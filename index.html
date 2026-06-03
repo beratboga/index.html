@@ -1,0 +1,1370 @@
+<!DOCTYPE html>
+<html lang="tr">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no" />
+<title>04agri.com — Ağrı'nın Dijital Rehberi</title>
+<meta name="description" content="Ağrı'nın dijital rehberi: restoranlar, cafes, gezilecek yerler, nöbetçi eczane, etkinlikler ve daha fazlası." />
+<link rel="preconnect" href="https://fonts.googleapis.com" />
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+<link href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:opsz,wght@12..96,400;12..96,600;12..96,700;12..96,800&family=Plus+Jakarta+Sans:wght@400;500;600;700;800&display=swap" rel="stylesheet" />
+<style>
+/* ============================================================
+   04agri.com — Ağrı Dijital Rehberi
+   ============================================================ */
+
+:root{
+  --bg:        #f6f4ef;
+  --bg-2:      #efece4;
+  --ink:       #17150f;
+  --ink-soft:  #6a655a;
+  --ink-faint: #a39d90;
+  --line:      #e3ded3;
+  --card:      #ffffff;
+
+  --dark:   #0c1020;
+  --dark-2: #131a31;
+  --dawn-1: #1a2444;      
+  --dawn-2: #5b6aa0;
+  --dawn-3: #e6a071;      
+  --dawn-4: #f3c9a0;
+
+  --globe:  220, 232, 255;
+  --accent: #06f251;      
+  --pin:    #FF4B4B;
+
+  --maxw: 1280px;
+  --r-lg: 28px;
+  --r-md: 18px;
+  --r-sm: 12px;
+  --shadow-1: 0 1px 2px rgba(20,18,12,.04), 0 8px 24px rgba(20,18,12,.06);
+  --shadow-2: 0 12px 40px rgba(20,18,12,.16);
+  --shadow-3: 0 30px 90px rgba(8,10,24,.45);
+
+  --display: "Bricolage Grotesque", "Plus Jakarta Sans", system-ui, sans-serif;
+  --body:    "Plus Jakarta Sans", system-ui, -apple-system, sans-serif;
+  --ease: cubic-bezier(.22,.61,.36,1);
+  --ease-io: cubic-bezier(.83,0,.17,1);
+}
+
+*{ box-sizing:border-box; }
+html{ scroll-behavior:smooth; }
+html, body{
+  margin:0; padding:0;
+  width: 100%;
+  max-width: 100%;
+  background:var(--bg); color:var(--ink);
+  font-family:var(--body); font-size:17px; line-height:1.55;
+  -webkit-font-smoothing:antialiased; text-rendering:optimizeLegibility;
+  overflow-x:hidden;
+}
+h1,h2,h3,h4{ font-family:var(--display); font-weight:700; line-height:1.02; letter-spacing:-.02em; margin:0; }
+button{ font-family:inherit; cursor:pointer; border:none; background:none; color:inherit; }
+input, select{ font-family:inherit; }
+a{ color:inherit; text-decoration:none; cursor:pointer; }
+.wrap{ max-width:var(--maxw); margin:0 auto; padding:0 28px; width:100%; }
+::selection{ background:var(--accent); color:var(--ink); }
+
+/* ---------- NAZİK POLİTİKA ONAY MODALI (BOTTOM SHEET) ---------- */
+.tos-overlay { position:fixed; inset:0; z-index:9999; background:rgba(12,16,32,0.45); backdrop-filter:blur(8px); display:flex; flex-direction:column; justify-content:flex-end; align-items:center; width:100%; height:100%; }
+.tos-modal { background:#fff; color:var(--ink); padding:36px 36px 42px; border-radius:32px 32px 0 0; max-width:800px; width:100%; box-shadow:0 -10px 40px rgba(0,0,0,0.2); animation:slideUp 0.6s cubic-bezier(0.2, 0.8, 0.2, 1) forwards; display:flex; flex-direction:column; gap:16px; }
+@keyframes slideUp { from { transform:translateY(100%); opacity:0; } to { transform:translateY(0); opacity:1; } }
+
+.tos-modal h2 { font-size:24px; font-weight:800; color:var(--dark); display:flex; align-items:center; gap:10px; margin:0; }
+.tos-modal p { font-size:15px; color:var(--ink-soft); line-height:1.6; margin:0; text-align:justify; }
+.tos-disclaimer { font-size:13px !important; color:var(--ink-faint) !important; background:var(--bg-2); padding:12px 14px; border-radius:12px; border-left:3px solid var(--accent); }
+.tos-actions { display:flex; gap:12px; margin-top:12px; }
+.tos-btn { flex:1; padding:16px; border-radius:100px; font-weight:800; font-size:15px; text-align:center; transition:all 0.2s; cursor:pointer; }
+.tos-btn.accept { background:var(--accent); color:var(--ink); border:none; }
+.tos-btn.accept:hover { filter:brightness(0.95); transform:translateY(-2px); }
+.tos-btn.decline { background:transparent; color:var(--ink-soft); border:1px solid var(--line); }
+.tos-btn.decline:hover { background:var(--bg-2); color:var(--ink); }
+
+/* GİZLİLİK / KULLANIM ŞARTLARI DOKÜMAN MODALI */
+.doc-modal-overlay { position:fixed; inset:0; z-index:10000; background:rgba(12,16,32,0.7); backdrop-filter:blur(10px); display:grid; place-items:center; padding:20px; }
+.doc-modal-card { background:var(--card); color:var(--ink); border-radius:24px; max-width:640px; width:100%; max-height:85vh; display:flex; flex-direction:column; box-shadow:var(--shadow-3); overflow:hidden; animation:fadeIn .35s ease; }
+.doc-modal-head { display:flex; align-items:center; justify-content:space-between; padding:24px 28px; border-bottom:1px solid var(--line); }
+.doc-modal-head h2 { font-size:22px; font-weight:800; color:var(--dark); }
+.doc-modal-close { width:38px; height:38px; border-radius:50%; background:var(--bg-2); font-weight:800; cursor:pointer; flex-shrink:0; }
+.doc-modal-body { padding:24px 28px 30px; overflow-y:auto; }
+.doc-modal-body p { font-size:15px; line-height:1.7; color:var(--ink-soft); text-align:justify; margin:0; }
+
+/* Kabul Etmeyenler İçin Çıkan Kibar Blok Ekranı */
+.tos-blocked-overlay { position:fixed; inset:0; z-index:9999; background:rgba(12,16,32,0.65); backdrop-filter:blur(12px); display:grid; place-items:center; padding:20px; }
+.tos-blocked-card { background:var(--card); color:var(--ink); padding:40px; border-radius:24px; max-width:480px; text-align:center; box-shadow:var(--shadow-3); animation: fadeIn 0.4s ease; }
+.tos-blocked-card h3 { font-size:22px; margin-bottom:16px; color:var(--dark); }
+.tos-blocked-card p { color:var(--ink-soft); font-size:15px; line-height:1.6; margin-bottom:24px; }
+@keyframes fadeIn { from { opacity:0; transform:scale(0.95); } to { opacity:1; transform:scale(1); } }
+
+/* ---------- top bar ---------- */
+.topbar{ position:fixed; inset:0 0 auto 0; z-index:60; display:grid; grid-template-columns:1fr auto 1fr; align-items:center; padding:18px 28px; transition:background .4s var(--ease), backdrop-filter .4s; pointer-events:none; width:100%; }
+.topbar > *{ pointer-events:auto; }
+.topbar.scrolled{ background:color-mix(in srgb, var(--bg), transparent 12%); backdrop-filter:saturate(140%) blur(14px); box-shadow:0 1px 0 var(--line); }
+.logo{ justify-self:start; display:flex; align-items:center; gap:8px; font-family:var(--display); font-weight:800; font-size:22px; letter-spacing:-.03em; }
+.logo .badge{ width:38px; height:38px; border-radius:11px; display:grid; place-items:center; background:var(--accent); color:var(--ink); font-size:18px; font-weight:800; box-shadow:0 6px 16px color-mix(in srgb,var(--accent),transparent 55%); }
+.logo .txt{ display:flex; align-items:baseline; color:var(--ink); transition: color .4s var(--ease); }
+.logo .dim{ color:var(--ink-faint); font-weight:600; transition: color .4s var(--ease); }
+.topbar.on-dark .logo .txt{ color:#fff; }
+.topbar.on-dark .logo .dim{ color:rgba(255,255,255,.55); }
+
+.topbar-nav{ justify-self:center; display:flex; gap:28px; font-size:15px; font-weight:700; }
+.topbar-nav a{ position:relative; color:var(--ink); transition:color .2s; }
+.topbar.on-dark .topbar-nav a{ color:#fff; }
+.topbar-nav a:hover{ color:var(--accent); }
+
+.topbar .loc{ justify-self:end; display:flex; align-items:center; gap:7px; font-size:14px; font-weight:600; color:var(--ink-soft); }
+.topbar.on-dark .loc{ color:rgba(255,255,255,.7); }
+.loc .dot{ width:8px;height:8px;border-radius:50%; background:var(--accent); box-shadow:0 0 0 4px color-mix(in srgb,var(--accent),transparent 70%); }
+
+/* HERO & MOUNTAIN */
+.hero{ position:relative; height:100svh; min-height:680px; width:100%; overflow:hidden; background:linear-gradient(180deg, var(--dark) 0%, var(--dark-2) 100%); }
+.hero .sky{ position:absolute; inset:0; transition:opacity 1.4s var(--ease); }
+.hero .sky.dawn{ opacity:0; background: radial-gradient(120% 80% at 50% 120%, var(--dawn-3) 0%, transparent 55%), linear-gradient(180deg, var(--dawn-1) 0%, var(--dawn-2) 58%, var(--dawn-4) 100%); }
+.hero.is-mountain .sky.dawn{ opacity:1; }
+.hero .sun{ position:absolute; left:50%; top:62%; width:340px; height:340px; margin:-170px 0 0 -170px; border-radius:50%; opacity:0; background:radial-gradient(circle, rgba(255,228,190,.9) 0%, rgba(255,200,140,.35) 40%, transparent 70%); transition:opacity 1.6s var(--ease) .2s; filter:blur(2px); }
+.hero.is-mountain .sun{ opacity:.9; }
+
+.globe-stage{ position:absolute; inset:0; display:grid; place-items:center; transform-origin:50% 54%; transition:transform 1.5s var(--ease-io), opacity 1.1s var(--ease) .25s; }
+.hero.is-zoom .globe-stage{ transform:scale(8); opacity:0; }
+.globe-canvas{ display:block; }
+
+.geo-label{ position:absolute; left:50%; top:54%; transform:translate(-50%,46px) scale(.9); z-index:6; text-align:center; opacity:0; transition:opacity .6s var(--ease), transform .6s var(--ease); pointer-events:none; }
+.hero.is-locate .geo-label{ opacity:1; transform:translate(-50%,46px) scale(1); }
+.hero.is-zoom .geo-label, .hero.is-mountain .geo-label{ opacity:0; }
+.geo-label .pt{ font-family:var(--display); font-weight:700; font-size:15px; color:#fff; letter-spacing:.18em; text-transform:uppercase; }
+.geo-label .sub{ font-size:12.5px; color:rgba(255,255,255,.6); margin-top:3px; letter-spacing:.05em; }
+
+.mountain{ position:absolute; inset:0; z-index: 5; opacity:0; transform:translateY(40px); pointer-events:none; transition:opacity 1.3s var(--ease) .35s, transform 1.5s var(--ease) .35s; }
+.hero.is-mountain .mountain{ opacity:1; transform:translateY(0); }
+.mountain img { width: 100%; height: 100%; object-fit: cover; object-position: bottom center; display: block; }
+
+.hero-content{ position:absolute; inset:0; z-index:10; display:flex; flex-direction:column; align-items:center; justify-content:flex-start; padding-top:14vh; text-align:center; pointer-events:none; width:100%; }
+.hero-content > *{ pointer-events:auto; }
+.hero-eyebrow{ display:inline-flex; align-items:center; gap:9px; font-size:13px; font-weight:700; letter-spacing:.16em; text-transform:uppercase; color:rgba(255,255,255,.72); white-space:nowrap; padding:8px 16px; border:1px solid rgba(255,255,255,.18); border-radius:100px; background:rgba(255,255,255,.04); backdrop-filter:blur(6px); opacity:0; transform:translateY(12px); transition:all .7s var(--ease) .1s; }
+.hero-title{ color:#fff; font-size:clamp(38px, 6.4vw, 78px); margin:20px 0 0; line-height:1.0; opacity:0; transform:translateY(18px); transition:all .8s var(--ease) .2s; white-space:nowrap; }
+.hero-title em{ font-style:normal; color:var(--accent); -webkit-text-stroke:0; background:linear-gradient(120deg,var(--accent),#2dd86f); -webkit-background-clip:text; background-clip:text; -webkit-text-fill-color:transparent; }
+.hero-sub{ color:rgba(255,255,255,.82); font-size:clamp(15px,1.6vw,19px); margin:20px auto 0; max-width:44ch; padding:0 20px; opacity:0; transform:translateY(16px); transition:all .8s var(--ease) .3s; text-wrap:pretty; }
+.hero.is-mountain .hero-eyebrow, .hero.is-mountain .hero-title, .hero.is-mountain .hero-sub{ opacity:1; transform:none; }
+
+.search-wrapper{ position:relative; margin-top:34px; width:min(680px, 90%); opacity:0; transform:translateY(20px) scale(.98); transition:all .8s var(--ease) .42s; }
+.hero.is-mountain .search-wrapper{ opacity:1; transform:none; }
+.search{ display:flex; align-items:center; gap:10px; background:rgba(255,255,255,.96); border-radius:100px; padding:9px 9px 9px 22px; box-shadow:var(--shadow-3); border:1px solid rgba(255,255,255,.6); position:relative; z-index:2; width:100%; }
+.search .ico{ color:var(--ink-faint); display:flex; flex-shrink:0; }
+.search input{ flex:1; border:none; outline:none; background:none; font-size:17px; color:var(--ink); padding:12px 4px; min-width:0; }
+.search input::placeholder{ color:var(--ink-faint); }
+.search .go{ flex-shrink:0; background:var(--ink); color:#fff; font-weight:700; font-size:15px; padding:13px 26px; border-radius:100px; transition:transform .2s var(--ease), background .2s; }
+.search .go:hover{ transform:translateY(-1px); background:#000; }
+
+.search-dropdown{ position:absolute; top:calc(100% + 12px); left:0; right:0; background:#fff; border-radius:var(--r-md); box-shadow:var(--shadow-3); overflow:hidden; z-index:1; display:flex; flex-direction:column; text-align:left; }
+.sugg-item{ display:flex; align-items:center; gap:12px; padding:14px 22px; border-bottom:1px solid var(--line); cursor:pointer; transition:background .2s; }
+.sugg-item:last-child{ border-bottom:none; }
+.sugg-item:hover{ background:var(--bg-2); }
+.sugg-item .s-icon{ display:grid; place-items:center; width:34px; height:34px; border-radius:8px; color:#fff; flex-shrink:0; }
+.sugg-item .s-text{ flex:1; display:flex; flex-direction:column; }
+.sugg-item .s-name{ font-weight:700; color:var(--ink); font-size:15px; }
+.sugg-item .s-cat{ font-size:12px; color:var(--ink-soft); font-weight:600; }
+
+.search-tags{ display:flex; gap:8px; flex-wrap:wrap; justify-content:center; margin-top:16px; opacity:0; transition:opacity .8s var(--ease) .6s; padding:0 16px; }
+.hero.is-mountain .search-tags{ opacity:1; }
+.search-tags button{ font-size:13px; font-weight:600; color:#fff; padding:7px 14px; border-radius:100px; border:1px solid rgba(255,255,255,.22); background:rgba(255,255,255,.06); backdrop-filter:blur(6px); transition:all .2s var(--ease); cursor:pointer; }
+.search-tags button:hover{ background:var(--accent); color:var(--ink); border-color:transparent; transform:translateY(-1px); }
+.search-tags button.highlight-btn { background: var(--accent); color: var(--ink); border-color: transparent; box-shadow: 0 4px 14px rgba(6, 242, 81, 0.2); }
+.search-tags button.highlight-btn:hover { filter: brightness(0.9); }
+
+.scroll-hint{ position:absolute; left:50%; bottom:26px; transform:translateX(-50%); z-index:11; display:flex; flex-direction:column; align-items:center; gap:7px; color:rgba(255,255,255,.7); font-size:12px; font-weight:600; letter-spacing:.14em; text-transform:uppercase; opacity:0; transition:opacity .8s var(--ease) .8s; }
+.hero.is-mountain .scroll-hint{ opacity:1; }
+.scroll-hint .mouse{ width:22px; height:34px; border:2px solid rgba(255,255,255,.45); border-radius:12px; position:relative; }
+.scroll-hint .mouse::after{ content:""; position:absolute; left:50%; top:6px; width:3px; height:7px; margin-left:-1.5px; border-radius:2px; background:#fff; animation:wheel 1.6s var(--ease) infinite; }
+@keyframes wheel{ 0%{opacity:0;transform:translateY(0)} 30%{opacity:1} 70%{opacity:1} 100%{opacity:0;transform:translateY(10px)} }
+
+/* BANNER MARQUEE */
+.banner-section{ padding:40px 0; background:var(--bg); overflow:hidden; width:100%; max-width:100%; }
+.marquee{ display:flex; width:max-content; animation:scroll 40s linear infinite; will-change:transform; }
+.marquee:hover{ animation-play-state:paused; }
+@keyframes scroll{ from{ transform:translateX(0); } to{ transform:translateX(-50%); } }
+.banner-img{ width:300px; height:180px; border-radius:var(--r-md); object-fit:cover; box-shadow:var(--shadow-1); border:2px solid #fff; margin-right:20px; flex-shrink:0; }
+.banner-placeholder{ display:flex; align-items:center; justify-content:center; text-align:center; padding:16px; background:linear-gradient(135deg, var(--dawn-1) 0%, var(--dawn-3) 100%); }
+.banner-placeholder span{ color:#fff; font-family:var(--display); font-weight:700; font-size:17px; letter-spacing:-.01em; text-shadow:0 2px 8px rgba(0,0,0,.25); }
+
+/* HİKAYELER (özgün tasarım) */
+.stories-section{ padding:8px 0 24px; background:var(--bg); width:100%; }
+.stories-row{ display:flex; gap:20px; flex-wrap:wrap; }
+.story-bubble{ display:flex; flex-direction:column; align-items:center; gap:8px; background:none; cursor:pointer; width:84px; }
+.story-ring{ width:82px; height:82px; border-radius:50%; padding:3px; display:grid; place-items:center;
+  background:conic-gradient(from 140deg, var(--accent), var(--dawn-3), var(--dawn-2), var(--accent));
+  box-shadow:0 6px 18px color-mix(in srgb, var(--accent), transparent 70%); transition:transform .2s var(--ease); }
+.story-bubble:hover .story-ring{ transform:scale(1.05); }
+.story-thumb{ width:100%; height:100%; border-radius:50%; background-color:var(--dark-2); background-size:cover; background-position:center;
+  display:grid; place-items:center; color:rgba(255,255,255,.7); border:3px solid var(--bg); }
+.story-label{ font-size:13px; font-weight:700; color:var(--ink-soft); text-align:center; line-height:1.1; max-width:84px; }
+
+/* Hikaye tam ekran görüntüleyici */
+.story-viewer{ position:fixed; inset:0; z-index:300; background:rgba(8,10,24,.92); backdrop-filter:blur(6px); display:grid; place-items:center; padding:20px; animation:fadeIn .3s ease; }
+.story-progress{ position:absolute; top:18px; left:50%; transform:translateX(-50%); width:min(360px,80%); height:4px; border-radius:4px; background:rgba(255,255,255,.25); overflow:hidden; }
+.story-progress-fill{ display:block; height:100%; width:100%; background:#fff; border-radius:4px; transform-origin:left; animation:storyBar 6s linear forwards; }
+@keyframes storyBar{ from{ transform:scaleX(0);} to{ transform:scaleX(1);} }
+.story-close{ position:absolute; top:30px; right:24px; width:42px; height:42px; border-radius:50%; background:rgba(255,255,255,.15); color:#fff; font-size:16px; font-weight:800; cursor:pointer; }
+.story-card{ position:relative; width:min(380px,92vw); aspect-ratio:9/16; max-height:84vh; border-radius:22px; overflow:hidden; box-shadow:var(--shadow-3); }
+.story-card-img{ width:100%; height:100%; object-fit:cover; }
+.story-card-bg{ position:absolute; inset:0; background:linear-gradient(160deg, var(--dawn-1) 0%, var(--dawn-2) 45%, var(--dawn-3) 100%); }
+.story-card-overlay{ position:absolute; inset:0; display:flex; flex-direction:column; justify-content:flex-end; gap:14px; padding:30px; background:linear-gradient(180deg, transparent 45%, rgba(0,0,0,.55) 100%); }
+.story-card-badge{ align-self:flex-start; background:var(--accent); color:var(--ink); font-family:var(--display); font-weight:800; font-size:14px; padding:7px 16px; border-radius:100px; }
+.story-card-text{ color:#fff; font-family:var(--display); font-weight:700; font-size:24px; line-height:1.2; text-shadow:0 2px 10px rgba(0,0,0,.4); text-wrap:balance; }
+
+/* GÜNDEM, HİKAYELER & WIDGETLAR */
+#gundem{ padding:20px 0 40px; background:var(--bg); width:100%; max-width:100%; overflow-x:hidden; }
+.gundem-layout{ display:grid; grid-template-columns: 1fr 360px; gap:32px; align-items:start; }
+
+.widget-panel{ display:flex; flex-direction:column; gap:16px; width:100%; }
+.widget-card{ background:var(--card); border-radius:var(--r-lg); padding:24px; box-shadow:var(--shadow-1); border:1px solid var(--line); position:relative; overflow:hidden; }
+.widget-card.weather{ background:linear-gradient(135deg, #4facfe 0%, #00f2fe 100%); color:#fff; border:none; }
+.w-top{ display:flex; justify-content:space-between; align-items:flex-start; margin-bottom:12px; }
+.w-top .city{ font-family:var(--display); font-weight:700; font-size:20px; }
+.w-top .date{ font-size:13px; font-weight:600; opacity:.8; }
+.w-main{ display:flex; align-items:center; gap:16px; }
+.w-main .temp{ font-size:42px; font-family:var(--display); font-weight:800; line-height:1; }
+.w-main .desc{ font-size:14px; font-weight:600; opacity:.9; max-width:120px; line-height:1.2; }
+
+.widget-card.prayer{ background:var(--dark-2); color:#fff; border:none; padding:20px; }
+.p-top{ display:flex; flex-direction:column; margin-bottom:12px; }
+.p-top-row { display:flex; align-items:center; justify-content:space-between; font-family:var(--display); font-size:19px; font-weight:700; margin-bottom:4px; }
+.p-date{ font-size:12px; font-weight:600; color:var(--accent); font-family:var(--body); }
+.p-countdown { font-size:13px; color:rgba(255,255,255,.7); display:flex; gap:6px; align-items:center; font-weight:600; }
+.p-countdown span { background:rgba(6,242,81,.15); color:var(--accent); padding:2px 8px; border-radius:100px; font-family:var(--display); font-size:14px; font-variant-numeric:tabular-nums; border:1px solid rgba(6,242,81,.3); }
+.p-grid{ display:grid; grid-template-columns:repeat(3,1fr); gap:8px; text-align:center; }
+.p-item{ background:rgba(255,255,255,.08); border-radius:10px; padding:6px 2px; border:1px solid rgba(255,255,255,.05); }
+.p-item.active{ background:var(--accent); color:var(--ink); font-weight:800; border-color:transparent; transform:scale(1.02); box-shadow:0 4px 12px rgba(6,242,81,.2); }
+.p-item span{ display:block; font-size:10px; font-weight:700; opacity:.7; text-transform:uppercase; margin-bottom:1px; }
+.p-item strong{ display:block; font-family:var(--display); font-size:14px; }
+
+/* DİNAMİK SEÇMELİ ECZANE WIDGETI */
+.widget-card.pharmacy-widget { background: var(--card); border: 1px solid var(--line); padding: 20px; color: var(--ink); }
+.ph-header { display: flex; align-items: center; justify-content: space-between; margin-bottom: 14px; gap: 10px; }
+.ph-title { font-family: var(--display); font-size: 18px; font-weight: 800; display: flex; align-items: center; gap: 6px; }
+.ph-select { background: var(--bg-2); border: 1px solid var(--line); padding: 6px 12px; border-radius: 100px; font-size: 13px; font-weight: 700; outline: none; color: var(--ink); cursor: pointer; }
+.ph-box { background: var(--bg); border-radius: var(--r-sm); padding: 14px; border: 1px solid var(--line); display: flex; flex-direction: column; gap: 8px; }
+.ph-name-row { display: flex; justify-content: space-between; align-items: baseline; }
+.ph-name { font-family: var(--display); font-size: 16px; font-weight: 800; color: var(--pin); }
+.ph-date-badge { font-size: 11px; background: var(--ink); color: #fff; padding: 2px 8px; border-radius: 100px; font-weight: 700; }
+.ph-detail { font-size: 13.5px; color: var(--ink-soft); line-height: 1.4; font-weight: 500; }
+.ph-landmark { font-size: 12px; color: var(--ink); font-weight: 700; text-transform: uppercase; border-left: 2px solid var(--pin); padding-left: 6px; margin-top: 2px; }
+.ph-footer-actions { display: flex; justify-content: space-between; align-items: center; margin-top: 6px; padding-top: 8px; border-top: 1px dashed var(--line); }
+.ph-phone { font-size: 14px; font-weight: 800; color: var(--ink); display: flex; align-items: center; gap: 4px; }
+.ph-map-link { font-size: 12.5px; font-weight: 700; color: #3498DB; text-decoration: underline; }
+.ph-empty { font-size: 13.5px; color: var(--ink-faint); text-align: center; padding: 10px 0; font-weight: 600; }
+
+.news-wrap{ grid-column: 1 / -1; margin-top:16px; width:100%; }
+.news-header{ font-family:var(--display); font-size:26px; font-weight:700; margin-bottom:20px; display:flex; align-items:center; gap:10px; }
+.news-header::before{ content:""; display:block; width:12px; height:12px; border-radius:50%; background:var(--pin); }
+.news-list{ display:flex; flex-direction:column; gap:16px; width:100%; }
+.news-item{ display:flex; gap:20px; background:var(--card); border-radius:var(--r-md); padding:16px; box-shadow:var(--shadow-1); border:1px solid var(--line); transition:transform .2s var(--ease), box-shadow .2s; cursor:pointer; }
+.news-item:hover{ transform:translateY(-3px); box-shadow:var(--shadow-2); }
+.news-img{ width:150px; height:110px; border-radius:12px; object-fit:cover; flex-shrink:0; background:var(--bg-2); }
+.news-img-placeholder{ background:linear-gradient(135deg, var(--dawn-1) 0%, var(--dawn-3) 100%); }
+.news-content{ display:flex; flex-direction:column; justify-content:center; }
+.news-content h4{ font-size:18px; margin-bottom:6px; color:var(--ink); }
+.news-content p{ font-size:14px; color:var(--ink-soft); line-height:1.4; display:-webkit-box; -webkit-line-clamp:2; -webkit-box-orient:vertical; overflow:hidden; }
+.news-meta{ margin-bottom:6px; font-size:12px; font-weight:700; color:var(--accent); letter-spacing:.05em; }
+
+/* KATEGORİLER (SABİT SEKMELİ DÜZEN - ASLA BOŞLUK BIRAKMAZ) */
+#kategoriler { width:100%; max-width:100%; padding:40px 0 20px; background:var(--bg); }
+.cats-intro{ padding-bottom: 24px; }
+.cats-intro .kicker{ font-size:13px; font-weight:800; letter-spacing:.18em; text-transform:uppercase; color:var(--accent); }
+.cats-intro h2{ font-size:clamp(30px,4.6vw,56px); margin:14px 0 0; max-width:18ch; text-wrap:balance; }
+.cats-intro p{ color:var(--ink-soft); max-width:52ch; margin:16px 0 0; font-size:17px; }
+
+.cats-interactive-container { display:grid; grid-template-columns:360px 1fr; gap:40px; align-items:start; width:100%; margin-top:20px; }
+.cat-list{ display:flex; flex-direction:column; gap:4px; }
+.cat-item{ display:flex; align-items:center; gap:16px; padding:12px 16px; text-align:left; width:100%; border-radius:var(--r-sm); transition:all 0.3s var(--ease); position:relative; background:transparent; }
+.cat-item .num{ font-family:var(--display); font-weight:600; font-size:14px; width:24px; color:var(--ink-faint); font-variant-numeric:tabular-nums; }
+.cat-item .nm{ font-family:var(--display); font-weight:700; letter-spacing:-.02em; font-size:22px; color:var(--ink-soft); transition:all 0.3s var(--ease); line-height:1.05; }
+.cat-item .swatch{ width:0; height:12px; border-radius:6px; transition:width 0.3s var(--ease); flex-shrink:0; }
+.cat-item.active { background: var(--card); box-shadow: var(--shadow-1); border: 1px solid var(--line); }
+.cat-item.active .nm{ color:var(--ink); font-size:25px; }
+.cat-item.active .num{ color:var(--ink); }
+.cat-item.active .swatch{ width:24px; }
+.cat-item:hover:not(.active) { background: rgba(255,255,255,0.5); }
+.cat-item:hover .nm { color: var(--ink); }
+
+.cat-stage{ position:relative; height:420px; border-radius:var(--r-lg); overflow:hidden; box-shadow:var(--shadow-2); background:var(--bg-2); width:100%; }
+.cat-panel{ position:absolute; inset:0; display:flex; flex-direction:column; justify-content:flex-end; padding:42px; color:#fff; height:100%; }
+.cat-panel .ghost{ position:absolute; right:-10px; top:-30px; font-family:var(--display); font-weight:800; font-size:clamp(180px,24vw,260px); line-height:.8; color:rgba(255,255,255,.14); letter-spacing:-.04em; pointer-events:none; }
+.cat-panel .scrim{ position:absolute; inset:0; background:linear-gradient(180deg, transparent 30%, rgba(0,0,0,.55) 100%); }
+.cat-panel .body{ position:relative; z-index:2; }
+.cat-panel h3{ font-size:clamp(34px,4vw,50px); color:#fff; text-wrap:balance; margin-bottom:8px; }
+.cat-panel p{ margin:8px 0 0; font-size:16px; max-width:44ch; color:rgba(255,255,255,.95); text-wrap:pretty; }
+.cat-cta{ align-self:flex-start; display:inline-flex; align-items:center; gap:9px; background:#fff; color:var(--ink); font-weight:700; font-size:15px; padding:14px 24px; border-radius:100px; box-shadow:0 10px 30px rgba(0,0,0,0.15); transition:transform .2s var(--ease); margin-top:24px; }
+.cat-cta:hover{ transform:translateY(-2px); }
+
+/* MEKANLAR / KARTLAR OVERLAY */
+.ov{ position:fixed; inset:0; z-index:100; background:var(--bg); display:flex; flex-direction:column; animation:ovIn .4s var(--ease) both; width:100%; overflow-x:hidden; }
+@keyframes ovIn{ from{ opacity:0; transform:translateY(2%); } to{ opacity:1; transform:none; } }
+.ov-head{ display:flex; align-items:center; gap:16px; padding:18px 28px; border-bottom:1px solid var(--line); flex-shrink:0; background:var(--bg); z-index:3; width:100%; box-sizing:border-box; }
+.ov-back{ display:inline-flex; align-items:center; gap:8px; font-weight:700; font-size:15px; padding:10px 16px; border-radius:100px; background:var(--bg-2); transition:background .2s; }
+.ov-back:hover{ background:var(--line); }
+.ov-title{ display:flex; align-items:center; gap:12px; }
+.ov-title .dot{ width:14px; height:14px; border-radius:5px; }
+.ov-title h2{ font-size:26px; }
+.ov-close{ margin-left:auto; width:44px; height:44px; border-radius:50%; display:grid; place-items:center; background:var(--bg-2); font-weight:800; cursor:pointer; }
+
+.ov-body{ flex:1; overflow-y:auto; overflow-x:hidden; width:100%; display:flex; flex-direction:column; }
+.grid{ max-width:var(--maxw); margin:0 auto; padding:32px 28px 80px; display:grid; grid-template-columns:repeat(auto-fill,minmax(310px,1fr)); gap:26px; width:100%; }
+
+.card{ position:relative; height:340px; border-radius:var(--r-md); overflow:hidden; cursor:pointer; box-shadow:var(--shadow-1); transition:transform .35s var(--ease), box-shadow .35s var(--ease); display:flex; flex-direction:column; justify-content:flex-end; padding:24px; color:#fff; }
+.card:hover{ transform:translateY(-6px); box-shadow:var(--shadow-2); }
+.card .scrim{ position:absolute; inset:0; background:linear-gradient(180deg, transparent 20%, rgba(0,0,0,0.88) 100%); z-index:1; }
+.card .body{ position:relative; z-index:2; }
+.card h3{ font-size:24px; color:#fff; text-wrap:balance; margin:0; font-weight:800; }
+.card .card-area{ display:flex; align-items:center; gap:6px; font-size:13.5px; font-weight:700; margin:8px 0; color:var(--accent); }
+.card p{ margin:6px 0 0; font-size:14px; color:rgba(255,255,255,0.92); line-height:1.45; text-wrap:pretty; }
+
+/* GEZİLECEK YERLER DETAY MODALI (SADECE FOTO, METİN VE ADRES-KONUM) */
+.place-modal-overlay { position:fixed; inset:0; z-index:250; background:rgba(12,16,32,0.85); backdrop-filter:blur(10px); display:grid; place-items:center; padding:20px; width:100%; height:100%; }
+.place-modal-content { background:var(--bg); border-radius:var(--r-lg); max-width:700px; width:100%; overflow:hidden; box-shadow:var(--shadow-3); border:1px solid var(--line); display:flex; flex-direction:column; position:relative; max-height:92vh; }
+.pm-close { position:absolute; top:16px; right:16px; width:38px; height:38px; border-radius:50%; background:rgba(0,0,0,0.5); color:#fff; display:grid; place-items:center; z-index:10; font-weight:800; cursor:pointer; }
+.pm-img-wrap { width:100%; height:300px; position:relative; background:#111; }
+.pm-img-wrap img { width:100%; height:100%; object-fit:cover; }
+.pm-noimg { position:absolute; inset:0; display:flex; flex-direction:column; align-items:center; justify-content:center; gap:10px; color:rgba(255,255,255,.55); }
+.pm-noimg span { font-size:13px; font-weight:600; letter-spacing:.04em; }
+.card-noimg { position:absolute; inset:0; display:grid; place-items:center; color:rgba(255,255,255,.35); z-index:0; }
+.pm-img-scrim { position:absolute; inset:0; background:linear-gradient(180deg, transparent 50%, rgba(23,21,15,0.9) 100%); }
+.pm-title-box { position:absolute; bottom:20px; left:24px; right:24px; color:#fff; }
+.pm-title-box h2 { font-size:28px; font-weight:800; text-shadow:0 2px 8px rgba(0,0,0,0.5); }
+.pm-body { padding:28px; display:flex; flex-direction:column; gap:20px; overflow-y:auto; }
+.pm-info { font-size:15.5px; color:var(--ink); line-height:1.6; margin:0; }
+.pm-meta-box { background:var(--card); border:1px solid var(--line); padding:16px; border-radius:var(--r-sm); display:flex; flex-direction:column; gap:10px; }
+.pm-meta-item { display:flex; align-items:flex-start; gap:10px; font-size:14.5px; font-weight:600; color:var(--ink-soft); }
+.pm-meta-item svg { color:var(--pin); flex-shrink:0; margin-top:2px; }
+.pm-maps-btn { background:var(--ink); color:#fff; font-weight:800; padding:14px; border-radius:100px; display:flex; align-items:center; justify-content:center; gap:8px; font-size:15px; transition:background 0.2s; text-align:center; margin-top:8px; }
+.pm-maps-btn:hover { background:#000; }
+
+/* ÇOK YAKINDA SADECE TEK SATIR UYARI MODELİ */
+.coming-soon-container { max-width:500px; margin:auto; text-align:center; padding:80px 24px; }
+.coming-soon-container h4 { font-size:20px; color:var(--ink-soft); font-weight:700; margin:0; letter-spacing:-0.01em; }
+
+/* NÖBETÇİ ECZANE TAM SAYFA GÖRÜNÜMÜ */
+.pharm-page { max-width:var(--maxw); margin:0 auto; padding:28px 28px 80px; width:100%; }
+.pharm-page-bar { display:flex; flex-direction:column; gap:16px; margin-bottom:26px; }
+.pharm-page-date { display:inline-flex; align-items:center; gap:8px; font-family:var(--display); font-weight:700; font-size:18px; color:var(--ink); }
+.pharm-page-date svg { color:var(--pin); }
+.pharm-page-districts { display:flex; flex-wrap:wrap; gap:8px; }
+.pharm-chip { font-size:14px; font-weight:700; padding:9px 18px; border-radius:100px; background:var(--bg-2); border:1px solid var(--line); color:var(--ink-soft); transition:all .2s var(--ease); cursor:pointer; }
+.pharm-chip:hover { background:var(--card); color:var(--ink); }
+.pharm-chip.active { background:var(--ink); color:#fff; border-color:transparent; }
+.pharm-page-grid { display:grid; grid-template-columns:repeat(auto-fill,minmax(330px,1fr)); gap:20px; }
+.pharm-card { background:var(--card); border:1px solid var(--line); border-radius:var(--r-md); padding:22px; box-shadow:var(--shadow-1); display:flex; flex-direction:column; gap:10px; transition:transform .2s var(--ease), box-shadow .2s; }
+.pharm-card:hover { transform:translateY(-3px); box-shadow:var(--shadow-2); }
+.pharm-card-top { display:flex; justify-content:space-between; align-items:baseline; gap:10px; }
+.pharm-card-name { font-family:var(--display); font-size:19px; font-weight:800; color:var(--pin); line-height:1.1; }
+.pharm-card-dist { font-size:11px; font-weight:800; background:var(--ink); color:#fff; padding:3px 10px; border-radius:100px; white-space:nowrap; letter-spacing:.03em; }
+.pharm-card-addr { font-size:14px; color:var(--ink-soft); line-height:1.45; font-weight:500; }
+.pharm-card-landmark { font-size:13px; color:var(--ink); font-weight:700; border-left:3px solid var(--pin); padding-left:8px; }
+.pharm-card-foot { display:flex; justify-content:space-between; align-items:center; margin-top:4px; padding-top:12px; border-top:1px dashed var(--line); }
+.pharm-card-phone { font-size:15px; font-weight:800; color:var(--ink); }
+.pharm-card-map { font-size:13px; font-weight:700; color:#3498DB; text-decoration:underline; }
+.pharm-empty { grid-column:1 / -1; text-align:center; padding:60px 20px; color:var(--ink-soft); font-size:16px; font-weight:600; }
+
+/* FOOTER & SÖZLEŞME METNİ */
+.foot{ background:var(--dark); color:#fff; padding:60px 0 30px; margin-top:40px; width:100%; max-width:100%; overflow:hidden; }
+.foot .top{ display:flex; flex-wrap:wrap; gap:40px; justify-content:space-between; align-items:flex-start; }
+.foot h3{ font-size:clamp(28px,4vw,48px); max-width:16ch; color:#fff; text-wrap:balance; }
+.foot .lead { color:rgba(255,255,255,.6); font-size:14px; margin-top:12px; max-width:52ch; text-align:justify; line-height:1.5; }
+.foot .cols{ display:flex; gap:64px; flex-wrap:wrap; }
+.foot .col h5{ font-size:13px; letter-spacing:.14em; text-transform:uppercase; color:rgba(255,255,255,.5); margin:0 0 14px; font-weight:700; }
+.foot .col a, .foot .col span{ display:block; color:rgba(255,255,255,.82); font-size:15px; padding:5px 0; transition:color .2s; cursor:pointer; }
+.foot .col a:hover{ color:var(--accent); }
+.foot .rule{ height:1px; background:rgba(255,255,255,.1); margin:40px 0 20px; width:100%; }
+.foot .bottom{ display:flex; flex-wrap:wrap; gap:12px; justify-content:space-between; font-size:13.5px; color:rgba(255,255,255,.45); width:100%; }
+
+/* ---------- RESPONSIVE ---------- */
+@media (max-width:920px){
+  .topbar{ grid-template-columns: auto 1fr; }
+  .topbar-nav{ display:none; }
+  .gundem-layout{ grid-template-columns:1fr; }
+  .cats-interactive-container { grid-template-columns:150px 1fr; gap:20px; }
+  .cat-stage{ height:380px; }
+  .cat-list{ gap:4px; }
+  .cat-item{ padding:10px 8px; gap:8px; }
+  .cat-item .num{ display:none; }
+  .cat-item .nm{ font-size:15px; }
+  .cat-item.active .nm{ font-size:17px; }
+  .tos-modal { padding: 30px 24px; border-radius:24px 24px 0 0; }
+}
+@media (max-width:680px){
+  body{ font-size:16px; }
+  .wrap{ padding: 0 16px; }
+  .topbar .loc{ display:none; }
+  .hero-content{ padding-top:13vh; }
+  .hero-title{ white-space:normal; }
+  .search{ padding:7px 7px 7px 18px; }
+  .search .go{ padding:12px 18px; }
+  .grid{ grid-template-columns:1fr; padding:20px 16px 60px; }
+  .cats-interactive-container { grid-template-columns:1fr; gap:16px; }
+  .cat-list { flex-direction: row; flex-wrap: wrap; gap:6px; }
+  .cat-item { width: auto; padding:8px 12px; background: var(--bg-2); }
+  .cat-item.active { background: var(--card); }
+  .cat-stage { height: 300px; }
+  .cat-panel { padding: 24px; }
+  .tos-actions { flex-direction: column; }
+  .tos-modal { padding: 24px 20px; }
+  .pharm-page { padding:20px 16px 60px; }
+  .pharm-page-grid { grid-template-columns:1fr; }
+}
+</style>
+</head>
+<body>
+<div id="root"></div>
+
+<script src="https://cdnjs.cloudflare.com/ajax/libs/react/18.3.1/umd/react.production.min.js" crossorigin="anonymous"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/react-dom/18.3.1/umd/react-dom.production.min.js" crossorigin="anonymous"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/babel-standalone/7.26.4/babel.min.js" crossorigin="anonymous"></script>
+
+<script type="text/babel">
+/* ===================== DATA & ECZANE LİSTESİ ===================== */
+(function(){
+  "use strict";
+
+  const categories = [
+    {
+      id:"restoranlar", name:"Restoranlar", color:"#FF4B4B", tagline:"Lezzet Durakları", 
+      blurb:"Dönerden hamburgere, yöresel lezzetlerden dünya mutfağına; Ağrı'nın en sevilen lezzet duraklarını bir arada keşfedin.",
+      places:[]
+    },
+    {
+      id:"cafeler", name:"Cafeler", color:"#FF8C00", tagline:"Kahve ve Mola", 
+      blurb:"Üçüncü nesil kahveciler, serpme kahvaltı noktaları ve keyifli mola mekanları; şehrin kahve kültürü burada.",
+      places:[]
+    },
+    {
+      id:"pastaneler", name:"Pastaneler", color:"#F4D03F", tagline:"Tatlı Molası", 
+      blurb:"Şehrin en taze pastaneleri, fırın ürünleri ve tatlı durakları; tatlı molanız için en doğru adresler.",
+      places:[]
+    },
+    {
+      id:"saglik", name:"Sağlık Hizmetleri", color:"#2ECC71", tagline:"Sağlık & Danışmanlık", 
+      blurb:"Özel diş hekimi klinikleri, dil ve konuşma terapistleri, psikologlar ve fizyoterapistler bir arada.",
+      places:[]
+    },
+    {
+      id:"nobetci", name:"Nöbetçi Eczane", color:"#E74C3C", tagline:"Acil Sağlık", 
+      blurb:"Ağrı genelinde tüm ilçelerin günlük nöbetçi eczane bilgisi; adres, telefon ve harita konumlarıyla.",
+      places:[]
+    },
+    {
+      id:"guzellik", name:"Güzellik & Bakım", color:"#9B59B6", tagline:"Kişisel Bakım", 
+      blurb:"Güzellik merkezleri, lazer, cilt bakımı ve estetik klinikleri; kişisel bakımınız için doğru yer.",
+      places:[]
+    },
+    {
+      id:"kuafor", name:"Kuaför", color:"#FF69B4", tagline:"Saç Tasarım", 
+      blurb:"En iyi kadın ve erkek kuaför salonları ile modern saç tasarım noktaları bir arada.",
+      places:[]
+    },
+    {
+      id:"egitim", name:"Eğitim", color:"#3498DB", tagline:"Özel Kurs & Dershaneler", 
+      blurb:"Dershaneler, eğitim koçları ve özel ders veren eğitmen hocalar; eğitim yolculuğunuz için rehber.",
+      places:[]
+    },
+    {
+      id:"etkinlik", name:"Etkinlik", color:"#3F51B5", tagline:"Kültür & Sanat", 
+      blurb:"Şehirdeki konserler, festivaller, tiyatrolar ve doğa turları; Ağrı'nın kültür-sanat takvimi.",
+      places:[]
+    },
+    {
+      id:"gezilecek", name:"Gezilecek Yerler", color:"#1ABC9C", tagline:"Ağrı'nın Hazineleri", 
+      blurb:"Tarihten doğaya — Ücretsiz, telifsiz ve muhteşem manzaralar doğrudan harita konumlarıyla.",
+      places:[
+        {
+          name:"Balık Gölü", 
+          info:"Türkiye'nin en yüksek rakımlı doğa harikası buzul göllerinden biridir. Taşlıçay ilçesi sınırlarında yer alan bu saklı cennet, berrak suları, doğal kırmızı benekli alabalığı ve etrafındaki muhteşem sıradağ manzarasıyla kampçılar, doğa yürüyüşçüleri ve fotoğrafçılar için kusursuz bir kaçış noktası sunar.", 
+          area:"Taşlıçay", 
+          img:"",
+          address:"Balık Gölü Doğal Koruma Alanı, Taşlıçay / Ağrı",
+          mapsUrl:"https://maps.google.com/?q=Balik+Golu+Taslicay+Agri"
+        },
+        {
+          name:"İshak Paşa Sarayı", 
+          info:"18. yüzyıldan kalma büyüleyici bir Osmanlı, Selçuklu ve Pat mimarisi sentezidir. Doğubayazıt ovasına hâkim yüksek sarp kayalıklar üzerine inşa edilmiş bu heybetli anıt eser, muazzam taş işlemeli kapıları, camisi, divan avlusu ve haremiyle adeta bir masal diyarından günümüze kalmış bir şaheserdir.", 
+          area:"Doğubayazıt", 
+          img:"",
+          address:"İshakpaşa Mahallesi, Saray Yolu No:1, Doğubayazıt / Ağrı",
+          mapsUrl:"https://maps.google.com/?q=Ishak+Pasa+Sarayi+Dogubayazit"
+        },
+        {
+          name:"Ağrı Dağı (5.137 m)", 
+          info:"Türkiye'nin ve tüm Avrupa'nın en yüksek heybetli zirvesidir. Yıl boyunca erimeyen kalıcı buzulları, efsanevi Nuh'un Tufanı hikayeleri ve heybetli volkanik yapısıyla her yıl dünyanın dört bir yanından binlerce profesyonel dağcıyı, trekking grubunu ve coğrafya meraklısını Ağrı'ya çekmektedir.", 
+          area:"Doğubayazıt", 
+          img:"",
+          address:"Ağrı Dağı Millî Parkı, Doğubayazıt / Ağrı",
+          mapsUrl:"https://maps.google.com/?q=Agri+Dagi+Zirvesi"
+        },
+        {
+          name:"Diyadin Kaplıcaları", 
+          info:"Şifalı yüksek mineralli termal suları, jeotermal kaynakları ve hemen yanı başından gürleyen derin kanyon oluşumuyla Ağrı'nın en önemli sağlık, dinlenme ve şifa merkezidir. Bölgedeki tesisler cilt hastalıkları, romatizma ve eklem rahatsızlıklarına iyi gelen sularıyla bilinir.", 
+          area:"Diyadin", 
+          img:"",
+          address:"Kaplıcalar Bölgesi, Diyadin / Ağrı",
+          mapsUrl:"https://maps.google.com/?q=Diyadin+Kaplicalari+Agri"
+        },
+        {
+          name:"Meteor Çukuru", 
+          info:"Alaska'dakinden sonra dünyanın tescillenmiş en büyük ikinci göktaşı çukurudur. Gürbulak sınır kapısına oldukça yakın bir konumda yer alan, derinliği ve dairesel genişliğiyle görenleri hayrete düşüren, sıra dışı ve gizemli bir doğal coğrafi anıttır.", 
+          area:"Doğubayazıt", 
+          img:"",
+          address:"Karlıca Köyü Yolu, Sınır Hattı, Doğubayazıt / Ağrı",
+          mapsUrl:"https://maps.google.com/?q=Meteor+Cukuru+Dogubayazit"
+        },
+        {
+          name:"Nuh'un Gemisi (Durupınar)", 
+          info:"Büyük Tufan sonrası Nuh'un efsanevi gemisinin karaya oturduğu yer olarak kabul edilen, doğal silüetiyle devasa bir tekne şekline sahip yeryüzü oluşumudur. Her yıl inanç turizmi ve uluslararası araştırmacılar tarafından yoğun şekilde ziyaret edilir.", 
+          area:"Durupınar", 
+          img:"",
+          address:"Üzengili Köyü Dağlık Alanı, Durupınar, Doğubayazıt / Ağrı",
+          mapsUrl:"https://maps.google.com/?q=Nuhun+Gemisi+Durupinar+Agri"
+        }
+      ]
+    },
+  ];
+
+  const dutyPharmacies = [
+    {date:"02.06.2026", district:"DİYADİN", name:"DİLAN ECZANESİ", address:"ISA AGA MAHALLESİ INÖNÜ CADDESİ NO:36", landmark:"BELEDİYE YANI", phone:"0472 511 28 28", url:"https://maps.google.com/?q=Dilan+Eczanesi+Diyadin"},
+    {date:"02.06.2026", district:"DOĞUBAYAZIT", name:"YAŞAM ECZANESİ", address:"İSHAKPAŞA MAHALLESİ GÜLVEREN SOKAK NO:80C", landmark:"2 NOLU OCAĞI KARŞISI", phone:"0507 171 74 97", url:"https://maps.google.com/?q=Yasam+Eczanesi+Dogubayazit"},
+    {date:"02.06.2026", district:"ELEŞKİRT", name:"ŞİFA ECZANESİ", address:"MÜFTÜ SELİM MAHALLESİ CUMHURİYET CADDESİ NO:13", landmark:"SAĞLIK OCAĞI KARŞISI", phone:"0472 711 21 41", url:"https://maps.google.com/?q=Sifa+Eczanesi+Eleskirt"},
+    {date:"02.06.2026", district:"HAMUR", name:"AHMET ECZANESİ", address:"Kümbet Mahallesi Van Caddesi No:49C", landmark:"HAMUR BELEDİYESİ ALTI", phone:"0544 564 57 48", url:"https://maps.google.com/?q=Ahmet+Eczanesi+Hamur"},
+    {date:"02.06.2026", district:"MERKEZ", name:"BÜŞRA DOĞAN ECZANESİ", address:"ALPASLAN MAH.ESKİ VAN CAD.NO:102", landmark:"KAPALI MEYVE-SEBZE PAZARI KARŞISI", phone:"0472 215 29 42", url:"https://maps.google.com/?q=Busra+Dogan+Eczanesi+Agri"},
+    {date:"02.06.2026", district:"MERKEZ", name:"TUĞBA ECZANESİ", address:"Fırat Mahallesi 1018/1 Sokak No:14C", landmark:"AĞRI EĞİTİM VE ARAŞTIRMA HASTANESİ ACİL ÇIKIŞ KAPISI ÇAPRAZI", phone:"0507 252 68 74", url:"https://maps.google.com/?q=Tugba+Eczanesi+Agri"},
+    {date:"02.06.2026", district:"PATNOS", name:"DEVA ECZANESİ", address:"ATATÜRK MAHALLESİ MENDERES CADDESİ NO:146", landmark:"PATNOS İTİMAT YAZIHANESİ YANI", phone:"0472 616 16 19", url:"https://maps.google.com/?q=Deva+Eczanesi+Patnos"},
+    {date:"02.06.2026", district:"TAŞLIÇAY", name:"BEYZA ECZANESİ", address:"15 TEMMUZ ŞEHİTLER MAHALLESİ MAREŞAL FEVZİ ÇAKMAK CADDESİ NO:1/1", landmark:"PTT KARGO YANI", phone:"0472 551 30 00", url:"https://maps.google.com/?q=Beyza+Eczanesi+Taslicay"},
+    {date:"02.06.2026", district:"TUTAK", name:"BERFİN ECZANESİ", address:"Murat Mahallesi Dr Cihan ÖKTEM Caddesi No:5A ve 5B", landmark:"GAZİ İLKOKULUNUN KARŞISI", phone:"0552 636 00 04", url:"https://maps.google.com/?q=Berfin+Eczanesi+Tutak"},
+
+    {date:"03.06.2026", district:"DİYADİN", name:"DİYADİN ECZANESİ", address:"İSA AĞA MAHALLESİ INÖNÜ CADDESİ NO:98", landmark:"PTT KARŞISI", phone:"0472 511 24 65", url:"https://maps.google.com/?q=Diyadin+Eczanesi+Diyadin"},
+    {date:"03.06.2026", district:"DOĞUBAYAZIT", name:"BAHAR ECZANESİ", address:"İSHAKPAŞA MAHALLESİ ŞERAFETTİN ERYILMAZ CADDESİ NO: 158A", landmark:"KURTULUŞ İLKOKUL VE ORTAOKUL KARŞISI", phone:"0537 770 54 13", url:"https://maps.google.com/?q=Bahar+Eczanesi+Dogubayazit"},
+    {date:"03.06.2026", district:"ELEŞKİRT", name:"ELEŞKİRT ECZANESİ", address:"İSTİKLAL MAHALLESİ CUMHURİYET CADDESİ NO:109", landmark:"BELEDİYE BİNASİ KARŞISI", phone:"0472 711 29 16", url:"https://maps.google.com/?q=Eleskirt+Eczanesi+Eleskirt"},
+    {date:"03.06.2026", district:"HAMUR", name:"HAMUR ECZANESİ", address:"KÜMBET MAHALLESİ VAN CADDESİ NO:49/A", landmark:"HAMUR BELEDİYESİ ALTI", phone:"0472 616 71 72", url:"https://maps.google.com/?q=Hamur+Eczanesi+Hamur"},
+    {date:"03.06.2026", district:"MERKEZ", name:"DERMAN ECZANESİ", address:"GAZİ MAHALLESİ SAĞLIK CADDESİ NO:46/B", landmark:"2 NOLU SAĞLIK OCAĞI KARŞISI", phone:"0545 190 85 04", url:"https://maps.google.com/?q=Derman+Eczanesi+Agri"},
+    {date:"03.06.2026", district:"MERKEZ", name:"ALTINTAŞ ECZANESİ", address:"YAVUZ MAHALLESİ ÖZGÜL ÖZGÜL APT. NO:119/A", landmark:"EFE TIP MERKEZİ YANI", phone:"0472 215 77 77", url:"https://maps.google.com/?q=Altintas+Eczanesi+Agri"},
+    {date:"03.06.2026", district:"PATNOS", name:"EMEK ECZANESİ", address:"SARISU MAHALLESİ BİTLİS YOLU NO:29", landmark:"HASTANE YANI", phone:"0472 616 14 11", url:"https://maps.google.com/?q=Emek+Eczanesi+Patnos"},
+    {date:"03.06.2026", district:"TAŞLIÇAY", name:"ÇARE ECZANESİ", address:"HÜRRİYET MAHALLESİ M.FEVZİ ÇAKMAK CADDESİ DIŞ KAPI NO:94A", landmark:"MERVE KIRTASİYE YANI", phone:"0546 491 53 22", url:"https://maps.google.com/?q=Care+Eczanesi+Taslicay"},
+    {date:"03.06.2026", district:"TUTAK", name:"BEGÜM ECZANESİ", address:"CAMİ MAHALLESİ KAZIM KARABEKİR CADDESİ NO:11B-11C", landmark:"KAYMAKAMLIK EVİ KARŞISI", phone:"0472 411 31 89", url:"https://maps.google.com/?q=Begum+Eczanesi+Tutak"},
+
+    {date:"04.06.2026", district:"DİYADİN", name:"ŞİFA ECZANESİ", address:"MURAT MAHALLESİ KAYMAKAM ÖZGÜR AZER KURAK CADDESİ NO:63A", landmark:"MURAT CAMİİ YANI", phone:"0505 597 63 42", url:"https://maps.google.com/?q=Sifa+Eczanesi+Diyadin"},
+    {date:"04.06.2026", district:"DOĞUBAYAZIT", name:"BEYAZIT ECZANESİ", address:"ULUYOL MAHALLESİ AĞRI CADDESİ NO:296K-296L", landmark:"FATİH CAMİİ KARŞISI", phone:"0472 312 67 02", url:"https://maps.google.com/?q=Beyazit+Eczanesi+Dogubayazit"},
+    {date:"04.06.2026", district:"ELEŞKİRT", name:"EMEK ECZANESİ", address:"MÜFTÜ SELİM MAHALLESİ CUMHURİYET CADDESİ NO:112/B", landmark:"SAĞLIK OCAĞI KARŞISI", phone:"0472 711 47 47", url:"https://maps.google.com/?q=Emek+Eczanesi+Eleskirt"},
+    {date:"04.06.2026", district:"HAMUR", name:"AHMET ECZANESİ", address:"Kümbet Mahallesi Van Caddesi No:49C", landmark:"HAMUR BELEDİYESİ ALTI", phone:"0544 564 57 48", url:"https://maps.google.com/?q=Ahmet+Eczanesi+Hamur"},
+    {date:"04.06.2026", district:"MERKEZ", name:"ZARİF ECZANESİ", address:"LEYLEK PINAR MAHALLESİ CUMHURİYET CADDESİ NO:6-8 C", landmark:"MERKEZ CAMİİ ALTI", phone:"0472 215 55 50", url:"https://maps.google.com/?q=Zarif+Eczanesi+Agri"},
+    {date:"04.06.2026", district:"MERKEZ", name:"YILDIRIM ECZANESİ", address:"GAZİ MAHALLESİ SAĞLIK CADDESİ NO:50-54A", landmark:"2 NOLU SAĞLIK OCAĞI KARŞISI", phone:"0543 129 58 33", url:"https://maps.google.com/?q=Yildirim+Eczanesi+Agri"},
+    {date:"04.06.2026", district:"PATNOS", name:"NUR ECZANESİ", address:"ALPASLAN MAHALLESİ DERGAH CADDESİ KAPI NO:3/A", landmark:"SARISU MARKET KARŞISI", phone:"0535 078 75 10", url:"https://maps.google.com/?q=Nur+Eczanesi+Patnos"},
+    {date:"04.06.2026", district:"TAŞLIÇAY", name:"ELİF ECZANESİ", address:"HÜRRİYET MAHALLESİ MAREŞAL FEVZİ ÇAKMAK CADDESİ NO:100", landmark:"A101 KARŞISI", phone:"0472 551 29 00", url:"https://maps.google.com/?q=Elif+Eczanesi+Taslicay"},
+    {date:"04.06.2026", district:"TUTAK", name:"TUTAK ECZANESİ", address:"MURAT MAHALLESİ CUMHURİYET CADDESİ NO:51/A", landmark:"MERKEZDE", phone:"0472 411 26 98", url:"https://maps.google.com/?q=Tutak+Eczanesi+Tutak"},
+
+    {date:"05.06.2026", district:"DİYADİN", name:"CEREN ECZANESİ", address:"Murat Mahallesi Şehit Kaymakam Fatih Safitürk Cad. No:13H", landmark:"KÜLTÜR KİTAP KIRTASİYE KARŞISI", phone:"0530 115 54 04", url:"https://maps.google.com/?q=Ceren+Eczanesi+Diyadin"},
+    {date:"05.06.2026", district:"DOĞUBAYAZIT", name:"AFA ECZANESİ", address:"ÇİFTEPINAR MAHALLESİ İSA GEÇİT CADDESİ NO:8/A", landmark:"GÜÇBİR HOME KARŞISI", phone:"0472 312 27 00", url:"https://maps.google.com/?q=Afa+Eczanesi+Dogubayazit"},
+    {date:"05.06.2026", district:"ELEŞKİRT", name:"ESRA ECZANESİ", address:"İstiklal Mahallesi Cumhuriyet Caddesi No:83", landmark:"ZİRAAT BANKASI KARŞISI", phone:"0545 591 44 24", url:"https://maps.google.com/?q=Esra+Eczanesi+Eleskirt"},
+    {date:"05.06.2026", district:"HAMUR", name:"HAMUR ECZANESİ", address:"KÜMBET MAHALLESİ VAN CADDESİ NO:49/A", landmark:"HAMUR BELEDİYESİ ALTI", phone:"0472 616 71 72", url:"https://maps.google.com/?q=Hamur+Eczanesi+Hamur"},
+    {date:"05.06.2026", district:"MERKEZ", name:"EYLÜL ECZANESİ", address:"HÜRRİYET MAHALLESİ NAMIK SEZGİN CADDESİ NO:17/A", landmark:"SÜRAT KARGO YANI", phone:"0472 215 95 00", url:"https://maps.google.com/?q=Eylul+Eczanesi+Agri"},
+    {date:"05.06.2026", district:"MERKEZ", name:"NADİR ECZANESİ", address:"FIRAT MAHALLESİ 1018/3 SOKAK NO:8/A", landmark:"AĞRI EĞİTİM VE ARAŞTIRMA HASTANESİ KARŞISI", phone:"0542 188 55 04", url:"https://maps.google.com/?q=Nadir+Eczanesi+Agri"},
+    {date:"05.06.2026", district:"PATNOS", name:"ROZA ECZANESİ", address:"ATATÜRK MAHALLESİ ADNAN MENDERES CADDESİ NO:136", landmark:"PATNOS İTİMAT YANI", phone:"0472 616 29 00", url:"https://maps.google.com/?q=Roza+Eczanesi+Patnos"},
+    {date:"05.06.2026", district:"TAŞLIÇAY", name:"FERHAT ECZANESİ", address:"HÜRRİYET MAHALLESİ M.FEVZİ ÇAKMAK CADDESİ NO:48/A", landmark:"ÖĞRETMEN EVİ ALTI", phone:"0539 430 14 11", url:"https://maps.google.com/?q=Ferhat+Eczanesi+Taslicay"},
+    {date:"05.06.2026", district:"TUTAK", name:"OZAN ECZANESİ", address:"Cami Mahallesi Cumhuriyet Caddesi No:39B", landmark:"Merkez Camii Yanı", phone:"0472 411 28 97", url:"https://maps.google.com/?q=Ozan+Eczanesi+Tutak"},
+
+    {date:"06.06.2026", district:"DİYADİN", name:"DERMAN ECZANESİ", address:"Atatürk Mahallesi Safitürk Caddesi No:10A", landmark:"Menekşem Market Karşısı", phone:"0472 511 36 36", url:"https://maps.google.com/?q=Derman+Eczanesi+Diyadin"},
+    {date:"06.06.2026", district:"DOĞUBAYAZIT", name:"DOĞA ECZANESİ", address:"ÇİFTEPINAR MAHALLESİ AĞRI CADDESİ NO:31/H", landmark:"ESKİ TAPU KADASTRO KARŞISI", phone:"0472 312 75 39", url:"https://maps.google.com/?q=Doga+Eczanesi+Dogubayazit"},
+    {date:"06.06.2026", district:"ELEŞKİRT", name:"MAHMUTPAŞA ECZANESİ", address:"İstiklal Mahallesi Cumhuriyet Caddesi No:101", landmark:"KİLER MARKET KARŞISI", phone:"0472 711 29 78", url:"https://maps.google.com/?q=Mahmutpasa+Eczanesi+Eleskirt"},
+    {date:"06.06.2026", district:"HAMUR", name:"AHMET ECZANESİ", address:"Kümbet Mahallesi Van Caddesi No:49C", landmark:"HAMUR BELEDİYESİ ALTI", phone:"0544 564 57 48", url:"https://maps.google.com/?q=Ahmet+Eczanesi+Hamur"},
+    {date:"06.06.2026", district:"MERKEZ", name:"KRAL ECZANESİ", address:"MURAT MAHALLESİ ESKİ VAN CADDESİ NO:135A", landmark:"ÇEVİK KUVVET YANI", phone:"0472 215 44 65", url:"https://maps.google.com/?q=Kral+Eczanesi+Agri"},
+    {date:"06.06.2026", district:"MERKEZ", name:"KARACA ECZANESİ", address:"Fatih Mahallesi Kağızman Caddesi No:147/A", landmark:"FATİH MEZARLIĞININ 400 METRE İLERİSİ", phone:"0472 215 05 47", url:"https://maps.google.com/?q=Karaca+Eczanesi+Agri"},
+    {date:"06.06.2026", district:"PATNOS", name:"YENİ İSTANBUL ECZANESİ", address:"ATATÜRK MAHALLESİ 128 SOKAK NO:6A", landmark:"MERKEZDE", phone:"0472 616 94 29", url:"https://maps.google.com/?q=Yeni+Istanbul+Eczanesi+Patnos"},
+    {date:"06.06.2026", district:"TAŞLIÇAY", name:"TAŞLIÇAY ECZANESİ", address:"Cumhuriyet Mahallesi Mareşal Favzi Çakmak Caddesi No:23", landmark:"MERKEZDE", phone:"0472 551 28 91", url:"https://maps.google.com/?q=Taslicay+Eczanesi+Taslicay"},
+    {date:"06.06.2026", district:"TUTAK", name:"BERFİN ECZANESİ", address:"Murat Mahallesi Dr Cihan ÖKTEM Caddesi No:5A ve 5B", landmark:"GAZİ İLKOKULUNUN KARŞISI", phone:"0552 636 00 04", url:"https://maps.google.com/?q=Berfin+Eczanesi+Tutak"},
+
+    {date:"07.06.2026", district:"DİYADİN", name:"DİLAN ECZANESİ", address:"ISA AGA MAHALLESİ INÖNÜ CADDESİ NO:36", landmark:"BELEDİYE YANI", phone:"0472 511 28 28", url:"https://maps.google.com/?q=Dilan+Eczanesi+Diyadin"},
+    {date:"07.06.2026", district:"DOĞUBAYAZIT", name:"YAĞMUR ECZANESİ", address:"AHMEDİHANİ MAHALLESİ AĞRI CADDESİ NO:208", landmark:"AĞIZ VE DİŞ SAĞLIĞI MERKEZİ KARŞISI", phone:"0472 312 85 85", url:"https://maps.google.com/?q=Yagmur+Eczanesi+Dogubayazit"},
+    {date:"07.06.2026", district:"ELEŞKİRT", name:"ŞİFA ECZANESİ", address:"MÜFTÜ SELİM MAHALLESİ CUMHURİYET CADDESİ NO:13", landmark:"SAĞLIK OCAĞI KARŞISI", phone:"0472 711 21 41", url:"https://maps.google.com/?q=Sifa+Eczanesi+Eleskirt"},
+    {date:"07.06.2026", district:"HAMUR", name:"HAMUR ECZANESİ", address:"KÜMBET MAHALLESİ VAN CADDESİ NO:49/A", landmark:"HAMUR BELEDİYESİ ALTI", phone:"0472 616 71 72", url:"https://maps.google.com/?q=Hamur+Eczanesi+Hamur"},
+    {date:"07.06.2026", district:"MERKEZ", name:"HAYAT ECZANESİ", address:"ALPASLAN MAHALLESİ ESKİ VAN CADDESİ NO:140/A", landmark:"DOĞA KOLEJİ YOLU", phone:"0534 796 64 04", url:"https://maps.google.com/?q=Hayat+Eczanesi+Agri"},
+    {date:"07.06.2026", district:"MERKEZ", name:"ARDA ECZANESİ", address:"LEYLEK PINAR MAHALLESİ VALİ KONAĞI CADDESİ NO:33/A", landmark:"ÖZGÜL AVM YANI", phone:"0472 215 72 00", url:"https://maps.google.com/?q=Arda+Eczanesi+Agri"},
+    {date:"07.06.2026", district:"PATNOS", name:"CERRAHPAŞA ECZANESİ", address:"Atatürk Mahallesi Menderes Bulvar Kapı No:122", landmark:"TURKCELL BAYİ KARŞISI", phone:"0507 141 04 24", url:"https://maps.google.com/?q=Cerrahpasa+Eczanesi+Patnos"},
+    {date:"07.06.2026", district:"TAŞLIÇAY", name:"BEYZA ECZANESİ", address:"15 TEMMUZ ŞEHİTLER MAHALLESİ MAREŞAL FEVZİ ÇAKMAK CADDESİ NO:1/1", landmark:"PTT KARGO YANI", phone:"0472 551 30 00", url:"https://maps.google.com/?q=Beyza+Eczanesi+Taslicay"},
+    {date:"07.06.2026", district:"TUTAK", name:"BEGÜM ECZANESİ", address:"CAMİ MAHALLESİ KAZIM KARABEKİR CADDESİ NO:11B-11C", landmark:"KAYMAKAMLIK EVİ KARŞISI", phone:"0472 411 31 89", url:"https://maps.google.com/?q=Begum+Eczanesi+Tutak"},
+
+    {date:"08.06.2026", district:"DİYADİN", name:"DİYADİN ECZANESİ", address:"İSA AĞA MAHALLESİ INÖNÜ CADDESİ NO:98", landmark:"PTT KARŞISI", phone:"0472 511 24 65", url:"https://maps.google.com/?q=Diyadin+Eczanesi+Diyadin"},
+    {date:"08.06.2026", district:"DOĞUBAYAZIT", name:"NEFES ECZANESİ", address:"ÇİFTE PINAR MAHALLESİ AĞRI CADDESİ NO:59/A", landmark:"MANOLYA PASTANESİ YANI", phone:"0472 312 20 90", url:"https://maps.google.com/?q=Nefes+Eczanesi+Dogubayazit"},
+    {date:"08.06.2026", district:"ELEŞKİRT", name:"ELEŞKİRT ECZANESİ", address:"İSTİKLAL MAHALLESİ CUMHURİYET CADDESİ NO:109", landmark:"BELEDİYE BİNASİ KARŞISI", phone:"0472 711 29 16", url:"https://maps.google.com/?q=Eleskirt+Eczanesi+Eleskirt"},
+    {date:"08.06.2026", district:"HAMUR", name:"AHMET ECZANESİ", address:"Kümbet Mahallesi Van Caddesi No:49C", landmark:"HAMUR BELEDİYESİ ALTI", phone:"0544 564 57 48", url:"https://maps.google.com/?q=Ahmet+Eczanesi+Hamur"},
+    {date:"08.06.2026", district:"MERKEZ", name:"YOL ECZANESİ", address:"FIRAT MAHALLESİ ATALAY CADDESİ NO:16/D", landmark:"AĞRI BELEDİYESİ KARŞISI", phone:"0472 215 81 86", url:"https://maps.google.com/?q=Yol+Eczanesi+Agri"},
+    {date:"08.06.2026", district:"MERKEZ", name:"BEREN ECZANESİ", address:"BAHÇELİEVLER MAHALLAESİ CUMHURİYET CADDESİ NO:135B", landmark:"CUMAÇAY GARAJI KARŞISI", phone:"0546 153 04 58", url:"https://maps.google.com/?q=Beren+Eczanesi+Agri"},
+    {date:"08.06.2026", district:"PATNOS", name:"DEVA ECZANESİ", address:"ATATÜRK MAHALLESİ MENDERES CADDESİ NO:146", landmark:"PATNOS İTİMAT YAZIHANESİ YANI", phone:"0472 616 16 19", url:"https://maps.google.com/?q=Deva+Eczanesi+Patnos"},
+    {date:"08.06.2026", district:"TAŞLIÇAY", name:"ÇARE ECZANESİ", address:"HÜRRİYET MAHALLESİ M.FEVZİ ÇAKMAK CADDESİ DIŞ KAPI NO:94A", landmark:"MERVE KIRTASİYE YANI", phone:"0546 491 53 22", url:"https://maps.google.com/?q=Care+Eczanesi+Taslicay"},
+    {date:"08.06.2026", district:"TUTAK", name:"TUTAK ECZANESİ", address:"MURAT MAHALLESİ CUMHURİYET CADDESİ NO:51/A", landmark:"MERVE KIRTASİYE YANI", phone:"0472 411 26 98", url:"https://maps.google.com/?q=Tutak+Eczanesi+Tutak"}
+  ];
+
+  window.AGRI = { categories, dutyPharmacies };
+
+  // BANNER'LAR — görsel eklemek için 'img' alanına URL yaz. Boşsa "çok yakında" yazısı çıkar.
+  // İstediğin kadar ekleyip çıkarabilirsin (sayı serbest).
+  window.AGRI_STATIC_BANNERS = [
+    { img:"", text:"Çok yakında hizmetinizdeyiz" },
+    { img:"", text:"Çok yakında hizmetinizdeyiz" },
+    { img:"", text:"Çok yakında hizmetinizdeyiz" }
+  ];
+
+  // HİKAYELER (Instagram tarzı, özgün renklerle) — buraya yeni nesne ekleyerek
+  // istediğin kadar hikaye oluşturabilir veya silebilirsin. Şu an tek hikaye var.
+  // Her hikaye: { title (kapak yazısı), cover (kapak görseli, boşsa renkli kapak),
+  //               slideText (açılınca görünen yazı), slideImg (açılınca görünen görsel, boş olabilir) }
+  window.AGRI_STORIES = [
+    {
+      title: "Çok Yakında",
+      cover: "",
+      slideText: "Çok yakında hizmete açılacak. Ağrı'nın dijital rehberi için takipte kalın.",
+      slideImg: ""
+    }
+  ];
+
+  window.PAT = { pattern };
+})();
+
+/* Güvenli kalıcı saklama: localStorage çalışmazsa cookie, o da olmazsa bellek.
+   Bu sayede hangi ortamda olursa olsun onay kaydı sayfa yenilense de korunur. */
+const safeStore = (function(){
+  let mem = {};
+
+  function lsOk(){
+    try { const k="__t__"; window.localStorage.setItem(k,"1"); window.localStorage.removeItem(k); return true; }
+    catch(e){ return false; }
+  }
+  const hasLS = lsOk();
+
+  function setCookie(key, val){
+    try {
+      const exp = new Date(Date.now() + 365*24*60*60*1000).toUTCString();
+      document.cookie = encodeURIComponent(key) + "=" + encodeURIComponent(val) + "; expires=" + exp + "; path=/; SameSite=Lax";
+      return true;
+    } catch(e){ return false; }
+  }
+  function getCookie(key){
+    try {
+      const name = encodeURIComponent(key) + "=";
+      const parts = document.cookie.split(";");
+      for (let c of parts){
+        c = c.trim();
+        if (c.indexOf(name) === 0) return decodeURIComponent(c.substring(name.length));
+      }
+      return null;
+    } catch(e){ return null; }
+  }
+
+  return {
+    get(key){
+      if (hasLS){
+        try { const v = window.localStorage.getItem(key); if (v != null) return v; } catch(e){}
+      }
+      const ck = getCookie(key);
+      if (ck != null) return ck;
+      return (key in mem) ? mem[key] : null;
+    },
+    set(key, val){
+      let stored = false;
+      if (hasLS){
+        try { window.localStorage.setItem(key, val); stored = true; } catch(e){}
+      }
+      if (setCookie(key, val)) stored = true;
+      mem[key] = val; // her durumda bellek yedeği
+      return stored;
+    }
+  };
+})();
+
+/* ===================== globe.jsx ===================== */
+const { useRef, useEffect, useState, useCallback } = React;
+const AGRI_LAT = 39.72, AGRI_LON = 43.05;
+const RAD = Math.PI / 180;
+const norm360 = a => ((a % 360) + 360) % 360;
+
+function project(lat, lon, yaw, pitch){
+  const lr = (lon + yaw) * RAD, fr = lat * RAD, b = pitch * RAD;
+  const x = Math.cos(fr) * Math.sin(lr), y = Math.sin(fr), z = Math.cos(fr) * Math.cos(lr);
+  return { x, y: y * Math.cos(b) - z * Math.sin(b), z: y * Math.sin(b) + z * Math.cos(b) };
+}
+
+function GlobeCanvas({ phase }){
+  const ref = useRef(null);
+  const state = useRef({ yaw: -20, pitch: 8, targetYaw: null, targetPitch: 39.72, t: 0 });
+
+  useEffect(() => {
+    const canvas = ref.current; const ctx = canvas.getContext("2d");
+    let raf, w, h, R, cx, cy, dpr = Math.min(devicePixelRatio || 1, 2);
+    function size(){ w=canvas.getBoundingClientRect().width; h=canvas.getBoundingClientRect().height; canvas.width=w*dpr; canvas.height=h*dpr; ctx.setTransform(dpr,0,0,dpr,0,0); R=Math.min(w,h)*0.27; cx=w/2; cy=h*0.54; }
+    size(); window.addEventListener("resize", size);
+    const GC = `220,232,255`;
+
+    function drawArc(pts){
+      ctx.beginPath(); let started = false;
+      for (let i=0; i<pts.length; i++){
+        if (pts[i].z > 0.02){ const sx = cx + R * pts[i].x, sy = cy - R * pts[i].y; if (!started){ ctx.moveTo(sx, sy); started = true; } else ctx.lineTo(sx, sy); } else started = false;
+      }
+      ctx.stroke();
+    }
+
+    function frame(ts){
+      const s = state.current; if (!s.t) s.t = ts; const dt = Math.min(48, ts - s.t); s.t = ts;
+      if (s.targetYaw == null) s.yaw -= dt * 0.024; else { s.yaw += (s.targetYaw - s.yaw) * 0.055; s.pitch += (s.targetPitch - s.pitch) * 0.06; }
+      ctx.clearRect(0,0,w,h);
+      const g = ctx.createRadialGradient(cx - R*0.3, cy - R*0.35, R*0.1, cx, cy, R*1.05); g.addColorStop(0, `rgba(${GC},0.10)`); g.addColorStop(0.7, `rgba(${GC},0.03)`); g.addColorStop(1, `rgba(${GC},0)`);
+      ctx.fillStyle = g; ctx.beginPath(); ctx.arc(cx,cy,R,0,Math.PI*2); ctx.fill();
+      ctx.lineWidth=1.1; ctx.strokeStyle=`rgba(${GC},0.28)`; ctx.beginPath(); ctx.arc(cx,cy,R,0,Math.PI*2); ctx.stroke();
+      const yaw = s.yaw, pitch = s.pitch; ctx.lineWidth=1;
+      for (let lat=-75; lat<=75; lat+=15){ ctx.strokeStyle=lat===0?`rgba(${GC},0.40)`:`rgba(${GC},0.16)`; const pts=[]; for(let lon=0; lon<=360; lon+=4) pts.push(project(lat,lon,yaw,pitch)); drawArc(pts); }
+      for (let lon=0; lon<360; lon+=15){ ctx.strokeStyle=`rgba(${GC},0.16)`; const pts=[]; for(let lat=-90; lat<=90; lat+=4) pts.push(project(lat,lon,yaw,pitch)); drawArc(pts); }
+      const m = project(AGRI_LAT, AGRI_LON, yaw, pitch);
+      if (m.z > 0){
+        const sx=cx+R*m.x, sy=cy-R*m.y, near=s.targetYaw!=null?1:0.35, pulse=(Math.sin(ts/420)+1)/2;
+        ctx.strokeStyle=`rgba(6,242,81,${0.5*near})`; ctx.lineWidth=1.5; ctx.beginPath(); ctx.arc(sx,sy,6+pulse*10*near,0,Math.PI*2); ctx.stroke();
+        ctx.fillStyle=`rgba(6,242,81,${0.85*near+0.15})`; ctx.beginPath(); ctx.arc(sx,sy,4.5,0,Math.PI*2); ctx.fill();
+      }
+      raf = requestAnimationFrame(frame);
+    }
+    raf = requestAnimationFrame(frame);
+    return () => { cancelAnimationFrame(raf); window.removeEventListener("resize", size); };
+  }, []);
+
+  useEffect(() => {
+    const s = state.current;
+    if (phase === "spin"){ s.targetYaw = null; s.targetPitch = 39.72; } else if (["locate","zoom","mountain","rest"].includes(phase)){
+      if (s.targetYaw == null){ s.targetYaw = s.yaw + norm360(-AGRI_LON - s.yaw) + 360; s.targetPitch = AGRI_LAT; }
+    }
+  }, [phase]);
+
+  return <canvas ref={ref} className="globe-canvas" style={{width:"100%", height:"100%"}} />;
+}
+
+/* ===================== TOPBAR (eksikti, eklendi) ===================== */
+function Topbar({ dark }){
+  const [scrolled, setScrolled] = useState(false);
+
+  useEffect(() => {
+    const onScroll = () => setScrolled(window.scrollY > 40);
+    onScroll();
+    window.addEventListener("scroll", onScroll, { passive: true });
+    return () => window.removeEventListener("scroll", onScroll);
+  }, []);
+
+  // Sayfanın en üstündeyken hero karanlık olduğu için yazılar beyaz (on-dark);
+  // aşağı kaydırınca açık arka plan gelir (scrolled).
+  const onDark = !scrolled;
+  const cls = ["topbar", scrolled ? "scrolled" : "", onDark ? "on-dark" : ""].join(" ").trim();
+
+  return (
+    <div className={cls}>
+      <a className="logo" href="#top" onClick={(e)=>{ e.preventDefault(); window.scrollTo({ top:0, behavior:"smooth" }); }}>
+        <span className="badge">04</span>
+        <span className="txt">agri<span className="dim">.com</span></span>
+      </a>
+      <nav className="topbar-nav">
+        <a href="#gundem" onClick={(e)=>{ e.preventDefault(); document.getElementById("gundem").scrollIntoView({ behavior:"smooth" }); }}>Gündem</a>
+        <a href="#kategoriler" onClick={(e)=>{ e.preventDefault(); document.getElementById("kategoriler").scrollIntoView({ behavior:"smooth" }); }}>Kategoriler</a>
+        <a href="#iletisim" onClick={(e)=>{ e.preventDefault(); document.getElementById("iletisim").scrollIntoView({ behavior:"smooth" }); }}>İletişim</a>
+      </nav>
+      <div className="loc"><span className="dot"></span>Ağrı, Türkiye</div>
+    </div>
+  );
+}
+
+function Hero({ onSearchPlace, onOpenCat }){
+  const [phase, setPhase] = useState("spin");
+  const timers = useRef([]);
+  const [q, setQ] = useState("");
+  const [suggs, setSuggs] = useState([]);
+
+  const run = useCallback(() => {
+    timers.current.forEach(clearTimeout); timers.current = []; setPhase("spin");
+    [[2200, "locate"], [4000, "zoom"], [4800, "mountain"], [5600, "rest"]].forEach(([ms, p]) => timers.current.push(setTimeout(() => setPhase(p), ms)));
+  }, []);
+
+  useEffect(() => { run(); return () => timers.current.forEach(clearTimeout); }, [run]);
+
+  const cls = ["hero", phase==="locate"?"is-locate":"", phase==="zoom"?"is-zoom":"", ["mountain","rest"].includes(phase)?"is-zoom is-mountain":""].join(" ");
+
+  const handleSearchChange = (e) => {
+    const val = e.target.value; setQ(val);
+    if(val.length > 1) {
+      let res = [];
+      window.AGRI.categories.forEach(c => {
+        if(c.id === "gezilecek") {
+          c.places.forEach(p => { if(p.name.toLowerCase().includes(val.toLowerCase())) { res.push({ ...p, catId: c.id, catName: c.name, catColor: c.color }); } });
+        }
+      });
+      setSuggs(res.slice(0, 5));
+    } else setSuggs([]);
+  };
+
+  const handleSelect = (place) => { setQ(""); setSuggs([]); onSearchPlace(place); }
+
+  return (
+    <header className={cls} data-screen-label="Hero">
+      <div className="sky dawn"></div><div className="sun"></div>
+      <div className="globe-stage"><GlobeCanvas phase={phase} /></div>
+      <div className="geo-label"><div className="pt">AĞRI</div><div className="sub">39.72° K · 43.05° D</div></div>
+      <div className="mountain"><img src="agridagi.png" alt="Ağrı Dağı" /></div>
+
+      <div className="hero-content">
+        <span className="hero-eyebrow"><span style={{width:8,height:8,borderRadius:"50%",background:"var(--accent)",display:"inline-block"}}></span>Ağrı'nın dijital kapısı</span>
+        <h1 className="hero-title">Ağrı'yı <em>keşfet</em>.</h1>
+        <div className="search-wrapper">
+          <form className="search" onSubmit={(e)=>e.preventDefault()}>
+            <span className="ico"><svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2"><circle cx="11" cy="11" r="7"/><path d="m20 20-3.2-3.2"/></svg></span>
+            <input value={q} onChange={handleSearchChange} placeholder="Gezilecek yerleri arayın..." aria-label="Ara" onBlur={()=>setTimeout(()=>setSuggs([]), 200)} />
+            <button type="button" className="go" onClick={() => document.getElementById("kategoriler").scrollIntoView({ behavior:"smooth" })}>Kategoriler</button>
+          </form>
+          {suggs.length > 0 && (
+            <div className="search-dropdown">
+              {suggs.map((s, idx) => (
+                <div key={idx} className="sugg-item" onMouseDown={()=>handleSelect(s)}>
+                  <div className="s-icon" style={{background: s.catColor}}><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2"><path d="M12 21s7-6.3 7-11a7 7 0 1 0-14 0c0 4.7 7 11 7 11Z"/></svg></div>
+                  <div className="s-text"><span className="s-name">{s.name}</span><span className="s-cat">{s.catName}</span></div>
+                </div>
+              ))}
+            </div>
+          )}
+        </div>
+        <div className="search-tags">
+          <button className="highlight-btn" onClick={() => document.getElementById("kategoriler").scrollIntoView({ behavior:"smooth" })}>Tüm Kategoriler</button>
+          <button onClick={()=>onOpenCat("nobetci")}>Nöbetçi Eczane</button>
+          <button onClick={()=>onOpenCat("gezilecek")}>Gezilecek Yerler</button>
+          <button onClick={()=>onOpenCat("etkinlik")}>Etkinlikler</button>
+        </div>
+      </div>
+    </header>
+  );
+}
+
+function ImageMarquee() {
+  // Temel seti birkaç kez tekrarlayıp dolgun bir şerit oluştur,
+  // sonra bu şeridi birebir ikiye katla -> %50 kaydırma kusursuz/sonsuz döner.
+  const base = [].concat(
+    window.AGRI_STATIC_BANNERS,
+    window.AGRI_STATIC_BANNERS,
+    window.AGRI_STATIC_BANNERS,
+    window.AGRI_STATIC_BANNERS
+  );
+  const loop = base.concat(base);
+  return (
+    <div className="banner-section">
+      <div className="marquee">
+        {loop.map((b, i) => {
+          const hasImg = b && b.img && b.img.trim() !== "";
+          if (hasImg) {
+            return <img key={i} src={b.img} className="banner-img" alt="Görsel" />;
+          }
+          return (
+            <div key={i} className="banner-img banner-placeholder">
+              <span>{(b && b.text) ? b.text : "Çok yakında hizmetinizdeyiz"}</span>
+            </div>
+          );
+        })}
+      </div>
+    </div>
+  );
+}
+
+/* ===================== HİKAYELER (Instagram tarzı, özgün tasarım) ===================== */
+function Stories() {
+  const stories = window.AGRI_STORIES || [];
+  const [openIdx, setOpenIdx] = useState(null);
+
+  if (stories.length === 0) return null;
+
+  const active = openIdx != null ? stories[openIdx] : null;
+
+  return (
+    <section className="stories-section">
+      <div className="wrap">
+        <div className="stories-row">
+          {stories.map((s, i) => {
+            const hasCover = s.cover && s.cover.trim() !== "";
+            return (
+              <button key={i} className="story-bubble" onClick={() => setOpenIdx(i)}>
+                <span className="story-ring">
+                  <span className="story-thumb" style={hasCover ? { backgroundImage:`url(${s.cover})` } : null}>
+                    {!hasCover && (
+                      <svg width="26" height="26" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.8"><path d="M12 2v4M12 18v4M2 12h4M18 12h4"/><circle cx="12" cy="12" r="4"/></svg>
+                    )}
+                  </span>
+                </span>
+                <span className="story-label">{s.title}</span>
+              </button>
+            );
+          })}
+        </div>
+      </div>
+
+      {active && (
+        <div className="story-viewer" onClick={(e)=>{ if(e.target.className==='story-viewer') setOpenIdx(null); }}>
+          <div className="story-progress"><span className="story-progress-fill"></span></div>
+          <button className="story-close" onClick={()=>setOpenIdx(null)}>✕</button>
+          <div className="story-card">
+            {active.slideImg && active.slideImg.trim() !== "" ? (
+              <img className="story-card-img" src={active.slideImg} alt={active.title} />
+            ) : (
+              <div className="story-card-bg"></div>
+            )}
+            <div className="story-card-overlay">
+              <div className="story-card-badge">{active.title}</div>
+              <div className="story-card-text">{active.slideText}</div>
+            </div>
+          </div>
+        </div>
+      )}
+    </section>
+  );
+}
+
+/* ===================== DİNAMİK NÖBETÇİ ECZANE WIDGETI ===================== */
+function PharmacyWidget() {
+  const [district, setDistrict] = useState("MERKEZ");
+  const [currentDateText, setCurrentDateText] = useState("02.06.2026");
+
+  useEffect(() => {
+    const updatePharmacyDate = () => {
+      const now = new Date();
+      const d = now.getDate().toString().padStart(2, '0');
+      const m = (now.getMonth() + 1).toString().padStart(2, '0');
+      const y = now.getFullYear();
+      const calculatedDate = `${d}.${m}.${y}`;
+      
+      const exists = window.AGRI.dutyPharmacies.some(p => p.date === calculatedDate);
+      if (exists) {
+        setCurrentDateText(calculatedDate);
+      }
+    };
+
+    updatePharmacyDate();
+    const interval = setInterval(updatePharmacyDate, 60000); 
+    return () => clearInterval(interval);
+  }, []);
+
+  const activePharmacies = window.AGRI.dutyPharmacies.filter(
+    p => p.date === currentDateText && p.district.toUpperCase() === district.toUpperCase()
+  );
+
+  const districtsList = ["MERKEZ", "DİYADİN", "DOĞUBAYAZIT", "ELEŞKİRT", "HAMUR", "PATNOS", "TAŞLIÇAY", "TUTAK"];
+
+  return (
+    <div className="widget-card pharmacy-widget">
+      <div className="ph-header">
+        <div className="ph-title">
+          <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="#FF4B4B" strokeWidth="2.5"><path d="M12 2v20M2 12h20"/></svg>
+          Nöbetçi Eczaneler
+        </div>
+        <select className="ph-select" value={district} onChange={(e) => setDistrict(e.target.value)}>
+          {districtsList.map((d, i) => <option key={i} value={d}>{d}</option>)}
+        </select>
+      </div>
+
+      <div className="ph-list-container">
+        {activePharmacies.length > 0 ? (
+          activePharmacies.map((ph, idx) => (
+            <div className="ph-box" key={idx} style={{marginBottom: idx < activePharmacies.length - 1 ? '10px' : '0'}}>
+              <div className="ph-name-row">
+                <span className="ph-name">{ph.name}</span>
+                <span className="ph-date-badge">{ph.date}</span>
+              </div>
+              <div className="ph-detail">{ph.address}</div>
+              <div className="ph-landmark">📍 {ph.landmark}</div>
+              <div className="ph-footer-actions">
+                <span className="ph-phone">📞 {ph.phone}</span>
+                <a className="ph-map-link" href={ph.url} target="_blank" rel="noopener noreferrer">Haritada Göster</a>
+              </div>
+            </div>
+          ))
+        ) : (
+          <div className="ph-empty">Bu tarihte bu ilçe için nöbetçi listesi bulunamadı.</div>
+        )}
+      </div>
+    </div>
+  );
+}
+
+function AgendaDashboard(){
+  const todayPrayer = {i:"02:44", g:"04:35", o:"12:13", k:"16:08", a:"19:37", y:"21:20"};
+  return (
+    <section id="gundem">
+      <div className="wrap gundem-layout">
+        <div className="g-left">
+          <div className="news-wrap" style={{marginTop: 0}}>
+            <div className="news-header">Gündem Haberleri</div>
+            <div className="news-list">
+              <div className="news-item">
+                {(window.AGRI_STATIC_BANNERS[0] && window.AGRI_STATIC_BANNERS[0].img) ? (
+                  <img src={window.AGRI_STATIC_BANNERS[0].img} className="news-img" />
+                ) : (
+                  <div className="news-img news-img-placeholder"></div>
+                )}
+                <div className="news-content"><span className="news-meta">GÜNCEL</span><h4>Ağrı'nın dijital merkezi yakında hizmetinizde</h4><p>Ağrı genelindeki tüm yerel bilgilendirmeler, esnaf rehberi ve gezi rotaları tek bir çatı altında, ücretsiz olarak çok yakında sizlerle.</p></div>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <div className="widget-panel">
+          <div className="widget-card weather" style={{background: 'linear-gradient(135deg, #4facfe 0%, #00f2fe 100%)'}}>
+            <div className="w-top"><span className="city">Ağrı Merkez</span><span className="date">02 Haz 2026</span></div>
+            <div className="w-main"><span className="temp">19°</span><span className="desc">Parçalı bulutlu</span></div>
+          </div>
+
+          <div className="widget-card prayer">
+            <div className="p-top">
+              <div className="p-top-row">Vakitler <span className="p-date">02 Haz</span></div>
+              <div className="p-countdown">Ağrı Vakit Bilgileri</div>
+            </div>
+            <div className="p-grid">
+              <div className="p-item"><span>İmsak</span><strong>{todayPrayer.i}</strong></div>
+              <div className="p-item"><span>Güneş</span><strong>{todayPrayer.g}</strong></div>
+              <div className="p-item active"><span>Öğle</span><strong>{todayPrayer.o}</strong></div>
+              <div className="p-item"><span>İkindi</span><strong>{todayPrayer.k}</strong></div>
+              <div className="p-item"><span>Akşam</span><strong>{todayPrayer.a}</strong></div>
+              <div className="p-item"><span>Yatsı</span><strong>{todayPrayer.y}</strong></div>
+            </div>
+          </div>
+
+          <PharmacyWidget />
+        </div>
+      </div>
+    </section>
+  );
+}
+
+/* ===================== KATEGORİLER (SABİT TAB SİSTEMİ) ===================== */
+function Categories({ onOpen }){
+  const cats = window.AGRI.categories; 
+  const [active, setActive] = useState(0);
+  const cat = cats[active]; 
+  const bg = window.PAT.pattern(cat.color, active);
+  
+  return (
+    <section id="kategoriler">
+      <div className="wrap">
+        <div className="cats-intro">
+          <div className="kicker">Şehir Rehberi</div>
+          <h2>Ağrı'da aradığın her şey.</h2>
+          <p>Kategorileri seçerek içerikleri inceleyebilirsiniz.</p>
+        </div>
+        
+        <div className="cats-interactive-container">
+          <nav className="cat-list">
+            {cats.map((c, i) => (
+              <button key={c.id} className={"cat-item"+(i===active?" active":"")} onClick={()=>onOpen(c)} onMouseEnter={()=>setActive(i)}>
+                <span className="num">{String(i+1).padStart(2,"0")}</span>
+                <span className="swatch" style={{background:c.color}}></span>
+                <span className="nm" style={i===active?{color:c.color}:null}>{c.name}</span>
+              </button>
+            ))}
+          </nav>
+          
+          <div className="cat-stage">
+            <div className="cat-panel" key={cat.id} style={{background:bg}}>
+              <div className="ghost">{String(active+1).padStart(2,"0")}</div>
+              <div className="scrim"></div>
+              <div className="body">
+                <h3>{cat.name}</h3>
+                <p>{cat.blurb}</p>
+                <button className="cat-cta" onClick={()=>onOpen(cat)}>İncele</button>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+  );
+}
+
+/* ===================== NÖBETÇİ ECZANE TAM SAYFA GÖRÜNÜMÜ (İL/İLÇE SEÇMELİ) ===================== */
+function PharmacyFullView() {
+  const districtsList = ["MERKEZ", "TAŞLIÇAY", "DİYADİN", "DOĞUBAYAZIT", "ELEŞKİRT", "HAMUR", "PATNOS", "TUTAK"];
+  const [district, setDistrict] = useState("MERKEZ");
+  const [currentDateText, setCurrentDateText] = useState("02.06.2026");
+
+  useEffect(() => {
+    const updateDate = () => {
+      const now = new Date();
+      const d = now.getDate().toString().padStart(2, '0');
+      const m = (now.getMonth() + 1).toString().padStart(2, '0');
+      const y = now.getFullYear();
+      const calc = `${d}.${m}.${y}`;
+      if (window.AGRI.dutyPharmacies.some(p => p.date === calc)) setCurrentDateText(calc);
+    };
+    updateDate();
+    const t = setInterval(updateDate, 60000);
+    return () => clearInterval(t);
+  }, []);
+
+  const list = window.AGRI.dutyPharmacies.filter(
+    p => p.date === currentDateText && p.district.toUpperCase() === district.toUpperCase()
+  );
+
+  return (
+    <div className="pharm-page">
+      <div className="pharm-page-bar">
+        <div className="pharm-page-date">
+          <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2"><rect x="3" y="4" width="18" height="18" rx="2"/><path d="M16 2v4M8 2v4M3 10h18"/></svg>
+          {currentDateText} tarihli nöbetçi eczaneler
+        </div>
+        <div className="pharm-page-districts">
+          {districtsList.map((d, i) => (
+            <button key={i} className={"pharm-chip"+(d===district?" active":"")} onClick={()=>setDistrict(d)}>{d}</button>
+          ))}
+        </div>
+      </div>
+
+      <div className="pharm-page-grid">
+        {list.length > 0 ? (
+          list.map((ph, idx) => (
+            <div className="pharm-card" key={idx}>
+              <div className="pharm-card-top">
+                <span className="pharm-card-name">{ph.name}</span>
+                <span className="pharm-card-dist">{ph.district}</span>
+              </div>
+              <div className="pharm-card-addr">{ph.address}</div>
+              <div className="pharm-card-landmark">📍 {ph.landmark}</div>
+              <div className="pharm-card-foot">
+                <a className="pharm-card-phone" href={`tel:${ph.phone.replace(/\s/g,'')}`}>📞 {ph.phone}</a>
+                <a className="pharm-card-map" href={ph.url} target="_blank" rel="noopener noreferrer">Haritada Göster</a>
+              </div>
+            </div>
+          ))
+        ) : (
+          <div className="pharm-empty">Bu tarihte <strong>{district}</strong> ilçesi için nöbetçi eczane listesi bulunamadı.</div>
+        )}
+      </div>
+    </div>
+  );
+}
+
+/* ===================== DETAYLI GÖRÜNTÜLEME MODALLARI ===================== */
+function PlacesOverlay({ cat, onClose }){
+  const [selectedPlace, setSelectedPlace] = useState(null);
+  const isGezilecek = cat.id === "gezilecek";
+  const isNobetci = cat.id === "nobetci";
+
+  if (selectedPlace && isGezilecek) {
+    return (
+      <div className="place-modal-overlay" onClick={(e) => { if(e.target.className==='place-modal-overlay') setSelectedPlace(null); }}>
+        <div className="place-modal-content">
+          <div className="pm-close" onClick={() => setSelectedPlace(null)}>X</div>
+          <div className="pm-img-wrap" style={ (!selectedPlace.img || selectedPlace.img.trim()==="") ? { background:`linear-gradient(150deg, ${cat.color} 0%, color-mix(in srgb, ${cat.color}, #000 45%) 100%)` } : null }>
+            { selectedPlace.img && selectedPlace.img.trim() !== "" ? (
+              <img src={selectedPlace.img} alt={selectedPlace.name} />
+            ) : (
+              <div className="pm-noimg">
+                <svg width="54" height="54" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.4"><path d="M12 21s7-6.3 7-11a7 7 0 1 0-14 0c0 4.7 7 11 7 11Z"/><circle cx="12" cy="10" r="2.5"/></svg>
+                <span>Görsel yakında eklenecek</span>
+              </div>
+            )}
+            <div className="pm-img-scrim"></div>
+            <div className="pm-title-box">
+              <h2>{selectedPlace.name}</h2>
+            </div>
+          </div>
+          <div className="pm-body">
+            <p className="pm-info">{selectedPlace.info}</p>
+            <div className="pm-meta-box">
+              <div className="pm-meta-item">
+                <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5"><path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z"/><circle cx="12" cy="10" r="3"/></svg>
+                <div><strong>Konum / İlçe:</strong> {selectedPlace.area}</div>
+              </div>
+              <div className="pm-meta-item">
+                <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5"><path d="M20 10c0 6-8 12-8 12s-8-6-8-12a8 8 0 0 1 16 0Z"/></svg>
+                <div><strong>Adres Tarifi:</strong> {selectedPlace.address}</div>
+              </div>
+            </div>
+            <a className="pm-maps-btn" href={selectedPlace.mapsUrl} target="_blank" rel="noopener noreferrer">
+              Google Haritalar'da Aç (Navigasyon)
+            </a>
+          </div>
+        </div>
+      </div>
+    );
+  }
+
+  return (
+    <div className="ov">
+      <div className="ov-head">
+        <button className="ov-back" onClick={onClose}>Geri Dön</button>
+        <div className="ov-title"><h2>{cat.name}</h2></div>
+        <button className="ov-close" onClick={onClose}>X</button>
+      </div>
+      <div className="ov-body">
+        {isGezilecek ? (
+          <div className="grid">
+            {cat.places.map((p, i) => {
+              const hasImg = p.img && p.img.trim() !== "";
+              const cardStyle = hasImg
+                ? { backgroundImage:`url(${p.img})`, backgroundSize:'cover', backgroundPosition:'center' }
+                : { background:`linear-gradient(150deg, ${cat.color} 0%, color-mix(in srgb, ${cat.color}, #000 45%) 100%)` };
+              return (
+                <div key={i} className="card" onClick={() => setSelectedPlace(p)} style={cardStyle}>
+                  {!hasImg && (
+                    <div className="card-noimg">
+                      <svg width="42" height="42" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.6"><path d="M12 21s7-6.3 7-11a7 7 0 1 0-14 0c0 4.7 7 11 7 11Z"/><circle cx="12" cy="10" r="2.5"/></svg>
+                    </div>
+                  )}
+                  <div className="scrim"></div>
+                  <div className="body">
+                    <h3>{p.name}</h3>
+                    <div className="card-area">📍 {p.area}</div>
+                    <p>{p.info.slice(0, 90)}...</p>
+                  </div>
+                </div>
+              );
+            })}
+          </div>
+        ) : isNobetci ? (
+          <PharmacyFullView />
+        ) : (
+          <div className="coming-soon-container">
+            <h4>Çok yakında burada listelenecektir.</h4>
+          </div>
+        )}
+      </div>
+    </div>
+  );
+}
+
+/* ===================== MASTER APP & NAZİK ONAY SİSTEMİ ===================== */
+const { useEffect: useEffectA, useState: useStateA } = React;
+
+function App(){
+  const [openCat, setOpenCat] = useStateA(null);
+  const [docView, setDocView] = useStateA(null); // 'privacy' | 'terms' | null
+  
+  const [tosStatus, setTosStatus] = useStateA(() => {
+    return safeStore.get('agri_onay') || 'ask'; 
+  });
+
+  const handleAcceptTos = () => {
+    safeStore.set('agri_onay', 'true');
+    setTosStatus('true');
+  };
+
+  const handleDeclineTos = () => {
+    setTosStatus('blocked');
+  };
+
+  // Site arka planda kaydırılmasın diye overflow kilidi
+  useEffectA(() => {
+    if (tosStatus !== 'true') {
+      document.body.style.overflow = 'hidden';
+    } else {
+      document.body.style.overflow = 'auto';
+    }
+  }, [tosStatus]);
+
+  // GİZLİLİK POLİTİKASI METNİ
+  const privacyText = "Değerli Ziyaretçimiz, bu web sayfası Ağrı'ya hizmet eden; hiçbir verinizi işlemeyen, saklamayan veya üçüncü taraflarla paylaşmayan, hiçbir konum bilgisi veya kişisel bilgi talep etmeyen bir tanıtım platformudur. Sizden ad, soyad, telefon, e-posta veya konum gibi hiçbir kişisel veri istenmez ve toplanmaz. Amacımız yalnızca Ağrı'yı; restoranları, cafeleri, pastaneleri, sağlık hizmetlerini, nöbetçi eczaneleri, güzellik ve bakım merkezlerini, kuaförleri, eğitim kurumlarını, etkinlikleri ve gezilecek yerleri tek bir çatı altında, ücretsiz biçimde hem Ağrı halkına hem de değerli misafirlerimize tanıtmaktır. Tarayıcınızda yalnızca bu onay kutusunu bir daha göstermemek için küçük bir teknik kayıt (yerel depolama) tutulabilir; bu kayıt hiçbir şekilde tarafımıza iletilmez. Herhangi bir soru veya talebiniz için biagri0404@hotmail.com adresinden bize ulaşabilirsiniz.";
+
+  // KULLANIM ŞARTLARI METNİ
+  const termsText = "Bu platformu kullanarak aşağıdaki şartları kabul etmiş olursunuz. Platformda yer alan tüm bilgiler (mekan, adres, telefon, nöbetçi eczane, vakitler vb.) tamamen bilgilendirme amaçlıdır ve resmî nitelik taşımaz. Bilgiler zamanla değişebileceğinden, olası hatalı, eksik veya güncel olmayan içeriklerden tarafımız sorumlu tutulamaz; önemli durumlarda ilgili kurumdan teyit almanız önerilir. Platformdaki içerikler izinsiz olarak ticari amaçla kopyalanamaz veya çoğaltılamaz. Bağlantı verilen üçüncü taraf hizmetlerin (ör. harita uygulamaları) içeriğinden ve gizlilik uygulamalarından o hizmet sağlayıcılar sorumludur. Bir bilgiyi düzeltmek, eklemek veya kaldırmak isterseniz biagri0404@hotmail.com adresi üzerinden bizimle iletişime geçebilirsiniz. Şartlar gerektiğinde güncellenebilir.\n\nSorumluluk Reddi (Disclaimer): Verilen bilgiler bilgilendirme amaçlıdır, resmî nitelik taşımaz ve güncel olmayabilir.";
+
+  const docData = {
+    privacy: { title: "Gizlilik Politikası", body: privacyText },
+    terms:   { title: "Kullanım Şartları",   body: termsText }
+  };
+
+  return (
+    <div id="top" style={{ pointerEvents: tosStatus !== 'true' ? 'none' : 'auto' }}>
+      
+      {/* ANA SAYFA İÇERİĞİ KUSURSUZ YÜKLENİR (SADECE TIKLANAMAZ DURUMDADIR) */}
+      <Topbar dark={false} />
+      <Hero onOpenCat={(id) => setOpenCat(window.AGRI.categories.find(c=>c.id===id))} onSearchPlace={() => setOpenCat(window.AGRI.categories.find(c=>c.id==='gezilecek'))} />
+      <ImageMarquee /> 
+      <Stories />
+      <AgendaDashboard />
+      <Categories onOpen={setOpenCat} />
+      
+      <footer className="foot" id="iletisim">
+        <div className="wrap">
+          <div className="top">
+            <div>
+              <h3>Ağrı Dijital Rehberi</h3>
+              <p className="lead">Ağrı'ya hizmet eden; hiçbir verinizi işlemeyen, saklamayan ve hiçbir konum bilgisi talep etmeyen ücretsiz bir tanıtım platformudur. Amacımız yalnızca şehrimizi en güzel şekilde tanıtmaktır. Sorumluluk Reddi (Disclaimer): Verilen bilgiler bilgilendirme amaçlıdır, resmî nitelik taşımaz ve güncel olmayabilir.</p>
+            </div>
+            <div className="cols">
+              <div className="col">
+                <h5>Kategoriler</h5>
+                {window.AGRI.categories.map(c => (
+                  <span key={c.id} onClick={()=>setOpenCat(window.AGRI.categories.find(x=>x.id===c.id))}>{c.name}</span>
+                ))}
+              </div>
+              <div className="col">
+                <h5>Yasal</h5>
+                <span onClick={()=>setDocView('privacy')}>Gizlilik Politikası</span>
+                <span onClick={()=>setDocView('terms')}>Kullanım Şartları</span>
+              </div>
+              <div className="col">
+                <h5>İletişim</h5>
+                <a href="mailto:biagri0404@hotmail.com">biagri0404@hotmail.com</a>
+              </div>
+            </div>
+          </div>
+          <div className="rule"></div>
+          <div className="bottom">
+            <span>Copyright © 2026 04agri.com — Tüm hakları saklıdır. Başarılar dileriz.</span>
+          </div>
+        </div>
+      </footer>
+
+      {openCat && <PlacesOverlay cat={openCat} onClose={() => setOpenCat(null)} />}
+
+      {/* GİZLİLİK / KULLANIM ŞARTLARI DOKÜMAN MODALI (footer linklerinden açılır) */}
+      {docView && (
+        <div className="doc-modal-overlay" style={{ pointerEvents:'auto' }} onClick={(e)=>{ if(e.target.className==='doc-modal-overlay') setDocView(null); }}>
+          <div className="doc-modal-card">
+            <div className="doc-modal-head">
+              <h2>{docData[docView].title}</h2>
+              <button className="doc-modal-close" onClick={()=>setDocView(null)}>X</button>
+            </div>
+            <div className="doc-modal-body">
+              <p>{docData[docView].body}</p>
+            </div>
+          </div>
+        </div>
+      )}
+
+      {/* ŞEFFAF - BOTTOM SHEET MODAL (İLK GİRİŞTE ONAY) */}
+      {tosStatus === 'ask' && (
+        <div className="tos-overlay" style={{ pointerEvents: 'auto' }}>
+          <div className="tos-modal">
+            <h2>Hoş Geldiniz 🌿</h2>
+            <p>Ağrı'nın dijital rehberine hoş geldiniz. Bu platform sizden hiçbir kişisel veri veya konum bilgisi talep etmez. Devam etmeden önce lütfen <strong onClick={()=>setDocView('privacy')} style={{cursor:'pointer', textDecoration:'underline'}}>Gizlilik Politikası</strong> ve <strong onClick={()=>setDocView('terms')} style={{cursor:'pointer', textDecoration:'underline'}}>Kullanım Şartları</strong> metinlerini onaylayın.</p>
+            <p className="tos-disclaimer"><strong>Sorumluluk Reddi (Disclaimer):</strong> Verilen bilgiler bilgilendirme amaçlıdır, resmî nitelik taşımaz ve güncel olmayabilir.</p>
+            <div className="tos-actions">
+              <button className="tos-btn decline" onClick={handleDeclineTos}>Şimdilik Onaylamıyorum</button>
+              <button className="tos-btn accept" onClick={handleAcceptTos}>Okudum, Onaylıyorum</button>
+            </div>
+          </div>
+        </div>
+      )}
+
+      {/* REDDEDENLER İÇİN KİBAR VEDA EKRANI */}
+      {tosStatus === 'blocked' && (
+        <div className="tos-blocked-overlay" style={{ pointerEvents: 'auto' }}>
+          <div className="tos-blocked-card">
+            <h3>Görüşünüze Saygı Duyuyoruz</h3>
+            <p>Sayfamızı inceleyebilmek ve kullanabilmek için Gizlilik Politikası ve Kullanım Şartları'nı onaylamanız gerekmektedir. Fikrinizi değiştirdiğinizde aramıza tekrar katılabilirsiniz.</p>
+            <button className="tos-btn accept" style={{ width: '100%', padding: '16px' }} onClick={() => setTosStatus('ask')}>Şartları Tekrar İncele</button>
+          </div>
+        </div>
+      )}
+
+    </div>
+  );
+}
+
+function pattern(color, variant) {
+  return `linear-gradient(135deg, ${color} 0%, color-mix(in srgb, ${color}, #000 30%) 100%)`;
+}
+
+ReactDOM.createRoot(document.getElementById("root")).render(<App />);
+</script>
+</body>
+</html>
