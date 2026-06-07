@@ -342,6 +342,59 @@ a{ color:inherit; text-decoration:none; cursor:pointer; }
 .coming-soon-container { max-width:500px; margin:auto; text-align:center; padding:80px 24px; }
 .coming-soon-container h4 { font-size:20px; color:var(--ink-soft); font-weight:700; margin:0; letter-spacing:-0.01em; }
 
+/* ===== SAĞLIK HİZMETLERİ ALT KATEGORİ + DİYETİSYEN (YENİ) ===== */
+.health-sub-page { max-width:var(--maxw); margin:0 auto; padding:32px 28px 80px; width:100%; }
+.health-sub-intro { margin-bottom:28px; }
+.health-sub-intro .kick { font-size:13px; font-weight:800; letter-spacing:.16em; text-transform:uppercase; color:#2ECC71; }
+.health-sub-intro h3 { font-size:clamp(26px,3.4vw,40px); margin:10px 0 0; color:var(--ink); }
+.health-sub-intro p { color:var(--ink-soft); max-width:54ch; margin:12px 0 0; font-size:16px; }
+.health-sub-grid { display:grid; grid-template-columns:repeat(auto-fill,minmax(250px,1fr)); gap:20px; }
+.health-sub-card { position:relative; background:var(--card); border:1px solid var(--line); border-radius:var(--r-md); padding:26px 24px; box-shadow:var(--shadow-1); cursor:pointer; overflow:hidden; transition:transform .3s var(--ease), box-shadow .3s var(--ease), border-color .3s var(--ease); display:flex; flex-direction:column; gap:14px; min-height:200px; }
+.health-sub-card:hover { transform:translateY(-6px); box-shadow:var(--shadow-2); border-color:transparent; }
+.health-sub-card .hs-glow { position:absolute; right:-40px; top:-40px; width:140px; height:140px; border-radius:50%; opacity:.12; filter:blur(6px); transition:opacity .3s var(--ease), transform .3s var(--ease); }
+.health-sub-card:hover .hs-glow { opacity:.22; transform:scale(1.15); }
+.health-sub-card .hs-icon { width:52px; height:52px; border-radius:14px; display:grid; place-items:center; color:#fff; position:relative; z-index:2; box-shadow:0 8px 20px rgba(0,0,0,.12); }
+.health-sub-card .hs-name { font-family:var(--display); font-size:21px; font-weight:800; color:var(--ink); position:relative; z-index:2; line-height:1.1; }
+.health-sub-card .hs-desc { font-size:13.5px; color:var(--ink-soft); line-height:1.45; position:relative; z-index:2; margin-top:auto; }
+.health-sub-card .hs-go { display:inline-flex; align-items:center; gap:6px; font-size:13px; font-weight:800; color:#2ECC71; position:relative; z-index:2; transition:gap .25s var(--ease); }
+.health-sub-card:hover .hs-go { gap:11px; }
+
+/* DİYETİSYEN LİSTE */
+.diet-page { max-width:var(--maxw); margin:0 auto; padding:32px 28px 80px; width:100%; }
+.diet-grid { display:grid; grid-template-columns:repeat(auto-fill,minmax(280px,1fr)); gap:24px; }
+.diet-card { background:var(--card); border:1px solid var(--line); border-radius:var(--r-lg); overflow:hidden; box-shadow:var(--shadow-1); cursor:pointer; transition:transform .35s var(--ease), box-shadow .35s var(--ease); display:flex; flex-direction:column; animation:dietIn .5s var(--ease) both; }
+@keyframes dietIn { from { opacity:0; transform:translateY(24px); } to { opacity:1; transform:none; } }
+.diet-card:hover { transform:translateY(-8px); box-shadow:var(--shadow-2); }
+.diet-photo-wrap { width:100%; aspect-ratio:4/5; overflow:hidden; background:linear-gradient(150deg, #2ECC71 0%, #0f7a45 100%); position:relative; }
+.diet-photo-wrap img { width:100%; height:100%; object-fit:cover; display:block; transition:transform .5s var(--ease); }
+.diet-card:hover .diet-photo-wrap img { transform:scale(1.05); }
+.diet-photo-noimg { position:absolute; inset:0; display:grid; place-items:center; color:rgba(255,255,255,.65); }
+.diet-card-body { padding:20px 22px 24px; display:flex; flex-direction:column; gap:14px; }
+.diet-card-name { font-family:var(--display); font-size:20px; font-weight:800; color:var(--ink); line-height:1.15; text-align:center; }
+.diet-card-btn { align-self:stretch; display:inline-flex; align-items:center; justify-content:center; gap:8px; background:var(--ink); color:#fff; font-weight:800; font-size:14.5px; padding:13px 18px; border-radius:100px; transition:background .2s var(--ease), transform .2s var(--ease); }
+.diet-card-btn:hover { background:#2ECC71; color:#08210f; transform:translateY(-2px); }
+
+/* DİYETİSYEN DETAY MODALI */
+.diet-modal-overlay { position:fixed; inset:0; z-index:260; background:rgba(8,20,12,0.82); backdrop-filter:blur(10px); display:grid; place-items:center; padding:20px; animation:fadeIn .3s ease; }
+.diet-modal-card { background:var(--bg); border-radius:var(--r-lg); max-width:560px; width:100%; max-height:92vh; overflow-y:auto; box-shadow:var(--shadow-3); border:1px solid var(--line); position:relative; animation:dietModalIn .4s var(--ease) both; }
+@keyframes dietModalIn { from { opacity:0; transform:translateY(30px) scale(.97); } to { opacity:1; transform:none; } }
+.diet-modal-close { position:absolute; top:16px; right:16px; width:38px; height:38px; border-radius:50%; background:rgba(0,0,0,0.55); color:#fff; display:grid; place-items:center; z-index:10; font-weight:800; cursor:pointer; }
+.diet-modal-hero { width:100%; aspect-ratio:1/1; max-height:380px; overflow:hidden; background:linear-gradient(150deg, #2ECC71 0%, #0f7a45 100%); position:relative; }
+.diet-modal-hero img { width:100%; height:100%; object-fit:cover; object-position:center top; display:block; }
+.diet-modal-hero-noimg { position:absolute; inset:0; display:grid; place-items:center; color:rgba(255,255,255,.65); }
+.diet-modal-body { padding:26px 28px 30px; display:flex; flex-direction:column; gap:18px; }
+.diet-modal-name { font-family:var(--display); font-size:26px; font-weight:800; color:var(--ink); text-align:center; line-height:1.15; }
+.diet-modal-tagline { font-size:15px; color:var(--ink-soft); text-align:center; line-height:1.5; font-weight:600; max-width:42ch; margin:0 auto; }
+.diet-contact-box { background:var(--card); border:1px solid var(--line); border-radius:var(--r-md); padding:18px; display:flex; flex-direction:column; gap:12px; }
+.diet-contact-title { font-size:12px; font-weight:800; letter-spacing:.12em; text-transform:uppercase; color:#2ECC71; }
+.diet-contact-row { display:flex; align-items:center; gap:12px; font-size:15px; font-weight:700; color:var(--ink); transition:color .2s; }
+.diet-contact-row svg { color:#2ECC71; flex-shrink:0; }
+.diet-contact-row.phone:hover { color:#2ECC71; }
+.diet-contact-row .label { font-size:11px; font-weight:700; color:var(--ink-faint); text-transform:uppercase; letter-spacing:.05em; display:block; }
+.diet-contact-row .val { display:flex; flex-direction:column; line-height:1.3; }
+.diet-maps-btn { background:var(--ink); color:#fff; font-weight:800; padding:15px; border-radius:100px; display:flex; align-items:center; justify-content:center; gap:8px; font-size:15px; transition:background .2s var(--ease), transform .2s var(--ease); }
+.diet-maps-btn:hover { background:#2ECC71; color:#08210f; transform:translateY(-2px); }
+
 /* NÖBETÇİ ECZANE TAM SAYFA GÖRÜNÜMÜ */
 .pharm-page { max-width:var(--maxw); margin:0 auto; padding:28px 28px 80px; width:100%; }
 .pharm-page-bar { display:flex; flex-direction:column; gap:16px; margin-bottom:26px; }
@@ -409,6 +462,8 @@ a{ color:inherit; text-decoration:none; cursor:pointer; }
   .tos-modal { padding: 24px 20px; }
   .pharm-page { padding:20px 16px 60px; }
   .pharm-page-grid { grid-template-columns:1fr; }
+  .health-sub-page { padding:24px 16px 60px; }
+  .diet-page { padding:24px 16px 60px; }
 }
 </style>
 </head>
@@ -442,7 +497,7 @@ a{ color:inherit; text-decoration:none; cursor:pointer; }
     },
     {
       id:"saglik", name:"Sağlık Hizmetleri", color:"#2ECC71", tagline:"Sağlık & Danışmanlık", 
-      blurb:"Özel diş hekimi klinikleri, dil ve konuşma terapistleri, psikologlar ve fizyoterapistler bir arada.",
+      blurb:"Özel diş hekimi klinikleri, dil ve konuşma terapistleri, psikologlar, fizyoterapistler ve diyetisyenler bir arada.",
       places:[]
     },
     {
@@ -526,6 +581,27 @@ a{ color:inherit; text-decoration:none; cursor:pointer; }
     },
   ];
 
+  /* SAĞLIK HİZMETLERİ ALT KATEGORİLERİ (YENİ) */
+  const healthSubcategories = [
+    { id:"dis",   name:"Diş Hekimi",            color:"#3498DB", desc:"Özel diş hekimi klinikleri ve ağız-diş sağlığı merkezleri." },
+    { id:"dil",   name:"Dil ve Konuşma Terapisti", color:"#9B59B6", desc:"Dil, konuşma ve iletişim terapisti uzmanları." },
+    { id:"psikolog", name:"Psikolog",           color:"#E67E22", desc:"Psikolog ve danışmanlık hizmetleri." },
+    { id:"fizyoterapist", name:"Fizyoterapist", color:"#1ABC9C", desc:"Fizik tedavi ve rehabilitasyon uzmanları." },
+    { id:"diyetisyen", name:"Diyetisyen",       color:"#2ECC71", desc:"Yüz yüze ve online beslenme danışmanlığı.", hasContent:true }
+  ];
+
+  /* DİYETİSYEN LİSTESİ (YENİ) — şimdilik tek kişi */
+  const dietitians = [
+    {
+      name:"Uzman Diyetisyen Bilge İgan Yıldırım",
+      photo:"uzm.diyetisyenbilge.jpg",
+      tagline:"Uzman Hizmet Biriminde yüz yüze ve online beslenme danışmanlığı.",
+      phones:["0472 215 0184","0543 120 4505"],
+      address:"Saray Plaza Kat5 AĞRI",
+      mapsUrl:"https://maps.google.com/?q=Saray+Plaza+Agri"
+    }
+  ];
+
   const dutyPharmacies = [
     {date:"02.06.2026", district:"DİYADİN", name:"DİLAN ECZANESİ", address:"ISA AGA MAHALLESİ INÖNÜ CADDESİ NO:36", landmark:"BELEDİYE YANI", phone:"0472 511 28 28", url:"https://maps.google.com/?q=Dilan+Eczanesi+Diyadin"},
     {date:"02.06.2026", district:"DOĞUBAYAZIT", name:"YAŞAM ECZANESİ", address:"İSHAKPAŞA MAHALLESİ GÜLVEREN SOKAK NO:80C", landmark:"2 NOLU OCAĞI KARŞISI", phone:"0507 171 74 97", url:"https://maps.google.com/?q=Yasam+Eczanesi+Dogubayazit"},
@@ -598,7 +674,7 @@ a{ color:inherit; text-decoration:none; cursor:pointer; }
     {date:"08.06.2026", district:"TUTAK", name:"TUTAK ECZANESİ", address:"MURAT MAHALLESİ CUMHURİYET CADDESİ NO:51/A", landmark:"MERVE KIRTASİYE YANI", phone:"0472 411 26 98", url:"https://maps.google.com/?q=Tutak+Eczanesi+Tutak"}
   ];
 
-  window.AGRI = { categories, dutyPharmacies };
+  window.AGRI = { categories, dutyPharmacies, healthSubcategories, dietitians };
 
   // BANNER'LAR — görsel eklemek için 'img' alanına URL yaz. Boşsa "çok yakında" yazısı çıkar.
   // İstediğin kadar ekleyip çıkarabilirsin (sayı serbest).
@@ -1140,11 +1216,142 @@ function PharmacyFullView() {
   );
 }
 
+/* ===================== SAĞLIK HİZMETLERİ TAM SAYFA (YENİ) ===================== */
+/* Önce alt kategori kartları, "diyetisyen" kartına basınca diyetisyen listesi,
+   bir diyetisyene basınca detay modalı açılır. */
+function HealthFullView() {
+  const subs = window.AGRI.healthSubcategories || [];
+  const diets = window.AGRI.dietitians || [];
+  const [view, setView] = useState("subs");          // "subs" | "diyetisyen"
+  const [selectedDiet, setSelectedDiet] = useState(null);
+
+  const PinSvg = (props) => (
+    <svg width={props.s || 18} height={props.s || 18} viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.4">
+      <path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z"/><circle cx="12" cy="10" r="3"/>
+    </svg>
+  );
+
+  // DİYETİSYEN LİSTE GÖRÜNÜMÜ
+  if (view === "diyetisyen") {
+    return (
+      <div className="diet-page">
+        <div className="health-sub-intro">
+          <div className="kick">Sağlık Hizmetleri · Diyetisyen</div>
+          <h3>Diyetisyenler</h3>
+          <p>Yüz yüze ve online beslenme danışmanlığı veren uzman diyetisyenler.</p>
+          <button className="ov-back" style={{marginTop:18}} onClick={()=>setView("subs")}>← Sağlık Kategorileri</button>
+        </div>
+
+        <div className="diet-grid">
+          {diets.map((d, i) => {
+            const hasPhoto = d.photo && d.photo.trim() !== "";
+            return (
+              <div className="diet-card" key={i} style={{animationDelay:`${i*0.08}s`}} onClick={()=>setSelectedDiet(d)}>
+                <div className="diet-photo-wrap">
+                  {hasPhoto ? (
+                    <img src={d.photo} alt={d.name} />
+                  ) : (
+                    <div className="diet-photo-noimg">
+                      <svg width="52" height="52" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.5"><circle cx="12" cy="8" r="4"/><path d="M4 21v-1a8 8 0 0 1 16 0v1"/></svg>
+                    </div>
+                  )}
+                </div>
+                <div className="diet-card-body">
+                  <div className="diet-card-name">{d.name}</div>
+                  <button className="diet-card-btn" onClick={(e)=>{ e.stopPropagation(); setSelectedDiet(d); }}>
+                    Detaylı Gör
+                    <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.4"><path d="M5 12h14M13 6l6 6-6 6"/></svg>
+                  </button>
+                </div>
+              </div>
+            );
+          })}
+        </div>
+
+        {/* DİYETİSYEN DETAY MODALI */}
+        {selectedDiet && (
+          <div className="diet-modal-overlay" onClick={(e)=>{ if(e.target.className==='diet-modal-overlay') setSelectedDiet(null); }}>
+            <div className="diet-modal-card">
+              <div className="diet-modal-close" onClick={()=>setSelectedDiet(null)}>X</div>
+              <div className="diet-modal-hero">
+                {selectedDiet.photo && selectedDiet.photo.trim() !== "" ? (
+                  <img src={selectedDiet.photo} alt={selectedDiet.name} />
+                ) : (
+                  <div className="diet-modal-hero-noimg">
+                    <svg width="72" height="72" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.4"><circle cx="12" cy="8" r="4"/><path d="M4 21v-1a8 8 0 0 1 16 0v1"/></svg>
+                  </div>
+                )}
+              </div>
+              <div className="diet-modal-body">
+                <div className="diet-modal-name">{selectedDiet.name}</div>
+                <p className="diet-modal-tagline">{selectedDiet.tagline}</p>
+
+                <div className="diet-contact-box">
+                  <div className="diet-contact-title">İletişim Bilgileri</div>
+                  {selectedDiet.phones.map((ph, k) => (
+                    <a className="diet-contact-row phone" key={k} href={`tel:${ph.replace(/\s/g,'')}`}>
+                      <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.2"><path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07 19.5 19.5 0 0 1-6-6 19.79 19.79 0 0 1-3.07-8.67A2 2 0 0 1 4.11 2h3a2 2 0 0 1 2 1.72c.13.96.36 1.9.7 2.81a2 2 0 0 1-.45 2.11L8.09 9.91a16 16 0 0 0 6 6l1.27-1.27a2 2 0 0 1 2.11-.45c.91.34 1.85.57 2.81.7A2 2 0 0 1 22 16.92z"/></svg>
+                      <span className="val"><span className="label">Randevu için</span>{ph}</span>
+                    </a>
+                  ))}
+                  <div className="diet-contact-row">
+                    <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.2"><path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z"/><circle cx="12" cy="10" r="3"/></svg>
+                    <span className="val"><span className="label">Adres</span>{selectedDiet.address}</span>
+                  </div>
+                </div>
+
+                <a className="diet-maps-btn" href={selectedDiet.mapsUrl} target="_blank" rel="noopener noreferrer">
+                  <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.4"><path d="M3 11l19-9-9 19-2-8-8-2z"/></svg>
+                  Google Haritalar'da Aç (Navigasyon)
+                </a>
+              </div>
+            </div>
+          </div>
+        )}
+      </div>
+    );
+  }
+
+  // ALT KATEGORİ KARTLARI GÖRÜNÜMÜ
+  return (
+    <div className="health-sub-page">
+      <div className="health-sub-intro">
+        <div className="kick">Sağlık Hizmetleri</div>
+        <h3>Bir hizmet alanı seçin</h3>
+        <p>Özel diş hekimi klinikleri, dil ve konuşma terapistleri, psikologlar, fizyoterapistler ve diyetisyenler bir arada.</p>
+      </div>
+
+      <div className="health-sub-grid">
+        {subs.map((s, i) => (
+          <div
+            className="health-sub-card"
+            key={s.id}
+            style={{ animationDelay:`${i*0.05}s` }}
+            onClick={()=>{ if(s.id === "diyetisyen") setView("diyetisyen"); }}
+          >
+            <span className="hs-glow" style={{ background:s.color }}></span>
+            <span className="hs-icon" style={{ background:`linear-gradient(150deg, ${s.color} 0%, color-mix(in srgb, ${s.color}, #000 30%) 100%)` }}>
+              <svg width="26" height="26" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.2"><path d="M12 21s7-6.3 7-11a7 7 0 1 0-14 0c0 4.7 7 11 7 11Z"/><circle cx="12" cy="10" r="2.5"/></svg>
+            </span>
+            <span className="hs-name">{s.name}</span>
+            <span className="hs-desc">{s.desc}</span>
+            <span className="hs-go">
+              {s.hasContent ? "Listeyi Gör" : "Çok yakında"}
+              <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.6"><path d="M5 12h14M13 6l6 6-6 6"/></svg>
+            </span>
+          </div>
+        ))}
+      </div>
+    </div>
+  );
+}
+
 /* ===================== DETAYLI GÖRÜNTÜLEME MODALLARI ===================== */
 function PlacesOverlay({ cat, onClose }){
   const [selectedPlace, setSelectedPlace] = useState(null);
   const isGezilecek = cat.id === "gezilecek";
   const isNobetci = cat.id === "nobetci";
+  const isSaglik = cat.id === "saglik";
 
   if (selectedPlace && isGezilecek) {
     return (
@@ -1220,6 +1427,8 @@ function PlacesOverlay({ cat, onClose }){
           </div>
         ) : isNobetci ? (
           <PharmacyFullView />
+        ) : isSaglik ? (
+          <HealthFullView />
         ) : (
           <div className="coming-soon-container">
             <h4>Çok yakında burada listelenecektir.</h4>
@@ -1260,10 +1469,10 @@ function App(){
   }, [tosStatus]);
 
   // GİZLİLİK POLİTİKASI METNİ
-  const privacyText = "Değerli Ziyaretçimiz, bu web sayfası Ağrı'ya hizmet eden; hiçbir verinizi işlemeyen, saklamayan veya üçüncü taraflarla paylaşmayan, hiçbir konum bilgisi veya kişisel bilgi talep etmeyen bir tanıtım platformudur. Sizden ad, soyad, telefon, e-posta veya konum gibi hiçbir kişisel veri istenmez ve toplanmaz. Amacımız yalnızca Ağrı'yı; restoranları, cafeleri, pastaneleri, sağlık hizmetlerini, nöbetçi eczaneleri, güzellik ve bakım merkezlerini, kuaförleri, eğitim kurumlarını, etkinlikleri ve gezilecek yerleri tek bir çatı altında, ücretsiz biçimde hem Ağrı halkına hem de değerli misafirlerimize tanıtmaktır. Tarayıcınızda yalnızca bu onay kutusunu bir daha göstermemek için küçük bir teknik kayıt (yerel depolama) tutulabilir; bu kayıt hiçbir şekilde tarafımıza iletilmez. Herhangi bir soru veya talebiniz için biagri0404@hotmail.com adresinden bize ulaşabilirsiniz.";
+  const privacyText = "Değerli Ziyaretçimiz, bu web sayfası Ağrı'ya hizmet eden; hiçbir verinizi işlemeyen, saklamayan veya üçüncü taraflarla paylaşmayan, hiçbir konum bilgisi veya kişisel bilgi talep etmeyen bir tanıtım platformudur. Sizden ad, soyad, telefon, e-posta veya konum gibi hiçbir kişisel veri istenmez ve toplanmaz. Amacımız yalnızca Ağrı'yı; restoranları, cafeleri, pastaneleri, sağlık hizmetlerini, nöbetçi eczaneleri, güzellik ve bakım merkezlerini, kuaförleri, eğitim kurumlarını, etkinlikleri ve gezilecek yerleri tek bir çatı altında, ücretsiz biçimde hem Ağrı halkına hem de değerli misafirlerimize tanıtmaktır. Tarayıcınızda yalnızca bu onay kutusunu bir daha göstermemek için küçük bir teknik kayıt (yerel depolama) tutulabilir; bu kayıt hiçbir şekilde tarafımıza iletilmez. Herhangi bir soru veya talebiniz için biagri0404@hotmail.com adresinden bize ulaşabilirsiniz.\n\nÜçüncü Taraf Verileri ve Kamuya Açık Bilgiler:\nPlatformumuz, işletmelerin ve kişilerin kendi rızalarıyla rehberimizde yer alması için tarafımıza sunduğu iletişim verilerini (telefon numarası, açık adres, işletme adı, vitrin görselleri) kamuya açık şekilde sergilemektedir. Bu verilerin toplanması, yayınlanması ve işlenmesi tamamen veri sahibinin (işletme/kişi) kendi talebi ve onayı ile gerçekleşmiştir. Tarafımıza iletilen bu işletme verilerinde hak ihlali, yanlış yönlendirme veya sahte beyan bulunması durumunda, sitemiz veri işleyen veya yayınlayan sıfatıyla sorumlu tutulamaz. Bilgilerini sitemizden kaldırtmak isteyen veya güncelleyen işletmeler, sitemiz üzerindeki iletişim kanallarından bizimle irtibata geçerek bu yöndeki taleplerini iletebilirler. İşlem en kısa sürede gerçekleştirilecektir, ancak geçmişe dönük yaşanmış mağduriyetlerden sitemiz sorumlu tutulamaz.";
 
   // KULLANIM ŞARTLARI METNİ
-  const termsText = "Bu platformu kullanarak aşağıdaki şartları kabul etmiş olursunuz. Platformda yer alan tüm bilgiler (mekan, adres, telefon, nöbetçi eczane, vakitler vb.) tamamen bilgilendirme amaçlıdır ve resmî nitelik taşımaz. Bilgiler zamanla değişebileceğinden, olası hatalı, eksik veya güncel olmayan içeriklerden tarafımız sorumlu tutulamaz; önemli durumlarda ilgili kurumdan teyit almanız önerilir. Platformdaki içerikler izinsiz olarak ticari amaçla kopyalanamaz veya çoğaltılamaz. Bağlantı verilen üçüncü taraf hizmetlerin (ör. harita uygulamaları) içeriğinden ve gizlilik uygulamalarından o hizmet sağlayıcılar sorumludur. Bir bilgiyi düzeltmek, eklemek veya kaldırmak isterseniz biagri0404@hotmail.com adresi üzerinden bizimle iletişime geçebilirsiniz. Şartlar gerektiğinde güncellenebilir.\n\nSorumluluk Reddi (Disclaimer): Verilen bilgiler bilgilendirme amaçlıdır, resmî nitelik taşımaz ve güncel olmayabilir.";
+  const termsText = "Bu platformu kullanarak aşağıdaki şartları kabul etmiş olursunuz. Platformda yer alan tüm bilgiler (mekan, adres, telefon, nöbetçi eczane, vakitler vb.) tamamen bilgilendirme amaçlıdır ve resmî nitelik taşımaz. Bilgiler zamanla değişebileceğinden, olası hatalı, eksik veya güncel olmayan içeriklerden tarafımız sorumlu tutulamaz; önemli durumlarda ilgili kurumdan teyit almanız önerilir. Platformdaki içerikler izinsiz olarak ticari amaçla kopyalanamaz veya çoğaltılamaz. Bağlantı verilen üçüncü taraf hizmetlerin (ör. harita uygulamaları) içeriğinden ve gizlilik uygulamalarından o hizmet sağlayıcılar sorumludur. Bir bilgiyi düzeltmek, eklemek veya kaldırmak isterseniz biagri0404@hotmail.com adresi üzerinden bizimle iletişime geçebilirsiniz. Şartlar gerektiğinde güncellenebilir.\n\nMadde X – İçerik Sağlayıcılar, Üçüncü Taraf İşletmeler ve Sorumluluk Reddi\n\n1. Web sitemizde listelenen \"Gezilecek Yerler\" kategorisi hariç olmak üzere; diğer tüm kategorilerde (işletmeler, mekanlar, hizmet sağlayıcılar vb.) yer alan her türlü görsel, iletişim numarası, konum/adres bilgisi, hizmet tanımı ve fiyatlandırma gibi içerikler, bizzat ilgili kişi ve işletmelerin açık rızası ve kendi beyanları doğrultusunda tarafımıza iletilmiş ve sisteme eklenmiştir.\n\n2. Platformumuz yalnızca bir aracı, rehber ve vitrin görevi görmektedir. Sitemizde yer alan üçüncü şahıs veya işletmelere ait hiçbir bilginin kesin doğruluğunu, güncelliğini veya güvenilirliğini garanti etmiyoruz. Sitede yer alan bilgilerin yanlış, eksik veya yanıltıcı olmasından doğabilecek hiçbir hukuki, maddi veya manevi zarardan platformumuz, site yöneticilerimiz ve kurucularımız sorumlu tutulamaz. Tüm yasal sorumluluk, bu içeriklerin yayınlanmasını talep eden ve bilgileri tarafımıza ileten kişi ve işletmelerin şahsına/tüzel kişiliğine aittir.\n\n3. Hizmet Kalitesi ve Ticari İlişkiler: Kullanıcıların, sitemiz üzerinden iletişim kurduğu, ziyaret ettiği veya hizmet/ürün satın aldığı hiçbir işletme ile platformumuz arasında ticari bir bağ bulunmamaktadır. Bu kişi veya işletmelerden alınacak hizmetin kalitesi, ayıplı mal/hizmet süreçleri, müşteri memnuniyetsizliği veya yaşanabilecek herhangi bir ticari/hukuki uyuşmazlıkta sitemiz kesinlikle taraf değildir ve hiçbir sorumluluk kabul etmez.\n\n4. Yapay Zeka ile Üretilen İçerikler: Sitemizde yalnızca \"Gezilecek Yerler\" kategorisi altında sunulan görsel materyaller, tamamen tarafımızca yapay zeka (AI) teknolojileri kullanılarak üretilmiştir. Bu görseller temsilidir ve gerçeği ile birebir uyuşmama ihtimali barındırır. Kullanıcılar bu durumu bilerek sitemizi ziyaret ettiklerini kabul ederler.\n\nSorumluluk Reddi (Disclaimer): Verilen bilgiler bilgilendirme amaçlıdır, resmî nitelik taşımaz ve güncel olmayabilir.";
 
   const docData = {
     privacy: { title: "Gizlilik Politikası", body: privacyText },
@@ -1336,6 +1545,7 @@ function App(){
           <div className="tos-modal">
             <h2>Hoş Geldiniz 🌿</h2>
             <p>Ağrı'nın dijital rehberine hoş geldiniz. Bu platform sizden hiçbir kişisel veri veya konum bilgisi talep etmez. Devam etmeden önce lütfen <strong onClick={()=>setDocView('privacy')} style={{cursor:'pointer', textDecoration:'underline'}}>Gizlilik Politikası</strong> ve <strong onClick={()=>setDocView('terms')} style={{cursor:'pointer', textDecoration:'underline'}}>Kullanım Şartları</strong> metinlerini onaylayın.</p>
+            <p>Platformumuzda yer alan "Gezilecek Yerler" kategorisi dışındaki tüm işletme, kurum ve kişi profillerine ait bilgiler (görseller, adresler, iletişim numaraları ve sunulan hizmetler), ilgili tarafların kendi hür iradeleri ve rızaları ile sitemizde yayınlanmak üzere tarafımıza iletilmiştir. Bu bilgilerin (eksik, yanlış veya yanıltıcı olması dahil) doğruluğundan ve bu işletmelerden alacağınız mal/hizmetlerin kalitesinden platformumuz hiçbir şekilde sorumlu tutulamaz. Tüm hukuki sorumluluk, bu bilgileri sitemize gönderen kişi ve işletmelere aittir. Ek olarak, sitemizdeki "Gezilecek Yerler" kategorisinde yer alan görseller tamamen tarafımızca yapay zeka kullanılarak üretilmiş olup temsilidir. Sitemizi kullanmaya devam ederek ve "Okudum, Onaylıyorum" butonuna tıklayarak, Kullanım Şartları ve Gizlilik Politikamızı peşinen kabul etmiş olursunuz.</p>
             <p className="tos-disclaimer"><strong>Sorumluluk Reddi (Disclaimer):</strong> Verilen bilgiler bilgilendirme amaçlıdır, resmî nitelik taşımaz ve güncel olmayabilir.</p>
             <div className="tos-actions">
               <button className="tos-btn decline" onClick={handleDeclineTos}>Şimdilik Onaylamıyorum</button>
