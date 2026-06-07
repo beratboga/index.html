@@ -177,14 +177,23 @@ a{ color:inherit; text-decoration:none; cursor:pointer; }
 .scroll-hint .mouse::after{ content:""; position:absolute; left:50%; top:6px; width:3px; height:7px; margin-left:-1.5px; border-radius:2px; background:#fff; animation:wheel 1.6s var(--ease) infinite; }
 @keyframes wheel{ 0%{opacity:0;transform:translateY(0)} 30%{opacity:1} 70%{opacity:1} 100%{opacity:0;transform:translateY(10px)} }
 
-/* BANNER MARQUEE */
+/* BANNER MARQUEE & ÖZEL DİYETİSYEN BANNER TASARIMI */
 .banner-section{ padding:40px 0; background:var(--bg); overflow:hidden; width:100%; max-width:100%; }
 .marquee{ display:flex; width:max-content; animation:scroll 40s linear infinite; will-change:transform; }
 .marquee:hover{ animation-play-state:paused; }
 @keyframes scroll{ from{ transform:translateX(0); } to{ transform:translateX(-50%); } }
+
 .banner-img{ width:300px; height:180px; border-radius:var(--r-md); object-fit:cover; box-shadow:var(--shadow-1); border:2px solid #fff; margin-right:20px; flex-shrink:0; }
 .banner-placeholder{ display:flex; align-items:center; justify-content:center; text-align:center; padding:16px; background:linear-gradient(135deg, var(--dawn-1) 0%, var(--dawn-3) 100%); }
 .banner-placeholder span{ color:#fff; font-family:var(--display); font-weight:700; font-size:17px; letter-spacing:-.01em; text-shadow:0 2px 8px rgba(0,0,0,.25); }
+
+/* Diyetisyen Özel Banner Wrap */
+.banner-diet-wrap { position:relative; width:300px; height:180px; border-radius:var(--r-md); overflow:hidden; box-shadow:var(--shadow-1); border:2px solid #fff; margin-right:20px; flex-shrink:0; cursor:pointer; background:#111; }
+.banner-diet-img { width:100%; height:100%; object-fit:cover; object-position:center 15%; opacity:0.85; transition:transform 0.4s var(--ease); display:block; }
+.banner-diet-wrap:hover .banner-diet-img { transform:scale(1.05); opacity:0.6; }
+.banner-diet-overlay { position:absolute; inset:0; display:flex; flex-direction:column; justify-content:flex-end; padding:20px 16px; background:linear-gradient(180deg, transparent 20%, rgba(8,10,24,0.9) 100%); text-align:center; pointer-events:none; }
+.banner-diet-overlay .welcome { font-family:var(--display); font-size:17px; font-weight:800; color:var(--accent); margin-bottom:4px; letter-spacing:0.02em; text-shadow:0 2px 8px rgba(0,0,0,0.6); }
+.banner-diet-overlay .name { color:#fff; font-size:14px; font-weight:600; line-height:1.2; text-shadow:0 1px 4px rgba(0,0,0,0.8); }
 
 /* HİKAYELER (özgün tasarım) */
 .stories-section{ padding:8px 0 24px; background:var(--bg); width:100%; }
@@ -318,7 +327,7 @@ a{ color:inherit; text-decoration:none; cursor:pointer; }
 .card .card-area{ display:flex; align-items:center; gap:6px; font-size:13.5px; font-weight:700; margin:8px 0; color:var(--accent); }
 .card p{ margin:6px 0 0; font-size:14px; color:rgba(255,255,255,0.92); line-height:1.45; text-wrap:pretty; }
 
-/* GEZİLECEK YERLER DETAY MODALI (SADECE FOTO, METİN VE ADRES-KONUM) */
+/* GEZİLECEK YERLER DETAY MODALI */
 .place-modal-overlay { position:fixed; inset:0; z-index:250; background:rgba(12,16,32,0.85); backdrop-filter:blur(10px); display:grid; place-items:center; padding:20px; width:100%; height:100%; }
 .place-modal-content { background:var(--bg); border-radius:var(--r-lg); max-width:700px; width:100%; overflow:hidden; box-shadow:var(--shadow-3); border:1px solid var(--line); display:flex; flex-direction:column; position:relative; max-height:92vh; }
 .pm-close { position:absolute; top:16px; right:16px; width:38px; height:38px; border-radius:50%; background:rgba(0,0,0,0.5); color:#fff; display:grid; place-items:center; z-index:10; font-weight:800; cursor:pointer; }
@@ -338,11 +347,10 @@ a{ color:inherit; text-decoration:none; cursor:pointer; }
 .pm-maps-btn { background:var(--ink); color:#fff; font-weight:800; padding:14px; border-radius:100px; display:flex; align-items:center; justify-content:center; gap:8px; font-size:15px; transition:background 0.2s; text-align:center; margin-top:8px; }
 .pm-maps-btn:hover { background:#000; }
 
-/* ÇOK YAKINDA SADECE TEK SATIR UYARI MODELİ */
 .coming-soon-container { max-width:500px; margin:auto; text-align:center; padding:80px 24px; }
 .coming-soon-container h4 { font-size:20px; color:var(--ink-soft); font-weight:700; margin:0; letter-spacing:-0.01em; }
 
-/* ===== SAĞLIK HİZMETLERİ ALT KATEGORİ + DİYETİSYEN (YENİ) ===== */
+/* ===== SAĞLIK HİZMETLERİ ALT KATEGORİ + DİYETİSYEN ===== */
 .health-sub-page { max-width:var(--maxw); margin:0 auto; padding:32px 28px 80px; width:100%; }
 .health-sub-intro { margin-bottom:28px; }
 .health-sub-intro .kick { font-size:13px; font-weight:800; letter-spacing:.16em; text-transform:uppercase; color:#2ECC71; }
@@ -366,7 +374,7 @@ a{ color:inherit; text-decoration:none; cursor:pointer; }
 @keyframes dietIn { from { opacity:0; transform:translateY(24px); } to { opacity:1; transform:none; } }
 .diet-card:hover { transform:translateY(-8px); box-shadow:var(--shadow-2); }
 .diet-photo-wrap { width:100%; aspect-ratio:4/5; overflow:hidden; background:linear-gradient(150deg, #2ECC71 0%, #0f7a45 100%); position:relative; }
-.diet-photo-wrap img { width:100%; height:100%; object-fit:cover; display:block; transition:transform .5s var(--ease); }
+.diet-photo-wrap img { width:100%; height:100%; object-fit:cover; object-position:center top; display:block; transition:transform .5s var(--ease); }
 .diet-card:hover .diet-photo-wrap img { transform:scale(1.05); }
 .diet-photo-noimg { position:absolute; inset:0; display:grid; place-items:center; color:rgba(255,255,255,.65); }
 .diet-card-body { padding:20px 22px 24px; display:flex; flex-direction:column; gap:14px; }
@@ -590,7 +598,7 @@ a{ color:inherit; text-decoration:none; cursor:pointer; }
     { id:"diyetisyen", name:"Diyetisyen",       color:"#2ECC71", desc:"Yüz yüze ve online beslenme danışmanlığı.", hasContent:true }
   ];
 
-  /* DİYETİSYEN LİSTESİ (YENİ) — şimdilik tek kişi */
+  /* DİYETİSYEN LİSTESİ */
   const dietitians = [
     {
       name:"Uzman Diyetisyen Bilge İgan Yıldırım",
@@ -613,95 +621,66 @@ a{ color:inherit; text-decoration:none; cursor:pointer; }
     {date:"02.06.2026", district:"TAŞLIÇAY", name:"BEYZA ECZANESİ", address:"15 TEMMUZ ŞEHİTLER MAHALLESİ MAREŞAL FEVZİ ÇAKMAK CADDESİ NO:1/1", landmark:"PTT KARGO YANI", phone:"0472 551 30 00", url:"https://maps.google.com/?q=Beyza+Eczanesi+Taslicay"},
     {date:"02.06.2026", district:"TUTAK", name:"BERFİN ECZANESİ", address:"Murat Mahallesi Dr Cihan ÖKTEM Caddesi No:5A ve 5B", landmark:"GAZİ İLKOKULUNUN KARŞISI", phone:"0552 636 00 04", url:"https://maps.google.com/?q=Berfin+Eczanesi+Tutak"},
 
-    {date:"03.06.2026", district:"DİYADİN", name:"DİYADİN ECZANESİ", address:"İSA AĞA MAHALLESİ INÖNÜ CADDESİ NO:98", landmark:"PTT KARŞISI", phone:"0472 511 24 65", url:"https://maps.google.com/?q=Diyadin+Eczanesi+Diyadin"},
-    {date:"03.06.2026", district:"DOĞUBAYAZIT", name:"BAHAR ECZANESİ", address:"İSHAKPAŞA MAHALLESİ ŞERAFETTİN ERYILMAZ CADDESİ NO: 158A", landmark:"KURTULUŞ İLKOKUL VE ORTAOKUL KARŞISI", phone:"0537 770 54 13", url:"https://maps.google.com/?q=Bahar+Eczanesi+Dogubayazit"},
-    {date:"03.06.2026", district:"ELEŞKİRT", name:"ELEŞKİRT ECZANESİ", address:"İSTİKLAL MAHALLESİ CUMHURİYET CADDESİ NO:109", landmark:"BELEDİYE BİNASİ KARŞISI", phone:"0472 711 29 16", url:"https://maps.google.com/?q=Eleskirt+Eczanesi+Eleskirt"},
-    {date:"03.06.2026", district:"HAMUR", name:"HAMUR ECZANESİ", address:"KÜMBET MAHALLESİ VAN CADDESİ NO:49/A", landmark:"HAMUR BELEDİYESİ ALTI", phone:"0472 616 71 72", url:"https://maps.google.com/?q=Hamur+Eczanesi+Hamur"},
-    {date:"03.06.2026", district:"MERKEZ", name:"DERMAN ECZANESİ", address:"GAZİ MAHALLESİ SAĞLIK CADDESİ NO:46/B", landmark:"2 NOLU SAĞLIK OCAĞI KARŞISI", phone:"0545 190 85 04", url:"https://maps.google.com/?q=Derman+Eczanesi+Agri"},
-    {date:"03.06.2026", district:"MERKEZ", name:"ALTINTAŞ ECZANESİ", address:"YAVUZ MAHALLESİ ÖZGÜL ÖZGÜL APT. NO:119/A", landmark:"EFE TIP MERKEZİ YANI", phone:"0472 215 77 77", url:"https://maps.google.com/?q=Altintas+Eczanesi+Agri"},
-    {date:"03.06.2026", district:"PATNOS", name:"EMEK ECZANESİ", address:"SARISU MAHALLESİ BİTLİS YOLU NO:29", landmark:"HASTANE YANI", phone:"0472 616 14 11", url:"https://maps.google.com/?q=Emek+Eczanesi+Patnos"},
-    {date:"03.06.2026", district:"TAŞLIÇAY", name:"ÇARE ECZANESİ", address:"HÜRRİYET MAHALLESİ M.FEVZİ ÇAKMAK CADDESİ DIŞ KAPI NO:94A", landmark:"MERVE KIRTASİYE YANI", phone:"0546 491 53 22", url:"https://maps.google.com/?q=Care+Eczanesi+Taslicay"},
-    {date:"03.06.2026", district:"TUTAK", name:"BEGÜM ECZANESİ", address:"CAMİ MAHALLESİ KAZIM KARABEKİR CADDESİ NO:11B-11C", landmark:"KAYMAKAMLIK EVİ KARŞISI", phone:"0472 411 31 89", url:"https://maps.google.com/?q=Begum+Eczanesi+Tutak"},
+    {date:"09.06.2026", district:"DİYADİN", name:"ŞİFA ECZANESİ", address:"MURAT MAHALLESİ KAYMAKAM ÖZGÜR AZER KURAK CADDESİ NO:63A", landmark:"MURAT CAMİİ YANI", phone:"0505 597 63 42", url:"https://maps.google.com/?q=%C5%9E%C4%B0FA+ECZANES%C4%B0+D%C4%B0YAD%C4%B0N"},
+    {date:"09.06.2026", district:"DOĞUBAYAZIT", name:"CAN ECZANESİ", address:"İSHAKPAŞA MAHALLESİ AĞRI CADDESİ NO:274A", landmark:"GÜVEN LOKANTASI KARŞISI", phone:"0472 312 04 12", url:"https://maps.google.com/?q=CAN+ECZANES%C4%B0+DO%C4%9EUBAYAZIT"},
+    {date:"09.06.2026", district:"ELEŞKİRT", name:"EMEK ECZANESİ", address:"MÜFTÜ SELİM MAHALLESİ CUMHURİYET CADDESİ NO:112/B", landmark:"SAĞLIK OCAĞI KARŞISI", phone:"0472 711 47 47", url:"https://maps.google.com/?q=EMEK+ECZANES%C4%B0+ELE%C5%9EK%C4%B0RT"},
+    {date:"09.06.2026", district:"HAMUR", name:"HAMUR ECZANESİ", address:"KÜMBET MAHALLESİ VAN CADDESİ NO:49/A", landmark:"HAMUR BELEDİYESİ ALTI", phone:"0472 616 71 72", url:"https://maps.google.com/?q=HAMUR+ECZANES%C4%B0+HAMUR"},
+    {date:"09.06.2026", district:"MERKEZ", name:"SAĞLIK ECZANESİ", address:"FIRAT MAHALLESİ ATALAY CADDESİ NO:28/E", landmark:"BELEDİYE KARŞISI", phone:"0472 215 75 38", url:"https://maps.google.com/?q=SA%C4%9ELIK+ECZANES%C4%B0+MERKEZ"},
+    {date:"09.06.2026", district:"MERKEZ", name:"RUKİYE ECZANESİ", address:"BAHÇELİ EVLER MAHALLESİ CUMHURİYET CADDESİ NO 125A", landmark:"ESKİ KÜTÜPHANE YANI", phone:"0472 216 06 06", url:"https://maps.google.com/?q=RUK%C4%B0YE+ECZANES%C4%B0+MERKEZ"},
+    {date:"09.06.2026", district:"PATNOS", name:"DURMAZ ECZANESİ", address:"ALPASLAN MAHALLESİ MALAZGİRT CADDESİ NO:136A", landmark:"ESKİ KİLER MARKET YANI", phone:"0543 899 15 21", url:"https://maps.google.com/?q=DURMAZ+ECZANES%C4%B0+PATNOS"},
+    {date:"09.06.2026", district:"TAŞLIÇAY", name:"ELİF ECZANESİ", address:"HÜRRİYET MAHALLESİ MAREŞAL FEVZİ ÇAKMAK CADDESİ NO:100", landmark:"A101 KARŞISI", phone:"0472 551 29 00", url:"https://maps.google.com/?q=EL%C4%B0F+ECZANES%C4%B0+TA%C5%9ELI%C3%87AY"},
+    {date:"09.06.2026", district:"TUTAK", name:"OZAN ECZANESİ", address:"Cami Mahallesi Cumhuriyet Caddesi No:39B", landmark:"Merkez Camii Yanı", phone:"0472 411 28 97", url:"https://maps.google.com/?q=OZAN+ECZANES%C4%B0+TUTAK"},
 
-    {date:"04.06.2026", district:"DİYADİN", name:"ŞİFA ECZANESİ", address:"MURAT MAHALLESİ KAYMAKAM ÖZGÜR AZER KURAK CADDESİ NO:63A", landmark:"MURAT CAMİİ YANI", phone:"0505 597 63 42", url:"https://maps.google.com/?q=Sifa+Eczanesi+Diyadin"},
-    {date:"04.06.2026", district:"DOĞUBAYAZIT", name:"BEYAZIT ECZANESİ", address:"ULUYOL MAHALLESİ AĞRI CADDESİ NO:296K-296L", landmark:"FATİH CAMİİ KARŞISI", phone:"0472 312 67 02", url:"https://maps.google.com/?q=Beyazit+Eczanesi+Dogubayazit"},
-    {date:"04.06.2026", district:"ELEŞKİRT", name:"EMEK ECZANESİ", address:"MÜFTÜ SELİM MAHALLESİ CUMHURİYET CADDESİ NO:112/B", landmark:"SAĞLIK OCAĞI KARŞISI", phone:"0472 711 47 47", url:"https://maps.google.com/?q=Emek+Eczanesi+Eleskirt"},
-    {date:"04.06.2026", district:"HAMUR", name:"AHMET ECZANESİ", address:"Kümbet Mahallesi Van Caddesi No:49C", landmark:"HAMUR BELEDİYESİ ALTI", phone:"0544 564 57 48", url:"https://maps.google.com/?q=Ahmet+Eczanesi+Hamur"},
-    {date:"04.06.2026", district:"MERKEZ", name:"ZARİF ECZANESİ", address:"LEYLEK PINAR MAHALLESİ CUMHURİYET CADDESİ NO:6-8 C", landmark:"MERKEZ CAMİİ ALTI", phone:"0472 215 55 50", url:"https://maps.google.com/?q=Zarif+Eczanesi+Agri"},
-    {date:"04.06.2026", district:"MERKEZ", name:"YILDIRIM ECZANESİ", address:"GAZİ MAHALLESİ SAĞLIK CADDESİ NO:50-54A", landmark:"2 NOLU SAĞLIK OCAĞI KARŞISI", phone:"0543 129 58 33", url:"https://maps.google.com/?q=Yildirim+Eczanesi+Agri"},
-    {date:"04.06.2026", district:"PATNOS", name:"NUR ECZANESİ", address:"ALPASLAN MAHALLESİ DERGAH CADDESİ KAPI NO:3/A", landmark:"SARISU MARKET KARŞISI", phone:"0535 078 75 10", url:"https://maps.google.com/?q=Nur+Eczanesi+Patnos"},
-    {date:"04.06.2026", district:"TAŞLIÇAY", name:"ELİF ECZANESİ", address:"HÜRRİYET MAHALLESİ MAREŞAL FEVZİ ÇAKMAK CADDESİ NO:100", landmark:"A101 KARŞISI", phone:"0472 551 29 00", url:"https://maps.google.com/?q=Elif+Eczanesi+Taslicay"},
-    {date:"04.06.2026", district:"TUTAK", name:"TUTAK ECZANESİ", address:"MURAT MAHALLESİ CUMHURİYET CADDESİ NO:51/A", landmark:"MERKEZDE", phone:"0472 411 26 98", url:"https://maps.google.com/?q=Tutak+Eczanesi+Tutak"},
+    {date:"10.06.2026", district:"DİYADİN", name:"CEREN ECZANESİ", address:"Murat Mahallesi Şehit Kaymakam Muhammed Fatih Safitürk Caddesi No:13H", landmark:"KÜLTÜR KİTAP KIRTASİYE KARŞISI", phone:"0530 115 54 04", url:"https://maps.google.com/?q=CEREN+ECZANES%C4%B0+D%C4%B0YAD%C4%B0N"},
+    {date:"10.06.2026", district:"DOĞUBAYAZIT", name:"KESKİN ECZANESİ", address:"ULUYOL MAHALLESİ AĞRI CADDESİ NO:93/C", landmark:"ÇINAR PASTANESİ YANI", phone:"0472 312 60 60", url:"https://maps.google.com/?q=KESK%C4%B0N+ECZANES%C4%B0+DO%C4%9EUBAYAZIT"},
+    {date:"10.06.2026", district:"ELEŞKİRT", name:"ESRA ECZANESİ", address:"İstiklal Mahallesi Cumhuriyet Caddesi No:83", landmark:"ZİRAAT BANKASI KARŞISI", phone:"0545 591 44 24", url:"https://maps.google.com/?q=ESRA+ECZANES%C4%B0+ELE%C5%9EK%C4%B0RT"},
+    {date:"10.06.2026", district:"HAMUR", name:"AHMET ECZANESİ", address:"Kümbet Mahallesi Van Caddesi No:49C", landmark:"HAMUR BELEDİYESİ ALTI", phone:"0544 564 57 48", url:"https://maps.google.com/?q=AHMET+ECZANES%C4%B0+HAMUR"},
+    {date:"10.06.2026", district:"MERKEZ", name:"EMRE ECZANESİ", address:"Alpaslan Mahallesi Eski Van Caddesi No:142A", landmark:"İLÇELER GARAJI YANI", phone:"0542 498 63 73", url:"https://maps.google.com/?q=EMRE+ECZANES%C4%B0+MERKEZ"},
+    {date:"10.06.2026", district:"MERKEZ", name:"HARUN ECZANESİ", address:"YAVUZ MAHALLESİ 403 SOKAK NO:13/A", landmark:"TERZİLER CADDESİ AŞAĞISI", phone:"0472 215 25 83", url:"https://maps.google.com/?q=HARUN+ECZANES%C4%B0+MERKEZ"},
+    {date:"10.06.2026", district:"PATNOS", name:"IŞIK ECZANESİ", address:"INÖNÜ MAHALLESİ MALAZGIRT CADDESİ NO:13", landmark:"LAL LOKANTASI KARŞISI", phone:"0472 616 24 01", url:"https://maps.google.com/?q=I%C5%9EIK+ECZANES%C4%B0+PATNOS"},
+    {date:"10.06.2026", district:"TAŞLIÇAY", name:"FERHAT ECZANESİ", address:"HÜRRİYET MAHALLESİ M.FEVZİ ÇAKMAK CADDESİ NO:48/A", landmark:"ÖĞRETMEN EVİ ALTI", phone:"0539 430 14 11", url:"https://maps.google.com/?q=FERHAT+ECZANES%C4%B0+TA%C5%9ELI%C3%87AY"},
+    {date:"10.06.2026", district:"TUTAK", name:"BERFİN ECZANESİ", address:"Murat Mahallesi Dr Cihan ÖKTEM Caddesi No:5A ve 5B", landmark:"GAZİ İLKOKULUNUN KARŞISI", phone:"0552 636 00 04", url:"https://maps.google.com/?q=BERF%C4%B0N+ECZANES%C4%B0+TUTAK"},
 
-    {date:"05.06.2026", district:"DİYADİN", name:"CEREN ECZANESİ", address:"Murat Mahallesi Şehit Kaymakam Fatih Safitürk Cad. No:13H", landmark:"KÜLTÜR KİTAP KIRTASİYE KARŞISI", phone:"0530 115 54 04", url:"https://maps.google.com/?q=Ceren+Eczanesi+Diyadin"},
-    {date:"05.06.2026", district:"DOĞUBAYAZIT", name:"AFA ECZANESİ", address:"ÇİFTEPINAR MAHALLESİ İSA GEÇİT CADDESİ NO:8/A", landmark:"GÜÇBİR HOME KARŞISI", phone:"0472 312 27 00", url:"https://maps.google.com/?q=Afa+Eczanesi+Dogubayazit"},
-    {date:"05.06.2026", district:"ELEŞKİRT", name:"ESRA ECZANESİ", address:"İstiklal Mahallesi Cumhuriyet Caddesi No:83", landmark:"ZİRAAT BANKASI KARŞISI", phone:"0545 591 44 24", url:"https://maps.google.com/?q=Esra+Eczanesi+Eleskirt"},
-    {date:"05.06.2026", district:"HAMUR", name:"HAMUR ECZANESİ", address:"KÜMBET MAHALLESİ VAN CADDESİ NO:49/A", landmark:"HAMUR BELEDİYESİ ALTI", phone:"0472 616 71 72", url:"https://maps.google.com/?q=Hamur+Eczanesi+Hamur"},
-    {date:"05.06.2026", district:"MERKEZ", name:"EYLÜL ECZANESİ", address:"HÜRRİYET MAHALLESİ NAMIK SEZGİN CADDESİ NO:17/A", landmark:"SÜRAT KARGO YANI", phone:"0472 215 95 00", url:"https://maps.google.com/?q=Eylul+Eczanesi+Agri"},
-    {date:"05.06.2026", district:"MERKEZ", name:"NADİR ECZANESİ", address:"FIRAT MAHALLESİ 1018/3 SOKAK NO:8/A", landmark:"AĞRI EĞİTİM VE ARAŞTIRMA HASTANESİ KARŞISI", phone:"0542 188 55 04", url:"https://maps.google.com/?q=Nadir+Eczanesi+Agri"},
-    {date:"05.06.2026", district:"PATNOS", name:"ROZA ECZANESİ", address:"ATATÜRK MAHALLESİ ADNAN MENDERES CADDESİ NO:136", landmark:"PATNOS İTİMAT YANI", phone:"0472 616 29 00", url:"https://maps.google.com/?q=Roza+Eczanesi+Patnos"},
-    {date:"05.06.2026", district:"TAŞLIÇAY", name:"FERHAT ECZANESİ", address:"HÜRRİYET MAHALLESİ M.FEVZİ ÇAKMAK CADDESİ NO:48/A", landmark:"ÖĞRETMEN EVİ ALTI", phone:"0539 430 14 11", url:"https://maps.google.com/?q=Ferhat+Eczanesi+Taslicay"},
-    {date:"05.06.2026", district:"TUTAK", name:"OZAN ECZANESİ", address:"Cami Mahallesi Cumhuriyet Caddesi No:39B", landmark:"Merkez Camii Yanı", phone:"0472 411 28 97", url:"https://maps.google.com/?q=Ozan+Eczanesi+Tutak"},
+    {date:"11.06.2026", district:"MERKEZ", name:"AĞRI ECZANESİ", address:"ABİDE MAHALLESİ YAŞAR KEMAL CADDESİ NO:48/A", landmark:"AĞRI VALİLİĞİ KARŞISI", phone:"0472 215 58 13", url:"https://maps.google.com/?q=A%C4%9ERI+ECZANES%C4%B0+MERKEZ"},
+    {date:"11.06.2026", district:"MERKEZ", name:"KÖPRÜBAŞI ECZANESİ", address:"100.YIL MAHALLESİ YENİ VAN CADDESİ NO:132A", landmark:"EROĞLU MARKET YANI", phone:"0542 138 72 76", url:"https://maps.google.com/?q=K%C3%96PR%C3%9CBA%C5%9EI+ECZANES%C4%B0+MERKEZ"},
+    {date:"11.06.2026", district:"PATNOS", name:"OKTAY VURAL ECZANESİ", address:"ALPASLAN MAHALLESİ MALAZGİRT CADDESİ NO:72", landmark:"ŞEYH ABDULVAHAP KÜFREVİ EVİ KARŞISI", phone:"0472 616 18 74", url:"https://maps.google.com/?q=OKTAY+VURAL+ECZANES%C4%B0+PATNOS"},
+    {date:"11.06.2026", district:"TAŞLIÇAY", name:"TAŞLIÇAY ECZANESİ", address:"Cumhuriyet Mahallesi Mareşal Favzi Çakmak Caddesi No:23", landmark:"", phone:"0472 551 28 91", url:"https://maps.google.com/?q=TA%C5%9ELI%C3%87AY+ECZANES%C4%B0+TA%C5%9ELI%C3%87AY"},
+    {date:"11.06.2026", district:"TUTAK", name:"BEGÜM ECZANESİ", address:"CAMİ MAHALLESİ KAZIM KARABEKİR CADDESİ NO:11B-11C", landmark:"KAYMAKAMLIK EVİ KARŞISI", phone:"0472 411 31 89", url:"https://maps.google.com/?q=BEG%C3%9CM+ECZANES%C4%B0+TUTAK"},
 
-    {date:"06.06.2026", district:"DİYADİN", name:"DERMAN ECZANESİ", address:"Atatürk Mahallesi Safitürk Caddesi No:10A", landmark:"Menekşem Market Karşısı", phone:"0472 511 36 36", url:"https://maps.google.com/?q=Derman+Eczanesi+Diyadin"},
-    {date:"06.06.2026", district:"DOĞUBAYAZIT", name:"DOĞA ECZANESİ", address:"ÇİFTEPINAR MAHALLESİ AĞRI CADDESİ NO:31/H", landmark:"ESKİ TAPU KADASTRO KARŞISI", phone:"0472 312 75 39", url:"https://maps.google.com/?q=Doga+Eczanesi+Dogubayazit"},
-    {date:"06.06.2026", district:"ELEŞKİRT", name:"MAHMUTPAŞA ECZANESİ", address:"İstiklal Mahallesi Cumhuriyet Caddesi No:101", landmark:"KİLER MARKET KARŞISI", phone:"0472 711 29 78", url:"https://maps.google.com/?q=Mahmutpasa+Eczanesi+Eleskirt"},
-    {date:"06.06.2026", district:"HAMUR", name:"AHMET ECZANESİ", address:"Kümbet Mahallesi Van Caddesi No:49C", landmark:"HAMUR BELEDİYESİ ALTI", phone:"0544 564 57 48", url:"https://maps.google.com/?q=Ahmet+Eczanesi+Hamur"},
-    {date:"06.06.2026", district:"MERKEZ", name:"KRAL ECZANESİ", address:"MURAT MAHALLESİ ESKİ VAN CADDESİ NO:135A", landmark:"ÇEVİK KUVVET YANI", phone:"0472 215 44 65", url:"https://maps.google.com/?q=Kral+Eczanesi+Agri"},
-    {date:"06.06.2026", district:"MERKEZ", name:"KARACA ECZANESİ", address:"Fatih Mahallesi Kağızman Caddesi No:147/A", landmark:"FATİH MEZARLIĞININ 400 METRE İLERİSİ", phone:"0472 215 05 47", url:"https://maps.google.com/?q=Karaca+Eczanesi+Agri"},
-    {date:"06.06.2026", district:"PATNOS", name:"YENİ İSTANBUL ECZANESİ", address:"ATATÜRK MAHALLESİ 128 SOKAK NO:6A", landmark:"MERKEZDE", phone:"0472 616 94 29", url:"https://maps.google.com/?q=Yeni+Istanbul+Eczanesi+Patnos"},
-    {date:"06.06.2026", district:"TAŞLIÇAY", name:"TAŞLIÇAY ECZANESİ", address:"Cumhuriyet Mahallesi Mareşal Favzi Çakmak Caddesi No:23", landmark:"MERKEZDE", phone:"0472 551 28 91", url:"https://maps.google.com/?q=Taslicay+Eczanesi+Taslicay"},
-    {date:"06.06.2026", district:"TUTAK", name:"BERFİN ECZANESİ", address:"Murat Mahallesi Dr Cihan ÖKTEM Caddesi No:5A ve 5B", landmark:"GAZİ İLKOKULUNUN KARŞISI", phone:"0552 636 00 04", url:"https://maps.google.com/?q=Berfin+Eczanesi+Tutak"},
-
-    {date:"07.06.2026", district:"DİYADİN", name:"DİLAN ECZANESİ", address:"ISA AGA MAHALLESİ INÖNÜ CADDESİ NO:36", landmark:"BELEDİYE YANI", phone:"0472 511 28 28", url:"https://maps.google.com/?q=Dilan+Eczanesi+Diyadin"},
-    {date:"07.06.2026", district:"DOĞUBAYAZIT", name:"YAĞMUR ECZANESİ", address:"AHMEDİHANİ MAHALLESİ AĞRI CADDESİ NO:208", landmark:"AĞIZ VE DİŞ SAĞLIĞI MERKEZİ KARŞISI", phone:"0472 312 85 85", url:"https://maps.google.com/?q=Yagmur+Eczanesi+Dogubayazit"},
-    {date:"07.06.2026", district:"ELEŞKİRT", name:"ŞİFA ECZANESİ", address:"MÜFTÜ SELİM MAHALLESİ CUMHURİYET CADDESİ NO:13", landmark:"SAĞLIK OCAĞI KARŞISI", phone:"0472 711 21 41", url:"https://maps.google.com/?q=Sifa+Eczanesi+Eleskirt"},
-    {date:"07.06.2026", district:"HAMUR", name:"HAMUR ECZANESİ", address:"KÜMBET MAHALLESİ VAN CADDESİ NO:49/A", landmark:"HAMUR BELEDİYESİ ALTI", phone:"0472 616 71 72", url:"https://maps.google.com/?q=Hamur+Eczanesi+Hamur"},
-    {date:"07.06.2026", district:"MERKEZ", name:"HAYAT ECZANESİ", address:"ALPASLAN MAHALLESİ ESKİ VAN CADDESİ NO:140/A", landmark:"DOĞA KOLEJİ YOLU", phone:"0534 796 64 04", url:"https://maps.google.com/?q=Hayat+Eczanesi+Agri"},
-    {date:"07.06.2026", district:"MERKEZ", name:"ARDA ECZANESİ", address:"LEYLEK PINAR MAHALLESİ VALİ KONAĞI CADDESİ NO:33/A", landmark:"ÖZGÜL AVM YANI", phone:"0472 215 72 00", url:"https://maps.google.com/?q=Arda+Eczanesi+Agri"},
-    {date:"07.06.2026", district:"PATNOS", name:"CERRAHPAŞA ECZANESİ", address:"Atatürk Mahallesi Menderes Bulvar Kapı No:122", landmark:"TURKCELL BAYİ KARŞISI", phone:"0507 141 04 24", url:"https://maps.google.com/?q=Cerrahpasa+Eczanesi+Patnos"},
-    {date:"07.06.2026", district:"TAŞLIÇAY", name:"BEYZA ECZANESİ", address:"15 TEMMUZ ŞEHİTLER MAHALLESİ MAREŞAL FEVZİ ÇAKMAK CADDESİ NO:1/1", landmark:"PTT KARGO YANI", phone:"0472 551 30 00", url:"https://maps.google.com/?q=Beyza+Eczanesi+Taslicay"},
-    {date:"07.06.2026", district:"TUTAK", name:"BEGÜM ECZANESİ", address:"CAMİ MAHALLESİ KAZIM KARABEKİR CADDESİ NO:11B-11C", landmark:"KAYMAKAMLIK EVİ KARŞISI", phone:"0472 411 31 89", url:"https://maps.google.com/?q=Begum+Eczanesi+Tutak"},
-
-    {date:"08.06.2026", district:"DİYADİN", name:"DİYADİN ECZANESİ", address:"İSA AĞA MAHALLESİ INÖNÜ CADDESİ NO:98", landmark:"PTT KARŞISI", phone:"0472 511 24 65", url:"https://maps.google.com/?q=Diyadin+Eczanesi+Diyadin"},
-    {date:"08.06.2026", district:"DOĞUBAYAZIT", name:"NEFES ECZANESİ", address:"ÇİFTE PINAR MAHALLESİ AĞRI CADDESİ NO:59/A", landmark:"MANOLYA PASTANESİ YANI", phone:"0472 312 20 90", url:"https://maps.google.com/?q=Nefes+Eczanesi+Dogubayazit"},
-    {date:"08.06.2026", district:"ELEŞKİRT", name:"ELEŞKİRT ECZANESİ", address:"İSTİKLAL MAHALLESİ CUMHURİYET CADDESİ NO:109", landmark:"BELEDİYE BİNASİ KARŞISI", phone:"0472 711 29 16", url:"https://maps.google.com/?q=Eleskirt+Eczanesi+Eleskirt"},
-    {date:"08.06.2026", district:"HAMUR", name:"AHMET ECZANESİ", address:"Kümbet Mahallesi Van Caddesi No:49C", landmark:"HAMUR BELEDİYESİ ALTI", phone:"0544 564 57 48", url:"https://maps.google.com/?q=Ahmet+Eczanesi+Hamur"},
-    {date:"08.06.2026", district:"MERKEZ", name:"YOL ECZANESİ", address:"FIRAT MAHALLESİ ATALAY CADDESİ NO:16/D", landmark:"AĞRI BELEDİYESİ KARŞISI", phone:"0472 215 81 86", url:"https://maps.google.com/?q=Yol+Eczanesi+Agri"},
-    {date:"08.06.2026", district:"MERKEZ", name:"BEREN ECZANESİ", address:"BAHÇELİEVLER MAHALLAESİ CUMHURİYET CADDESİ NO:135B", landmark:"CUMAÇAY GARAJI KARŞISI", phone:"0546 153 04 58", url:"https://maps.google.com/?q=Beren+Eczanesi+Agri"},
-    {date:"08.06.2026", district:"PATNOS", name:"DEVA ECZANESİ", address:"ATATÜRK MAHALLESİ MENDERES CADDESİ NO:146", landmark:"PATNOS İTİMAT YAZIHANESİ YANI", phone:"0472 616 16 19", url:"https://maps.google.com/?q=Deva+Eczanesi+Patnos"},
-    {date:"08.06.2026", district:"TAŞLIÇAY", name:"ÇARE ECZANESİ", address:"HÜRRİYET MAHALLESİ M.FEVZİ ÇAKMAK CADDESİ DIŞ KAPI NO:94A", landmark:"MERVE KIRTASİYE YANI", phone:"0546 491 53 22", url:"https://maps.google.com/?q=Care+Eczanesi+Taslicay"},
-    {date:"08.06.2026", district:"TUTAK", name:"TUTAK ECZANESİ", address:"MURAT MAHALLESİ CUMHURİYET CADDESİ NO:51/A", landmark:"MERVE KIRTASİYE YANI", phone:"0472 411 26 98", url:"https://maps.google.com/?q=Tutak+Eczanesi+Tutak"}
+    {date:"12.06.2026", district:"DİYADİN", name:"DİLAN ECZANESİ", address:"ISA AGA MAHALLESİ INÖNÜ CADDESİ NO:36", landmark:"BELEDİYE YANI", phone:"0472 511 28 28", url:"https://maps.google.com/?q=D%C4%B0LAN+ECZANES%C4%B0+D%C4%B0YAD%C4%B0N"},
+    {date:"12.06.2026", district:"DOĞUBAYAZIT", name:"ÇAPA ECZANESİ", address:"AHMEDİHANİ MAHALLESİ ABDURREZAK ALADAĞ CADDESİ NO:73/C", landmark:"IĞDIR DURAĞI YOLU ÜZERİ", phone:"0544 451 24 96", url:"https://maps.google.com/?q=%C3%87APA+ECZANES%C4%B0+DO%C4%9EUBAYAZIT"},
+    {date:"12.06.2026", district:"ELEŞKİRT", name:"ŞİFA ECZANESİ", address:"MÜFTÜ SELİM MAHALLESİ CUMHURİYET CADDESİ NO:13", landmark:"SAĞLIK OCAĞI KARŞISI", phone:"0472 711 21 41", url:"https://maps.google.com/?q=%C5%9E%C4%B0FA+ECZANES%C4%B0+ELE%C5%9EK%C4%B0RT"},
+    {date:"12.06.2026", district:"HAMUR", name:"AHMET ECZANESİ", address:"Kümbet Mahallesi Van Caddesi No:49C", landmark:"HAMUR BELEDİYESİ ALTI", phone:"0544 564 57 48", url:"https://maps.google.com/?q=AHMET+ECZANES%C4%B0+HAMUR"},
+    {date:"12.06.2026", district:"MERKEZ", name:"SEVGİ ECZANESİ", address:"LEYLEK PINAR MAHALLESİ CUMHURIYET CADDESİ NO:142", landmark:"HALK BANK YUKARASI", phone:"0472 216 34 20", url:"https://maps.google.com/?q=SEVG%C4%B0+ECZANES%C4%B0+MERKEZ"},
+    {date:"12.06.2026", district:"MERKEZ", name:"ŞİFA ECZANESİ", address:"YAVUZ MAHALLESİ YAŞAR KEMAL CADDESİ NO:2/A", landmark:"BÜYÜK AĞRI OTELİ ALTI", phone:"0472 215 30 00", url:"https://maps.google.com/?q=%C5%9E%C4%B0FA+ECZANES%C4%B0+MERKEZ"},
+    {date:"12.06.2026", district:"PATNOS", name:"SARI ECZANESİ", address:"ATATÜRK MAHALLESİ ALPASLAN CADDESİ KAPI NO: 69", landmark:"FATİH ET LOKANTASI ÇAPRAZI", phone:"0551 481 44 68", url:"https://maps.google.com/?q=SARI+ECZANES%C4%B0+PATNOS"},
+    {date:"12.06.2026", district:"TAŞLIÇAY", name:"BEYZA ECZANESİ", address:"15 TEMMUZ ŞEHİTLER MAHALLESİ MAREŞAL FEVZİ ÇAKMAK CADDESİ NO:1/1", landmark:"PTT KARGO YANI", phone:"0472 551 30 00", url:"https://maps.google.com/?q=BEYZA+ECZANES%C4%B0+TA%C5%9ELI%C3%87AY"},
+    {date:"12.06.2026", district:"TUTAK", name:"TUTAK ECZANESİ", address:"MURAT MAHALLESİ CUMHURİYET CADDESİ NO:51/A", landmark:"", phone:"0472 411 26 98", url:"https://maps.google.com/?q=TUTAK+ECZANES%C4%B0+TUTAK"}
   ];
 
   window.AGRI = { categories, dutyPharmacies, healthSubcategories, dietitians };
 
-  // BANNER'LAR — görsel eklemek için 'img' alanına URL yaz. Boşsa "çok yakında" yazısı çıkar.
-  // İstediğin kadar ekleyip çıkarabilirsin (sayı serbest).
+  // Diyetisyen banner görselleri istenildiği gibi 1 ve 2 olmak üzere dönüşümlü eklendi.
   window.AGRI_STATIC_BANNERS = [
-    { img:"", text:"Çok yakında hizmetinizdeyiz" },
-    { img:"", text:"Çok yakında hizmetinizdeyiz" },
-    { img:"", text:"Çok yakında hizmetinizdeyiz" }
+    { img:"uzm.diyetisyenbilge.jpg", text:"Aramıza Hoşgeldiniz", name:"Uzman Diyetisyen Bilge İgan Yıldırım", isDiet:true },
+    { img:"uzm.diyetisyenbilge2.jpg", text:"Aramıza Hoşgeldiniz", name:"Uzman Diyetisyen Bilge İgan Yıldırım", isDiet:true },
+    { img:"uzm.diyetisyenbilge.jpg", text:"Aramıza Hoşgeldiniz", name:"Uzman Diyetisyen Bilge İgan Yıldırım", isDiet:true },
+    { img:"uzm.diyetisyenbilge2.jpg", text:"Aramıza Hoşgeldiniz", name:"Uzman Diyetisyen Bilge İgan Yıldırım", isDiet:true }
   ];
 
-  // HİKAYELER (Instagram tarzı, özgün renklerle) — buraya yeni nesne ekleyerek
-  // istediğin kadar hikaye oluşturabilir veya silebilirsin. Şu an tek hikaye var.
-  // Her hikaye: { title (kapak yazısı), cover (kapak görseli, boşsa renkli kapak),
-  //               slideText (açılınca görünen yazı), slideImg (açılınca görünen görsel, boş olabilir) }
+  // Instagram tarzı Story Verisi (Sadece bilge1.jpg kaldı)
   window.AGRI_STORIES = [
     {
-      title: "Çok Yakında",
-      cover: "",
-      slideText: "Çok yakında hizmete açılacak. Ağrı'nın dijital rehberi için takipte kalın.",
-      slideImg: ""
+      title: "Uzm. Dyt. Bilge",
+      cover: "uzm.diyetisyenbilge1.jpg",
+      slideText: "Aramıza Hoşgeldiniz Uzman Diyetisyen Bilge İgan Yıldırım! Sağlıklı beslenme danışmanlığı ile artık Ağrı Dijital Rehberi'nde.",
+      slideImg: "uzm.diyetisyenbilge1.jpg"
     }
   ];
 
   window.PAT = { pattern };
 })();
 
-/* Güvenli kalıcı saklama: localStorage çalışmazsa cookie, o da olmazsa bellek.
-   Bu sayede hangi ortamda olursa olsun onay kaydı sayfa yenilense de korunur. */
 const safeStore = (function(){
   let mem = {};
 
@@ -745,7 +724,7 @@ const safeStore = (function(){
         try { window.localStorage.setItem(key, val); stored = true; } catch(e){}
       }
       if (setCookie(key, val)) stored = true;
-      mem[key] = val; // her durumda bellek yedeği
+      mem[key] = val; 
       return stored;
     }
   };
@@ -814,7 +793,6 @@ function GlobeCanvas({ phase }){
   return <canvas ref={ref} className="globe-canvas" style={{width:"100%", height:"100%"}} />;
 }
 
-/* ===================== TOPBAR (eksikti, eklendi) ===================== */
 function Topbar({ dark }){
   const [scrolled, setScrolled] = useState(false);
 
@@ -825,8 +803,6 @@ function Topbar({ dark }){
     return () => window.removeEventListener("scroll", onScroll);
   }, []);
 
-  // Sayfanın en üstündeyken hero karanlık olduğu için yazılar beyaz (on-dark);
-  // aşağı kaydırınca açık arka plan gelir (scrolled).
   const onDark = !scrolled;
   const cls = ["topbar", scrolled ? "scrolled" : "", onDark ? "on-dark" : ""].join(" ").trim();
 
@@ -915,8 +891,6 @@ function Hero({ onSearchPlace, onOpenCat }){
 }
 
 function ImageMarquee() {
-  // Temel seti birkaç kez tekrarlayıp dolgun bir şerit oluştur,
-  // sonra bu şeridi birebir ikiye katla -> %50 kaydırma kusursuz/sonsuz döner.
   const base = [].concat(
     window.AGRI_STATIC_BANNERS,
     window.AGRI_STATIC_BANNERS,
@@ -928,10 +902,23 @@ function ImageMarquee() {
     <div className="banner-section">
       <div className="marquee">
         {loop.map((b, i) => {
+          if (b && b.isDiet) {
+             return (
+               <div key={i} className="banner-diet-wrap" onClick={() => window.dispatchEvent(new Event('trigger-diet-banner'))}>
+                 <img src={b.img} className="banner-diet-img" alt="Uzman Diyetisyen" />
+                 <div className="banner-diet-overlay">
+                   <span className="welcome">{b.text}</span>
+                   <span className="name">{b.name}</span>
+                 </div>
+               </div>
+             );
+          }
+
           const hasImg = b && b.img && b.img.trim() !== "";
           if (hasImg) {
             return <img key={i} src={b.img} className="banner-img" alt="Görsel" />;
           }
+
           return (
             <div key={i} className="banner-img banner-placeholder">
               <span>{(b && b.text) ? b.text : "Çok yakında hizmetinizdeyiz"}</span>
@@ -943,7 +930,7 @@ function ImageMarquee() {
   );
 }
 
-/* ===================== HİKAYELER (Instagram tarzı, özgün tasarım) ===================== */
+/* ===================== HİKAYELER ===================== */
 function Stories() {
   const stories = window.AGRI_STORIES || [];
   const [openIdx, setOpenIdx] = useState(null);
@@ -995,7 +982,7 @@ function Stories() {
   );
 }
 
-/* ===================== DİNAMİK NÖBETÇİ ECZANE WIDGETI ===================== */
+/* ===================== WIDGETLAR ===================== */
 function PharmacyWidget() {
   const [district, setDistrict] = useState("MERKEZ");
   const [currentDateText, setCurrentDateText] = useState("02.06.2026");
@@ -1071,11 +1058,7 @@ function AgendaDashboard(){
             <div className="news-header">Gündem Haberleri</div>
             <div className="news-list">
               <div className="news-item">
-                {(window.AGRI_STATIC_BANNERS[0] && window.AGRI_STATIC_BANNERS[0].img) ? (
-                  <img src={window.AGRI_STATIC_BANNERS[0].img} className="news-img" />
-                ) : (
-                  <div className="news-img news-img-placeholder"></div>
-                )}
+                <div className="news-img news-img-placeholder"></div>
                 <div className="news-content"><span className="news-meta">GÜNCEL</span><h4>Ağrı'nın dijital merkezi yakında hizmetinizde</h4><p>Ağrı genelindeki tüm yerel bilgilendirmeler, esnaf rehberi ve gezi rotaları tek bir çatı altında, ücretsiz olarak çok yakında sizlerle.</p></div>
               </div>
             </div>
@@ -1110,7 +1093,7 @@ function AgendaDashboard(){
   );
 }
 
-/* ===================== KATEGORİLER (SABİT TAB SİSTEMİ) ===================== */
+/* ===================== KATEGORİLER ===================== */
 function Categories({ onOpen }){
   const cats = window.AGRI.categories; 
   const [active, setActive] = useState(0);
@@ -1154,7 +1137,6 @@ function Categories({ onOpen }){
   );
 }
 
-/* ===================== NÖBETÇİ ECZANE TAM SAYFA GÖRÜNÜMÜ (İL/İLÇE SEÇMELİ) ===================== */
 function PharmacyFullView() {
   const districtsList = ["MERKEZ", "TAŞLIÇAY", "DİYADİN", "DOĞUBAYAZIT", "ELEŞKİRT", "HAMUR", "PATNOS", "TUTAK"];
   const [district, setDistrict] = useState("MERKEZ");
@@ -1216,14 +1198,25 @@ function PharmacyFullView() {
   );
 }
 
-/* ===================== SAĞLIK HİZMETLERİ TAM SAYFA (YENİ) ===================== */
-/* Önce alt kategori kartları, "diyetisyen" kartına basınca diyetisyen listesi,
-   bir diyetisyene basınca detay modalı açılır. */
+/* ===================== SAĞLIK HİZMETLERİ TAM SAYFA ===================== */
 function HealthFullView() {
   const subs = window.AGRI.healthSubcategories || [];
   const diets = window.AGRI.dietitians || [];
-  const [view, setView] = useState("subs");          // "subs" | "diyetisyen"
+  const [view, setView] = useState("subs");          
   const [selectedDiet, setSelectedDiet] = useState(null);
+
+  useEffect(() => {
+    const handler = () => {
+      setView("diyetisyen");
+      if (diets.length > 0) setSelectedDiet(diets[0]);
+    };
+    window.addEventListener('show-dietitian', handler);
+    if (window._forceDietitianOpen) {
+      handler();
+      window._forceDietitianOpen = false;
+    }
+    return () => window.removeEventListener('show-dietitian', handler);
+  }, [diets]);
 
   const PinSvg = (props) => (
     <svg width={props.s || 18} height={props.s || 18} viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.4">
@@ -1231,7 +1224,6 @@ function HealthFullView() {
     </svg>
   );
 
-  // DİYETİSYEN LİSTE GÖRÜNÜMÜ
   if (view === "diyetisyen") {
     return (
       <div className="diet-page">
@@ -1268,7 +1260,6 @@ function HealthFullView() {
           })}
         </div>
 
-        {/* DİYETİSYEN DETAY MODALI */}
         {selectedDiet && (
           <div className="diet-modal-overlay" onClick={(e)=>{ if(e.target.className==='diet-modal-overlay') setSelectedDiet(null); }}>
             <div className="diet-modal-card">
@@ -1312,7 +1303,6 @@ function HealthFullView() {
     );
   }
 
-  // ALT KATEGORİ KARTLARI GÖRÜNÜMÜ
   return (
     <div className="health-sub-page">
       <div className="health-sub-intro">
@@ -1346,7 +1336,6 @@ function HealthFullView() {
   );
 }
 
-/* ===================== DETAYLI GÖRÜNTÜLEME MODALLARI ===================== */
 function PlacesOverlay({ cat, onClose }){
   const [selectedPlace, setSelectedPlace] = useState(null);
   const isGezilecek = cat.id === "gezilecek";
@@ -1439,12 +1428,12 @@ function PlacesOverlay({ cat, onClose }){
   );
 }
 
-/* ===================== MASTER APP & NAZİK ONAY SİSTEMİ ===================== */
+/* ===================== MASTER APP ===================== */
 const { useEffect: useEffectA, useState: useStateA } = React;
 
 function App(){
   const [openCat, setOpenCat] = useStateA(null);
-  const [docView, setDocView] = useStateA(null); // 'privacy' | 'terms' | null
+  const [docView, setDocView] = useStateA(null); 
   
   const [tosStatus, setTosStatus] = useStateA(() => {
     return safeStore.get('agri_onay') || 'ask'; 
@@ -1459,7 +1448,6 @@ function App(){
     setTosStatus('blocked');
   };
 
-  // Site arka planda kaydırılmasın diye overflow kilidi
   useEffectA(() => {
     if (tosStatus !== 'true') {
       document.body.style.overflow = 'hidden';
@@ -1468,10 +1456,19 @@ function App(){
     }
   }, [tosStatus]);
 
-  // GİZLİLİK POLİTİKASI METNİ
+  useEffectA(() => {
+    const handleDietBanner = () => {
+      const saglikCat = window.AGRI.categories.find(c => c.id === 'saglik');
+      setOpenCat(saglikCat);
+      window._forceDietitianOpen = true; 
+      setTimeout(() => window.dispatchEvent(new Event('show-dietitian')), 50);
+    };
+    window.addEventListener('trigger-diet-banner', handleDietBanner);
+    return () => window.removeEventListener('trigger-diet-banner', handleDietBanner);
+  }, []);
+
   const privacyText = "Değerli Ziyaretçimiz, bu web sayfası Ağrı'ya hizmet eden; hiçbir verinizi işlemeyen, saklamayan veya üçüncü taraflarla paylaşmayan, hiçbir konum bilgisi veya kişisel bilgi talep etmeyen bir tanıtım platformudur. Sizden ad, soyad, telefon, e-posta veya konum gibi hiçbir kişisel veri istenmez ve toplanmaz. Amacımız yalnızca Ağrı'yı; restoranları, cafeleri, pastaneleri, sağlık hizmetlerini, nöbetçi eczaneleri, güzellik ve bakım merkezlerini, kuaförleri, eğitim kurumlarını, etkinlikleri ve gezilecek yerleri tek bir çatı altında, ücretsiz biçimde hem Ağrı halkına hem de değerli misafirlerimize tanıtmaktır. Tarayıcınızda yalnızca bu onay kutusunu bir daha göstermemek için küçük bir teknik kayıt (yerel depolama) tutulabilir; bu kayıt hiçbir şekilde tarafımıza iletilmez. Herhangi bir soru veya talebiniz için biagri0404@hotmail.com adresinden bize ulaşabilirsiniz.\n\nÜçüncü Taraf Verileri ve Kamuya Açık Bilgiler:\nPlatformumuz, işletmelerin ve kişilerin kendi rızalarıyla rehberimizde yer alması için tarafımıza sunduğu iletişim verilerini (telefon numarası, açık adres, işletme adı, vitrin görselleri) kamuya açık şekilde sergilemektedir. Bu verilerin toplanması, yayınlanması ve işlenmesi tamamen veri sahibinin (işletme/kişi) kendi talebi ve onayı ile gerçekleşmiştir. Tarafımıza iletilen bu işletme verilerinde hak ihlali, yanlış yönlendirme veya sahte beyan bulunması durumunda, sitemiz veri işleyen veya yayınlayan sıfatıyla sorumlu tutulamaz. Bilgilerini sitemizden kaldırtmak isteyen veya güncelleyen işletmeler, sitemiz üzerindeki iletişim kanallarından bizimle irtibata geçerek bu yöndeki taleplerini iletebilirler. İşlem en kısa sürede gerçekleştirilecektir, ancak geçmişe dönük yaşanmış mağduriyetlerden sitemiz sorumlu tutulamaz.";
 
-  // KULLANIM ŞARTLARI METNİ
   const termsText = "Bu platformu kullanarak aşağıdaki şartları kabul etmiş olursunuz. Platformda yer alan tüm bilgiler (mekan, adres, telefon, nöbetçi eczane, vakitler vb.) tamamen bilgilendirme amaçlıdır ve resmî nitelik taşımaz. Bilgiler zamanla değişebileceğinden, olası hatalı, eksik veya güncel olmayan içeriklerden tarafımız sorumlu tutulamaz; önemli durumlarda ilgili kurumdan teyit almanız önerilir. Platformdaki içerikler izinsiz olarak ticari amaçla kopyalanamaz veya çoğaltılamaz. Bağlantı verilen üçüncü taraf hizmetlerin (ör. harita uygulamaları) içeriğinden ve gizlilik uygulamalarından o hizmet sağlayıcılar sorumludur. Bir bilgiyi düzeltmek, eklemek veya kaldırmak isterseniz biagri0404@hotmail.com adresi üzerinden bizimle iletişime geçebilirsiniz. Şartlar gerektiğinde güncellenebilir.\n\nMadde X – İçerik Sağlayıcılar, Üçüncü Taraf İşletmeler ve Sorumluluk Reddi\n\n1. Web sitemizde listelenen \"Gezilecek Yerler\" kategorisi hariç olmak üzere; diğer tüm kategorilerde (işletmeler, mekanlar, hizmet sağlayıcılar vb.) yer alan her türlü görsel, iletişim numarası, konum/adres bilgisi, hizmet tanımı ve fiyatlandırma gibi içerikler, bizzat ilgili kişi ve işletmelerin açık rızası ve kendi beyanları doğrultusunda tarafımıza iletilmiş ve sisteme eklenmiştir.\n\n2. Platformumuz yalnızca bir aracı, rehber ve vitrin görevi görmektedir. Sitemizde yer alan üçüncü şahıs veya işletmelere ait hiçbir bilginin kesin doğruluğunu, güncelliğini veya güvenilirliğini garanti etmiyoruz. Sitede yer alan bilgilerin yanlış, eksik veya yanıltıcı olmasından doğabilecek hiçbir hukuki, maddi veya manevi zarardan platformumuz, site yöneticilerimiz ve kurucularımız sorumlu tutulamaz. Tüm yasal sorumluluk, bu içeriklerin yayınlanmasını talep eden ve bilgileri tarafımıza ileten kişi ve işletmelerin şahsına/tüzel kişiliğine aittir.\n\n3. Hizmet Kalitesi ve Ticari İlişkiler: Kullanıcıların, sitemiz üzerinden iletişim kurduğu, ziyaret ettiği veya hizmet/ürün satın aldığı hiçbir işletme ile platformumuz arasında ticari bir bağ bulunmamaktadır. Bu kişi veya işletmelerden alınacak hizmetin kalitesi, ayıplı mal/hizmet süreçleri, müşteri memnuniyetsizliği veya yaşanabilecek herhangi bir ticari/hukuki uyuşmazlıkta sitemiz kesinlikle taraf değildir ve hiçbir sorumluluk kabul etmez.\n\n4. Yapay Zeka ile Üretilen İçerikler: Sitemizde yalnızca \"Gezilecek Yerler\" kategorisi altında sunulan görsel materyaller, tamamen tarafımızca yapay zeka (AI) teknolojileri kullanılarak üretilmiştir. Bu görseller temsilidir ve gerçeği ile birebir uyuşmama ihtimali barındırır. Kullanıcılar bu durumu bilerek sitemizi ziyaret ettiklerini kabul ederler.\n\nSorumluluk Reddi (Disclaimer): Verilen bilgiler bilgilendirme amaçlıdır, resmî nitelik taşımaz ve güncel olmayabilir.";
 
   const docData = {
@@ -1482,7 +1479,6 @@ function App(){
   return (
     <div id="top" style={{ pointerEvents: tosStatus !== 'true' ? 'none' : 'auto' }}>
       
-      {/* ANA SAYFA İÇERİĞİ KUSURSUZ YÜKLENİR (SADECE TIKLANAMAZ DURUMDADIR) */}
       <Topbar dark={false} />
       <Hero onOpenCat={(id) => setOpenCat(window.AGRI.categories.find(c=>c.id===id))} onSearchPlace={() => setOpenCat(window.AGRI.categories.find(c=>c.id==='gezilecek'))} />
       <ImageMarquee /> 
@@ -1524,7 +1520,6 @@ function App(){
 
       {openCat && <PlacesOverlay cat={openCat} onClose={() => setOpenCat(null)} />}
 
-      {/* GİZLİLİK / KULLANIM ŞARTLARI DOKÜMAN MODALI (footer linklerinden açılır) */}
       {docView && (
         <div className="doc-modal-overlay" style={{ pointerEvents:'auto' }} onClick={(e)=>{ if(e.target.className==='doc-modal-overlay') setDocView(null); }}>
           <div className="doc-modal-card">
@@ -1539,7 +1534,6 @@ function App(){
         </div>
       )}
 
-      {/* ŞEFFAF - BOTTOM SHEET MODAL (İLK GİRİŞTE ONAY) */}
       {tosStatus === 'ask' && (
         <div className="tos-overlay" style={{ pointerEvents: 'auto' }}>
           <div className="tos-modal">
@@ -1555,7 +1549,6 @@ function App(){
         </div>
       )}
 
-      {/* REDDEDENLER İÇİN KİBAR VEDA EKRANI */}
       {tosStatus === 'blocked' && (
         <div className="tos-blocked-overlay" style={{ pointerEvents: 'auto' }}>
           <div className="tos-blocked-card">
