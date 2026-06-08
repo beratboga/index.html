@@ -65,7 +65,7 @@ a{ color:inherit; text-decoration:none; cursor:pointer; }
 .wrap{ max-width:var(--maxw); margin:0 auto; padding:0 28px; width:100%; }
 ::selection{ background:var(--accent); color:var(--ink); }
 
-/* ---------- NAZİK POLİTİKA ONAY MODALI (BOTTOM SHEET) ---------- */
+/* ---------- NAZİK POLİTİKA ONAY MODALI ---------- */
 .tos-overlay { position:fixed; inset:0; z-index:9999; background:rgba(12,16,32,0.45); backdrop-filter:blur(8px); display:flex; flex-direction:column; justify-content:flex-end; align-items:center; width:100%; height:100%; }
 .tos-modal { background:#fff; color:var(--ink); padding:36px 36px 42px; border-radius:32px 32px 0 0; max-width:800px; width:100%; box-shadow:0 -10px 40px rgba(0,0,0,0.2); animation:slideUp 0.6s cubic-bezier(0.2, 0.8, 0.2, 1) forwards; display:flex; flex-direction:column; gap:16px; }
 @keyframes slideUp { from { transform:translateY(100%); opacity:0; } to { transform:translateY(0); opacity:1; } }
@@ -89,7 +89,6 @@ a{ color:inherit; text-decoration:none; cursor:pointer; }
 .doc-modal-body { padding:24px 28px 30px; overflow-y:auto; }
 .doc-modal-body p { font-size:15px; line-height:1.7; color:var(--ink-soft); text-align:justify; margin:0; }
 
-/* Kabul Etmeyenler İçin Çıkan Kibar Blok Ekranı */
 .tos-blocked-overlay { position:fixed; inset:0; z-index:9999; background:rgba(12,16,32,0.65); backdrop-filter:blur(12px); display:grid; place-items:center; padding:20px; }
 .tos-blocked-card { background:var(--card); color:var(--ink); padding:40px; border-radius:24px; max-width:480px; text-align:center; box-shadow:var(--shadow-3); animation: fadeIn 0.4s ease; }
 .tos-blocked-card h3 { font-size:22px; margin-bottom:16px; color:var(--dark); }
@@ -589,7 +588,6 @@ a{ color:inherit; text-decoration:none; cursor:pointer; }
     },
   ];
 
-  /* SAĞLIK HİZMETLERİ ALT KATEGORİLERİ (YENİ) */
   const healthSubcategories = [
     { id:"dis",   name:"Diş Hekimi",            color:"#3498DB", desc:"Özel diş hekimi klinikleri ve ağız-diş sağlığı merkezleri." },
     { id:"dil",   name:"Dil ve Konuşma Terapisti", color:"#9B59B6", desc:"Dil, konuşma ve iletişim terapisti uzmanları." },
@@ -598,7 +596,6 @@ a{ color:inherit; text-decoration:none; cursor:pointer; }
     { id:"diyetisyen", name:"Diyetisyen",       color:"#2ECC71", desc:"Yüz yüze ve online beslenme danışmanlığı.", hasContent:true }
   ];
 
-  /* DİYETİSYEN LİSTESİ */
   const dietitians = [
     {
       name:"Uzman Diyetisyen Bilge İgan Yıldırım",
@@ -621,46 +618,69 @@ a{ color:inherit; text-decoration:none; cursor:pointer; }
     {date:"02.06.2026", district:"TAŞLIÇAY", name:"BEYZA ECZANESİ", address:"15 TEMMUZ ŞEHİTLER MAHALLESİ MAREŞAL FEVZİ ÇAKMAK CADDESİ NO:1/1", landmark:"PTT KARGO YANI", phone:"0472 551 30 00", url:"https://maps.google.com/?q=Beyza+Eczanesi+Taslicay"},
     {date:"02.06.2026", district:"TUTAK", name:"BERFİN ECZANESİ", address:"Murat Mahallesi Dr Cihan ÖKTEM Caddesi No:5A ve 5B", landmark:"GAZİ İLKOKULUNUN KARŞISI", phone:"0552 636 00 04", url:"https://maps.google.com/?q=Berfin+Eczanesi+Tutak"},
 
-    {date:"09.06.2026", district:"DİYADİN", name:"ŞİFA ECZANESİ", address:"MURAT MAHALLESİ KAYMAKAM ÖZGÜR AZER KURAK CADDESİ NO:63A", landmark:"MURAT CAMİİ YANI", phone:"0505 597 63 42", url:"https://maps.google.com/?q=%C5%9E%C4%B0FA+ECZANES%C4%B0+D%C4%B0YAD%C4%B0N"},
-    {date:"09.06.2026", district:"DOĞUBAYAZIT", name:"CAN ECZANESİ", address:"İSHAKPAŞA MAHALLESİ AĞRI CADDESİ NO:274A", landmark:"GÜVEN LOKANTASI KARŞISI", phone:"0472 312 04 12", url:"https://maps.google.com/?q=CAN+ECZANES%C4%B0+DO%C4%9EUBAYAZIT"},
-    {date:"09.06.2026", district:"ELEŞKİRT", name:"EMEK ECZANESİ", address:"MÜFTÜ SELİM MAHALLESİ CUMHURİYET CADDESİ NO:112/B", landmark:"SAĞLIK OCAĞI KARŞISI", phone:"0472 711 47 47", url:"https://maps.google.com/?q=EMEK+ECZANES%C4%B0+ELE%C5%9EK%C4%B0RT"},
-    {date:"09.06.2026", district:"HAMUR", name:"HAMUR ECZANESİ", address:"KÜMBET MAHALLESİ VAN CADDESİ NO:49/A", landmark:"HAMUR BELEDİYESİ ALTI", phone:"0472 616 71 72", url:"https://maps.google.com/?q=HAMUR+ECZANES%C4%B0+HAMUR"},
-    {date:"09.06.2026", district:"MERKEZ", name:"SAĞLIK ECZANESİ", address:"FIRAT MAHALLESİ ATALAY CADDESİ NO:28/E", landmark:"BELEDİYE KARŞISI", phone:"0472 215 75 38", url:"https://maps.google.com/?q=SA%C4%9ELIK+ECZANES%C4%B0+MERKEZ"},
-    {date:"09.06.2026", district:"MERKEZ", name:"RUKİYE ECZANESİ", address:"BAHÇELİ EVLER MAHALLESİ CUMHURİYET CADDESİ NO 125A", landmark:"ESKİ KÜTÜPHANE YANI", phone:"0472 216 06 06", url:"https://maps.google.com/?q=RUK%C4%B0YE+ECZANES%C4%B0+MERKEZ"},
-    {date:"09.06.2026", district:"PATNOS", name:"DURMAZ ECZANESİ", address:"ALPASLAN MAHALLESİ MALAZGİRT CADDESİ NO:136A", landmark:"ESKİ KİLER MARKET YANI", phone:"0543 899 15 21", url:"https://maps.google.com/?q=DURMAZ+ECZANES%C4%B0+PATNOS"},
-    {date:"09.06.2026", district:"TAŞLIÇAY", name:"ELİF ECZANESİ", address:"HÜRRİYET MAHALLESİ MAREŞAL FEVZİ ÇAKMAK CADDESİ NO:100", landmark:"A101 KARŞISI", phone:"0472 551 29 00", url:"https://maps.google.com/?q=EL%C4%B0F+ECZANES%C4%B0+TA%C5%9ELI%C3%87AY"},
-    {date:"09.06.2026", district:"TUTAK", name:"OZAN ECZANESİ", address:"Cami Mahallesi Cumhuriyet Caddesi No:39B", landmark:"Merkez Camii Yanı", phone:"0472 411 28 97", url:"https://maps.google.com/?q=OZAN+ECZANES%C4%B0+TUTAK"},
+    {date:"08.06.2026", district:"DİYADİN", name:"DİYADİN ECZANESİ", address:"İSA AĞA MAHALLESİ INÖNÜ CADDESİ NO:98", landmark:"PTT KARŞISI", phone:"0472 511 24 65", url:"https://www.google.com/maps?q=39.539805,43.674178"},
+    {date:"08.06.2026", district:"DOĞUBAYAZIT", name:"NEFES ECZANESİ", address:"ÇİFTE PINAR MAHALLESİ AĞRI CADDESİ NO:59/A", landmark:"MANOLYA PASTANESİ YANI", phone:"0472 312 20 90", url:"https://www.google.com/maps?q=39.548247,44.078958"},
+    {date:"08.06.2026", district:"ELEŞKİRT", name:"ELEŞKİRT ECZANESİ", address:"İSTİKLAL MAHALLESİ CUMHURİYET CADDESİ NO:109", landmark:"BELEDİYE BİNASİ KARŞISI", phone:"0472 711 29 16", url:"https://www.google.com/maps?q=39.798415,42.676952"},
+    {date:"08.06.2026", district:"HAMUR", name:"AHMET ECZANESİ", address:"Kümbet Mahallesi Van Caddesi No:49C", landmark:"HAMUR BELEDİYESİ ALTI", phone:"0544 564 57 48", url:"https://www.google.com/maps?q=39.609435,42.988575"},
+    {date:"08.06.2026", district:"MERKEZ", name:"BEREN ECZANESİ", address:"BAHÇELİEVLER MAHALLAESİ CUMHURİYET CADDESİ NO:135B", landmark:"CUMAÇAY GARAJI KARŞISI", phone:"0546 153 04 58", url:"https://www.google.com/maps?q=39.724290,43.053878"},
+    {date:"08.06.2026", district:"MERKEZ", name:"YOL ECZANESİ", address:"FIRAT MAHALLESİ ATALAY CADDESİ NO:16/D", landmark:"AĞRI BELEDİYESİ KARŞISI", phone:"0472 215 81 86", url:"https://www.google.com/maps?q=39.717492,43.017776"},
+    {date:"08.06.2026", district:"PATNOS", name:"DEVA ECZANESİ", address:"ATATÜRK MAHALLESİ MENDERES CADDESİ NO:146", landmark:"PATNOS İTİMAT YAZIHANESİ YANI", phone:"0472 616 16 19", url:"https://www.google.com/maps?q=39.234215,42.861461"},
+    {date:"08.06.2026", district:"TAŞLIÇAY", name:"ÇARE ECZANESİ", address:"HÜRRİYET MAHALLESİ M.FEVZİ ÇAKMAK CADDESİ DIŞ KAPI NO:94A", landmark:"MERVE KIRTASİYE YANI", phone:"0546 491 53 22", url:"https://www.google.com/maps?q=39.634434,43.376381"},
+    {date:"08.06.2026", district:"TUTAK", name:"TUTAK ECZANESİ", address:"MURAT MAHALLESİ CUMHURİYET CADDESİ NO:51/A", landmark:"", phone:"0472 411 26 98", url:"https://www.google.com/maps?q=39.538255,42.773258"},
 
-    {date:"10.06.2026", district:"DİYADİN", name:"CEREN ECZANESİ", address:"Murat Mahallesi Şehit Kaymakam Muhammed Fatih Safitürk Caddesi No:13H", landmark:"KÜLTÜR KİTAP KIRTASİYE KARŞISI", phone:"0530 115 54 04", url:"https://maps.google.com/?q=CEREN+ECZANES%C4%B0+D%C4%B0YAD%C4%B0N"},
-    {date:"10.06.2026", district:"DOĞUBAYAZIT", name:"KESKİN ECZANESİ", address:"ULUYOL MAHALLESİ AĞRI CADDESİ NO:93/C", landmark:"ÇINAR PASTANESİ YANI", phone:"0472 312 60 60", url:"https://maps.google.com/?q=KESK%C4%B0N+ECZANES%C4%B0+DO%C4%9EUBAYAZIT"},
-    {date:"10.06.2026", district:"ELEŞKİRT", name:"ESRA ECZANESİ", address:"İstiklal Mahallesi Cumhuriyet Caddesi No:83", landmark:"ZİRAAT BANKASI KARŞISI", phone:"0545 591 44 24", url:"https://maps.google.com/?q=ESRA+ECZANES%C4%B0+ELE%C5%9EK%C4%B0RT"},
-    {date:"10.06.2026", district:"HAMUR", name:"AHMET ECZANESİ", address:"Kümbet Mahallesi Van Caddesi No:49C", landmark:"HAMUR BELEDİYESİ ALTI", phone:"0544 564 57 48", url:"https://maps.google.com/?q=AHMET+ECZANES%C4%B0+HAMUR"},
-    {date:"10.06.2026", district:"MERKEZ", name:"EMRE ECZANESİ", address:"Alpaslan Mahallesi Eski Van Caddesi No:142A", landmark:"İLÇELER GARAJI YANI", phone:"0542 498 63 73", url:"https://maps.google.com/?q=EMRE+ECZANES%C4%B0+MERKEZ"},
-    {date:"10.06.2026", district:"MERKEZ", name:"HARUN ECZANESİ", address:"YAVUZ MAHALLESİ 403 SOKAK NO:13/A", landmark:"TERZİLER CADDESİ AŞAĞISI", phone:"0472 215 25 83", url:"https://maps.google.com/?q=HARUN+ECZANES%C4%B0+MERKEZ"},
-    {date:"10.06.2026", district:"PATNOS", name:"IŞIK ECZANESİ", address:"INÖNÜ MAHALLESİ MALAZGIRT CADDESİ NO:13", landmark:"LAL LOKANTASI KARŞISI", phone:"0472 616 24 01", url:"https://maps.google.com/?q=I%C5%9EIK+ECZANES%C4%B0+PATNOS"},
-    {date:"10.06.2026", district:"TAŞLIÇAY", name:"FERHAT ECZANESİ", address:"HÜRRİYET MAHALLESİ M.FEVZİ ÇAKMAK CADDESİ NO:48/A", landmark:"ÖĞRETMEN EVİ ALTI", phone:"0539 430 14 11", url:"https://maps.google.com/?q=FERHAT+ECZANES%C4%B0+TA%C5%9ELI%C3%87AY"},
-    {date:"10.06.2026", district:"TUTAK", name:"BERFİN ECZANESİ", address:"Murat Mahallesi Dr Cihan ÖKTEM Caddesi No:5A ve 5B", landmark:"GAZİ İLKOKULUNUN KARŞISI", phone:"0552 636 00 04", url:"https://maps.google.com/?q=BERF%C4%B0N+ECZANES%C4%B0+TUTAK"},
+    {date:"09.06.2026", district:"DİYADİN", name:"ŞİFA ECZANESİ", address:"MURAT MAHALLESİ KAYMAKAM ÖZGÜR AZER KURAK CADDESİ NO:63A", landmark:"MURAT CAMİİ YANI", phone:"0505 597 63 42", url:"https://www.google.com/maps?q=39.546386,43.666963"},
+    {date:"09.06.2026", district:"DOĞUBAYAZIT", name:"CAN ECZANESİ", address:"İSHAKPAŞA MAHALLESİ AĞRI CADDESİ NO:274A", landmark:"GÜVEN LOKANTASI KARŞISI", phone:"0472 312 04 12", url:"https://www.google.com/maps?q=39.548309,44.077235"},
+    {date:"09.06.2026", district:"ELEŞKİRT", name:"EMEK ECZANESİ", address:"MÜFTÜ SELİM MAHALLESİ CUMHURİYET CADDESİ NO:112/B", landmark:"SAĞLIK OCAĞI KARŞISI", phone:"0472 711 47 47", url:"https://www.google.com/maps?q=39.798169,42.677894"},
+    {date:"09.06.2026", district:"HAMUR", name:"HAMUR ECZANESİ", address:"KÜMBET MAHALLESİ VAN CADDESİ NO:49/A", landmark:"HAMUR BELEDİYESİ ALTI", phone:"0472 616 71 72", url:"https://www.google.com/maps?q=39.609511,42.988588"},
+    {date:"09.06.2026", district:"MERKEZ", name:"SAĞLIK ECZANESİ", address:"FIRAT MAHALLESİ ATALAY CADDESİ NO:28/E", landmark:"BELEDİYE KARŞISI", phone:"0472 215 75 38", url:"https://www.google.com/maps?q=39.717167,43.016447"},
+    {date:"09.06.2026", district:"MERKEZ", name:"RUKİYE ECZANESİ", address:"BAHÇELİ EVLER MAHALLESİ CUMHURİYET CADDESİ NO 125A", landmark:"ESKİ KÜTÜPHANE YANI", phone:"0472 216 06 06", url:"https://www.google.com/maps?q=39.724167,43.053824"},
+    {date:"09.06.2026", district:"PATNOS", name:"DURMAZ ECZANESİ", address:"ALPASLAN MAHALLESİ MALAZGİRT CADDESİ NO:136A", landmark:"ESKİ KİLER MARKET YANI", phone:"0543 899 15 21", url:"https://www.google.com/maps?q=39.229743,42.860278"},
+    {date:"09.06.2026", district:"TAŞLIÇAY", name:"ELİF ECZANESİ", address:"HÜRRİYET MAHALLESİ MAREŞAL FEVZİ ÇAKMAK CADDESİ NO:100", landmark:"A101 KARŞISI", phone:"0472 551 29 00", url:"https://www.google.com/maps?q=39.634128,43.376708"},
+    {date:"09.06.2026", district:"TUTAK", name:"OZAN ECZANESİ", address:"Cami Mahallesi Cumhuriyet Caddesi No:39B", landmark:"Merkez Camii Yanı", phone:"0472 411 28 97", url:"https://www.google.com/maps?q=39.540225,42.770822"},
 
-    {date:"11.06.2026", district:"MERKEZ", name:"AĞRI ECZANESİ", address:"ABİDE MAHALLESİ YAŞAR KEMAL CADDESİ NO:48/A", landmark:"AĞRI VALİLİĞİ KARŞISI", phone:"0472 215 58 13", url:"https://maps.google.com/?q=A%C4%9ERI+ECZANES%C4%B0+MERKEZ"},
-    {date:"11.06.2026", district:"MERKEZ", name:"KÖPRÜBAŞI ECZANESİ", address:"100.YIL MAHALLESİ YENİ VAN CADDESİ NO:132A", landmark:"EROĞLU MARKET YANI", phone:"0542 138 72 76", url:"https://maps.google.com/?q=K%C3%96PR%C3%9CBA%C5%9EI+ECZANES%C4%B0+MERKEZ"},
-    {date:"11.06.2026", district:"PATNOS", name:"OKTAY VURAL ECZANESİ", address:"ALPASLAN MAHALLESİ MALAZGİRT CADDESİ NO:72", landmark:"ŞEYH ABDULVAHAP KÜFREVİ EVİ KARŞISI", phone:"0472 616 18 74", url:"https://maps.google.com/?q=OKTAY+VURAL+ECZANES%C4%B0+PATNOS"},
-    {date:"11.06.2026", district:"TAŞLIÇAY", name:"TAŞLIÇAY ECZANESİ", address:"Cumhuriyet Mahallesi Mareşal Favzi Çakmak Caddesi No:23", landmark:"", phone:"0472 551 28 91", url:"https://maps.google.com/?q=TA%C5%9ELI%C3%87AY+ECZANES%C4%B0+TA%C5%9ELI%C3%87AY"},
-    {date:"11.06.2026", district:"TUTAK", name:"BEGÜM ECZANESİ", address:"CAMİ MAHALLESİ KAZIM KARABEKİR CADDESİ NO:11B-11C", landmark:"KAYMAKAMLIK EVİ KARŞISI", phone:"0472 411 31 89", url:"https://maps.google.com/?q=BEG%C3%9CM+ECZANES%C4%B0+TUTAK"},
+    {date:"10.06.2026", district:"DİYADİN", name:"CEREN ECZANESİ", address:"Murat Mahallesi Şehit Kaymakam Muhammed Fatih Safitürk Caddesi No:13H", landmark:"KÜLTÜR KİTAP KIRTASİYE KARŞISI", phone:"0530 115 54 04", url:"https://www.google.com/maps?q=39.540798,43.670828"},
+    {date:"10.06.2026", district:"DOĞUBAYAZIT", name:"KESKİN ECZANESİ", address:"ULUYOL MAHALLESİ AĞRI CADDESİ NO:93/C", landmark:"ÇINAR PASTANESİ YANI", phone:"0472 312 60 60", url:"https://www.google.com/maps?q=39.547955,44.076724"},
+    {date:"10.06.2026", district:"ELEŞKİRT", name:"ESRA ECZANESİ", address:"İstiklal Mahallesi Cumhuriyet Caddesi No:83", landmark:"ZİRAAT BANKASI KARŞISI", phone:"0545 591 44 24", url:"https://www.google.com/maps?q=39.798541,42.676397"},
+    {date:"10.06.2026", district:"HAMUR", name:"AHMET ECZANESİ", address:"Kümbet Mahallesi Van Caddesi No:49C", landmark:"HAMUR BELEDİYESİ ALTI", phone:"0544 564 57 48", url:"https://www.google.com/maps?q=39.609435,42.988575"},
+    {date:"10.06.2026", district:"MERKEZ", name:"EMRE ECZANESİ", address:"Alpaslan Mahallesi Eski Van Caddesi No:142A", landmark:"İLÇELER GARAJI YANI", phone:"0542 498 63 73", url:"https://www.google.com/maps?q=39.714239,43.053186"},
+    {date:"10.06.2026", district:"MERKEZ", name:"HARUN ECZANESİ", address:"YAVUZ MAHALLESİ 403 SOKAK NO:13/A", landmark:"TERZİLER CADDESİ AŞAĞISI", phone:"0472 215 25 83", url:"https://www.google.com/maps?q=39.720926,43.051469"},
+    {date:"10.06.2026", district:"PATNOS", name:"IŞIK ECZANESİ", address:"INÖNÜ MAHALLESİ MALAZGIRT CADDESİ NO:13", landmark:"LAL LOKANTASI KARŞISI", phone:"0472 616 24 01", url:"https://www.google.com/maps?q=39.233443,42.863301"},
+    {date:"10.06.2026", district:"TAŞLIÇAY", name:"FERHAT ECZANESİ", address:"HÜRRİYET MAHALLESİ M.FEVZİ ÇAKMAK CADDESİ NO:48/A", landmark:"ÖĞRETMEN EVİ ALTI", phone:"0539 430 14 11", url:"https://www.google.com/maps?q=39.635854,43.374546"},
+    {date:"10.06.2026", district:"TUTAK", name:"BERFİN ECZANESİ", address:"Murat Mahallesi Dr Cihan ÖKTEM Caddesi No:5A ve 5B", landmark:"GAZİ İLKOKULUNUN KARŞISI", phone:"0552 636 00 04", url:"https://www.google.com/maps?q=39.539584,42.773208"},
 
-    {date:"12.06.2026", district:"DİYADİN", name:"DİLAN ECZANESİ", address:"ISA AGA MAHALLESİ INÖNÜ CADDESİ NO:36", landmark:"BELEDİYE YANI", phone:"0472 511 28 28", url:"https://maps.google.com/?q=D%C4%B0LAN+ECZANES%C4%B0+D%C4%B0YAD%C4%B0N"},
-    {date:"12.06.2026", district:"DOĞUBAYAZIT", name:"ÇAPA ECZANESİ", address:"AHMEDİHANİ MAHALLESİ ABDURREZAK ALADAĞ CADDESİ NO:73/C", landmark:"IĞDIR DURAĞI YOLU ÜZERİ", phone:"0544 451 24 96", url:"https://maps.google.com/?q=%C3%87APA+ECZANES%C4%B0+DO%C4%9EUBAYAZIT"},
-    {date:"12.06.2026", district:"ELEŞKİRT", name:"ŞİFA ECZANESİ", address:"MÜFTÜ SELİM MAHALLESİ CUMHURİYET CADDESİ NO:13", landmark:"SAĞLIK OCAĞI KARŞISI", phone:"0472 711 21 41", url:"https://maps.google.com/?q=%C5%9E%C4%B0FA+ECZANES%C4%B0+ELE%C5%9EK%C4%B0RT"},
-    {date:"12.06.2026", district:"HAMUR", name:"AHMET ECZANESİ", address:"Kümbet Mahallesi Van Caddesi No:49C", landmark:"HAMUR BELEDİYESİ ALTI", phone:"0544 564 57 48", url:"https://maps.google.com/?q=AHMET+ECZANES%C4%B0+HAMUR"},
-    {date:"12.06.2026", district:"MERKEZ", name:"SEVGİ ECZANESİ", address:"LEYLEK PINAR MAHALLESİ CUMHURIYET CADDESİ NO:142", landmark:"HALK BANK YUKARASI", phone:"0472 216 34 20", url:"https://maps.google.com/?q=SEVG%C4%B0+ECZANES%C4%B0+MERKEZ"},
-    {date:"12.06.2026", district:"MERKEZ", name:"ŞİFA ECZANESİ", address:"YAVUZ MAHALLESİ YAŞAR KEMAL CADDESİ NO:2/A", landmark:"BÜYÜK AĞRI OTELİ ALTI", phone:"0472 215 30 00", url:"https://maps.google.com/?q=%C5%9E%C4%B0FA+ECZANES%C4%B0+MERKEZ"},
-    {date:"12.06.2026", district:"PATNOS", name:"SARI ECZANESİ", address:"ATATÜRK MAHALLESİ ALPASLAN CADDESİ KAPI NO: 69", landmark:"FATİH ET LOKANTASI ÇAPRAZI", phone:"0551 481 44 68", url:"https://maps.google.com/?q=SARI+ECZANES%C4%B0+PATNOS"},
-    {date:"12.06.2026", district:"TAŞLIÇAY", name:"BEYZA ECZANESİ", address:"15 TEMMUZ ŞEHİTLER MAHALLESİ MAREŞAL FEVZİ ÇAKMAK CADDESİ NO:1/1", landmark:"PTT KARGO YANI", phone:"0472 551 30 00", url:"https://maps.google.com/?q=BEYZA+ECZANES%C4%B0+TA%C5%9ELI%C3%87AY"},
-    {date:"12.06.2026", district:"TUTAK", name:"TUTAK ECZANESİ", address:"MURAT MAHALLESİ CUMHURİYET CADDESİ NO:51/A", landmark:"", phone:"0472 411 26 98", url:"https://maps.google.com/?q=TUTAK+ECZANES%C4%B0+TUTAK"}
+    {date:"11.06.2026", district:"DİYADİN", name:"DERMAN ECZANESİ", address:"Atatürk Mahallesi Şehit Kaymakam Muhammed Fatih Safitürk Caddesi No:10A", landmark:"Menekşem Market Karşısı", phone:"0472 511 36 36", url:"https://www.google.com/maps?q=39.540271,43.671124"},
+    {date:"11.06.2026", district:"DOĞUBAYAZIT", name:"ZEYNEP ECZANESİ", address:"SANAYİ MAHALLESİ ÇEVRE YOLU BULVARI NO:766/D", landmark:"DEVLET HASTANESİ KARŞISI", phone:"0472 312 82 22", url:"https://www.google.com/maps?q=39.541362,44.017494"},
+    {date:"11.06.2026", district:"ELEŞKİRT", name:"MAHMUTPAŞA ECZANESİ", address:"İstiklal Mahallesi Cumhuriyet Caddesi No:101", landmark:"KİLER MARKET KARŞISI", phone:"0472 711 29 78", url:"https://www.google.com/maps?q=39.798426,42.677388"},
+    {date:"11.06.2026", district:"HAMUR", name:"HAMUR ECZANESİ", address:"KÜMBET MAHALLESİ VAN CADDESİ NO:49/A", landmark:"HAMUR BELEDİYESİ ALTI", phone:"0472 616 71 72", url:"https://www.google.com/maps?q=39.609511,42.988588"},
+    {date:"11.06.2026", district:"MERKEZ", name:"AĞRI ECZANESİ", address:"ABİDE MAHALLESİ YAŞAR KEMAL CADDESİ NO:48/A", landmark:"AĞRI VALİLİĞİ KARŞISI", phone:"0472 215 58 13", url:"https://www.google.com/maps?q=39.719049,43.033018"},
+    {date:"11.06.2026", district:"MERKEZ", name:"KÖPRÜBAŞI ECZANESİ", address:"100.YIL MAHALLESİ YENİ VAN CADDESİ NO:132A", landmark:"EROĞLU MARKET YANI", phone:"0542 138 72 76", url:"https://www.google.com/maps?q=39.706295,43.048174"},
+    {date:"11.06.2026", district:"PATNOS", name:"OKTAY VURAL ECZANESİ", address:"ALPASLAN MAHALLESİ MALAZGİRT CADDESİ NO:72", landmark:"ŞEYH ABDULVAHAP KÜFREVİ EVİ KARŞISI", phone:"0472 616 18 74", url:"https://www.google.com/maps?q=39.231735,42.861958"},
+    {date:"11.06.2026", district:"TAŞLIÇAY", name:"TAŞLIÇAY ECZANESİ", address:"Cumhuriyet Mahallesi Mareşal Favzi Çakmak Caddesi No:23", landmark:"", phone:"0472 551 28 91", url:"https://www.google.com/maps?q=39.637014,43.373894"},
+    {date:"11.06.2026", district:"TUTAK", name:"BEGÜM ECZANESİ", address:"CAMİ MAHALLESİ KAZIM KARABEKİR CADDESİ NO:11B-11C", landmark:"KAYMAKAMLIK EVİ KARŞISI", phone:"0472 411 31 89", url:"https://www.google.com/maps?q=39.538143,42.771397"},
+
+    {date:"12.06.2026", district:"DİYADİN", name:"DİLAN ECZANESİ", address:"ISA AGA MAHALLESİ INÖNÜ CADDESİ NO:36", landmark:"BELEDİYE YANI", phone:"0472 511 28 28", url:"https://www.google.com/maps?q=39.539751,43.672485"},
+    {date:"12.06.2026", district:"DOĞUBAYAZIT", name:"ÇAPA ECZANESİ", address:"AHMEDİHANİ MAHALLESİ ABDURREZAK ALADAĞ CADDESİ NO:73/C", landmark:"IĞDIR DURAĞI YOLU ÜZERİ", phone:"0544 451 24 96", url:"https://www.google.com/maps?q=39.549213,44.079323"},
+    {date:"12.06.2026", district:"ELEŞKİRT", name:"ŞİFA ECZANESİ", address:"MÜFTÜ SELİM MAHALLESİ CUMHURİYET CADDESİ NO:13", landmark:"SAĞLIK OCAĞI KARŞISI", phone:"0472 711 21 41", url:"https://www.google.com/maps?q=39.798195,42.677684"},
+    {date:"12.06.2026", district:"HAMUR", name:"AHMET ECZANESİ", address:"Kümbet Mahallesi Van Caddesi No:49C", landmark:"HAMUR BELEDİYESİ ALTI", phone:"0544 564 57 48", url:"https://www.google.com/maps?q=39.609435,42.988575"},
+    {date:"12.06.2026", district:"MERKEZ", name:"SEVGİ ECZANESİ", address:"LEYLEK PINAR MAHALLESİ CUMHURIYET CADDESİ NO:142", landmark:"HALK BANK YUKARASI", phone:"0472 216 34 20", url:"https://www.google.com/maps?q=39.721889,43.053141"},
+    {date:"12.06.2026", district:"MERKEZ", name:"ŞİFA ECZANESİ", address:"YAVUZ MAHALLESİ YAŞAR KEMAL CADDESİ NO:2/A", landmark:"BÜYÜK AĞRI OTELİ ALTI", phone:"0472 215 30 00", url:"https://www.google.com/maps?q=39.719214,43.051600"},
+    {date:"12.06.2026", district:"PATNOS", name:"SARI ECZANESİ", address:"ATATÜRK MAHALLESİ ALPASLAN CADDESİ KAPI NO: 69", landmark:"FATİH ET LOKANTASI ÇAPRAZI", phone:"0551 481 44 68", url:"https://www.google.com/maps?q=39.232071,42.862017"},
+    {date:"12.06.2026", district:"TAŞLIÇAY", name:"BEYZA ECZANESİ", address:"15 TEMMUZ ŞEHİTLER MAHALLESİ MAREŞAL FEVZİ ÇAKMAK CADDESİ NO:1/1", landmark:"PTT KARGO YANI", phone:"0472 551 30 00", url:"https://www.google.com/maps?q=39.636158,43.374813"},
+    {date:"12.06.2026", district:"TUTAK", name:"TUTAK ECZANESİ", address:"MURAT MAHALLESİ CUMHURİYET CADDESİ NO:51/A", landmark:"", phone:"0472 411 26 98", url:"https://www.google.com/maps?q=39.538255,42.773258"},
+
+    {date:"13.06.2026", district:"DİYADİN", name:"DİYADİN ECZANESİ", address:"İSA AĞA MAHALLESİ INÖNÜ CADDESİ NO:98", landmark:"PTT KARŞISI", phone:"0472 511 24 65", url:"https://www.google.com/maps?q=39.539805,43.674178"},
+    {date:"13.06.2026", district:"DOĞUBAYAZIT", name:"DÜNYA ECZANESİ", address:"Ahmedi Hani Mahallesi 1352 Sokak No:5C", landmark:"Meteoroloji Sağlık Ocağı Karşısı", phone:"0472 312 60 70", url:"https://www.google.com/maps?q=39.549403,44.090033"},
+    {date:"13.06.2026", district:"ELEŞKİRT", name:"ELEŞKİRT ECZANESİ", address:"İSTİKLAL MAHALLESİ CUMHURİYET CADDESİ NO:109", landmark:"BELEDİYE BİNASİ KARŞISI", phone:"0472 711 29 16", url:"https://www.google.com/maps?q=39.798415,42.676952"},
+    {date:"13.06.2026", district:"HAMUR", name:"HAMUR ECZANESİ", address:"KÜMBET MAHALLESİ VAN CADDESİ NO:49/A", landmark:"HAMUR BELEDİYESİ ALTI", phone:"0472 616 71 72", url:"https://www.google.com/maps?q=39.609511,42.988588"},
+    {date:"13.06.2026", district:"MERKEZ", name:"NURAY ECZANESİ", address:"HÜRRİYET MAHALLLESİ CUMHURİYET CADDESİ NO:88B", landmark:"EFE (GÜVEN) TIP MERKEZİ KARŞISI", phone:"0538 864 41 33", url:"https://www.google.com/maps?q=39.722706,43.053513"},
+    {date:"13.06.2026", district:"MERKEZ", name:"TAYSUN ECZANESİ", address:"KURTULUŞ MAHALLESİ YENİ VAN CADDESİ No:62A", landmark:"LASSA BAYİİ YANI", phone:"0472 215 13 21", url:"https://www.google.com/maps?q=39.714067,43.049662"},
+    {date:"13.06.2026", district:"PATNOS", name:"YEŞİLÇİMEN ECZANESİ", address:"Yeşil Çimen Mahallesi Van Bulvar Caddesi Kapı No:227A", landmark:"SELAHATTİN EYYUBİ FEN LİSESİ YANI", phone:"0544 427 23 65", url:"https://www.google.com/maps?q=39.237820,42.880954"},
+    {date:"13.06.2026", district:"TAŞLIÇAY", name:"ÇARE ECZANESİ", address:"HÜRRİYET MAHALLESİ M.FEVZİ ÇAKMAK CADDESİ DIŞ KAPI NO:94A", landmark:"MERVE KIRTASİYE YANI", phone:"0546 491 53 22", url:"https://www.google.com/maps?q=39.634434,43.376381"},
+    {date:"13.06.2026", district:"TUTAK", name:"OZAN ECZANESİ", address:"Cami Mahallesi Cumhuriyet Caddesi No:39B", landmark:"Merkez Camii Yanı", phone:"0472 411 28 97", url:"https://www.google.com/maps?q=39.540225,42.770822"}
   ];
 
   window.AGRI = { categories, dutyPharmacies, healthSubcategories, dietitians };
 
-  // Diyetisyen banner görselleri istenildiği gibi 1 ve 2 olmak üzere dönüşümlü eklendi.
   window.AGRI_STATIC_BANNERS = [
     { img:"uzm.diyetisyenbilge.jpg", text:"Aramıza Hoşgeldiniz", name:"Uzman Diyetisyen Bilge İgan Yıldırım", isDiet:true },
     { img:"uzm.diyetisyenbilge2.jpg", text:"Aramıza Hoşgeldiniz", name:"Uzman Diyetisyen Bilge İgan Yıldırım", isDiet:true },
@@ -668,7 +688,6 @@ a{ color:inherit; text-decoration:none; cursor:pointer; }
     { img:"uzm.diyetisyenbilge2.jpg", text:"Aramıza Hoşgeldiniz", name:"Uzman Diyetisyen Bilge İgan Yıldırım", isDiet:true }
   ];
 
-  // Instagram tarzı Story Verisi (Sadece bilge1.jpg kaldı)
   window.AGRI_STORIES = [
     {
       title: "Uzm. Dyt. Bilge",
@@ -683,50 +702,13 @@ a{ color:inherit; text-decoration:none; cursor:pointer; }
 
 const safeStore = (function(){
   let mem = {};
-
-  function lsOk(){
-    try { const k="__t__"; window.localStorage.setItem(k,"1"); window.localStorage.removeItem(k); return true; }
-    catch(e){ return false; }
-  }
+  function lsOk(){ try { const k="__t__"; window.localStorage.setItem(k,"1"); window.localStorage.removeItem(k); return true; } catch(e){ return false; } }
   const hasLS = lsOk();
-
-  function setCookie(key, val){
-    try {
-      const exp = new Date(Date.now() + 365*24*60*60*1000).toUTCString();
-      document.cookie = encodeURIComponent(key) + "=" + encodeURIComponent(val) + "; expires=" + exp + "; path=/; SameSite=Lax";
-      return true;
-    } catch(e){ return false; }
-  }
-  function getCookie(key){
-    try {
-      const name = encodeURIComponent(key) + "=";
-      const parts = document.cookie.split(";");
-      for (let c of parts){
-        c = c.trim();
-        if (c.indexOf(name) === 0) return decodeURIComponent(c.substring(name.length));
-      }
-      return null;
-    } catch(e){ return null; }
-  }
-
+  function setCookie(key, val){ try { const exp = new Date(Date.now() + 365*24*60*60*1000).toUTCString(); document.cookie = encodeURIComponent(key) + "=" + encodeURIComponent(val) + "; expires=" + exp + "; path=/; SameSite=Lax"; return true; } catch(e){ return false; } }
+  function getCookie(key){ try { const name = encodeURIComponent(key) + "="; const parts = document.cookie.split(";"); for (let c of parts){ c = c.trim(); if (c.indexOf(name) === 0) return decodeURIComponent(c.substring(name.length)); } return null; } catch(e){ return null; } }
   return {
-    get(key){
-      if (hasLS){
-        try { const v = window.localStorage.getItem(key); if (v != null) return v; } catch(e){}
-      }
-      const ck = getCookie(key);
-      if (ck != null) return ck;
-      return (key in mem) ? mem[key] : null;
-    },
-    set(key, val){
-      let stored = false;
-      if (hasLS){
-        try { window.localStorage.setItem(key, val); stored = true; } catch(e){}
-      }
-      if (setCookie(key, val)) stored = true;
-      mem[key] = val; 
-      return stored;
-    }
+    get(key){ if (hasLS){ try { const v = window.localStorage.getItem(key); if (v != null) return v; } catch(e){} } const ck = getCookie(key); if (ck != null) return ck; return (key in mem) ? mem[key] : null; },
+    set(key, val){ let stored = false; if (hasLS){ try { window.localStorage.setItem(key, val); stored = true; } catch(e){} } if (setCookie(key, val)) stored = true; mem[key] = val; return stored; }
   };
 })();
 
@@ -795,17 +777,14 @@ function GlobeCanvas({ phase }){
 
 function Topbar({ dark }){
   const [scrolled, setScrolled] = useState(false);
-
   useEffect(() => {
     const onScroll = () => setScrolled(window.scrollY > 40);
     onScroll();
     window.addEventListener("scroll", onScroll, { passive: true });
     return () => window.removeEventListener("scroll", onScroll);
   }, []);
-
   const onDark = !scrolled;
   const cls = ["topbar", scrolled ? "scrolled" : "", onDark ? "on-dark" : ""].join(" ").trim();
-
   return (
     <div className={cls}>
       <a className="logo" href="#top" onClick={(e)=>{ e.preventDefault(); window.scrollTo({ top:0, behavior:"smooth" }); }}>
@@ -891,12 +870,7 @@ function Hero({ onSearchPlace, onOpenCat }){
 }
 
 function ImageMarquee() {
-  const base = [].concat(
-    window.AGRI_STATIC_BANNERS,
-    window.AGRI_STATIC_BANNERS,
-    window.AGRI_STATIC_BANNERS,
-    window.AGRI_STATIC_BANNERS
-  );
+  const base = [].concat(window.AGRI_STATIC_BANNERS, window.AGRI_STATIC_BANNERS, window.AGRI_STATIC_BANNERS, window.AGRI_STATIC_BANNERS);
   const loop = base.concat(base);
   return (
     <div className="banner-section">
@@ -913,17 +887,9 @@ function ImageMarquee() {
                </div>
              );
           }
-
           const hasImg = b && b.img && b.img.trim() !== "";
-          if (hasImg) {
-            return <img key={i} src={b.img} className="banner-img" alt="Görsel" />;
-          }
-
-          return (
-            <div key={i} className="banner-img banner-placeholder">
-              <span>{(b && b.text) ? b.text : "Çok yakında hizmetinizdeyiz"}</span>
-            </div>
-          );
+          if (hasImg) return <img key={i} src={b.img} className="banner-img" alt="Görsel" />;
+          return <div key={i} className="banner-img banner-placeholder"><span>{(b && b.text) ? b.text : "Çok yakında hizmetinizdeyiz"}</span></div>;
         })}
       </div>
     </div>
@@ -934,11 +900,8 @@ function ImageMarquee() {
 function Stories() {
   const stories = window.AGRI_STORIES || [];
   const [openIdx, setOpenIdx] = useState(null);
-
   if (stories.length === 0) return null;
-
   const active = openIdx != null ? stories[openIdx] : null;
-
   return (
     <section className="stories-section">
       <div className="wrap">
@@ -949,9 +912,7 @@ function Stories() {
               <button key={i} className="story-bubble" onClick={() => setOpenIdx(i)}>
                 <span className="story-ring">
                   <span className="story-thumb" style={hasCover ? { backgroundImage:`url(${s.cover})` } : null}>
-                    {!hasCover && (
-                      <svg width="26" height="26" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.8"><path d="M12 2v4M12 18v4M2 12h4M18 12h4"/><circle cx="12" cy="12" r="4"/></svg>
-                    )}
+                    {!hasCover && <svg width="26" height="26" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.8"><path d="M12 2v4M12 18v4M2 12h4M18 12h4"/><circle cx="12" cy="12" r="4"/></svg>}
                   </span>
                 </span>
                 <span className="story-label">{s.title}</span>
@@ -960,17 +921,12 @@ function Stories() {
           })}
         </div>
       </div>
-
       {active && (
         <div className="story-viewer" onClick={(e)=>{ if(e.target.className==='story-viewer') setOpenIdx(null); }}>
           <div className="story-progress"><span className="story-progress-fill"></span></div>
           <button className="story-close" onClick={()=>setOpenIdx(null)}>✕</button>
           <div className="story-card">
-            {active.slideImg && active.slideImg.trim() !== "" ? (
-              <img className="story-card-img" src={active.slideImg} alt={active.title} />
-            ) : (
-              <div className="story-card-bg"></div>
-            )}
+            {active.slideImg && active.slideImg.trim() !== "" ? <img className="story-card-img" src={active.slideImg} alt={active.title} /> : <div className="story-card-bg"></div>}
             <div className="story-card-overlay">
               <div className="story-card-badge">{active.title}</div>
               <div className="story-card-text">{active.slideText}</div>
@@ -985,31 +941,22 @@ function Stories() {
 /* ===================== WIDGETLAR ===================== */
 function PharmacyWidget() {
   const [district, setDistrict] = useState("MERKEZ");
-  const [currentDateText, setCurrentDateText] = useState("02.06.2026");
+  const [currentDateText, setCurrentDateText] = useState(() => {
+    const now = new Date();
+    return `${now.getDate().toString().padStart(2, '0')}.${(now.getMonth() + 1).toString().padStart(2, '0')}.${now.getFullYear()}`;
+  });
 
   useEffect(() => {
     const updatePharmacyDate = () => {
       const now = new Date();
-      const d = now.getDate().toString().padStart(2, '0');
-      const m = (now.getMonth() + 1).toString().padStart(2, '0');
-      const y = now.getFullYear();
-      const calculatedDate = `${d}.${m}.${y}`;
-      
-      const exists = window.AGRI.dutyPharmacies.some(p => p.date === calculatedDate);
-      if (exists) {
-        setCurrentDateText(calculatedDate);
-      }
+      const calculatedDate = `${now.getDate().toString().padStart(2, '0')}.${(now.getMonth() + 1).toString().padStart(2, '0')}.${now.getFullYear()}`;
+      if (currentDateText !== calculatedDate) setCurrentDateText(calculatedDate);
     };
-
-    updatePharmacyDate();
     const interval = setInterval(updatePharmacyDate, 60000); 
     return () => clearInterval(interval);
-  }, []);
+  }, [currentDateText]);
 
-  const activePharmacies = window.AGRI.dutyPharmacies.filter(
-    p => p.date === currentDateText && p.district.toUpperCase() === district.toUpperCase()
-  );
-
+  const activePharmacies = window.AGRI.dutyPharmacies.filter(p => p.date === currentDateText && p.district.toUpperCase() === district.toUpperCase());
   const districtsList = ["MERKEZ", "DİYADİN", "DOĞUBAYAZIT", "ELEŞKİRT", "HAMUR", "PATNOS", "TAŞLIÇAY", "TUTAK"];
 
   return (
@@ -1049,7 +996,98 @@ function PharmacyWidget() {
 }
 
 function AgendaDashboard(){
-  const todayPrayer = {i:"02:44", g:"04:35", o:"12:13", k:"16:08", a:"19:37", y:"21:20"};
+  const data = {
+    "2026-06-07": {i:"02:40", g:"04:33", o:"12:12", k:"16:08", a:"19:40", y:"21:25"},
+    "2026-06-08": {i:"02:40", g:"04:33", o:"12:12", k:"16:09", a:"19:41", y:"21:25"},
+    "2026-06-09": {i:"02:39", g:"04:33", o:"12:12", k:"16:09", a:"19:41", y:"21:26"},
+    "2026-06-10": {i:"02:39", g:"04:33", o:"12:12", k:"16:09", a:"19:42", y:"21:27"},
+    "2026-06-11": {i:"02:39", g:"04:33", o:"12:12", k:"16:09", a:"19:42", y:"21:28"},
+    "2026-06-12": {i:"02:38", g:"04:32", o:"12:13", k:"16:10", a:"19:43", y:"21:28"},
+    "2026-06-13": {i:"02:38", g:"04:32", o:"12:13", k:"16:10", a:"19:43", y:"21:29"},
+    "2026-06-14": {i:"02:38", g:"04:32", o:"12:13", k:"16:10", a:"19:44", y:"21:30"},
+    "2026-06-15": {i:"02:38", g:"04:32", o:"12:13", k:"16:10", a:"19:44", y:"21:30"},
+    "2026-06-16": {i:"02:38", g:"04:32", o:"12:13", k:"16:11", a:"19:45", y:"21:31"},
+    "2026-06-17": {i:"02:37", g:"04:32", o:"12:14", k:"16:11", a:"19:45", y:"21:31"},
+    "2026-06-18": {i:"02:37", g:"04:33", o:"12:14", k:"16:11", a:"19:45", y:"21:32"},
+    "2026-06-19": {i:"02:38", g:"04:33", o:"12:14", k:"16:11", a:"19:46", y:"21:32"},
+    "2026-06-20": {i:"02:38", g:"04:33", o:"12:14", k:"16:11", a:"19:46", y:"21:32"},
+    "2026-06-21": {i:"02:38", g:"04:33", o:"12:15", k:"16:12", a:"19:46", y:"21:33"},
+    "2026-06-22": {i:"02:38", g:"04:33", o:"12:15", k:"16:12", a:"19:46", y:"21:33"},
+    "2026-06-23": {i:"02:38", g:"04:34", o:"12:15", k:"16:12", a:"19:46", y:"21:33"},
+    "2026-06-24": {i:"02:39", g:"04:34", o:"12:15", k:"16:12", a:"19:47", y:"21:33"},
+    "2026-06-25": {i:"02:39", g:"04:34", o:"12:15", k:"16:13", a:"19:47", y:"21:33"},
+    "2026-06-26": {i:"02:39", g:"04:34", o:"12:16", k:"16:13", a:"19:47", y:"21:33"},
+    "2026-06-27": {i:"02:40", g:"04:35", o:"12:16", k:"16:13", a:"19:47", y:"21:33"},
+    "2026-06-28": {i:"02:41", g:"04:35", o:"12:16", k:"16:13", a:"19:47", y:"21:33"},
+    "2026-06-29": {i:"02:41", g:"04:36", o:"12:16", k:"16:13", a:"19:47", y:"21:33"},
+    "2026-06-30": {i:"02:42", g:"04:36", o:"12:16", k:"16:13", a:"19:47", y:"21:33"}
+  };
+
+  function getLivePrayerState() {
+    const now = new Date();
+    const y = now.getFullYear();
+    const m = String(now.getMonth() + 1).padStart(2, '0');
+    const d = String(now.getDate()).padStart(2, '0');
+    const ymd = `${y}-${m}-${d}`;
+    
+    const tomorrow = new Date(now);
+    tomorrow.setDate(tomorrow.getDate() + 1);
+    const tom_ymd = `${tomorrow.getFullYear()}-${String(tomorrow.getMonth() + 1).padStart(2, '0')}-${String(tomorrow.getDate()).padStart(2, '0')}`;
+
+    const defPts = {i:"02:40", g:"04:33", o:"12:12", k:"16:09", a:"19:41", y:"21:25"};
+    const todayPts = data[ymd] || defPts;
+    const tomPts = data[tom_ymd] || defPts;
+
+    const months = ["Oca","Şub","Mar","Nis","May","Haz","Tem","Ağu","Eyl","Eki","Kas","Ara"];
+    const dateStr = `${d} ${months[now.getMonth()]}`;
+    const weatherDateStr = `${d} ${months[now.getMonth()]} ${y}`;
+
+    const toDate = (timeStr, isTomorrow=false) => {
+       const [h,min] = timeStr.split(':');
+       const dateObj = new Date(now);
+       if(isTomorrow) dateObj.setDate(dateObj.getDate() + 1);
+       dateObj.setHours(h, min, 0, 0);
+       return dateObj;
+    };
+
+    const sched = [
+      { nextId: "i", nextName: "İmsak'a kalan", time: toDate(todayPts.i), activeForPrev: "y" },
+      { nextId: "g", nextName: "Güneş'e kalan", time: toDate(todayPts.g), activeForPrev: "i" },
+      { nextId: "o", nextName: "Öğle'ye kalan", time: toDate(todayPts.o), activeForPrev: "g" },
+      { nextId: "k", nextName: "İkindi'ye kalan", time: toDate(todayPts.k), activeForPrev: "o" },
+      { nextId: "a", nextName: "Akşam'a kalan", time: toDate(todayPts.a), activeForPrev: "k" },
+      { nextId: "y", nextName: "Yatsı'ya kalan", time: toDate(todayPts.y), activeForPrev: "a" },
+      { nextId: "i_tom", nextName: "İmsak'a kalan", time: toDate(tomPts.i, true), activeForPrev: "y" }
+    ];
+
+    let activeId = "y";
+    let nextName = "İmsak'a kalan";
+    let diff = 0;
+
+    for (let i = 0; i < sched.length; i++) {
+      if (now < sched[i].time) {
+        diff = sched[i].time - now;
+        activeId = sched[i].activeForPrev;
+        nextName = sched[i].nextName;
+        break;
+      }
+    }
+
+    const hh = Math.floor(diff / 3600000);
+    const mm = Math.floor((diff % 3600000) / 60000);
+    const ss = Math.floor((diff % 60000) / 1000);
+    const countdown = `${String(hh).padStart(2,'0')}:${String(mm).padStart(2,'0')}:${String(ss).padStart(2,'0')}`;
+
+    return { pts: todayPts, dateStr, weatherDateStr, countdown, nextName, activeId };
+  }
+
+  const [prayerState, setPrayerState] = useState(() => getLivePrayerState());
+
+  useEffect(() => {
+    const timer = setInterval(() => setPrayerState(getLivePrayerState()), 1000);
+    return () => clearInterval(timer);
+  }, []);
+
   return (
     <section id="gundem">
       <div className="wrap gundem-layout">
@@ -1067,22 +1105,28 @@ function AgendaDashboard(){
 
         <div className="widget-panel">
           <div className="widget-card weather" style={{background: 'linear-gradient(135deg, #4facfe 0%, #00f2fe 100%)'}}>
-            <div className="w-top"><span className="city">Ağrı Merkez</span><span className="date">02 Haz 2026</span></div>
+            <div className="w-top"><span className="city">Ağrı Merkez</span><span className="date">{prayerState.weatherDateStr}</span></div>
             <div className="w-main"><span className="temp">19°</span><span className="desc">Parçalı bulutlu</span></div>
           </div>
 
           <div className="widget-card prayer">
             <div className="p-top">
-              <div className="p-top-row">Vakitler <span className="p-date">02 Haz</span></div>
-              <div className="p-countdown">Ağrı Vakit Bilgileri</div>
+              <div className="p-top-row">Vakitler <span className="p-date">{prayerState.dateStr}</span></div>
+              <div className="p-countdown">
+                {prayerState.countdown ? (
+                  <>{prayerState.nextName} <span>{prayerState.countdown}</span></>
+                ) : (
+                  "Hesaplanıyor..."
+                )}
+              </div>
             </div>
             <div className="p-grid">
-              <div className="p-item"><span>İmsak</span><strong>{todayPrayer.i}</strong></div>
-              <div className="p-item"><span>Güneş</span><strong>{todayPrayer.g}</strong></div>
-              <div className="p-item active"><span>Öğle</span><strong>{todayPrayer.o}</strong></div>
-              <div className="p-item"><span>İkindi</span><strong>{todayPrayer.k}</strong></div>
-              <div className="p-item"><span>Akşam</span><strong>{todayPrayer.a}</strong></div>
-              <div className="p-item"><span>Yatsı</span><strong>{todayPrayer.y}</strong></div>
+              <div className={`p-item ${prayerState.activeId==="i"?"active":""}`}><span>İmsak</span><strong>{prayerState.pts.i}</strong></div>
+              <div className={`p-item ${prayerState.activeId==="g"?"active":""}`}><span>Güneş</span><strong>{prayerState.pts.g}</strong></div>
+              <div className={`p-item ${prayerState.activeId==="o"?"active":""}`}><span>Öğle</span><strong>{prayerState.pts.o}</strong></div>
+              <div className={`p-item ${prayerState.activeId==="k"?"active":""}`}><span>İkindi</span><strong>{prayerState.pts.k}</strong></div>
+              <div className={`p-item ${prayerState.activeId==="a"?"active":""}`}><span>Akşam</span><strong>{prayerState.pts.a}</strong></div>
+              <div className={`p-item ${prayerState.activeId==="y"?"active":""}`}><span>Yatsı</span><strong>{prayerState.pts.y}</strong></div>
             </div>
           </div>
 
@@ -1140,21 +1184,20 @@ function Categories({ onOpen }){
 function PharmacyFullView() {
   const districtsList = ["MERKEZ", "TAŞLIÇAY", "DİYADİN", "DOĞUBAYAZIT", "ELEŞKİRT", "HAMUR", "PATNOS", "TUTAK"];
   const [district, setDistrict] = useState("MERKEZ");
-  const [currentDateText, setCurrentDateText] = useState("02.06.2026");
+  const [currentDateText, setCurrentDateText] = useState(() => {
+    const now = new Date();
+    return `${now.getDate().toString().padStart(2, '0')}.${(now.getMonth() + 1).toString().padStart(2, '0')}.${now.getFullYear()}`;
+  });
 
   useEffect(() => {
     const updateDate = () => {
       const now = new Date();
-      const d = now.getDate().toString().padStart(2, '0');
-      const m = (now.getMonth() + 1).toString().padStart(2, '0');
-      const y = now.getFullYear();
-      const calc = `${d}.${m}.${y}`;
-      if (window.AGRI.dutyPharmacies.some(p => p.date === calc)) setCurrentDateText(calc);
+      const calc = `${now.getDate().toString().padStart(2, '0')}.${(now.getMonth() + 1).toString().padStart(2, '0')}.${now.getFullYear()}`;
+      if (currentDateText !== calc) setCurrentDateText(calc);
     };
-    updateDate();
     const t = setInterval(updateDate, 60000);
     return () => clearInterval(t);
-  }, []);
+  }, [currentDateText]);
 
   const list = window.AGRI.dutyPharmacies.filter(
     p => p.date === currentDateText && p.district.toUpperCase() === district.toUpperCase()
