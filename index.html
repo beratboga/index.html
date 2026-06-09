@@ -5,6 +5,18 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no" />
 <title>04agri.com — Ağrı'nın Dijital Rehberi</title>
 <meta name="description" content="Ağrı'nın dijital rehberi: restoranlar, cafes, gezilecek yerler, nöbetçi eczane, etkinlikler ve daha fazlası." />
+
+<meta property="og:title" content="04agri.com — Ağrı'nın Dijital Rehberi" />
+<meta property="og:description" content="Ağrı'nın dijital rehberi: restoranlar, cafeler, gezilecek yerler, nöbetçi eczaneler ve daha fazlası tek bir yerde." />
+<meta property="og:image" content="https://04agri.com/kapak-gorseli.jpg" />
+<meta property="og:url" content="https://04agri.com" />
+<meta property="og:type" content="website" />
+
+<meta name="twitter:card" content="summary_large_image" />
+<meta name="twitter:title" content="04agri.com — Ağrı'nın Dijital Rehberi" />
+<meta name="twitter:description" content="Ağrı'nın en kapsamlı dijital şehir rehberi." />
+<meta name="twitter:image" content="https://04agri.com/kapak-gorseli.jpg" />
+
 <link rel="preconnect" href="https://fonts.googleapis.com" />
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
 <link href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:opsz,wght@12..96,400;12..96,600;12..96,700;12..96,800&family=Plus+Jakarta+Sans:wght@400;500;600;700;800&display=swap" rel="stylesheet" />
@@ -12,7 +24,6 @@
 /* ============================================================
    04agri.com — Ağrı Dijital Rehberi
    ============================================================ */
-
 :root{
   --bg:        #f6f4ef;
   --bg-2:      #efece4;
@@ -34,11 +45,11 @@
   --pin:    #FF4B4B;
 
   --maxw: 1280px;
-  --r-lg: 28px;
-  --r-md: 18px;
-  --r-sm: 12px;
-  --shadow-1: 0 1px 2px rgba(20,18,12,.04), 0 8px 24px rgba(20,18,12,.06);
-  --shadow-2: 0 12px 40px rgba(20,18,12,.16);
+  --r-lg: 32px;
+  --r-md: 24px;
+  --r-sm: 14px;
+  --shadow-1: 0 4px 12px rgba(20,18,12,.06), 0 1px 3px rgba(20,18,12,.04);
+  --shadow-2: 0 20px 40px rgba(20,18,12,.12), 0 8px 16px rgba(20,18,12,.08);
   --shadow-3: 0 30px 90px rgba(8,10,24,.45);
 
   --display: "Bricolage Grotesque", "Plus Jakarta Sans", system-ui, sans-serif;
@@ -59,7 +70,7 @@ html, body{
   overflow-x:hidden;
 }
 h1,h2,h3,h4{ font-family:var(--display); font-weight:700; line-height:1.02; letter-spacing:-.02em; margin:0; }
-button{ font-family:inherit; cursor:pointer; border:none; background:none; color:inherit; }
+button{ font-family:inherit; cursor:pointer; border:none; background:none; color:inherit; outline:none; }
 input, select{ font-family:inherit; }
 a{ color:inherit; text-decoration:none; cursor:pointer; }
 .wrap{ max-width:var(--maxw); margin:0 auto; padding:0 28px; width:100%; }
@@ -69,7 +80,6 @@ a{ color:inherit; text-decoration:none; cursor:pointer; }
 .tos-overlay { position:fixed; inset:0; z-index:9999; background:rgba(12,16,32,0.45); backdrop-filter:blur(8px); display:flex; flex-direction:column; justify-content:flex-end; align-items:center; width:100%; height:100%; }
 .tos-modal { background:#fff; color:var(--ink); padding:36px 36px 42px; border-radius:32px 32px 0 0; max-width:800px; width:100%; box-shadow:0 -10px 40px rgba(0,0,0,0.2); animation:slideUp 0.6s cubic-bezier(0.2, 0.8, 0.2, 1) forwards; display:flex; flex-direction:column; gap:16px; }
 @keyframes slideUp { from { transform:translateY(100%); opacity:0; } to { transform:translateY(0); opacity:1; } }
-
 .tos-modal h2 { font-size:24px; font-weight:800; color:var(--dark); display:flex; align-items:center; gap:10px; margin:0; }
 .tos-modal p { font-size:15px; color:var(--ink-soft); line-height:1.6; margin:0; text-align:justify; }
 .tos-disclaimer { font-size:13px !important; color:var(--ink-faint) !important; background:var(--bg-2); padding:12px 14px; border-radius:12px; border-left:3px solid var(--accent); }
@@ -80,7 +90,7 @@ a{ color:inherit; text-decoration:none; cursor:pointer; }
 .tos-btn.decline { background:transparent; color:var(--ink-soft); border:1px solid var(--line); }
 .tos-btn.decline:hover { background:var(--bg-2); color:var(--ink); }
 
-/* GİZLİLİK / KULLANIM ŞARTLARI DOKÜMAN MODALI */
+/* GİZLİLİK MODALI */
 .doc-modal-overlay { position:fixed; inset:0; z-index:10000; background:rgba(12,16,32,0.7); backdrop-filter:blur(10px); display:grid; place-items:center; padding:20px; }
 .doc-modal-card { background:var(--card); color:var(--ink); border-radius:24px; max-width:640px; width:100%; max-height:85vh; display:flex; flex-direction:column; box-shadow:var(--shadow-3); overflow:hidden; animation:fadeIn .35s ease; }
 .doc-modal-head { display:flex; align-items:center; justify-content:space-between; padding:24px 28px; border-bottom:1px solid var(--line); }
@@ -94,6 +104,7 @@ a{ color:inherit; text-decoration:none; cursor:pointer; }
 .tos-blocked-card h3 { font-size:22px; margin-bottom:16px; color:var(--dark); }
 .tos-blocked-card p { color:var(--ink-soft); font-size:15px; line-height:1.6; margin-bottom:24px; }
 @keyframes fadeIn { from { opacity:0; transform:scale(0.95); } to { opacity:1; transform:scale(1); } }
+.animate-fade { animation: fadeIn 0.4s var(--ease); }
 
 /* ---------- top bar ---------- */
 .topbar{ position:fixed; inset:0 0 auto 0; z-index:60; display:grid; grid-template-columns:1fr auto 1fr; align-items:center; padding:18px 28px; transition:background .4s var(--ease), backdrop-filter .4s; pointer-events:none; width:100%; }
@@ -176,25 +187,20 @@ a{ color:inherit; text-decoration:none; cursor:pointer; }
 .scroll-hint .mouse::after{ content:""; position:absolute; left:50%; top:6px; width:3px; height:7px; margin-left:-1.5px; border-radius:2px; background:#fff; animation:wheel 1.6s var(--ease) infinite; }
 @keyframes wheel{ 0%{opacity:0;transform:translateY(0)} 30%{opacity:1} 70%{opacity:1} 100%{opacity:0;transform:translateY(10px)} }
 
-/* BANNER MARQUEE & ÖZEL DİYETİSYEN BANNER TASARIMI */
+/* BANNER MARQUEE (YENİLENDİ) */
 .banner-section{ padding:40px 0; background:var(--bg); overflow:hidden; width:100%; max-width:100%; }
 .marquee{ display:flex; width:max-content; animation:scroll 40s linear infinite; will-change:transform; }
 .marquee:hover{ animation-play-state:paused; }
 @keyframes scroll{ from{ transform:translateX(0); } to{ transform:translateX(-50%); } }
 
-.banner-img{ width:300px; height:180px; border-radius:var(--r-md); object-fit:cover; box-shadow:var(--shadow-1); border:2px solid #fff; margin-right:20px; flex-shrink:0; }
-.banner-placeholder{ display:flex; align-items:center; justify-content:center; text-align:center; padding:16px; background:linear-gradient(135deg, var(--dawn-1) 0%, var(--dawn-3) 100%); }
-.banner-placeholder span{ color:#fff; font-family:var(--display); font-weight:700; font-size:17px; letter-spacing:-.01em; text-shadow:0 2px 8px rgba(0,0,0,.25); }
+.banner-item { width: 340px; height: 190px; border-radius: var(--r-md); box-shadow: var(--shadow-1); border: 1px solid rgba(255,255,255,0.4); margin-right: 20px; flex-shrink: 0; position: relative; overflow: hidden; background-size: cover; background-position: center; display: block; transition: transform 0.3s var(--ease), box-shadow 0.3s var(--ease); }
+.banner-item:hover { transform: translateY(-4px); box-shadow: var(--shadow-2); }
+.banner-scrim { position: absolute; inset: 0; background: linear-gradient(180deg, transparent 20%, rgba(0,0,0,0.85) 100%); }
+.banner-content { position: absolute; bottom: 16px; left: 16px; right: 16px; display: flex; flex-direction: column; z-index: 2; }
+.banner-title { color: #fff; font-family: var(--display); font-size: 17px; font-weight: 800; line-height: 1.2; margin-bottom: 4px; text-shadow: 0 2px 4px rgba(0,0,0,0.5); }
+.banner-sub { color: var(--accent); font-size: 12.5px; font-weight: 700; text-transform: uppercase; letter-spacing: 0.05em; }
 
-/* Diyetisyen Özel Banner Wrap */
-.banner-diet-wrap { position:relative; width:300px; height:180px; border-radius:var(--r-md); overflow:hidden; box-shadow:var(--shadow-1); border:2px solid #fff; margin-right:20px; flex-shrink:0; cursor:pointer; background:#111; }
-.banner-diet-img { width:100%; height:100%; object-fit:cover; object-position:center 15%; opacity:0.85; transition:transform 0.4s var(--ease); display:block; }
-.banner-diet-wrap:hover .banner-diet-img { transform:scale(1.05); opacity:0.6; }
-.banner-diet-overlay { position:absolute; inset:0; display:flex; flex-direction:column; justify-content:flex-end; padding:20px 16px; background:linear-gradient(180deg, transparent 20%, rgba(8,10,24,0.9) 100%); text-align:center; pointer-events:none; }
-.banner-diet-overlay .welcome { font-family:var(--display); font-size:17px; font-weight:800; color:var(--accent); margin-bottom:4px; letter-spacing:0.02em; text-shadow:0 2px 8px rgba(0,0,0,0.6); }
-.banner-diet-overlay .name { color:#fff; font-size:14px; font-weight:600; line-height:1.2; text-shadow:0 1px 4px rgba(0,0,0,0.8); }
-
-/* HİKAYELER (özgün tasarım) */
+/* HİKAYELER */
 .stories-section{ padding:8px 0 24px; background:var(--bg); width:100%; }
 .stories-row{ display:flex; gap:20px; flex-wrap:wrap; }
 .story-bubble{ display:flex; flex-direction:column; align-items:center; gap:8px; background:none; cursor:pointer; width:84px; }
@@ -305,8 +311,10 @@ a{ color:inherit; text-decoration:none; cursor:pointer; }
 .cat-cta:hover{ transform:translateY(-2px); }
 
 /* MEKANLAR / KARTLAR OVERLAY */
-.ov{ position:fixed; inset:0; z-index:100; background:var(--bg); display:flex; flex-direction:column; animation:ovIn .4s var(--ease) both; width:100%; overflow-x:hidden; }
-@keyframes ovIn{ from{ opacity:0; transform:translateY(2%); } to{ opacity:1; transform:none; } }
+.ov{ position:fixed; inset:0; z-index:100; background:var(--bg); display:flex; flex-direction:column; width:100%; overflow-x:hidden; }
+.ov.animate-in { animation: ovPop 0.4s cubic-bezier(0.22, 0.61, 0.36, 1) forwards; }
+@keyframes ovPop{ from{ opacity:0; transform:scale(0.98) translateY(10px); } to{ opacity:1; transform:none; } }
+
 .ov-head{ display:flex; align-items:center; gap:16px; padding:18px 28px; border-bottom:1px solid var(--line); flex-shrink:0; background:var(--bg); z-index:3; width:100%; box-sizing:border-box; }
 .ov-back{ display:inline-flex; align-items:center; gap:8px; font-weight:700; font-size:15px; padding:10px 16px; border-radius:100px; background:var(--bg-2); transition:background .2s; }
 .ov-back:hover{ background:var(--line); }
@@ -316,91 +324,87 @@ a{ color:inherit; text-decoration:none; cursor:pointer; }
 .ov-close{ margin-left:auto; width:44px; height:44px; border-radius:50%; display:grid; place-items:center; background:var(--bg-2); font-weight:800; cursor:pointer; }
 
 .ov-body{ flex:1; overflow-y:auto; overflow-x:hidden; width:100%; display:flex; flex-direction:column; }
-.grid{ max-width:var(--maxw); margin:0 auto; padding:32px 28px 80px; display:grid; grid-template-columns:repeat(auto-fill,minmax(310px,1fr)); gap:26px; width:100%; }
+.grid{ max-width:var(--maxw); margin:0 auto; padding:40px 28px 80px; display:grid; grid-template-columns:repeat(auto-fill,minmax(320px,1fr)); gap:32px; width:100%; }
 
-.card{ position:relative; height:340px; border-radius:var(--r-md); overflow:hidden; cursor:pointer; box-shadow:var(--shadow-1); transition:transform .35s var(--ease), box-shadow .35s var(--ease); display:flex; flex-direction:column; justify-content:flex-end; padding:24px; color:#fff; }
-.card:hover{ transform:translateY(-6px); box-shadow:var(--shadow-2); }
-.card .scrim{ position:absolute; inset:0; background:linear-gradient(180deg, transparent 20%, rgba(0,0,0,0.88) 100%); z-index:1; }
-.card .body{ position:relative; z-index:2; }
-.card h3{ font-size:24px; color:#fff; text-wrap:balance; margin:0; font-weight:800; }
-.card .card-area{ display:flex; align-items:center; gap:6px; font-size:13.5px; font-weight:700; margin:8px 0; color:var(--accent); }
-.card p{ margin:6px 0 0; font-size:14px; color:rgba(255,255,255,0.92); line-height:1.45; text-wrap:pretty; }
+/* --- APPLE YENİ NESİL PREMIUM KART TASARIMI --- */
+.card {
+  position: relative; 
+  height: 380px; 
+  border-radius: var(--r-lg); 
+  overflow: hidden; 
+  cursor: pointer; 
+  box-shadow: 0 10px 40px rgba(0,0,0,0.1); 
+  border: 1px solid rgba(255,255,255,0.2); 
+  transition: all 0.4s cubic-bezier(0.22, 0.61, 0.36, 1); 
+  display: flex; 
+  flex-direction: column; 
+  justify-content: space-between; 
+  padding: 24px; 
+  color: #fff; 
+  background-size: cover;
+  background-position: center;
+  transform-origin: center center;
+}
+.card::after {
+  content: ""; position: absolute; inset: 0; border-radius: inherit; border: 2px solid transparent; background: linear-gradient(135deg, rgba(255,255,255,0.4) 0%, rgba(255,255,255,0) 100%) border-box; -webkit-mask: linear-gradient(#fff 0 0) padding-box, linear-gradient(#fff 0 0); -webkit-mask-composite: destination-out; mask-composite: exclude; pointer-events: none; z-index: 5;
+}
+.card:hover { 
+  transform: translateY(-8px) scale(1.02); 
+  box-shadow: 0 30px 60px rgba(0,0,0,0.25); 
+}
+.card:active {
+  transform: scale(0.96);
+}
+.card .scrim { 
+  position:absolute; inset:0; 
+  background:linear-gradient(180deg, rgba(0,0,0,0.1) 0%, rgba(0,0,0,0.4) 45%, rgba(0,0,0,0.95) 100%); 
+  z-index:1; pointer-events:none; 
+}
+.card-top-bar {
+  display: flex; justify-content: space-between; align-items: flex-start; z-index: 2; position: relative;
+}
+.card-icon {
+  width: 52px; height: 52px; background: rgba(255,255,255,0.25); backdrop-filter: blur(14px); border-radius: 18px; display: grid; place-items: center; font-size: 26px; box-shadow: 0 6px 16px rgba(0,0,0,0.12); border: 1px solid rgba(255,255,255,0.4);
+}
+.card .body { position:relative; z-index:2; display:flex; flex-direction:column; }
+.card h3 { font-size:26px; color:#fff; text-wrap:balance; margin:0; font-weight:800; letter-spacing:-0.02em; line-height: 1.1; }
+.card .card-area { display:inline-flex; align-items:center; gap:6px; font-size:13px; font-weight:800; margin:10px 0 0; color:var(--accent); background:rgba(255,255,255,0.15); padding:6px 12px; border-radius:10px; align-self:flex-start; backdrop-filter:blur(8px); border: 1px solid rgba(255,255,255,0.1); }
+.card p { margin:8px 0 0; font-size:14.5px; color:rgba(255,255,255,0.95); line-height:1.5; text-wrap:pretty; font-weight:500; }
+.card-note { font-size: 13px; color: rgba(255,255,255,0.7); margin-top: 18px; padding-top: 14px; border-top: 1px solid rgba(255,255,255,0.2); font-weight: 600; display: flex; align-items: center; gap: 6px; }
 
-/* GEZİLECEK YERLER DETAY MODALI */
-.place-modal-overlay { position:fixed; inset:0; z-index:250; background:rgba(12,16,32,0.85); backdrop-filter:blur(10px); display:grid; place-items:center; padding:20px; width:100%; height:100%; }
-.place-modal-content { background:var(--bg); border-radius:var(--r-lg); max-width:700px; width:100%; overflow:hidden; box-shadow:var(--shadow-3); border:1px solid var(--line); display:flex; flex-direction:column; position:relative; max-height:92vh; }
-.pm-close { position:absolute; top:16px; right:16px; width:38px; height:38px; border-radius:50%; background:rgba(0,0,0,0.5); color:#fff; display:grid; place-items:center; z-index:10; font-weight:800; cursor:pointer; }
+/* ALT KATEGORİ ÖZEL TASARIMI (SUBCAT) */
+.subcat-card .body { justify-content:center; align-items:flex-start; height:100%; margin-top: auto; }
+.subcat-card h3 { font-size:32px; line-height:1.15; }
+
+/* KART DETAY MODALI (POP-UP) */
+@keyframes modalPopUp {
+  0% { opacity: 0; transform: scale(0.95) translateY(15px); }
+  100% { opacity: 1; transform: scale(1) translateY(0); }
+}
+.place-modal-overlay { position:fixed; inset:0; z-index:250; background:rgba(12,16,32,0.85); backdrop-filter:blur(12px); display:grid; place-items:center; padding:20px; width:100%; height:100%; animation:fadeIn .3s ease; }
+.place-modal-content { background:var(--bg); border-radius:var(--r-lg); max-width:700px; width:100%; overflow:hidden; box-shadow:var(--shadow-3); border:1px solid var(--line); display:flex; flex-direction:column; position:relative; max-height:92vh; animation: modalPopUp 0.4s cubic-bezier(0.22, 0.61, 0.36, 1) forwards; }
+.pm-close { position:absolute; top:16px; right:16px; width:38px; height:38px; border-radius:50%; background:rgba(0,0,0,0.5); color:#fff; display:grid; place-items:center; z-index:10; font-weight:800; cursor:pointer; backdrop-filter:blur(4px); transition:background 0.2s; }
+.pm-close:hover { background:var(--pin); }
 .pm-img-wrap { width:100%; height:300px; position:relative; background:#111; }
 .pm-img-wrap img { width:100%; height:100%; object-fit:cover; }
 .pm-noimg { position:absolute; inset:0; display:flex; flex-direction:column; align-items:center; justify-content:center; gap:10px; color:rgba(255,255,255,.55); }
 .pm-noimg span { font-size:13px; font-weight:600; letter-spacing:.04em; }
 .card-noimg { position:absolute; inset:0; display:grid; place-items:center; color:rgba(255,255,255,.35); z-index:0; }
 .pm-img-scrim { position:absolute; inset:0; background:linear-gradient(180deg, transparent 50%, rgba(23,21,15,0.9) 100%); }
-.pm-title-box { position:absolute; bottom:20px; left:24px; right:24px; color:#fff; }
-.pm-title-box h2 { font-size:28px; font-weight:800; text-shadow:0 2px 8px rgba(0,0,0,0.5); }
+.pm-title-box { position:absolute; bottom:24px; left:28px; right:28px; color:#fff; }
+.pm-title-box h2 { font-size:32px; font-weight:800; text-shadow:0 2px 10px rgba(0,0,0,0.6); line-height:1.1; }
 .pm-body { padding:28px; display:flex; flex-direction:column; gap:20px; overflow-y:auto; }
-.pm-info { font-size:15.5px; color:var(--ink); line-height:1.6; margin:0; }
-.pm-meta-box { background:var(--card); border:1px solid var(--line); padding:16px; border-radius:var(--r-sm); display:flex; flex-direction:column; gap:10px; }
-.pm-meta-item { display:flex; align-items:flex-start; gap:10px; font-size:14.5px; font-weight:600; color:var(--ink-soft); }
+.pm-info { font-size:16px; color:var(--ink); line-height:1.6; margin:0; font-weight:500;}
+.pm-meta-box { background:var(--card); border:1px solid var(--line); padding:20px; border-radius:var(--r-sm); display:flex; flex-direction:column; gap:16px; box-shadow:var(--shadow-1); }
+.pm-meta-item { display:flex; align-items:flex-start; gap:12px; font-size:15px; font-weight:600; color:var(--ink-soft); }
 .pm-meta-item svg { color:var(--pin); flex-shrink:0; margin-top:2px; }
-.pm-maps-btn { background:var(--ink); color:#fff; font-weight:800; padding:14px; border-radius:100px; display:flex; align-items:center; justify-content:center; gap:8px; font-size:15px; transition:background 0.2s; text-align:center; margin-top:8px; }
-.pm-maps-btn:hover { background:#000; }
+.pm-meta-item strong { display:block; margin-bottom:4px; font-size:13px; color:var(--ink-faint); text-transform:uppercase; letter-spacing:.05em;}
+.pm-maps-btn { background:var(--ink); color:#fff; font-weight:800; padding:16px; border-radius:100px; display:flex; align-items:center; justify-content:center; gap:8px; font-size:16px; transition:background 0.2s, transform 0.2s; text-align:center; margin-top:8px; box-shadow:0 8px 24px rgba(0,0,0,0.15); }
+.pm-maps-btn:hover { background:#000; transform:translateY(-2px); }
 
+/* ÇOK YAKINDA SADECE TEK SATIR UYARI MODELİ */
 .coming-soon-container { max-width:500px; margin:auto; text-align:center; padding:80px 24px; }
 .coming-soon-container h4 { font-size:20px; color:var(--ink-soft); font-weight:700; margin:0; letter-spacing:-0.01em; }
-
-/* ===== SAĞLIK HİZMETLERİ ALT KATEGORİ + DİYETİSYEN ===== */
-.health-sub-page { max-width:var(--maxw); margin:0 auto; padding:32px 28px 80px; width:100%; }
-.health-sub-intro { margin-bottom:28px; }
-.health-sub-intro .kick { font-size:13px; font-weight:800; letter-spacing:.16em; text-transform:uppercase; color:#2ECC71; }
-.health-sub-intro h3 { font-size:clamp(26px,3.4vw,40px); margin:10px 0 0; color:var(--ink); }
-.health-sub-intro p { color:var(--ink-soft); max-width:54ch; margin:12px 0 0; font-size:16px; }
-.health-sub-grid { display:grid; grid-template-columns:repeat(auto-fill,minmax(250px,1fr)); gap:20px; }
-.health-sub-card { position:relative; background:var(--card); border:1px solid var(--line); border-radius:var(--r-md); padding:26px 24px; box-shadow:var(--shadow-1); cursor:pointer; overflow:hidden; transition:transform .3s var(--ease), box-shadow .3s var(--ease), border-color .3s var(--ease); display:flex; flex-direction:column; gap:14px; min-height:200px; }
-.health-sub-card:hover { transform:translateY(-6px); box-shadow:var(--shadow-2); border-color:transparent; }
-.health-sub-card .hs-glow { position:absolute; right:-40px; top:-40px; width:140px; height:140px; border-radius:50%; opacity:.12; filter:blur(6px); transition:opacity .3s var(--ease), transform .3s var(--ease); }
-.health-sub-card:hover .hs-glow { opacity:.22; transform:scale(1.15); }
-.health-sub-card .hs-icon { width:52px; height:52px; border-radius:14px; display:grid; place-items:center; color:#fff; position:relative; z-index:2; box-shadow:0 8px 20px rgba(0,0,0,.12); }
-.health-sub-card .hs-name { font-family:var(--display); font-size:21px; font-weight:800; color:var(--ink); position:relative; z-index:2; line-height:1.1; }
-.health-sub-card .hs-desc { font-size:13.5px; color:var(--ink-soft); line-height:1.45; position:relative; z-index:2; margin-top:auto; }
-.health-sub-card .hs-go { display:inline-flex; align-items:center; gap:6px; font-size:13px; font-weight:800; color:#2ECC71; position:relative; z-index:2; transition:gap .25s var(--ease); }
-.health-sub-card:hover .hs-go { gap:11px; }
-
-/* DİYETİSYEN LİSTE */
-.diet-page { max-width:var(--maxw); margin:0 auto; padding:32px 28px 80px; width:100%; }
-.diet-grid { display:grid; grid-template-columns:repeat(auto-fill,minmax(280px,1fr)); gap:24px; }
-.diet-card { background:var(--card); border:1px solid var(--line); border-radius:var(--r-lg); overflow:hidden; box-shadow:var(--shadow-1); cursor:pointer; transition:transform .35s var(--ease), box-shadow .35s var(--ease); display:flex; flex-direction:column; animation:dietIn .5s var(--ease) both; }
-@keyframes dietIn { from { opacity:0; transform:translateY(24px); } to { opacity:1; transform:none; } }
-.diet-card:hover { transform:translateY(-8px); box-shadow:var(--shadow-2); }
-.diet-photo-wrap { width:100%; aspect-ratio:4/5; overflow:hidden; background:linear-gradient(150deg, #2ECC71 0%, #0f7a45 100%); position:relative; }
-.diet-photo-wrap img { width:100%; height:100%; object-fit:cover; object-position:center top; display:block; transition:transform .5s var(--ease); }
-.diet-card:hover .diet-photo-wrap img { transform:scale(1.05); }
-.diet-photo-noimg { position:absolute; inset:0; display:grid; place-items:center; color:rgba(255,255,255,.65); }
-.diet-card-body { padding:20px 22px 24px; display:flex; flex-direction:column; gap:14px; }
-.diet-card-name { font-family:var(--display); font-size:20px; font-weight:800; color:var(--ink); line-height:1.15; text-align:center; }
-.diet-card-btn { align-self:stretch; display:inline-flex; align-items:center; justify-content:center; gap:8px; background:var(--ink); color:#fff; font-weight:800; font-size:14.5px; padding:13px 18px; border-radius:100px; transition:background .2s var(--ease), transform .2s var(--ease); }
-.diet-card-btn:hover { background:#2ECC71; color:#08210f; transform:translateY(-2px); }
-
-/* DİYETİSYEN DETAY MODALI */
-.diet-modal-overlay { position:fixed; inset:0; z-index:260; background:rgba(8,20,12,0.82); backdrop-filter:blur(10px); display:grid; place-items:center; padding:20px; animation:fadeIn .3s ease; }
-.diet-modal-card { background:var(--bg); border-radius:var(--r-lg); max-width:560px; width:100%; max-height:92vh; overflow-y:auto; box-shadow:var(--shadow-3); border:1px solid var(--line); position:relative; animation:dietModalIn .4s var(--ease) both; }
-@keyframes dietModalIn { from { opacity:0; transform:translateY(30px) scale(.97); } to { opacity:1; transform:none; } }
-.diet-modal-close { position:absolute; top:16px; right:16px; width:38px; height:38px; border-radius:50%; background:rgba(0,0,0,0.55); color:#fff; display:grid; place-items:center; z-index:10; font-weight:800; cursor:pointer; }
-.diet-modal-hero { width:100%; aspect-ratio:1/1; max-height:380px; overflow:hidden; background:linear-gradient(150deg, #2ECC71 0%, #0f7a45 100%); position:relative; }
-.diet-modal-hero img { width:100%; height:100%; object-fit:cover; object-position:center top; display:block; }
-.diet-modal-hero-noimg { position:absolute; inset:0; display:grid; place-items:center; color:rgba(255,255,255,.65); }
-.diet-modal-body { padding:26px 28px 30px; display:flex; flex-direction:column; gap:18px; }
-.diet-modal-name { font-family:var(--display); font-size:26px; font-weight:800; color:var(--ink); text-align:center; line-height:1.15; }
-.diet-modal-tagline { font-size:15px; color:var(--ink-soft); text-align:center; line-height:1.5; font-weight:600; max-width:42ch; margin:0 auto; }
-.diet-contact-box { background:var(--card); border:1px solid var(--line); border-radius:var(--r-md); padding:18px; display:flex; flex-direction:column; gap:12px; }
-.diet-contact-title { font-size:12px; font-weight:800; letter-spacing:.12em; text-transform:uppercase; color:#2ECC71; }
-.diet-contact-row { display:flex; align-items:center; gap:12px; font-size:15px; font-weight:700; color:var(--ink); transition:color .2s; }
-.diet-contact-row svg { color:#2ECC71; flex-shrink:0; }
-.diet-contact-row.phone:hover { color:#2ECC71; }
-.diet-contact-row .label { font-size:11px; font-weight:700; color:var(--ink-faint); text-transform:uppercase; letter-spacing:.05em; display:block; }
-.diet-contact-row .val { display:flex; flex-direction:column; line-height:1.3; }
-.diet-maps-btn { background:var(--ink); color:#fff; font-weight:800; padding:15px; border-radius:100px; display:flex; align-items:center; justify-content:center; gap:8px; font-size:15px; transition:background .2s var(--ease), transform .2s var(--ease); }
-.diet-maps-btn:hover { background:#2ECC71; color:#08210f; transform:translateY(-2px); }
 
 /* NÖBETÇİ ECZANE TAM SAYFA GÖRÜNÜMÜ */
 .pharm-page { max-width:var(--maxw); margin:0 auto; padding:28px 28px 80px; width:100%; }
@@ -469,8 +473,6 @@ a{ color:inherit; text-decoration:none; cursor:pointer; }
   .tos-modal { padding: 24px 20px; }
   .pharm-page { padding:20px 16px 60px; }
   .pharm-page-grid { grid-template-columns:1fr; }
-  .health-sub-page { padding:24px 16px 60px; }
-  .diet-page { padding:24px 16px 60px; }
 }
 </style>
 </head>
@@ -482,14 +484,14 @@ a{ color:inherit; text-decoration:none; cursor:pointer; }
 <script src="https://cdnjs.cloudflare.com/ajax/libs/babel-standalone/7.26.4/babel.min.js" crossorigin="anonymous"></script>
 
 <script type="text/babel">
-/* ===================== DATA & ECZANE LİSTESİ ===================== */
+/* ===================== DATA & MASTER REHBER LISTESİ ===================== */
 (function(){
   "use strict";
 
   const categories = [
     {
       id:"restoranlar", name:"Restoranlar", color:"#FF4B4B", tagline:"Lezzet Durakları", 
-      blurb:"Dönerden hamburgere, yöresel lezzetlerden dünya mutfağına; Ağrı'nın en sevilen lezzet duraklarını bir arada keşfedin.",
+      blurb:"Dönerden hamburgere, yöresel lezzetlerden dünya mutfağına; Ağrı'nın en sevilen lezzet duraklarını bir arada keşfet.",
       places:[]
     },
     {
@@ -505,7 +507,29 @@ a{ color:inherit; text-decoration:none; cursor:pointer; }
     {
       id:"saglik", name:"Sağlık Hizmetleri", color:"#2ECC71", tagline:"Sağlık & Danışmanlık", 
       blurb:"Özel diş hekimi klinikleri, dil ve konuşma terapistleri, psikologlar, fizyoterapistler ve diyetisyenler bir arada.",
-      places:[]
+      hasSubCategories: true,
+      subCategories: [
+        { id: "dis", name: "Özel Diş Hekimi Klinikleri", icon: "🦷", note: "Ağız ve diş sağlığı merkezleri", places: [] },
+        { id: "dil", name: "Dil ve Konuşma Terapistleri", icon: "🗣️", note: "Konuşma bozuklukları uzmanları", places: [] },
+        { id: "psikolog", name: "Psikologlar", icon: "🧠", note: "Ruh sağlığı ve danışmanlık", places: [] },
+        { id: "fizyo", name: "Fizyoterapistler", icon: "🦴", note: "Fizik tedavi uzmanları", places: [] },
+        { id: "diyetisyen", name: "Diyetisyenler", icon: "🍏", note: "Sağlıklı beslenme ve diyet uzmanları",
+          places: [
+            {
+              name:"Uzman Diyetisyen Bilge İgan Yıldırım", 
+              info:"Uzman Hizmet Biriminde yüz yüze ve online beslenme danışmanlığı", 
+              area:"Ağrı Merkez", 
+              img:"uzm.diyetisyenbilge.jpg",
+              icon: "✨",
+              note: "Sağlıklı yaşama ilk adımınızı atın.",
+              address:"Saray Plaza Kat 5 AĞRI",
+              phones:["0472 215 0184", "0543 120 4505"],
+              mapsUrl:"https://maps.google.com/?q=Saray+Plaza+Ağrı"
+            }
+          ]
+        }
+      ],
+      places:[] 
     },
     {
       id:"nobetci", name:"Nöbetçi Eczane", color:"#E74C3C", tagline:"Acil Sağlık", 
@@ -523,8 +547,32 @@ a{ color:inherit; text-decoration:none; cursor:pointer; }
       places:[]
     },
     {
-      id:"egitim", name:"Eğitim", color:"#3498DB", tagline:"Özel Kurs & Dershaneler", 
-      blurb:"Dershaneler, eğitim koçları ve özel ders veren eğitmen hocalar; eğitim yolculuğunuz için rehber.",
+      id:"egitim", name:"Eğitim", color:"#3498DB", tagline:"Kurs & Dil Okulları", 
+      blurb:"Dershaneler, modern dil okulları, yazılım akademileri ve uzman özel ders eğitmen kadroları rehberi.",
+      hasSubCategories: true,
+      subCategories: [
+        { 
+          id: "dil-kursu", 
+          name: "Dil Kursu", 
+          icon: "🎓", /* Gıcık eden o bayrak ikonu düzeltildi, şık ve sade yapıldı */
+          note: "Yabancı dil eğitim merkezleri",
+          places: [
+            {
+              name: "E.L.I.T",
+              subName: "ENGLISH LANGUAGE INSTITUTE TURKEY",
+              info: "Hayalinizdeki Dil Eğitiminize Bugün Başlayın",
+              area: "Ağrı Merkez",
+              img: "agrıelitdilkursu.jpg", /* KART GÖRSELİ TAM İSMİYLE BURADA */
+              icon: "✨",
+              note: "Uluslararası standartlarda dil eğitimi.",
+              address: "Hürriyet Mah. 1810 SK. No:11 AĞRI",
+              phones: ["+90 533 895 8255"],
+              email: "info@elitlearning.com",
+              mapsUrl: "https://maps.google.com/?q=Hürriyet+Mah.+1810+SK.+No:11+Ağrı"
+            }
+          ] 
+        }
+      ],
       places:[]
     },
     {
@@ -538,6 +586,7 @@ a{ color:inherit; text-decoration:none; cursor:pointer; }
       places:[
         {
           name:"Balık Gölü", 
+          icon: "🏕️", note: "Doğa ile iç içe kamp ve gezi.",
           info:"Türkiye'nin en yüksek rakımlı doğa harikası buzul göllerinden biridir. Taşlıçay ilçesi sınırlarında yer alan bu saklı cennet, berrak suları, doğal kırmızı benekli alabalığı ve etrafındaki muhteşem sıradağ manzarasıyla kampçılar, doğa yürüyüşçüleri ve fotoğrafçılar için kusursuz bir kaçış noktası sunar.", 
           area:"Taşlıçay", 
           img:"",
@@ -546,6 +595,7 @@ a{ color:inherit; text-decoration:none; cursor:pointer; }
         },
         {
           name:"İshak Paşa Sarayı", 
+          icon: "🕌", note: "Tarihi mimari şaheseri.",
           info:"18. yüzyıldan kalma büyüleyici bir Osmanlı, Selçuklu ve Pat mimarisi sentezidir. Doğubayazıt ovasına hâkim yüksek sarp kayalıklar üzerine inşa edilmiş bu heybetli anıt eser, muazzam taş işlemeli kapıları, camisi, divan avlusu ve haremiyle adeta bir masal diyarından günümüze kalmış bir şaheserdir.", 
           area:"Doğubayazıt", 
           img:"",
@@ -554,6 +604,7 @@ a{ color:inherit; text-decoration:none; cursor:pointer; }
         },
         {
           name:"Ağrı Dağı (5.137 m)", 
+          icon: "🏔️", note: "Avrupa'nın en yüksek zirvesi.",
           info:"Türkiye'nin ve tüm Avrupa'nın en yüksek heybetli zirvesidir. Yıl boyunca erimeyen kalıcı buzulları, efsanevi Nuh'un Tufanı hikayeleri ve heybetli volkanik yapısıyla her yıl dünyanın dört bir yanından binlerce profesyonel dağcıyı, trekking grubunu ve coğrafya meraklısını Ağrı'ya çekmektedir.", 
           area:"Doğubayazıt", 
           img:"",
@@ -562,6 +613,7 @@ a{ color:inherit; text-decoration:none; cursor:pointer; }
         },
         {
           name:"Diyadin Kaplıcaları", 
+          icon: "♨️", note: "Şifalı termal sular ve dinlenme.",
           info:"Şifalı yüksek mineralli termal suları, jeotermal kaynakları ve hemen yanı başından gürleyen derin kanyon oluşumuyla Ağrı'nın en önemli sağlık, dinlenme ve şifa merkezidir. Bölgedeki tesisler cilt hastalıkları, romatizma ve eklem rahatsızlıklarına iyi gelen sularıyla bilinir.", 
           area:"Diyadin", 
           img:"",
@@ -570,6 +622,7 @@ a{ color:inherit; text-decoration:none; cursor:pointer; }
         },
         {
           name:"Meteor Çukuru", 
+          icon: "☄️", note: "Dünyanın en büyük ikinci krateri.",
           info:"Alaska'dakinden sonra dünyanın tescillenmiş en büyük ikinci göktaşı çukurudur. Gürbulak sınır kapısına oldukça yakın bir konumda yer alan, derinliği ve dairesel genişliğiyle görenleri hayrete düşüren, sıra dışı ve gizemli bir doğal coğrafi anıttır.", 
           area:"Doğubayazıt", 
           img:"",
@@ -578,6 +631,7 @@ a{ color:inherit; text-decoration:none; cursor:pointer; }
         },
         {
           name:"Nuh'un Gemisi (Durupınar)", 
+          icon: "🚢", note: "Efsanevi inanç turizmi rotası.",
           info:"Büyük Tufan sonrası Nuh'un efsanevi gemisinin karaya oturduğu yer olarak kabul edilen, doğal silüetiyle devasa bir tekne şekline sahip yeryüzü oluşumudur. Her yıl inanç turizmi ve uluslararası araştırmacılar tarafından yoğun şekilde ziyaret edilir.", 
           area:"Durupınar", 
           img:"",
@@ -586,25 +640,6 @@ a{ color:inherit; text-decoration:none; cursor:pointer; }
         }
       ]
     },
-  ];
-
-  const healthSubcategories = [
-    { id:"dis",   name:"Diş Hekimi",            color:"#3498DB", desc:"Özel diş hekimi klinikleri ve ağız-diş sağlığı merkezleri." },
-    { id:"dil",   name:"Dil ve Konuşma Terapisti", color:"#9B59B6", desc:"Dil, konuşma ve iletişim terapisti uzmanları." },
-    { id:"psikolog", name:"Psikolog",           color:"#E67E22", desc:"Psikolog ve danışmanlık hizmetleri." },
-    { id:"fizyoterapist", name:"Fizyoterapist", color:"#1ABC9C", desc:"Fizik tedavi ve rehabilitasyon uzmanları." },
-    { id:"diyetisyen", name:"Diyetisyen",       color:"#2ECC71", desc:"Yüz yüze ve online beslenme danışmanlığı.", hasContent:true }
-  ];
-
-  const dietitians = [
-    {
-      name:"Uzman Diyetisyen Bilge İgan Yıldırım",
-      photo:"uzm.diyetisyenbilge.jpg",
-      tagline:"Uzman Hizmet Biriminde yüz yüze ve online beslenme danışmanlığı.",
-      phones:["0472 215 0184","0543 120 4505"],
-      address:"Saray Plaza Kat5 AĞRI",
-      mapsUrl:"https://maps.google.com/?q=Saray+Plaza+Agri"
-    }
   ];
 
   const dutyPharmacies = [
@@ -618,97 +653,141 @@ a{ color:inherit; text-decoration:none; cursor:pointer; }
     {date:"02.06.2026", district:"TAŞLIÇAY", name:"BEYZA ECZANESİ", address:"15 TEMMUZ ŞEHİTLER MAHALLESİ MAREŞAL FEVZİ ÇAKMAK CADDESİ NO:1/1", landmark:"PTT KARGO YANI", phone:"0472 551 30 00", url:"https://maps.google.com/?q=Beyza+Eczanesi+Taslicay"},
     {date:"02.06.2026", district:"TUTAK", name:"BERFİN ECZANESİ", address:"Murat Mahallesi Dr Cihan ÖKTEM Caddesi No:5A ve 5B", landmark:"GAZİ İLKOKULUNUN KARŞISI", phone:"0552 636 00 04", url:"https://maps.google.com/?q=Berfin+Eczanesi+Tutak"},
 
-    {date:"08.06.2026", district:"DİYADİN", name:"DİYADİN ECZANESİ", address:"İSA AĞA MAHALLESİ INÖNÜ CADDESİ NO:98", landmark:"PTT KARŞISI", phone:"0472 511 24 65", url:"https://www.google.com/maps?q=39.539805,43.674178"},
-    {date:"08.06.2026", district:"DOĞUBAYAZIT", name:"NEFES ECZANESİ", address:"ÇİFTE PINAR MAHALLESİ AĞRI CADDESİ NO:59/A", landmark:"MANOLYA PASTANESİ YANI", phone:"0472 312 20 90", url:"https://www.google.com/maps?q=39.548247,44.078958"},
-    {date:"08.06.2026", district:"ELEŞKİRT", name:"ELEŞKİRT ECZANESİ", address:"İSTİKLAL MAHALLESİ CUMHURİYET CADDESİ NO:109", landmark:"BELEDİYE BİNASİ KARŞISI", phone:"0472 711 29 16", url:"https://www.google.com/maps?q=39.798415,42.676952"},
-    {date:"08.06.2026", district:"HAMUR", name:"AHMET ECZANESİ", address:"Kümbet Mahallesi Van Caddesi No:49C", landmark:"HAMUR BELEDİYESİ ALTI", phone:"0544 564 57 48", url:"https://www.google.com/maps?q=39.609435,42.988575"},
-    {date:"08.06.2026", district:"MERKEZ", name:"BEREN ECZANESİ", address:"BAHÇELİEVLER MAHALLAESİ CUMHURİYET CADDESİ NO:135B", landmark:"CUMAÇAY GARAJI KARŞISI", phone:"0546 153 04 58", url:"https://www.google.com/maps?q=39.724290,43.053878"},
-    {date:"08.06.2026", district:"MERKEZ", name:"YOL ECZANESİ", address:"FIRAT MAHALLESİ ATALAY CADDESİ NO:16/D", landmark:"AĞRI BELEDİYESİ KARŞISI", phone:"0472 215 81 86", url:"https://www.google.com/maps?q=39.717492,43.017776"},
-    {date:"08.06.2026", district:"PATNOS", name:"DEVA ECZANESİ", address:"ATATÜRK MAHALLESİ MENDERES CADDESİ NO:146", landmark:"PATNOS İTİMAT YAZIHANESİ YANI", phone:"0472 616 16 19", url:"https://www.google.com/maps?q=39.234215,42.861461"},
-    {date:"08.06.2026", district:"TAŞLIÇAY", name:"ÇARE ECZANESİ", address:"HÜRRİYET MAHALLESİ M.FEVZİ ÇAKMAK CADDESİ DIŞ KAPI NO:94A", landmark:"MERVE KIRTASİYE YANI", phone:"0546 491 53 22", url:"https://www.google.com/maps?q=39.634434,43.376381"},
-    {date:"08.06.2026", district:"TUTAK", name:"TUTAK ECZANESİ", address:"MURAT MAHALLESİ CUMHURİYET CADDESİ NO:51/A", landmark:"", phone:"0472 411 26 98", url:"https://www.google.com/maps?q=39.538255,42.773258"},
+    {date:"03.06.2026", district:"DİYADİN", name:"DİYADİN ECZANESİ", address:"İSA AĞA MAHALLESİ INÖNÜ CADDESİ NO:98", landmark:"PTT KARŞISI", phone:"0472 511 24 65", url:"https://maps.google.com/?q=Diyadin+Eczanesi+Diyadin"},
+    {date:"03.06.2026", district:"DOĞUBAYAZIT", name:"BAHAR ECZANESİ", address:"İSHAKPAŞA MAHALLESİ ŞERAFETTİN ERYILMAZ CADDESİ NO: 158A", landmark:"KURTULUŞ İLKOKUL VE ORTAOKUL KARŞISI", phone:"0537 770 54 13", url:"https://maps.google.com/?q=Bahar+Eczanesi+Dogubayazit"},
+    {date:"03.06.2026", district:"ELEŞKİRT", name:"ELEŞKİRT ECZANESİ", address:"İSTİKLAL MAHALLESİ CUMHURİYET CADDESİ NO:109", landmark:"BELEDİYE BİNASİ KARŞISI", phone:"0472 711 29 16", url:"https://maps.google.com/?q=Eleskirt+Eczanesi+Eleskirt"},
+    {date:"03.06.2026", district:"HAMUR", name:"HAMUR ECZANESİ", address:"KÜMBET MAHALLESİ VAN CADDESİ NO:49/A", landmark:"HAMUR BELEDİYESİ ALTI", phone:"0472 616 71 72", url:"https://maps.google.com/?q=Hamur+Eczanesi+Hamur"},
+    {date:"03.06.2026", district:"MERKEZ", name:"DERMAN ECZANESİ", address:"GAZİ MAHALLESİ SAĞLIK CADDESİ NO:46/B", landmark:"2 NOLU SAĞLIK OCAĞI KARŞISI", phone:"0545 190 85 04", url:"https://maps.google.com/?q=Derman+Eczanesi+Agri"},
+    {date:"03.06.2026", district:"MERKEZ", name:"ALTINTAŞ ECZANESİ", address:"YAVUZ MAHALLESİ ÖZGÜL ÖZGÜL APT. NO:119/A", landmark:"EFE TIP MERKEZİ YANI", phone:"0472 215 77 77", url:"https://maps.google.com/?q=Altintas+Eczanesi+Agri"},
+    {date:"03.06.2026", district:"PATNOS", name:"EMEK ECZANESİ", address:"SARISU MAHALLESİ BİTLİS YOLU NO:29", landmark:"HASTANE YANI", phone:"0472 616 14 11", url:"https://maps.google.com/?q=Emek+Eczanesi+Patnos"},
+    {date:"03.06.2026", district:"TAŞLIÇAY", name:"ÇARE ECZANESİ", address:"HÜRRİYET MAHALLESİ M.FEVZİ ÇAKMAK CADDESİ DIŞ KAPI NO:94A", landmark:"MERVE KIRTASİYE YANI", phone:"0546 491 53 22", url:"https://maps.google.com/?q=Care+Eczanesi+Taslicay"},
+    {date:"03.06.2026", district:"TUTAK", name:"BEGÜM ECZANESİ", address:"CAMİ MAHALLESİ KAZIM KARABEKİR CADDESİ NO:11B-11C", landmark:"KAYMAKAMLIK EVİ KARŞISI", phone:"0472 411 31 89", url:"https://maps.google.com/?q=Begum+Eczanesi+Tutak"},
 
-    {date:"09.06.2026", district:"DİYADİN", name:"ŞİFA ECZANESİ", address:"MURAT MAHALLESİ KAYMAKAM ÖZGÜR AZER KURAK CADDESİ NO:63A", landmark:"MURAT CAMİİ YANI", phone:"0505 597 63 42", url:"https://www.google.com/maps?q=39.546386,43.666963"},
-    {date:"09.06.2026", district:"DOĞUBAYAZIT", name:"CAN ECZANESİ", address:"İSHAKPAŞA MAHALLESİ AĞRI CADDESİ NO:274A", landmark:"GÜVEN LOKANTASI KARŞISI", phone:"0472 312 04 12", url:"https://www.google.com/maps?q=39.548309,44.077235"},
-    {date:"09.06.2026", district:"ELEŞKİRT", name:"EMEK ECZANESİ", address:"MÜFTÜ SELİM MAHALLESİ CUMHURİYET CADDESİ NO:112/B", landmark:"SAĞLIK OCAĞI KARŞISI", phone:"0472 711 47 47", url:"https://www.google.com/maps?q=39.798169,42.677894"},
-    {date:"09.06.2026", district:"HAMUR", name:"HAMUR ECZANESİ", address:"KÜMBET MAHALLESİ VAN CADDESİ NO:49/A", landmark:"HAMUR BELEDİYESİ ALTI", phone:"0472 616 71 72", url:"https://www.google.com/maps?q=39.609511,42.988588"},
-    {date:"09.06.2026", district:"MERKEZ", name:"SAĞLIK ECZANESİ", address:"FIRAT MAHALLESİ ATALAY CADDESİ NO:28/E", landmark:"BELEDİYE KARŞISI", phone:"0472 215 75 38", url:"https://www.google.com/maps?q=39.717167,43.016447"},
-    {date:"09.06.2026", district:"MERKEZ", name:"RUKİYE ECZANESİ", address:"BAHÇELİ EVLER MAHALLESİ CUMHURİYET CADDESİ NO 125A", landmark:"ESKİ KÜTÜPHANE YANI", phone:"0472 216 06 06", url:"https://www.google.com/maps?q=39.724167,43.053824"},
-    {date:"09.06.2026", district:"PATNOS", name:"DURMAZ ECZANESİ", address:"ALPASLAN MAHALLESİ MALAZGİRT CADDESİ NO:136A", landmark:"ESKİ KİLER MARKET YANI", phone:"0543 899 15 21", url:"https://www.google.com/maps?q=39.229743,42.860278"},
-    {date:"09.06.2026", district:"TAŞLIÇAY", name:"ELİF ECZANESİ", address:"HÜRRİYET MAHALLESİ MAREŞAL FEVZİ ÇAKMAK CADDESİ NO:100", landmark:"A101 KARŞISI", phone:"0472 551 29 00", url:"https://www.google.com/maps?q=39.634128,43.376708"},
-    {date:"09.06.2026", district:"TUTAK", name:"OZAN ECZANESİ", address:"Cami Mahallesi Cumhuriyet Caddesi No:39B", landmark:"Merkez Camii Yanı", phone:"0472 411 28 97", url:"https://www.google.com/maps?q=39.540225,42.770822"},
+    {date:"04.06.2026", district:"DİYADİN", name:"ŞİFA ECZANESİ", address:"MURAT MAHALLESİ KAYMAKAM ÖZGÜR AZER KURAK CADDESİ NO:63A", landmark:"MURAT CAMİİ YANI", phone:"0505 597 63 42", url:"https://maps.google.com/?q=Sifa+Eczanesi+Diyadin"},
+    {date:"04.06.2026", district:"DOĞUBAYAZIT", name:"BEYAZIT ECZANESİ", address:"ULUYOL MAHALLESİ AĞRI CADDESİ NO:296K-296L", landmark:"FATİH CAMİİ KARŞISI", phone:"0472 312 67 02", url:"https://maps.google.com/?q=Beyazit+Eczanesi+Dogubayazit"},
+    {date:"04.06.2026", district:"ELEŞKİRT", name:"EMEK ECZANESİ", address:"MÜFTÜ SELİM MAHALLESİ CUMHURİYET CADDESİ NO:112/B", landmark:"SAĞLIK OCAĞI KARŞISI", phone:"0472 711 47 47", url:"https://maps.google.com/?q=Emek+Eczanesi+Eleskirt"},
+    {date:"04.06.2026", district:"HAMUR", name:"AHMET ECZANESİ", address:"Kümbet Mahallesi Van Caddesi No:49C", landmark:"HAMUR BELEDİYESİ ALTI", phone:"0544 564 57 48", url:"https://maps.google.com/?q=Ahmet+Eczanesi+Hamur"},
+    {date:"04.06.2026", district:"MERKEZ", name:"ZARİF ECZANESİ", address:"LEYLEK PINAR MAHALLESİ CUMHURİYET CADDESİ NO:6-8 C", landmark:"MERKEZ CAMİİ ALTI", phone:"0472 215 55 50", url:"https://maps.google.com/?q=Zarif+Eczanesi+Agri"},
+    {date:"04.06.2026", district:"MERKEZ", name:"YILDIRIM ECZANESİ", address:"GAZİ MAHALLESİ SAĞLIK CADDESİ NO:50-54A", landmark:"2 NOLU SAĞLIK OCAĞI KARŞISI", phone:"0543 129 58 33", url:"https://maps.google.com/?q=Yildirim+Eczanesi+Agri"},
+    {date:"04.06.2026", district:"PATNOS", name:"NUR ECZANESİ", address:"ALPASLAN MAHALLESİ DERGAH CADDESİ KAPI NO:3/A", landmark:"SARISU MARKET KARŞISI", phone:"0535 078 75 10", url:"https://maps.google.com/?q=Nur+Eczanesi+Patnos"},
+    {date:"04.06.2026", district:"TAŞLIÇAY", name:"ELİF ECZANESİ", address:"HÜRRİYET MAHALLESİ MAREŞAL FEVZİ ÇAKMAK CADDESİ NO:100", landmark:"A101 KARŞISI", phone:"0472 551 29 00", url:"https://maps.google.com/?q=Elif+Eczanesi+Taslicay"},
+    {date:"04.06.2026", district:"TUTAK", name:"TUTAK ECZANESİ", address:"MURAT MAHALLESİ CUMHURİYET CADDESİ NO:51/A", landmark:"MERKEZDE", phone:"0472 411 26 98", url:"https://maps.google.com/?q=Tutak+Eczanesi+Tutak"},
 
-    {date:"10.06.2026", district:"DİYADİN", name:"CEREN ECZANESİ", address:"Murat Mahallesi Şehit Kaymakam Muhammed Fatih Safitürk Caddesi No:13H", landmark:"KÜLTÜR KİTAP KIRTASİYE KARŞISI", phone:"0530 115 54 04", url:"https://www.google.com/maps?q=39.540798,43.670828"},
-    {date:"10.06.2026", district:"DOĞUBAYAZIT", name:"KESKİN ECZANESİ", address:"ULUYOL MAHALLESİ AĞRI CADDESİ NO:93/C", landmark:"ÇINAR PASTANESİ YANI", phone:"0472 312 60 60", url:"https://www.google.com/maps?q=39.547955,44.076724"},
-    {date:"10.06.2026", district:"ELEŞKİRT", name:"ESRA ECZANESİ", address:"İstiklal Mahallesi Cumhuriyet Caddesi No:83", landmark:"ZİRAAT BANKASI KARŞISI", phone:"0545 591 44 24", url:"https://www.google.com/maps?q=39.798541,42.676397"},
-    {date:"10.06.2026", district:"HAMUR", name:"AHMET ECZANESİ", address:"Kümbet Mahallesi Van Caddesi No:49C", landmark:"HAMUR BELEDİYESİ ALTI", phone:"0544 564 57 48", url:"https://www.google.com/maps?q=39.609435,42.988575"},
-    {date:"10.06.2026", district:"MERKEZ", name:"EMRE ECZANESİ", address:"Alpaslan Mahallesi Eski Van Caddesi No:142A", landmark:"İLÇELER GARAJI YANI", phone:"0542 498 63 73", url:"https://www.google.com/maps?q=39.714239,43.053186"},
-    {date:"10.06.2026", district:"MERKEZ", name:"HARUN ECZANESİ", address:"YAVUZ MAHALLESİ 403 SOKAK NO:13/A", landmark:"TERZİLER CADDESİ AŞAĞISI", phone:"0472 215 25 83", url:"https://www.google.com/maps?q=39.720926,43.051469"},
-    {date:"10.06.2026", district:"PATNOS", name:"IŞIK ECZANESİ", address:"INÖNÜ MAHALLESİ MALAZGIRT CADDESİ NO:13", landmark:"LAL LOKANTASI KARŞISI", phone:"0472 616 24 01", url:"https://www.google.com/maps?q=39.233443,42.863301"},
-    {date:"10.06.2026", district:"TAŞLIÇAY", name:"FERHAT ECZANESİ", address:"HÜRRİYET MAHALLESİ M.FEVZİ ÇAKMAK CADDESİ NO:48/A", landmark:"ÖĞRETMEN EVİ ALTI", phone:"0539 430 14 11", url:"https://www.google.com/maps?q=39.635854,43.374546"},
-    {date:"10.06.2026", district:"TUTAK", name:"BERFİN ECZANESİ", address:"Murat Mahallesi Dr Cihan ÖKTEM Caddesi No:5A ve 5B", landmark:"GAZİ İLKOKULUNUN KARŞISI", phone:"0552 636 00 04", url:"https://www.google.com/maps?q=39.539584,42.773208"},
+    {date:"05.06.2026", district:"DİYADİN", name:"CEREN ECZANESİ", address:"Murat Mahallesi Şehit Kaymakam Fatih Safitürk Cad. No:13H", landmark:"KÜLTÜR KİTAP KIRTASİYE KARŞISI", phone:"0530 115 54 04", url:"https://maps.google.com/?q=Ceren+Eczanesi+Diyadin"},
+    {date:"05.06.2026", district:"DOĞUBAYAZIT", name:"AFA ECZANESİ", address:"ÇİFTEPINAR MAHALLESİ İSA GEÇİT CADDESİ NO:8/A", landmark:"GÜÇBİR HOME KARŞISI", phone:"0472 312 27 00", url:"https://maps.google.com/?q=Afa+Eczanesi+Dogubayazit"},
+    {date:"05.06.2026", district:"ELEŞKİRT", name:"ESRA ECZANESİ", address:"İstiklal Mahallesi Cumhuriyet Caddesi No:83", landmark:"ZİRAAT BANKASI KARŞISI", phone:"0545 591 44 24", url:"https://maps.google.com/?q=Esra+Eczanesi+Eleskirt"},
+    {date:"05.06.2026", district:"HAMUR", name:"HAMUR ECZANESİ", address:"KÜMBET MAHALLESİ VAN CADDESİ NO:49/A", landmark:"HAMUR BELEDİYESİ ALTI", phone:"0472 616 71 72", url:"https://maps.google.com/?q=Hamur+Eczanesi+Hamur"},
+    {date:"05.06.2026", district:"MERKEZ", name:"EYLÜL ECZANESİ", address:"HÜRRİYET MAHALLESİ NAMIK SEZGİN CADDESİ NO:17/A", landmark:"SÜRAT KARGO YANI", phone:"0472 215 95 00", url:"https://maps.google.com/?q=Eylul+Eczanesi+Agri"},
+    {date:"05.06.2026", district:"MERKEZ", name:"NADİR ECZANESİ", address:"FIRAT MAHALLESİ 1018/3 SOKAK NO:8/A", landmark:"AĞRI EĞİTİM VE ARAŞTIRMA HASTANESİ KARŞISI", phone:"0542 188 55 04", url:"https://maps.google.com/?q=Nadir+Eczanesi+Agri"},
+    {date:"05.06.2026", district:"PATNOS", name:"ROZA ECZANESİ", address:"ATATÜRK MAHALLESİ ADNAN MENDERES CADDESİ NO:136", landmark:"PATNOS İTİMAT YANI", phone:"0472 616 29 00", url:"https://maps.google.com/?q=Roza+Eczanesi+Patnos"},
+    {date:"05.06.2026", district:"TAŞLIÇAY", name:"FERHAT ECZANESİ", address:"HÜRRİYET MAHALLESİ M.FEVZİ ÇAKMAK CADDESİ NO:48/A", landmark:"ÖĞRETMEN EVİ ALTI", phone:"0539 430 14 11", url:"https://maps.google.com/?q=Ferhat+Eczanesi+Taslicay"},
+    {date:"05.06.2026", district:"TUTAK", name:"OZAN ECZANESİ", address:"Cami Mahallesi Cumhuriyet Caddesi No:39B", landmark:"Merkez Camii Yanı", phone:"0472 411 28 97", url:"https://maps.google.com/?q=Ozan+Eczanesi+Tutak"},
 
-    {date:"11.06.2026", district:"DİYADİN", name:"DERMAN ECZANESİ", address:"Atatürk Mahallesi Şehit Kaymakam Muhammed Fatih Safitürk Caddesi No:10A", landmark:"Menekşem Market Karşısı", phone:"0472 511 36 36", url:"https://www.google.com/maps?q=39.540271,43.671124"},
-    {date:"11.06.2026", district:"DOĞUBAYAZIT", name:"ZEYNEP ECZANESİ", address:"SANAYİ MAHALLESİ ÇEVRE YOLU BULVARI NO:766/D", landmark:"DEVLET HASTANESİ KARŞISI", phone:"0472 312 82 22", url:"https://www.google.com/maps?q=39.541362,44.017494"},
-    {date:"11.06.2026", district:"ELEŞKİRT", name:"MAHMUTPAŞA ECZANESİ", address:"İstiklal Mahallesi Cumhuriyet Caddesi No:101", landmark:"KİLER MARKET KARŞISI", phone:"0472 711 29 78", url:"https://www.google.com/maps?q=39.798426,42.677388"},
-    {date:"11.06.2026", district:"HAMUR", name:"HAMUR ECZANESİ", address:"KÜMBET MAHALLESİ VAN CADDESİ NO:49/A", landmark:"HAMUR BELEDİYESİ ALTI", phone:"0472 616 71 72", url:"https://www.google.com/maps?q=39.609511,42.988588"},
-    {date:"11.06.2026", district:"MERKEZ", name:"AĞRI ECZANESİ", address:"ABİDE MAHALLESİ YAŞAR KEMAL CADDESİ NO:48/A", landmark:"AĞRI VALİLİĞİ KARŞISI", phone:"0472 215 58 13", url:"https://www.google.com/maps?q=39.719049,43.033018"},
-    {date:"11.06.2026", district:"MERKEZ", name:"KÖPRÜBAŞI ECZANESİ", address:"100.YIL MAHALLESİ YENİ VAN CADDESİ NO:132A", landmark:"EROĞLU MARKET YANI", phone:"0542 138 72 76", url:"https://www.google.com/maps?q=39.706295,43.048174"},
-    {date:"11.06.2026", district:"PATNOS", name:"OKTAY VURAL ECZANESİ", address:"ALPASLAN MAHALLESİ MALAZGİRT CADDESİ NO:72", landmark:"ŞEYH ABDULVAHAP KÜFREVİ EVİ KARŞISI", phone:"0472 616 18 74", url:"https://www.google.com/maps?q=39.231735,42.861958"},
-    {date:"11.06.2026", district:"TAŞLIÇAY", name:"TAŞLIÇAY ECZANESİ", address:"Cumhuriyet Mahallesi Mareşal Favzi Çakmak Caddesi No:23", landmark:"", phone:"0472 551 28 91", url:"https://www.google.com/maps?q=39.637014,43.373894"},
-    {date:"11.06.2026", district:"TUTAK", name:"BEGÜM ECZANESİ", address:"CAMİ MAHALLESİ KAZIM KARABEKİR CADDESİ NO:11B-11C", landmark:"KAYMAKAMLIK EVİ KARŞISI", phone:"0472 411 31 89", url:"https://www.google.com/maps?q=39.538143,42.771397"},
+    {date:"06.06.2026", district:"DİYADİN", name:"DERMAN ECZANESİ", address:"Atatürk Mahallesi Safitürk Caddesi No:10A", landmark:"Menekşem Market Karşısı", phone:"0472 511 36 36", url:"https://maps.google.com/?q=Derman+Eczanesi+Diyadin"},
+    {date:"06.06.2026", district:"DOĞUBAYAZIT", name:"DOĞA ECZANESİ", address:"ÇİFTEPINAR MAHALLESİ AĞRI CADDESİ NO:31/H", landmark:"ESKİ TAPU KADASTRO KARŞISI", phone:"0472 312 75 39", url:"https://maps.google.com/?q=Doga+Eczanesi+Dogubayazit"},
+    {date:"06.06.2026", district:"ELEŞKİRT", name:"MAHMUTPAŞA ECZANESİ", address:"İstiklal Mahallesi Cumhuriyet Caddesi No:101", landmark:"KİLER MARKET KARŞISI", phone:"0472 711 29 78", url:"https://maps.google.com/?q=Mahmutpasa+Eczanesi+Eleskirt"},
+    {date:"06.06.2026", district:"HAMUR", name:"AHMET ECZANESİ", address:"Kümbet Mahallesi Van Caddesi No:49C", landmark:"HAMUR BELEDİYESİ ALTI", phone:"0544 564 57 48", url:"https://maps.google.com/?q=Ahmet+Eczanesi+Hamur"},
+    {date:"06.06.2026", district:"MERKEZ", name:"KRAL ECZANESİ", address:"MURAT MAHALLESY ESKİ VAN CADDESİ NO:135A", landmark:"ÇEVİK KUVVET YANI", phone:"0472 215 44 65", url:"https://maps.google.com/?q=Kral+Eczanesi+Agri"},
+    {date:"06.06.2026", district:"MERKEZ", name:"KARACA ECZANESİ", address:"Fatih Mahallesi Kağızman Caddesi No:147/A", landmark:"FATİH MEZARLIĞININ 400 METRE İLERİSİ", phone:"0472 215 05 47", url:"https://maps.google.com/?q=Karaca+Eczanesi+Agri"},
+    {date:"06.06.2026", district:"PATNOS", name:"YENİ İSTANBUL ECZANESİ", address:"ATATÜRK MAHALLESİ 128 SOKAK NO:6A", landmark:"MERKEZDE", phone:"0472 616 94 29", url:"https://maps.google.com/?q=Yeni+Istanbul+Eczanesi+Patnos"},
+    {date:"06.06.2026", district:"TAŞLIÇAY", name:"TAŞLIÇAY ECZANESİ", address:"Cumhuriyet Mahallesi Mareşal Favzi Çakmak Caddesi No:23", landmark:"MERKEZDE", phone:"0472 551 28 91", url:"https://maps.google.com/?q=Taslicay+Eczanesi+Taslicay"},
+    {date:"06.06.2026", district:"TUTAK", name:"BERFİN ECZANESİ", address:"Murat Mahallesi Dr Cihan ÖKTEM Caddesi No:5A ve 5B", landmark:"GAZİ İLKOKULUNUN KARŞISI", phone:"0552 636 00 04", url:"https://maps.google.com/?q=Berfin+Eczanesi+Tutak"},
 
-    {date:"12.06.2026", district:"DİYADİN", name:"DİLAN ECZANESİ", address:"ISA AGA MAHALLESİ INÖNÜ CADDESİ NO:36", landmark:"BELEDİYE YANI", phone:"0472 511 28 28", url:"https://www.google.com/maps?q=39.539751,43.672485"},
-    {date:"12.06.2026", district:"DOĞUBAYAZIT", name:"ÇAPA ECZANESİ", address:"AHMEDİHANİ MAHALLESİ ABDURREZAK ALADAĞ CADDESİ NO:73/C", landmark:"IĞDIR DURAĞI YOLU ÜZERİ", phone:"0544 451 24 96", url:"https://www.google.com/maps?q=39.549213,44.079323"},
-    {date:"12.06.2026", district:"ELEŞKİRT", name:"ŞİFA ECZANESİ", address:"MÜFTÜ SELİM MAHALLESİ CUMHURİYET CADDESİ NO:13", landmark:"SAĞLIK OCAĞI KARŞISI", phone:"0472 711 21 41", url:"https://www.google.com/maps?q=39.798195,42.677684"},
-    {date:"12.06.2026", district:"HAMUR", name:"AHMET ECZANESİ", address:"Kümbet Mahallesi Van Caddesi No:49C", landmark:"HAMUR BELEDİYESİ ALTI", phone:"0544 564 57 48", url:"https://www.google.com/maps?q=39.609435,42.988575"},
-    {date:"12.06.2026", district:"MERKEZ", name:"SEVGİ ECZANESİ", address:"LEYLEK PINAR MAHALLESİ CUMHURIYET CADDESİ NO:142", landmark:"HALK BANK YUKARASI", phone:"0472 216 34 20", url:"https://www.google.com/maps?q=39.721889,43.053141"},
-    {date:"12.06.2026", district:"MERKEZ", name:"ŞİFA ECZANESİ", address:"YAVUZ MAHALLESİ YAŞAR KEMAL CADDESİ NO:2/A", landmark:"BÜYÜK AĞRI OTELİ ALTI", phone:"0472 215 30 00", url:"https://www.google.com/maps?q=39.719214,43.051600"},
-    {date:"12.06.2026", district:"PATNOS", name:"SARI ECZANESİ", address:"ATATÜRK MAHALLESİ ALPASLAN CADDESİ KAPI NO: 69", landmark:"FATİH ET LOKANTASI ÇAPRAZI", phone:"0551 481 44 68", url:"https://www.google.com/maps?q=39.232071,42.862017"},
-    {date:"12.06.2026", district:"TAŞLIÇAY", name:"BEYZA ECZANESİ", address:"15 TEMMUZ ŞEHİTLER MAHALLESİ MAREŞAL FEVZİ ÇAKMAK CADDESİ NO:1/1", landmark:"PTT KARGO YANI", phone:"0472 551 30 00", url:"https://www.google.com/maps?q=39.636158,43.374813"},
-    {date:"12.06.2026", district:"TUTAK", name:"TUTAK ECZANESİ", address:"MURAT MAHALLESİ CUMHURİYET CADDESİ NO:51/A", landmark:"", phone:"0472 411 26 98", url:"https://www.google.com/maps?q=39.538255,42.773258"},
+    {date:"07.06.2026", district:"DİYADİN", name:"DİLAN ECZANESİ", address:"ISA AGA MAHALLESİ INÖNÜ CADDESİ NO:36", landmark:"BELEDİYE YANI", phone:"0472 511 28 28", url:"https://maps.google.com/?q=Dilan+Eczanesi+Diyadin"},
+    {date:"07.06.2026", district:"DOĞUBAYAZIT", name:"YAĞMUR ECZANESİ", address:"AHMEDİHANİ MAHALLESİ AĞRI CADDESİ NO:208", landmark:"AĞIZ VE DİŞ SAĞLIĞI MERKEZİ KARŞISI", phone:"0472 312 85 85", url:"https://maps.google.com/?q=Yagmur+Eczanesi+Dogubayazit"},
+    {date:"07.06.2026", district:"ELEŞKİRT", name:"ŞİFA ECZANESİ", address:"MÜFTÜ SELİM MAHALLESİ CUMHURİYET CADDESİ NO:13", landmark:"SAĞLIK OCAĞI KARŞISI", phone:"0472 711 21 41", url:"https://maps.google.com/?q=Sifa+Eczanesi+Eleskirt"},
+    {date:"07.06.2026", district:"HAMUR", name:"HAMUR ECZANESİ", address:"KÜMBET MAHALLESİ VAN CADDESİ NO:49/A", landmark:"HAMUR BELEDİYESİ ALTI", phone:"0472 616 71 72", url:"https://maps.google.com/?q=Hamur+Eczanesi+Hamur"},
+    {date:"07.06.2026", district:"MERKEZ", name:"HAYAT ECZANESİ", address:"ALPASLAN MAHALLESİ ESKİ VAN CADDESİ NO:140/A", landmark:"DOĞA KOLEJİ YOLU", phone:"0534 796 64 04", url:"https://maps.google.com/?q=Hayat+Eczanesi+Agri"},
+    {date:"07.06.2026", district:"MERKEZ", name:"ARDA ECZANESİ", address:"LEYLEK PINAR MAHALLESİ VALİ KONAĞI CADDESİ NO:33/A", landmark:"ÖZGÜL AVM YANI", phone:"0472 215 72 00", url:"https://maps.google.com/?q=Arda+Eczanesi+Agri"},
+    {date:"07.06.2026", district:"PATNOS", name:"CERRAHPAŞA ECZANESİ", address:"Atatürk Mahallesi Menderes Bulvar Kapı No:122", landmark:"TURKCELL BAYİ KARŞISI", phone:"0507 141 04 24", url:"https://maps.google.com/?q=Cerrahpasa+Eczanesi+Patnos"},
+    {date:"07.06.2026", district:"TAŞLIÇAY", name:"BEYZA ECZANESİ", address:"15 TEMMUZ ŞEHİTLER MAHALLESİ MAREŞAL FEVZİ ÇAKMAK CADDESİ NO:1/1", landmark:"PTT KARGO YANI", phone:"0472 551 30 00", url:"https://maps.google.com/?q=Beyza+Eczanesi+Taslicay"},
+    {date:"07.06.2026", district:"TUTAK", name:"BEGÜM ECZANESİ", address:"CAMİ MAHALLESİ KAZIM KARABEKİR CADDESİ NO:11B-11C", landmark:"KAYMAKAMLIK EVİ KARŞISI", phone:"0472 411 31 89", url:"https://maps.google.com/?q=Begum+Eczanesi+Tutak"},
 
-    {date:"13.06.2026", district:"DİYADİN", name:"DİYADİN ECZANESİ", address:"İSA AĞA MAHALLESİ INÖNÜ CADDESİ NO:98", landmark:"PTT KARŞISI", phone:"0472 511 24 65", url:"https://www.google.com/maps?q=39.539805,43.674178"},
-    {date:"13.06.2026", district:"DOĞUBAYAZIT", name:"DÜNYA ECZANESİ", address:"Ahmedi Hani Mahallesi 1352 Sokak No:5C", landmark:"Meteoroloji Sağlık Ocağı Karşısı", phone:"0472 312 60 70", url:"https://www.google.com/maps?q=39.549403,44.090033"},
-    {date:"13.06.2026", district:"ELEŞKİRT", name:"ELEŞKİRT ECZANESİ", address:"İSTİKLAL MAHALLESİ CUMHURİYET CADDESİ NO:109", landmark:"BELEDİYE BİNASİ KARŞISI", phone:"0472 711 29 16", url:"https://www.google.com/maps?q=39.798415,42.676952"},
-    {date:"13.06.2026", district:"HAMUR", name:"HAMUR ECZANESİ", address:"KÜMBET MAHALLESİ VAN CADDESİ NO:49/A", landmark:"HAMUR BELEDİYESİ ALTI", phone:"0472 616 71 72", url:"https://www.google.com/maps?q=39.609511,42.988588"},
-    {date:"13.06.2026", district:"MERKEZ", name:"NURAY ECZANESİ", address:"HÜRRİYET MAHALLLESİ CUMHURİYET CADDESİ NO:88B", landmark:"EFE (GÜVEN) TIP MERKEZİ KARŞISI", phone:"0538 864 41 33", url:"https://www.google.com/maps?q=39.722706,43.053513"},
-    {date:"13.06.2026", district:"MERKEZ", name:"TAYSUN ECZANESİ", address:"KURTULUŞ MAHALLESİ YENİ VAN CADDESİ No:62A", landmark:"LASSA BAYİİ YANI", phone:"0472 215 13 21", url:"https://www.google.com/maps?q=39.714067,43.049662"},
-    {date:"13.06.2026", district:"PATNOS", name:"YEŞİLÇİMEN ECZANESİ", address:"Yeşil Çimen Mahallesi Van Bulvar Caddesi Kapı No:227A", landmark:"SELAHATTİN EYYUBİ FEN LİSESİ YANI", phone:"0544 427 23 65", url:"https://www.google.com/maps?q=39.237820,42.880954"},
-    {date:"13.06.2026", district:"TAŞLIÇAY", name:"ÇARE ECZANESİ", address:"HÜRRİYET MAHALLESİ M.FEVZİ ÇAKMAK CADDESİ DIŞ KAPI NO:94A", landmark:"MERVE KIRTASİYE YANI", phone:"0546 491 53 22", url:"https://www.google.com/maps?q=39.634434,43.376381"},
-    {date:"13.06.2026", district:"TUTAK", name:"OZAN ECZANESİ", address:"Cami Mahallesi Cumhuriyet Caddesi No:39B", landmark:"Merkez Camii Yanı", phone:"0472 411 28 97", url:"https://www.google.com/maps?q=39.540225,42.770822"}
+    {date:"08.06.2026", district:"DİYADİN", name:"DİYADİN ECZANESİ", address:"İSA AĞA MAHALLESİ INÖNÜ CADDESİ NO:98", landmark:"PTT KARŞISI", phone:"0472 511 24 65", url:"https://maps.google.com/?q=Diyadin+Eczanesi+Diyadin"},
+    {date:"08.06.2026", district:"DOĞUBAYAZIT", name:"NEFES ECZANESİ", address:"ÇİFTE PINAR MAHALLESİ AĞRI CADDESİ NO:59/A", landmark:"MANOLYA PASTANESİ YANI", phone:"0472 312 20 90", url:"https://maps.google.com/?q=Nefes+Eczanesi+Dogubayazit"},
+    {date:"08.06.2026", district:"ELEŞKİRT", name:"ELEŞKİRT ECZANESİ", address:"İSTİKLAL MAHALLESİ CUMHURİYET CADDESİ NO:109", landmark:"BELEDİYE BİNASİ KARŞISI", phone:"0472 711 29 16", url:"https://maps.google.com/?q=Eleskirt+Eczanesi+Eleskirt"},
+    {date:"08.06.2026", district:"HAMUR", name:"AHMET ECZANESİ", address:"Kümbet Mahallesi Van Caddesi No:49C", landmark:"HAMUR BELEDİYESİ ALTI", phone:"0544 564 57 48", url:"https://maps.google.com/?q=Ahmet+Eczanesi+Hamur"},
+    {date:"08.06.2026", district:"MERKEZ", name:"YOL ECZANESİ", address:"FIRAT MAHALLESİ ATALAY CADDESİ NO:16/D", landmark:"AĞRI BELEDİYESİ KARŞISI", phone:"0472 215 81 86", url:"https://maps.google.com/?q=Yol+Eczanesi+Agri"},
+    {date:"08.06.2026", district:"MERKEZ", name:"BEREN ECZANESİ", address:"BAHÇELİEVLER MAHALLAESİ CUMHURİYET CADDESİ NO:135B", landmark:"CUMAÇAY GARAJI KARŞISI", phone:"0546 153 04 58", url:"https://maps.google.com/?q=Beren+Eczanesi+Agri"},
+    {date:"08.06.2026", district:"PATNOS", name:"DEVA ECZANESİ", address:"ATATÜRK MAHALLESİ MENDERES CADDESİ NO:146", landmark:"PATNOS İTİMAT YAZIHANESİ YANI", phone:"0472 616 16 19", url:"https://maps.google.com/?q=Deva+Eczanesi+Patnos"},
+    {date:"08.06.2026", district:"TAŞLIÇAY", name:"ÇARE ECZANESİ", address:"HÜRRİYET MAHALLESİ M.FEVZİ ÇAKMAK CADDESİ DIŞ KAPI NO:94A", landmark:"MERVE KIRTASİYE YANI", phone:"0546 491 53 22", url:"https://maps.google.com/?q=Care+Eczanesi+Taslicay"},
+    {date:"08.06.2026", district:"TUTAK", name:"TUTAK ECZANESİ", address:"MURAT MAHALLESİ CUMHURİYET CADDESİ NO:51/A", landmark:"MERVE KIRTASİYE YANI", phone:"0472 411 26 98", url:"https://maps.google.com/?q=Tutak+Eczanesi+Tutak"}
   ];
 
-  window.AGRI = { categories, dutyPharmacies, healthSubcategories, dietitians };
+  window.AGRI = { categories, dutyPharmacies };
 
+  // BANNERLAR (Senin verdiğin "1" numaralı özel görsel ismiyle)
   window.AGRI_STATIC_BANNERS = [
-    { img:"uzm.diyetisyenbilge.jpg", text:"Aramıza Hoşgeldiniz", name:"Uzman Diyetisyen Bilge İgan Yıldırım", isDiet:true },
-    { img:"uzm.diyetisyenbilge2.jpg", text:"Aramıza Hoşgeldiniz", name:"Uzman Diyetisyen Bilge İgan Yıldırım", isDiet:true },
-    { img:"uzm.diyetisyenbilge.jpg", text:"Aramıza Hoşgeldiniz", name:"Uzman Diyetisyen Bilge İgan Yıldırım", isDiet:true },
-    { img:"uzm.diyetisyenbilge2.jpg", text:"Aramıza Hoşgeldiniz", name:"Uzman Diyetisyen Bilge İgan Yıldırım", isDiet:true }
+    { img:"uzm.diyetisyenbilge.jpg", title:"Uzm. Diyetisyen Bilge İgan Yıldırım", subtitle:"Aramıza hoşgeldiniz" },
+    { img:"agrıelitdilkursu.jpg", title:"Ağrı E.L.I.T Dil Kursu", subtitle:"Aramıza hoşgeldiniz" }
   ];
 
+  // HİKAYELER (Senin verdiğin "2" numaralı özel görsel ismiyle)
   window.AGRI_STORIES = [
     {
-      title: "Uzm. Dyt. Bilge",
-      cover: "uzm.diyetisyenbilge1.jpg",
-      slideText: "Aramıza Hoşgeldiniz Uzman Diyetisyen Bilge İgan Yıldırım! Sağlıklı beslenme danışmanlığı ile artık Ağrı Dijital Rehberi'nde.",
-      slideImg: "uzm.diyetisyenbilge1.jpg"
+      title: "Dyt. Bilge",
+      cover: "uzm.diyetisyenbilge.jpg",
+      slideText: "Uzman Hizmet Biriminde yüz yüze ve online beslenme danışmanlığı çok yakında sizlerle.",
+      slideImg: "uzm.diyetisyenbilge.jpg"
+    },
+    {
+      title: "E.L.I.T Okulları",
+      cover: "agrıelitdilkursu2.jpg",
+      slideText: "Hayalinizdeki Dil Eğitiminize Bugün Başlayın. ENGLISH LANGUAGE INSTITUTE TURKEY.",
+      slideImg: "agrıelitdilkursu2.jpg"
     }
   ];
 
   window.PAT = { pattern };
 })();
 
+/* Güvenli kalıcı yerel veri saklama */
 const safeStore = (function(){
   let mem = {};
-  function lsOk(){ try { const k="__t__"; window.localStorage.setItem(k,"1"); window.localStorage.removeItem(k); return true; } catch(e){ return false; } }
+
+  function lsOk(){
+    try { const k="__t__"; window.localStorage.setItem(k,"1"); window.localStorage.removeItem(k); return true; }
+    catch(e){ return false; }
+  }
   const hasLS = lsOk();
-  function setCookie(key, val){ try { const exp = new Date(Date.now() + 365*24*60*60*1000).toUTCString(); document.cookie = encodeURIComponent(key) + "=" + encodeURIComponent(val) + "; expires=" + exp + "; path=/; SameSite=Lax"; return true; } catch(e){ return false; } }
-  function getCookie(key){ try { const name = encodeURIComponent(key) + "="; const parts = document.cookie.split(";"); for (let c of parts){ c = c.trim(); if (c.indexOf(name) === 0) return decodeURIComponent(c.substring(name.length)); } return null; } catch(e){ return null; } }
+
+  function setCookie(key, val){
+    try {
+      const exp = new Date(Date.now() + 365*24*60*60*1000).toUTCString();
+      document.cookie = encodeURIComponent(key) + "=" + encodeURIComponent(val) + "; expires=" + exp + "; path=/; SameSite=Lax";
+      return true;
+    } catch(e){ return false; }
+  }
+  function getCookie(key){
+    try {
+      const name = encodeURIComponent(key) + "=";
+      const parts = document.cookie.split(";");
+      for (let c of parts){
+        c = c.trim();
+        if (c.indexOf(name) === 0) return decodeURIComponent(c.substring(name.length));
+      }
+      return null;
+    } catch(e){ return null; }
+  }
+
   return {
-    get(key){ if (hasLS){ try { const v = window.localStorage.getItem(key); if (v != null) return v; } catch(e){} } const ck = getCookie(key); if (ck != null) return ck; return (key in mem) ? mem[key] : null; },
-    set(key, val){ let stored = false; if (hasLS){ try { window.localStorage.setItem(key, val); stored = true; } catch(e){} } if (setCookie(key, val)) stored = true; mem[key] = val; return stored; }
+    get(key){
+      if (hasLS){
+        try { const v = window.localStorage.getItem(key); if (v != null) return v; } catch(e){}
+      }
+      const ck = getCookie(key);
+      if (ck != null) return ck;
+      return (key in mem) ? mem[key] : null;
+    },
+    set(key, val){
+      let stored = false;
+      if (hasLS){
+        try { window.localStorage.setItem(key, val); stored = true; } catch(e){}
+      }
+      if (setCookie(key, val)) stored = true;
+      mem[key] = val;
+      return stored;
+    }
   };
 })();
 
@@ -775,19 +854,23 @@ function GlobeCanvas({ phase }){
   return <canvas ref={ref} className="globe-canvas" style={{width:"100%", height:"100%"}} />;
 }
 
-function Topbar({ dark }){
+/* ===================== TOPBAR ===================== */
+function Topbar(){
   const [scrolled, setScrolled] = useState(false);
+
   useEffect(() => {
     const onScroll = () => setScrolled(window.scrollY > 40);
     onScroll();
     window.addEventListener("scroll", onScroll, { passive: true });
     return () => window.removeEventListener("scroll", onScroll);
   }, []);
+
   const onDark = !scrolled;
   const cls = ["topbar", scrolled ? "scrolled" : "", onDark ? "on-dark" : ""].join(" ").trim();
+
   return (
     <div className={cls}>
-      <a className="logo" href="#top" onClick={(e)=>{ e.preventDefault(); window.scrollTo({ top:0, behavior:"smooth" }); }}>
+      <a className="logo" href="/" onClick={(e)=>{ e.preventDefault(); window.history.pushState(null, "", "/"); window.dispatchEvent(new Event("popstate")); window.scrollTo({ top:0, behavior:"smooth" }); }}>
         <span className="badge">04</span>
         <span className="txt">agri<span className="dim">.com</span></span>
       </a>
@@ -860,48 +943,43 @@ function Hero({ onSearchPlace, onOpenCat }){
         </div>
         <div className="search-tags">
           <button className="highlight-btn" onClick={() => document.getElementById("kategoriler").scrollIntoView({ behavior:"smooth" })}>Tüm Kategoriler</button>
-          <button onClick={()=>onOpenCat("nobetci")}>Nöbetçi Eczane</button>
-          <button onClick={()=>onOpenCat("gezilecek")}>Gezilecek Yerler</button>
-          <button onClick={()=>onOpenCat("etkinlik")}>Etkinlikler</button>
+          <button onClick={() => onOpenCat(window.AGRI.categories.find(c => c.id === 'nobetci'))}>Nöbetçi Eczane</button>
+          <button onClick={() => onOpenCat(window.AGRI.categories.find(c => c.id === 'gezilecek'))}>Gezilecek Yerler</button>
+          <button onClick={() => onOpenCat(window.AGRI.categories.find(c => c.id === 'egitim'))}>Eğitim</button>
         </div>
       </div>
     </header>
   );
 }
 
+/* ===================== BANNER (IMAGE MARQUEE) YENİ TASARIM ===================== */
 function ImageMarquee() {
-  const base = [].concat(window.AGRI_STATIC_BANNERS, window.AGRI_STATIC_BANNERS, window.AGRI_STATIC_BANNERS, window.AGRI_STATIC_BANNERS);
-  const loop = base.concat(base);
+  const base = window.AGRI_STATIC_BANNERS;
+  const loop = base.concat(base).concat(base).concat(base); 
   return (
     <div className="banner-section">
       <div className="marquee">
-        {loop.map((b, i) => {
-          if (b && b.isDiet) {
-             return (
-               <div key={i} className="banner-diet-wrap" onClick={() => window.dispatchEvent(new Event('trigger-diet-banner'))}>
-                 <img src={b.img} className="banner-diet-img" alt="Uzman Diyetisyen" />
-                 <div className="banner-diet-overlay">
-                   <span className="welcome">{b.text}</span>
-                   <span className="name">{b.name}</span>
-                 </div>
-               </div>
-             );
-          }
-          const hasImg = b && b.img && b.img.trim() !== "";
-          if (hasImg) return <img key={i} src={b.img} className="banner-img" alt="Görsel" />;
-          return <div key={i} className="banner-img banner-placeholder"><span>{(b && b.text) ? b.text : "Çok yakında hizmetinizdeyiz"}</span></div>;
-        })}
+        {loop.map((b, i) => (
+          <div key={i} className="banner-item" style={{ backgroundImage: `url(${b.img})` }}>
+            <div className="banner-scrim"></div>
+            <div className="banner-content">
+              <span className="banner-title">{b.title}</span>
+              <span className="banner-sub">{b.subtitle}</span>
+            </div>
+          </div>
+        ))}
       </div>
     </div>
   );
 }
 
-/* ===================== HİKAYELER ===================== */
 function Stories() {
   const stories = window.AGRI_STORIES || [];
   const [openIdx, setOpenIdx] = useState(null);
+
   if (stories.length === 0) return null;
   const active = openIdx != null ? stories[openIdx] : null;
+
   return (
     <section className="stories-section">
       <div className="wrap">
@@ -912,7 +990,9 @@ function Stories() {
               <button key={i} className="story-bubble" onClick={() => setOpenIdx(i)}>
                 <span className="story-ring">
                   <span className="story-thumb" style={hasCover ? { backgroundImage:`url(${s.cover})` } : null}>
-                    {!hasCover && <svg width="26" height="26" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.8"><path d="M12 2v4M12 18v4M2 12h4M18 12h4"/><circle cx="12" cy="12" r="4"/></svg>}
+                    {!hasCover && (
+                      <svg width="26" height="26" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.8"><path d="M12 2v4M12 18v4M2 12h4M18 12h4"/><circle cx="12" cy="12" r="4"/></svg>
+                    )}
                   </span>
                 </span>
                 <span className="story-label">{s.title}</span>
@@ -921,12 +1001,17 @@ function Stories() {
           })}
         </div>
       </div>
+
       {active && (
         <div className="story-viewer" onClick={(e)=>{ if(e.target.className==='story-viewer') setOpenIdx(null); }}>
           <div className="story-progress"><span className="story-progress-fill"></span></div>
           <button className="story-close" onClick={()=>setOpenIdx(null)}>✕</button>
           <div className="story-card">
-            {active.slideImg && active.slideImg.trim() !== "" ? <img className="story-card-img" src={active.slideImg} alt={active.title} /> : <div className="story-card-bg"></div>}
+            {active.slideImg && active.slideImg.trim() !== "" ? (
+              <img className="story-card-img" src={active.slideImg} alt={active.title} />
+            ) : (
+              <div className="story-card-bg"></div>
+            )}
             <div className="story-card-overlay">
               <div className="story-card-badge">{active.title}</div>
               <div className="story-card-text">{active.slideText}</div>
@@ -938,25 +1023,31 @@ function Stories() {
   );
 }
 
-/* ===================== WIDGETLAR ===================== */
 function PharmacyWidget() {
   const [district, setDistrict] = useState("MERKEZ");
-  const [currentDateText, setCurrentDateText] = useState(() => {
-    const now = new Date();
-    return `${now.getDate().toString().padStart(2, '0')}.${(now.getMonth() + 1).toString().padStart(2, '0')}.${now.getFullYear()}`;
-  });
+  const [currentDateText, setCurrentDateText] = useState("02.06.2026");
 
   useEffect(() => {
     const updatePharmacyDate = () => {
       const now = new Date();
-      const calculatedDate = `${now.getDate().toString().padStart(2, '0')}.${(now.getMonth() + 1).toString().padStart(2, '0')}.${now.getFullYear()}`;
-      if (currentDateText !== calculatedDate) setCurrentDateText(calculatedDate);
+      const d = now.getDate().toString().padStart(2, '0');
+      const m = (now.getMonth() + 1).toString().padStart(2, '0');
+      const y = now.getFullYear();
+      const calculatedDate = `${d}.${m}.${y}`;
+      
+      const exists = window.AGRI.dutyPharmacies.some(p => p.date === calculatedDate);
+      if (exists) setCurrentDateText(calculatedDate);
     };
+
+    updatePharmacyDate();
     const interval = setInterval(updatePharmacyDate, 60000); 
     return () => clearInterval(interval);
-  }, [currentDateText]);
+  }, []);
 
-  const activePharmacies = window.AGRI.dutyPharmacies.filter(p => p.date === currentDateText && p.district.toUpperCase() === district.toUpperCase());
+  const activePharmacies = window.AGRI.dutyPharmacies.filter(
+    p => p.date === currentDateText && p.district.toUpperCase() === district.toUpperCase()
+  );
+
   const districtsList = ["MERKEZ", "DİYADİN", "DOĞUBAYAZIT", "ELEŞKİRT", "HAMUR", "PATNOS", "TAŞLIÇAY", "TUTAK"];
 
   return (
@@ -996,98 +1087,7 @@ function PharmacyWidget() {
 }
 
 function AgendaDashboard(){
-  const data = {
-    "2026-06-07": {i:"02:40", g:"04:33", o:"12:12", k:"16:08", a:"19:40", y:"21:25"},
-    "2026-06-08": {i:"02:40", g:"04:33", o:"12:12", k:"16:09", a:"19:41", y:"21:25"},
-    "2026-06-09": {i:"02:39", g:"04:33", o:"12:12", k:"16:09", a:"19:41", y:"21:26"},
-    "2026-06-10": {i:"02:39", g:"04:33", o:"12:12", k:"16:09", a:"19:42", y:"21:27"},
-    "2026-06-11": {i:"02:39", g:"04:33", o:"12:12", k:"16:09", a:"19:42", y:"21:28"},
-    "2026-06-12": {i:"02:38", g:"04:32", o:"12:13", k:"16:10", a:"19:43", y:"21:28"},
-    "2026-06-13": {i:"02:38", g:"04:32", o:"12:13", k:"16:10", a:"19:43", y:"21:29"},
-    "2026-06-14": {i:"02:38", g:"04:32", o:"12:13", k:"16:10", a:"19:44", y:"21:30"},
-    "2026-06-15": {i:"02:38", g:"04:32", o:"12:13", k:"16:10", a:"19:44", y:"21:30"},
-    "2026-06-16": {i:"02:38", g:"04:32", o:"12:13", k:"16:11", a:"19:45", y:"21:31"},
-    "2026-06-17": {i:"02:37", g:"04:32", o:"12:14", k:"16:11", a:"19:45", y:"21:31"},
-    "2026-06-18": {i:"02:37", g:"04:33", o:"12:14", k:"16:11", a:"19:45", y:"21:32"},
-    "2026-06-19": {i:"02:38", g:"04:33", o:"12:14", k:"16:11", a:"19:46", y:"21:32"},
-    "2026-06-20": {i:"02:38", g:"04:33", o:"12:14", k:"16:11", a:"19:46", y:"21:32"},
-    "2026-06-21": {i:"02:38", g:"04:33", o:"12:15", k:"16:12", a:"19:46", y:"21:33"},
-    "2026-06-22": {i:"02:38", g:"04:33", o:"12:15", k:"16:12", a:"19:46", y:"21:33"},
-    "2026-06-23": {i:"02:38", g:"04:34", o:"12:15", k:"16:12", a:"19:46", y:"21:33"},
-    "2026-06-24": {i:"02:39", g:"04:34", o:"12:15", k:"16:12", a:"19:47", y:"21:33"},
-    "2026-06-25": {i:"02:39", g:"04:34", o:"12:15", k:"16:13", a:"19:47", y:"21:33"},
-    "2026-06-26": {i:"02:39", g:"04:34", o:"12:16", k:"16:13", a:"19:47", y:"21:33"},
-    "2026-06-27": {i:"02:40", g:"04:35", o:"12:16", k:"16:13", a:"19:47", y:"21:33"},
-    "2026-06-28": {i:"02:41", g:"04:35", o:"12:16", k:"16:13", a:"19:47", y:"21:33"},
-    "2026-06-29": {i:"02:41", g:"04:36", o:"12:16", k:"16:13", a:"19:47", y:"21:33"},
-    "2026-06-30": {i:"02:42", g:"04:36", o:"12:16", k:"16:13", a:"19:47", y:"21:33"}
-  };
-
-  function getLivePrayerState() {
-    const now = new Date();
-    const y = now.getFullYear();
-    const m = String(now.getMonth() + 1).padStart(2, '0');
-    const d = String(now.getDate()).padStart(2, '0');
-    const ymd = `${y}-${m}-${d}`;
-    
-    const tomorrow = new Date(now);
-    tomorrow.setDate(tomorrow.getDate() + 1);
-    const tom_ymd = `${tomorrow.getFullYear()}-${String(tomorrow.getMonth() + 1).padStart(2, '0')}-${String(tomorrow.getDate()).padStart(2, '0')}`;
-
-    const defPts = {i:"02:40", g:"04:33", o:"12:12", k:"16:09", a:"19:41", y:"21:25"};
-    const todayPts = data[ymd] || defPts;
-    const tomPts = data[tom_ymd] || defPts;
-
-    const months = ["Oca","Şub","Mar","Nis","May","Haz","Tem","Ağu","Eyl","Eki","Kas","Ara"];
-    const dateStr = `${d} ${months[now.getMonth()]}`;
-    const weatherDateStr = `${d} ${months[now.getMonth()]} ${y}`;
-
-    const toDate = (timeStr, isTomorrow=false) => {
-       const [h,min] = timeStr.split(':');
-       const dateObj = new Date(now);
-       if(isTomorrow) dateObj.setDate(dateObj.getDate() + 1);
-       dateObj.setHours(h, min, 0, 0);
-       return dateObj;
-    };
-
-    const sched = [
-      { nextId: "i", nextName: "İmsak'a kalan", time: toDate(todayPts.i), activeForPrev: "y" },
-      { nextId: "g", nextName: "Güneş'e kalan", time: toDate(todayPts.g), activeForPrev: "i" },
-      { nextId: "o", nextName: "Öğle'ye kalan", time: toDate(todayPts.o), activeForPrev: "g" },
-      { nextId: "k", nextName: "İkindi'ye kalan", time: toDate(todayPts.k), activeForPrev: "o" },
-      { nextId: "a", nextName: "Akşam'a kalan", time: toDate(todayPts.a), activeForPrev: "k" },
-      { nextId: "y", nextName: "Yatsı'ya kalan", time: toDate(todayPts.y), activeForPrev: "a" },
-      { nextId: "i_tom", nextName: "İmsak'a kalan", time: toDate(tomPts.i, true), activeForPrev: "y" }
-    ];
-
-    let activeId = "y";
-    let nextName = "İmsak'a kalan";
-    let diff = 0;
-
-    for (let i = 0; i < sched.length; i++) {
-      if (now < sched[i].time) {
-        diff = sched[i].time - now;
-        activeId = sched[i].activeForPrev;
-        nextName = sched[i].nextName;
-        break;
-      }
-    }
-
-    const hh = Math.floor(diff / 3600000);
-    const mm = Math.floor((diff % 3600000) / 60000);
-    const ss = Math.floor((diff % 60000) / 1000);
-    const countdown = `${String(hh).padStart(2,'0')}:${String(mm).padStart(2,'0')}:${String(ss).padStart(2,'0')}`;
-
-    return { pts: todayPts, dateStr, weatherDateStr, countdown, nextName, activeId };
-  }
-
-  const [prayerState, setPrayerState] = useState(() => getLivePrayerState());
-
-  useEffect(() => {
-    const timer = setInterval(() => setPrayerState(getLivePrayerState()), 1000);
-    return () => clearInterval(timer);
-  }, []);
-
+  const todayPrayer = {i:"02:44", g:"04:35", o:"12:13", k:"16:08", a:"19:37", y:"21:20"};
   return (
     <section id="gundem">
       <div className="wrap gundem-layout">
@@ -1105,28 +1105,22 @@ function AgendaDashboard(){
 
         <div className="widget-panel">
           <div className="widget-card weather" style={{background: 'linear-gradient(135deg, #4facfe 0%, #00f2fe 100%)'}}>
-            <div className="w-top"><span className="city">Ağrı Merkez</span><span className="date">{prayerState.weatherDateStr}</span></div>
+            <div className="w-top"><span className="city">Ağrı Merkez</span><span className="date">02 Haz 2026</span></div>
             <div className="w-main"><span className="temp">19°</span><span className="desc">Parçalı bulutlu</span></div>
           </div>
 
           <div className="widget-card prayer">
             <div className="p-top">
-              <div className="p-top-row">Vakitler <span className="p-date">{prayerState.dateStr}</span></div>
-              <div className="p-countdown">
-                {prayerState.countdown ? (
-                  <>{prayerState.nextName} <span>{prayerState.countdown}</span></>
-                ) : (
-                  "Hesaplanıyor..."
-                )}
-              </div>
+              <div className="p-top-row">Vakitler <span className="p-date">02 Haz</span></div>
+              <div className="p-countdown">Ağrı Vakit Bilgileri</div>
             </div>
             <div className="p-grid">
-              <div className={`p-item ${prayerState.activeId==="i"?"active":""}`}><span>İmsak</span><strong>{prayerState.pts.i}</strong></div>
-              <div className={`p-item ${prayerState.activeId==="g"?"active":""}`}><span>Güneş</span><strong>{prayerState.pts.g}</strong></div>
-              <div className={`p-item ${prayerState.activeId==="o"?"active":""}`}><span>Öğle</span><strong>{prayerState.pts.o}</strong></div>
-              <div className={`p-item ${prayerState.activeId==="k"?"active":""}`}><span>İkindi</span><strong>{prayerState.pts.k}</strong></div>
-              <div className={`p-item ${prayerState.activeId==="a"?"active":""}`}><span>Akşam</span><strong>{prayerState.pts.a}</strong></div>
-              <div className={`p-item ${prayerState.activeId==="y"?"active":""}`}><span>Yatsı</span><strong>{prayerState.pts.y}</strong></div>
+              <div className="p-item"><span>İmsak</span><strong>{todayPrayer.i}</strong></div>
+              <div className="p-item"><span>Güneş</span><strong>{todayPrayer.g}</strong></div>
+              <div className="p-item active"><span>Öğle</span><strong>{todayPrayer.o}</strong></div>
+              <div className="p-item"><span>İkindi</span><strong>{todayPrayer.k}</strong></div>
+              <div className="p-item"><span>Akşam</span><strong>{todayPrayer.a}</strong></div>
+              <div className="p-item"><span>Yatsı</span><strong>{todayPrayer.y}</strong></div>
             </div>
           </div>
 
@@ -1137,7 +1131,6 @@ function AgendaDashboard(){
   );
 }
 
-/* ===================== KATEGORİLER ===================== */
 function Categories({ onOpen }){
   const cats = window.AGRI.categories; 
   const [active, setActive] = useState(0);
@@ -1184,27 +1177,28 @@ function Categories({ onOpen }){
 function PharmacyFullView() {
   const districtsList = ["MERKEZ", "TAŞLIÇAY", "DİYADİN", "DOĞUBAYAZIT", "ELEŞKİRT", "HAMUR", "PATNOS", "TUTAK"];
   const [district, setDistrict] = useState("MERKEZ");
-  const [currentDateText, setCurrentDateText] = useState(() => {
-    const now = new Date();
-    return `${now.getDate().toString().padStart(2, '0')}.${(now.getMonth() + 1).toString().padStart(2, '0')}.${now.getFullYear()}`;
-  });
+  const [currentDateText, setCurrentDateText] = useState("02.06.2026");
 
   useEffect(() => {
     const updateDate = () => {
       const now = new Date();
-      const calc = `${now.getDate().toString().padStart(2, '0')}.${(now.getMonth() + 1).toString().padStart(2, '0')}.${now.getFullYear()}`;
-      if (currentDateText !== calc) setCurrentDateText(calc);
+      const d = now.getDate().toString().padStart(2, '0');
+      const m = (now.getMonth() + 1).toString().padStart(2, '0');
+      const y = now.getFullYear();
+      const calc = `${d}.${m}.${y}`;
+      if (window.AGRI.dutyPharmacies.some(p => p.date === calc)) setCurrentDateText(calc);
     };
+    updateDate();
     const t = setInterval(updateDate, 60000);
     return () => clearInterval(t);
-  }, [currentDateText]);
+  }, []);
 
   const list = window.AGRI.dutyPharmacies.filter(
     p => p.date === currentDateText && p.district.toUpperCase() === district.toUpperCase()
   );
 
   return (
-    <div className="pharm-page">
+    <div className="pharm-page animate-fade">
       <div className="pharm-page-bar">
         <div className="pharm-page-date">
           <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2"><rect x="3" y="4" width="18" height="18" rx="2"/><path d="M16 2v4M8 2v4M3 10h18"/></svg>
@@ -1241,151 +1235,32 @@ function PharmacyFullView() {
   );
 }
 
-/* ===================== SAĞLIK HİZMETLERİ TAM SAYFA ===================== */
-function HealthFullView() {
-  const subs = window.AGRI.healthSubcategories || [];
-  const diets = window.AGRI.dietitians || [];
-  const [view, setView] = useState("subs");          
-  const [selectedDiet, setSelectedDiet] = useState(null);
+/* ===================== DETAYLI GÖRÜNTÜLEME MODALLARI ===================== */
+function PlacesOverlay({ cat, onClose }){
+  const [selectedSubCat, setSelectedSubCat] = useState(null);
+  const [selectedPlace, setSelectedPlace] = useState(null);
+  const [isClosing, setIsClosing] = useState(false);
+  
+  const isNobetci = cat.id === "nobetci";
+  const hasSubCats = cat.hasSubCategories;
 
-  useEffect(() => {
-    const handler = () => {
-      setView("diyetisyen");
-      if (diets.length > 0) setSelectedDiet(diets[0]);
-    };
-    window.addEventListener('show-dietitian', handler);
-    if (window._forceDietitianOpen) {
-      handler();
-      window._forceDietitianOpen = false;
+  const handleBack = () => {
+    if (selectedPlace) {
+      setSelectedPlace(null);
+    } else if (selectedSubCat) {
+      setSelectedSubCat(null);
+    } else {
+      setIsClosing(true);
+      setTimeout(onClose, 250); 
     }
-    return () => window.removeEventListener('show-dietitian', handler);
-  }, [diets]);
+  };
 
-  const PinSvg = (props) => (
-    <svg width={props.s || 18} height={props.s || 18} viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.4">
-      <path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z"/><circle cx="12" cy="10" r="3"/>
-    </svg>
-  );
-
-  if (view === "diyetisyen") {
-    return (
-      <div className="diet-page">
-        <div className="health-sub-intro">
-          <div className="kick">Sağlık Hizmetleri · Diyetisyen</div>
-          <h3>Diyetisyenler</h3>
-          <p>Yüz yüze ve online beslenme danışmanlığı veren uzman diyetisyenler.</p>
-          <button className="ov-back" style={{marginTop:18}} onClick={()=>setView("subs")}>← Sağlık Kategorileri</button>
-        </div>
-
-        <div className="diet-grid">
-          {diets.map((d, i) => {
-            const hasPhoto = d.photo && d.photo.trim() !== "";
-            return (
-              <div className="diet-card" key={i} style={{animationDelay:`${i*0.08}s`}} onClick={()=>setSelectedDiet(d)}>
-                <div className="diet-photo-wrap">
-                  {hasPhoto ? (
-                    <img src={d.photo} alt={d.name} />
-                  ) : (
-                    <div className="diet-photo-noimg">
-                      <svg width="52" height="52" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.5"><circle cx="12" cy="8" r="4"/><path d="M4 21v-1a8 8 0 0 1 16 0v1"/></svg>
-                    </div>
-                  )}
-                </div>
-                <div className="diet-card-body">
-                  <div className="diet-card-name">{d.name}</div>
-                  <button className="diet-card-btn" onClick={(e)=>{ e.stopPropagation(); setSelectedDiet(d); }}>
-                    Detaylı Gör
-                    <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.4"><path d="M5 12h14M13 6l6 6-6 6"/></svg>
-                  </button>
-                </div>
-              </div>
-            );
-          })}
-        </div>
-
-        {selectedDiet && (
-          <div className="diet-modal-overlay" onClick={(e)=>{ if(e.target.className==='diet-modal-overlay') setSelectedDiet(null); }}>
-            <div className="diet-modal-card">
-              <div className="diet-modal-close" onClick={()=>setSelectedDiet(null)}>X</div>
-              <div className="diet-modal-hero">
-                {selectedDiet.photo && selectedDiet.photo.trim() !== "" ? (
-                  <img src={selectedDiet.photo} alt={selectedDiet.name} />
-                ) : (
-                  <div className="diet-modal-hero-noimg">
-                    <svg width="72" height="72" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.4"><circle cx="12" cy="8" r="4"/><path d="M4 21v-1a8 8 0 0 1 16 0v1"/></svg>
-                  </div>
-                )}
-              </div>
-              <div className="diet-modal-body">
-                <div className="diet-modal-name">{selectedDiet.name}</div>
-                <p className="diet-modal-tagline">{selectedDiet.tagline}</p>
-
-                <div className="diet-contact-box">
-                  <div className="diet-contact-title">İletişim Bilgileri</div>
-                  {selectedDiet.phones.map((ph, k) => (
-                    <a className="diet-contact-row phone" key={k} href={`tel:${ph.replace(/\s/g,'')}`}>
-                      <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.2"><path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07 19.5 19.5 0 0 1-6-6 19.79 19.79 0 0 1-3.07-8.67A2 2 0 0 1 4.11 2h3a2 2 0 0 1 2 1.72c.13.96.36 1.9.7 2.81a2 2 0 0 1-.45 2.11L8.09 9.91a16 16 0 0 0 6 6l1.27-1.27a2 2 0 0 1 2.11-.45c.91.34 1.85.57 2.81.7A2 2 0 0 1 22 16.92z"/></svg>
-                      <span className="val"><span className="label">Randevu için</span>{ph}</span>
-                    </a>
-                  ))}
-                  <div className="diet-contact-row">
-                    <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.2"><path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z"/><circle cx="12" cy="10" r="3"/></svg>
-                    <span className="val"><span className="label">Adres</span>{selectedDiet.address}</span>
-                  </div>
-                </div>
-
-                <a className="diet-maps-btn" href={selectedDiet.mapsUrl} target="_blank" rel="noopener noreferrer">
-                  <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.4"><path d="M3 11l19-9-9 19-2-8-8-2z"/></svg>
-                  Google Haritalar'da Aç (Navigasyon)
-                </a>
-              </div>
-            </div>
-          </div>
-        )}
-      </div>
-    );
+  const handleClose = () => {
+    setIsClosing(true);
+    setTimeout(onClose, 250);
   }
 
-  return (
-    <div className="health-sub-page">
-      <div className="health-sub-intro">
-        <div className="kick">Sağlık Hizmetleri</div>
-        <h3>Bir hizmet alanı seçin</h3>
-        <p>Özel diş hekimi klinikleri, dil ve konuşma terapistleri, psikologlar, fizyoterapistler ve diyetisyenler bir arada.</p>
-      </div>
-
-      <div className="health-sub-grid">
-        {subs.map((s, i) => (
-          <div
-            className="health-sub-card"
-            key={s.id}
-            style={{ animationDelay:`${i*0.05}s` }}
-            onClick={()=>{ if(s.id === "diyetisyen") setView("diyetisyen"); }}
-          >
-            <span className="hs-glow" style={{ background:s.color }}></span>
-            <span className="hs-icon" style={{ background:`linear-gradient(150deg, ${s.color} 0%, color-mix(in srgb, ${s.color}, #000 30%) 100%)` }}>
-              <svg width="26" height="26" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.2"><path d="M12 21s7-6.3 7-11a7 7 0 1 0-14 0c0 4.7 7 11 7 11Z"/><circle cx="12" cy="10" r="2.5"/></svg>
-            </span>
-            <span className="hs-name">{s.name}</span>
-            <span className="hs-desc">{s.desc}</span>
-            <span className="hs-go">
-              {s.hasContent ? "Listeyi Gör" : "Çok yakında"}
-              <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.6"><path d="M5 12h14M13 6l6 6-6 6"/></svg>
-            </span>
-          </div>
-        ))}
-      </div>
-    </div>
-  );
-}
-
-function PlacesOverlay({ cat, onClose }){
-  const [selectedPlace, setSelectedPlace] = useState(null);
-  const isGezilecek = cat.id === "gezilecek";
-  const isNobetci = cat.id === "nobetci";
-  const isSaglik = cat.id === "saglik";
-
-  if (selectedPlace && isGezilecek) {
+  if (selectedPlace) {
     return (
       <div className="place-modal-overlay" onClick={(e) => { if(e.target.className==='place-modal-overlay') setSelectedPlace(null); }}>
         <div className="place-modal-content">
@@ -1395,77 +1270,135 @@ function PlacesOverlay({ cat, onClose }){
               <img src={selectedPlace.img} alt={selectedPlace.name} />
             ) : (
               <div className="pm-noimg">
-                <svg width="54" height="54" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.4"><path d="M12 21s7-6.3 7-11a7 7 0 1 0-14 0c0 4.7 7 11 7 11Z"/><circle cx="12" cy="10" r="2.5"/></svg>
+                <div style={{fontSize:'42px', marginBottom:'10px'}}>{selectedPlace.icon || '📍'}</div>
                 <span>Görsel yakında eklenecek</span>
               </div>
             )}
             <div className="pm-img-scrim"></div>
             <div className="pm-title-box">
               <h2>{selectedPlace.name}</h2>
+              {selectedPlace.subName && <span style={{display:'block', fontSize:'15px', opacity:0.85, fontWeight:600, marginTop:'4px', letterSpacing:'0.02em'}}>{selectedPlace.subName}</span>}
             </div>
           </div>
           <div className="pm-body">
             <p className="pm-info">{selectedPlace.info}</p>
             <div className="pm-meta-box">
-              <div className="pm-meta-item">
-                <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5"><path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z"/><circle cx="12" cy="10" r="3"/></svg>
-                <div><strong>Konum / İlçe:</strong> {selectedPlace.area}</div>
-              </div>
-              <div className="pm-meta-item">
-                <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5"><path d="M20 10c0 6-8 12-8 12s-8-6-8-12a8 8 0 0 1 16 0Z"/></svg>
-                <div><strong>Adres Tarifi:</strong> {selectedPlace.address}</div>
-              </div>
+              
+              {selectedPlace.area && (
+                <div className="pm-meta-item">
+                  <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5"><path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z"/><circle cx="12" cy="10" r="3"/></svg>
+                  <div><strong>Konum / İlçe:</strong> {selectedPlace.area}</div>
+                </div>
+              )}
+
+              {selectedPlace.address && (
+                <div className="pm-meta-item">
+                  <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5"><path d="M20 10c0 6-8 12-8 12s-8-6-8-12a8 8 0 0 1 16 0Z"/></svg>
+                  <div><strong>Adres Tarifi:</strong> {selectedPlace.address}</div>
+                </div>
+              )}
+
+              {selectedPlace.phones && selectedPlace.phones.length > 0 && (
+                <div className="pm-meta-item">
+                  <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5"><path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07 19.5 19.5 0 0 1-6-6 19.79 19.79 0 0 1-3.07-8.67A2 2 0 0 1 4.11 2h3a2 2 0 0 1 2 1.72 12.84 12.84 0 0 0 .7 2.81 2 2 0 0 1-.45 2.11L8.09 9.91a16 16 0 0 0 6 6l1.27-1.27a2 2 0 0 1 2.11-.45 12.84 12.84 0 0 0 2.81.7A2 2 0 0 1 22 16.92z"/></svg>
+                  <div style={{display:'flex', flexDirection:'column', gap:'4px'}}>
+                    <strong>İletişim & Randevu:</strong>
+                    {selectedPlace.phones.map((pNum, pIdx) => (
+                      <a key={pIdx} href={`tel:${pNum.replace(/\s/g,'')}`} style={{color:'var(--ink)', textDecoration:'none', fontWeight:'700', fontSize:'15.5px'}}>📞 {pNum}</a>
+                    ))}
+                  </div>
+                </div>
+              )}
+
+              {selectedPlace.email && (
+                <div className="pm-meta-item">
+                  <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5"><path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"/><polyline points="22,6 12,13 2,6"/></svg>
+                  <div><strong>E-Posta:</strong> <a href={`mailto:${selectedPlace.email}`} style={{color:'var(--ink)', fontWeight:'700'}}>{selectedPlace.email}</a></div>
+                </div>
+              )}
             </div>
-            <a className="pm-maps-btn" href={selectedPlace.mapsUrl} target="_blank" rel="noopener noreferrer">
-              Google Haritalar'da Aç (Navigasyon)
-            </a>
+
+            {selectedPlace.mapsUrl && (
+              <a className="pm-maps-btn" href={selectedPlace.mapsUrl} target="_blank" rel="noopener noreferrer">
+                Google Haritalar'da Aç (Navigasyon)
+              </a>
+            )}
           </div>
         </div>
       </div>
     );
   }
 
+  let content;
+  if (isNobetci) {
+    content = <PharmacyFullView />;
+  } else if (hasSubCats && !selectedSubCat) {
+    content = (
+      <div className="grid animate-fade">
+        {cat.subCategories.map((sub, i) => (
+          <div key={i} className="card subcat-card" onClick={() => setSelectedSubCat(sub)} style={{background:`linear-gradient(150deg, ${cat.color} 0%, color-mix(in srgb, ${cat.color}, #000 45%) 100%)`}}>
+            <div className="scrim"></div>
+            
+            <div className="card-top-bar">
+              <div className="card-icon">{sub.icon || '📌'}</div>
+            </div>
+
+            <div className="body">
+              <h3>{sub.name}</h3>
+              <div className="card-note">{sub.note || 'Tıklayıp içerikleri inceleyin'}</div>
+            </div>
+          </div>
+        ))}
+      </div>
+    );
+  } else {
+    const activePlaces = hasSubCats ? (selectedSubCat ? selectedSubCat.places : []) : cat.places;
+    
+    if (activePlaces && activePlaces.length > 0) {
+      content = (
+        <div className="grid animate-fade">
+          {activePlaces.map((p, i) => {
+            const hasImg = p.img && p.img.trim() !== "";
+            const cardStyle = hasImg
+              ? { backgroundImage:`url(${p.img})` }
+              : { background:`linear-gradient(150deg, ${cat.color} 0%, color-mix(in srgb, ${cat.color}, #000 45%) 100%)` };
+            return (
+              <div key={i} className="card" onClick={() => setSelectedPlace(p)} style={cardStyle}>
+                <div className="scrim"></div>
+                
+                <div className="card-top-bar">
+                  <div className="card-icon">{p.icon || '📍'}</div>
+                </div>
+
+                <div className="body">
+                  <h3>{p.name}</h3>
+                  {p.subName && <div style={{fontSize:'13px', color:'rgba(255,255,255,0.85)', fontWeight:'700', marginTop:'4px'}}>{p.subName}</div>}
+                  {p.area && <div className="card-area">📍 {p.area}</div>}
+                  <div className="card-note">{p.note || 'Detayları görmek için tıklayın'}</div>
+                </div>
+              </div>
+            );
+          })}
+        </div>
+      );
+    } else {
+      content = (
+        <div className="coming-soon-container animate-fade">
+          <h4>Çok yakında burada listelenecektir.</h4>
+        </div>
+      );
+    }
+  }
+
   return (
-    <div className="ov">
+    <div className={`ov ${isClosing ? 'animate-out' : 'animate-in'}`} style={isClosing ? {opacity:0, transition:'opacity 0.2s'} : {}}>
       <div className="ov-head">
-        <button className="ov-back" onClick={onClose}>Geri Dön</button>
-        <div className="ov-title"><h2>{cat.name}</h2></div>
-        <button className="ov-close" onClick={onClose}>X</button>
+        <button className="ov-back" onClick={handleBack}>Geri Dön</button>
+        <div className="ov-title"><h2>{selectedSubCat ? selectedSubCat.name : cat.name}</h2></div>
+        <button className="ov-close" onClick={handleClose}>X</button>
       </div>
       <div className="ov-body">
-        {isGezilecek ? (
-          <div className="grid">
-            {cat.places.map((p, i) => {
-              const hasImg = p.img && p.img.trim() !== "";
-              const cardStyle = hasImg
-                ? { backgroundImage:`url(${p.img})`, backgroundSize:'cover', backgroundPosition:'center' }
-                : { background:`linear-gradient(150deg, ${cat.color} 0%, color-mix(in srgb, ${cat.color}, #000 45%) 100%)` };
-              return (
-                <div key={i} className="card" onClick={() => setSelectedPlace(p)} style={cardStyle}>
-                  {!hasImg && (
-                    <div className="card-noimg">
-                      <svg width="42" height="42" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.6"><path d="M12 21s7-6.3 7-11a7 7 0 1 0-14 0c0 4.7 7 11 7 11Z"/><circle cx="12" cy="10" r="2.5"/></svg>
-                    </div>
-                  )}
-                  <div className="scrim"></div>
-                  <div className="body">
-                    <h3>{p.name}</h3>
-                    <div className="card-area">📍 {p.area}</div>
-                    <p>{p.info.slice(0, 90)}...</p>
-                  </div>
-                </div>
-              );
-            })}
-          </div>
-        ) : isNobetci ? (
-          <PharmacyFullView />
-        ) : isSaglik ? (
-          <HealthFullView />
-        ) : (
-          <div className="coming-soon-container">
-            <h4>Çok yakında burada listelenecektir.</h4>
-          </div>
-        )}
+        {content}
       </div>
     </div>
   );
@@ -1481,6 +1414,32 @@ function App(){
   const [tosStatus, setTosStatus] = useStateA(() => {
     return safeStore.get('agri_onay') || 'ask'; 
   });
+
+  useEffectA(() => {
+    const handleLocationRouting = () => {
+      const pathName = window.location.pathname.replace(/^\/|\/$/g, "");
+      if (pathName) {
+        const matchingCat = window.AGRI.categories.find(c => c.id === pathName);
+        if (matchingCat) setOpenCat(matchingCat);
+      } else {
+        setOpenCat(null);
+      }
+    };
+
+    handleLocationRouting(); 
+    window.addEventListener("popstate", handleLocationRouting);
+    return () => window.removeEventListener("popstate", handleLocationRouting);
+  }, []);
+
+  const handleUpdateCategoryView = (cat) => {
+    if (cat) {
+      window.history.pushState(null, "", `/${cat.id}`);
+      setOpenCat(cat);
+    } else {
+      window.history.pushState(null, "", "/"); 
+      setOpenCat(null);
+    }
+  };
 
   const handleAcceptTos = () => {
     safeStore.set('agri_onay', 'true');
@@ -1499,20 +1458,8 @@ function App(){
     }
   }, [tosStatus]);
 
-  useEffectA(() => {
-    const handleDietBanner = () => {
-      const saglikCat = window.AGRI.categories.find(c => c.id === 'saglik');
-      setOpenCat(saglikCat);
-      window._forceDietitianOpen = true; 
-      setTimeout(() => window.dispatchEvent(new Event('show-dietitian')), 50);
-    };
-    window.addEventListener('trigger-diet-banner', handleDietBanner);
-    return () => window.removeEventListener('trigger-diet-banner', handleDietBanner);
-  }, []);
-
-  const privacyText = "Değerli Ziyaretçimiz, bu web sayfası Ağrı'ya hizmet eden; hiçbir verinizi işlemeyen, saklamayan veya üçüncü taraflarla paylaşmayan, hiçbir konum bilgisi veya kişisel bilgi talep etmeyen bir tanıtım platformudur. Sizden ad, soyad, telefon, e-posta veya konum gibi hiçbir kişisel veri istenmez ve toplanmaz. Amacımız yalnızca Ağrı'yı; restoranları, cafeleri, pastaneleri, sağlık hizmetlerini, nöbetçi eczaneleri, güzellik ve bakım merkezlerini, kuaförleri, eğitim kurumlarını, etkinlikleri ve gezilecek yerleri tek bir çatı altında, ücretsiz biçimde hem Ağrı halkına hem de değerli misafirlerimize tanıtmaktır. Tarayıcınızda yalnızca bu onay kutusunu bir daha göstermemek için küçük bir teknik kayıt (yerel depolama) tutulabilir; bu kayıt hiçbir şekilde tarafımıza iletilmez. Herhangi bir soru veya talebiniz için biagri0404@hotmail.com adresinden bize ulaşabilirsiniz.\n\nÜçüncü Taraf Verileri ve Kamuya Açık Bilgiler:\nPlatformumuz, işletmelerin ve kişilerin kendi rızalarıyla rehberimizde yer alması için tarafımıza sunduğu iletişim verilerini (telefon numarası, açık adres, işletme adı, vitrin görselleri) kamuya açık şekilde sergilemektedir. Bu verilerin toplanması, yayınlanması ve işlenmesi tamamen veri sahibinin (işletme/kişi) kendi talebi ve onayı ile gerçekleşmiştir. Tarafımıza iletilen bu işletme verilerinde hak ihlali, yanlış yönlendirme veya sahte beyan bulunması durumunda, sitemiz veri işleyen veya yayınlayan sıfatıyla sorumlu tutulamaz. Bilgilerini sitemizden kaldırtmak isteyen veya güncelleyen işletmeler, sitemiz üzerindeki iletişim kanallarından bizimle irtibata geçerek bu yöndeki taleplerini iletebilirler. İşlem en kısa sürede gerçekleştirilecektir, ancak geçmişe dönük yaşanmış mağduriyetlerden sitemiz sorumlu tutulamaz.";
-
-  const termsText = "Bu platformu kullanarak aşağıdaki şartları kabul etmiş olursunuz. Platformda yer alan tüm bilgiler (mekan, adres, telefon, nöbetçi eczane, vakitler vb.) tamamen bilgilendirme amaçlıdır ve resmî nitelik taşımaz. Bilgiler zamanla değişebileceğinden, olası hatalı, eksik veya güncel olmayan içeriklerden tarafımız sorumlu tutulamaz; önemli durumlarda ilgili kurumdan teyit almanız önerilir. Platformdaki içerikler izinsiz olarak ticari amaçla kopyalanamaz veya çoğaltılamaz. Bağlantı verilen üçüncü taraf hizmetlerin (ör. harita uygulamaları) içeriğinden ve gizlilik uygulamalarından o hizmet sağlayıcılar sorumludur. Bir bilgiyi düzeltmek, eklemek veya kaldırmak isterseniz biagri0404@hotmail.com adresi üzerinden bizimle iletişime geçebilirsiniz. Şartlar gerektiğinde güncellenebilir.\n\nMadde X – İçerik Sağlayıcılar, Üçüncü Taraf İşletmeler ve Sorumluluk Reddi\n\n1. Web sitemizde listelenen \"Gezilecek Yerler\" kategorisi hariç olmak üzere; diğer tüm kategorilerde (işletmeler, mekanlar, hizmet sağlayıcılar vb.) yer alan her türlü görsel, iletişim numarası, konum/adres bilgisi, hizmet tanımı ve fiyatlandırma gibi içerikler, bizzat ilgili kişi ve işletmelerin açık rızası ve kendi beyanları doğrultusunda tarafımıza iletilmiş ve sisteme eklenmiştir.\n\n2. Platformumuz yalnızca bir aracı, rehber ve vitrin görevi görmektedir. Sitemizde yer alan üçüncü şahıs veya işletmelere ait hiçbir bilginin kesin doğruluğunu, güncelliğini veya güvenilirliğini garanti etmiyoruz. Sitede yer alan bilgilerin yanlış, eksik veya yanıltıcı olmasından doğabilecek hiçbir hukuki, maddi veya manevi zarardan platformumuz, site yöneticilerimiz ve kurucularımız sorumlu tutulamaz. Tüm yasal sorumluluk, bu içeriklerin yayınlanmasını talep eden ve bilgileri tarafımıza ileten kişi ve işletmelerin şahsına/tüzel kişiliğine aittir.\n\n3. Hizmet Kalitesi ve Ticari İlişkiler: Kullanıcıların, sitemiz üzerinden iletişim kurduğu, ziyaret ettiği veya hizmet/ürün satın aldığı hiçbir işletme ile platformumuz arasında ticari bir bağ bulunmamaktadır. Bu kişi veya işletmelerden alınacak hizmetin kalitesi, ayıplı mal/hizmet süreçleri, müşteri memnuniyetsizliği veya yaşanabilecek herhangi bir ticari/hukuki uyuşmazlıkta sitemiz kesinlikle taraf değildir ve hiçbir sorumluluk kabul etmez.\n\n4. Yapay Zeka ile Üretilen İçerikler: Sitemizde yalnızca \"Gezilecek Yerler\" kategorisi altında sunulan görsel materyaller, tamamen tarafımızca yapay zeka (AI) teknolojileri kullanılarak üretilmiştir. Bu görseller temsilidir ve gerçeği ile birebir uyuşmama ihtimali barındırır. Kullanıcılar bu durumu bilerek sitemizi ziyaret ettiklerini kabul ederler.\n\nSorumluluk Reddi (Disclaimer): Verilen bilgiler bilgilendirme amaçlıdır, resmî nitelik taşımaz ve güncel olmayabilir.";
+  const privacyText = "Değerli Ziyaretçimiz, bu web sayfası Ağrı'ya hizmet eden; hiçbir verinizi işlemeyen, saklamayan veya üçüncü taraflarla paylaşmayan, hiçbir konum bilgisi veya kişisel bilgi talep etmeyen bir tanıtım platformudur. Sizden ad, soyad, telefon, e-posta veya konum gibi hiçbir kişisel veri istenmez ve toplanmaz. Amacımız yalnızca Ağrı'yı; restoranları, cafeleri, pastaneleri, sağlık hizmetlerini, nöbetçi eczaneleri, güzellik ve bakım merkezlerini, kuaförleri, eğitim kurumlarını, etkinlikleri ve gezilecek yerleri tek bir çatı altında, ücretsiz biçimde hem Ağrı halkına hem de değerli misafirlerimize tanıtmaktır. Tarayıcınızda yalnızca bu onay kutusunu bir daha göstermemek için küçük bir teknik kayıt (yerel depolama) tutulabilir; bu kayıt hiçbir şekilde tarafımıza iletilmez. Herhangi bir soru veya talebiniz için biagri0404@hotmail.com adresinden bize ulaşabilirsiniz.";
+  const termsText = "Bu platformu kullanarak aşağıdaki şartları kabul etmiş olursunuz. Platformda yer alan tüm bilgiler (mekan, adres, telefon, nöbetçi eczane, vakitler vb.) tamamen bilgilendirme amaçlıdır ve resmî nitelik taşımaz. Bilgiler zamanla değişebileceğinden, olası hatalı, eksik veya güncel olmayan içeriklerden tarafımız sorumlu tutulamaz; önemli durumlarda ilgili kurumdan teyit almanız önerilir. Platformdaki içerikler izinsiz olarak ticari amaçla kopyalanamaz veya çoğaltılamaz. Bağlantı verilen üçüncü taraf hizmetlerin (ör. harita uygulamaları) içeriğinden ve gizlilik uygulamalarından o hizmet sağlayıcılar sorumludur. Bir bilgiyi düzeltmek, eklemek veya kaldırmak isterseniz biagri0404@hotmail.com adresi üzerinden bizimle iletişime geçebilirsiniz. Şartlar gerektiğinde güncellenebilir.\n\nSorumluluk Reddi (Disclaimer): Verilen bilgiler bilgilendirme amaçlıdır, resmî nitelik taşımaz ve güncel olmayabilir.";
 
   const docData = {
     privacy: { title: "Gizlilik Politikası", body: privacyText },
@@ -1522,12 +1469,12 @@ function App(){
   return (
     <div id="top" style={{ pointerEvents: tosStatus !== 'true' ? 'none' : 'auto' }}>
       
-      <Topbar dark={false} />
-      <Hero onOpenCat={(id) => setOpenCat(window.AGRI.categories.find(c=>c.id===id))} onSearchPlace={() => setOpenCat(window.AGRI.categories.find(c=>c.id==='gezilecek'))} />
+      <Topbar />
+      <Hero onOpenCat={handleUpdateCategoryView} onSearchPlace={() => handleUpdateCategoryView(window.AGRI.categories.find(c=>c.id==='gezilecek'))} />
       <ImageMarquee /> 
       <Stories />
       <AgendaDashboard />
-      <Categories onOpen={setOpenCat} />
+      <Categories onOpen={handleUpdateCategoryView} />
       
       <footer className="foot" id="iletisim">
         <div className="wrap">
@@ -1540,7 +1487,7 @@ function App(){
               <div className="col">
                 <h5>Kategoriler</h5>
                 {window.AGRI.categories.map(c => (
-                  <span key={c.id} onClick={()=>setOpenCat(window.AGRI.categories.find(x=>x.id===c.id))}>{c.name}</span>
+                  <span key={c.id} onClick={()=>handleUpdateCategoryView(window.AGRI.categories.find(x=>x.id===c.id))}>{c.name}</span>
                 ))}
               </div>
               <div className="col">
@@ -1561,7 +1508,7 @@ function App(){
         </div>
       </footer>
 
-      {openCat && <PlacesOverlay cat={openCat} onClose={() => setOpenCat(null)} />}
+      {openCat && <PlacesOverlay cat={openCat} onClose={() => handleUpdateCategoryView(null)} />}
 
       {docView && (
         <div className="doc-modal-overlay" style={{ pointerEvents:'auto' }} onClick={(e)=>{ if(e.target.className==='doc-modal-overlay') setDocView(null); }}>
@@ -1582,7 +1529,6 @@ function App(){
           <div className="tos-modal">
             <h2>Hoş Geldiniz 🌿</h2>
             <p>Ağrı'nın dijital rehberine hoş geldiniz. Bu platform sizden hiçbir kişisel veri veya konum bilgisi talep etmez. Devam etmeden önce lütfen <strong onClick={()=>setDocView('privacy')} style={{cursor:'pointer', textDecoration:'underline'}}>Gizlilik Politikası</strong> ve <strong onClick={()=>setDocView('terms')} style={{cursor:'pointer', textDecoration:'underline'}}>Kullanım Şartları</strong> metinlerini onaylayın.</p>
-            <p>Platformumuzda yer alan "Gezilecek Yerler" kategorisi dışındaki tüm işletme, kurum ve kişi profillerine ait bilgiler (görseller, adresler, iletişim numaraları ve sunulan hizmetler), ilgili tarafların kendi hür iradeleri ve rızaları ile sitemizde yayınlanmak üzere tarafımıza iletilmiştir. Bu bilgilerin (eksik, yanlış veya yanıltıcı olması dahil) doğruluğundan ve bu işletmelerden alacağınız mal/hizmetlerin kalitesinden platformumuz hiçbir şekilde sorumlu tutulamaz. Tüm hukuki sorumluluk, bu bilgileri sitemize gönderen kişi ve işletmelere aittir. Ek olarak, sitemizdeki "Gezilecek Yerler" kategorisinde yer alan görseller tamamen tarafımızca yapay zeka kullanılarak üretilmiş olup temsilidir. Sitemizi kullanmaya devam ederek ve "Okudum, Onaylıyorum" butonuna tıklayarak, Kullanım Şartları ve Gizlilik Politikamızı peşinen kabul etmiş olursunuz.</p>
             <p className="tos-disclaimer"><strong>Sorumluluk Reddi (Disclaimer):</strong> Verilen bilgiler bilgilendirme amaçlıdır, resmî nitelik taşımaz ve güncel olmayabilir.</p>
             <div className="tos-actions">
               <button className="tos-btn decline" onClick={handleDeclineTos}>Şimdilik Onaylamıyorum</button>
