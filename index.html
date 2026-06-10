@@ -194,7 +194,7 @@ a{ color:inherit; text-decoration:none; cursor:pointer; }
 .marquee:hover{ animation-play-state:paused; }
 @keyframes scroll{ from{ transform:translateX(0); } to{ transform:translateX(-50%); } }
 
-.banner-item { width: 340px; height: 190px; border-radius: var(--r-md); box-shadow: var(--shadow-1); border: 1px solid rgba(255,255,255,0.4); margin-right: 20px; flex-shrink: 0; position: relative; overflow: hidden; background-size: cover; background-position: center; display: block; transition: transform 0.3s var(--ease), box-shadow 0.3s var(--ease); }
+.banner-item { width: 340px; height: 190px; border-radius: var(--r-md); box-shadow: var(--shadow-1); border: 1px solid rgba(255,255,255,0.4); margin-right: 20px; flex-shrink: 0; position: relative; overflow: hidden; background-size: cover; background-position: center 20%; display: block; transition: transform 0.3s var(--ease), box-shadow 0.3s var(--ease); }
 .banner-item:hover { transform: translateY(-4px); box-shadow: var(--shadow-2); }
 .banner-scrim { position: absolute; inset: 0; background: linear-gradient(180deg, transparent 20%, rgba(0,0,0,0.85) 100%); }
 .banner-content { position: absolute; bottom: 16px; left: 16px; right: 16px; display: flex; flex-direction: column; z-index: 2; }
@@ -334,48 +334,52 @@ a{ color:inherit; text-decoration:none; cursor:pointer; }
   border-radius: var(--r-lg); 
   overflow: hidden; 
   cursor: pointer; 
-  box-shadow: 0 10px 40px rgba(0,0,0,0.1); 
-  border: 1px solid rgba(255,255,255,0.2); 
-  transition: all 0.4s cubic-bezier(0.22, 0.61, 0.36, 1); 
+  box-shadow: 0 12px 38px rgba(0,0,0,0.14); 
+  border: 1px solid rgba(255,255,255,0.18); 
+  transition: transform 0.45s cubic-bezier(0.22, 0.61, 0.36, 1), box-shadow 0.45s cubic-bezier(0.22, 0.61, 0.36, 1); 
   display: flex; 
   flex-direction: column; 
   justify-content: space-between; 
   padding: 24px; 
   color: #fff; 
   background-size: cover;
-  background-position: center;
+  background-position: center 22%;
   transform-origin: center center;
+  isolation: isolate;
 }
 .card::after {
-  content: ""; position: absolute; inset: 0; border-radius: inherit; border: 2px solid transparent; background: linear-gradient(135deg, rgba(255,255,255,0.4) 0%, rgba(255,255,255,0) 100%) border-box; -webkit-mask: linear-gradient(#fff 0 0) padding-box, linear-gradient(#fff 0 0); -webkit-mask-composite: destination-out; mask-composite: exclude; pointer-events: none; z-index: 5;
+  content: ""; position: absolute; inset: 0; border-radius: inherit; border: 2px solid transparent; background: linear-gradient(135deg, rgba(255,255,255,0.5) 0%, rgba(255,255,255,0) 55%) border-box; -webkit-mask: linear-gradient(#fff 0 0) padding-box, linear-gradient(#fff 0 0); -webkit-mask-composite: destination-out; mask-composite: exclude; pointer-events: none; z-index: 5;
 }
 .card:hover { 
-  transform: translateY(-8px) scale(1.02); 
-  box-shadow: 0 30px 60px rgba(0,0,0,0.25); 
+  transform: translateY(-10px) scale(1.015); 
+  box-shadow: 0 36px 70px rgba(0,0,0,0.3); 
 }
 .card:active {
-  transform: scale(0.96);
+  transform: scale(0.97);
 }
 .card .scrim { 
   position:absolute; inset:0; 
-  background:linear-gradient(180deg, rgba(0,0,0,0.1) 0%, rgba(0,0,0,0.4) 45%, rgba(0,0,0,0.95) 100%); 
+  background:linear-gradient(180deg, rgba(0,0,0,0.05) 0%, rgba(0,0,0,0.35) 42%, rgba(0,0,0,0.92) 100%); 
   z-index:1; pointer-events:none; 
 }
 .card-top-bar {
   display: flex; justify-content: space-between; align-items: flex-start; z-index: 2; position: relative;
 }
 .card-icon {
-  width: 52px; height: 52px; background: rgba(255,255,255,0.25); backdrop-filter: blur(14px); border-radius: 18px; display: grid; place-items: center; font-size: 26px; box-shadow: 0 6px 16px rgba(0,0,0,0.12); border: 1px solid rgba(255,255,255,0.4);
+  width: 58px; height: 58px; background: rgba(255,255,255,0.18); backdrop-filter: blur(16px); border-radius: 20px; display: grid; place-items: center; box-shadow: 0 8px 22px rgba(0,0,0,0.18), inset 0 1px 0 rgba(255,255,255,0.45); border: 1px solid rgba(255,255,255,0.35); transition: transform 0.4s var(--ease), background 0.3s; 
 }
+.card:hover .card-icon { transform: translateY(-2px) scale(1.05); background: rgba(255,255,255,0.26); }
 .card .body { position:relative; z-index:2; display:flex; flex-direction:column; }
-.card h3 { font-size:26px; color:#fff; text-wrap:balance; margin:0; font-weight:800; letter-spacing:-0.02em; line-height: 1.1; }
+.card h3 { font-size:27px; color:#fff; text-wrap:balance; margin:0; font-weight:800; letter-spacing:-0.02em; line-height: 1.08; text-shadow:0 2px 12px rgba(0,0,0,0.4); }
 .card .card-area { display:inline-flex; align-items:center; gap:6px; font-size:13px; font-weight:800; margin:10px 0 0; color:var(--accent); background:rgba(255,255,255,0.15); padding:6px 12px; border-radius:10px; align-self:flex-start; backdrop-filter:blur(8px); border: 1px solid rgba(255,255,255,0.1); }
 .card p { margin:8px 0 0; font-size:14.5px; color:rgba(255,255,255,0.95); line-height:1.5; text-wrap:pretty; font-weight:500; }
-.card-note { font-size: 13px; color: rgba(255,255,255,0.7); margin-top: 18px; padding-top: 14px; border-top: 1px solid rgba(255,255,255,0.2); font-weight: 600; display: flex; align-items: center; gap: 6px; }
+.card-note { font-size: 13px; color: rgba(255,255,255,0.78); margin-top: 18px; padding-top: 14px; border-top: 1px solid rgba(255,255,255,0.22); font-weight: 600; display: flex; align-items: center; gap: 6px; }
 
 /* ALT KATEGORİ ÖZEL TASARIMI (SUBCAT) */
 .subcat-card .body { justify-content:center; align-items:flex-start; height:100%; margin-top: auto; }
 .subcat-card h3 { font-size:32px; line-height:1.15; }
+.subcat-ghost { position:absolute; right:-26px; bottom:-22px; z-index:1; opacity:0.16; transform:rotate(-8deg); pointer-events:none; transition:transform 0.5s var(--ease), opacity 0.4s; }
+.subcat-card:hover .subcat-ghost { transform:rotate(-4deg) scale(1.08); opacity:0.22; }
 
 /* KART DETAY MODALI (POP-UP) */
 @keyframes modalPopUp {
@@ -387,7 +391,7 @@ a{ color:inherit; text-decoration:none; cursor:pointer; }
 .pm-close { position:absolute; top:16px; right:16px; width:38px; height:38px; border-radius:50%; background:rgba(0,0,0,0.5); color:#fff; display:grid; place-items:center; z-index:10; font-weight:800; cursor:pointer; backdrop-filter:blur(4px); transition:background 0.2s; }
 .pm-close:hover { background:var(--pin); }
 .pm-img-wrap { width:100%; height:300px; position:relative; background:#111; }
-.pm-img-wrap img { width:100%; height:100%; object-fit:cover; }
+.pm-img-wrap img { width:100%; height:100%; object-fit:cover; object-position:center 20%; }
 .pm-noimg { position:absolute; inset:0; display:flex; flex-direction:column; align-items:center; justify-content:center; gap:10px; color:rgba(255,255,255,.55); }
 .pm-noimg span { font-size:13px; font-weight:600; letter-spacing:.04em; }
 .card-noimg { position:absolute; inset:0; display:grid; place-items:center; color:rgba(255,255,255,.35); z-index:0; }
@@ -402,6 +406,42 @@ a{ color:inherit; text-decoration:none; cursor:pointer; }
 .pm-meta-item strong { display:block; margin-bottom:4px; font-size:13px; color:var(--ink-faint); text-transform:uppercase; letter-spacing:.05em;}
 .pm-maps-btn { background:var(--ink); color:#fff; font-weight:800; padding:16px; border-radius:100px; display:flex; align-items:center; justify-content:center; gap:8px; font-size:16px; transition:background 0.2s, transform 0.2s; text-align:center; margin-top:8px; box-shadow:0 8px 24px rgba(0,0,0,0.15); }
 .pm-maps-btn:hover { background:#000; transform:translateY(-2px); }
+
+/* Detay görselini tıklanabilir yap (tam ekran açılır) */
+.pm-img-wrap.clickable { cursor: zoom-in; }
+.pm-zoom-hint { position:absolute; top:14px; left:14px; z-index:6; background:rgba(0,0,0,0.5); color:#fff; font-size:12px; font-weight:700; padding:7px 12px; border-radius:100px; display:flex; align-items:center; gap:6px; backdrop-filter:blur(6px); pointer-events:none; letter-spacing:.02em; }
+
+/* DERS LİSTESİ (chip) */
+.pm-lessons { display:flex; flex-wrap:wrap; gap:9px; }
+.pm-lesson-chip { background:linear-gradient(135deg, var(--accent) 0%, color-mix(in srgb, var(--accent), #000 18%) 100%); color:#fff; font-size:13.5px; font-weight:800; padding:9px 15px; border-radius:100px; box-shadow:0 4px 12px rgba(0,0,0,0.12); letter-spacing:.01em; border:1px solid rgba(255,255,255,0.25); }
+
+/* TAM EKRAN GÖRSEL / VİDEO İZLEYİCİ (LIGHTBOX) */
+@keyframes fsIn { from { opacity:0; } to { opacity:1; } }
+.fs-overlay { position:fixed; inset:0; z-index:400; background:rgba(8,8,12,0.96); backdrop-filter:blur(10px); display:flex; flex-direction:column; animation:fsIn .25s ease; }
+.fs-stage { flex:1; display:flex; align-items:center; justify-content:center; min-height:0; padding:16px; position:relative; }
+.fs-stage img, .fs-stage video { max-width:100%; max-height:100%; width:auto; height:auto; object-fit:contain; border-radius:12px; box-shadow:0 20px 60px rgba(0,0,0,0.5); background:#000; }
+.fs-close { position:absolute; top:18px; right:18px; width:46px; height:46px; border-radius:50%; background:rgba(255,255,255,0.14); color:#fff; display:grid; place-items:center; z-index:10; font-weight:800; cursor:pointer; backdrop-filter:blur(8px); border:1px solid rgba(255,255,255,0.2); transition:background .2s; font-size:20px; }
+.fs-close:hover { background:rgba(255,255,255,0.28); }
+.fs-caption { flex-shrink:0; background:linear-gradient(0deg, rgba(0,0,0,0.6) 0%, transparent 100%); padding:22px 20px 26px; color:#fff; }
+.fs-caption-inner { max-width:640px; margin:0 auto; display:flex; flex-direction:column; gap:12px; }
+.fs-caption h3 { font-size:23px; font-weight:800; letter-spacing:-0.01em; line-height:1.1; }
+.fs-caption h3 span { display:block; font-size:13.5px; font-weight:700; opacity:0.8; margin-top:3px; letter-spacing:.03em; }
+.fs-meta-row { display:flex; flex-wrap:wrap; gap:10px 22px; }
+.fs-meta { display:flex; align-items:center; gap:9px; font-size:15px; font-weight:700; color:rgba(255,255,255,0.92); }
+.fs-meta svg { flex-shrink:0; opacity:0.9; }
+.fs-meta a { color:#fff; text-decoration:none; }
+.fs-meta a:hover { text-decoration:underline; }
+
+/* VİDEO oynatıcı kontrolleri */
+.fs-vid-controls { display:flex; align-items:center; justify-content:center; gap:14px; flex-shrink:0; padding:14px 16px calc(14px + env(safe-area-inset-bottom)); background:rgba(0,0,0,0.4); }
+.fs-vid-btn { width:54px; height:54px; border-radius:50%; background:rgba(255,255,255,0.16); color:#fff; display:grid; place-items:center; cursor:pointer; border:1px solid rgba(255,255,255,0.22); transition:background .2s, transform .15s; backdrop-filter:blur(6px); }
+.fs-vid-btn:hover { background:rgba(255,255,255,0.3); }
+.fs-vid-btn:active { transform:scale(0.92); }
+.fs-vid-btn.primary { width:66px; height:66px; background:var(--accent); border-color:rgba(255,255,255,0.4); }
+
+/* Müzik kartı: kaydırılabilir olduğunu belirten ipucu */
+.card.has-video { touch-action: pan-y; }
+.card-video-badge { position:absolute; top:18px; right:18px; z-index:3; background:rgba(0,0,0,0.55); color:#fff; font-size:11.5px; font-weight:800; padding:7px 12px; border-radius:100px; display:flex; align-items:center; gap:6px; backdrop-filter:blur(6px); border:1px solid rgba(255,255,255,0.2); letter-spacing:.02em; }
 
 /* ÇOK YAKINDA SADECE TEK SATIR UYARI MODELİ */
 .coming-soon-container { max-width:500px; margin:auto; text-align:center; padding:80px 24px; }
@@ -474,6 +514,13 @@ a{ color:inherit; text-decoration:none; cursor:pointer; }
   .tos-modal { padding: 24px 20px; }
   .pharm-page { padding:20px 16px 60px; }
   .pharm-page-grid { grid-template-columns:1fr; }
+  .fs-stage { padding:10px; }
+  .fs-caption { padding:18px 16px 22px; }
+  .fs-caption h3 { font-size:20px; }
+  .fs-meta { font-size:14px; }
+  .fs-vid-btn { width:48px; height:48px; }
+  .fs-vid-btn.primary { width:58px; height:58px; }
+  .pm-img-wrap { height:240px; }
 }
 </style>
 </head>
@@ -510,18 +557,18 @@ a{ color:inherit; text-decoration:none; cursor:pointer; }
       blurb:"Özel diş hekimi klinikleri, dil ve konuşma terapistleri, psikologlar, fizyoterapistler ve diyetisyenler bir arada.",
       hasSubCategories: true,
       subCategories: [
-        { id: "dis", name: "Özel Diş Hekimi Klinikleri", icon: "🦷", note: "Ağız ve diş sağlığı merkezleri", places: [] },
-        { id: "dil", name: "Dil ve Konuşma Terapistleri", icon: "🗣️", note: "Konuşma bozuklukları uzmanları", places: [] },
-        { id: "psikolog", name: "Psikologlar", icon: "🧠", note: "Ruh sağlığı ve danışmanlık", places: [] },
-        { id: "fizyo", name: "Fizyoterapistler", icon: "🦴", note: "Fizik tedavi uzmanları", places: [] },
-        { id: "diyetisyen", name: "Diyetisyenler", icon: "🍏", note: "Sağlıklı beslenme ve diyet uzmanları",
+        { id: "dis", name: "Özel Diş Hekimi Klinikleri", icon: "tooth", note: "Ağız ve diş sağlığı merkezleri", places: [] },
+        { id: "dil", name: "Dil ve Konuşma Terapistleri", icon: "speak", note: "Konuşma bozuklukları uzmanları", places: [] },
+        { id: "psikolog", name: "Psikologlar", icon: "brain", note: "Ruh sağlığı ve danışmanlık", places: [] },
+        { id: "fizyo", name: "Fizyoterapistler", icon: "bone", note: "Fizik tedavi uzmanları", places: [] },
+        { id: "diyetisyen", name: "Diyetisyenler", icon: "leaf", note: "Sağlıklı beslenme ve diyet uzmanları",
           places: [
             {
               name:"Uzman Diyetisyen Bilge İgan Yıldırım", 
               info:"Uzman Hizmet Biriminde yüz yüze ve online beslenme danışmanlığı", 
               area:"Ağrı Merkez", 
               img:"uzm.diyetisyenbilge.jpg",
-              icon: "✨",
+              icon: "leaf",
               note: "Sağlıklı yaşama ilk adımınızı atın.",
               address:"Saray Plaza Kat 5 AĞRI",
               phones:["0472 215 0184", "0543 120 4505"],
@@ -555,7 +602,7 @@ a{ color:inherit; text-decoration:none; cursor:pointer; }
         { 
           id: "dil-kursu", 
           name: "Dil Kursu", 
-          icon: "🎓", /* Gıcık eden o bayrak ikonu düzeltildi, şık ve sade yapıldı */
+          icon: "lang",
           note: "Yabancı dil eğitim merkezleri",
           places: [
             {
@@ -563,8 +610,8 @@ a{ color:inherit; text-decoration:none; cursor:pointer; }
               subName: "ENGLISH LANGUAGE INSTITUTE TURKEY",
               info: "Hayalinizdeki Dil Eğitiminize Bugün Başlayın",
               area: "Ağrı Merkez",
-              img: "agrıelitdilkursu.jpg", /* KART GÖRSELİ TAM İSMİYLE BURADA */
-              icon: "✨",
+              img: "agrıelitdilkursu.jpg",
+              icon: "lang",
               note: "Uluslararası standartlarda dil eğitimi.",
               address: "Hürriyet Mah. 1810 SK. No:11 AĞRI",
               phones: ["+90 533 895 8255"],
@@ -572,6 +619,28 @@ a{ color:inherit; text-decoration:none; cursor:pointer; }
               mapsUrl: "https://maps.google.com/?q=Hürriyet+Mah.+1810+SK.+No:11+Ağrı"
             }
           ] 
+        },
+        {
+          id: "muzik",
+          name: "Müzik",
+          icon: "music",
+          note: "Müzik eğitmenleri ve enstrüman dersleri",
+          places: [
+            {
+              name: "Muhammed Hoca",
+              subName: "MÜZİK EĞİTMENİ",
+              info: "Profesyonel müzik eğitimi ile enstrüman ve teori derslerinde Ağrı'da hizmetinizdeyim. Her yaş ve seviyeye uygun, birebir ve grup dersleriyle müzik yolculuğunuza güçlü bir başlangıç yapın.",
+              area: "Ağrı Merkez",
+              img: "muhammedhoca1.jpg",
+              video: "muhammedhocavideo.mp4",
+              icon: "music",
+              note: "Müzik yolculuğunuza bugün başlayın.",
+              address: "Ağrı Merkez",
+              phones: ["0545 971 2132"],
+              lessons: ["Bağlama", "Gitar", "Keman", "Yan Flüt", "Elektro Gitar", "Piyano", "Kalimba", "Ukulele", "Ritim"],
+              mapsUrl: "https://maps.google.com/?q=Ağrı+Merkez"
+            }
+          ]
         }
       ],
       places:[]
@@ -587,7 +656,7 @@ a{ color:inherit; text-decoration:none; cursor:pointer; }
       places:[
         {
           name:"Balık Gölü", 
-          icon: "🏕️", note: "Doğa ile iç içe kamp ve gezi.",
+          icon: "tent", note: "Doğa ile iç içe kamp ve gezi.",
           info:"Türkiye'nin en yüksek rakımlı doğa harikası buzul göllerinden biridir. Taşlıçay ilçesi sınırlarında yer alan bu saklı cennet, berrak suları, doğal kırmızı benekli alabalığı ve etrafındaki muhteşem sıradağ manzarasıyla kampçılar, doğa yürüyüşçüleri ve fotoğrafçılar için kusursuz bir kaçış noktası sunar.", 
           area:"Taşlıçay", 
           img:"",
@@ -596,7 +665,7 @@ a{ color:inherit; text-decoration:none; cursor:pointer; }
         },
         {
           name:"İshak Paşa Sarayı", 
-          icon: "🕌", note: "Tarihi mimari şaheseri.",
+          icon: "mosque", note: "Tarihi mimari şaheseri.",
           info:"18. yüzyıldan kalma büyüleyici bir Osmanlı, Selçuklu ve Pat mimarisi sentezidir. Doğubayazıt ovasına hâkim yüksek sarp kayalıklar üzerine inşa edilmiş bu heybetli anıt eser, muazzam taş işlemeli kapıları, camisi, divan avlusu ve haremiyle adeta bir masal diyarından günümüze kalmış bir şaheserdir.", 
           area:"Doğubayazıt", 
           img:"",
@@ -605,7 +674,7 @@ a{ color:inherit; text-decoration:none; cursor:pointer; }
         },
         {
           name:"Ağrı Dağı (5.137 m)", 
-          icon: "🏔️", note: "Avrupa'nın en yüksek zirvesi.",
+          icon: "mountain", note: "Avrupa'nın en yüksek zirvesi.",
           info:"Türkiye'nin ve tüm Avrupa'nın en yüksek heybetli zirvesidir. Yıl boyunca erimeyen kalıcı buzulları, efsanevi Nuh'un Tufanı hikayeleri ve heybetli volkanik yapısıyla her yıl dünyanın dört bir yanından binlerce profesyonel dağcıyı, trekking grubunu ve coğrafya meraklısını Ağrı'ya çekmektedir.", 
           area:"Doğubayazıt", 
           img:"",
@@ -614,7 +683,7 @@ a{ color:inherit; text-decoration:none; cursor:pointer; }
         },
         {
           name:"Diyadin Kaplıcaları", 
-          icon: "♨️", note: "Şifalı termal sular ve dinlenme.",
+          icon: "spa", note: "Şifalı termal sular ve dinlenme.",
           info:"Şifalı yüksek mineralli termal suları, jeotermal kaynakları ve hemen yanı başından gürleyen derin kanyon oluşumuyla Ağrı'nın en önemli sağlık, dinlenme ve şifa merkezidir. Bölgedeki tesisler cilt hastalıkları, romatizma ve eklem rahatsızlıklarına iyi gelen sularıyla bilinir.", 
           area:"Diyadin", 
           img:"",
@@ -623,7 +692,7 @@ a{ color:inherit; text-decoration:none; cursor:pointer; }
         },
         {
           name:"Meteor Çukuru", 
-          icon: "☄️", note: "Dünyanın en büyük ikinci krateri.",
+          icon: "meteor", note: "Dünyanın en büyük ikinci krateri.",
           info:"Alaska'dakinden sonra dünyanın tescillenmiş en büyük ikinci göktaşı çukurudur. Gürbulak sınır kapısına oldukça yakın bir konumda yer alan, derinliği ve dairesel genişliğiyle görenleri hayrete düşüren, sıra dışı ve gizemli bir doğal coğrafi anıttır.", 
           area:"Doğubayazıt", 
           img:"",
@@ -632,7 +701,7 @@ a{ color:inherit; text-decoration:none; cursor:pointer; }
         },
         {
           name:"Nuh'un Gemisi (Durupınar)", 
-          icon: "🚢", note: "Efsanevi inanç turizmi rotası.",
+          icon: "ship", note: "Efsanevi inanç turizmi rotası.",
           info:"Büyük Tufan sonrası Nuh'un efsanevi gemisinin karaya oturduğu yer olarak kabul edilen, doğal silüetiyle devasa bir tekne şekline sahip yeryüzü oluşumudur. Her yıl inanç turizmi ve uluslararası araştırmacılar tarafından yoğun şekilde ziyaret edilir.", 
           area:"Durupınar", 
           img:"",
@@ -712,18 +781,85 @@ a{ color:inherit; text-decoration:none; cursor:pointer; }
     {date:"08.06.2026", district:"MERKEZ", name:"BEREN ECZANESİ", address:"BAHÇELİEVLER MAHALLAESİ CUMHURİYET CADDESİ NO:135B", landmark:"CUMAÇAY GARAJI KARŞISI", phone:"0546 153 04 58", url:"https://maps.google.com/?q=Beren+Eczanesi+Agri"},
     {date:"08.06.2026", district:"PATNOS", name:"DEVA ECZANESİ", address:"ATATÜRK MAHALLESİ MENDERES CADDESİ NO:146", landmark:"PATNOS İTİMAT YAZIHANESİ YANI", phone:"0472 616 16 19", url:"https://maps.google.com/?q=Deva+Eczanesi+Patnos"},
     {date:"08.06.2026", district:"TAŞLIÇAY", name:"ÇARE ECZANESİ", address:"HÜRRİYET MAHALLESİ M.FEVZİ ÇAKMAK CADDESİ DIŞ KAPI NO:94A", landmark:"MERVE KIRTASİYE YANI", phone:"0546 491 53 22", url:"https://maps.google.com/?q=Care+Eczanesi+Taslicay"},
-    {date:"08.06.2026", district:"TUTAK", name:"TUTAK ECZANESİ", address:"MURAT MAHALLESİ CUMHURİYET CADDESİ NO:51/A", landmark:"MERVE KIRTASİYE YANI", phone:"0472 411 26 98", url:"https://maps.google.com/?q=Tutak+Eczanesi+Tutak"}
+    {date:"08.06.2026", district:"TUTAK", name:"TUTAK ECZANESİ", address:"MURAT MAHALLESİ CUMHURİYET CADDESİ NO:51/A", landmark:"MERVE KIRTASİYE YANI", phone:"0472 411 26 98", url:"https://maps.google.com/?q=Tutak+Eczanesi+Tutak"},
+
+    {date:"10.06.2026", district:"DİYADİN", name:"CEREN ECZANESİ", address:"Murat Mahallesi Şehit Kaymakam Muhammed Fatih Safitürk Caddesi No:13H", landmark:"KÜLTÜR KİTAP KIRTASİYE KARŞISI", phone:"0530 115 54 04", url:"https://www.google.com/maps?q=39.540798,43.670828"},
+    {date:"10.06.2026", district:"DOĞUBAYAZIT", name:"GÜLİSTAN ECZANESİ", address:"ÇİFTEPINAR MAHALLESİ BELEDİYE CADDESİ NO:29/A", landmark:"1 NOLU SAĞLIK OCAĞI YANI", phone:"0472 312 27 80", url:"https://www.google.com/maps?q=39.543331,44.083227"},
+    {date:"10.06.2026", district:"ELEŞKİRT", name:"ESRA ECZANESİ", address:"İstiklal Mahallesi Cumhuriyet Caddesi No:83", landmark:"ZİRAAT BANKASI KARŞISI", phone:"0545 591 44 24", url:"https://www.google.com/maps?q=39.798541,42.676397"},
+    {date:"10.06.2026", district:"HAMUR", name:"AHMET ECZANESİ", address:"Kümbet Mahallesi Van Caddesi No:49C", landmark:"HAMUR BELEDİYESİ ALTI", phone:"0544 564 57 48", url:"https://www.google.com/maps?q=39.609435,42.988575"},
+    {date:"10.06.2026", district:"MERKEZ", name:"EMRE ECZANESİ", address:"Alpaslan Mahallesi Eski Van Caddesi No:142A", landmark:"İLÇELER GARAJI YANI", phone:"0542 498 63 73", url:"https://www.google.com/maps?q=39.714239,43.053186"},
+    {date:"10.06.2026", district:"MERKEZ", name:"HARUN ECZANESİ", address:"YAVUZ MAHALLESİ 403 SOKAK NO:13/A", landmark:"TERZİLER CADDESİ AŞAĞISI", phone:"0472 215 25 83", url:"https://www.google.com/maps?q=39.720926,43.051469"},
+    {date:"10.06.2026", district:"PATNOS", name:"IŞIK ECZANESİ", address:"INÖNÜ MAHALLESİ MALAZGIRT CADDESİ NO:13", landmark:"LAL LOKANTASI KARŞISI", phone:"0472 616 24 01", url:"https://www.google.com/maps?q=39.233443,42.863301"},
+    {date:"10.06.2026", district:"TAŞLIÇAY", name:"FERHAT ECZANESİ", address:"HÜRRİYET MAHALLESİ M.FEVZİ ÇAKMAK CADDESİ NO:48/A", landmark:"ÖĞRETMEN EVİ ALTI", phone:"0539 430 14 11", url:"https://www.google.com/maps?q=39.635854,43.374546"},
+    {date:"10.06.2026", district:"TUTAK", name:"BERFİN ECZANESİ", address:"Murat Mahallesi Dr Cihan ÖKTEM Caddesi No:5A ve 5B", landmark:"GAZİ İLKOKULUNUN KARŞISI", phone:"0552 636 00 04", url:"https://www.google.com/maps?q=39.539584,42.773208"},
+
+    {date:"11.06.2026", district:"DİYADİN", name:"DERMAN ECZANESİ", address:"Atatürk Mahallesi Şehit Kaymakam Muhammed Fatih Safitürk Caddesi No:10A", landmark:"Menekşem Market Karşısı", phone:"0472 511 36 36", url:"https://www.google.com/maps?q=39.540271,43.671124"},
+    {date:"11.06.2026", district:"DOĞUBAYAZIT", name:"ZEYNEP ECZANESİ", address:"SANAYİ MAHALLESİ ÇEVRE YOLU BULVARI NO:766/D", landmark:"DEVLET HASTANESİ KARŞISI", phone:"0472 312 82 22", url:"https://www.google.com/maps?q=39.541362,44.017494"},
+    {date:"11.06.2026", district:"ELEŞKİRT", name:"MAHMUTPAŞA ECZANESİ", address:"İstiklal Mahallesi Cumhuriyet Caddesi No:101", landmark:"KİLER MARKET KARŞISI", phone:"0472 711 29 78", url:"https://www.google.com/maps?q=39.798426,42.677388"},
+    {date:"11.06.2026", district:"HAMUR", name:"HAMUR ECZANESİ", address:"KÜMBET MAHALLESİ VAN CADDESİ NO:49/A", landmark:"HAMUR BELEDİYESİ ALTI", phone:"0472 616 71 72", url:"https://www.google.com/maps?q=39.609511,42.988588"},
+    {date:"11.06.2026", district:"MERKEZ", name:"AĞRI ECZANESİ", address:"ABİDE MAHALLESİ YAŞAR KEMAL CADDESİ NO:48/A", landmark:"AĞRI VALİLİĞİ KARŞISI", phone:"0472 215 58 13", url:"https://www.google.com/maps?q=39.719049,43.033018"},
+    {date:"11.06.2026", district:"MERKEZ", name:"KÖPRÜBAŞI ECZANESİ", address:"100.YIL MAHALLESİ YENİ VAN CADDESİ NO:132A", landmark:"EROĞLU MARKET YANI", phone:"0542 138 72 76", url:"https://www.google.com/maps?q=39.706295,43.048174"},
+    {date:"11.06.2026", district:"PATNOS", name:"OKTAY VURAL ECZANESİ", address:"ALPASLAN MAHALLESİ MALAZGİRT CADDESİ NO:72", landmark:"ŞEYH ABDULVAHAP KÜFREVİ EVİ KARŞISI", phone:"0472 616 18 74", url:"https://www.google.com/maps?q=39.231735,42.861958"},
+    {date:"11.06.2026", district:"TAŞLIÇAY", name:"TAŞLIÇAY ECZANESİ", address:"Cumhuriyet Mahallesi Mareşal Favzi Çakmak Caddesi No:23", landmark:"MERKEZDE", phone:"0472 551 28 91", url:"https://www.google.com/maps?q=39.637014,43.373894"},
+    {date:"11.06.2026", district:"TUTAK", name:"BEGÜM ECZANESİ", address:"CAMİ MAHALLESİ KAZIM KARABEKİR CADDESİ NO:11B-11C", landmark:"KAYMAKAMLIK EVİ KARŞISI", phone:"0472 411 31 89", url:"https://www.google.com/maps?q=39.538143,42.771397"},
+
+    {date:"12.06.2026", district:"DİYADİN", name:"DİLAN ECZANESİ", address:"ISA AGA MAHALLESİ INÖNÜ CADDESİ NO:36", landmark:"BELEDİYE YANI", phone:"0472 511 28 28", url:"https://www.google.com/maps?q=39.539751,43.672485"},
+    {date:"12.06.2026", district:"DOĞUBAYAZIT", name:"ÇAPA ECZANESİ", address:"AHMEDİHANİ MAHALLESİ ABDURREZAK ALADAĞ CADDESİ NO:73/C", landmark:"IĞDIR DURAĞI YOLU ÜZERİ", phone:"0544 451 24 96", url:"https://www.google.com/maps?q=39.549213,44.079323"},
+    {date:"12.06.2026", district:"ELEŞKİRT", name:"ŞİFA ECZANESİ", address:"MÜFTÜ SELİM MAHALLESİ CUMHURİYET CADDESİ NO:13", landmark:"SAĞLIK OCAĞI KARŞISI", phone:"0472 711 21 41", url:"https://www.google.com/maps?q=39.798195,42.677684"},
+    {date:"12.06.2026", district:"HAMUR", name:"AHMET ECZANESİ", address:"Kümbet Mahallesi Van Caddesi No:49C", landmark:"HAMUR BELEDİYESİ ALTI", phone:"0544 564 57 48", url:"https://www.google.com/maps?q=39.609435,42.988575"},
+    {date:"12.06.2026", district:"MERKEZ", name:"SEVGİ ECZANESİ", address:"LEYLEK PINAR MAHALLESİ CUMHURIYET CADDESİ NO:142", landmark:"HALK BANK YUKARASI", phone:"0472 216 34 20", url:"https://www.google.com/maps?q=39.721889,43.053141"},
+    {date:"12.06.2026", district:"MERKEZ", name:"ŞİFA ECZANESİ", address:"YAVUZ MAHALLESİ YAŞAR KEMAL CADDESİ NO:2/A", landmark:"BÜYÜK AĞRI OTELİ ALTI", phone:"0472 215 30 00", url:"https://www.google.com/maps?q=39.719214,43.051600"},
+    {date:"12.06.2026", district:"PATNOS", name:"SARI ECZANESİ", address:"ATATÜRK MAHALLESİ ALPASLAN CADDESİ KAPI NO: 69", landmark:"FATİH ET LOKANTASI ÇAPRAZI", phone:"0551 481 44 68", url:"https://www.google.com/maps?q=39.232071,42.862017"},
+    {date:"12.06.2026", district:"TAŞLIÇAY", name:"BEYZA ECZANESİ", address:"15 TEMMUZ ŞEHİTLER MAHALLESİ MAREŞAL FEVZİ ÇAKMAK CADDESİ NO:1/1", landmark:"PTT KARGO YANI", phone:"0472 551 30 00", url:"https://www.google.com/maps?q=39.636158,43.374813"},
+    {date:"12.06.2026", district:"TUTAK", name:"TUTAK ECZANESİ", address:"MURAT MAHALLESİ CUMHURİYET CADDESİ NO:51/A", landmark:"MERKEZDE", phone:"0472 411 26 98", url:"https://www.google.com/maps?q=39.538255,42.773258"}
   ];
 
-  window.AGRI = { categories, dutyPharmacies };
+  /* 30 GÜNLÜK HAVA DURUMU (Ağrı Merkez) - tarih -> {temp(gündüz), desc, low} */
+  const weatherData = {
+    "10.06.2026": { temp:15, low:null, desc:"Yer yer hafif yağmur" },
+    "11.06.2026": { temp:24, low:14, desc:"Parçalı bulutlu ve yağmur ihtimali" },
+    "12.06.2026": { temp:24, low:14, desc:"Yağmurlu ve bulutlu" },
+    "13.06.2026": { temp:24, low:14, desc:"Parçalı bulutlu ve yağmur ihtimali" },
+    "14.06.2026": { temp:22, low:11, desc:"Yağmurlu ve bulutlu" },
+    "15.06.2026": { temp:21, low:12, desc:"Yağmurlu ve bulutlu" },
+    "16.06.2026": { temp:23, low:14, desc:"Parçalı bulutlu ve yağmur ihtimali" },
+    "17.06.2026": { temp:24, low:14, desc:"Hafif yağmurlu ve açık hava" },
+    "18.06.2026": { temp:24, low:14, desc:"Bulutlu ve yağmur ihtimali" },
+    "19.06.2026": { temp:26, low:13, desc:"Hafif yağmurlu ve açık hava" },
+    "20.06.2026": { temp:23, low:13, desc:"Parçalı bulutlu" },
+    "21.06.2026": { temp:24, low:13, desc:"Güneşli" },
+    "22.06.2026": { temp:26, low:15, desc:"Güneşli" },
+    "23.06.2026": { temp:29, low:18, desc:"Güneşli" },
+    "24.06.2026": { temp:31, low:20, desc:"Güneşli" },
+    "25.06.2026": { temp:23, low:10, desc:"Yer yer sağanak ve gök gürültülü sağanak" },
+    "26.06.2026": { temp:25, low:9,  desc:"Yer yer gök gürültülü sağanak yağış" },
+    "27.06.2026": { temp:24, low:9,  desc:"Yer yer gök gürültülü sağanak yağış" },
+    "28.06.2026": { temp:25, low:11, desc:"Çoğunlukla güneşli" },
+    "29.06.2026": { temp:21, low:8,  desc:"Yer yer gök gürültülü sağanak yağış" },
+    "30.06.2026": { temp:23, low:9,  desc:"Parçalı bulutlu" },
+    "01.07.2026": { temp:22, low:9,  desc:"Güneşli" },
+    "02.07.2026": { temp:28, low:12, desc:"Çoğunlukla güneşli" },
+    "03.07.2026": { temp:28, low:13, desc:"Çoğunlukla güneşli" },
+    "04.07.2026": { temp:29, low:13, desc:"Güneşli" },
+    "05.07.2026": { temp:24, low:10, desc:"Çoğunlukla güneşli" },
+    "06.07.2026": { temp:24, low:10, desc:"Güneşli" },
+    "07.07.2026": { temp:24, low:10, desc:"Güneşli" },
+    "08.07.2026": { temp:21, low:9,  desc:"Çok bulutlu" },
+    "09.07.2026": { temp:22, low:10, desc:"Az bulutlu ve güneşli" },
+    "10.07.2026": { temp:27, low:12, desc:"Bulutlar arasında aralıklı güneş" },
+    "11.07.2026": { temp:27, low:12, desc:"Bulutlar arasında aralıklı güneş" }
+  };
 
-  // BANNERLAR (Senin verdiğin "1" numaralı özel görsel ismiyle)
+  window.AGRI = { categories, dutyPharmacies, weatherData };
+
+  // BANNERLAR (Bilge -> E.L.I.T -> Muhammed Hoca sırası)
   window.AGRI_STATIC_BANNERS = [
     { img:"uzm.diyetisyenbilge.jpg", title:"Uzm. Diyetisyen Bilge İgan Yıldırım", subtitle:"Aramıza hoşgeldiniz" },
-    { img:"agrıelitdilkursu.jpg", title:"Ağrı E.L.I.T Dil Kursu", subtitle:"Aramıza hoşgeldiniz" }
+    { img:"agrıelitdilkursu.jpg", title:"Ağrı E.L.I.T Dil Kursu", subtitle:"Aramıza hoşgeldiniz" },
+    { img:"muhammedhoca2.jpg", title:"Muhammed Hoca", subtitle:"Aramıza Hoşgeldin" }
   ];
 
-  // HİKAYELER (Senin verdiğin "2" numaralı özel görsel ismiyle)
+  // HİKAYELER
   window.AGRI_STORIES = [
     {
       title: "Dyt. Bilge",
@@ -736,6 +872,12 @@ a{ color:inherit; text-decoration:none; cursor:pointer; }
       cover: "agrıelitdilkursu2.jpg",
       slideText: "Hayalinizdeki Dil Eğitiminize Bugün Başlayın. ENGLISH LANGUAGE INSTITUTE TURKEY.",
       slideImg: "agrıelitdilkursu2.jpg"
+    },
+    {
+      title: "Muhammed Hoca",
+      cover: "muhammedhoca3.jpg",
+      slideText: "Müzik eğitiminde yeni hocamız Muhammed Hoca aramıza katıldı. Müzik yolculuğunuza bugün başlayın.",
+      slideImg: "muhammedhoca3.jpg"
     }
   ];
 
@@ -792,8 +934,139 @@ const safeStore = (function(){
   };
 })();
 
-/* ===================== globe.jsx ===================== */
 const { useRef, useEffect, useState, useCallback } = React;
+
+/* ===================== KALİTELİ SVG İKON KÜTÜPHANESİ ===================== */
+/* Düz emoji yerine zarif, ince çizgili (stroke) SVG ikonlar */
+function Icon({ name, size = 26, stroke = "currentColor", sw = 1.7 }) {
+  const common = {
+    width: size, height: size, viewBox: "0 0 24 24",
+    fill: "none", stroke: stroke, strokeWidth: sw,
+    strokeLinecap: "round", strokeLinejoin: "round"
+  };
+  const paths = {
+    // Sağlık alt kategorileri
+    tooth: <path d="M12 5.5c-1.4-1.6-3.2-2-4.7-1.6C5.5 4.4 4.5 6 4.7 8c.2 1.7.6 2.7 1 4.5.5 2.4.7 5 1.7 6.4.5.7 1.5.7 1.9-.1.7-1.3.8-3.3 1.4-4.6.3-.6 1.3-.6 1.6 0 .6 1.3.7 3.3 1.4 4.6.4.8 1.4.8 1.9.1 1-1.4 1.2-4 1.7-6.4.4-1.8.8-2.8 1-4.5.2-2-.8-3.6-2.6-4.1-1.5-.4-3.3 0-4.7 1.6Z"/>,
+    speak: <g><path d="M3 11a8 8 0 0 1 16 0v0a8 8 0 0 1-8 8H7l-3 2v-4a8 8 0 0 1-1-6Z"/><path d="M8 10h6M8 13h4"/></g>,
+    brain: <g><path d="M9.5 3A2.5 2.5 0 0 0 7 5.5v.5a2.5 2.5 0 0 0-2 4 2.5 2.5 0 0 0 0 4 2.5 2.5 0 0 0 2 4v.5A2.5 2.5 0 0 0 12 21V3.5"/><path d="M14.5 3A2.5 2.5 0 0 1 17 5.5v.5a2.5 2.5 0 0 1 2 4 2.5 2.5 0 0 1 0 4 2.5 2.5 0 0 1-2 4v.5A2.5 2.5 0 0 1 12 21"/></g>,
+    bone: <path d="M17 10c1.5 0 3-1 3-3s-1.3-2.5-2.4-2.4C16.5 4.7 16 6 16 6l-2.5 2.5M7 14c-1.5 0-3 1-3 3s1.3 2.5 2.4 2.4C7.5 19.3 8 18 8 18l9-9 .5-.5"/>,
+    leaf: <g><path d="M11 20A7 7 0 0 1 4 13c0-5 4.5-9 16-9 0 7-3.5 13-9 13a6 6 0 0 1-2 .5"/><path d="M11 20c0-4 2-8 6-11"/></g>,
+    // Eğitim
+    lang: <g><circle cx="12" cy="12" r="9"/><path d="M3 12h18M12 3c2.5 2.5 2.5 16 0 18M12 3c-2.5 2.5-2.5 16 0 18"/></g>,
+    music: <g><path d="M9 18V5l11-2v13"/><circle cx="6" cy="18" r="3"/><circle cx="17" cy="16" r="3"/></g>,
+    // Gezilecek
+    tent: <g><path d="M3.5 20 12 5l8.5 15M12 5v15M9 20l3-5 3 5"/></g>,
+    mosque: <g><path d="M5 21V11M19 21V11M5 11c0-3 3-3 3-6 0 3 3 3 3 6M11 11c0-3 3-3 3-6 0 3 3 3 3 6M12 3v2M3 21h18M8 21v-4a4 4 0 0 1 8 0v4"/></g>,
+    mountain: <path d="m3 20 6.5-12 3.5 6 2.5-4L21 20H3Z"/>,
+    spa: <g><path d="M12 22c4-3 7-6 7-10a7 7 0 0 0-14 0c0 4 3 7 7 10ZM9 8c1 0 3 1 3 3M15 8c-1 0-3 1-3 3"/></g>,
+    meteor: <g><circle cx="14" cy="14" r="7"/><path d="M9 9 4 4M12 7l-3-3M7 12 3 8"/></g>,
+    ship: <g><path d="M3 16 4 9h16l1 7M5 16c0 2 2 3 4 3s4-1 4-3M12 9V4h4M3 16c.5 2 2 3 3 3"/></g>,
+    // Genel pin
+    pin: <g><path d="M12 21s7-6.3 7-11a7 7 0 1 0-14 0c0 4.7 7 11 7 11Z"/><circle cx="12" cy="10" r="2.5"/></g>
+  };
+  return <svg {...common}>{paths[name] || paths.pin}</svg>;
+}
+
+/* ===================== TAM EKRAN GÖRSEL İZLEYİCİ ===================== */
+function FullscreenImage({ place, onClose }) {
+  useEffect(() => {
+    const onKey = (e) => { if (e.key === "Escape") onClose(); };
+    document.addEventListener("keydown", onKey);
+    const prev = document.body.style.overflow;
+    document.body.style.overflow = "hidden";
+    return () => { document.removeEventListener("keydown", onKey); document.body.style.overflow = prev; };
+  }, []);
+
+  const phone = place.phones && place.phones.length ? place.phones[0] : null;
+
+  return (
+    <div className="fs-overlay" onClick={(e) => { if (e.target.classList.contains("fs-overlay")) onClose(); }}>
+      <div className="fs-close" onClick={onClose}>✕</div>
+      <div className="fs-stage">
+        <img src={place.img} alt={place.name} />
+      </div>
+      <div className="fs-caption">
+        <div className="fs-caption-inner">
+          <h3>{place.name}{place.subName && <span>{place.subName}</span>}</h3>
+          <div className="fs-meta-row">
+            {place.address && (
+              <div className="fs-meta">
+                <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.2"><path d="M20 10c0 6-8 12-8 12s-8-6-8-12a8 8 0 0 1 16 0Z"/><circle cx="12" cy="10" r="2.5"/></svg>
+                <span>{place.address}</span>
+              </div>
+            )}
+            {phone && (
+              <div className="fs-meta">
+                <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.2"><path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07 19.5 19.5 0 0 1-6-6 19.79 19.79 0 0 1-3.07-8.67A2 2 0 0 1 4.11 2h3a2 2 0 0 1 2 1.72 12.84 12.84 0 0 0 .7 2.81 2 2 0 0 1-.45 2.11L8.09 9.91a16 16 0 0 0 6 6l1.27-1.27a2 2 0 0 1 2.11-.45 12.84 12.84 0 0 0 2.81.7A2 2 0 0 1 22 16.92z"/></svg>
+                <a href={`tel:${phone.replace(/\s/g,'')}`}>{phone}</a>
+              </div>
+            )}
+          </div>
+        </div>
+      </div>
+    </div>
+  );
+}
+
+/* ===================== TAM EKRAN VİDEO OYNATICI ===================== */
+function FullscreenVideo({ src, title, onClose }) {
+  const vidRef = useRef(null);
+  const [playing, setPlaying] = useState(true);
+  const [muted, setMuted] = useState(false);
+
+  useEffect(() => {
+    const onKey = (e) => { if (e.key === "Escape") onClose(); };
+    document.addEventListener("keydown", onKey);
+    const prev = document.body.style.overflow;
+    document.body.style.overflow = "hidden";
+    const v = vidRef.current;
+    if (v) { v.play().catch(() => setPlaying(false)); }
+    return () => { document.removeEventListener("keydown", onKey); document.body.style.overflow = prev; };
+  }, []);
+
+  const togglePlay = () => {
+    const v = vidRef.current; if (!v) return;
+    if (v.paused) { v.play(); setPlaying(true); } else { v.pause(); setPlaying(false); }
+  };
+  const toggleMute = () => {
+    const v = vidRef.current; if (!v) return;
+    v.muted = !v.muted; setMuted(v.muted);
+  };
+
+  return (
+    <div className="fs-overlay">
+      <div className="fs-close" onClick={onClose}>✕</div>
+      <div className="fs-stage">
+        <video
+          ref={vidRef}
+          src={src}
+          playsInline
+          autoPlay
+          onClick={togglePlay}
+          onPlay={() => setPlaying(true)}
+          onPause={() => setPlaying(false)}
+          onEnded={() => setPlaying(false)}
+        />
+      </div>
+      <div className="fs-vid-controls">
+        <div className="fs-vid-btn primary" onClick={togglePlay} title={playing ? "Durdur" : "Oynat"}>
+          {playing ? (
+            <svg width="26" height="26" viewBox="0 0 24 24" fill="#fff"><rect x="6" y="5" width="4" height="14" rx="1.2"/><rect x="14" y="5" width="4" height="14" rx="1.2"/></svg>
+          ) : (
+            <svg width="26" height="26" viewBox="0 0 24 24" fill="#fff"><path d="M7 5.5v13a1 1 0 0 0 1.5.87l11-6.5a1 1 0 0 0 0-1.74l-11-6.5A1 1 0 0 0 7 5.5Z"/></svg>
+          )}
+        </div>
+        <div className="fs-vid-btn" onClick={toggleMute} title={muted ? "Sesi aç" : "Sesi kapat"}>
+          {muted ? (
+            <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="#fff" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"><path d="M11 5 6 9H2v6h4l5 4V5Z"/><line x1="22" y1="9" x2="16" y2="15"/><line x1="16" y1="9" x2="22" y2="15"/></svg>
+          ) : (
+            <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="#fff" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"><path d="M11 5 6 9H2v6h4l5 4V5Z"/><path d="M15.5 8.5a5 5 0 0 1 0 7M18.5 5.5a9 9 0 0 1 0 13"/></svg>
+          )}
+        </div>
+      </div>
+    </div>
+  );
+}
 const AGRI_LAT = 39.72, AGRI_LON = 43.05;
 const RAD = Math.PI / 180;
 const norm360 = a => ((a % 360) + 360) % 360;
@@ -953,7 +1226,47 @@ function Hero({ onSearchPlace, onOpenCat }){
   );
 }
 
-/* ===================== BANNER (IMAGE MARQUEE) YENİ TASARIM ===================== */
+/* ===================== ORTAK TARİH MANTIĞI (SAAT 12:00 GEÇİŞİ) ===================== */
+/* Saat 12:00'ı geçtikten sonra otomatik olarak ertesi günün nöbetçi/hava verisi gösterilir.
+   Nöbet teslim saati 12:00 olarak kabul edilmiştir (eczaneler bu saatte devreder). */
+const SHIFT_HOUR = 12;
+
+function fmtDate(dateObj){
+  const d = dateObj.getDate().toString().padStart(2, '0');
+  const m = (dateObj.getMonth() + 1).toString().padStart(2, '0');
+  const y = dateObj.getFullYear();
+  return `${d}.${m}.${y}`;
+}
+
+/* Aktif nöbet/hava günü: saat SHIFT_HOUR'ı geçtiyse bir sonraki güne kay */
+function getActiveDateText(){
+  const now = new Date();
+  const base = new Date(now.getFullYear(), now.getMonth(), now.getDate());
+  if (now.getHours() >= SHIFT_HOUR) {
+    base.setDate(base.getDate() + 1);
+  }
+  return fmtDate(base);
+}
+
+/* Veride aktif tarih varsa onu, yoksa veride bulunan en yakın/ilk tarihi döndür */
+function resolveDutyDate(){
+  const active = getActiveDateText();
+  const all = window.AGRI.dutyPharmacies;
+  if (all.some(p => p.date === active)) return active;
+  // aktif tarih yoksa: mevcut en güncel (son) tarihe düş
+  const dates = [...new Set(all.map(p => p.date))];
+  return dates.length ? dates[dates.length - 1] : active;
+}
+
+function resolveWeatherDate(){
+  const active = getActiveDateText();
+  const wd = window.AGRI.weatherData || {};
+  if (wd[active]) return active;
+  const keys = Object.keys(wd);
+  return keys.length ? keys[0] : active;
+}
+
+/* ===================== BANNER (IMAGE MARQUEE) ===================== */
 function ImageMarquee() {
   const base = window.AGRI_STATIC_BANNERS;
   const loop = base.concat(base).concat(base).concat(base); 
@@ -1026,22 +1339,12 @@ function Stories() {
 
 function PharmacyWidget() {
   const [district, setDistrict] = useState("MERKEZ");
-  const [currentDateText, setCurrentDateText] = useState("02.06.2026");
+  const [currentDateText, setCurrentDateText] = useState(() => resolveDutyDate());
 
   useEffect(() => {
-    const updatePharmacyDate = () => {
-      const now = new Date();
-      const d = now.getDate().toString().padStart(2, '0');
-      const m = (now.getMonth() + 1).toString().padStart(2, '0');
-      const y = now.getFullYear();
-      const calculatedDate = `${d}.${m}.${y}`;
-      
-      const exists = window.AGRI.dutyPharmacies.some(p => p.date === calculatedDate);
-      if (exists) setCurrentDateText(calculatedDate);
-    };
-
-    updatePharmacyDate();
-    const interval = setInterval(updatePharmacyDate, 60000); 
+    const update = () => setCurrentDateText(resolveDutyDate());
+    update();
+    const interval = setInterval(update, 60000); 
     return () => clearInterval(interval);
   }, []);
 
@@ -1072,7 +1375,7 @@ function PharmacyWidget() {
                 <span className="ph-date-badge">{ph.date}</span>
               </div>
               <div className="ph-detail">{ph.address}</div>
-              <div className="ph-landmark">📍 {ph.landmark}</div>
+              {ph.landmark && <div className="ph-landmark">📍 {ph.landmark}</div>}
               <div className="ph-footer-actions">
                 <span className="ph-phone">📞 {ph.phone}</span>
                 <a className="ph-map-link" href={ph.url} target="_blank" rel="noopener noreferrer">Haritada Göster</a>
@@ -1082,6 +1385,38 @@ function PharmacyWidget() {
         ) : (
           <div className="ph-empty">Bu tarihte bu ilçe için nöbetçi listesi bulunamadı.</div>
         )}
+      </div>
+    </div>
+  );
+}
+
+/* ===================== HAVA DURUMU WIDGET'I ===================== */
+function WeatherWidget() {
+  const [dateText, setDateText] = useState(() => resolveWeatherDate());
+
+  useEffect(() => {
+    const update = () => setDateText(resolveWeatherDate());
+    update();
+    const interval = setInterval(update, 60000);
+    return () => clearInterval(interval);
+  }, []);
+
+  const wd = (window.AGRI.weatherData || {})[dateText] || { temp: "--", low: null, desc: "Veri yok" };
+
+  // gösterim için kısa tarih: "12 Haz" gibi
+  const months = ["Oca","Şub","Mar","Nis","May","Haz","Tem","Ağu","Eyl","Eki","Kas","Ara"];
+  const parts = dateText.split(".");
+  const shortDate = parts.length === 3 ? `${parseInt(parts[0],10)} ${months[parseInt(parts[1],10)-1]} ${parts[2]}` : dateText;
+
+  return (
+    <div className="widget-card weather" style={{background: 'linear-gradient(135deg, #4facfe 0%, #00f2fe 100%)'}}>
+      <div className="w-top"><span className="city">Ağrı Merkez</span><span className="date">{shortDate}</span></div>
+      <div className="w-main">
+        <span className="temp">{wd.temp}{wd.temp !== "--" ? "°" : ""}</span>
+        <span className="desc">
+          {wd.desc}
+          {wd.low != null && <span style={{display:'block', opacity:0.85, fontSize:'12px', marginTop:'4px'}}>En düşük {wd.low}°</span>}
+        </span>
       </div>
     </div>
   );
@@ -1105,14 +1440,11 @@ function AgendaDashboard(){
         </div>
 
         <div className="widget-panel">
-          <div className="widget-card weather" style={{background: 'linear-gradient(135deg, #4facfe 0%, #00f2fe 100%)'}}>
-            <div className="w-top"><span className="city">Ağrı Merkez</span><span className="date">02 Haz 2026</span></div>
-            <div className="w-main"><span className="temp">19°</span><span className="desc">Parçalı bulutlu</span></div>
-          </div>
+          <WeatherWidget />
 
           <div className="widget-card prayer">
             <div className="p-top">
-              <div className="p-top-row">Vakitler <span className="p-date">02 Haz</span></div>
+              <div className="p-top-row">Vakitler <span className="p-date">Ağrı</span></div>
               <div className="p-countdown">Ağrı Vakit Bilgileri</div>
             </div>
             <div className="p-grid">
@@ -1178,19 +1510,12 @@ function Categories({ onOpen }){
 function PharmacyFullView() {
   const districtsList = ["MERKEZ", "TAŞLIÇAY", "DİYADİN", "DOĞUBAYAZIT", "ELEŞKİRT", "HAMUR", "PATNOS", "TUTAK"];
   const [district, setDistrict] = useState("MERKEZ");
-  const [currentDateText, setCurrentDateText] = useState("02.06.2026");
+  const [currentDateText, setCurrentDateText] = useState(() => resolveDutyDate());
 
   useEffect(() => {
-    const updateDate = () => {
-      const now = new Date();
-      const d = now.getDate().toString().padStart(2, '0');
-      const m = (now.getMonth() + 1).toString().padStart(2, '0');
-      const y = now.getFullYear();
-      const calc = `${d}.${m}.${y}`;
-      if (window.AGRI.dutyPharmacies.some(p => p.date === calc)) setCurrentDateText(calc);
-    };
-    updateDate();
-    const t = setInterval(updateDate, 60000);
+    const update = () => setCurrentDateText(resolveDutyDate());
+    update();
+    const t = setInterval(update, 60000);
     return () => clearInterval(t);
   }, []);
 
@@ -1221,7 +1546,7 @@ function PharmacyFullView() {
                 <span className="pharm-card-dist">{ph.district}</span>
               </div>
               <div className="pharm-card-addr">{ph.address}</div>
-              <div className="pharm-card-landmark">📍 {ph.landmark}</div>
+              {ph.landmark && <div className="pharm-card-landmark">📍 {ph.landmark}</div>}
               <div className="pharm-card-foot">
                 <a className="pharm-card-phone" href={`tel:${ph.phone.replace(/\s/g,'')}`}>📞 {ph.phone}</a>
                 <a className="pharm-card-map" href={ph.url} target="_blank" rel="noopener noreferrer">Haritada Göster</a>
@@ -1241,6 +1566,9 @@ function PlacesOverlay({ cat, onClose }){
   const [selectedSubCat, setSelectedSubCat] = useState(null);
   const [selectedPlace, setSelectedPlace] = useState(null);
   const [isClosing, setIsClosing] = useState(false);
+  const [fsImage, setFsImage] = useState(null);
+  const [fsVideo, setFsVideo] = useState(null);
+  const touchStartX = useRef(null);
   
   const isNobetci = cat.id === "nobetci";
   const hasSubCats = cat.hasSubCategories;
@@ -1262,17 +1590,49 @@ function PlacesOverlay({ cat, onClose }){
   }
 
   if (selectedPlace) {
+    const hasImg = selectedPlace.img && selectedPlace.img.trim() !== "";
+    const hasVideo = selectedPlace.video && selectedPlace.video.trim() !== "";
+    const openMedia = () => {
+      if (hasVideo) setFsVideo(selectedPlace.video);
+      else if (hasImg) setFsImage(selectedPlace);
+    };
     return (
       <div className="place-modal-overlay" onClick={(e) => { if(e.target.className==='place-modal-overlay') setSelectedPlace(null); }}>
         <div className="place-modal-content">
           <div className="pm-close" onClick={() => setSelectedPlace(null)}>X</div>
-          <div className="pm-img-wrap" style={ (!selectedPlace.img || selectedPlace.img.trim()==="") ? { background:`linear-gradient(150deg, ${cat.color} 0%, color-mix(in srgb, ${cat.color}, #000 45%) 100%)` } : null }>
-            { selectedPlace.img && selectedPlace.img.trim() !== "" ? (
+          <div
+            className={"pm-img-wrap" + ((hasImg || hasVideo) ? " clickable" : "")}
+            onClick={(hasImg || hasVideo) ? openMedia : undefined}
+            onTouchStart={hasVideo ? (e) => { touchStartX.current = e.touches[0].clientX; } : undefined}
+            onTouchEnd={hasVideo ? (e) => {
+              if (touchStartX.current == null) return;
+              const dx = e.changedTouches[0].clientX - touchStartX.current;
+              touchStartX.current = null;
+              if (Math.abs(dx) > 45) setFsVideo(selectedPlace.video);
+            } : undefined}
+            style={ !hasImg ? { background:`linear-gradient(150deg, ${cat.color} 0%, color-mix(in srgb, ${cat.color}, #000 45%) 100%)` } : null }
+          >
+            { hasImg ? (
               <img src={selectedPlace.img} alt={selectedPlace.name} />
             ) : (
               <div className="pm-noimg">
-                <div style={{fontSize:'42px', marginBottom:'10px'}}>{selectedPlace.icon || '📍'}</div>
+                <div style={{marginBottom:'10px', opacity:0.9}}><Icon name={selectedPlace.icon || 'pin'} size={48} stroke="#fff" sw={1.5} /></div>
                 <span>Görsel yakında eklenecek</span>
+              </div>
+            )}
+            {(hasImg || hasVideo) && (
+              <div className="pm-zoom-hint">
+                {hasVideo ? (
+                  <>
+                    <svg width="14" height="14" viewBox="0 0 24 24" fill="#fff"><path d="M7 5.5v13a1 1 0 0 0 1.5.87l11-6.5a1 1 0 0 0 0-1.74l-11-6.5A1 1 0 0 0 7 5.5Z"/></svg>
+                    Videoyu Oynat
+                  </>
+                ) : (
+                  <>
+                    <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="#fff" strokeWidth="2.2" strokeLinecap="round" strokeLinejoin="round"><path d="M15 3h6v6M9 21H3v-6M21 3l-7 7M3 21l7-7"/></svg>
+                    Tam Ekran
+                  </>
+                )}
               </div>
             )}
             <div className="pm-img-scrim"></div>
@@ -1283,6 +1643,18 @@ function PlacesOverlay({ cat, onClose }){
           </div>
           <div className="pm-body">
             <p className="pm-info">{selectedPlace.info}</p>
+
+            {selectedPlace.lessons && selectedPlace.lessons.length > 0 && (
+              <div style={{display:'flex', flexDirection:'column', gap:'12px'}}>
+                <strong style={{fontSize:'13px', color:'var(--ink-faint)', textTransform:'uppercase', letterSpacing:'.05em', fontWeight:800}}>Verilen Dersler</strong>
+                <div className="pm-lessons">
+                  {selectedPlace.lessons.map((ls, li) => (
+                    <span key={li} className="pm-lesson-chip">{ls}</span>
+                  ))}
+                </div>
+              </div>
+            )}
+
             <div className="pm-meta-box">
               
               {selectedPlace.area && (
@@ -1326,6 +1698,8 @@ function PlacesOverlay({ cat, onClose }){
             )}
           </div>
         </div>
+        {fsImage && <FullscreenImage place={fsImage} onClose={() => setFsImage(null)} />}
+        {fsVideo && <FullscreenVideo src={fsVideo} title={selectedPlace.name} onClose={() => setFsVideo(null)} />}
       </div>
     );
   }
@@ -1339,9 +1713,10 @@ function PlacesOverlay({ cat, onClose }){
         {cat.subCategories.map((sub, i) => (
           <div key={i} className="card subcat-card" onClick={() => setSelectedSubCat(sub)} style={{background:`linear-gradient(150deg, ${cat.color} 0%, color-mix(in srgb, ${cat.color}, #000 45%) 100%)`}}>
             <div className="scrim"></div>
-            
+            <div className="subcat-ghost"><Icon name={sub.icon || 'pin'} size={150} stroke="#fff" sw={1} /></div>
+
             <div className="card-top-bar">
-              <div className="card-icon">{sub.icon || '📌'}</div>
+              <div className="card-icon"><Icon name={sub.icon || 'pin'} size={28} stroke="#fff" sw={1.7} /></div>
             </div>
 
             <div className="body">
@@ -1360,22 +1735,47 @@ function PlacesOverlay({ cat, onClose }){
         <div className="grid animate-fade">
           {activePlaces.map((p, i) => {
             const hasImg = p.img && p.img.trim() !== "";
+            const hasVideo = p.video && p.video.trim() !== "";
             const cardStyle = hasImg
               ? { backgroundImage:`url(${p.img})` }
               : { background:`linear-gradient(150deg, ${cat.color} 0%, color-mix(in srgb, ${cat.color}, #000 45%) 100%)` };
+
+            const handleCardClick = () => { setSelectedPlace(p); };
+            const onTouchStart = hasVideo ? (e) => { touchStartX.current = e.touches[0].clientX; } : undefined;
+            const onTouchEnd = hasVideo ? (e) => {
+              if (touchStartX.current == null) return;
+              const dx = e.changedTouches[0].clientX - touchStartX.current;
+              touchStartX.current = null;
+              if (Math.abs(dx) > 45) setFsVideo(p.video);
+            } : undefined;
+
             return (
-              <div key={i} className="card" onClick={() => setSelectedPlace(p)} style={cardStyle}>
+              <div
+                key={i}
+                className={"card" + (hasVideo ? " has-video" : "")}
+                onClick={handleCardClick}
+                onTouchStart={onTouchStart}
+                onTouchEnd={onTouchEnd}
+                style={cardStyle}
+              >
                 <div className="scrim"></div>
-                
+
+                {hasVideo && (
+                  <div className="card-video-badge">
+                    <svg width="13" height="13" viewBox="0 0 24 24" fill="#fff"><path d="M7 5.5v13a1 1 0 0 0 1.5.87l11-6.5a1 1 0 0 0 0-1.74l-11-6.5A1 1 0 0 0 7 5.5Z"/></svg>
+                    Video
+                  </div>
+                )}
+
                 <div className="card-top-bar">
-                  <div className="card-icon">{p.icon || '📍'}</div>
+                  <div className="card-icon"><Icon name={p.icon || 'pin'} size={28} stroke="#fff" sw={1.7} /></div>
                 </div>
 
                 <div className="body">
                   <h3>{p.name}</h3>
                   {p.subName && <div style={{fontSize:'13px', color:'rgba(255,255,255,0.85)', fontWeight:'700', marginTop:'4px'}}>{p.subName}</div>}
                   {p.area && <div className="card-area">📍 {p.area}</div>}
-                  <div className="card-note">{p.note || 'Detayları görmek için tıklayın'}</div>
+                  <div className="card-note">{hasVideo ? 'Tıkla: detay · Kaydır: video' : (p.note || 'Detayları görmek için tıklayın')}</div>
                 </div>
               </div>
             );
