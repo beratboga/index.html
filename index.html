@@ -438,6 +438,9 @@ a{ color:inherit; text-decoration:none; cursor:pointer; }
 .fs-vid-btn:hover { background:rgba(255,255,255,0.3); }
 .fs-vid-btn:active { transform:scale(0.92); }
 .fs-vid-btn.primary { width:66px; height:66px; background:var(--accent); border-color:rgba(255,255,255,0.4); }
+.fs-bigplay { position:absolute; top:50%; left:50%; transform:translate(-50%,-50%); width:84px; height:84px; border-radius:50%; background:rgba(0,0,0,0.55); display:grid; place-items:center; cursor:pointer; backdrop-filter:blur(6px); border:1.5px solid rgba(255,255,255,0.35); box-shadow:0 10px 30px rgba(0,0,0,0.4); animation:fsIn .2s ease; }
+.fs-bigplay:active { transform:translate(-50%,-50%) scale(0.92); }
+.fs-bigplay svg { margin-left:5px; }
 
 /* Müzik kartı: kaydırılabilir olduğunu belirten ipucu */
 .card.has-video { touch-action: pan-y; }
@@ -934,7 +937,7 @@ const safeStore = (function(){
   };
 })();
 
-const { useRef, useEffect, useState, useCallback } = React;
+const { useRef, useEffect, useState, useCallback, useMemo } = React;
 
 /* ===================== KALİTELİ SVG İKON KÜTÜPHANESİ ===================== */
 /* Düz emoji yerine zarif, ince çizgili (stroke) SVG ikonlar */
@@ -1020,13 +1023,34 @@ function FullscreenVideo({ src, title, onClose }) {
     const prev = document.body.style.overflow;
     document.body.style.overflow = "hidden";
     const v = vidRef.current;
-    if (v) { v.play().catch(() => setPlaying(false)); }
-    return () => { document.removeEventListener("keydown", onKey); document.body.style.overflow = prev; };
+    if (v) { v.play().then(() => setPlaying(true)).catch(() => setPlaying(false)); }
+
+    // Bildirime/başka uygulamaya gidip geri dönünce videoyu kaldığı yerden sürdür
+    const onVisible = () => {
+      const vid = vidRef.current;
+      if (!vid) return;
+      if (document.visibilityState === "visible") {
+        // kullanıcı geri döndü: oynatmaya çalış (otomatik durmuşsa devam etsin)
+        vid.play().then(() => setPlaying(true)).catch(() => setPlaying(false));
+      }
+    };
+    document.addEventListener("visibilitychange", onVisible);
+    window.addEventListener("focus", onVisible);
+    window.addEventListener("pageshow", onVisible);
+
+    return () => {
+      document.removeEventListener("keydown", onKey);
+      document.removeEventListener("visibilitychange", onVisible);
+      window.removeEventListener("focus", onVisible);
+      window.removeEventListener("pageshow", onVisible);
+      document.body.style.overflow = prev;
+    };
   }, []);
 
   const togglePlay = () => {
     const v = vidRef.current; if (!v) return;
-    if (v.paused) { v.play(); setPlaying(true); } else { v.pause(); setPlaying(false); }
+    if (v.paused) { v.play().then(() => setPlaying(true)).catch(() => {}); }
+    else { v.pause(); setPlaying(false); }
   };
   const toggleMute = () => {
     const v = vidRef.current; if (!v) return;
@@ -1042,11 +1066,16 @@ function FullscreenVideo({ src, title, onClose }) {
           src={src}
           playsInline
           autoPlay
+          loop
           onClick={togglePlay}
           onPlay={() => setPlaying(true)}
           onPause={() => setPlaying(false)}
-          onEnded={() => setPlaying(false)}
         />
+        {!playing && (
+          <div className="fs-bigplay" onClick={togglePlay}>
+            <svg width="42" height="42" viewBox="0 0 24 24" fill="#fff"><path d="M7 5.5v13a1 1 0 0 0 1.5.87l11-6.5a1 1 0 0 0 0-1.74l-11-6.5A1 1 0 0 0 7 5.5Z"/></svg>
+          </div>
+        )}
       </div>
       <div className="fs-vid-controls">
         <div className="fs-vid-btn primary" onClick={togglePlay} title={playing ? "Durdur" : "Oynat"}>
@@ -1229,7 +1258,10 @@ function Hero({ onSearchPlace, onOpenCat }){
 /* ===================== ORTAK TARİH MANTIĞI (SAAT 12:00 GEÇİŞİ) ===================== */
 /* Saat 12:00'ı geçtikten sonra otomatik olarak ertesi günün nöbetçi/hava verisi gösterilir.
    Nöbet teslim saati 12:00 olarak kabul edilmiştir (eczaneler bu saatte devreder). */
-const SHIFT_HOUR = 12;
+/* Eczane nöbet devri: sabah mesai başlangıcı (yaklaşık 09:00).
+   Bir eczane, nöbet günü saat 09:00'dan ertesi gün 09:00'a kadar nöbetçidir.
+   Yani saat 09:00'dan ÖNCEYSE hâlâ bir önceki günün nöbetçisi geçerlidir. */
+const PHARMACY_SHIFT_HOUR = 9;
 
 function fmtDate(dateObj){
   const d = dateObj.getDate().toString().padStart(2, '0');
@@ -1238,19 +1270,19 @@ function fmtDate(dateObj){
   return `${d}.${m}.${y}`;
 }
 
-/* Aktif nöbet/hava günü: saat SHIFT_HOUR'ı geçtiyse bir sonraki güne kay */
-function getActiveDateText(){
+/* Aktif nöbetçi günü: saat 09:00'dan önceyse bir önceki güne sarkar */
+function getActiveDutyDateText(){
   const now = new Date();
   const base = new Date(now.getFullYear(), now.getMonth(), now.getDate());
-  if (now.getHours() >= SHIFT_HOUR) {
-    base.setDate(base.getDate() + 1);
+  if (now.getHours() < PHARMACY_SHIFT_HOUR) {
+    base.setDate(base.getDate() - 1);
   }
   return fmtDate(base);
 }
 
 /* Veride aktif tarih varsa onu, yoksa veride bulunan en yakın/ilk tarihi döndür */
 function resolveDutyDate(){
-  const active = getActiveDateText();
+  const active = getActiveDutyDateText();
   const all = window.AGRI.dutyPharmacies;
   if (all.some(p => p.date === active)) return active;
   // aktif tarih yoksa: mevcut en güncel (son) tarihe düş
@@ -1258,12 +1290,14 @@ function resolveDutyDate(){
   return dates.length ? dates[dates.length - 1] : active;
 }
 
+/* Hava durumu: her zaman bugünün (takvim) tarihini gösterir */
 function resolveWeatherDate(){
-  const active = getActiveDateText();
+  const now = new Date();
+  const today = fmtDate(new Date(now.getFullYear(), now.getMonth(), now.getDate()));
   const wd = window.AGRI.weatherData || {};
-  if (wd[active]) return active;
+  if (wd[today]) return today;
   const keys = Object.keys(wd);
-  return keys.length ? keys[0] : active;
+  return keys.length ? keys[0] : today;
 }
 
 /* ===================== BANNER (IMAGE MARQUEE) ===================== */
@@ -1422,8 +1456,176 @@ function WeatherWidget() {
   );
 }
 
+/* ===================== NAMAZ VAKİTLERİ (TAMAMEN ÇEVRİMDIŞI HESAPLAMA) =====================
+   Hiçbir API/bulut/internet kullanılmaz. Vakitler tarayıcıda astronomik olarak hesaplanır.
+   Ağrı için Diyanet'e uyumlu açılar: Fecir (İmsak) 18°, Yatsı 17°. Konum: 39.7191 K, 43.0503 D, UTC+3.
+   Algoritma: klasik açık kaynak "PrayTimes" güneş konumu hesabı. */
+const AGRI_PRAYER = { lat: 39.7191, lng: 43.0503, tz: 3, fajrAngle: 18, ishaAngle: 17 };
+
+const PRAYER_ORDER = [
+  { key:"imsak",   label:"İmsak" },
+  { key:"gunes",   label:"Güneş" },
+  { key:"ogle",    label:"Öğle" },
+  { key:"ikindi",  label:"İkindi" },
+  { key:"aksam",   label:"Akşam" },
+  { key:"yatsi",   label:"Yatsı" }
+];
+
+function pad2(n){ return n.toString().padStart(2, "0"); }
+
+/* --- trigonometri yardımcıları (derece cinsinden) --- */
+const _dtr = d => d * Math.PI / 180;
+const _rtd = r => r * 180 / Math.PI;
+const _sin = d => Math.sin(_dtr(d));
+const _cos = d => Math.cos(_dtr(d));
+const _tan = d => Math.tan(_dtr(d));
+const _arcsin = x => _rtd(Math.asin(x));
+const _arccos = x => _rtd(Math.acos(x));
+const _arccot = x => _rtd(Math.atan(1 / x));
+const _fixAngle = a => { a = a - 360 * Math.floor(a / 360); return a < 0 ? a + 360 : a; };
+const _fixHour  = a => { a = a - 24 * Math.floor(a / 24); return a < 0 ? a + 24 : a; };
+
+/* Julian gün */
+function _julian(y, m, d){
+  if (m <= 2){ y -= 1; m += 12; }
+  const A = Math.floor(y / 100);
+  const B = 2 - A + Math.floor(A / 4);
+  return Math.floor(365.25 * (y + 4716)) + Math.floor(30.6001 * (m + 1)) + d + B - 1524.5;
+}
+
+/* Güneş konumu: [eğiklik (declination), zaman denklemi (equation of time)] */
+function _sunPosition(jd){
+  const D = jd - 2451545.0;
+  const g = _fixAngle(357.529 + 0.98560028 * D);
+  const q = _fixAngle(280.459 + 0.98564736 * D);
+  const L = _fixAngle(q + 1.915 * _sin(g) + 0.020 * _sin(2 * g));
+  const e = 23.439 - 0.00000036 * D;
+  const decl = _arcsin(_sin(e) * _sin(L));
+  let RA = _rtd(Math.atan2(_cos(e) * _sin(L), _cos(L))) / 15;
+  RA = _fixHour(RA);
+  const eqt = q / 15 - RA;
+  return [decl, eqt];
+}
+
+/* Belirli güneş açısı (alfa) için saat açısı süresi */
+function _timeForAngle(angle, lat, decl){
+  const cosH = (-_sin(angle) - _sin(lat) * _sin(decl)) / (_cos(lat) * _cos(decl));
+  if (cosH > 1 || cosH < -1) return NaN; // kutup bölgesi: vakit oluşmaz
+  return _arccos(cosH) / 15;
+}
+
+/* İkindi (Diyanet/Şafii: gölge oranı = 1) */
+function _asrTime(lat, decl){
+  const angle = -_arccot(1 + _tan(Math.abs(lat - decl)));
+  return _timeForAngle(angle, lat, decl);
+}
+
+/* Verilen tarih için Ağrı namaz vakitlerini "HH:MM" döndürür — tamamen lokal */
+function computeAgriPrayerTimes(dateObj){
+  const y = dateObj.getFullYear(), m = dateObj.getMonth() + 1, d = dateObj.getDate();
+  const { lat, lng, tz, fajrAngle, ishaAngle } = AGRI_PRAYER;
+  const jd = _julian(y, m, d) - lng / (15 * 24);
+  const [decl, eqt] = _sunPosition(jd + 0.5);
+
+  // öğle (zeval) saati
+  const dhuhr = _fixHour(12 - eqt) + (tz - lng / 15);
+  const noon = dhuhr;
+
+  const tImsak  = _timeForAngle(fajrAngle, lat, decl);
+  const tGunes  = _timeForAngle(0.833, lat, decl);     // güneş doğuşu (atmosfer kırılması)
+  const tIkindi = _asrTime(lat, decl);
+  const tAksam  = _timeForAngle(0.833, lat, decl);     // güneş batışı
+  const tYatsi  = _timeForAngle(ishaAngle, lat, decl);
+
+  const times = {
+    imsak:  noon - tImsak,
+    gunes:  noon - tGunes,
+    ogle:   noon,
+    ikindi: noon + tIkindi,
+    aksam:  noon + tAksam,
+    yatsi:  noon + tYatsi
+  };
+
+  // Diyanet "temkin" (ihtiyat payı) yaklaşımına göre küçük düzeltmeler (dakika).
+  // Resmî Ağrı vakitleriyle uyum için kalibre edilmiştir.
+  const TEMKIN = { imsak: 5, gunes: -5, ogle: 6, ikindi: 3, aksam: 2, yatsi: -7 };
+  for (const k in times) { if (!isNaN(times[k])) times[k] += TEMKIN[k] / 60; }
+
+  const fmt = (t) => {
+    if (isNaN(t)) return "--:--";
+    t = _fixHour(t + 0.5 / 60); // yuvarlama
+    const hh = Math.floor(t);
+    const mm = Math.floor((t - hh) * 60);
+    return pad2(hh) + ":" + pad2(mm);
+  };
+
+  const out = {};
+  for (const k in times) out[k] = fmt(times[k]);
+  return out;
+}
+
+function toMinutesFloat(hhmm){
+  if (!hhmm || hhmm.indexOf(":") < 0) return 0;
+  const [h, m] = hhmm.split(":").map(n => parseInt(n, 10));
+  return h * 60 + m;
+}
+
+function PrayerTimesWidget(){
+  const [now, setNow] = useState(() => new Date());
+
+  // saniyede bir güncelle (geri sayım + gün değişimi otomatik yakalanır)
+  useEffect(() => {
+    const id = setInterval(() => setNow(new Date()), 1000);
+    return () => clearInterval(id);
+  }, []);
+
+  // bugünün vakitleri (gün değişince otomatik yeniden hesaplanır)
+  const dayKey = now.getFullYear() + "-" + now.getMonth() + "-" + now.getDate();
+  const times = useMemo(() => computeAgriPrayerTimes(now), [dayKey]);
+
+  const nowMinutes = now.getHours() * 60 + now.getMinutes() + now.getSeconds() / 60;
+  const list = PRAYER_ORDER.map(p => ({ ...p, time: times[p.key], min: toMinutesFloat(times[p.key]) }));
+
+  // sonraki vakit (bugün geçilmediyse), yoksa yarının ilk vakti (İmsak)
+  let nextIdx = list.findIndex(p => p.min > nowMinutes);
+  let isTomorrow = false;
+  if (nextIdx === -1) { nextIdx = 0; isTomorrow = true; }
+
+  // aktif vakit = sonrakinden bir önceki
+  let activeIdx = nextIdx - 1;
+  if (activeIdx < 0) activeIdx = list.length - 1;
+
+  // sonraki vakte kalan süre (saniye)
+  const next = list[nextIdx];
+  const nowSec = now.getHours() * 3600 + now.getMinutes() * 60 + now.getSeconds();
+  let secRemain = next.min * 60 - nowSec;
+  if (isTomorrow) secRemain = (next.min + 24 * 60) * 60 - nowSec;
+  if (secRemain < 0) secRemain += 24 * 3600;
+
+  const hh = Math.floor(secRemain / 3600);
+  const mm = Math.floor((secRemain % 3600) / 60);
+  const ss = Math.floor(secRemain % 60);
+  const countdown = `${pad2(hh)}:${pad2(mm)}:${pad2(ss)}`;
+
+  return (
+    <div className="widget-card prayer">
+      <div className="p-top">
+        <div className="p-top-row">Namaz Vakitleri <span className="p-date">Ağrı</span></div>
+        <div className="p-countdown">{next.label} vaktine <span>{countdown}</span></div>
+      </div>
+      <div className="p-grid">
+        {list.map((p, i) => (
+          <div key={p.key} className={"p-item" + (i === activeIdx ? " active" : "")}>
+            <span>{p.label}</span><strong>{p.time}</strong>
+          </div>
+        ))}
+      </div>
+    </div>
+  );
+}
+
+
 function AgendaDashboard(){
-  const todayPrayer = {i:"02:44", g:"04:35", o:"12:13", k:"16:08", a:"19:37", y:"21:20"};
   return (
     <section id="gundem">
       <div className="wrap gundem-layout">
@@ -1442,20 +1644,7 @@ function AgendaDashboard(){
         <div className="widget-panel">
           <WeatherWidget />
 
-          <div className="widget-card prayer">
-            <div className="p-top">
-              <div className="p-top-row">Vakitler <span className="p-date">Ağrı</span></div>
-              <div className="p-countdown">Ağrı Vakit Bilgileri</div>
-            </div>
-            <div className="p-grid">
-              <div className="p-item"><span>İmsak</span><strong>{todayPrayer.i}</strong></div>
-              <div className="p-item"><span>Güneş</span><strong>{todayPrayer.g}</strong></div>
-              <div className="p-item active"><span>Öğle</span><strong>{todayPrayer.o}</strong></div>
-              <div className="p-item"><span>İkindi</span><strong>{todayPrayer.k}</strong></div>
-              <div className="p-item"><span>Akşam</span><strong>{todayPrayer.a}</strong></div>
-              <div className="p-item"><span>Yatsı</span><strong>{todayPrayer.y}</strong></div>
-            </div>
-          </div>
+          <PrayerTimesWidget />
 
           <PharmacyWidget />
         </div>
