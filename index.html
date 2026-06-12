@@ -6,7 +6,10 @@
 <title>04agri.com — Ağrı'nın Dijital Rehberi</title>
 <meta name="google-site-verification" content="google-site-verification: google0b24ad689a534761.html" />
 <meta name="description" content="Ağrı'nın dijital rehberi: restoranlar, cafes, gezilecek yerler, nöbetçi eczane, etkinlikler ve daha fazlası." />
-<link rel="icon" type="image/png" href="https://04agri.com/logo.png" />
+
+<link rel="icon" type="image/jpeg" href="https://04agri.com/agridagi.jpg" />
+<link rel="apple-touch-icon" href="https://04agri.com/agridagi.jpg" />
+
 <meta property="og:title" content="04agri.com — Ağrı'nın Dijital Rehberi" />
 <meta property="og:description" content="Ağrı'nın dijital rehberi: restoranlar, cafeler, gezilecek yerler, nöbetçi eczaneler ve daha fazlası tek bir yerde." />
 <meta property="og:image" content="https://04agri.com/kapak-gorseli.jpg" />
@@ -17,6 +20,17 @@
 <meta name="twitter:title" content="04agri.com — Ağrı'nın Dijital Rehberi" />
 <meta name="twitter:description" content="Ağrı'nın en kapsamlı dijital şehir rehberi." />
 <meta name="twitter:image" content="https://04agri.com/kapak-gorseli.jpg" />
+
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "WebSite",
+  "name": "04agri.com — Ağrı'nın Dijital Rehberi",
+  "url": "https://04agri.com/",
+  "description": "Ağrı'nın dijital rehberi: restoranlar, cafeler, gezilecek yerler, nöbetçi eczaneler ve daha fazlası tek bir yerde.",
+  "image": "https://04agri.com/agridagi.jpg"
+}
+</script>
 
 <link rel="preconnect" href="https://fonts.googleapis.com" />
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
@@ -527,6 +541,21 @@ a{ color:inherit; text-decoration:none; cursor:pointer; }
 </style>
 </head>
 <body>
+
+<noscript>
+  <div style="padding: 20px; font-family: sans-serif;">
+    <h1>04agri.com — Ağrı'nın Dijital Rehberi</h1>
+    <p>Ağrı'nın dijital rehberi: restoranlar, cafeler, gezilecek yerler, nöbetçi eczane, etkinlikler ve daha fazlası.</p>
+    <h2>Öne Çıkanlar ve Uzmanlar</h2>
+    <ul>
+      <li>Sağlık Hizmetleri: Uzman Diyetisyen Bilge İgan Yıldırım, Dr. Nilay Dinçgözoğlu (Medikal Estetik)</li>
+      <li>Eğitim: E.L.I.T Dil Kursu, Muhammed Hoca (Müzik), Armoni Sanat Evi</li>
+      <li>Gezilecek Yerler: Balık Gölü, İshak Paşa Sarayı, Ağrı Dağı, Diyadin Kaplıcaları, Meteor Çukuru, Nuh'un Gemisi</li>
+      <li>Ağrı Merkez, Doğubayazıt, Diyadin, Eleşkirt, Patnos Nöbetçi Eczaneleri</li>
+    </ul>
+  </div>
+</noscript>
+
 <div id="root"></div>
 
 <script src="https://cdnjs.cloudflare.com/ajax/libs/react/18.3.1/umd/react.production.min.js" crossorigin="anonymous"></script>
@@ -1031,7 +1060,6 @@ const safeStore = (function(){
 const { useRef, useEffect, useState, useCallback, useMemo } = React;
 
 /* ===================== KALİTELİ SVG İKON KÜTÜPHANESİ ===================== */
-/* Düz emoji yerine zarif, ince çizgili (stroke) SVG ikonlar */
 function Icon({ name, size = 26, stroke = "currentColor", sw = 1.7 }) {
   const common = {
     width: size, height: size, viewBox: "0 0 24 24",
@@ -1116,12 +1144,10 @@ function FullscreenVideo({ src, title, onClose }) {
     const v = vidRef.current;
     if (v) { v.play().then(() => setPlaying(true)).catch(() => setPlaying(false)); }
 
-    // Bildirime/başka uygulamaya gidip geri dönünce videoyu kaldığı yerden sürdür
     const onVisible = () => {
       const vid = vidRef.current;
       if (!vid) return;
       if (document.visibilityState === "visible") {
-        // kullanıcı geri döndü: oynatmaya çalış (otomatik durmuşsa devam etsin)
         vid.play().then(() => setPlaying(true)).catch(() => setPlaying(false));
       }
     };
@@ -1187,6 +1213,7 @@ function FullscreenVideo({ src, title, onClose }) {
     </div>
   );
 }
+
 const AGRI_LAT = 39.72, AGRI_LON = 43.05;
 const RAD = Math.PI / 180;
 const norm360 = a => ((a % 360) + 360) % 360;
@@ -1346,14 +1373,6 @@ function Hero({ onSearchPlace, onOpenCat }){
   );
 }
 
-/* ===================== ORTAK TARİH MANTIĞI (SAAT 12:00 GEÇİŞİ) ===================== */
-/* Saat 12:00'ı geçtikten sonra otomatik olarak ertesi günün nöbetçi/hava verisi gösterilir.
-   Nöbet teslim saati 12:00 olarak kabul edilmiştir (eczaneler bu saatte devreder). */
-/* Eczane nöbet devri: sabah mesai başlangıcı (yaklaşık 09:00).
-   Bir eczane, nöbet günü saat 09:00'dan ertesi gün 09:00'a kadar nöbetçidir.
-   Yani saat 09:00'dan ÖNCEYSE hâlâ bir önceki günün nöbetçisi geçerlidir. */
-const PHARMACY_SHIFT_HOUR = 9;
-
 function fmtDate(dateObj){
   const d = dateObj.getDate().toString().padStart(2, '0');
   const m = (dateObj.getMonth() + 1).toString().padStart(2, '0');
@@ -1361,7 +1380,8 @@ function fmtDate(dateObj){
   return `${d}.${m}.${y}`;
 }
 
-/* Aktif nöbetçi günü: saat 09:00'dan önceyse bir önceki güne sarkar */
+const PHARMACY_SHIFT_HOUR = 9;
+
 function getActiveDutyDateText(){
   const now = new Date();
   const base = new Date(now.getFullYear(), now.getMonth(), now.getDate());
@@ -1371,17 +1391,14 @@ function getActiveDutyDateText(){
   return fmtDate(base);
 }
 
-/* Veride aktif tarih varsa onu, yoksa veride bulunan en yakın/ilk tarihi döndür */
 function resolveDutyDate(){
   const active = getActiveDutyDateText();
   const all = window.AGRI.dutyPharmacies;
   if (all.some(p => p.date === active)) return active;
-  // aktif tarih yoksa: mevcut en güncel (son) tarihe düş
   const dates = [...new Set(all.map(p => p.date))];
   return dates.length ? dates[dates.length - 1] : active;
 }
 
-/* Hava durumu: her zaman bugünün (takvim) tarihini gösterir */
 function resolveWeatherDate(){
   const now = new Date();
   const today = fmtDate(new Date(now.getFullYear(), now.getMonth(), now.getDate()));
@@ -1480,7 +1497,7 @@ function PharmacyWidget() {
   const districtsList = ["MERKEZ", "DİYADİN", "DOĞUBAYAZIT", "ELEŞKİRT", "HAMUR", "PATNOS", "TAŞLIÇAY", "TUTAK"];
 
   return (
-    <div className="widget-card pharmacy-widget">
+    <div className="widget-card pharmacy-widget" data-nosnippet="true">
       <div className="ph-header">
         <div className="ph-title">
           <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="#FF4B4B" strokeWidth="2.5"><path d="M12 2v20M2 12h20"/></svg>
@@ -1515,7 +1532,6 @@ function PharmacyWidget() {
   );
 }
 
-/* ===================== HAVA DURUMU WIDGET'I ===================== */
 function WeatherWidget() {
   const [dateText, setDateText] = useState(() => resolveWeatherDate());
 
@@ -1528,13 +1544,12 @@ function WeatherWidget() {
 
   const wd = (window.AGRI.weatherData || {})[dateText] || { temp: "--", low: null, desc: "Veri yok" };
 
-  // gösterim için kısa tarih: "12 Haz" gibi
   const months = ["Oca","Şub","Mar","Nis","May","Haz","Tem","Ağu","Eyl","Eki","Kas","Ara"];
   const parts = dateText.split(".");
   const shortDate = parts.length === 3 ? `${parseInt(parts[0],10)} ${months[parseInt(parts[1],10)-1]} ${parts[2]}` : dateText;
 
   return (
-    <div className="widget-card weather" style={{background: 'linear-gradient(135deg, #4facfe 0%, #00f2fe 100%)'}}>
+    <div className="widget-card weather" data-nosnippet="true" style={{background: 'linear-gradient(135deg, #4facfe 0%, #00f2fe 100%)'}}>
       <div className="w-top"><span className="city">Ağrı Merkez</span><span className="date">{shortDate}</span></div>
       <div className="w-main">
         <span className="temp">{wd.temp}{wd.temp !== "--" ? "°" : ""}</span>
@@ -1547,10 +1562,6 @@ function WeatherWidget() {
   );
 }
 
-/* ===================== NAMAZ VAKİTLERİ (TAMAMEN ÇEVRİMDIŞI HESAPLAMA) =====================
-   Hiçbir API/bulut/internet kullanılmaz. Vakitler tarayıcıda astronomik olarak hesaplanır.
-   Ağrı için Diyanet'e uyumlu açılar: Fecir (İmsak) 18°, Yatsı 17°. Konum: 39.7191 K, 43.0503 D, UTC+3.
-   Algoritma: klasik açık kaynak "PrayTimes" güneş konumu hesabı. */
 const AGRI_PRAYER = { lat: 39.7191, lng: 43.0503, tz: 3, fajrAngle: 18, ishaAngle: 17 };
 
 const PRAYER_ORDER = [
@@ -1564,7 +1575,6 @@ const PRAYER_ORDER = [
 
 function pad2(n){ return n.toString().padStart(2, "0"); }
 
-/* --- trigonometri yardımcıları (derece cinsinden) --- */
 const _dtr = d => d * Math.PI / 180;
 const _rtd = r => r * 180 / Math.PI;
 const _sin = d => Math.sin(_dtr(d));
@@ -1576,7 +1586,6 @@ const _arccot = x => _rtd(Math.atan(1 / x));
 const _fixAngle = a => { a = a - 360 * Math.floor(a / 360); return a < 0 ? a + 360 : a; };
 const _fixHour  = a => { a = a - 24 * Math.floor(a / 24); return a < 0 ? a + 24 : a; };
 
-/* Julian gün */
 function _julian(y, m, d){
   if (m <= 2){ y -= 1; m += 12; }
   const A = Math.floor(y / 100);
@@ -1584,7 +1593,6 @@ function _julian(y, m, d){
   return Math.floor(365.25 * (y + 4716)) + Math.floor(30.6001 * (m + 1)) + d + B - 1524.5;
 }
 
-/* Güneş konumu: [eğiklik (declination), zaman denklemi (equation of time)] */
 function _sunPosition(jd){
   const D = jd - 2451545.0;
   const g = _fixAngle(357.529 + 0.98560028 * D);
@@ -1598,34 +1606,30 @@ function _sunPosition(jd){
   return [decl, eqt];
 }
 
-/* Belirli güneş açısı (alfa) için saat açısı süresi */
 function _timeForAngle(angle, lat, decl){
   const cosH = (-_sin(angle) - _sin(lat) * _sin(decl)) / (_cos(lat) * _cos(decl));
-  if (cosH > 1 || cosH < -1) return NaN; // kutup bölgesi: vakit oluşmaz
+  if (cosH > 1 || cosH < -1) return NaN;
   return _arccos(cosH) / 15;
 }
 
-/* İkindi (Diyanet/Şafii: gölge oranı = 1) */
 function _asrTime(lat, decl){
   const angle = -_arccot(1 + _tan(Math.abs(lat - decl)));
   return _timeForAngle(angle, lat, decl);
 }
 
-/* Verilen tarih için Ağrı namaz vakitlerini "HH:MM" döndürür — tamamen lokal */
 function computeAgriPrayerTimes(dateObj){
   const y = dateObj.getFullYear(), m = dateObj.getMonth() + 1, d = dateObj.getDate();
   const { lat, lng, tz, fajrAngle, ishaAngle } = AGRI_PRAYER;
   const jd = _julian(y, m, d) - lng / (15 * 24);
   const [decl, eqt] = _sunPosition(jd + 0.5);
 
-  // öğle (zeval) saati
   const dhuhr = _fixHour(12 - eqt) + (tz - lng / 15);
   const noon = dhuhr;
 
   const tImsak  = _timeForAngle(fajrAngle, lat, decl);
-  const tGunes  = _timeForAngle(0.833, lat, decl);     // güneş doğuşu (atmosfer kırılması)
+  const tGunes  = _timeForAngle(0.833, lat, decl);     
   const tIkindi = _asrTime(lat, decl);
-  const tAksam  = _timeForAngle(0.833, lat, decl);     // güneş batışı
+  const tAksam  = _timeForAngle(0.833, lat, decl);     
   const tYatsi  = _timeForAngle(ishaAngle, lat, decl);
 
   const times = {
@@ -1637,14 +1641,12 @@ function computeAgriPrayerTimes(dateObj){
     yatsi:  noon + tYatsi
   };
 
-  // Diyanet "temkin" (ihtiyat payı) yaklaşımına göre küçük düzeltmeler (dakika).
-  // Resmî Ağrı vakitleriyle uyum için kalibre edilmiştir.
   const TEMKIN = { imsak: 5, gunes: -5, ogle: 6, ikindi: 3, aksam: 2, yatsi: -7 };
   for (const k in times) { if (!isNaN(times[k])) times[k] += TEMKIN[k] / 60; }
 
   const fmt = (t) => {
     if (isNaN(t)) return "--:--";
-    t = _fixHour(t + 0.5 / 60); // yuvarlama
+    t = _fixHour(t + 0.5 / 60); 
     const hh = Math.floor(t);
     const mm = Math.floor((t - hh) * 60);
     return pad2(hh) + ":" + pad2(mm);
@@ -1664,29 +1666,24 @@ function toMinutesFloat(hhmm){
 function PrayerTimesWidget(){
   const [now, setNow] = useState(() => new Date());
 
-  // saniyede bir güncelle (geri sayım + gün değişimi otomatik yakalanır)
   useEffect(() => {
     const id = setInterval(() => setNow(new Date()), 1000);
     return () => clearInterval(id);
   }, []);
 
-  // bugünün vakitleri (gün değişince otomatik yeniden hesaplanır)
   const dayKey = now.getFullYear() + "-" + now.getMonth() + "-" + now.getDate();
   const times = useMemo(() => computeAgriPrayerTimes(now), [dayKey]);
 
   const nowMinutes = now.getHours() * 60 + now.getMinutes() + now.getSeconds() / 60;
   const list = PRAYER_ORDER.map(p => ({ ...p, time: times[p.key], min: toMinutesFloat(times[p.key]) }));
 
-  // sonraki vakit (bugün geçilmediyse), yoksa yarının ilk vakti (İmsak)
   let nextIdx = list.findIndex(p => p.min > nowMinutes);
   let isTomorrow = false;
   if (nextIdx === -1) { nextIdx = 0; isTomorrow = true; }
 
-  // aktif vakit = sonrakinden bir önceki
   let activeIdx = nextIdx - 1;
   if (activeIdx < 0) activeIdx = list.length - 1;
 
-  // sonraki vakte kalan süre (saniye)
   const next = list[nextIdx];
   const nowSec = now.getHours() * 3600 + now.getMinutes() * 60 + now.getSeconds();
   let secRemain = next.min * 60 - nowSec;
@@ -1699,7 +1696,7 @@ function PrayerTimesWidget(){
   const countdown = `${pad2(hh)}:${pad2(mm)}:${pad2(ss)}`;
 
   return (
-    <div className="widget-card prayer">
+    <div className="widget-card prayer" data-nosnippet="true">
       <div className="p-top">
         <div className="p-top-row">Namaz Vakitleri <span className="p-date">Ağrı</span></div>
         <div className="p-countdown">{next.label} vaktine <span>{countdown}</span></div>
@@ -1721,7 +1718,7 @@ function AgendaDashboard(){
     <section id="gundem">
       <div className="wrap gundem-layout">
         <div className="g-left">
-          <div className="news-wrap" style={{marginTop: 0}}>
+          <div className="news-wrap" style={{marginTop: 0}} data-nosnippet="true">
             <div className="news-header">Gündem Haberleri</div>
             <div className="news-list">
               
@@ -1740,9 +1737,7 @@ function AgendaDashboard(){
 
         <div className="widget-panel">
           <WeatherWidget />
-
           <PrayerTimesWidget />
-
           <PharmacyWidget />
         </div>
       </div>
@@ -1810,7 +1805,7 @@ function PharmacyFullView() {
   );
 
   return (
-    <div className="pharm-page animate-fade">
+    <div className="pharm-page animate-fade" data-nosnippet="true">
       <div className="pharm-page-bar">
         <div className="pharm-page-date">
           <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2"><rect x="3" y="4" width="18" height="18" rx="2"/><path d="M16 2v4M8 2v4M3 10h18"/></svg>
@@ -1847,7 +1842,6 @@ function PharmacyFullView() {
   );
 }
 
-/* ===================== DETAYLI GÖRÜNTÜLEME MODALLARI ===================== */
 function PlacesOverlay({ cat, onClose }){
   const [selectedSubCat, setSelectedSubCat] = useState(null);
   const [selectedPlace, setSelectedPlace] = useState(null);
