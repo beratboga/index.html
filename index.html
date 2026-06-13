@@ -549,7 +549,7 @@ a{ color:inherit; text-decoration:none; cursor:pointer; }
     <h2>Öne Çıkanlar ve Uzmanlar</h2>
     <ul>
       <li>Sağlık Hizmetleri: Uzman Diyetisyen Bilge İgan Yıldırım, Dr. Nilay Dinçgözoğlu (Medikal Estetik)</li>
-      <li>Eğitim: E.L.I.T Dil Kursu, Muhammed Hoca (Müzik), Armoni Sanat Evi</li>
+      <li>Eğitim: E.L.I.T Dil Kursu, Muhammed Hoca (Müzik)</li>
       <li>Gezilecek Yerler: Balık Gölü, İshak Paşa Sarayı, Ağrı Dağı, Diyadin Kaplıcaları, Meteor Çukuru, Nuh'un Gemisi</li>
       <li>Ağrı Merkez, Doğubayazıt, Diyadin, Eleşkirt, Patnos Nöbetçi Eczaneleri</li>
     </ul>
@@ -702,22 +702,6 @@ a{ color:inherit; text-decoration:none; cursor:pointer; }
               instagram: "muhammedhoca04",
               lessons: ["Bağlama", "Gitar", "Keman", "Yan Flüt", "Elektro Gitar", "Piyano", "Kalimba", "Ukulele", "Ritim"],
               mapsUrl: "https://maps.google.com/?q=Ağrı+Merkez"
-            },
-            {
-              name: "Armoni Sanat Evi",
-              subName: "MÜZİK VE SANAT AKADEMİSİ",
-              info: "Ağrı’da 3 yıldır müzik eğitiminin adresi .",
-              area: "Ağrı Merkez",
-              img: "armoni.jpg",
-              img2: "armoni2.jpg",
-              bgPos: "top center",
-              icon: "music",
-              note: "Sanatla büyüyen bir gelecek için",
-              address: "Ağrı Merkez",
-              phones: ["0544 484 74 03"],
-              instagram: "agriarmonisanatevi",
-              lessonsTitle: "Ders İçerikleri",
-              lessons: ["Piyano", "Gitar", "Keman", "Yan Flüt", "Bağlama"]
             }
           ]
         }
@@ -988,13 +972,12 @@ const dutyPharmacies = [
 
   window.AGRI = { categories, dutyPharmacies, weatherData };
 
-  // BANNERLAR (Bilge -> E.L.I.T -> Muhammed Hoca -> Dr. Nilay sırası)
+  // BANNERLAR
   window.AGRI_STATIC_BANNERS = [
     { img:"uzm.diyetisyenbilge.jpg", title:"Uzm. Diyetisyen Bilge İgan Yıldırım", subtitle:"Aramıza hoşgeldiniz" },
     { img:"agrıelitdilkursu.jpg", title:"Ağrı E.L.I.T Dil Kursu", subtitle:"Aramıza hoşgeldiniz" },
     { img:"muhammedhoca2.jpg", title:"Muhammed Hoca", subtitle:"Aramıza HoşgeldinİZ" },
     { img:"drnilay1.jpg", title:"Dr. Nilay Dinçgözoğlu", subtitle:"Aramıza Hoşgeldin", bgPos: "center center" },
-    { img:"armoni.jpg", title:"Armoni Sanat Evi", subtitle:"Aramıza Hoşgeldiniz" },
     { img:"bahar3.jpg", title:"Bahar İgan Bağan", subtitle:"Yaşam Koçu", bgPos: "center 35%" }
   ];
 
@@ -1024,13 +1007,6 @@ window.AGRI_STORIES = [
       bgPos: "center 35%", 
       slideText: "Medikal Estetik alanında PRP, Botoks, Mezoterapi ve daha birçok yenilikçi uygulama ile Dr. Nilay Dinçgözoğlu aramıza katıldı.",
       slideImg: "drnilay2.jpg"
-    },
-    {
-      title: "Armoni Sanat",
-      cover: "armoni.jpg",
-      bgPos: "top center",
-      slideText: "Piyano, Gitar, Keman, Yan Flüt ve Bağlama dersleri ile müzik yolculuğuna başla.",
-      slideImg: "armoni1.jpg"
     },
     {
       title: "Bahar İgan Bağan",
@@ -2107,7 +2083,7 @@ function PlacesOverlay({ cat, onClose }){
                 </div>
               </div>
             );
-         })}
+          })}
           
           {cat.id === "gezilecek" && (
             <div style={{ gridColumn: '1 / -1', textAlign: 'center', padding: '20px 10px', marginTop: '10px', color: 'var(--ink-soft)', fontSize: '14px' }}>
