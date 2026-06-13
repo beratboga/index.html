@@ -412,7 +412,7 @@ a{ color:inherit; text-decoration:none; cursor:pointer; }
 .pm-title-box { position:absolute; bottom:24px; left:28px; right:28px; color:#fff; }
 .pm-title-box h2 { font-size:32px; font-weight:800; text-shadow:0 2px 10px rgba(0,0,0,0.6); line-height:1.1; }
 .pm-body { padding:28px; display:flex; flex-direction:column; gap:20px; overflow-y:auto; }
-.pm-info { font-size:16px; color:var(--ink); line-height:1.6; margin:0; font-weight:500;}
+.pm-info { font-size:16px; color:var(--ink); line-height:1.6; margin:0; font-weight:500; white-space: pre-wrap; }
 .pm-meta-box { background:var(--card); border:1px solid var(--line); padding:20px; border-radius:var(--r-sm); display:flex; flex-direction:column; gap:16px; box-shadow:var(--shadow-1); }
 .pm-meta-item { display:flex; align-items:flex-start; gap:12px; font-size:15px; font-weight:600; color:var(--ink-soft); }
 .pm-meta-item svg { color:var(--pin); flex-shrink:0; margin-top:2px; }
@@ -730,6 +730,35 @@ a{ color:inherit; text-decoration:none; cursor:pointer; }
       places:[]
     },
     {
+      id:"danismanlik", name:"Danışmanlık", color:"#8E44AD", tagline:"Kişisel Gelişim", 
+      blurb:"Yaşam koçluğu, meditasyon, farkındalık ve kişisel gelişim uzmanları ile potansiyelinizi keşfedin.",
+      hasSubCategories: true, // Alt kategorileri aktif ettik
+      subCategories: [
+        { 
+          id: "yasam-kocu", 
+          name: "Yaşam Koçu", 
+          icon: "brain", 
+          note: "Kişisel gelişim ve farkındalık danışmanlığı", 
+          places: [
+            {
+              name: "Bahar İgan Bağan",
+              subName: "YAŞAM KOÇU",
+              info: "Hizmet Tanımı\n\nBireysel dönüşüm, duygusal denge ve yaşam kalitesini artırmaya yönelik bütüncül danışmanlık hizmetleri sunulmaktadır.\n\nHizmet Kapsamı:\n\n• Yaşam Koçluğu\nKişinin hedeflerini netleştirmesi, karar alma süreçlerini güçlendirmesi ve yaşamında yön belirlemesine destek sağlayan koçluk çalışmaları.\n\n• Enerji Çalışmaları (Kozmik Enerji, Bioenerji, Spiritüel Enerji)\nEnerji alanının dengelenmesi, blokajların çözülmesi ve yaşam akışının desteklenmesine yönelik uygulamalar.\n\n• EFT (Duygusal Özgürleşme Tekniği)\nStres, kaygı ve duygusal yüklerin azaltılmasına yardımcı olan duygusal regülasyon çalışmaları.\n\n• Meditasyon Uygulamaları\nZihinsel sakinlik, farkındalık ve içsel dengeyi destekleyen rehberli uygulamalar.\n\nÇalışma Prensibi:\n\nHer danışan için ihtiyaçlara özel seans planlaması yapılır. Süreç tamamen bireysel hedefler doğrultusunda ilerler.\n\nÖnemli Bilgilendirme:\n\nSunulan hizmetler tıbbi bir tedavi, teşhis veya psikolojik terapi niteliği taşımaz. Dini bir içerik veya dini yönlendirme taşımaz",
+              area: "Ağrı Merkez",
+              img: "bahar1.jpg",
+              bgPos: "center 5%", // Karttaki görseli yukarı çektik
+              icon: "brain",
+              note: "Farkındalıklı bir yaşama adım atın.",
+              address: "Yavuz Mahallesi, Nevzat Güngör Caddesi, Saray Plaza Kat:5 No:40",
+              instagram: "farkimdalikliyasam",
+              mapsUrl: "https://maps.google.com/?q=Ağrı+Saray+Plaza" // Navigasyon linki eklendi
+            }
+          ] 
+        }
+      ],
+      places:[] 
+    },
+    {
       id:"gezilecek", name:"Gezilecek Yerler", color:"#1ABC9C", tagline:"Ağrı'nın Hazineleri", 
       blurb:"Tarihten doğaya — Ücretsiz, telifsiz ve muhteşem manzaralar doğrudan harita konumlarıyla.",
       places:[
@@ -965,7 +994,8 @@ const dutyPharmacies = [
     { img:"agrıelitdilkursu.jpg", title:"Ağrı E.L.I.T Dil Kursu", subtitle:"Aramıza hoşgeldiniz" },
     { img:"muhammedhoca2.jpg", title:"Muhammed Hoca", subtitle:"Aramıza HoşgeldinİZ" },
     { img:"drnilay1.jpg", title:"Dr. Nilay Dinçgözoğlu", subtitle:"Aramıza Hoşgeldin", bgPos: "center center" },
-    { img:"armoni.jpg", title:"Armoni Sanat Evi", subtitle:"Aramıza Hoşgeldiniz" }
+    { img:"armoni.jpg", title:"Armoni Sanat Evi", subtitle:"Aramıza Hoşgeldiniz" },
+    { img:"bahar3.jpg", title:"Bahar İgan Bağan", subtitle:"Yaşam Koçu", bgPos: "center 35%" }
   ];
 
   // HİKAYELER
@@ -1001,6 +1031,13 @@ window.AGRI_STORIES = [
       bgPos: "top center",
       slideText: "Piyano, Gitar, Keman, Yan Flüt ve Bağlama dersleri ile müzik yolculuğuna başla.",
       slideImg: "armoni1.jpg"
+    },
+    {
+      title: "Bahar İgan Bağan",
+      cover: "bahar2.jpg",
+      bgPos: "top",
+      slideText: "Farkındalıklı bir yaşama adım atın. Yaşam koçluğu seanslarımızla kendi potansiyelinizi keşfedin.",
+      slideImg: "bahar2.jpg"
     }
   ];
 
