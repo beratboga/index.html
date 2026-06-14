@@ -3,6 +3,9 @@
 <head>
 <meta charset="UTF-8" />
 <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no" />
+
+<base href="/" />
+
 <title>04agri.com — Ağrı'nın Dijital Rehberi</title>
 <meta name="google-site-verification" content="google-site-verification: google0b24ad689a534761.html" />
 <meta name="description" content="Ağrı'nın dijital rehberi: restoranlar, cafes, gezilecek yerler, nöbetçi eczane, etkinlikler ve daha fazlası." />
@@ -36,6 +39,7 @@
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
 <link href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:opsz,wght@12..96,400;12..96,600;12..96,700;12..96,800&family=Plus+Jakarta+Sans:wght@400;500;600;700;800&display=swap" rel="stylesheet" />
 <style>
+  
 /* ============================================================
    04agri.com — Ağrı Dijital Rehberi
    ============================================================ */
@@ -538,6 +542,20 @@ a{ color:inherit; text-decoration:none; cursor:pointer; }
   .fs-vid-btn.primary { width:58px; height:58px; }
   .pm-img-wrap { height:240px; }
 }
+/* FAVORİ KALP BUTONU */
+.fav-btn { position: absolute; top: 16px; right: 16px; z-index: 10; width: 40px; height: 40px; border-radius: 50%; background: rgba(0, 0, 0, 0.45); backdrop-filter: blur(6px); display: grid; place-items: center; border: 1px solid rgba(255,255,255,0.2); transition: all 0.2s var(--ease); cursor: pointer; }
+.fav-btn:hover { background: rgba(0, 0, 0, 0.65); transform: scale(1.05); }
+.fav-btn:active { transform: scale(0.9); }
+.fav-btn.is-fav svg { fill: #FF4B4B; stroke: #FF4B4B; animation: heartPop 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275); }
+@keyframes heartPop { 0% { transform: scale(1); } 50% { transform: scale(1.3); } 100% { transform: scale(1); } }
+/* --- FAVORİ VE PAYLAŞ BUTONU TASARIMLARI --- */
+.fav-btn { position: absolute; top: 16px; right: 16px; z-index: 10; width: 40px; height: 40px; border-radius: 50%; background: rgba(0, 0, 0, 0.45); backdrop-filter: blur(6px); display: grid; place-items: center; border: 1px solid rgba(255,255,255,0.2); transition: all 0.2s var(--ease); cursor: pointer; }
+.fav-btn:hover { background: rgba(0, 0, 0, 0.65); transform: scale(1.05); }
+.fav-btn:active { transform: scale(0.9); }
+.fav-btn.is-fav svg { fill: #FF4B4B; stroke: #FF4B4B; animation: heartPop 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275); }
+@keyframes heartPop { 0% { transform: scale(1); } 50% { transform: scale(1.3); } 100% { transform: scale(1); } }
+.pm-share-btn { background: #fff; color: var(--ink); font-weight: 800; padding: 16px; border-radius: 100px; display: flex; align-items: center; justify-content: center; gap: 8px; font-size: 16px; transition: all 0.2s; text-align: center; margin-top: 12px; box-shadow: 0 8px 24px rgba(0,0,0,0.08); border: 1px solid var(--line); cursor: pointer; width: 100%; }
+.pm-share-btn:hover { transform: translateY(-2px); box-shadow: 0 12px 28px rgba(0,0,0,0.12); }
 </style>
 </head>
 <body>
@@ -566,6 +584,15 @@ a{ color:inherit; text-decoration:none; cursor:pointer; }
 /* ===================== DATA & MASTER REHBER LISTESİ ===================== */
 (function(){
   "use strict";
+
+  // Slugify Fonksiyonu (URL dostu metin oluşturucu)
+  function slugify(text) {
+    if(!text) return "";
+    const trMap = { 'ç':'c', 'Ç':'c', 'ğ':'g', 'Ğ':'g', 'ş':'s', 'Ş':'s', 'ü':'u', 'Ü':'u', 'ı':'i', 'İ':'i', 'ö':'o', 'Ö':'o' };
+    let str = text;
+    for (let key in trMap) { str = str.replace(new RegExp(key, 'g'), trMap[key]); }
+    return str.toLowerCase().replace(/[^a-z0-9\s-]/g, '').replace(/\s+/g, '-').replace(/-+/g, '-');
+  }
 
   const categories = [
     {
@@ -716,7 +743,7 @@ a{ color:inherit; text-decoration:none; cursor:pointer; }
     {
       id:"danismanlik", name:"Danışmanlık", color:"#8E44AD", tagline:"Kişisel Gelişim", 
       blurb:"Yaşam koçluğu, meditasyon, farkındalık ve kişisel gelişim uzmanları ile potansiyelinizi keşfedin.",
-      hasSubCategories: true, // Alt kategorileri aktif ettik
+      hasSubCategories: true,
       subCategories: [
         { 
           id: "yasam-kocu", 
@@ -730,12 +757,12 @@ a{ color:inherit; text-decoration:none; cursor:pointer; }
               info: "Hizmet Tanımı\n\nBireysel dönüşüm, duygusal denge ve yaşam kalitesini artırmaya yönelik bütüncül danışmanlık hizmetleri sunulmaktadır.\n\nHizmet Kapsamı:\n\n• Yaşam Koçluğu\nKişinin hedeflerini netleştirmesi, karar alma süreçlerini güçlendirmesi ve yaşamında yön belirlemesine destek sağlayan koçluk çalışmaları.\n\n• Enerji Çalışmaları (Kozmik Enerji, Bioenerji, Spiritüel Enerji)\nEnerji alanının dengelenmesi, blokajların çözülmesi ve yaşam akışının desteklenmesine yönelik uygulamalar.\n\n• EFT (Duygusal Özgürleşme Tekniği)\nStres, kaygı ve duygusal yüklerin azaltılmasına yardımcı olan duygusal regülasyon çalışmaları.\n\n• Meditasyon Uygulamaları\nZihinsel sakinlik, farkındalık ve içsel dengeyi destekleyen rehberli uygulamalar.\n\nÇalışma Prensibi:\n\nHer danışan için ihtiyaçlara özel seans planlaması yapılır. Süreç tamamen bireysel hedefler doğrultusunda ilerler.\n\nÖnemli Bilgilendirme:\n\nSunulan hizmetler tıbbi bir tedavi, teşhis veya psikolojik terapi niteliği taşımaz. Dini bir içerik veya dini yönlendirme taşımaz",
               area: "Ağrı Merkez",
               img: "bahar1.jpg",
-              bgPos: "center 5%", // Karttaki görseli yukarı çektik
+              bgPos: "center 5%",
               icon: "brain",
               note: "Farkındalıklı bir yaşama adım atın.",
               address: "Yavuz Mahallesi, Nevzat Güngör Caddesi, Saray Plaza Kat:5 No:40",
               instagram: "farkimdalikliyasam",
-              mapsUrl: "https://maps.google.com/?q=Ağrı+Saray+Plaza" // Navigasyon linki eklendi
+              mapsUrl: "https://maps.google.com/?q=Ağrı+Saray+Plaza"
             }
           ] 
         }
@@ -803,6 +830,16 @@ a{ color:inherit; text-decoration:none; cursor:pointer; }
       ]
     },
   ];
+
+  // Kategorilerdeki her mekana otomatik slug (url) ekliyoruz.
+  categories.forEach(c => {
+    if (c.places) c.places.forEach(p => p.slug = slugify(p.name));
+    if (c.hasSubCategories) {
+      c.subCategories.forEach(sub => {
+        if (sub.places) sub.places.forEach(p => p.slug = slugify(p.name));
+      });
+    }
+  });
 
 const dutyPharmacies = [
   // --- 12.06.2026 ---
@@ -1080,24 +1117,22 @@ function Icon({ name, size = 26, stroke = "currentColor", sw = 1.7 }) {
     strokeLinecap: "round", strokeLinejoin: "round"
   };
   const paths = {
-    // Sağlık alt kategorileri
     tooth: <path d="M12 5.5c-1.4-1.6-3.2-2-4.7-1.6C5.5 4.4 4.5 6 4.7 8c.2 1.7.6 2.7 1 4.5.5 2.4.7 5 1.7 6.4.5.7 1.5.7 1.9-.1.7-1.3.8-3.3 1.4-4.6.3-.6 1.3-.6 1.6 0 .6 1.3.7 3.3 1.4 4.6.4.8 1.4.8 1.9.1 1-1.4 1.2-4 1.7-6.4.4-1.8.8-2.8 1-4.5.2-2-.8-3.6-2.6-4.1-1.5-.4-3.3 0-4.7 1.6Z"/>,
     speak: <g><path d="M3 11a8 8 0 0 1 16 0v0a8 8 0 0 1-8 8H7l-3 2v-4a8 8 0 0 1-1-6Z"/><path d="M8 10h6M8 13h4"/></g>,
     brain: <g><path d="M9.5 3A2.5 2.5 0 0 0 7 5.5v.5a2.5 2.5 0 0 0-2 4 2.5 2.5 0 0 0 0 4 2.5 2.5 0 0 0 2 4v.5A2.5 2.5 0 0 0 12 21V3.5"/><path d="M14.5 3A2.5 2.5 0 0 1 17 5.5v.5a2.5 2.5 0 0 1 2 4 2.5 2.5 0 0 1 0 4 2.5 2.5 0 0 1-2 4v.5A2.5 2.5 0 0 1 12 21"/></g>,
     bone: <path d="M17 10c1.5 0 3-1 3-3s-1.3-2.5-2.4-2.4C16.5 4.7 16 6 16 6l-2.5 2.5M7 14c-1.5 0-3 1-3 3s1.3 2.5 2.4 2.4C7.5 19.3 8 18 8 18l9-9 .5-.5"/>,
     leaf: <g><path d="M11 20A7 7 0 0 1 4 13c0-5 4.5-9 16-9 0 7-3.5 13-9 13a6 6 0 0 1-2 .5"/><path d="M11 20c0-4 2-8 6-11"/></g>,
-    // Eğitim
     lang: <g><circle cx="12" cy="12" r="9"/><path d="M3 12h18M12 3c2.5 2.5 2.5 16 0 18M12 3c-2.5 2.5-2.5 16 0 18"/></g>,
     music: <g><path d="M9 18V5l11-2v13"/><circle cx="6" cy="18" r="3"/><circle cx="17" cy="16" r="3"/></g>,
-    // Gezilecek
     tent: <g><path d="M3.5 20 12 5l8.5 15M12 5v15M9 20l3-5 3 5"/></g>,
     mosque: <g><path d="M5 21V11M19 21V11M5 11c0-3 3-3 3-6 0 3 3 3 3 6M11 11c0-3 3-3 3-6 0 3 3 3 3 6M12 3v2M3 21h18M8 21v-4a4 4 0 0 1 8 0v4"/></g>,
     mountain: <path d="m3 20 6.5-12 3.5 6 2.5-4L21 20H3Z"/>,
     spa: <g><path d="M12 22c4-3 7-6 7-10a7 7 0 0 0-14 0c0 4 3 7 7 10ZM9 8c1 0 3 1 3 3M15 8c-1 0-3 1-3 3"/></g>,
     meteor: <g><circle cx="14" cy="14" r="7"/><path d="M9 9 4 4M12 7l-3-3M7 12 3 8"/></g>,
     ship: <g><path d="M3 16 4 9h16l1 7M5 16c0 2 2 3 4 3s4-1 4-3M12 9V4h4M3 16c.5 2 2 3 3 3"/></g>,
-    // Genel pin
-    pin: <g><path d="M12 21s7-6.3 7-11a7 7 0 1 0-14 0c0 4.7 7 11 7 11Z"/><circle cx="12" cy="10" r="2.5"/></g>
+    pin: <g><path d="M12 21s7-6.3 7-11a7 7 0 1 0-14 0c0 4.7 7 11 7 11Z"/><circle cx="12" cy="10" r="2.5"/></g>,
+    heart: <path d="M20.84 4.61a5.5 5.5 0 0 0-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 0 0-7.78 7.78l1.06 1.06L12 21.23l7.78-7.78 1.06-1.06a5.5 5.5 0 0 0 0-7.78z"/>,
+    share: <g><circle cx="18" cy="5" r="3"/><circle cx="6" cy="12" r="3"/><circle cx="18" cy="19" r="3"/><line x1="8.59" y1="13.51" x2="15.42" y2="17.49"/><line x1="15.41" y1="6.51" x2="8.59" y2="10.49"/></g>
   };
   return <svg {...common}>{paths[name] || paths.pin}</svg>;
 }
@@ -1318,7 +1353,17 @@ function Topbar(){
   );
 }
 
-function Hero({ onSearchPlace, onOpenCat }){
+/* ===================== AKILLI ARAMA YARDIMCI FONKSİYONU ===================== */
+// Arama yaparken Türkçe karakterleri ve büyük/küçük harf sorunlarını çözer
+const normalizeSearchText = (text) => {
+  if (!text) return "";
+  return text.toLocaleLowerCase('tr-TR')
+    .replace(/ğ/g, 'g').replace(/ü/g, 'u').replace(/ş/g, 's')
+    .replace(/ı/g, 'i').replace(/ö/g, 'o').replace(/ç/g, 'c');
+};
+
+/* ===================== HERO (GÜNCELLENMİŞ ARAMA ÇUBUĞU) ===================== */
+function Hero({ onSearchPlace, onOpenCat, onOpenFavorites }){
   const [phase, setPhase] = useState("spin");
   const timers = useRef([]);
   const [q, setQ] = useState("");
@@ -1334,16 +1379,52 @@ function Hero({ onSearchPlace, onOpenCat }){
   const cls = ["hero", phase==="locate"?"is-locate":"", phase==="zoom"?"is-zoom":"", ["mountain","rest"].includes(phase)?"is-zoom is-mountain":""].join(" ");
 
   const handleSearchChange = (e) => {
-    const val = e.target.value; setQ(val);
+    const val = e.target.value; 
+    setQ(val);
+
     if(val.length > 1) {
       let res = [];
+      const query = normalizeSearchText(val); // Kullanıcının yazdığını temizle
+
+      // Tüm kategorileri ve alt kategorileri tara
       window.AGRI.categories.forEach(c => {
-        if(c.id === "gezilecek") {
-          c.places.forEach(p => { if(p.name.toLowerCase().includes(val.toLowerCase())) { res.push({ ...p, catId: c.id, catName: c.name, catColor: c.color }); } });
+        
+        // 1. Ana kategorilerdeki mekanları tara
+        if(c.places) {
+          c.places.forEach(p => {
+            // İsim, alt isim, açıklama ve dersleri birleştirip tek bir metin yapıyoruz
+            const targetText = normalizeSearchText(p.name + " " + (p.info || "") + " " + (p.subName || "") + " " + (p.lessons ? p.lessons.join(" ") : ""));
+            
+            if(targetText.includes(query)) {
+              if (!res.some(existing => existing.slug === p.slug)) {
+                res.push({ ...p, catId: c.id, catName: c.name, catColor: c.color });
+              }
+            }
+          });
+        }
+
+        // 2. Alt kategorilerdeki mekanları tara (Sağlık, Eğitim vb.)
+        if(c.hasSubCategories && c.subCategories) {
+          c.subCategories.forEach(sub => {
+            if(sub.places) {
+              sub.places.forEach(p => {
+                const targetText = normalizeSearchText(p.name + " " + (p.info || "") + " " + (p.subName || "") + " " + (p.lessons ? p.lessons.join(" ") : ""));
+                
+                if(targetText.includes(query)) {
+                  if (!res.some(existing => existing.slug === p.slug)) {
+                    res.push({ ...p, catId: c.id, catName: `${c.name} - ${sub.name}`, catColor: c.color });
+                  }
+                }
+              });
+            }
+          });
         }
       });
-      setSuggs(res.slice(0, 5));
-    } else setSuggs([]);
+      // En fazla 6 sonuç göster
+      setSuggs(res.slice(0, 6));
+    } else {
+      setSuggs([]);
+    }
   };
 
   const handleSelect = (place) => { setQ(""); setSuggs([]); onSearchPlace(place); }
@@ -1361,7 +1442,7 @@ function Hero({ onSearchPlace, onOpenCat }){
         <div className="search-wrapper">
           <form className="search" onSubmit={(e)=>e.preventDefault()}>
             <span className="ico"><svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2"><circle cx="11" cy="11" r="7"/><path d="m20 20-3.2-3.2"/></svg></span>
-            <input value={q} onChange={handleSearchChange} placeholder="Gezilecek yerleri arayın..." aria-label="Ara" onBlur={()=>setTimeout(()=>setSuggs([]), 200)} />
+            <input value={q} onChange={handleSearchChange} placeholder="Mekan, doktor, restoran, kurs arayın..." aria-label="Ara" onBlur={()=>setTimeout(()=>setSuggs([]), 200)} />
             <button type="button" className="go" onClick={() => document.getElementById("kategoriler").scrollIntoView({ behavior:"smooth" })}>Kategoriler</button>
           </form>
           {suggs.length > 0 && (
@@ -1376,7 +1457,8 @@ function Hero({ onSearchPlace, onOpenCat }){
           )}
         </div>
         <div className="search-tags">
-          <button className="highlight-btn" onClick={() => document.getElementById("kategoriler").scrollIntoView({ behavior:"smooth" })}>Tüm Kategoriler</button>
+           <button className="highlight-btn" onClick={() => document.getElementById("kategoriler").scrollIntoView({ behavior:"smooth" })}>Tüm Kategoriler</button>
+          <button className="highlight-btn" style={{background:'#fff', color:'#008000'}} onClick={onOpenFavorites}>Favorilerim 💚</button>
           <button onClick={() => onOpenCat(window.AGRI.categories.find(c => c.id === 'nobetci'))}>Nöbetçi Eczane</button>
           <button onClick={() => onOpenCat(window.AGRI.categories.find(c => c.id === 'gezilecek'))}>Gezilecek Yerler</button>
           <button onClick={() => onOpenCat(window.AGRI.categories.find(c => c.id === 'egitim'))}>Eğitim</button>
@@ -1855,9 +1937,10 @@ function PharmacyFullView() {
   );
 }
 
-function PlacesOverlay({ cat, onClose }){
-  const [selectedSubCat, setSelectedSubCat] = useState(null);
-  const [selectedPlace, setSelectedPlace] = useState(null);
+// ROUTER GÜNCELLEMESİ: initialSubCat ve initialPlace propertyleri eklendi
+function PlacesOverlay({ cat, initialSubCat, initialPlace, onClose, favorites = [], toggleFav }){
+  const [selectedSubCat, setSelectedSubCat] = useState(initialSubCat || null);
+  const [selectedPlace, setSelectedPlace] = useState(initialPlace || null);
   const [isClosing, setIsClosing] = useState(false);
   const [fsImage, setFsImage] = useState(null);
   const [fsVideo, setFsVideo] = useState(null);
@@ -1866,21 +1949,43 @@ function PlacesOverlay({ cat, onClose }){
   const isNobetci = cat.id === "nobetci";
   const hasSubCats = cat.hasSubCategories;
 
+  // Dinamik SEO Title ve Description Mantığı
+  useEffect(() => {
+    let title = "04agri.com — Ağrı'nın Dijital Rehberi";
+    let desc = "Ağrı'nın dijital rehberi: restoranlar, cafeler, gezilecek yerler, nöbetçi eczaneler ve daha fazlası tek bir yerde.";
+    
+    if (selectedPlace) {
+      title = `${selectedPlace.name} - ${cat.name} | 04agri.com`;
+      if(selectedPlace.info) desc = selectedPlace.info.substring(0, 150) + '...';
+    } else if (cat) {
+      title = `${cat.name} | 04agri.com`;
+      desc = cat.blurb || desc;
+    }
+    
+    document.title = title;
+    let metaDesc = document.querySelector('meta[name="description"]');
+    if (metaDesc) metaDesc.setAttribute("content", desc);
+
+  }, [selectedPlace, cat]);
+
   const handleBack = () => {
     if (selectedPlace) {
       setSelectedPlace(null);
+      window.history.pushState(null, "", `/${cat.id}`);
     } else if (selectedSubCat) {
       setSelectedSubCat(null);
     } else {
+      window.history.pushState(null, "", `/`);
       setIsClosing(true);
       setTimeout(onClose, 250); 
     }
   };
 
   const handleClose = () => {
+    window.history.pushState(null, "", `/`);
     setIsClosing(true);
     setTimeout(onClose, 250);
-  }
+  };
 
   if (selectedPlace) {
     const hasImg = selectedPlace.img && selectedPlace.img.trim() !== "";
@@ -1889,10 +1994,28 @@ function PlacesOverlay({ cat, onClose }){
       if (hasVideo) setFsVideo(selectedPlace.video);
       else if (hasImg) setFsImage(selectedPlace);
     };
+    const handleShare = async () => {
+      const shareUrl = `https://04agri.com/mekan/${selectedPlace.slug}`;
+      const shareData = {
+        title: selectedPlace.name,
+        text: `${selectedPlace.name} detaylarını Ağrı Dijital Rehberi'nde incele!`,
+        url: shareUrl
+      };
+      if (navigator.share) {
+        try {
+          await navigator.share(shareData);
+        } catch (err) {
+          console.log("Paylaşım iptal edildi");
+        }
+      } else {
+        navigator.clipboard.writeText(shareUrl);
+        alert("Link kopyalandı! İstediğiniz yere yapıştırıp gönderebilirsiniz:\n" + shareUrl);
+      }
+    };
     return ( 
-      <div className="place-modal-overlay" onClick={(e) => { if(e.target.className==='place-modal-overlay') setSelectedPlace(null); }}>
+      <div className="place-modal-overlay" onClick={(e) => { if(e.target.className==='place-modal-overlay') handleBack(); }}>
         <div className="place-modal-content">
-          <div className="pm-close" onClick={() => setSelectedPlace(null)}>X</div>
+          <div className="pm-close" onClick={handleBack}>X</div>
           <div
             className={"pm-img-wrap" + ((hasImg || hasVideo) ? " clickable" : "")}
             onClick={(hasImg || hasVideo) ? openMedia : undefined}
@@ -2000,6 +2123,16 @@ function PlacesOverlay({ cat, onClose }){
                 Google Haritalar'da Aç (Navigasyon)
               </a>
             )}
+            <button className="pm-share-btn" onClick={handleShare}>
+              <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round">
+                <circle cx="18" cy="5" r="3"></circle>
+                <circle cx="6" cy="12" r="3"></circle>
+                <circle cx="18" cy="19" r="3"></circle>
+                <line x1="8.59" y1="13.51" x2="15.42" y2="17.49"></line>
+                <line x1="15.41" y1="6.51" x2="8.59" y2="10.49"></line>
+              </svg>
+              Bu Mekanı Paylaş
+            </button>
           </div>
         </div>
         {fsImage && <FullscreenImage place={fsImage} onClose={() => setFsImage(null)} />}
@@ -2044,7 +2177,11 @@ function PlacesOverlay({ cat, onClose }){
               ? { backgroundImage:`url(${p.img})`, backgroundPosition: p.bgPos || 'center 22%' }
               : { background:`linear-gradient(150deg, ${cat.color} 0%, color-mix(in srgb, ${cat.color}, #000 45%) 100%)` };
 
-            const handleCardClick = () => { setSelectedPlace(p); };
+            const handleCardClick = () => { 
+              setSelectedPlace(p); 
+              // Mikro-Site Router Mantığı: Karta tıklayınca linki güncelle
+              window.history.pushState(null, "", `/mekan/${p.slug}`);
+            };
             const onTouchStart = hasVideo ? (e) => { touchStartX.current = e.touches[0].clientX; } : undefined;
             const onTouchEnd = hasVideo ? (e) => {
               if (touchStartX.current == null) return;
@@ -2063,7 +2200,12 @@ function PlacesOverlay({ cat, onClose }){
                 style={cardStyle}
               >
                 <div className="scrim"></div>
-
+<button 
+                  className={`fav-btn ${favorites.includes(p.slug) ? "is-fav" : ""}`} 
+                  onClick={(e) => { e.stopPropagation(); toggleFav(p.slug); }}
+                >
+                  <Icon name="heart" size={20} stroke="#fff" sw={2} />
+                </button>
                 {hasVideo && (
                   <div className="card-video-badge">
                     <svg width="13" height="13" viewBox="0 0 24 24" fill="#fff"><path d="M7 5.5v13a1 1 0 0 0 1.5.87l11-6.5a1 1 0 0 0 0-1.74l-11-6.5A1 1 0 0 0 7 5.5Z"/></svg>
@@ -2121,7 +2263,46 @@ const { useEffect: useEffectA, useState: useStateA } = React;
 
 function App(){
   const [openCat, setOpenCat] = useStateA(null);
+  const [directSub, setDirectSub] = useStateA(null);
+  const [directPlace, setDirectPlace] = useStateA(null);
   const [docView, setDocView] = useStateA(null); 
+  // FAVORİLER HAFIZASI (Yerel Depolama)
+  const [favorites, setFavorites] = useStateA(() => {
+    const saved = safeStore.get('agri_favs');
+    return saved ? JSON.parse(saved) : [];
+  });
+
+  const toggleFav = (slug) => {
+    let newFavs;
+    if (favorites.includes(slug)) {
+      newFavs = favorites.filter(id => id !== slug); // Favoriden çıkar
+    } else {
+      newFavs = [...favorites, slug]; // Favoriye ekle
+    }
+    setFavorites(newFavs);
+    safeStore.set('agri_favs', JSON.stringify(newFavs));
+  };
+
+  const handleOpenFavorites = () => {
+    let allPlaces = [];
+    window.AGRI.categories.forEach(c => {
+      if(c.places) allPlaces = [...allPlaces, ...c.places];
+      if(c.hasSubCategories) {
+        c.subCategories.forEach(sub => { if(sub.places) allPlaces = [...allPlaces, ...sub.places]; });
+      }
+    });
+    const favPlaces = allPlaces.filter(p => favorites.includes(p.slug));
+    
+    const favCategory = {
+      id: "favorilerim",
+      name: "Favorilerim 💚",
+      color: "#FF4B4B",
+      blurb: "Kendi cihazınıza kaydettiğiniz favori mekanlarınız.",
+      places: favPlaces
+    };
+    setOpenCat(favCategory); setDirectSub(null); setDirectPlace(null);
+    document.getElementById("kategoriler").scrollIntoView({ behavior:"smooth" });
+  };
   
   const [tosStatus, setTosStatus] = useStateA(() => {
     return safeStore.get('agri_onay') || 'ask'; 
@@ -2129,12 +2310,45 @@ function App(){
 
   useEffectA(() => {
     const handleLocationRouting = () => {
-      const pathName = window.location.pathname.replace(/^\/|\/$/g, "");
-      if (pathName) {
-        const matchingCat = window.AGRI.categories.find(c => c.id === pathName);
-        if (matchingCat) setOpenCat(matchingCat);
+      const pathParts = window.location.pathname.replace(/^\/|\/$/g, "").split("/");
+      
+      // Mikro site yönlendirmesi (Örn: /mekan/bahar-igan-bagan)
+      if (pathParts[0] === "mekan" && pathParts[1]) {
+        const slug = pathParts[1];
+        let fCat = null, fSub = null, fPlace = null;
+        
+        window.AGRI.categories.forEach(c => {
+          if (c.places) {
+            const p = c.places.find(x => x.slug === slug);
+            if (p) { fCat = c; fPlace = p; }
+          }
+          if (c.hasSubCategories) {
+            c.subCategories.forEach(sub => {
+              if (sub.places) {
+                const p = sub.places.find(x => x.slug === slug);
+                if (p) { fCat = c; fSub = sub; fPlace = p; }
+              }
+            });
+          }
+        });
+        
+        if (fCat && fPlace) {
+          setOpenCat(fCat); setDirectSub(fSub); setDirectPlace(fPlace);
+        } else {
+          setOpenCat(null); setDirectSub(null); setDirectPlace(null);
+        }
+      } 
+      // Normal Kategori Yönlendirmesi (Örn: /gezilecek)
+      else if (pathParts[0]) {
+        const matchingCat = window.AGRI.categories.find(c => c.id === pathParts[0]);
+        if (matchingCat) {
+          setOpenCat(matchingCat); setDirectSub(null); setDirectPlace(null);
+        } else {
+          setOpenCat(null); setDirectSub(null); setDirectPlace(null);
+        }
       } else {
-        setOpenCat(null);
+        setOpenCat(null); setDirectSub(null); setDirectPlace(null);
+        document.title = "04agri.com — Ağrı'nın Dijital Rehberi";
       }
     };
 
@@ -2146,10 +2360,18 @@ function App(){
   const handleUpdateCategoryView = (cat) => {
     if (cat) {
       window.history.pushState(null, "", `/${cat.id}`);
-      setOpenCat(cat);
+      setOpenCat(cat); setDirectSub(null); setDirectPlace(null);
     } else {
       window.history.pushState(null, "", "/"); 
-      setOpenCat(null);
+      setOpenCat(null); setDirectSub(null); setDirectPlace(null);
+    }
+  };
+
+  const handleSearchSelect = (place) => {
+    const cat = window.AGRI.categories.find(c => c.id === place.catId);
+    if(cat) {
+      window.history.pushState(null, "", `/mekan/${place.slug}`);
+      setOpenCat(cat); setDirectSub(null); setDirectPlace(place);
     }
   };
 
@@ -2182,7 +2404,7 @@ function App(){
     <div id="top" style={{ pointerEvents: tosStatus !== 'true' ? 'none' : 'auto' }}>
       
       <Topbar />
-      <Hero onOpenCat={handleUpdateCategoryView} onSearchPlace={() => handleUpdateCategoryView(window.AGRI.categories.find(c=>c.id==='gezilecek'))} />
+<Hero onOpenCat={handleUpdateCategoryView} onSearchPlace={handleSearchSelect} onOpenFavorites={handleOpenFavorites} />
       <ImageMarquee /> 
       <Stories />
       <AgendaDashboard />
@@ -2220,7 +2442,7 @@ function App(){
         </div>
       </footer>
 
-      {openCat && <PlacesOverlay cat={openCat} onClose={() => handleUpdateCategoryView(null)} />}
+      {openCat && <PlacesOverlay cat={openCat} initialSubCat={directSub} initialPlace={directPlace}onClose={() => handleUpdateCategoryView(null)} favorites={favorites} toggleFav={toggleFav} />}
 
       {docView && (
         <div className="doc-modal-overlay" style={{ pointerEvents:'auto' }} onClick={(e)=>{ if(e.target.className==='doc-modal-overlay') setDocView(null); }}>
