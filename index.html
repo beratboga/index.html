@@ -567,7 +567,7 @@ a{ color:inherit; text-decoration:none; cursor:pointer; }
     <h2>Öne Çıkanlar ve Uzmanlar</h2>
     <ul>
       <li>Sağlık Hizmetleri: Uzman Diyetisyen Bilge İgan Yıldırım, Dr. Nilay Dinçgözoğlu (Medikal Estetik)</li>
-      <li>Eğitim: E.L.I.T Dil Kursu, Muhammed Hoca (Müzik)</li>
+      <li>Eğitim: E.L.I.T Dil Kursu, Muhammed Hoca (Müzik), Merve Hoca (Piyano ve Yan Flüt), Nevra Başçı (Matematik)</li>
       <li>Gezilecek Yerler: Balık Gölü, İshak Paşa Sarayı, Ağrı Dağı, Diyadin Kaplıcaları, Meteor Çukuru, Nuh'un Gemisi</li>
       <li>Ağrı Merkez, Doğubayazıt, Diyadin, Eleşkirt, Patnos Nöbetçi Eczaneleri</li>
     </ul>
@@ -710,6 +710,26 @@ a{ color:inherit; text-decoration:none; cursor:pointer; }
           ] 
         },
         {
+          id: "matematik",
+          name: "Matematik",
+          icon: "brain",
+          note: "Matematik özel ders ve eğitimleri",
+          places: [
+            {
+              name: "Nevra Başçı",
+              subName: "MATEMATİK EĞİTMENİ",
+              info: "Matematik derslerinde başarıya ulaşmanız için profesyonel destek. Matematiği korkulan bir ders olmaktan çıkarıp severek öğrenin.",
+              area: "Ağrı Merkez",
+              img: "nevrahoca1.jpg",
+              icon: "brain",
+              note: "Matematiği severek öğrenin.",
+              address: "Ağrı Merkez",
+              instagram: "nevramatematik",
+              lessons: ["Matematik", "LGS Hazırlık", "YKS Hazırlık"]
+            }
+          ]
+        },
+        {
           id: "muzik",
           name: "Müzik",
           icon: "music",
@@ -729,6 +749,18 @@ a{ color:inherit; text-decoration:none; cursor:pointer; }
               instagram: "muhammedhoca04",
               lessons: ["Bağlama", "Gitar", "Keman", "Yan Flüt", "Elektro Gitar", "Piyano", "Kalimba", "Ukulele", "Ritim"],
               mapsUrl: "https://maps.google.com/?q=Ağrı+Merkez"
+            },
+            {
+              name: "Merve Hoca",
+              subName: "MÜZİK EĞİTMENİ",
+              info: "Piyano ve yan flüt eğitimleri ile müziğin büyülü dünyasına adım atın. Her yaş ve seviyeye uygun dersler.",
+              area: "Ağrı Merkez",
+              img: "mervehoca1.jpg",
+              icon: "music",
+              note: "Müzik yolculuğunuza bugün başlayın.",
+              address: "Ağrı Merkez",
+              instagram: "agripiyanoyanflutogreniyorum04",
+              lessons: ["Piyano", "Yan Flüt"]
             }
           ]
         }
@@ -1015,7 +1047,9 @@ const dutyPharmacies = [
     { img:"agrıelitdilkursu.jpg", title:"Ağrı E.L.I.T Dil Kursu", subtitle:"Aramıza hoşgeldiniz" },
     { img:"muhammedhoca2.jpg", title:"Muhammed Hoca", subtitle:"Aramıza HoşgeldinİZ" },
     { img:"drnilay1.jpg", title:"Dr. Nilay Dinçgözoğlu", subtitle:"Aramıza Hoşgeldin", bgPos: "center center" },
-    { img:"bahar3.jpg", title:"Bahar İgan Bağan", subtitle:"Yaşam Koçu", bgPos: "center 35%" }
+    { img:"bahar3.jpg", title:"Bahar İgan Bağan", subtitle:"Yaşam Koçu", bgPos: "center 35%" },
+    { img:"mervehoca1.jpg", title:"Merve Hoca", subtitle:"Aramıza Hoşgeldin" },
+    { img:"nevrahoca1.jpg", title:"Nevra Başçı", subtitle:"Aramıza Hoşgeldin" }
   ];
 
   // HİKAYELER
@@ -1051,6 +1085,18 @@ window.AGRI_STORIES = [
       bgPos: "top",
       slideText: "Farkındalıklı bir yaşama adım atın. Yaşam koçluğu seanslarımızla kendi potansiyelinizi keşfedin.",
       slideImg: "bahar2.jpg"
+    },
+    {
+      title: "Merve Hoca",
+      cover: "mervehoca2.jpg",
+      slideText: "Müzik eğitiminde yeni hocamız Merve Hoca aramıza katıldı. Piyano ve Yan Flüt dersleriyle hizmetinizde.",
+      slideImg: "mervehoca2.jpg"
+    },
+    {
+      title: "Nevra Başçı",
+      cover: "nevrahoca2.jpg",
+      slideText: "Matematik eğitiminde Nevra Başçı aramıza katıldı. Matematiği korkulan bir ders olmaktan çıkarıp severek öğrenin.",
+      slideImg: "nevrahoca2.jpg"
     }
   ];
 
