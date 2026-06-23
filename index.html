@@ -617,7 +617,35 @@ a{ color:inherit; text-decoration:none; cursor:pointer; }
       subCategories: [
         { id: "dis", name: "Özel Diş Hekimi Klinikleri", icon: "tooth", note: "Ağız ve diş sağlığı merkezleri", places: [] },
         { id: "dil", name: "Dil ve Konuşma Terapistleri", icon: "speak", note: "Konuşma bozuklukları uzmanları", places: [] },
-        { id: "psikolog", name: "Psikologlar", icon: "brain", note: "Ruh sağlığı ve danışmanlık", places: [] },
+        { id: "psikolog", name: "Psikologlar", icon: "brain", note: "Ruh sağlığı ve danışmanlık", 
+  places: [
+    {
+      name: "Dilek Polat",
+      subName: "Psikolojik Danışman & Oyun Terapisti",
+      info: "Çocuk ve Ergenlere Yönelik Psikolojik Danışmanlık Hizmeti",
+      area: "Ağrı",
+      img: "dilekpolat1.jpg",
+      icon: "brain",
+      note: "Her çocuğun dünyasına ulaşan bir yol vardır.",
+      address: "Ağrı",
+      instagram: "psk.dan.dilekpolat",
+      email: "dilekpolat263@gmail.com",
+      lessonsTitle: "Hizmetler",
+      lessons: [
+        "Oyun Terapisi",
+        "Çocuk Danışmanlığı",
+        "Ergen Danışmanlığı",
+        "Kaygı ve Korkular",
+        "Özgüven Geliştirme",
+        "Sınav Kaygısı",
+        "Dikkat ve Odaklanma Çalışmaları",
+        "Sosyal Beceri Geliştirme",
+        "Duygu Düzenleme Becerileri"
+      ],
+      mapsUrl: ""
+    }
+  ] 
+},
         { id: "fizyo", name: "Fizyoterapistler", icon: "bone", note: "Fizik tedavi uzmanları", places: [] },
         { id: "diyetisyen", name: "Diyetisyenler", icon: "leaf", note: "Sağlıklı beslenme ve diyet uzmanları",
           places: [
@@ -1049,7 +1077,8 @@ const dutyPharmacies = [
     { img:"drnilay1.jpg", title:"Dr. Nilay Dinçgözoğlu", subtitle:"Aramıza Hoşgeldin", bgPos: "center center" },
     { img:"bahar3.jpg", title:"Bahar İgan Bağan", subtitle:"Yaşam Koçu", bgPos: "center 35%" },
     { img:"mervehoca1.jpg", title:"Merve Hoca", subtitle:"Aramıza Hoşgeldin" },
-    { img:"nevrahoca1.jpg", title:"Nevra Başcı", subtitle:"Aramıza Hoşgeldin", bgPos: "center" }
+    { img:"nevrahoca1.jpg", title:"Nevra Başcı", subtitle:"Aramıza Hoşgeldin", bgPos: "center" },
+    { img: "dilekpolat1.jpg", title: "Dilek Polat", subtitle: "Dilek Polat Aramıza Hoş Geldin", bgPos: "center center" }
   ];
 
   // HİKAYELER
@@ -1098,7 +1127,14 @@ window.AGRI_STORIES = [
       bgPos: "top",
       slideText: "Matematik eğitiminde Nevra Başcı aramıza katıldı. Matematiği korkulan bir ders olmaktan çıkarıp severek öğrenin.",
       slideImg: "nevrahoca2.jpg"
-    }
+    },
+    {
+  title: "Dilek Polat",
+  cover: "dilekpolat2.jpg",
+  bgPos: "center",
+  slideText: "Her çocuğun dünyasına ulaşan bir yol vardır. Psikolojik Danışmanlık ve Oyun Terapisi seansları ile aramıza katıldı.",
+  slideImg: "dilekpolat2.jpg"
+}
   ];
 
   window.PAT = { pattern };
