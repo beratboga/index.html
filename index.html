@@ -616,7 +616,24 @@ a{ color:inherit; text-decoration:none; cursor:pointer; }
       hasSubCategories: true,
       subCategories: [
         { id: "dis", name: "Özel Diş Hekimi Klinikleri", icon: "tooth", note: "Ağız ve diş sağlığı merkezleri", places: [] },
-        { id: "dil", name: "Dil ve Konuşma Terapistleri", icon: "speak", note: "Konuşma bozuklukları uzmanları", places: [] },
+       { id: "dil", name: "Dil ve Konuşma Terapistleri", icon: "speak", note: "Konuşma bozuklukları uzmanları", 
+          places: [
+          {
+              name: "Şevval Taşdemir",
+              subName: "Dil ve Konuşma Terapisti",
+              info: "Ağrı’nın Sağlık Bakanlığı onaylı ilk ve tek dil ve konuşma terapisi kliniği.",
+              area: "Ağrı Merkez",
+              img: "sevval1.jpg",
+              bgPos: "center",
+              icon: "speak",
+              note: "Sağlık Bakanlığı Onaylı Klinik",
+              address: "Leylekpınar Mahallesi 1703. Sokak Özgül Ofis Center Kat: 5 No: 29",
+              phones: ["0541 241 07 04"],
+              instagram: "dktsevvaltasdemir",
+              mapsUrl: "https://maps.google.com/?q=Leylekpınar+Mahallesi+1703.+Sokak+Özgül+Ofis+Center+Ağrı"
+            }
+          ] 
+        },
         { id: "psikolog", name: "Psikologlar", icon: "brain", note: "Ruh sağlığı ve danışmanlık", 
   places: [
     {
@@ -860,6 +877,19 @@ a{ color:inherit; text-decoration:none; cursor:pointer; }
               address: "Ağrı Merkez",
               instagram: "uzm.ogrt.ozgenur",
               lessons: ["Çocuk Gelişimi", "Özel Eğitim"]
+            },
+        
+            {
+              name: "Berivan Hoca",
+              subName: "Çocuk Gelişimi Uzmanı",
+              info: "Çocuk gelişimi, özel eğitim ve aile danışmanlığı alanında çalışan; AGTE uygulamalarıyla çocukların gelişimini destekleyen eğitimci. Readkitr uygulayıcısı.",
+              area: "Ağrı Merkez",
+              img: "berivan1.jpg",
+              bgPos: "center",
+              icon: "brain",
+              note: "AGTE & Readkitr Uygulayıcısı",
+              address: "Ağrı Merkez",
+              instagram: "pneuma"
             }
           ]
         }
@@ -1030,7 +1060,9 @@ const dutyPharmacies = [
     { img:"nevrahoca1.jpg", title:"Nevra Başcı", subtitle:"Aramıza Hoşgeldin", bgPos: "center" },
     { img: "dilekpolat1.jpg", title: "Dilek Polat", subtitle: "Dilek Polat Aramıza Hoş Geldin", bgPos: "center center" },
     { img: "ozge1.jpg", title: "Özge Nur Çelik", subtitle: "Aramıza Hoş Geldin", bgPos: "center" },
-    { img: "matematik1.jpg", title: "Emir Hoca", subtitle: "Aramıza Hoş Geldin", bgPos: "center" }
+    { img: "matematik1.jpg", title: "Emir Hoca", subtitle: "Aramıza Hoş Geldin", bgPos: "center" },
+    { img: "sevval1.jpg", title: "DKT Şevval Taşdemir", subtitle: "Aramıza Hoşgeldin", bgPos: "center" },
+    { img: "berivan1.jpg", title: "Berivan Hoca", subtitle: "Aramıza Hoşgeldin Berivan Hoca", bgPos: "center" }
   ];
 
   // HİKAYELER
@@ -1100,6 +1132,21 @@ window.AGRI_STORIES = [
       bgPos: "center",
       slideText: "Her seviyeye uygun, birebir online özel matematik dersleri Emir Hoca ile başlıyor.",
       slideImg: "matematik2.jpg"
+    },
+  
+    {
+      title: "DKT Şevval Taşdemir",
+      cover: "sevval2.jpg",
+      bgPos: "center",
+      slideText: "Ağrı’nın Sağlık Bakanlığı onaylı ilk ve tek dil ve konuşma terapisi kliniği ile Şevval Taşdemir aramıza katıldı.",
+      slideImg: "sevval2.jpg"
+    },
+    {
+      title: "Berivan Hoca",
+      cover: "berivan2.jpg",
+      bgPos: "center",
+      slideText: "Çocuk gelişimi, özel eğitim ve aile danışmanlığı alanında uzman Berivan Hoca aramıza katıldı.",
+      slideImg: "berivan2.jpg"
     }
   ];
 
