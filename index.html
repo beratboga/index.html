@@ -558,13 +558,49 @@ a{ color:inherit; text-decoration:none; cursor:pointer; }
 .fav-btn.is-fav svg { fill: #FF4B4B; stroke: #FF4B4B; animation: heartPop 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275); }
 @keyframes heartPop { 0% { transform: scale(1); } 50% { transform: scale(1.3); } 100% { transform: scale(1); } }
 /* --- FAVORİ VE PAYLAŞ BUTONU TASARIMLARI --- */
-.fav-btn { position: absolute; top: 16px; right: 16px; z-index: 10; width: 40px; height: 40px; border-radius: 50%; background: rgba(0, 0, 0, 0.45); backdrop-filter: blur(6px); display: grid; place-items: center; border: 1px solid rgba(255,255,255,0.2); transition: all 0.2s var(--ease); cursor: pointer; }
-.fav-btn:hover { background: rgba(0, 0, 0, 0.65); transform: scale(1.05); }
-.fav-btn:active { transform: scale(0.9); }
-.fav-btn.is-fav svg { fill: #FF4B4B; stroke: #FF4B4B; animation: heartPop 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275); }
-@keyframes heartPop { 0% { transform: scale(1); } 50% { transform: scale(1.3); } 100% { transform: scale(1); } }
 .pm-share-btn { background: #fff; color: var(--ink); font-weight: 800; padding: 16px; border-radius: 100px; display: flex; align-items: center; justify-content: center; gap: 8px; font-size: 16px; transition: all 0.2s; text-align: center; margin-top: 12px; box-shadow: 0 8px 24px rgba(0,0,0,0.08); border: 1px solid var(--line); cursor: pointer; width: 100%; }
 .pm-share-btn:hover { transform: translateY(-2px); box-shadow: 0 12px 28px rgba(0,0,0,0.12); }
+/* --- KARANLIK MOD RENKLERİ VE GEÇİŞ ANİMASYONU --- */
+body.dark-theme {
+  --bg: #0c1020;
+  --bg-2: #131a31;
+  --card: #1a2444;
+  --line: rgba(255,255,255,0.1);
+  --ink: #ffffff;
+  --ink-soft: #a0aabf;
+  --ink-faint: #5b6aa0;
+}
+
+body {
+  transition: background-color 0.5s var(--ease), color 0.5s var(--ease);
+}
+
+.widget-card, .pharm-card, .news-item, .cat-item, .pm-meta-box, .tos-modal, .doc-modal-card, .search-dropdown, .sugg-item {
+  transition: background-color 0.5s var(--ease), color 0.5s var(--ease), border-color 0.5s var(--ease), transform 0.2s ease, box-shadow 0.2s ease;
+}
+/* MOBİL ALT NAVİGASYON BAR */
+.bottom-nav { display: none; }
+@media (max-width: 680px) {
+  .bottom-nav {
+    display: flex; justify-content: space-around; align-items: center;
+    position: fixed; bottom: 0; left: 0; right: 0; z-index: 990;
+    background: rgba(255, 255, 255, 0.85); backdrop-filter: saturate(180%) blur(20px); -webkit-backdrop-filter: saturate(180%) blur(20px);
+    padding: 12px 10px calc(12px + env(safe-area-inset-bottom));
+    border-top: 1px solid rgba(0, 0, 0, 0.08); box-shadow: 0 -10px 40px rgba(0,0,0,0.05);
+  }
+  .nav-item {
+    position: relative; flex: 1; display: flex; flex-direction: column; align-items: center; gap: 4px;
+    color: var(--ink-faint); font-weight: 700; font-size: 11px; cursor: pointer; transition: all 0.4s var(--ease);
+  }
+  .nav-item.active { color: var(--accent); transform: translateY(-4px); }
+  .nav-item.active-red { color: var(--pin); transform: translateY(-4px); }
+  .nav-indicator {
+    position: absolute; top: -10px; width: 4px; height: 4px; border-radius: 50%;
+    background: currentColor; opacity: 0; transform: scale(0); transition: all 0.4s var(--ease);
+  }
+  .nav-item.active .nav-indicator, .nav-item.active-red .nav-indicator { opacity: 1; transform: scale(1); }
+}
+@media (max-width: 680px) { body { padding-bottom: 84px; } }
 </style>
 </head>
 <body>
@@ -1015,60 +1051,60 @@ a{ color:inherit; text-decoration:none; cursor:pointer; }
   });
 
 const dutyPharmacies = [
-    // --- 25.06.2026 ---
-    {date:"25.06.2026", district:"MERKEZ", name:"KAYA ECZANESİ", address:"Yavuz Mahallesi Kağızman Caddesi No:50/A", landmark:"BAYRAM MARKET KARŞISI", phone:"0472 216 66 22", url:"#"},
-    {date:"25.06.2026", district:"MERKEZ", name:"KÖPRÜBAŞI ECZANESİ", address:"100.YIL MAHALLESİ YENİ VAN CADDESİ NO:132A", landmark:"EROĞLU MARKET YANI", phone:"0542 138 72 76", url:"#"},
-    {date:"25.06.2026", district:"DİYADİN", name:"CEREN ECZANESİ", address:"Murat Mahallesi Şehit Kaymakam Muhammed Fatih Safitürk Caddesi No:13H", landmark:"KÜLTÜR KİTAP KIRTASİYE KARŞISI", phone:"0530 115 54 04", url:"#"},
-    {date:"25.06.2026", district:"DOĞUBAYAZIT", name:"SAĞLIK ECZANESİ", address:"Çiftepınar Mahallesi Meryemana Caddesi No:87D", landmark:"ARAS KARGO YANI", phone:"0472 312 45 00", url:"#"},
-    {date:"25.06.2026", district:"ELEŞKİRT", name:"ESRA ECZANESİ", address:"İstiklal Mahallesi Cumhuriyet Caddesi No:83", landmark:"ZİRAAT BANKASI KARŞISI", phone:"0545 591 44 24", url:"#"},
-    {date:"25.06.2026", district:"HAMUR", name:"HAMUR ECZANESİ", address:"KÜMBET MAHALLESİ VAN CADDESİ NO:49/A", landmark:"HAMUR BELEDİYESİ ALTI", phone:"0472 616 71 72", url:"#"},
-    {date:"25.06.2026", district:"PATNOS", name:"ÖZLEM ECZANESİ", address:"YENİ MAHALLESİ GARİP CADDESİ NO:39", landmark:"ÖZEL HASTANE KARŞISI", phone:"0472 616 14 02", url:"#"},
-    {date:"25.06.2026", district:"TAŞLIÇAY", name:"FERHAT ECZANESİ", address:"HÜRRİYET MAHALLESİ M.FEVZİ ÇAKMAK CADDESİ NO:48/A", landmark:"ÖĞRETMEN EVİ ALTI", phone:"0539 430 14 11", url:"#"},
-    {date:"25.06.2026", district:"TUTAK", name:"OZAN ECZANESİ", address:"Cami Mahallesi Cumhuriyet Caddesi No:39B", landmark:"Merkez Camii Yanı", phone:"0472 411 28 97", url:"#"},
+    // --- 30.06.2026 ---
+    {date:"30.06.2026", district:"MERKEZ", name:"KONAK ECZANESİ", address:"YAVUZ MAHALLESİ CUMHURİYET CADDESİ NO:5/B", landmark:"MERKEZ CAMİ KARŞISI", phone:"0472 502 09 88", url:"#"},
+    {date:"30.06.2026", district:"MERKEZ", name:"TAYSUN ECZANESİ", address:"KURTULUŞ MAHALLESİ YENİ VAN CADDESİ No:62A", landmark:"LASSA BAYİİ YANI", phone:"0472 215 13 21", url:"#"},
+    {date:"30.06.2026", district:"DİYADİN", name:"ŞİFA ECZANESİ", address:"MURAT MAHALLESİ KAYMAKAM ÖZGÜR AZER KURAK CADDESİ NO:63A", landmark:"MURAT CAMİİ YANI", phone:"0505 597 63 42", url:"#"},
+    {date:"30.06.2026", district:"DOĞUBAYAZIT", name:"TEKIN ECZANESİ", address:"ÇIFTEPINAR MAHALLESİ RIFKI BAŞKAYA CADDESİ NO:17/34", landmark:"DOĞUBAYAZIT AVM ALTI", phone:"0472 502 05 60", url:"#"},
+    {date:"30.06.2026", district:"ELEŞKİRT", name:"EMEK ECZANESİ", address:"MÜFTÜ SELİM MAHALLESİ CUMHURİYET CADDESİ NO:112/B", landmark:"SAĞLIK OCAĞI KARŞISI", phone:"0472 711 47 47", url:"#"},
+    {date:"30.06.2026", district:"HAMUR", name:"HAMUR ECZANESİ", address:"KÜMBET MAHALLESİ VAN CADDESİ NO:49/A", landmark:"HAMUR BELEDİYESİ ALTI", phone:"0472 616 71 72", url:"#"},
+    {date:"30.06.2026", district:"PATNOS", name:"IŞIK ECZANESİ", address:"INÖNÜ MAHALLESİ MALAZGIRT CADDESİ NO:13", landmark:"LAL LOKANTASI KARŞISI", phone:"0472 616 24 01", url:"#"},
+    {date:"30.06.2026", district:"TAŞLIÇAY", name:"ELİF ECZANESİ", address:"HÜRRİYET MAHALLESİ MAREŞAL FEVZİ ÇAKMAK CADDESİ NO:100", landmark:"A101 KARŞISI", phone:"0472 551 29 00", url:"#"},
+    {date:"30.06.2026", district:"TUTAK", name:"OZAN ECZANESİ", address:"Cami Mahallesi Cumhuriyet Caddesi No:39B", landmark:"Merkez Camii Yanı", phone:"0472 411 28 97", url:"#"},
 
-    // --- 26.06.2026 ---
-    {date:"26.06.2026", district:"DİYADİN", name:"DERMAN ECZANESİ", address:"Atatürk Mahallesi Şehit Kaymakam Muhammed Fatih Safitürk Caddesi No:10A", landmark:"Menekşem Market Karşısı", phone:"0472 511 36 36", url:"#"},
-    {date:"26.06.2026", district:"DOĞUBAYAZIT", name:"GÜLİSTAN ECZANESİ", address:"ÇİFTEPINAR MAHALLESİ BELEDİYE CADDESİ NO:29/A", landmark:"1 NOLU SAĞLIK OCAĞI YANI", phone:"0472 312 27 80", url:"#"},
-    {date:"26.06.2026", district:"ELEŞKİRT", name:"MAHMUTPAŞA ECZANESİ", address:"İstiklal Mahallesi Cumhuriyet Caddesi No:101", landmark:"KİLER MARKET KARŞISI", phone:"0472 711 29 78", url:"#"},
-    {date:"26.06.2026", district:"HAMUR", name:"AHMET ECZANESİ", address:"Kümbet Mahallesi Van Caddesi No:49C", landmark:"HAMUR BELEDİYESİ ALTI", phone:"0544 564 57 48", url:"#"},
-    {date:"26.06.2026", district:"MERKEZ", name:"YAŞAM ECZANESİ", address:"HURRİYET MAHALLESİ VALI KONAGI CADDESİ NO:50", landmark:"ÖZGÜL MARKET ÇAPRAZI", phone:"0472 215 42 72", url:"#"},
-    {date:"26.06.2026", district:"MERKEZ", name:"İNCİ ECZANESİ", address:"FIRAT MAHALLESİ ÇEVREYOLU CADDESİ NO:153/G", landmark:"HASTANE KARŞISI", phone:"0472 215 47 17", url:"#"},
-    {date:"26.06.2026", district:"PATNOS", name:"SÖYLEMEZ ECZANESİ", address:"YENİ MAHALLESİ GARİP SOKAK NO:53", landmark:"ÖZEL HASTANE KARŞISI", phone:"0472 616 17 16", url:"#"},
-    {date:"26.06.2026", district:"TAŞLIÇAY", name:"TAŞLIÇAY ECZANESİ", address:"Cumhuriyet Mahallesi Mareşal Favzi Çakmak Caddesi No:23", landmark:"", phone:"0472 551 28 91", url:"#"},
-    {date:"26.06.2026", district:"TUTAK", name:"BERFİN ECZANESİ", address:"Murat Mahallesi Dr Cihan ÖKTEM Caddesi No:5A ve 5B", landmark:"GAZİ İLKOKULUNUN KARŞISI", phone:"0552 636 00 04", url:"#"},
+    // --- 01.07.2026 ---
+    {date:"01.07.2026", district:"DİYADİN", name:"DERMAN ECZANESİ", address:"Atatürk Mahallesi Şehit Kaymakam Muhammed Fatih Safitürk Caddesi No:10A", landmark:"Menekşem Market Karşısı", phone:"0472 511 36 36", url:"#"},
+    {date:"01.07.2026", district:"DOĞUBAYAZIT", name:"AFA ECZANESİ", address:"ÇİFTEPINAR MAHALLESİ İSA GEÇİT CADDESİ NO:8/A", landmark:"GÜÇBİR HOME KARŞISI", phone:"0472 312 27 00", url:"#"},
+    {date:"01.07.2026", district:"ELEŞKİRT", name:"MAHMUTPAŞA ECZANESİ", address:"İstiklal Mahallesi Cumhuriyet Caddesi No:101", landmark:"KİLER MARKET KARŞISI", phone:"0472 711 29 78", url:"#"},
+    {date:"01.07.2026", district:"HAMUR", name:"HAMUR ECZANESİ", address:"KÜMBET MAHALLESİ VAN CADDESİ NO:49/A", landmark:"HAMUR BELEDİYESİ ALTI", phone:"0472 616 71 72", url:"#"},
+    {date:"01.07.2026", district:"MERKEZ", name:"DERMAN ECZANESİ", address:"GAZİ MAHALLESİ SAĞLIK CADDESİ NO:46/B", landmark:"2 NOLU SAĞLIK OCAĞI KARŞISI", phone:"0545 190 85 04", url:"#"},
+    {date:"01.07.2026", district:"MERKEZ", name:"MIZRAK ECZANESİ", address:"FIRAT MAHALLESİ 1018/3 SOKAK NO:6/G", landmark:"EĞİTİM ARAŞTIRMA HASTANESİ KARŞISI", phone:"0472 215 20 48", url:"#"},
+    {date:"01.07.2026", district:"PATNOS", name:"NAS ECZANESİ", address:"Atatürk Mahallesi Sultanmut Caddesi No:44F", landmark:"BİRLİK AVM KARŞISI", phone:"0552 454 00 04", url:"#"},
+    {date:"01.07.2026", district:"TAŞLIÇAY", name:"TAŞLIÇAY ECZANESİ", address:"Cumhuriyet Mahallesi Mareşal Favzi Çakmak Caddesi No:23", landmark:"", phone:"0472 551 28 91", url:"#"},
+    {date:"01.07.2026", district:"TUTAK", name:"BEGÜM ECZANESİ", address:"CAMİ MAHALLESİ KAZIM KARABEKİR CADDESİ NO:11B-11C", landmark:"KAYMAKAMLIK EVİ KARŞISI", phone:"0472 411 31 89", url:"#"},
 
-    // --- 27.06.2026 ---
-    {date:"27.06.2026", district:"DİYADİN", name:"DİLAN ECZANESİ", address:"ISA AGA MAHALLESİ INÖNÜ CADDESİ NO:36", landmark:"BELEDİYE YANI", phone:"0472 511 28 28", url:"#"},
-    {date:"27.06.2026", district:"DOĞUBAYAZIT", name:"EYLÜL ECZANESİ", address:"AHMEDİHANİ MAHALLESİ METEROLOJİ (1352) SOKAK NO:1/2C", landmark:"METEOROLOJİ SAĞLIK OCAĞI KARŞISI", phone:"0542 109 67 84", url:"#"},
-    {date:"27.06.2026", district:"ELEŞKİRT", name:"ŞİFA ECZANESİ", address:"MÜFTÜ SELİM MAHALLESİ CUMHURİYET CADDESİ NO:13", landmark:"SAĞLIK OCAĞI KARŞISI", phone:"0472 711 21 41", url:"#"},
-    {date:"27.06.2026", district:"HAMUR", name:"HAMUR ECZANESİ", address:"KÜMBET MAHALLESİ VAN CADDESİ NO:49/A", landmark:"HAMUR BELEDİYESİ ALTI", phone:"0472 616 71 72", url:"#"},
-    {date:"27.06.2026", district:"MERKEZ", name:"ŞİFA ECZANESİ", address:"YAVUZ MAHALLESİ YAŞAR KEMAL CADDESİ NO:2/A", landmark:"BÜYÜK AĞRI OTELİ ALTI", phone:"0472 215 30 00", url:"#"},
-    {date:"27.06.2026", district:"MERKEZ", name:"GÜVEN ECZANESİ", address:"ABİDE MAHALLESİ 1042 SOKAK NO:1", landmark:"ÖZEL LENA HASTANESİ KARŞISI", phone:"0472 215 01 91", url:"#"},
-    {date:"27.06.2026", district:"PATNOS", name:"BEYZADE ECZANESİ", address:"ATATÜRK MAHALLESİ SAİDİ NURSİ CADDESİ NO:3", landmark:"DİŞ HASTANESİ KARŞISI", phone:"0472 616 72 73", url:"#"},
-    {date:"27.06.2026", district:"TAŞLIÇAY", name:"BEYZA ECZANESİ", address:"15 TEMMUZ ŞEHİTLER MAHALLESİ MAREŞAL FEVZİ ÇAKMAK CADDESİ NO:1/1", landmark:"PTT KARGO YANI", phone:"0472 551 30 00", url:"#"},
-    {date:"27.06.2026", district:"TUTAK", name:"BEGÜM ECZANESİ", address:"CAMİ MAHALLESİ KAZIM KARABEKİR CADDESİ NO:11B-11C", landmark:"KAYMAKAMLIK EVİ KARŞISI", phone:"0472 411 31 89", url:"#"},
+    // --- 02.07.2026 ---
+    {date:"02.07.2026", district:"DİYADİN", name:"DİLAN ECZANESİ", address:"ISA AGA MAHALLESİ INÖNÜ CADDESİ NO:36", landmark:"BELEDİYE YANI", phone:"0472 511 28 28", url:"#"},
+    {date:"02.07.2026", district:"DOĞUBAYAZIT", name:"CAN ECZANESİ", address:"İSHAKPAŞA MAHALLESİ AĞRI CADDESİ NO:274A", landmark:"GÜVEN LOKANTASI KARŞISI", phone:"0472 312 04 12", url:"#"},
+    {date:"02.07.2026", district:"ELEŞKİRT", name:"ŞİFA ECZANESİ", address:"MÜFTÜ SELİM MAHALLESİ CUMHURİYET CADDESİ NO:13", landmark:"SAĞLIK OCAĞI KARŞISI", phone:"0472 711 21 41", url:"#"},
+    {date:"02.07.2026", district:"HAMUR", name:"AHMET ECZANESİ", address:"Kümbet Mahallesi Van Caddesi No:49C", landmark:"HAMUR BELEDİYESİ ALTI", phone:"0544 564 57 48", url:"#"},
+    {date:"02.07.2026", district:"MERKEZ", name:"KAYA ECZANESİ", address:"Yavuz Mahallesi Kağızman Caddesi No:50/A", landmark:"BAYRAM MARKET KARŞISI", phone:"0472 216 66 22", url:"#"},
+    {date:"02.07.2026", district:"MERKEZ", name:"ŞİFA ECZANESİ", address:"YAVUZ MAHALLESİ YAŞAR KEMAL CADDESİ NO:2/A", landmark:"BÜYÜK AĞRI OTELİ ALTI", phone:"0472 215 30 00", url:"#"},
+    {date:"02.07.2026", district:"PATNOS", name:"SARI ECZANESİ", address:"ATATÜRK MAHALLESİ ALPASLAN CADDESİ KAPI NO: 69", landmark:"FATİH ET LOKANTASI ÇAPRAZI", phone:"0551 481 44 68", url:"#"},
+    {date:"02.07.2026", district:"TAŞLIÇAY", name:"BEYZA ECZANESİ", address:"15 TEMMUZ ŞEHİTLER MAHALLESİ MAREŞAL FEVZİ ÇAKMAK CADDESİ NO:1/1", landmark:"PTT KARGO YANI", phone:"0472 551 30 00", url:"#"},
+    {date:"02.07.2026", district:"TUTAK", name:"TUTAK ECZANESİ", address:"MURAT MAHALLESİ CUMHURİYET CADDESİ NO:51/A", landmark:"", phone:"0472 411 26 98", url:"#"},
 
-    // --- 28.06.2026 ---
-    {date:"28.06.2026", district:"DİYADİN", name:"DİYADİN ECZANESİ", address:"İSA AĞA MAHALLESİ INÖNÜ CADDESİ NO:98", landmark:"PTT KARŞISI", phone:"0472 511 24 65", url:"#"},
-    {date:"28.06.2026", district:"DOĞUBAYAZIT", name:"YENİ HALK ECZANESİ", address:"Çiftepınar Mahallesi İnegöl Caddesi No:22A", landmark:"AHMED-İ HANİ CAMİİ YANI", phone:"0472 312 04 08", url:"#"},
-    {date:"28.06.2026", district:"ELEŞKİRT", name:"ELEŞKİRT ECZANESİ", address:"İSTİKLAL MAHALLESİ CUMHURİYET CADDESİ NO:109", landmark:"BELEDİYE BİNASİ KARŞISI", phone:"0472 711 29 16", url:"#"},
-    {date:"28.06.2026", district:"HAMUR", name:"AHMET ECZANESİ", address:"Kümbet Mahallesi Van Caddesi No:49C", landmark:"HAMUR BELEDİYESİ ALTI", phone:"0544 564 57 48", url:"#"},
-    {date:"28.06.2026", district:"MERKEZ", name:"DUMAN ECZANESİ", address:"SITKIYE MAHAHLLESİ YAŞAR KEMAL CADDESİ NO:27", landmark:"ADALET SARAYI KARŞISI", phone:"0472 216 11 13", url:"#"},
-    {date:"28.06.2026", district:"MERKEZ", name:"YONCA ECZANESİ", address:"LEYLEK PINAR MAHALLESİ VALI KONAGI CADDESİ NO:41", landmark:"BELEDİYE İŞ MERKEZİ ÇAPRAZI", phone:"0472 216 58 16", url:"#"},
-    {date:"28.06.2026", district:"PATNOS", name:"DEVA ECZANESİ", address:"ATATÜRK MAHALLESİ MENDERES CADDESİ NO:146", landmark:"PATNOS İTİMAT YAZIHANESİ YANI", phone:"0472 616 16 19", url:"#"},
-    {date:"28.06.2026", district:"TAŞLIÇAY", name:"ÇARE ECZANESİ", address:"HÜRRİYET MAHALLESİ M.FEVZİ ÇAKMAK CADDESİ DIŞ KAPI NO:94A", landmark:"MERVE KIRTASİYE YANI", phone:"0546 491 53 22", url:"#"},
-    {date:"28.06.2026", district:"TUTAK", name:"TUTAK ECZANESİ", address:"MURAT MAHALLESİ CUMHURİYET CADDESİ NO:51/A", landmark:"", phone:"0472 411 26 98", url:"#"},
+    // --- 03.07.2026 ---
+    {date:"03.07.2026", district:"DİYADİN", name:"DİYADİN ECZANESİ", address:"İSA AĞA MAHALLESİ INÖNÜ CADDESİ NO:98", landmark:"PTT KARŞISI", phone:"0472 511 24 65", url:"#"},
+    {date:"03.07.2026", district:"DOĞUBAYAZIT", name:"HACETTEPE ECZANESİ", address:"ÇİFTEPINAR MAHALLESİ RIFKI BAŞKAYA CAD.NO:116/3", landmark:"DOĞUBAYAZIT AĞIZ VE DİŞ SAĞLIĞI MERKEZİ KARŞISI", phone:"0472 312 37 53", url:"#"},
+    {date:"03.07.2026", district:"ELEŞKİRT", name:"ELEŞKİRT ECZANESİ", address:"İSTİKLAL MAHALLESİ CUMHURİYET CADDESİ NO:109", landmark:"BELEDİYE BİNASİ KARŞISI", phone:"0472 711 29 16", url:"#"},
+    {date:"03.07.2026", district:"HAMUR", name:"HAMUR ECZANESİ", address:"KÜMBET MAHALLESİ VAN CADDESİ NO:49/A", landmark:"HAMUR BELEDİYESİ ALTI", phone:"0472 616 71 72", url:"#"},
+    {date:"03.07.2026", district:"MERKEZ", name:"YILDIRIM ECZANESİ", address:"GAZİ MAHALLESİ SAĞLIK CADDESİ NO:50-54A", landmark:"2 NOLU SAĞLIK OCAĞI KARŞISI", phone:"0543 129 58 33", url:"#"},
+    {date:"03.07.2026", district:"MERKEZ", name:"SEVGİ ECZANESİ", address:"LEYLEK PINAR MAHALLESİ CUMHURIYET CADDESİ NO:142", landmark:"HALK BANK YUKARASI", phone:"0472 216 34 20", url:"#"},
+    {date:"03.07.2026", district:"PATNOS", name:"SÜPHAN ECZANESİ", address:"ATATÜRK MAHALLESİ MENDERES BULVARI NO:100", landmark:"HASTA KURUYEMİŞ KARŞISI", phone:"0472 616 21 71", url:"#"},
+    {date:"03.07.2026", district:"TAŞLIÇAY", name:"ÇARE ECZANESİ", address:"HÜRRİYET MAHALLESİ M.FEVZİ ÇAKMAK CADDESİ DIŞ KAPI NO:94A", landmark:"MERVE KIRTASİYE YANI", phone:"0546 491 53 22", url:"#"},
+    {date:"03.07.2026", district:"TUTAK", name:"OZAN ECZANESİ", address:"Cami Mahallesi Cumhuriyet Caddesi No:39B", landmark:"Merkez Camii Yanı", phone:"0472 411 28 97", url:"#"},
 
-    // --- 29.06.2026 ---
-    {date:"29.06.2026", district:"DİYADİN", name:"ŞİFA ECZANESİ", address:"MURAT MAHALLESİ KAYMAKAM ÖZGÜR AZER KURAK CADDESİ NO:63A", landmark:"MURAT CAMİİ YANI", phone:"0505 597 63 42", url:"#"},
-    {date:"29.06.2026", district:"DOĞUBAYAZIT", name:"TEKIN ECZANESİ", address:"ÇIFTEPINAR MAHALLESİ RIFKI BAŞKAYA CADDESİ NO:17/34", landmark:"DOĞUBAYAZIT AVM ALTI", phone:"0472 502 05 60", url:"#"},
-    {date:"29.06.2026", district:"ELEŞKİRT", name:"EMEK ECZANESİ", address:"MÜFTÜ SELİM MAHALLESİ CUMHURİYET CADDESİ NO:112/B", landmark:"SAĞLIK OCAĞI KARŞISI", phone:"0472 711 47 47", url:"#"},
-    {date:"29.06.2026", district:"HAMUR", name:"HAMUR ECZANESİ", address:"KÜMBET MAHALLESİ VAN CADDESİ NO:49/A", landmark:"HAMUR BELEDİYESİ ALTI", phone:"0472 616 71 72", url:"#"},
-    {date:"29.06.2026", district:"MERKEZ", name:"KONAK ECZANESİ", address:"YAVUZ MAHALLESİ CUMHURİYET CADDESİ NO:5/B", landmark:"MERKEZ CAMİ KARŞISI", phone:"0472 502 09 88", url:"#"},
-    {date:"29.06.2026", district:"MERKEZ", name:"TAYSUN ECZANESİ", address:"KURTULUŞ MAHALLESİ YENİ VAN CADDESİ No:62A", landmark:"LASSA BAYİİ YANI", phone:"0472 215 13 21", url:"#"},
-    {date:"29.06.2026", district:"PATNOS", name:"IŞIK ECZANESİ", address:"INÖNÜ MAHALLESİ MALAZGIRT CADDESİ NO:13", landmark:"LAL LOKANTASI KARŞISI", phone:"0472 616 24 01", url:"#"},
-    {date:"29.06.2026", district:"TAŞLIÇAY", name:"ELİF ECZANESİ", address:"HÜRRİYET MAHALLESİ MAREŞAL FEVZİ ÇAKMAK CADDESİ NO:100", landmark:"A101 KARŞISI", phone:"0472 551 29 00", url:"#"},
-    {date:"29.06.2026", district:"TUTAK", name:"OZAN ECZANESİ", address:"Cami Mahallesi Cumhuriyet Caddesi No:39B", landmark:"Merkez Camii Yanı", phone:"0472 411 28 97", url:"#"}
+    // --- 04.07.2026 ---
+    {date:"04.07.2026", district:"DİYADİN", name:"ŞİFA ECZANESİ", address:"MURAT MAHALLESİ KAYMAKAM ÖZGÜR AZER KURAK CADDESİ NO:63A", landmark:"MURAT CAMİİ YANI", phone:"0505 597 63 42", url:"#"},
+    {date:"04.07.2026", district:"DOĞUBAYAZIT", name:"FATMA KOÇ ECZANESİ", address:"ULUYOL MAHALLESİ AĞRI CADDESİ NO:77/A VE 77/B", landmark:"Yeni Güven Restorant Yanı", phone:"0551 535 53 54", url:"#"},
+    {date:"04.07.2026", district:"ELEŞKİRT", name:"EMEK ECZANESİ", address:"MÜFTÜ SELİM MAHALLESİ CUMHURİYET CADDESİ NO:112/B", landmark:"SAĞLIK OCAĞI KARŞISI", phone:"0472 711 47 47", url:"#"},
+    {date:"04.07.2026", district:"HAMUR", name:"AHMET ECZANESİ", address:"Kümbet Mahallesi Van Caddesi No:49C", landmark:"HAMUR BELEDİYESİ ALTI", phone:"0544 564 57 48", url:"#"},
+    {date:"04.07.2026", district:"MERKEZ", name:"TUĞBA ECZANESİ", address:"Fırat Mahallesi 1018/1 Sokak No:14C Ağrı", landmark:"AĞRI EĞİTİM VE ARAŞTIRMA HASTANESİ ACİL ÇIKIŞ KAPISI ÇAPRAZI", phone:"0507 252 68 74", url:"#"},
+    {date:"04.07.2026", district:"MERKEZ", name:"ARDA ECZANESİ", address:"LEYLEK PINAR MAHALLESİ VALİ KONAĞI CADDESİ NO:33/A", landmark:"ÖZGÜL AVM YANI", phone:"0472 215 72 00", url:"#"},
+    {date:"04.07.2026", district:"PATNOS", name:"CADDE ECZANESİ", address:"ATATÜRK MAHALLESİ MALAZGİRT CADDESİ KAPI NO:58A", landmark:"ENSAR KURUYEMİŞ YANI", phone:"0472 616 87 87", url:"#"},
+    {date:"04.07.2026", district:"TAŞLIÇAY", name:"ELİF ECZANESİ", address:"HÜRRİYET MAHALLESİ MAREŞAL FEVZİ ÇAKMAK CADDESİ NO:100", landmark:"A101 KARŞISI", phone:"0472 551 29 00", url:"#"},
+    {date:"04.07.2026", district:"TUTAK", name:"BERFİN ECZANESİ", address:"Murat Mahallesi Dr Cihan ÖKTEM Caddesi No:5A ve 5B", landmark:"GAZİ İLKOKULUNUN KARŞISI", phone:"0552 636 00 04", url:"#"}
   ];
  /* 15 GÜNLÜK HAVA DURUMU (Ağrı Merkez) */
   const weatherData = {
@@ -1290,7 +1326,11 @@ function Icon({ name, size = 26, stroke = "currentColor", sw = 1.7 }) {
     ship: <g><path d="M3 16 4 9h16l1 7M5 16c0 2 2 3 4 3s4-1 4-3M12 9V4h4M3 16c.5 2 2 3 3 3"/></g>,
     pin: <g><path d="M12 21s7-6.3 7-11a7 7 0 1 0-14 0c0 4.7 7 11 7 11Z"/><circle cx="12" cy="10" r="2.5"/></g>,
     heart: <path d="M20.84 4.61a5.5 5.5 0 0 0-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 0 0-7.78 7.78l1.06 1.06L12 21.23l7.78-7.78 1.06-1.06a5.5 5.5 0 0 0 0-7.78z"/>,
-    share: <g><circle cx="18" cy="5" r="3"/><circle cx="6" cy="12" r="3"/><circle cx="18" cy="19" r="3"/><line x1="8.59" y1="13.51" x2="15.42" y2="17.49"/><line x1="15.41" y1="6.51" x2="8.59" y2="10.49"/></g>
+    share: <g><circle cx="18" cy="5" r="3"/><circle cx="6" cy="12" r="3"/><circle cx="18" cy="19" r="3"/><line x1="8.59" y1="13.51" x2="15.42" y2="17.49"/><line x1="15.41" y1="6.51" x2="8.59" y2="10.49"/></g>,
+    home: <g><path d="M3 9l9-7 9 7v11a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z"/><polyline points="9 22 9 12 15 12 15 22"/></g>,
+    grid: <g><rect x="3" y="3" width="7" height="7"/><rect x="14" y="3" width="7" height="7"/><rect x="14" y="14" width="7" height="7"/><rect x="3" y="14" width="7" height="7"/></g>,
+    cross: <g><line x1="12" y1="5" x2="12" y2="19"/><line x1="5" y1="12" x2="19" y2="12"/></g>,
+    compass: <g><circle cx="12" cy="12" r="10"/><polygon points="16.24 7.76 14.12 14.12 7.76 16.24 9.88 9.88 16.24 7.76"/></g>
   };
   return <svg {...common}>{paths[name] || paths.pin}</svg>;
 }
@@ -1484,13 +1524,31 @@ function GlobeCanvas({ phase }){
 /* ===================== TOPBAR ===================== */
 function Topbar(){
   const [scrolled, setScrolled] = useState(false);
+  
+  // Karanlık mod hafızası ve kontrolü
+  const [isDark, setIsDark] = useState(() => {
+    const saved = safeStore.get('agri_theme');
+    return saved === 'dark'; 
+  });
 
+  // Sayfa kaydırma efekti
   useEffect(() => {
     const onScroll = () => setScrolled(window.scrollY > 40);
     onScroll();
     window.addEventListener("scroll", onScroll, { passive: true });
     return () => window.removeEventListener("scroll", onScroll);
   }, []);
+
+  // Tema değiştiğinde siteye rengi uygula ve hafızaya kaydet
+  useEffect(() => {
+    if (isDark) {
+      document.body.classList.add('dark-theme');
+      safeStore.set('agri_theme', 'dark');
+    } else {
+      document.body.classList.remove('dark-theme');
+      safeStore.set('agri_theme', 'light');
+    }
+  }, [isDark]);
 
   const onDark = !scrolled;
   const cls = ["topbar", scrolled ? "scrolled" : "", onDark ? "on-dark" : ""].join(" ").trim();
@@ -1506,7 +1564,32 @@ function Topbar(){
         <a href="#kategoriler" onClick={(e)=>{ e.preventDefault(); document.getElementById("kategoriler").scrollIntoView({ behavior:"smooth" }); }}>Kategoriler</a>
         <a href="#iletisim" onClick={(e)=>{ e.preventDefault(); document.getElementById("iletisim").scrollIntoView({ behavior:"smooth" }); }}>İletişim</a>
       </nav>
-      <div className="loc"><span className="dot"></span>Ağrı, Türkiye</div>
+      
+      <div style={{ justifySelf:'end', display:'flex', alignItems:'center', gap:'18px' }}>
+        <div className="loc"><span className="dot"></span>Ağrı, Türkiye</div>
+        
+        {/* Karanlık/Aydınlık Mod Butonu */}
+        <button 
+          onClick={() => setIsDark(!isDark)} 
+          title={isDark ? "Aydınlık Moda Geç" : "Karanlık Moda Geç"}
+          style={{
+            width: '38px', height: '38px', borderRadius: '50%', 
+            background: scrolled ? 'var(--bg-2)' : 'rgba(255,255,255,0.1)', 
+            border: scrolled ? '1px solid var(--line)' : '1px solid rgba(255,255,255,0.3)', 
+            display: 'grid', placeItems: 'center', cursor: 'pointer', 
+            transition: 'all 0.4s var(--ease)', backdropFilter: 'blur(6px)',
+            color: scrolled ? 'var(--ink)' : '#fff'
+          }}
+        >
+          <span style={{ 
+            fontSize: '18px', 
+            transition: 'transform 0.6s cubic-bezier(0.68, -0.55, 0.265, 1.55)', 
+            transform: isDark ? 'rotate(360deg)' : 'rotate(0deg)' 
+          }}>
+            {isDark ? "🌙" : "☀️"}
+          </span>
+        </button>
+      </div>
     </div>
   );
 }
@@ -1649,7 +1732,8 @@ function resolveDutyDate(){
   const all = window.AGRI.dutyPharmacies;
   if (all.some(p => p.date === active)) return active;
   const dates = [...new Set(all.map(p => p.date))];
-  return dates.length ? dates[dates.length - 1] : active;
+  /* Hata düzeltmesi: Eğer o gün listede yoksa, listedeki İLK tarihi göster (en sonuncuyu değil) */
+  return dates.length ? dates[0] : active; 
 }
 
 function resolveWeatherDate(){
@@ -2245,25 +2329,37 @@ function PlacesOverlay({ cat, initialSubCat, initialPlace, onClose, favorites = 
                 </div>
               )}
 
-              {/* Telefon Bölümü */}
+              {/* Telefon ve WhatsApp Bölümü HERKES İÇİN */}
               {selectedPlace.phones && selectedPlace.phones.length > 0 && (
                 <div className="pm-meta-item">
                   <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5"><path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07 19.5 19.5 0 0 1-6-6 19.79 19.79 0 0 1-3.07-8.67A2 2 0 0 1 4.11 2h3a2 2 0 0 1 2 1.72 12.84 12.84 0 0 0 .7 2.81 2 2 0 0 1-.45 2.11L8.09 9.91a16 16 0 0 0 6 6l1.27-1.27a2 2 0 0 1 2.11-.45 12.84 12.84 0 0 0 2.81.7A2 2 0 0 1 22 16.92z"/></svg>
-                  <div style={{display:'flex', flexDirection:'column', gap:'4px'}}>
+                  <div style={{display:'flex', flexDirection:'column', gap:'8px', width: '100%'}}>
                     <strong>İletişim & Randevu:</strong>
-                    {selectedPlace.phones.map((pNum, pIdx) => (
-                      <a key={pIdx} href={`tel:${pNum.replace(/\s/g,'')}`} style={{color:'var(--ink)', textDecoration:'none', fontWeight:'700', fontSize:'15.5px'}} onClick={() => window.gtag && window.gtag('event', 'telefon_arandi', { mekan_adi: selectedPlace.name })}>📞 {pNum}</a>
-                    ))}
+                    {selectedPlace.phones.map((pNum, pIdx) => {
+                      const cleanPhone = pNum.replace(/\s/g,'').replace(/^0/, '90');
+                      const waText = "Merhabalar, 04agri.com web sayfası üzerinden profilinizi gördüm ve size ulaşıyorum.";
+                      const waUrl = `https://wa.me/${cleanPhone}?text=${encodeURIComponent(waText)}`;
+                      return (
+                        <div key={pIdx} style={{display:'flex', gap:'8px', alignItems:'center', flexWrap:'wrap'}}>
+                          <a href={`tel:${pNum.replace(/\s/g,'')}`} style={{color:'var(--ink)', textDecoration:'none', fontWeight:'700', fontSize:'14px', background:'var(--bg-2)', padding:'6px 14px', borderRadius:'100px'}} onClick={() => window.gtag && window.gtag('event', 'telefon_arandi', { mekan_adi: selectedPlace.name })}>📞 Ara ({pNum})</a>
+                          <a href={waUrl} target="_blank" rel="noopener noreferrer" style={{color:'#25D366', textDecoration:'none', fontWeight:'800', fontSize:'14px', background:'rgba(37, 211, 102, 0.12)', padding:'6px 14px', borderRadius:'100px'}} onClick={() => window.gtag && window.gtag('event', 'whatsapp_tiklandi', { mekan_adi: selectedPlace.name })}>💬 WhatsApp'tan Yaz</a>
+                        </div>
+                      )
+                    })}
                   </div>
                 </div>
               )}
 
-              {/* Instagram Bölümü */}
+              {/* Instagram ve DM Bölümü HERKES İÇİN */}
               {selectedPlace.instagram && (
                 <div className="pm-meta-item">
                   <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5"><rect x="2" y="2" width="20" height="20" rx="5" ry="5"/><path d="M16 11.37A4 4 0 1 1 12.63 8 4 4 0 0 1 16 11.37z"/><line x1="17.5" y1="6.5" x2="17.51" y2="6.5"/></svg>
-                  <div>
-                    <strong>Instagram:</strong> <a href={`https://instagram.com/${selectedPlace.instagram}`} target="_blank" rel="noopener noreferrer" style={{color:'var(--ink)', fontWeight:'700', textDecoration:'underline'}} onClick={() => window.gtag && window.gtag('event', 'instagram_tiklandi', { mekan_adi: selectedPlace.name })}>@{selectedPlace.instagram}</a>
+                  <div style={{display:'flex', flexDirection:'column', gap:'6px', width: '100%'}}>
+                    <strong>Instagram:</strong> 
+                    <div style={{display:'flex', gap:'8px', alignItems:'center', flexWrap:'wrap'}}>
+                      <a href={`https://instagram.com/${selectedPlace.instagram}`} target="_blank" rel="noopener noreferrer" style={{color:'var(--ink)', fontWeight:'700', textDecoration:'none', background:'var(--bg-2)', padding:'6px 14px', borderRadius:'100px', fontSize:'14px'}} onClick={() => window.gtag && window.gtag('event', 'instagram_profile_tiklandi', { mekan_adi: selectedPlace.name })}>📸 @{selectedPlace.instagram}</a>
+                      <a href={`https://ig.me/m/${selectedPlace.instagram}`} target="_blank" rel="noopener noreferrer" style={{color:'#E1306C', fontWeight:'800', textDecoration:'none', background:'rgba(225, 48, 108, 0.08)', padding:'6px 14px', borderRadius:'100px', fontSize:'14px'}} onClick={() => window.gtag && window.gtag('event', 'instagram_dm_tiklandi', { mekan_adi: selectedPlace.name })}>✉️ DM Gönder</a>
+                    </div>
                   </div>
                 </div>
               )}
@@ -2430,10 +2526,54 @@ function PlacesOverlay({ cat, initialSubCat, initialPlace, onClose, favorites = 
   );
 }
 
+function BottomNav({ activeTab, onTabChange, onOpenCat, onOpenFavorites }) {
+  const tabs = [
+    { id: 'home', label: 'Ana Sayfa', icon: 'home' },
+    { id: 'cats', label: 'Keşfet', icon: 'grid' },
+    { id: 'nobetci', label: 'Eczane', icon: 'cross', colorClass: 'active-red' },
+    { id: 'gezilecek', label: 'Gezi', icon: 'compass' },
+    { id: 'favs', label: 'Favoriler', icon: 'heart', colorClass: 'active-red' }
+  ];
+
+  const handlePress = (tab) => {
+    onTabChange(tab.id);
+    if (tab.id === 'home') {
+      window.scrollTo({ top: 0, behavior: 'smooth' });
+      onOpenCat(null);
+    } else if (tab.id === 'cats') {
+      document.getElementById("kategoriler").scrollIntoView({ behavior:"smooth" });
+      onOpenCat(null);
+    } else if (tab.id === 'nobetci') {
+      onOpenCat(window.AGRI.categories.find(c => c.id === 'nobetci'));
+    } else if (tab.id === 'gezilecek') {
+      onOpenCat(window.AGRI.categories.find(c => c.id === 'gezilecek'));
+    } else if (tab.id === 'favs') {
+      onOpenFavorites();
+    }
+  };
+
+  return (
+    <nav className="bottom-nav" data-nosnippet="true">
+      {tabs.map(tab => {
+        const isActive = activeTab === tab.id;
+        const activeClass = tab.colorClass || 'active';
+        return (
+          <button key={tab.id} className={`nav-item ${isActive ? activeClass : ''}`} onClick={() => handlePress(tab)}>
+            <span className="nav-indicator"></span>
+            <Icon name={tab.icon} size={24} stroke={isActive ? "currentColor" : "var(--ink-faint)"} sw={isActive ? 2.2 : 1.8} />
+            <span>{tab.label}</span>
+          </button>
+        )
+      })}
+    </nav>
+  );
+}
+
 /* ===================== MASTER APP ===================== */
 const { useEffect: useEffectA, useState: useStateA } = React;
 
 function App(){
+  const [activeTab, setActiveTab] = useStateA('home');
   const [openCat, setOpenCat] = useStateA(null);
   const [directSub, setDirectSub] = useStateA(null);
   const [directPlace, setDirectPlace] = useStateA(null);
@@ -2474,6 +2614,7 @@ function App(){
     };
     setOpenCat(favCategory); setDirectSub(null); setDirectPlace(null);
     document.getElementById("kategoriler").scrollIntoView({ behavior:"smooth" });
+    setActiveTab('favs');
   };
   
   const [tosStatus, setTosStatus] = useStateA(() => {
@@ -2533,9 +2674,11 @@ function App(){
     if (cat) {
       window.history.pushState(null, "", `/${cat.id}`);
       setOpenCat(cat); setDirectSub(null); setDirectPlace(null);
+      setActiveTab(cat.id === 'nobetci' ? 'nobetci' : (cat.id === 'gezilecek' ? 'gezilecek' : 'cats'));
     } else {
       window.history.pushState(null, "", "/"); 
       setOpenCat(null); setDirectSub(null); setDirectPlace(null);
+      setActiveTab('home');
     }
   };
 
@@ -2654,6 +2797,7 @@ function App(){
         </div>
       )}
 
+      <BottomNav activeTab={activeTab} onTabChange={setActiveTab} onOpenCat={handleUpdateCategoryView} onOpenFavorites={handleOpenFavorites} />
     </div>
   );
 }
