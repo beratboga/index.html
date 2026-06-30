@@ -578,29 +578,42 @@ body {
 .widget-card, .pharm-card, .news-item, .cat-item, .pm-meta-box, .tos-modal, .doc-modal-card, .search-dropdown, .sugg-item {
   transition: background-color 0.5s var(--ease), color 0.5s var(--ease), border-color 0.5s var(--ease), transform 0.2s ease, box-shadow 0.2s ease;
 }
-/* MOBİL ALT NAVİGASYON BAR */
+/* YENİ NESİL PREMIUM MOBİL ALT NAVİGASYON BAR (REDDIT TARZI) */
 .bottom-nav { display: none; }
 @media (max-width: 680px) {
   .bottom-nav {
     display: flex; justify-content: space-around; align-items: center;
     position: fixed; bottom: 0; left: 0; right: 0; z-index: 990;
-    background: rgba(255, 255, 255, 0.85); backdrop-filter: saturate(180%) blur(20px); -webkit-backdrop-filter: saturate(180%) blur(20px);
-    padding: 12px 10px calc(12px + env(safe-area-inset-bottom));
-    border-top: 1px solid rgba(0, 0, 0, 0.08); box-shadow: 0 -10px 40px rgba(0,0,0,0.05);
+    background: rgba(255, 255, 255, 0.85); 
+    backdrop-filter: saturate(180%) blur(20px); -webkit-backdrop-filter: saturate(180%) blur(20px);
+    padding: 10px 8px calc(10px + env(safe-area-inset-bottom));
+    border-top: 1px solid rgba(0, 0, 0, 0.05); box-shadow: 0 -10px 40px rgba(0,0,0,0.04);
   }
   .nav-item {
-    position: relative; flex: 1; display: flex; flex-direction: column; align-items: center; gap: 4px;
-    color: var(--ink-faint); font-weight: 700; font-size: 11px; cursor: pointer; transition: all 0.4s var(--ease);
+    position: relative; flex: 1; display: flex; flex-direction: column; align-items: center; gap: 5px;
+    color: var(--ink-faint); font-weight: 600; font-size: 11px; cursor: pointer; transition: all 0.3s var(--ease);
+    padding: 6px 0; border-radius: 14px;
   }
-  .nav-item.active { color: var(--accent); transform: translateY(-4px); }
-  .nav-item.active-red { color: var(--pin); transform: translateY(-4px); }
-  .nav-indicator {
-    position: absolute; top: -10px; width: 4px; height: 4px; border-radius: 50%;
-    background: currentColor; opacity: 0; transform: scale(0); transition: all 0.4s var(--ease);
+  .nav-item.active { color: var(--ink); font-weight: 800; transform: translateY(-2px); }
+  .nav-item.active-red { color: var(--pin); font-weight: 800; transform: translateY(-2px); }
+  
+  /* Aktif sekmeye arkada şık bir hap (pill) efekti */
+  .nav-item.active::before, .nav-item.active-red::before {
+    content: ""; position: absolute; top: -2px; left: 50%; transform: translateX(-50%);
+    width: 48px; height: 32px; border-radius: 16px;
+    background: rgba(0,0,0,0.05); z-index: -1; animation: pillPop 0.3s var(--ease);
   }
-  .nav-item.active .nav-indicator, .nav-item.active-red .nav-indicator { opacity: 1; transform: scale(1); }
+  .nav-item.active-red::before { background: rgba(255, 75, 75, 0.12); }
 }
+@keyframes pillPop { 0% { transform: translateX(-50%) scale(0.5); opacity: 0; } 100% { transform: translateX(-50%) scale(1); opacity: 1; } }
 @media (max-width: 680px) { body { padding-bottom: 84px; } }
+
+/* Karanlık Mod İçin Reddit Navigasyon Uyumu */
+body.dark-theme .bottom-nav { background: rgba(12, 16, 32, 0.85); border-top: 1px solid rgba(255,255,255,0.05); }
+body.dark-theme .nav-item { color: rgba(255,255,255,0.4); }
+body.dark-theme .nav-item.active { color: #fff; }
+body.dark-theme .nav-item.active-red { color: var(--pin); }
+body.dark-theme .nav-item.active::before { background: rgba(255,255,255,0.1); }
 </style>
 </head>
 <body>
@@ -980,7 +993,7 @@ body {
     },
     {
       id:"gezilecek", name:"Gezilecek Yerler", color:"#1ABC9C", tagline:"Ağrı'nın Hazineleri", 
-      blurb:"Tarihten doğaya — Muhteşem manzaralar doğrudan harita konumlarıyla.",
+      blurb:"Tarihten, doğaya - Muhteşem manzaralar doğrudan harita konumlarıyla.",
       places:[
         {
           name:"Balık Gölü", 
@@ -2217,14 +2230,12 @@ function PlacesOverlay({ cat, initialSubCat, initialPlace, onClose, favorites = 
     } else if (selectedSubCat) {
       setSelectedSubCat(null);
     } else {
-      window.history.pushState(null, "", `/`);
       setIsClosing(true);
       setTimeout(onClose, 250); 
     }
   };
 
   const handleClose = () => {
-    window.history.pushState(null, "", `/`);
     setIsClosing(true);
     setTimeout(onClose, 250);
   };
@@ -2539,10 +2550,10 @@ function BottomNav({ activeTab, onTabChange, onOpenCat, onOpenFavorites }) {
     onTabChange(tab.id);
     if (tab.id === 'home') {
       window.scrollTo({ top: 0, behavior: 'smooth' });
-      onOpenCat(null);
+      onOpenCat(null, 'home');
     } else if (tab.id === 'cats') {
       document.getElementById("kategoriler").scrollIntoView({ behavior:"smooth" });
-      onOpenCat(null);
+      onOpenCat(null, 'cats');
     } else if (tab.id === 'nobetci') {
       onOpenCat(window.AGRI.categories.find(c => c.id === 'nobetci'));
     } else if (tab.id === 'gezilecek') {
@@ -2647,8 +2658,10 @@ function App(){
         
         if (fCat && fPlace) {
           setOpenCat(fCat); setDirectSub(fSub); setDirectPlace(fPlace);
+          setActiveTab(fCat.id === 'nobetci' ? 'nobetci' : (fCat.id === 'gezilecek' ? 'gezilecek' : 'cats'));
         } else {
           setOpenCat(null); setDirectSub(null); setDirectPlace(null);
+          setActiveTab('home');
         }
       } 
       // Normal Kategori Yönlendirmesi (Örn: /gezilecek)
@@ -2656,11 +2669,14 @@ function App(){
         const matchingCat = window.AGRI.categories.find(c => c.id === pathParts[0]);
         if (matchingCat) {
           setOpenCat(matchingCat); setDirectSub(null); setDirectPlace(null);
+          setActiveTab(matchingCat.id === 'nobetci' ? 'nobetci' : (matchingCat.id === 'gezilecek' ? 'gezilecek' : 'cats'));
         } else {
           setOpenCat(null); setDirectSub(null); setDirectPlace(null);
+          setActiveTab('home');
         }
       } else {
         setOpenCat(null); setDirectSub(null); setDirectPlace(null);
+        setActiveTab('home');
         document.title = "04agri.com — Ağrı'nın Dijital Rehberi";
       }
     };
@@ -2670,7 +2686,7 @@ function App(){
     return () => window.removeEventListener("popstate", handleLocationRouting);
   }, []);
 
-  const handleUpdateCategoryView = (cat) => {
+  const handleUpdateCategoryView = (cat, intendedTab = null) => {
     if (cat) {
       window.history.pushState(null, "", `/${cat.id}`);
       setOpenCat(cat); setDirectSub(null); setDirectPlace(null);
@@ -2678,7 +2694,9 @@ function App(){
     } else {
       window.history.pushState(null, "", "/"); 
       setOpenCat(null); setDirectSub(null); setDirectPlace(null);
-      setActiveTab('home');
+      if (intendedTab) {
+        setActiveTab(intendedTab);
+      }
     }
   };
 
@@ -2707,6 +2725,60 @@ function App(){
     }
   }, [tosStatus]);
 
+  // --- EKRAN KAYDIRMA (SWIPE) İLE SEKME DEĞİŞTİRME MOTORU ---
+  const touchStartX = useRef(null);
+  const touchStartY = useRef(null);
+  const touchEndX = useRef(null);
+
+  const handleTabSwitch = (tabId) => {
+    setActiveTab(tabId);
+    if (tabId === 'home') {
+      window.scrollTo({ top: 0, behavior: 'smooth' });
+      handleUpdateCategoryView(null, 'home');
+    } else if (tabId === 'cats') {
+      document.getElementById("kategoriler").scrollIntoView({ behavior:"smooth" });
+      handleUpdateCategoryView(null, 'cats');
+    } else if (tabId === 'nobetci') {
+      handleUpdateCategoryView(window.AGRI.categories.find(c => c.id === 'nobetci'));
+    } else if (tabId === 'gezilecek') {
+      handleUpdateCategoryView(window.AGRI.categories.find(c => c.id === 'gezilecek'));
+    } else if (tabId === 'favs') {
+      handleOpenFavorites();
+    }
+  };
+
+  const onTouchStartGlobal = (e) => {
+    touchStartX.current = e.targetTouches[0].clientX;
+    touchStartY.current = e.targetTouches[0].clientY;
+    touchEndX.current = null;
+  };
+
+  const onTouchMoveGlobal = (e) => { touchEndX.current = e.targetTouches[0].clientX; };
+
+  const onTouchEndGlobal = (e) => {
+    if (!touchStartX.current || !touchEndX.current) return;
+    
+    // Hikayeler veya kayan görseller (marquee) üzerinde kaydırma yapılıyorsa sekmeyi değiştirme
+    if (e.target.closest('.stories-row') || e.target.closest('.marquee') || e.target.closest('.search-tags')) return;
+
+    const distanceX = touchStartX.current - touchEndX.current;
+    
+    // Kaydırmanın bilerek yapıldığından emin ol (en az 90 piksel kaydırılmış olmalı)
+    if (Math.abs(distanceX) > 90) {
+      if (openCat && !['nobetci', 'gezilecek', 'favs'].includes(activeTab)) return; // Detay kartındayken sekme değiştirme
+      if (docView || tosStatus !== 'true') return; // Sözleşme ekranındayken sekme değiştirme
+      
+      const tabsOrder = ['home', 'cats', 'nobetci', 'gezilecek', 'favs'];
+      const currentIndex = tabsOrder.indexOf(activeTab);
+      
+      if (distanceX > 0 && currentIndex < tabsOrder.length - 1) {
+        handleTabSwitch(tabsOrder[currentIndex + 1]); // Sola Kaydırdı -> Sonraki Sekme
+      } else if (distanceX < 0 && currentIndex > 0) {
+        handleTabSwitch(tabsOrder[currentIndex - 1]); // Sağa Kaydırdı -> Önceki Sekme
+      }
+    }
+  };
+
   const privacyText = "Değerli Ziyaretçimiz, bu web sayfası Ağrı'ya hizmet eden; hiçbir verinizi işlemeyen, saklamayan veya üçüncü taraflarla paylaşmayan, hiçbir konum bilgisi veya kişisel bilgi talep etmeyen bir tanıtım platformudur. Sizden ad, soyad, telefon, e-posta veya konum gibi hiçbir kişisel veri istenmez ve toplanmaz. Amacımız yalnızca Ağrı'yı; restoranları, cafeleri, pastaneleri, sağlık hizmetlerini, nöbetçi eczaneleri, güzellik ve bakım merkezlerini, kuaförleri, eğitim kurumlarını, etkinlikleri ve gezilecek yerleri tek bir çatı altında, ücretsiz biçimde hem Ağrı halkına hem de değerli misafirlerimize tanıtmaktır. Tarayıcınızda yalnızca bu onay kutusunu bir daha göstermemek için küçük bir teknik kayıt (yerel depolama) tutulabilir; bu kayıt hiçbir şekilde tarafımıza iletilmez. Herhangi bir soru veya talebiniz için biagri0404@hotmail.com adresinden bize ulaşabilirsiniz.";
   const termsText = "Bu platformu kullanarak aşağıdaki şartları kabul etmiş olursunuz. Platformda yer alan tüm bilgiler (mekan, adres, telefon, nöbetçi eczane, vakitler vb.) tamamen bilgilendirme amaçlıdır ve resmî nitelik taşımaz. Bilgiler zamanla değişebileceğinden, olası hatalı, eksik veya güncel olmayan içeriklerden tarafımız sorumlu tutulamaz; önemli durumlarda ilgili kurumdan teyit almanız önerilir. Platformdaki içerikler izinsiz olarak ticari amaçla kopyalanamaz veya çoğaltılamaz. Bağlantı verilen üçüncü taraf hizmetlerin (ör. harita uygulamaları) içeriğinden ve gizlilik uygulamalarından o hizmet sağlayıcılar sorumludur. Bir bilgiyi düzeltmek, eklemek veya kaldırmak isterseniz biagri0404@hotmail.com adresi üzerinden bizimle iletişime geçebilirsiniz. Şartlar gerektiğinde güncellenebilir.\n\nSorumluluk Reddi (Disclaimer): Verilen bilgiler bilgilendirme amaçlıdır, resmî nitelik taşımaz ve güncel olmayabilir.";
 
@@ -2716,7 +2788,12 @@ function App(){
   };
 
   return (
-    <div id="top" style={{ pointerEvents: tosStatus !== 'true' ? 'none' : 'auto' }}>
+    <div id="top" 
+      style={{ pointerEvents: tosStatus !== 'true' ? 'none' : 'auto', overflowX: 'hidden' }}
+      onTouchStart={onTouchStartGlobal}
+      onTouchMove={onTouchMoveGlobal}
+      onTouchEnd={onTouchEndGlobal}
+    >
       
       <Topbar />
 <Hero onOpenCat={handleUpdateCategoryView} onSearchPlace={handleSearchSelect} onOpenFavorites={handleOpenFavorites} />
@@ -2757,7 +2834,7 @@ function App(){
         </div>
       </footer>
 
-      {openCat && <PlacesOverlay cat={openCat} initialSubCat={directSub} initialPlace={directPlace}onClose={() => handleUpdateCategoryView(null)} favorites={favorites} toggleFav={toggleFav} />}
+      {openCat && <PlacesOverlay cat={openCat} initialSubCat={directSub} initialPlace={directPlace} onClose={() => handleUpdateCategoryView(null)} favorites={favorites} toggleFav={toggleFav} />}
 
       {docView && (
         <div className="doc-modal-overlay" style={{ pointerEvents:'auto' }} onClick={(e)=>{ if(e.target.className==='doc-modal-overlay') setDocView(null); }}>
