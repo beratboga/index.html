@@ -755,6 +755,17 @@ body.dark-theme .nav-item.active::before { background: rgba(255,255,255,0.1); }
                 "Böbrek, karaciğer, mide ve bağırsak hastalıklarında tıbbi beslenme tedavisi",
                 "Yeme bozukluklarında beslenme danışmanlığı"
               ]
+            },
+            {
+              name: "Diyetisyen Seda Nur Dursun",
+              subName: "Beslenme ve Diyetetik",
+              info: "“Beslenme ve Diyetetik bölümünden başarıyla mezun oldum. Lisans eğitimim ve klinik stajlarım süresince edindiğim güncel, kanıta dayalı bilimsel bilgileri sizlerin sağlığı için pratiğe döküyorum.”",
+              area: "Ağrı Merkez",
+              img: "seda1.jpg",
+              bgPos: "center",
+              icon: "leaf",
+              note: "Sağlığınız için bilimsel rehberlik.",
+              instagram: "dytt.seda"
             }
           ]
         },
@@ -875,7 +886,7 @@ body.dark-theme .nav-item.active::before { background: rgba(255,255,255,0.1); }
               bgPos: "center",
               icon: "brain",
               note: "LGS & YKS Hazırlık",
-              phones: ["0501 056 85 12"],
+              phones: ["0553 380 35 45"],
               instagram: "cananhocamath",
               lessonsTitle: "Verilen Dersler",
               lessons: [
@@ -984,7 +995,7 @@ body.dark-theme .nav-item.active::before { background: rgba(255,255,255,0.1); }
               icon: "brain",
               note: "AGTE & Readkitr Uygulayıcısı",
               address: "Ağrı Merkez",
-              instagram: "pneuma"
+              instagram: "brvnogretmennn"
             }
           ]
         }
@@ -992,6 +1003,24 @@ body.dark-theme .nav-item.active::before { background: rgba(255,255,255,0.1); }
       places:[] 
     },
     {
+      id:"yazilim", name:"Yazılım & Teknoloji", color:"#34495E", tagline:"Dijital Çözümler", 
+      blurb:"Ağrı'nın dijital dönüşümüne öncülük eden yazılım şirketleri ve teknoloji ajansları.",
+      places:[
+        {
+          name: "SeaStarSoft",
+          subName: "Yazılım ve Teknoloji",
+          info: "SeaStarSoft, web sayfası geliştirme ve yenilikçi dijital çözümler üreten dinamik bir yazılım şirketidir. Markanızı dijital dünyaya taşıyoruz.",
+          area: "Ağrı Merkez",
+          img: "seastarsoft.jpg",
+          bgPos: "center",
+          icon: "grid",
+          note: "Dijital Çözüm Ortağınız",
+          instagram: "seastarsoft"
+        }
+      ]
+    },
+    {
+      
       id:"gezilecek", name:"Gezilecek Yerler", color:"#1ABC9C", tagline:"Ağrı'nın Hazineleri", 
       blurb:"Tarihten, doğaya - Muhteşem manzaralar doğrudan harita konumlarıyla.",
       places:[
@@ -1146,118 +1175,32 @@ const dutyPharmacies = [
 
   // BANNERLAR
   window.AGRI_STATIC_BANNERS = [
-    { img:"uzm.diyetisyenbilge.jpg", title:"Uzm. Diyetisyen Bilge İgan Yıldırım", subtitle:"Aramıza hoşgeldiniz" },
-    { img:"agrıelitdilkursu.jpg", title:"Ağrı E.L.I.T Dil Kursu", subtitle:"Aramıza hoşgeldiniz" },
-    { img:"muhammedhoca2.jpg", title:"Muhammed Hoca", subtitle:"Aramıza HoşgeldinİZ" },
-    { img:"drnilay1.jpg", title:"Dr. Nilay Dinçgözoğlu", subtitle:"Aramıza Hoşgeldin", bgPos: "center center" },
-    { img:"bahar3.jpg", title:"Bahar İgan Bağan", subtitle:"Yaşam Koçu", bgPos: "center 35%" },
-    { img:"mervehoca1.jpg", title:"Merve Hoca", subtitle:"Aramıza Hoşgeldin" },
-    { img:"nevrahoca1.jpg", title:"Nevra Başcı", subtitle:"Aramıza Hoşgeldin", bgPos: "center" },
-    { img: "dilekpolat1.jpg", title: "Dilek Polat", subtitle: "Dilek Polat Aramıza Hoş Geldin", bgPos: "center center" },
-    { img: "ozge1.jpg", title: "Özge Nur Çelik", subtitle: "Aramıza Hoş Geldin", bgPos: "center" },
-    { img: "matematik1.jpg", title: "Emir Hoca", subtitle: "Aramıza Hoş Geldin", bgPos: "center" },
-   { img: "sevval1.jpg", title: "Şevval Taşdemir", subtitle: "Aramıza Hoşgeldin Şevval Taşdemir", bgPos: "center" },
-    { img: "berivan1.jpg", title: "Berivan Hoca", subtitle: "Aramıza Hoşgeldin Berivan Hoca", bgPos: "center" },
-    { img: "berika1.jpg", title: "Berika Kuruçay", subtitle: "Diyetisyen Berika Kuruçay", bgPos: "center" },
-    { img: "canan1.jpg", title: "Canan Hoca", subtitle: "Matematik Özel Ders", bgPos: "center" }
+    { img:"uzm.diyetisyenbilge.jpg", title:"Uzm. Diyetisyen Bilge İgan Yıldırım", subtitle:"Aramıza hoşgeldiniz", slug: slugify("Uzman Diyetisyen Bilge İgan Yıldırım") },
+    { img:"agrıelitdilkursu.jpg", title:"Ağrı E.L.I.T Dil Kursu", subtitle:"Aramıza hoşgeldiniz", slug: slugify("E.L.I.T") },
+    { img:"muhammedhoca2.jpg", title:"Muhammed Hoca", subtitle:"Aramıza HoşgeldinİZ", slug: slugify("Muhammed Hoca") },
+    { img:"drnilay1.jpg", title:"Dr. Nilay Dinçgözoğlu", subtitle:"Aramıza Hoşgeldin", bgPos: "center center", slug: slugify("Dr. Nilay Dinçgözoğlu") },
+    { img:"bahar3.jpg", title:"Bahar İgan Bağan", subtitle:"Yaşam Koçu", bgPos: "center 35%", slug: slugify("Bahar İgan Bağan") },
+    { img:"mervehoca1.jpg", title:"Merve Hoca", subtitle:"Aramıza Hoşgeldin", slug: slugify("Merve Hoca") },
+    { img:"nevrahoca1.jpg", title:"Nevra Başcı", subtitle:"Aramıza Hoşgeldin", bgPos: "center", slug: slugify("Nevra Başcı") },
+    { img: "dilekpolat1.jpg", title: "Dilek Polat", subtitle: "Aramıza Hoş Geldin", bgPos: "center center", slug: slugify("Dilek Polat") },
+    { img: "ozge1.jpg", title: "Özge Nur Çelik", subtitle: "Aramıza Hoş Geldin", bgPos: "center", slug: slugify("Özge Nur Çelik") },
+    { img: "matematik1.jpg", title: "Emir Hoca", subtitle: "Aramıza Hoş Geldin", bgPos: "center", slug: slugify("Emir Hoca") },
+    { img: "sevval1.jpg", title: "Şevval Taşdemir", subtitle: "Aramıza Hoşgeldin Şevval Taşdemir", bgPos: "center", slug: slugify("Şevval Taşdemir") },
+    { img: "berivan1.jpg", title: "Berivan Hoca", subtitle: "Aramıza Hoşgeldin Berivan Hoca", bgPos: "center", slug: slugify("Berivan Hoca") },
+    { img: "berika1.jpg", title: "Berika Kuruçay", subtitle: "Diyetisyen Berika Kuruçay", bgPos: "center", slug: slugify("Diyetisyen Berika Kuruçay") },
+    { img: "canan1.jpg", title: "Canan Hoca", subtitle: "Matematik Özel Ders", bgPos: "center", slug: slugify("Canan Hoca") },
+    { img: "seda1.jpg", title: "Seda Nur Dursun", subtitle: "Aramıza Hoş Geldin", slug: slugify("Diyetisyen Seda Nur Dursun") },
+    { img: "seastarsoft.jpg", title: "SeaStarSoft", subtitle: "Dijital Çözüm Ortağınız", bgPos: "center", slug: slugify("SeaStarSoft") }
   ];
 
   // HİKAYELER
-window.AGRI_STORIES = [
+  window.AGRI_STORIES = [
     {
-      title: "Dyt. Bilge İgan Yıldırım",
-      cover: "uzm.diyetisyenbilge.jpg",
-      slideText: "Uzman Hizmet Biriminde yüz yüze ve online beslenme danışmanlığı çok yakında sizlerle.",
-      slideImg: "uzm.diyetisyenbilge.jpg"
-    },
-    {
-      title: "E.L.I.T Okulları",
-      cover: "agrıelitdilkursu2.jpg",
-      slideText: "Hayalinizdeki Dil Eğitiminize Bugün Başlayın. ENGLISH LANGUAGE INSTITUTE TURKEY.",
-      slideImg: "agrıelitdilkursu2.jpg"
-    },
-    {
-      title: "Muhammed Hoca",
-      cover: "muhammedhoca3.jpg",
-      slideText: "Müzik eğitiminde yeni hocamız Muhammed Hoca aramıza katıldı. Müzik yolculuğunuza bugün başlayın.",
-      slideImg: "muhammedhoca3.jpg"
-    },
-    {
-      title: "Dr. Nilay Dinçgözoğlu",
-      cover: "drnilay2.jpg",
-      bgPos: "center 35%", 
-      slideText: "Medikal Estetik alanında PRP, Botoks, Mezoterapi ve daha birçok yenilikçi uygulama ile Dr. Nilay Dinçgözoğlu aramıza katıldı.",
-      slideImg: "drnilay2.jpg"
-    },
-    {
-      title: "Bahar İgan Bağan",
-      cover: "bahar2.jpg",
-      bgPos: "top",
-      slideText: "Farkındalıklı bir yaşama adım atın. Yaşam koçluğu seanslarımızla kendi potansiyelinizi keşfedin.",
-      slideImg: "bahar2.jpg"
-    },
-    {
-      title: "Merve Hoca",
-      cover: "mervehoca2.jpg",
-      slideText: "Müzik eğitiminde yeni hocamız Merve Hoca aramıza katıldı. Piyano ve Yan Flüt dersleriyle hizmetinizde.",
-      slideImg: "mervehoca2.jpg"
-    },
-    {
-      title: "Nevra Başcı",
-      cover: "nevrahoca2.jpg",
-      bgPos: "top",
-      slideText: "Matematik eğitiminde Nevra Başcı aramıza katıldı. Matematiği korkulan bir ders olmaktan çıkarıp severek öğrenin.",
-      slideImg: "nevrahoca2.jpg"
-    },
-    {
-      title: "Dilek Polat",
-      cover: "dilekpolat2.jpg",
+      title: "🎁 Fırsat!",
+      cover: "kampanya2.jpg", 
       bgPos: "center",
-      slideText: "Her çocuğun dünyasına ulaşan bir yol vardır. Psikolojik Danışmanlık ve Oyun Terapisi seansları ile aramıza katıldı.",
-      slideImg: "dilekpolat2.jpg"
-    },
-    {
-      title: "Özge Nur Çelik",
-      cover: "ozge2.jpg",
-      bgPos: "center",
-      slideText: "Çocuk Gelişim Uzmanı ve Özel Eğitim Uzman Öğreticisi Özge Nur Çelik aramıza katıldı.",
-      slideImg: "ozge2.jpg"
-    },
-    {
-      title: "Emir Hoca",
-      cover: "matematik2.jpg",
-      bgPos: "center",
-      slideText: "Her seviyeye uygun, birebir online özel matematik dersleri Emir Hoca ile başlıyor.",
-      slideImg: "matematik2.jpg"
-    },
-  
-    {
-      title: "DKT Şevval Taşdemir",
-      cover: "sevval2.jpg",
-      bgPos: "center",
-      slideText: "Ağrı’nın Sağlık Bakanlığı onaylı ilk ve tek dil ve konuşma terapisi kliniği ile Şevval Taşdemir aramıza katıldı.",
-      slideImg: "sevval2.jpg"
-    },
-    {
-      title: "Berivan Hoca",
-      cover: "berivan2.jpg",
-      bgPos: "center",
-      slideText: "Çocuk gelişimi, özel eğitim ve aile danışmanlığı alanında uzman Berivan Hoca aramıza katıldı.",
-      slideImg: "berivan2.jpg"
-    },
-    {
-      title: "Berika Kuruçay",
-      cover: "berika2.jpg",
-      bgPos: "center",
-      slideText: "Online beslenme danışmanlığı ile Diyetisyen Berika Kuruçay platformumuza katıldı.",
-      slideImg: "berika2.jpg"
-    },
-    {
-      title: "Canan Hoca",
-      cover: "canan2.jpg",
-      bgPos: "center",
-      slideText: "LGS ve YKS hazırlığında birebir matematik özel dersleri ile Canan Hoca yanınızda!",
-      slideImg: "canan2.jpg"
+      slideText: "Harika fırsatlarımız başladı! Detaylar burada...",
+      slideImg: "kampanya1.jpg" 
     }
   ];
 
@@ -1766,7 +1709,21 @@ function ImageMarquee() {
     <div className="banner-section">
       <div className="marquee">
         {loop.map((b, i) => (
-          <div key={i} className="banner-item" style={{ backgroundImage: `url(${b.img})`, backgroundPosition: b.bgPos || 'center 20%' }}>
+          <div 
+            key={i} 
+            className="banner-item" 
+            style={{ 
+              backgroundImage: `url(${b.img})`, 
+              backgroundPosition: b.bgPos || 'center 20%', 
+              cursor: b.slug ? 'pointer' : 'default' 
+            }} 
+            onClick={() => { 
+              if(b.slug) { 
+                window.history.pushState(null, "", `/mekan/${b.slug}`); 
+                window.dispatchEvent(new Event("popstate")); 
+              } 
+            }}
+          >
             <div className="banner-scrim"></div>
             <div className="banner-content">
               <span className="banner-title">{b.title}</span>
@@ -1821,6 +1778,11 @@ function Stories() {
             <div className="story-card-overlay">
               <div className="story-card-badge">{active.title}</div>
               <div className="story-card-text">{active.slideText}</div>
+              {active.slug && (
+                 <button className="cat-cta" style={{marginTop:'12px', padding:'10px 20px'}} onClick={() => { setOpenIdx(null); window.history.pushState(null, "", `/mekan/${active.slug}`); window.dispatchEvent(new Event("popstate")); }}>
+                   Profili İncele ➔
+                 </button>
+              )}
             </div>
           </div>
         </div>
