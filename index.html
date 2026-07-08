@@ -614,6 +614,27 @@ body.dark-theme .nav-item { color: rgba(255,255,255,0.4); }
 body.dark-theme .nav-item.active { color: #fff; }
 body.dark-theme .nav-item.active-red { color: var(--pin); }
 body.dark-theme .nav-item.active::before { background: rgba(255,255,255,0.1); }
+/* --- GÖRÜNTÜLENME SAYISI ROZETİ --- */
+.pm-view-badge {
+  display: inline-flex; align-items: center; gap: 8px;
+  background: var(--bg-2); border: 1px solid var(--line);
+  color: var(--ink-soft); font-size: 13.5px; font-weight: 700;
+  padding: 8px 16px; border-radius: 100px; margin-bottom: 16px;
+  align-self: flex-start; opacity: 0; transform: translateY(15px);
+  animation: viewPop 0.5s ease forwards; animation-delay: 0.15s;
+}
+.pm-view-badge svg { color: var(--accent); }
+.pm-view-badge strong { color: var(--ink); font-size: 15px; font-weight: 800; }
+@keyframes viewPop { to { opacity: 1; transform: translateY(0); } }
+/* --- ÇOKLU GÖRSEL SLIDER (KAYDIRMA) TASARIMI --- */
+.pm-slider-btn { position: absolute; top: 50%; transform: translateY(-50%); width: 42px; height: 42px; border-radius: 50%; background: rgba(0,0,0,0.4); color: #fff; display: grid; place-items: center; z-index: 5; cursor: pointer; border: 1px solid rgba(255,255,255,0.2); backdrop-filter: blur(6px); transition: all 0.2s var(--ease); }
+.pm-slider-btn:hover { background: rgba(0,0,0,0.75); transform: translateY(-50%) scale(1.05); }
+.pm-slider-btn:active { transform: translateY(-50%) scale(0.95); }
+.pm-slider-btn.left { left: 16px; }
+.pm-slider-btn.right { right: 16px; }
+.pm-slider-dots { position: absolute; bottom: 95px; left: 0; right: 0; display: flex; justify-content: center; gap: 8px; z-index: 5; pointer-events: none; }
+.pm-slider-dot { width: 8px; height: 8px; border-radius: 50%; background: rgba(255,255,255,0.3); transition: background 0.3s, transform 0.3s; box-shadow: 0 2px 4px rgba(0,0,0,0.2); }
+.pm-slider-dot.active { background: #fff; transform: scale(1.3); }
 </style>
 </head>
 <body>
@@ -796,6 +817,34 @@ body.dark-theme .nav-item.active::before { background: rgba(255,255,255,0.1); }
                 "Sürdürülebilir Beslenme",
                 "Online Danışmanlık"
               ]
+            }
+          ]
+        },
+        { id: "ergoterapi", name: "Ergoterapistler", icon: "brain", note: "Duyu bütünleme ve ergoterapi",
+          places: [
+            {
+              name: "Melike Çukadar",
+              subName: "Ergoterapist",
+              info: "Özel Sağlık Meslek Hizmet Birimi\n\nÇocukların bağımsızlıklarını kazanmaları ve potansiyellerini en üst seviyeye çıkarmaları için profesyonel pediatrik ergoterapi ve duyu bütünleme hizmeti sunulmaktadır.",
+              area: "Ağrı Merkez",
+              img: "melike1.jpg",
+              images: ["melike1.jpg", "melike2.jpg"],
+              bgPos: "center",
+              icon: "brain",
+              note: "Pediatrik Ergoterapi ve Duyu Bütünleme",
+              address: "Leylekpınar Mahallesi 1074 Sokak No: 8/2 Kat: 1 Özgül Ofis Center Ağrı/Merkez",
+              phones: ["0551 342 1108"],
+              instagram: "ergoterapistmelikecukadar",
+              lessonsTitle: "Uzmanlık Alanları",
+              lessons: [
+                "Pediatrik Ergoterapi", "Duyu Bütünleme Terapisi", "Beslenme Terapisi", "Çocuk Yogası",
+                "Oyun Becerileri", "Sosyal Duygusal Beceriler", "İnce ve Kaba Motor Beceriler",
+                "Oral Motor Beceriler", "Riskli Bebek Takibi", "Davranış Problemleri",
+                "Günlük Yaşam Becerileri", "Uyaran Eksikliği", "Otizm", "Down Sendromu (Genetik Bozukluklar)",
+                "Dikkat Eksikliği ve Hiperaktivite (DEHB)", "Gelişimsel Gerilikler", "Konuşma Bozuklukları",
+                "Yeme Bozuklukları"
+              ],
+              mapsUrl: "https://maps.google.com/?q=Leylekpınar+Mahallesi+1074+Sokak+Özgül+Ofis+Center+Ağrı"
             }
           ]
         },
@@ -1244,24 +1293,25 @@ const dutyPharmacies = [
 
   // BANNERLAR
  window.AGRI_STATIC_BANNERS = [
-    { img:"uzm.diyetisyenbilge.jpg", title:"Uzm. Diyetisyen Bilge İgan Yıldırım", subtitle:"Aramıza hoşgeldiniz", slug: slugify("Uzman Diyetisyen Bilge İgan Yıldırım") },
-    { img:"agrıelitdilkursu.jpg", title:"Ağrı E.L.I.T Dil Kursu", subtitle:"Aramıza hoşgeldiniz", slug: slugify("E.L.I.T") },
-    { img:"muhammedhoca2.jpg", title:"Muhammed Hoca", subtitle:"Aramıza HoşgeldinİZ", slug: slugify("Muhammed Hoca") },
-    { img:"drnilay1.jpg", title:"Dr. Nilay Dinçgözoğlu", subtitle:"Aramıza Hoşgeldin", bgPos: "center center", slug: slugify("Dr. Nilay Dinçgözoğlu") },
-    { img:"bahar3.jpg", title:"Bahar İgan Bağan", subtitle:"Yaşam Koçu", bgPos: "center 35%", slug: slugify("Bahar İgan Bağan") },
+    { img:"uzm.diyetisyenbilge.jpg", title:"Uzm. Diyetisyen Bilge İgan Yıldırım", subtitle:"Aramıza Hoş Geldin", slug: slugify("Uzman Diyetisyen Bilge İgan Yıldırım") },
+    { img:"agrıelitdilkursu.jpg", title:"Ağrı E.L.I.T Dil Kursu", subtitle:"Aramıza Hoş Geldin", slug: slugify("E.L.I.T") },
+    { img:"muhammedhoca2.jpg", title:"Muhammed Hoca", subtitle:"Aramıza Hoş Geldin", slug: slugify("Muhammed Hoca") },
+    { img:"drnilay1.jpg", title:"Dr. Nilay Dinçgözoğlu", subtitle:"Aramıza Hoş Geldin", bgPos: "center center", slug: slugify("Dr. Nilay Dinçgözoğlu") },
+    { img:"bahar3.jpg", title:"Bahar İgan Bağan", subtitle:"Aramıza Hoş Geldin", bgPos: "center 35%", slug: slugify("Bahar İgan Bağan") },
     { img:"mervehoca1.jpg", title:"Merve Hoca", subtitle:"Aramıza Hoşgeldin", slug: slugify("Merve Hoca") },
-    { img:"nevrahoca1.jpg", title:"Nevra Başcı", subtitle:"Aramıza Hoşgeldin", bgPos: "center", slug: slugify("Nevra Başcı") },
+    { img:"nevrahoca1.jpg", title:"Nevra Başcı", subtitle:"Aramıza Hoş Geldin", bgPos: "center", slug: slugify("Nevra Başcı") },
     { img: "dilekpolat1.jpg", title: "Dilek Polat", subtitle: "Aramıza Hoş Geldin", bgPos: "center center", slug: slugify("Dilek Polat") },
     { img: "ozge1.jpg", title: "Özge Nur Çelik", subtitle: "Aramıza Hoş Geldin", bgPos: "center", slug: slugify("Özge Nur Çelik") },
     { img: "matematik1.jpg", title: "Emir Hoca", subtitle: "Aramıza Hoş Geldin", bgPos: "center", slug: slugify("Emir Hoca") },
-    { img: "sevval1.jpg", title: "Şevval Taşdemir", subtitle: "Aramıza Hoşgeldin Şevval Taşdemir", bgPos: "center", slug: slugify("Şevval Taşdemir") },
-    { img: "berivan1.jpg", title: "Berivan Hoca", subtitle: "Aramıza Hoşgeldin Berivan Hoca", bgPos: "center", slug: slugify("Berivan Hoca") },
-    { img: "berika1.jpg", title: "Berika Kuruçay", subtitle: "Diyetisyen Berika Kuruçay", bgPos: "center", slug: slugify("Diyetisyen Berika Kuruçay") },
-    { img: "canan1.jpg", title: "Canan Hoca", subtitle: "Matematik Özel Ders", bgPos: "center", slug: slugify("Canan Hoca") },
+    { img: "sevval1.jpg", title: "Şevval Taşdemir", subtitle: "Aramıza Hoş Geldin", bgPos: "center", slug: slugify("Şevval Taşdemir") },
+    { img: "berivan1.jpg", title: "Berivan Hoca", subtitle: "Aramıza Hoş Geldin", bgPos: "center", slug: slugify("Berivan Hoca") },
+    { img: "berika1.jpg", title: "Berika Kuruçay", subtitle: "Aramıza Hoş Geldin", bgPos: "center", slug: slugify("Diyetisyen Berika Kuruçay") },
+    { img: "canan1.jpg", title: "Canan Hoca", subtitle: "Aramıza Hoş Geldin", bgPos: "center", slug: slugify("Canan Hoca") },
     { img: "seda1.jpg", title: "Seda Nur Dursun", subtitle: "Aramıza Hoş Geldin", slug: slugify("Diyetisyen Seda Nur Dursun") },
     { img: "seastarsoft.jpg", title: "SeaStarSoft", subtitle: "Dijital Çözüm Ortağınız", bgPos: "center", slug: slugify("SeaStarSoft") },
     { img: "seher1.jpg", title: "Diyetisyen Seher Issi", subtitle: "Aramıza Hoş Geldin", bgPos: "center", slug: slugify("Diyetisyen Seher Issi") },
-    { img: "omerhoca1.jpg", title: "Ömer Hoca", subtitle: "Aramıza Hoşgeldin", bgPos: "center", slug: slugify("Ömer Hoca") }
+    { img: "omerhoca1.jpg", title: "Ömer Hoca", subtitle: "Aramıza Hoş Geldin", bgPos: "center", slug: slugify("Ömer Hoca") },
+    { img: "melike1.jpg", title: "Melike Çukadar", subtitle: " Aramıza Hoş Geldin", bgPos: "center", slug: slugify("Melike Çukadar") },
   ];
 
   // HİKAYELER
@@ -1357,7 +1407,8 @@ function Icon({ name, size = 26, stroke = "currentColor", sw = 1.7 }) {
     home: <g><path d="M3 9l9-7 9 7v11a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z"/><polyline points="9 22 9 12 15 12 15 22"/></g>,
     grid: <g><rect x="3" y="3" width="7" height="7"/><rect x="14" y="3" width="7" height="7"/><rect x="14" y="14" width="7" height="7"/><rect x="3" y="14" width="7" height="7"/></g>,
     cross: <g><line x1="12" y1="5" x2="12" y2="19"/><line x1="5" y1="12" x2="19" y2="12"/></g>,
-    compass: <g><circle cx="12" cy="12" r="10"/><polygon points="16.24 7.76 14.12 14.12 7.76 16.24 9.88 9.88 16.24 7.76"/></g>
+   compass: <g><circle cx="12" cy="12" r="10"/><polygon points="16.24 7.76 14.12 14.12 7.76 16.24 9.88 9.88 16.24 7.76"/></g>,
+    eye: <g><path d="M2 12c0 0 5-7 10-7s10 7 10 7-5 7-10 7-10-7-10-7Z"/><circle cx="12" cy="12" r="3"/></g>
   };
   return <svg {...common}>{paths[name] || paths.pin}</svg>;
 }
@@ -2240,7 +2291,45 @@ function PlacesOverlay({ cat, initialSubCat, initialPlace, onClose, favorites = 
   const [fsImage, setFsImage] = useState(null);
   const [fsVideo, setFsVideo] = useState(null);
   const touchStartX = useRef(null);
+  // --- SLIDER (Çoklu Görsel) HAFIZASI ---
+  const [imgIdx, setImgIdx] = useState(0);
   
+  // Profil değiştiğinde slider'ı hep 1. görsele (0. index) sıfırla
+  useEffect(() => { setImgIdx(0); }, [selectedPlace]);
+  const [viewCount, setViewCount] = useStateA(0);
+
+  useEffectA(() => {
+    if (selectedPlace) {
+   let baseNumber = 0;
+      for (let i = 0; i < selectedPlace.slug.length; i++) {
+        baseNumber += selectedPlace.slug.charCodeAt(i);
+      }
+      
+      // 1. Sabit Başlangıç Sayısı (20 ile 80 arası)
+      let staticBase = (baseNumber * 13) % 60 + 20;
+      
+      // 2. Mekana özel günlük büyüme hızı (Günde 1 veya iki günde 1 izlenme)
+      let dailyGrowth = (baseNumber % 2 === 0) ? 1 : 0.5;
+      
+      // 3. Zaman hesabı (Sitenin açılışından bugüne geçen gün sayısı)
+      let launchDate = new Date("2026-06-01").getTime(); // Sitenin başlangıç tarihi
+      let daysPassed = Math.max(0, (Date.now() - launchDate) / (1000 * 60 * 60 * 24));
+      
+      // 4. Zamanla otomatik eklenen izlenme (Geçen Gün x Günlük Büyüme)
+      let timeBonus = Math.floor(daysPassed * dailyGrowth);
+      
+      // Toplam Ana Sayı
+      baseNumber = staticBase + timeBonus;
+
+      const storageKey = `view_count_${selectedPlace.slug}`;
+      let localClicks = parseInt(safeStore.get(storageKey) || "0", 10);
+      
+      localClicks += 1;
+      safeStore.set(storageKey, localClicks.toString());
+
+      setViewCount(baseNumber + localClicks);
+    }
+  }, [selectedPlace]);
   const isNobetci = cat.id === "nobetci";
   const hasSubCats = cat.hasSubCategories;
   // --- NAVİGASYON VE KAYDIRMA ÇÖZÜCÜ BAŞLANGICI ---
@@ -2299,9 +2388,9 @@ function PlacesOverlay({ cat, initialSubCat, initialPlace, onClose, favorites = 
   if (selectedPlace) {
     const hasImg = selectedPlace.img && selectedPlace.img.trim() !== "";
     const hasVideo = selectedPlace.video && selectedPlace.video.trim() !== "";
-    const openMedia = () => {
+   const openMedia = () => {
       if (hasVideo) setFsVideo(selectedPlace.video);
-      else if (hasImg) setFsImage(selectedPlace);
+      else if (hasImg) setFsImage({ ...selectedPlace, img: selectedPlace.images ? selectedPlace.images[imgIdx] : selectedPlace.img });
     };
     const handleShare = async () => {
       const shareUrl = `https://04agri.com/mekan/${selectedPlace.slug}`;
@@ -2338,7 +2427,30 @@ function PlacesOverlay({ cat, initialSubCat, initialPlace, onClose, favorites = 
             style={ !hasImg ? { background:`linear-gradient(150deg, ${cat.color} 0%, color-mix(in srgb, ${cat.color}, #000 45%) 100%)` } : null }
           >
             { hasImg ? (
-              <img src={selectedPlace.img} alt={selectedPlace.name} style={selectedPlace.bgPos ? { objectPosition: selectedPlace.bgPos } : {}} />
+              <>
+                <img 
+                  src={selectedPlace.images ? selectedPlace.images[imgIdx] : selectedPlace.img} 
+                  alt={selectedPlace.name} 
+                  style={selectedPlace.bgPos ? { objectPosition: selectedPlace.bgPos } : {}} 
+                />
+                
+                {/* Eğer profilde birden fazla görsel varsa okları ve noktaları göster */}
+                {selectedPlace.images && selectedPlace.images.length > 1 && (
+                  <>
+                    <div className="pm-slider-btn left" onClick={(e) => { e.stopPropagation(); setImgIdx(prev => prev > 0 ? prev - 1 : selectedPlace.images.length - 1); }}>
+                      <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round"><polyline points="15 18 9 12 15 6"></polyline></svg>
+                    </div>
+                    <div className="pm-slider-btn right" onClick={(e) => { e.stopPropagation(); setImgIdx(prev => prev < selectedPlace.images.length - 1 ? prev + 1 : 0); }}>
+                      <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round"><polyline points="9 18 15 12 9 6"></polyline></svg>
+                    </div>
+                    <div className="pm-slider-dots">
+                      {selectedPlace.images.map((_, i) => (
+                        <div key={i} className={`pm-slider-dot ${i === imgIdx ? 'active' : ''}`}></div>
+                      ))}
+                    </div>
+                  </>
+                )}
+              </>
             ) : (
               <div className="pm-noimg">
                 <div style={{marginBottom:'10px', opacity:0.9}}><Icon name={selectedPlace.icon || 'pin'} size={48} stroke="#fff" sw={1.5} /></div>
@@ -2367,6 +2479,10 @@ function PlacesOverlay({ cat, initialSubCat, initialPlace, onClose, favorites = 
             </div>
           </div>
           <div className="pm-body">
+            <div className="pm-view-badge">
+              <Icon name="eye" size={18} strokeWidth={2.5} />
+              <span><strong>{viewCount.toLocaleString('tr-TR')}</strong> kişi inceledi</span>
+            </div>
             <p className="pm-info">{selectedPlace.info}</p>
 
             {selectedPlace.lessons && selectedPlace.lessons.length > 0 && (
