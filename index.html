@@ -69,8 +69,8 @@
   --dawn-4: #f3c9a0;
 
   --globe:  220, 232, 255;
-  --accent: #06f251;      
-  --pin:    #FF4B4B;
+  --accent: #44BD32;      
+  --pin:    #E84142;
 
   --maxw: 1280px;
   --r-lg: 32px;
@@ -206,7 +206,7 @@ a{ color:inherit; text-decoration:none; cursor:pointer; }
 .hero.is-mountain .search-tags{ opacity:1; }
 .search-tags button{ font-size:13px; font-weight:600; color:#fff; padding:7px 14px; border-radius:100px; border:1px solid rgba(255,255,255,.22); background:rgba(255,255,255,.06); backdrop-filter:blur(6px); transition:all .2s var(--ease); cursor:pointer; }
 .search-tags button:hover{ background:var(--accent); color:var(--ink); border-color:transparent; transform:translateY(-1px); }
-.search-tags button.highlight-btn { background: var(--accent); color: var(--ink); border-color: transparent; box-shadow: 0 4px 14px rgba(6, 242, 81, 0.2); }
+.search-tags button.highlight-btn { background: var(--accent); color: var(--ink); border-color: transparent; box-shadow: 0 4px 14px rgba(68, 189, 50, 0.2); }
 .search-tags button.highlight-btn:hover { filter: brightness(0.9); }
 
 .scroll-hint{ position:absolute; left:50%; bottom:26px; transform:translateX(-50%); z-index:11; display:flex; flex-direction:column; align-items:center; gap:7px; color:rgba(255,255,255,.7); font-size:12px; font-weight:600; letter-spacing:.14em; text-transform:uppercase; opacity:0; transition:opacity .8s var(--ease) .8s; }
@@ -272,10 +272,10 @@ a{ color:inherit; text-decoration:none; cursor:pointer; }
 .p-top-row { display:flex; align-items:center; justify-content:space-between; font-family:var(--display); font-size:19px; font-weight:700; margin-bottom:4px; }
 .p-date{ font-size:12px; font-weight:600; color:var(--accent); font-family:var(--body); }
 .p-countdown { font-size:13px; color:rgba(255,255,255,.7); display:flex; gap:6px; align-items:center; font-weight:600; }
-.p-countdown span { background:rgba(6,242,81,.15); color:var(--accent); padding:2px 8px; border-radius:100px; font-family:var(--display); font-size:14px; font-variant-numeric:tabular-nums; border:1px solid rgba(6,242,81,.3); }
+.p-countdown span { background:rgba(68,189,50,.15); color:var(--accent); padding:2px 8px; border-radius:100px; font-family:var(--display); font-size:14px; font-variant-numeric:tabular-nums; border:1px solid rgba(68,189,50,.3); }
 .p-grid{ display:grid; grid-template-columns:repeat(3,1fr); gap:8px; text-align:center; }
 .p-item{ background:rgba(255,255,255,.08); border-radius:10px; padding:6px 2px; border:1px solid rgba(255,255,255,.05); }
-.p-item.active{ background:var(--accent); color:var(--ink); font-weight:800; border-color:transparent; transform:scale(1.02); box-shadow:0 4px 12px rgba(6,242,81,.2); }
+.p-item.active{ background:var(--accent); color:var(--ink); font-weight:800; border-color:transparent; transform:scale(1.02); box-shadow:0 4px 12px rgba(68,189,50,.2); }
 .p-item span{ display:block; font-size:10px; font-weight:700; opacity:.7; text-transform:uppercase; margin-bottom:1px; }
 .p-item strong{ display:block; font-family:var(--display); font-size:14px; }
 
@@ -555,7 +555,7 @@ a{ color:inherit; text-decoration:none; cursor:pointer; }
 .fav-btn { position: absolute; top: 16px; right: 16px; z-index: 10; width: 40px; height: 40px; border-radius: 50%; background: rgba(0, 0, 0, 0.45); backdrop-filter: blur(6px); display: grid; place-items: center; border: 1px solid rgba(255,255,255,0.2); transition: all 0.2s var(--ease); cursor: pointer; }
 .fav-btn:hover { background: rgba(0, 0, 0, 0.65); transform: scale(1.05); }
 .fav-btn:active { transform: scale(0.9); }
-.fav-btn.is-fav svg { fill: #FF4B4B; stroke: #FF4B4B; animation: heartPop 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275); }
+.fav-btn.is-fav svg { fill: #E84142; stroke: #E84142; animation: heartPop 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275); }
 @keyframes heartPop { 0% { transform: scale(1); } 50% { transform: scale(1.3); } 100% { transform: scale(1); } }
 /* --- FAVORİ VE PAYLAŞ BUTONU TASARIMLARI --- */
 .pm-share-btn { background: #fff; color: var(--ink); font-weight: 800; padding: 16px; border-radius: 100px; display: flex; align-items: center; justify-content: center; gap: 8px; font-size: 16px; transition: all 0.2s; text-align: center; margin-top: 12px; box-shadow: 0 8px 24px rgba(0,0,0,0.08); border: 1px solid var(--line); cursor: pointer; width: 100%; }
@@ -654,22 +654,22 @@ body.dark-theme .nav-item.active::before { background: rgba(255,255,255,0.1); }
 
   const categories = [
     {
-      id:"restoranlar", name:"Restoranlar", color:"#FF4B4B", tagline:"Lezzet Durakları", 
+      id:"restoranlar", name:"Restoranlar", color:"#E84142", tagline:"Lezzet Durakları", 
       blurb:"Dönerden hamburgere, yöresel lezzetlerden dünya mutfağına; Ağrı'nın en sevilen lezzet duraklarını bir arada keşfet.",
       places:[]
     },
     {
-      id:"cafeler", name:"Cafeler", color:"#FF8C00", tagline:"Kahve ve Mola", 
+      id:"cafeler", name:"Cafeler", color:"#FA8231", tagline:"Kahve ve Mola", 
       blurb:"Üçüncü nesil kahveciler, serpme kahvaltı noktaları ve keyifli mola mekanları; şehrin kahve kültürü burada.",
       places:[]
     },
     {
-      id:"pastaneler", name:"Pastaneler", color:"#F4D03F", tagline:"Tatlı Molası", 
+      id:"pastaneler", name:"Pastaneler", color:"#FBC531", tagline:"Tatlı Molası", 
       blurb:"Şehrin en taze pastaneleri, fırın ürünleri ve tatlı durakları; tatlı molanız için en doğru adresler.",
       places:[]
     },
     {
-      id:"saglik", name:"Sağlık Hizmetleri", color:"#2ECC71", tagline:"Sağlık & Danışmanlık", 
+      id:"saglik", name:"Sağlık Hizmetleri", color:"#44BD32", tagline:"Sağlık & Danışmanlık", 
       blurb:"Özel diş hekimi klinikleri, dil ve konuşma terapistleri, psikologlar, fizyoterapistler ve diyetisyenler bir arada.",
       hasSubCategories: true,
       subCategories: [
@@ -832,7 +832,7 @@ body.dark-theme .nav-item.active::before { background: rgba(255,255,255,0.1); }
       places:[] 
     },
     {
-      id:"nobetci", name:"Nöbetçi Eczane", color:"#E74C3C", tagline:"Acil Sağlık", 
+      id:"nobetci", name:"Nöbetçi Eczane", color:"#E84142", tagline:"Acil Sağlık", 
       blurb:"Ağrı genelinde tüm ilçelerin günlük nöbetçi eczane bilgisi; adres, telefon ve harita konumlarıyla.",
       places:[]
     },
@@ -847,7 +847,7 @@ body.dark-theme .nav-item.active::before { background: rgba(255,255,255,0.1); }
       places:[]
     },
     {
-      id:"egitim", name:"Eğitim", color:"#3498DB", tagline:"Kurs & Dil Okulları", 
+      id:"egitim", name:"Eğitim", color:"#0097E6", tagline:"Kurs & Dil Okulları", 
       blurb:"Dershaneler, modern dil okulları, yazılım akademileri ve uzman özel ders eğitmen kadroları rehberi.",
       hasSubCategories: true,
       subCategories: [
@@ -1026,8 +1026,25 @@ body.dark-theme .nav-item.active::before { background: rgba(255,255,255,0.1); }
               note: "AGTE & Readkitr Uygulayıcısı",
               address: "Ağrı Merkez",
               instagram: "brvnogretmennn"
+            },
+            {
+              name: "Ömer Hoca",
+              subName: "Hareket Eğitimi Uzmanı",
+              info: "Bireye özel hareket eğitimi ve gelişim programları.",
+              area: "Ağrı Merkez",
+              img: "omerhoca1.jpg",
+              bgPos: "center",
+              icon: "brain",
+              note: "Hareket Eğitimi ve Gelişim",
+              address: "Özel Ümit Aras Özel Eğitim Uygulama Okulu 1. Kademe",
+              phones: ["0546 663 04 61"],
+              instagram: "omer_hoca_agri",
+              lessonsTitle: "Uzmanlık Alanları",
+              lessons: ["Otizm", "DEHB", "Zihinsel Yetersizlik", "Tipik Gelişim"],
+              mapsUrl: "https://maps.google.com/?q=Fırat,+Yaşar+Kemal+Cad+No+75/1,+04100+Ağrı+Merkez/Ağrı"
             }
           ]
+          
         }
       ],
       places:[] 
@@ -1039,7 +1056,7 @@ body.dark-theme .nav-item.active::before { background: rgba(255,255,255,0.1); }
         {
           name: "SeaStarSoft",
           subName: "Yazılım ve Teknoloji",
-          info: "SeaStarSoft, web sayfası geliştirme ve yenilikçi dijital çözümler üreten dinamik bir yazılım şirketidir. Markanızı dijital dünyaya taşıyoruz.",
+          info: "SeaStarSoft, e-ticaret ve web tasarım altyapıları kuran, işletmelere özel mağaza kurucu (website builder) çözümleri üreten yenilikçi bir teknoloji platformudur. Markanızı dijital dünyaya taşıyoruz.",
           area: "Ağrı Merkez",
           img: "seastarsoft.jpg",
           bgPos: "center",
@@ -1243,7 +1260,8 @@ const dutyPharmacies = [
     { img: "canan1.jpg", title: "Canan Hoca", subtitle: "Matematik Özel Ders", bgPos: "center", slug: slugify("Canan Hoca") },
     { img: "seda1.jpg", title: "Seda Nur Dursun", subtitle: "Aramıza Hoş Geldin", slug: slugify("Diyetisyen Seda Nur Dursun") },
     { img: "seastarsoft.jpg", title: "SeaStarSoft", subtitle: "Dijital Çözüm Ortağınız", bgPos: "center", slug: slugify("SeaStarSoft") },
-    { img: "seher1.jpg", title: "Diyetisyen Seher Issi", subtitle: "Aramıza Hoş Geldin", bgPos: "center", slug: slugify("Diyetisyen Seher Issi") }
+    { img: "seher1.jpg", title: "Diyetisyen Seher Issi", subtitle: "Aramıza Hoş Geldin", bgPos: "center", slug: slugify("Diyetisyen Seher Issi") },
+    { img: "omerhoca1.jpg", title: "Ömer Hoca", subtitle: "Aramıza Hoşgeldin", bgPos: "center", slug: slugify("Ömer Hoca") }
   ];
 
   // HİKAYELER
@@ -1518,8 +1536,8 @@ function GlobeCanvas({ phase }){
       const m = project(AGRI_LAT, AGRI_LON, yaw, pitch);
       if (m.z > 0){
         const sx=cx+R*m.x, sy=cy-R*m.y, near=s.targetYaw!=null?1:0.35, pulse=(Math.sin(ts/420)+1)/2;
-        ctx.strokeStyle=`rgba(6,242,81,${0.5*near})`; ctx.lineWidth=1.5; ctx.beginPath(); ctx.arc(sx,sy,6+pulse*10*near,0,Math.PI*2); ctx.stroke();
-        ctx.fillStyle=`rgba(6,242,81,${0.85*near+0.15})`; ctx.beginPath(); ctx.arc(sx,sy,4.5,0,Math.PI*2); ctx.fill();
+        ctx.strokeStyle=`rgba(68,189,50,${0.5*near})`; ctx.lineWidth=1.5; ctx.beginPath(); ctx.arc(sx,sy,6+pulse*10*near,0,Math.PI*2); ctx.stroke();
+        ctx.fillStyle=`rgba(68,189,50,${0.85*near+0.15})`; ctx.beginPath(); ctx.arc(sx,sy,4.5,0,Math.PI*2); ctx.fill();
       }
       raf = requestAnimationFrame(frame);
     }
@@ -1872,7 +1890,7 @@ function PharmacyWidget() {
     <div className="widget-card pharmacy-widget" data-nosnippet="true">
       <div className="ph-header">
         <div className="ph-title">
-          <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="#FF4B4B" strokeWidth="2.5"><path d="M12 2v20M2 12h20"/></svg>
+          <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="#E84142" strokeWidth="2.5"><path d="M12 2v20M2 12h20"/></svg>
           Nöbetçi Eczaneler
         </div>
         <select className="ph-select" value={district} onChange={(e) => setDistrict(e.target.value)}>
@@ -2657,7 +2675,7 @@ function App(){
     const favCategory = {
       id: "favorilerim",
       name: "Favorilerim 💚",
-      color: "#FF4B4B",
+      color: "#E84142",
       blurb: "Kendi cihazınıza kaydettiğiniz favori mekanlarınız.",
       places: favPlaces
     };
@@ -2834,7 +2852,7 @@ function App(){
     >
       
       <Topbar />
-<Hero onOpenCat={handleUpdateCategoryView} onSearchPlace={handleSearchSelect} onOpenFavorites={handleOpenFavorites} />
+      <Hero onOpenCat={handleUpdateCategoryView} onSearchPlace={handleSearchSelect} onOpenFavorites={handleOpenFavorites} />
       <ImageMarquee /> 
       <Stories />
       <AgendaDashboard />
