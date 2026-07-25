@@ -649,6 +649,7 @@ body.dark-theme .nav-item.active::before { background: rgba(255,255,255,0.1); }
       <li>Eğitim: E.L.I.T Dil Kursu, Muhammed Hoca (Müzik), Merve Hoca (Piyano ve Yan Flüt), Nevra Başçı (Matematik), Emir Hoca (Matematik)</li>
       <li>Gezilecek Yerler: Balık Gölü, İshak Paşa Sarayı, Ağrı Dağı, Diyadin Kaplıcaları, Meteor Çukuru, Nuh'un Gemisi</li>
       <li>Ağrı Merkez, Doğubayazıt, Diyadin, Eleşkirt, Patnos Nöbetçi Eczaneleri</li>
+      <li>Spor & Fitness: Club Maxfit (Ağrı Bay/Bayan Spor Salonu)</li>
     </ul>
   </div>
 </noscript>
@@ -889,6 +890,30 @@ body.dark-theme .nav-item.active::before { background: rgba(255,255,255,0.1); }
       id:"guzellik", name:"Güzellik & Bakım", color:"#9B59B6", tagline:"Kişisel Bakım", 
       blurb:"Güzellik merkezleri, lazer, cilt bakımı ve estetik klinikleri; kişisel bakımınız için doğru yer.",
       places:[]
+    },
+    {
+      id: "spor", 
+      name: "Spor & Fitness", 
+      color: "#E67E22", 
+      tagline: "Sağlıklı Yaşam", 
+      blurb: "Ağrı'daki en iyi spor salonları, fitness ve pilates merkezleri; zinde bir yaşam için seni bekliyor.",
+      places: [
+        {
+          name: "Club Maxfit",
+          subName: "Bay/Bayan Spor Salonu",
+          info: "Ağrı Club Maxfit Bay/Bayan spor salonu. Profesyonel eğitmenler eşliğinde sağlıklı ve zinde bir yaşama adım atın.",
+          area: "Ağrı Merkez",
+          img: "clubmaxfit.jpg",
+          bgPos: "center",
+          icon: "heart",
+          note: "Gym & Physical Fitness Center",
+          address: "Abide Mahallesi 1040. Sokak Barış Apart Altı No:3",
+          phones: ["0530 345 33 04"],
+          instagram: "clubmaxfit",
+          lessonsTitle: "Hizmetlerimiz",
+          lessons: ["Bodybuilding", "Fitness", "Zumba", "Pilates", "Step Aerobik"]
+        }
+      ]
     },
     {
       id:"kuafor", name:"Kuaför", color:"#FF69B4", tagline:"Saç Tasarım", 
@@ -1422,6 +1447,7 @@ const dutyPharmacies = [
     { img: "omerhoca1.jpg", title: "Ömer Hoca", subtitle: "Aramıza Hoş Geldin", bgPos: "center", slug: slugify("Ömer Hoca") },
     { img: "melike1.jpg", title: "Melike Çukadar", subtitle: " Aramıza Hoş Geldin", bgPos: "center", slug: slugify("Melike Çukadar") },
     { img: "logo.jpg", title: "Bluversea", subtitle: "Dijital Çözüm Ortağınız", bgPos: "center", slug: slugify("Bluversea") },
+    { img:"clubmaxfit.jpg", title:"Club Maxfit", subtitle:"Aramıza Hoş Geldin", bgPos: "center", slug: slugify("Club Maxfit") },
   ];
 
   // HİKAYELER
