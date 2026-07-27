@@ -944,8 +944,20 @@ body.dark-theme .nav-item.active::before { background: rgba(255,255,255,0.1); }
               instagram: "agrielitdilkursu",
               email: "info@elitlearning.com",
               mapsUrl: "https://maps.google.com/?q=Hürriyet+Mah.+1810+SK.+No:11+Ağrı"
-            }
-          ] 
+            },
+            {
+              name: "Bright English",
+              subName: "İrem Kaya - İngilizce Eğitmeni",
+              info: "Ağrı Merkez'de İngilizce özel ders ve eğitimleri ile dil öğrenim yolculuğunuzda yanınızdayım.",
+              area: "Ağrı Merkez",
+              img: "BrightEnglish.jpg",
+              bgPos: "center",
+              icon: "lang",
+              note: "İngilizce Özel Ders",
+              instagram: "agringilizceozelders",
+              lessons: ["İngilizce"]
+            },
+          ]
         },
         {
           id: "matematik",
@@ -1226,146 +1238,16 @@ body.dark-theme .nav-item.active::before { background: rgba(255,255,255,0.1); }
   });
 
 const dutyPharmacies = [
-   // --- 16.07.2026 ---
-    {date:"16.07.2026", district:"DİYADİN", name:"DERMAN ECZANESİ", address:"Atatürk Mahallesi Şehit Kaymakam Muhammed Fatih Safitürk Caddesi No:10A", landmark:"Menekşem Market Karşısı", phone:"0472 511 36 36", url:"#"},
-    {date:"16.07.2026", district:"DOĞUBAYAZIT", name:"ÇAPA ECZANESİ", address:"AHMEDİHANİ MAHALLESİ ABDURREZAK ALADAĞ CADDESİ NO:73/C", landmark:"IĞDIR DURAĞI YOLU ÜZERİ", phone:"0544 451 24 96", url:"#"},
-    {date:"16.07.2026", district:"ELEŞKİRT", name:"MAHMUTPAŞA ECZANESİ", address:"İstiklal Mahallesi Cumhuriyet Caddesi No:101", landmark:"KİLER MARKET KARŞISI", phone:"0472 711 29 78", url:"#"},
-    {date:"16.07.2026", district:"HAMUR", name:"AHMET ECZANESİ", address:"Kümbet Mahallesi Van Caddesi No:49C", landmark:"HAMUR BELEDİYESİ ALTI", phone:"0544 564 57 48", url:"#"},
-    {date:"16.07.2026", district:"MERKEZ", name:"BEREN ECZANESİ", address:"BAHÇELİEVLER MAHALLAESİ CUMHURİYET CADDESİ NO:135B", landmark:"CUMAÇAY GARAJI KARŞISI", phone:"0546 153 04 58", url:"#"},
-    {date:"16.07.2026", district:"MERKEZ", name:"ARDA ECZANESİ", address:"LEYLEK PINAR MAHALLESİ VALİ KONAĞI CADDESİ NO:33/A", landmark:"ÖZGÜL AVM YANI", phone:"0472 215 72 00", url:"#"},
-    {date:"16.07.2026", district:"PATNOS", name:"SÖYLEMEZ ECZANESİ", address:"YENİ MAHALLESİ GARİP SOKAK NO:53", landmark:"ÖZEL HASTANE KARŞISI", phone:"0472 616 17 16", url:"#"},
-    {date:"16.07.2026", district:"TAŞLIÇAY", name:"TAŞLIÇAY ECZANESİ", address:"Cumhuriyet Mahallesi Mareşal Favzi Çakmak Caddesi No:23", landmark:"", phone:"0472 551 28 91", url:"#"},
-    {date:"16.07.2026", district:"TUTAK", name:"BERFİN ECZANESİ", address:"Murat Mahallesi Dr Cihan ÖKTEM Caddesi No:5A ve 5B", landmark:"GAZİ İLKOKULUNUN KARŞISI", phone:"0552 636 00 04", url:"#"},
-
-    // --- 17.07.2026 ---
-    {date:"17.07.2026", district:"DİYADİN", name:"DİLAN ECZANESİ", address:"ISA AGA MAHALLESİ INÖNÜ CADDESİ NO:36", landmark:"BELEDİYE YANI", phone:"0472 511 28 28", url:"#"},
-    {date:"17.07.2026", district:"DOĞUBAYAZIT", name:"FATMA KOÇ ECZANESİ", address:"ULUYOL MAHALLESİ AĞRI CADDESİ NO:77/A VE 77/B", landmark:"Yeni Güven Restorant Yanı", phone:"0551 535 53 54", url:"#"},
-    {date:"17.07.2026", district:"ELEŞKİRT", name:"ŞİFA ECZANESİ", address:"MÜFTÜ SELİM MAHALLESİ CUMHURİYET CADDESİ NO:13", landmark:"SAĞLIK OCAĞI KARŞISI", phone:"0472 711 21 41", url:"#"},
-    {date:"17.07.2026", district:"HAMUR", name:"HAMUR ECZANESİ", address:"KÜMBET MAHALLESİ VAN CADDESİ NO:49/A", landmark:"HAMUR BELEDİYESİ ALTI", phone:"0472 616 71 72", url:"#"},
-    {date:"17.07.2026", district:"MERKEZ", name:"KARACA ECZANESİ", address:"Fatih Mahallesi Kağızman Caddesi No:147/A", landmark:"FATİH MEZARLIĞININ 400 METRE İLERİSİ", phone:"0472 215 05 47", url:"#"},
-    {date:"17.07.2026", district:"MERKEZ", name:"HARUN ECZANESİ", address:"YAVUZ MAHALLESİ 403 SOKAK NO:13/A", landmark:"TERZİLER CADDESİ AŞAĞISI", phone:"0472 215 25 83", url:"#"},
-    {date:"17.07.2026", district:"PATNOS", name:"YAĞMUR ECZANESİ", address:"ALPASLAN MAHALLESİ MALAZGİRT CADDESİ NO:226/A", landmark:"SAAT KULESİ KARŞISI", phone:"0543 504 49 85", url:"#"},
-    {date:"17.07.2026", district:"TAŞLIÇAY", name:"BEYZA ECZANESİ", address:"15 TEMMUZ ŞEHİTLER MAHALLESİ MAREŞAL FEVZİ ÇAKMAK CADDESİ NO:1/1", landmark:"PTT KARGO YANI", phone:"0472 551 30 00", url:"#"},
-    {date:"17.07.2026", district:"TUTAK", name:"BEGÜM ECZANESİ", address:"CAMİ MAHALLESİ KAZIM KARABEKİR CADDESİ NO:11B-11C", landmark:"KAYMAKAMLIK EVİ KARŞISI", phone:"0472 411 31 89", url:"#"},
-
-    // --- 18.07.2026 ---
-    {date:"18.07.2026", district:"DİYADİN", name:"DİYADİN ECZANESİ", address:"İSA AĞA MAHALLESİ INÖNÜ CADDESİ NO:98", landmark:"PTT KARŞISI", phone:"0472 511 24 65", url:"#"},
-    {date:"18.07.2026", district:"DOĞUBAYAZIT", name:"MONA ECZANESİ", address:"Uluyol Mahallesi Ağrı Caddesi No:91A", landmark:"ŞENLEN GİYİM KARŞISI", phone:"0541 737 63 04", url:"#"},
-    {date:"18.07.2026", district:"ELEŞKİRT", name:"ELEŞKİRT ECZANESİ", address:"İSTİKLAL MAHALLESİ CUMHURİYET CADDESİ NO:109", landmark:"BELEDİYE BİNASİ KARŞISI", phone:"0472 711 29 16", url:"#"},
-    {date:"18.07.2026", district:"HAMUR", name:"AHMET ECZANESİ", address:"Kümbet Mahallesi Van Caddesi No:49C", landmark:"HAMUR BELEDİYESİ ALTI", phone:"0544 564 57 48", url:"#"},
-    {date:"18.07.2026", district:"MERKEZ", name:"EMRE ECZANESİ", address:"Alpaslan Mahallesi Eski Van Caddesi No:142A", landmark:"İLÇELER GARAJI YANI", phone:"0542 498 63 73", url:"#"},
-    {date:"18.07.2026", district:"MERKEZ", name:"DEMİR ECZANESİ", address:"HÜRRİYET MAHALLESİ CUMHURİYET CADDESİ NO:170", landmark:"EFE TIP MERKEZİ KARŞISI", phone:"0472 215 33 34", url:"#"},
-    {date:"18.07.2026", district:"PATNOS", name:"ÇETİNKAYA ECZANESİ", address:"Alpaslan Mahallesi Sultanmut Caddesi Kapı No:96A", landmark:"Ağrı Dağı Sürücü Kursu Karşısı", phone:"0472 616 15 16", url:"#"},
-    {date:"18.07.2026", district:"TAŞLIÇAY", name:"ÇARE ECZANESİ", address:"HÜRRİYET MAHALLESİ M.FEVZİ ÇAKMAK CADDESİ DIŞ KAPI NO:94A", landmark:"MERVE KIRTASİYE YANI", phone:"0546 491 53 22", url:"#"},
-    {date:"18.07.2026", district:"TUTAK", name:"TUTAK ECZANESİ", address:"MURAT MAHALLESİ CUMHURİYET CADDESİ NO:51/A", landmark:"", phone:"0472 411 26 98", url:"#"},
-
-    // --- 19.07.2026 ---
-    {date:"19.07.2026", district:"DİYADİN", name:"ŞİFA ECZANESİ", address:"MURAT MAHALLESİ KAYMAKAM ÖZGÜR AZER KURAK CADDESİ NO:63A", landmark:"MURAT CAMİİ YANI", phone:"0505 597 63 42", url:"#"},
-    {date:"19.07.2026", district:"DOĞUBAYAZIT", name:"ZEYNEP ECZANESİ", address:"SANAYİ MAHALLESİ ÇEVRE YOLU BULVARI NO:766/D", landmark:"DEVLET HASTANESİ KARŞISI", phone:"0472 312 82 22", url:"#"},
-    {date:"19.07.2026", district:"ELEŞKİRT", name:"EMEK ECZANESİ", address:"MÜFTÜ SELİM MAHALLESİ CUMHURİYET CADDESİ NO:112/B", landmark:"SAĞLIK OCAĞI KARŞISI", phone:"0472 711 47 47", url:"#"},
-    {date:"19.07.2026", district:"HAMUR", name:"HAMUR ECZANESİ", address:"KÜMBET MAHALLESİ VAN CADDESİ NO:49/A", landmark:"HAMUR BELEDİYESİ ALTI", phone:"0472 616 71 72", url:"#"},
-    {date:"19.07.2026", district:"MERKEZ", name:"HAYAT ECZANESİ", address:"ALPASLAN MAHALLESİ ESKİ VAN CADDESİ NO:140/A", landmark:"DOĞA KOLEJİ YOLU", phone:"0534 796 64 04", url:"#"},
-    {date:"19.07.2026", district:"MERKEZ", name:"HİRA ECZANESİ", address:"FIRAT MAHALLESİ 1018/3 SOKAK NO:6/E", landmark:"AĞRI EĞİTİM VE ARAŞTIRMA HASTANESİ YANI", phone:"0472 215 31 41", url:"#"},
-    {date:"19.07.2026", district:"PATNOS", name:"IŞIK ECZANESİ", address:"INÖNÜ MAHALLESİ MALAZGIRT CADDESİ NO:13", landmark:"LAL LOKANTASI KARŞISI", phone:"0472 616 24 01", url:"#"},
-    {date:"19.07.2026", district:"TAŞLIÇAY", name:"ELİF ECZANESİ", address:"HÜRRİYET MAHALLESİ MAREŞAL FEVZİ ÇAKMAK CADDESİ NO:100", landmark:"A101 KARŞISI", phone:"0472 551 29 00", url:"#"},
-    {date:"19.07.2026", district:"TUTAK", name:"OZAN ECZANESİ", address:"Cami Mahallesi Cumhuriyet Caddesi No:39B", landmark:"Merkez Camii Yanı", phone:"0472 411 28 97", url:"#"},
-
-    // --- 20.07.2026 ---
-    {date:"20.07.2026", district:"DİYADİN", name:"CEREN ECZANESİ", address:"Murat Mahallesi Şehit Kaymakam Muhammed Fatih Safitürk Caddesi No:13H", landmark:"KÜLTÜR KİTAP KIRTASİYE KARŞISI", phone:"0530 115 54 04", url:"#"},
-    {date:"20.07.2026", district:"DOĞUBAYAZIT", name:"EGE ECZANESİ", address:"SANAYİ MAHALLESİ ÇEVREYOLU BULVARI NO:776/1", landmark:"DOĞUBAYAZIT DR. YAŞAR ERYILMAZ DEVLET HASTANESİ KARŞISI", phone:"0472 312 43 67", url:"#"},
-    {date:"20.07.2026", district:"ELEŞKİRT", name:"ESRA ECZANESİ", address:"İstiklal Mahallesi Cumhuriyet Caddesi No:83", landmark:"ZİRAAT BANKASI KARŞISI", phone:"0545 591 44 24", url:"#"},
-    {date:"20.07.2026", district:"HAMUR", name:"AHMET ECZANESİ", address:"Kümbet Mahallesi Van Caddesi No:49C", landmark:"HAMUR BELEDİYESİ ALTI", phone:"0544 564 57 48", url:"#"},
-    {date:"20.07.2026", district:"MERKEZ", name:"NADİR ECZANESİ", address:"FIRAT MAHALLESİ 1018/3 SOKAK NO:8/A", landmark:"AĞRI EĞİTİM VE ARAŞTIRMA HASTANESİ KARŞISI", phone:"0542 188 55 04", url:"#"},
-    {date:"20.07.2026", district:"MERKEZ", name:"BÜŞRA DOĞAN ECZANESİ", address:"ALPASLAN MAH.ESKİ VAN CAD.NO:102", landmark:"KAPALI MEYVE-SEBZE PAZARI KARŞISI", phone:"0472 215 29 42", url:"#"},
-    {date:"20.07.2026", district:"PATNOS", name:"NAS ECZANESİ", address:"Atatürk Mahallesi Sultanmut Caddesi No:44F", landmark:"BİRLİK AVM KARŞISI", phone:"0552 454 00 04", url:"#"},
-    {date:"20.07.2026", district:"TAŞLIÇAY", name:"FERHAT ECZANESİ", address:"HÜRRİYET MAHALLESİ M.FEVZİ ÇAKMAK CADDESİ NO:48/A", landmark:"ÖĞRETMEN EVİ ALTI", phone:"0539 430 14 11", url:"#"},
-    {date:"20.07.2026", district:"TUTAK", name:"BERFİN ECZANESİ", address:"Murat Mahallesi Dr Cihan ÖKTEM Caddesi No:5A ve 5B", landmark:"GAZİ İLKOKULUNUN KARŞISI", phone:"0552 636 00 04", url:"#"},
-
-    // --- 21.07.2026 ---
-    {date:"21.07.2026", district:"DİYADİN", name:"DERMAN ECZANESİ", address:"Atatürk Mahallesi Şehit Kaymakam Muhammed Fatih Safitürk Caddesi No:10A", landmark:"Menekşem Market Karşısı", phone:"0472 511 36 36", url:"#"},
-    {date:"21.07.2026", district:"DOĞUBAYAZIT", name:"DOĞA ECZANESİ", address:"ÇİFTEPINAR MAHALLESİ AĞRI CADDESİ NO:31/H", landmark:"ESKİ TAPU KADASTRO KARŞISI", phone:"0472 312 75 39", url:"#"},
-    {date:"21.07.2026", district:"ELEŞKİRT", name:"MAHMUTPAŞA ECZANESİ", address:"İstiklal Mahallesi Cumhuriyet Caddesi No:101", landmark:"KİLER MARKET KARŞISI", phone:"0472 711 29 78", url:"#"},
-    {date:"21.07.2026", district:"HAMUR", name:"HAMUR ECZANESİ", address:"KÜMBET MAHALLESİ VAN CADDESİ NO:49/A", landmark:"HAMUR BELEDİYESİ ALTI", phone:"0472 616 71 72", url:"#"},
-    {date:"21.07.2026", district:"MERKEZ", name:"YOL ECZANESİ", address:"FIRAT MAHALLESİ ATALAY CADDESİ NO:16/D", landmark:"AĞRI BELEDİYESİ KARŞISI", phone:"0472 215 81 86", url:"#"},
-    {date:"21.07.2026", district:"MERKEZ", name:"OKYANUS ECZANESİ", address:"YAVUZ MAHALLESİ NEVZAT GÜNGÖR CADDESİ NO:21/B", landmark:"BARIŞ KIRTASİYE YANI", phone:"0472 215 70 70", url:"#"},
-    {date:"21.07.2026", district:"PATNOS", name:"NUR ECZANESİ", address:"ALPASLAN MAHALLESİ DERGAH CADDESİ KAPI NO:3/A", landmark:"SARISU MARKET KARŞISI", phone:"0535 078 75 10", url:"#"},
-    {date:"21.07.2026", district:"TAŞLIÇAY", name:"TAŞLIÇAY ECZANESİ", address:"Cumhuriyet Mahallesi Mareşal Favzi Çakmak Caddesi No:23", landmark:"", phone:"0472 551 28 91", url:"#"},
-    {date:"21.07.2026", district:"TUTAK", name:"BEGÜM ECZANESİ", address:"CAMİ MAHALLESİ KAZIM KARABEKİR CADDESİ NO:11B-11C", landmark:"KAYMAKAMLIK EVİ KARŞISI", phone:"0472 411 31 89", url:"#"},
-
-    // --- 22.07.2026 ---
-    {date:"22.07.2026", district:"DİYADİN", name:"DİLAN ECZANESİ", address:"ISA AGA MAHALLESİ INÖNÜ CADDESİ NO:36", landmark:"BELEDİYE YANI", phone:"0472 511 28 28", url:"#"},
-    {date:"22.07.2026", district:"DOĞUBAYAZIT", name:"YENİ HALK ECZANESİ", address:"Çiftepınar Mahallesi İnegöl Caddesi No:22A", landmark:"AHMED-İ HANİ CAMİİ YANI", phone:"0472 312 04 08", url:"#"},
-    {date:"22.07.2026", district:"ELEŞKİRT", name:"ŞİFA ECZANESİ", address:"MÜFTÜ SELİM MAHALLESİ CUMHURİYET CADDESİ NO:13", landmark:"SAĞLIK OCAĞI KARŞISI", phone:"0472 711 21 41", url:"#"},
-    {date:"22.07.2026", district:"HAMUR", name:"AHMET ECZANESİ", address:"Kümbet Mahallesi Van Caddesi No:49C", landmark:"HAMUR BELEDİYESİ ALTI", phone:"0544 564 57 48", url:"#"},
-    {date:"22.07.2026", district:"MERKEZ", name:"DEMİR ECZANESİ", address:"HÜRRİYET MAHALLESİ CUMHURİYET CADDESİ NO:170", landmark:"EFE TIP MERKEZİ KARŞISI", phone:"0472 215 33 34", url:"#"},
-    {date:"22.07.2026", district:"MERKEZ", name:"GÜVEN ECZANESİ", address:"ABİDE MAHALLESİ 1042 SOKAK NO:1", landmark:"ÖZEL LENA HASTANESİ KARŞISI", phone:"0472 215 01 91", url:"#"},
-    {date:"22.07.2026", district:"PATNOS", name:"OKTAY VURAL ECZANESİ", address:"ALPASLAN MAHALLESİ MALAZGİRT CADDESİ NO:72", landmark:"ŞEYH ABDULVAHAP KÜFREVİ EVİ KARŞISI", phone:"0472 616 18 74", url:"#"},
-    {date:"22.07.2026", district:"TAŞLIÇAY", name:"BEYZA ECZANESİ", address:"15 TEMMUZ ŞEHİTLER MAHALLESİ MAREŞAL FEVZİ ÇAKMAK CADDESİ NO:1/1", landmark:"PTT KARGO YANI", phone:"0472 551 30 00", url:"#"},
-    {date:"22.07.2026", district:"TUTAK", name:"TUTAK ECZANESİ", address:"MURAT MAHALLESİ CUMHURİYET CADDESİ NO:51/A", landmark:"", phone:"0472 411 26 98", url:"#"},
-
-    // --- 23.07.2026 ---
-    {date:"23.07.2026", district:"DİYADİN", name:"DİYADİN ECZANESİ", address:"İSA AĞA MAHALLESİ INÖNÜ CADDESİ NO:98", landmark:"PTT KARŞISI", phone:"0472 511 24 65", url:"#"},
-    {date:"23.07.2026", district:"DOĞUBAYAZIT", name:"SAĞLIK ECZANESİ", address:"Çiftepınar Mahallesi Meryemana Caddesi No:87D", landmark:"ARAS KARGO YANI", phone:"0472 312 45 00", url:"#"},
-    {date:"23.07.2026", district:"ELEŞKİRT", name:"ELEŞKİRT ECZANESİ", address:"İSTİKLAL MAHALLESİ CUMHURİYET CADDESİ NO:109", landmark:"BELEDİYE BİNASİ KARŞISI", phone:"0472 711 29 16", url:"#"},
-    {date:"23.07.2026", district:"HAMUR", name:"HAMUR ECZANESİ", address:"KÜMBET MAHALLESİ VAN CADDESİ NO:49/A", landmark:"HAMUR BELEDİYESİ ALTI", phone:"0472 616 71 72", url:"#"},
-    {date:"23.07.2026", district:"MERKEZ", name:"EMRE ECZANESİ", address:"Alpaslan Mahallesi Eski Van Caddesi No:142A", landmark:"İLÇELER GARAJI YANI", phone:"0542 498 63 73", url:"#"},
-    {date:"23.07.2026", district:"MERKEZ", name:"KAYA ECZANESİ", address:"Yavuz Mahallesi Kağızman Caddesi No:50/A", landmark:"BAYRAM MARKET KARŞISI", phone:"0472 216 66 22", url:"#"},
-    {date:"23.07.2026", district:"PATNOS", name:"SÜPHAN ECZANESİ", address:"ATATÜRK MAHALLESİ MENDERES BULVARI NO:100", landmark:"HASTA KURUYEMİŞ KARŞISI", phone:"0472 616 21 71", url:"#"},
-
-    // --- 24.07.2026 ---
-    {date:"24.07.2026", district:"DİYADİN", name:"ŞİFA ECZANESİ", address:"MURAT MAHALLESİ KAYMAKAM ÖZGÜR AZER KURAK CADDESİ NO:63A", landmark:"MURAT CAMİİ YANI", phone:"0505 597 63 42", url:"#"},
-    {date:"24.07.2026", district:"DOĞUBAYAZIT", name:"NEZİHE ECZANESİ", address:"ULUYOL MAHALLESİ AĞRI CADDESİ NO:205/B", landmark:"2 NOLU SAĞLIK OCAĞI KARŞISI", phone:"0472 312 41 41", url:"#"},
-    {date:"24.07.2026", district:"ELEŞKİRT", name:"EMEK ECZANESİ", address:"MÜFTÜ SELİM MAHALLESİ CUMHURİYET CADDESİ NO:112/B", landmark:"SAĞLIK OCAĞI KARŞISI", phone:"0472 711 47 47", url:"#"},
-    {date:"24.07.2026", district:"HAMUR", name:"AHMET ECZANESİ", address:"Kümbet Mahallesi Van Caddesi No:49C", landmark:"HAMUR BELEDİYESİ ALTI", phone:"0544 564 57 48", url:"#"},
-    {date:"24.07.2026", district:"MERKEZ", name:"EREN ECZANESİ", address:"FIRAT MAHALLESİ 1018/3 SOKAK NO:8/B", landmark:"AĞRI EĞİTİM VE ARAŞTIRMA HASTANESİ YANI", phone:"0472 502 22 32", url:"#"},
-    {date:"24.07.2026", district:"MERKEZ", name:"RUKİYE ECZANESİ", address:"BAHÇELİ EVLER MAHALLESİ CUMHURİYET CADDESİ NO 125A", landmark:"ESKİ KÜTÜPHANE YANI", phone:"0472 216 06 06", url:"#"},
-    {date:"24.07.2026", district:"PATNOS", name:"YALÇIN ECZANESİ", address:"CAMİ MAHALLESİ RECEP TAYYİP ERDOĞAN BULVARI KAPI NO:1/A", landmark:"VANGÖLÜ YAZIHANE KARŞISI", phone:"0472 616 60 60", url:"#"},
-    {date:"24.07.2026", district:"TAŞLIÇAY", name:"ELİF ECZANESİ", address:"HÜRRİYET MAHALLESİ MAREŞAL FEVZİ ÇAKMAK CADDESİ NO:100", landmark:"A101 KARŞISI", phone:"0472 551 29 00", url:"#"},
-    {date:"24.07.2026", district:"TUTAK", name:"BERFİN ECZANESİ", address:"Murat Mahallesi Dr Cihan ÖKTEM Caddesi No:5A ve 5B", landmark:"GAZİ İLKOKULUNUN KARŞISI", phone:"0552 636 00 04", url:"#"},
-
-    // --- 25.07.2026 ---
-    {date:"25.07.2026", district:"DİYADİN", name:"CEREN ECZANESİ", address:"Murat Mahallesi Şehit Kaymakam Muhammed Fatih Safitürk Caddesi No:13H", landmark:"KÜLTÜR KİTAP KIRTASİYE KARŞISI", phone:"0530 115 54 04", url:"#"},
-    {date:"25.07.2026", district:"DOĞUBAYAZIT", name:"NEFES ECZANESİ", address:"ÇİFTE PINAR MAHALLESİ AĞRI CADDESİ NO:59/A", landmark:"MANOLYA PASTANESİ YANI", phone:"0472 312 20 90", url:"#"},
-    {date:"25.07.2026", district:"ELEŞKİRT", name:"ESRA ECZANESİ", address:"İstiklal Mahallesi Cumhuriyet Caddesi No:83", landmark:"ZİRAAT BANKASI KARŞISI", phone:"0545 591 44 24", url:"#"},
-    {date:"25.07.2026", district:"HAMUR", name:"HAMUR ECZANESİ", address:"KÜMBET MAHALLESİ VAN CADDESİ NO:49/A", landmark:"HAMUR BELEDİYESİ ALTI", phone:"0472 616 71 72", url:"#"},
-    {date:"25.07.2026", district:"MERKEZ", name:"DUMAN ECZANESİ", address:"SITKIYE MAHAHLLESİ YAŞAR KEMAL CADDESİ NO:27", landmark:"ADALET SARAYI KARŞISI", phone:"0472 216 11 13", url:"#"},
-    {date:"25.07.2026", district:"MERKEZ", name:"EYLÜL ECZANESİ", address:"HÜRRİYET MAHALLESİ NAMIK SEZGİN CADDESİ NO:17/A", landmark:"SÜRAT KARGO YANI", phone:"0472 215 95 00", url:"#"},
-    {date:"25.07.2026", district:"PATNOS", name:"DERMAN ECZANESİ", address:"SARI SU MAHALLESİ BİTLİS YOLU NO:20", landmark:"DEVLET HASTANESİ KARŞISI", phone:"0472 616 22 08", url:"#"},
-    {date:"25.07.2026", district:"TAŞLIÇAY", name:"FERHAT ECZANESİ", address:"HÜRRİYET MAHALLESİ M.FEVZİ ÇAKMAK CADDESİ NO:48/A", landmark:"ÖĞRETMEN EVİ ALTI", phone:"0539 430 14 11", url:"#"},
-    {date:"25.07.2026", district:"TUTAK", name:"BEGÜM ECZANESİ", address:"CAMİ MAHALLESİ KAZIM KARABEKİR CADDESİ NO:11B-11C", landmark:"KAYMAKAMLIK EVİ KARŞISI", phone:"0472 411 31 89", url:"#"},
-
-    // --- 26.07.2026 ---
-    {date:"26.07.2026", district:"DİYADİN", name:"DERMAN ECZANESİ", address:"Atatürk Mahallesi Şehit Kaymakam Muhammed Fatih Safitürk Caddesi No:10A", landmark:"Menekşem Market Karşısı", phone:"0472 511 36 36", url:"#"},
-    {date:"26.07.2026", district:"DOĞUBAYAZIT", name:"AFA ECZANESİ", address:"ÇİFTEPINAR MAHALLESİ İSA GEÇİT CADDESİ NO:8/A", landmark:"GÜÇBİR HOME KARŞISI", phone:"0472 312 27 00", url:"#"},
-    {date:"26.07.2026", district:"ELEŞKİRT", name:"MAHMUTPAŞA ECZANESİ", address:"İstiklal Mahallesi Cumhuriyet Caddesi No:101", landmark:"KİLER MARKET KARŞISI", phone:"0472 711 29 78", url:"#"},
-    {date:"26.07.2026", district:"HAMUR", name:"AHMET ECZANESİ", address:"Kümbet Mahallesi Van Caddesi No:49C", landmark:"HAMUR BELEDİYESİ ALTI", phone:"0544 564 57 48", url:"#"},
-    {date:"26.07.2026", district:"MERKEZ", name:"ALTINTAŞ ECZANESİ", address:"YAVUZ MAHALLESİ ÖZGÜL ÖZGÜL APT. NO:119/A", landmark:"EFE TIP MERKEZİ YANI", phone:"0472 215 77 77", url:"#"},
-    {date:"26.07.2026", district:"MERKEZ", name:"DURU ECZANESİ", address:"FIRAT MAHALLESİ 1018/3 SOKAK NO:6/F.", landmark:"Ağrı Eğitim ve Araştırma Hastanesi Karşısı", phone:"0472 215 06 61", url:"#"},
-    {date:"26.07.2026", district:"PATNOS", name:"ROZA ECZANESİ", address:"ATATÜRK MAHALLESİ ADNAN MENDERES CADDESİ NO:136", landmark:"PATNOS İTİMAT YANI", phone:"0472 616 29 00", url:"#"},
-    {date:"26.07.2026", district:"TAŞLIÇAY", name:"TAŞLIÇAY ECZANESİ", address:"Cumhuriyet Mahallesi Mareşal Favzi Çakmak Caddesi No:23", landmark:"", phone:"0472 551 28 91", url:"#"},
-    {date:"26.07.2026", district:"TUTAK", name:"TUTAK ECZANESİ", address:"MURAT MAHALLESİ CUMHURİYET CADDESİ NO:51/A", landmark:"", phone:"0472 411 26 98", url:"#"},
-
-    // --- 27.07.2026 ---
-    {date:"27.07.2026", district:"DİYADİN", name:"DİLAN ECZANESİ", address:"ISA AGA MAHALLESİ INÖNÜ CADDESİ NO:36", landmark:"BELEDİYE YANI", phone:"0472 511 28 28", url:"#"},
-    {date:"27.07.2026", district:"DOĞUBAYAZIT", name:"TEKIN ECZANESİ", address:"ÇIFTEPINAR MAHALLESİ RIFKI BAŞKAYA CADDESİ NO:17/34", landmark:"DOĞUBAYAZIT AVM ALTI", phone:"0472 502 05 60", url:"#"},
-    {date:"27.07.2026", district:"ELEŞKİRT", name:"ŞİFA ECZANESİ", address:"MÜFTÜ SELİM MAHALLESİ CUMHURİYET CADDESİ NO:13", landmark:"SAĞLIK OCAĞI KARŞISI", phone:"0472 711 21 41", url:"#"},
-    {date:"27.07.2026", district:"HAMUR", name:"HAMUR ECZANESİ", address:"KÜMBET MAHALLESİ VAN CADDESİ NO:49/A", landmark:"HAMUR BELEDİYESİ ALTI", phone:"0472 616 71 72", url:"#"},
-    {date:"27.07.2026", district:"MERKEZ", name:"TUĞBA ECZANESİ ECZANESİ", address:"Fırat Mahallesi 1018/1 Sokak No:14C Ağrı", landmark:"AĞRI EĞİTİM VE ARAŞTIRMA HASTANESİ ACİL ÇIKIŞ KAPISI ÇAPRAZI", phone:"0507 252 68 74", url:"#"},
-    {date:"27.07.2026", district:"MERKEZ", name:"SEVGİ ECZANESİ", address:"LEYLEK PINAR MAHALLESİ CUMHURIYET CADDESİ NO:142", landmark:"HALK BANK YUKARASI", phone:"0472 216 34 20", url:"#"},
-    {date:"27.07.2026", district:"PATNOS", name:"NUR ECZANESİ", address:"ALPASLAN MAHALLESİ DERGAH CADDESİ KAPI NO:3/A", landmark:"SARISU MARKET KARŞISI", phone:"0535 078 75 10", url:"#"},
-    {date:"27.07.2026", district:"TAŞLIÇAY", name:"BEYZA ECZANESİ", address:"15 TEMMUZ ŞEHİTLER MAHALLESİ MAREŞAL FEVZİ ÇAKMAK CADDESİ NO:1/1", landmark:"PTT KARGO YANI", phone:"0472 551 30 00", url:"#"},
-    {date:"27.07.2026", district:"TUTAK", name:"OZAN ECZANESİ", address:"Cami Mahallesi Cumhuriyet Caddesi No:39B", landmark:"Merkez Camii Yanı", phone:"0472 411 28 97", url:"#"},
-
-    // --- 28.07.2026 ---
-    {date:"28.07.2026", district:"DİYADİN", name:"DİYADİN ECZANESİ", address:"İSA AĞA MAHALLESİ INÖNÜ CADDESİ NO:98", landmark:"PTT KARŞISI", phone:"0472 511 24 65", url:"#"},
-    {date:"28.07.2026", district:"DOĞUBAYAZIT", name:"EYLÜL ECZANESİ", address:"AHMEDİHANİ MAHALLESİ METEROLOJİ (1352) SOKAK NO:1/2C", landmark:"METEOROLOJİ SAĞLIK OCAĞI KARŞISI", phone:"0542 109 67 84", url:"#"},
-    {date:"28.07.2026", district:"ELEŞKİRT", name:"ELEŞKİRT ECZANESİ", address:"İSTİKLAL MAHALLESİ CUMHURİYET CADDESİ NO:109", landmark:"BELEDİYE BİNASİ KARŞISI", phone:"0472 711 29 16", url:"#"},
-    {date:"28.07.2026", district:"HAMUR", name:"AHMET ECZANESİ", address:"Kümbet Mahallesi Van Caddesi No:49C", landmark:"HAMUR BELEDİYESİ ALTI", phone:"0544 564 57 48", url:"#"},
-    {date:"28.07.2026", district:"MERKEZ", name:"ZARİF ECZANESİ", address:"LEYLEK PINAR MAHALLESİ CUMHURİYET CADDESİ NO:6-8 C", landmark:"MERKEZ CAMİİ ALTI", phone:"0472 215 55 50", url:"#"},
-    {date:"28.07.2026", district:"MERKEZ", name:"EREN ECZANESİ", address:"FIRAT MAHALLESİ 1018/3 SOKAK NO:8/B", landmark:"AĞRI EĞİTİM VE ARAŞTIRMA HASTANESİ YANI", phone:"0472 502 22 32", url:"#"},
-    {date:"28.07.2026", district:"PATNOS", name:"OKTAY VURAL ECZANESİ", address:"ALPASLAN MAHALLESİ MALAZGİRT CADDESİ NO:72", landmark:"ŞEYH ABDULVAHAP KÜFREVİ EVİ KARŞISI", phone:"0472 616 18 74", url:"#"},
-    {date:"28.07.2026", district:"TAŞLIÇAY", name:"ÇARE ECZANESİ", address:"HÜRRİYET MAHALLESİ M.FEVZİ ÇAKMAK CADDESİ DIŞ KAPI NO:94A", landmark:"MERVE KIRTASİYE YANI", phone:"0546 491 53 22", url:"#"},
-    {date:"28.07.2026", district:"TUTAK", name:"BERFİN ECZANESİ", address:"Murat Mahallesi Dr Cihan ÖKTEM Caddesi No:5A ve 5B", landmark:"GAZİ İLKOKULUNUN KARŞISI", phone:"0552 636 00 04", url:"#"},
+   // --- TARİHSİZ GÖNDERDİĞİN LİSTE (Tarihi kendin düzeltebilirsin) ---
+    {date:"XX.07.2026", district:"MERKEZ", name:"SEVGİ ECZANESİ", address:"LEYLEK PINAR MAHALLESİ CUMHURIYET CADDESİ NO:142", landmark:"HALK BANK YUKARASI", phone:"0472 216 34 20", url:"#"},
+    {date:"XX.07.2026", district:"MERKEZ", name:"TUĞBA ECZANESİ", address:"Fırat Mahallesi 1018/1 Sokak No:14C Ağrı", landmark:"AĞRI EĞİTİM VE ARAŞTIRMA HASTANESİ ACİL ÇIKIŞ KAPISI ÇAPRAZI", phone:"0507 252 68 74", url:"#"},
+    {date:"XX.07.2026", district:"DİYADİN", name:"DİLAN ECZANESİ", address:"ISA AGA MAHALLESİ INÖNÜ CADDESİ NO:36", landmark:"BELEDİYE YANI", phone:"0472 511 28 28", url:"#"},
+    {date:"XX.07.2026", district:"DOĞUBAYAZIT", name:"TEKIN ECZANESİ", address:"ÇIFTEPINAR MAHALLESİ RIFKI BAŞKAYA CADDESİ NO:17/34", landmark:"DOĞUBAYAZIT AVM ALTI", phone:"0472 502 05 60", url:"#"},
+    {date:"XX.07.2026", district:"ELEŞKİRT", name:"ŞİFA ECZANESİ", address:"MÜFTÜ SELİM MAHALLESİ CUMHURİYET CADDESİ NO:13", landmark:"SAĞLIK OCAĞI KARŞISI", phone:"0472 711 21 41", url:"#"},
+    {date:"XX.07.2026", district:"HAMUR", name:"HAMUR ECZANESİ", address:"KÜMBET MAHALLESİ VAN CADDESİ NO:49/A", landmark:"HAMUR BELEDİYESİ ALTI", phone:"0472 616 71 72", url:"#"},
+    {date:"XX.07.2026", district:"PATNOS", name:"NUR ECZANESİ", address:"ALPASLAN MAHALLESİ DERGAH CADDESİ KAPI NO:3/A", landmark:"SARISU MARKET KARŞISI", phone:"0535 078 75 10", url:"#"},
+    {date:"XX.07.2026", district:"TAŞLIÇAY", name:"BEYZA ECZANESİ", address:"15 TEMMUZ ŞEHİTLER MAHALLESİ MAREŞAL FEVZİ ÇAKMAK CADDESİ NO:1/1", landmark:"PTT KARGO YANI", phone:"0472 551 30 00", url:"#"},
+    {date:"XX.07.2026", district:"TUTAK", name:"OZAN ECZANESİ", address:"Cami Mahallesi Cumhuriyet Caddesi No:39B", landmark:"Merkez Camii Yanı", phone:"0472 411 28 97", url:"#"},
 
     // --- 29.07.2026 ---
     {date:"29.07.2026", district:"DİYADİN", name:"ŞİFA ECZANESİ", address:"MURAT MAHALLESİ KAYMAKAM ÖZGÜR AZER KURAK CADDESİ NO:63A", landmark:"MURAT CAMİİ YANI", phone:"0505 597 63 42", url:"#"},
@@ -1374,7 +1256,7 @@ const dutyPharmacies = [
     {date:"29.07.2026", district:"HAMUR", name:"HAMUR ECZANESİ", address:"KÜMBET MAHALLESİ VAN CADDESİ NO:49/A", landmark:"HAMUR BELEDİYESİ ALTI", phone:"0472 616 71 72", url:"#"},
     {date:"29.07.2026", district:"MERKEZ", name:"HAYAT ECZANESİ", address:"ALPASLAN MAHALLESİ ESKİ VAN CADDESİ NO:140/A", landmark:"DOĞA KOLEJİ YOLU", phone:"0534 796 64 04", url:"#"},
     {date:"29.07.2026", district:"MERKEZ", name:"YONCA ECZANESİ", address:"LEYLEK PINAR MAHALLESİ VALI KONAGI CADDESİ NO:41", landmark:"BELEDİYE İŞ MERKEZİ ÇAPRAZI", phone:"0472 216 58 16", url:"#"},
-    {date:"29.07.2026", district:"PATNOS", name:"ÖMER ECZANESİ", address:"ATATÜRK MAHALLESİ MENDERES BULVARI NO:116 (YILMAZ GİYİM KARŞISI)", landmark:"", phone:"0472 616 88 87", url:"#"},
+    {date:"29.07.2026", district:"PATNOS", name:"ÖMER ECZANESİ", address:"ATATÜRK MAHALLESİ MENDERES BULVARI NO:116", landmark:"YILMAZ GİYİM KARŞISI", phone:"0472 616 88 87", url:"#"},
     {date:"29.07.2026", district:"TAŞLIÇAY", name:"ELİF ECZANESİ", address:"HÜRRİYET MAHALLESİ MAREŞAL FEVZİ ÇAKMAK CADDESİ NO:100", landmark:"A101 KARŞISI", phone:"0472 551 29 00", url:"#"},
     {date:"29.07.2026", district:"TUTAK", name:"BEGÜM ECZANESİ", address:"CAMİ MAHALLESİ KAZIM KARABEKİR CADDESİ NO:11B-11C", landmark:"KAYMAKAMLIK EVİ KARŞISI", phone:"0472 411 31 89", url:"#"},
 
@@ -1388,17 +1270,6 @@ const dutyPharmacies = [
     {date:"30.07.2026", district:"PATNOS", name:"ŞİFA ECZANESİ", address:"ATATÜRK MAHALLESİ MENDERES BULVARI KAPI NO:110A", landmark:"YILMAZ GİYİM KARŞISI", phone:"0472 616 25 85", url:"#"},
     {date:"30.07.2026", district:"TAŞLIÇAY", name:"FERHAT ECZANESİ", address:"HÜRRİYET MAHALLESİ M.FEVZİ ÇAKMAK CADDESİ NO:48/A", landmark:"ÖĞRETMEN EVİ ALTI", phone:"0539 430 14 11", url:"#"},
     {date:"30.07.2026", district:"TUTAK", name:"TUTAK ECZANESİ", address:"MURAT MAHALLESİ CUMHURİYET CADDESİ NO:51/A", landmark:"", phone:"0472 411 26 98", url:"#"},
-
-    // --- 31.07.2026 ---
-    {date:"31.07.2026", district:"DİYADİN", name:"DERMAN ECZANESİ", address:"Atatürk Mahallesi Şehit Kaymakam Muhammed Fatih Safitürk Caddesi No:10A", landmark:"Menekşem Market Karşısı", phone:"0472 511 36 36", url:"#"},
-    {date:"31.07.2026", district:"DOĞUBAYAZIT", name:"TANCA ECZANESİ", address:"ÇİFTEPINAR MAHALLESİ BELEDİYE CADDESİ NO:25A", landmark:"1 NOLU SAĞLIK OCAĞI YANI", phone:"0541 534 57 93", url:"#"},
-    {date:"31.07.2026", district:"ELEŞKİRT", name:"MAHMUTPAŞA ECZANESİ", address:"İstiklal Mahallesi Cumhuriyet Caddesi No:101", landmark:"KİLER MARKET KARŞISI", phone:"0472 711 29 78", url:"#"},
-    {date:"31.07.2026", district:"HAMUR", name:"HAMUR ECZANESİ", address:"KÜMBET MAHALLESİ VAN CADDESİ NO:49/A", landmark:"HAMUR BELEDİYESİ ALTI", phone:"0472 616 71 72", url:"#"},
-    {date:"31.07.2026", district:"MERKEZ", name:"DUMAN ECZANESİ", address:"SITKIYE MAHAHLLESİ YAŞAR KEMAL CADDESİ NO:27", landmark:"ADALET SARAYI KARŞISI", phone:"0472 216 11 13", url:"#"},
-    {date:"31.07.2026", district:"MERKEZ", name:"RUKİYE ECZANESİ", address:"BAHÇELİ EVLER MAHALLESİ CUMHURİYET CADDESİ NO 125A", landmark:"ESKİ KÜTÜPHANE YANI", phone:"0472 216 06 06", url:"#"},
-    {date:"31.07.2026", district:"PATNOS", name:"YENİ İSTANBUL ECZANESİ", address:"ATATÜRK MAHALLESİ 128 SOKAK NO:6A", landmark:"Çavuşoğlu Apart Altı", phone:"0472 616 94 29", url:"#"},
-    {date:"31.07.2026", district:"TAŞLIÇAY", name:"TAŞLIÇAY ECZANESİ", address:"Cumhuriyet Mahallesi Mareşal Favzi Çakmak Caddesi No:23", landmark:"", phone:"0472 551 28 91", url:"#"},
-    {date:"31.07.2026", district:"TUTAK", name:"OZAN ECZANESİ", address:"Cami Mahallesi Cumhuriyet Caddesi No:39B", landmark:"Merkez Camii Yanı", phone:"0472 411 28 97", url:"#"}
   ];
  /* 15 GÜNLÜK HAVA DURUMU (Ağrı Merkez) */
   const weatherData = {
@@ -1448,6 +1319,7 @@ const dutyPharmacies = [
     { img: "melike1.jpg", title: "Melike Çukadar", subtitle: " Aramıza Hoş Geldin", bgPos: "center", slug: slugify("Melike Çukadar") },
     { img: "logo.jpg", title: "Bluversea", subtitle: "Dijital Çözüm Ortağınız", bgPos: "center", slug: slugify("Bluversea") },
     { img:"clubmaxfit.jpg", title:"Club Maxfit", subtitle:"Aramıza Hoş Geldin", bgPos: "center", slug: slugify("Club Maxfit") },
+    { img:"BrightEnglish.jpg", title:"Bright English", subtitle:"İrem Kaya - Aramıza Hoş Geldin", slug: slugify("Bright English") },
   ];
 
   // HİKAYELER
