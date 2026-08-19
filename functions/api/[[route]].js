@@ -1,4 +1,4 @@
-// CLOUDFLARE BACKEND - RANDEVU, BLOG, LOG & ÇALIŞMA SAATLERİ MOTORU
+// CLOUDFLARE BACKEND - EKSİKSİZ TABLO & TÜM ÖZELLİKLER
 const JWT_SECRET = "04agri-super-secret-key-2026-secure";
 
 function utf8ToBase64(str) {
@@ -59,14 +59,72 @@ export async function onRequest(context) {
 
   try {
     // -----------------------------------------------------------
-    // 1. KURULUM ROTASI (Veritabanı Güncelleme)
+    // 1. KURULUM ROTASI (Eski Tabloları Temizleyip Sıfırdan Tam Kurar)
     // -----------------------------------------------------------
     if (pathname.includes("setup")) {
-      await db.prepare(`CREATE TABLE IF NOT EXISTS businesses (id TEXT PRIMARY KEY, name TEXT NOT NULL, category TEXT NOT NULL, username TEXT UNIQUE NOT NULL, password_hash TEXT NOT NULL, role TEXT DEFAULT 'business', phone TEXT, email TEXT, address TEXT, is_frozen INTEGER DEFAULT 0, created_at DATETIME DEFAULT CURRENT_TIMESTAMP)`).run();
-      await db.prepare(`CREATE TABLE IF NOT EXISTS appointments (id INTEGER PRIMARY KEY AUTOINCREMENT, code TEXT, business_id TEXT NOT NULL, customer_name TEXT NOT NULL, customer_phone TEXT NOT NULL, customer_email TEXT, customer_note TEXT, appointment_date TEXT NOT NULL, appointment_time TEXT NOT NULL, status TEXT DEFAULT 'Bekliyor', is_deleted INTEGER DEFAULT 0, deleted_by TEXT, deleted_at DATETIME, created_at DATETIME DEFAULT CURRENT_TIMESTAMP)`).run();
-      await db.prepare(`CREATE TABLE IF NOT EXISTS schedules (id INTEGER PRIMARY KEY AUTOINCREMENT, business_id TEXT NOT NULL, working_days TEXT DEFAULT '["Pazartesi","Salı","Çarşamba","Perşembe","Cuma","Cumartesi"]', slot_duration INTEGER DEFAULT 30, blocked_hours TEXT DEFAULT '[]')`).run();
-      await db.prepare(`CREATE TABLE IF NOT EXISTS blogs (id INTEGER PRIMARY KEY AUTOINCREMENT, business_id TEXT NOT NULL, title TEXT NOT NULL, content TEXT NOT NULL, status TEXT DEFAULT 'pending', rejection_reason TEXT, created_at DATETIME DEFAULT CURRENT_TIMESTAMP, approved_at DATETIME)`).run();
-      await db.prepare(`CREATE TABLE IF NOT EXISTS audit_logs (id INTEGER PRIMARY KEY AUTOINCREMENT, business_id TEXT, action TEXT NOT NULL, details TEXT NOT NULL, performed_by TEXT NOT NULL, created_at DATETIME DEFAULT CURRENT_TIMESTAMP)`).run();
+      await db.prepare(`DROP TABLE IF EXISTS businesses`).run();
+      await db.prepare(`DROP TABLE IF EXISTS appointments`).run();
+      await db.prepare(`DROP TABLE IF EXISTS schedules`).run();
+      await db.prepare(`DROP TABLE IF EXISTS blogs`).run();
+      await db.prepare(`DROP TABLE IF EXISTS audit_logs`).run();
+
+      await db.prepare(`CREATE TABLE businesses (
+        id TEXT PRIMARY KEY,
+        name TEXT NOT NULL,
+        category TEXT NOT NULL,
+        username TEXT UNIQUE NOT NULL,
+        password_hash TEXT NOT NULL,
+        role TEXT DEFAULT 'business',
+        phone TEXT,
+        email TEXT,
+        address TEXT,
+        is_frozen INTEGER DEFAULT 0,
+        created_at DATETIME DEFAULT CURRENT_TIMESTAMP
+      )`).run();
+
+      await db.prepare(`CREATE TABLE appointments (
+        id INTEGER PRIMARY KEY AUTOINCREMENT,
+        code TEXT,
+        business_id TEXT NOT NULL,
+        customer_name TEXT NOT NULL,
+        customer_phone TEXT NOT NULL,
+        customer_email TEXT,
+        customer_note TEXT,
+        appointment_date TEXT NOT NULL,
+        appointment_time TEXT NOT NULL,
+        status TEXT DEFAULT 'Bekliyor',
+        is_deleted INTEGER DEFAULT 0,
+        deleted_by TEXT,
+        deleted_at DATETIME,
+        created_at DATETIME DEFAULT CURRENT_TIMESTAMP
+      )`).run();
+
+      await db.prepare(`CREATE TABLE schedules (
+        business_id TEXT PRIMARY KEY,
+        working_days TEXT DEFAULT '["Pazartesi","Salı","Çarşamba","Perşembe","Cuma","Cumartesi"]',
+        slot_duration INTEGER DEFAULT 30,
+        blocked_hours TEXT DEFAULT '[]'
+      )`).run();
+
+      await db.prepare(`CREATE TABLE blogs (
+        id INTEGER PRIMARY KEY AUTOINCREMENT,
+        business_id TEXT NOT NULL,
+        title TEXT NOT NULL,
+        content TEXT NOT NULL,
+        status TEXT DEFAULT 'pending',
+        rejection_reason TEXT,
+        created_at DATETIME DEFAULT CURRENT_TIMESTAMP,
+        approved_at DATETIME
+      )`).run();
+
+      await db.prepare(`CREATE TABLE audit_logs (
+        id INTEGER PRIMARY KEY AUTOINCREMENT,
+        business_id TEXT,
+        action TEXT NOT NULL,
+        details TEXT NOT NULL,
+        performed_by TEXT NOT NULL,
+        created_at DATETIME DEFAULT CURRENT_TIMESTAMP
+      )`).run();
 
       const businesses = [
         ['superadmin', 'Süper Yönetici (Sen)', 'admin', 'superadmin', 'Agri04SuperAdmin!', 'superadmin', '05400000000', 'admin@04agri.com'],
@@ -96,10 +154,10 @@ export async function onRequest(context) {
       ];
 
       for (const b of businesses) {
-        await db.prepare(`INSERT OR REPLACE INTO businesses (id, name, category, username, password_hash, role, phone, email) VALUES (?, ?, ?, ?, ?, ?, ?, ?)`).bind(...b).run();
+        await db.prepare(`INSERT INTO businesses (id, name, category, username, password_hash, role, phone, email) VALUES (?, ?, ?, ?, ?, ?, ?, ?)`).bind(...b).run();
       }
 
-      return new Response(JSON.stringify({ success: true, message: "Sistem ve Veritabanı %100 Güncellendi." }), { headers: corsHeaders });
+      return new Response(JSON.stringify({ success: true, message: "TEBRİKLER! Veritabanı ve 23 İşletme Tüm Yeni Özelliklerle Kuruldu." }), { headers: corsHeaders });
     }
 
     // -----------------------------------------------------------
@@ -148,7 +206,8 @@ export async function onRequest(context) {
     // -----------------------------------------------------------
     if (pathname.includes("cancel-by-code") && method === "POST") {
       const { code, phone } = await request.json();
-      const appt = await db.prepare("SELECT * FROM appointments WHERE code = ? AND customer_phone LIKE ? AND is_deleted = 0").bind(code, `%${phone.replace(/\s/g,'')}%`).first();
+      const cleanP = (phone || "").replace(/\s/g, '');
+      const appt = await db.prepare("SELECT * FROM appointments WHERE code = ? AND customer_phone LIKE ? AND is_deleted = 0").bind(code, `%${cleanP}%`).first();
 
       if (!appt) {
         return new Response(JSON.stringify({ error: "Geçersiz randevu kodu veya telefon numarası!" }), { status: 404, headers: corsHeaders });
@@ -194,7 +253,7 @@ export async function onRequest(context) {
       return new Response(JSON.stringify(rows.results || []), { headers: corsHeaders });
     }
 
-    // 7. RANDEVU SİL / ONAYLA (İşletme / Superadmin)
+    // 7. RANDEVU SİL / ONAYLA
     if (pathname.includes("delete-appointment") && method === "POST") {
       const { id } = await request.json();
       const now = new Date().toISOString();
