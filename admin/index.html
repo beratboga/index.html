@@ -4,35 +4,59 @@
   <meta charset="UTF-8">
   <title>04agri.com — Yönetici Paneli</title>
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;600;700;800&display=swap" rel="stylesheet">
-  <!-- Ücretsiz Tarayıcı İçi Excel ve PDF Motorları -->
+  <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+  <!-- Ücretsiz PDF & Excel Motorları -->
   <script src="https://cdnjs.cloudflare.com/ajax/libs/xlsx/0.18.5/xlsx.full.min.js"></script>
   <script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/2.5.1/jspdf.umd.min.js"></script>
   <script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf-autotable/3.5.31/jspdf.plugin.autotable.min.js"></script>
   <style>
-    :root { --bg: #0c1020; --card: #131a31; --line: rgba(255,255,255,0.1); --accent: #44BD32; --pin: #E84142; --text: #fff; --muted: #a0aabf; }
-    * { box-sizing: border-box; font-family: 'Plus Jakarta Sans', sans-serif; }
-    body { margin: 0; background: var(--bg); color: var(--text); padding: 20px; font-size: 15px; }
-    .container { max-width: 1100px; margin: 0 auto; }
-    .login-box { max-width: 420px; margin: 60px auto; background: var(--card); padding: 32px; border-radius: 20px; border: 1px solid var(--line); }
-    input, textarea, select { width: 100%; padding: 12px 14px; margin: 8px 0 16px; border-radius: 10px; border: 1px solid var(--line); background: rgba(0,0,0,0.3); color: #fff; }
-    button { background: var(--accent); color: #000; font-weight: 800; padding: 12px 20px; border-radius: 10px; border: none; cursor: pointer; }
-    button:hover { opacity: 0.9; }
-    .btn-sec { background: transparent; color: #fff; border: 1px solid var(--line); }
-    .header-bar { display: flex; justify-content: space-between; align-items: center; border-bottom: 1px solid var(--line); padding-bottom: 16px; margin-bottom: 24px; flex-wrap: wrap; gap: 12px; }
-    .table-box { background: var(--card); border-radius: 16px; overflow-x: auto; border: 1px solid var(--line); margin-bottom: 24px; }
+    :root {
+      --bg: #f5f5f7;
+      --card: #ffffff;
+      --ink: #1d1d1f;
+      --muted: #86868b;
+      --line: #e5e5ea;
+      --accent: #34c759;
+      --pin: #ff3b30;
+      --blue: #0071e3;
+      --r-md: 18px;
+      --r-sm: 10px;
+      --shadow: 0 4px 20px rgba(0,0,0,0.04);
+    }
+    * { box-sizing: border-box; font-family: 'Plus Jakarta Sans', -apple-system, sans-serif; }
+    body { margin: 0; background: var(--bg); color: var(--ink); padding: 24px; font-size: 15px; }
+    .container { max-width: 1180px; margin: 0 auto; }
+    
+    /* GİRİŞ EKRANI */
+    .login-box { max-width: 380px; margin: 80px auto; background: var(--card); padding: 36px; border-radius: 24px; box-shadow: var(--shadow); border: 1px solid var(--line); }
+    .login-box h2 { margin: 0 0 8px; font-size: 22px; font-weight: 800; }
+    input, textarea, select { width: 100%; padding: 12px 14px; margin: 6px 0 16px; border-radius: var(--r-sm); border: 1px solid var(--line); background: #fafafa; outline: none; font-size: 14.5px; transition: border .2s; }
+    input:focus, textarea:focus, select:focus { border-color: var(--blue); background: #fff; }
+    button { background: var(--ink); color: #fff; font-weight: 700; padding: 11px 18px; border-radius: 100px; border: none; cursor: pointer; font-size: 14px; transition: opacity .2s, transform .1s; }
+    button:hover { opacity: 0.88; }
+    button:active { transform: scale(0.98); }
+    .btn-sec { background: var(--card); color: var(--ink); border: 1px solid var(--line); }
+    .btn-red { background: var(--pin); color: #fff; }
+    .btn-green { background: var(--accent); color: #000; }
+
+    /* DASHBOARD */
+    .header-bar { display: flex; justify-content: space-between; align-items: center; margin-bottom: 24px; flex-wrap: wrap; gap: 12px; }
+    .nav-tabs { display: flex; gap: 8px; margin-bottom: 24px; overflow-x: auto; padding-bottom: 4px; }
+    .nav-tab { background: var(--card); color: var(--muted); border: 1px solid var(--line); padding: 9px 18px; font-weight: 700; border-radius: 100px; font-size: 13.5px; white-space: nowrap; }
+    .nav-tab.active { background: var(--ink); color: #fff; border-color: var(--ink); }
+
+    .card { background: var(--card); padding: 24px; border-radius: var(--r-md); border: 1px solid var(--line); box-shadow: var(--shadow); margin-bottom: 24px; }
+    .table-box { background: var(--card); border-radius: var(--r-md); overflow-x: auto; border: 1px solid var(--line); margin-bottom: 24px; box-shadow: var(--shadow); }
     table { width: 100%; border-collapse: collapse; text-align: left; }
-    th, td { padding: 14px 18px; border-bottom: 1px solid var(--line); }
-    th { background: rgba(255,255,255,0.03); color: var(--muted); font-size: 13px; text-transform: uppercase; }
-    .badge { padding: 4px 8px; border-radius: 6px; font-size: 12px; font-weight: 700; display: inline-block; }
-    .badge-active { background: rgba(68,189,50,0.15); color: var(--accent); }
-    .badge-deleted { background: rgba(232,65,66,0.15); color: var(--pin); }
-    .badge-pending { background: rgba(255,193,7,0.15); color: #ffc107; }
-    .export-btns { display: flex; gap: 10px; margin-bottom: 16px; flex-wrap: wrap; }
-    .card { background: var(--card); padding: 20px; border-radius: 16px; border: 1px solid var(--line); margin-bottom: 20px; }
-    .nav-tabs { display: flex; gap: 10px; margin-bottom: 20px; border-bottom: 1px solid var(--line); padding-bottom: 10px; }
-    .nav-tab { background: none; color: var(--muted); border: none; padding: 8px 16px; font-weight: 700; cursor: pointer; border-radius: 8px; }
-    .nav-tab.active { background: var(--accent); color: #000; }
+    th, td { padding: 14px 16px; border-bottom: 1px solid var(--line); }
+    th { background: #fafafa; color: var(--muted); font-size: 12.5px; text-transform: uppercase; font-weight: 700; }
+    
+    .badge { padding: 4px 10px; border-radius: 100px; font-size: 12px; font-weight: 700; display: inline-block; }
+    .badge-approved { background: rgba(52,199,89,0.15); color: #248a3d; }
+    .badge-deleted { background: rgba(255,59,48,0.12); color: var(--pin); }
+    .badge-pending { background: rgba(255,149,0,0.15); color: #c97500; }
+
+    .filters-bar { display: flex; gap: 10px; margin-bottom: 16px; flex-wrap: wrap; align-items: center; }
   </style>
 </head>
 <body>
@@ -43,20 +67,21 @@
   let token = localStorage.getItem("04agri_token");
   let user = JSON.parse(localStorage.getItem("04agri_user") || "null");
   let currentTab = "randevular";
+  let apptFilter = "all"; // 'all', 'approved', 'deleted'
 
   const app = document.getElementById("app");
 
   function renderLogin() {
     app.innerHTML = `
       <div class="login-box">
-        <h2 style="margin-top:0">04agri.com Yönetici Girişi</h2>
-        <p style="color:var(--muted); font-size:14px">İşletme veya Süper Yönetici hesabınızla giriş yapın.</p>
+        <h2>04agri.com</h2>
+        <p style="color:var(--muted); font-size:13.5px; margin:0 0 20px;">Yönetim Paneli Girişi</p>
         <form onsubmit="handleLogin(event)">
-          <label>Kullanıcı Adı</label>
-          <input type="text" id="username" required placeholder="ör: dytbilge">
-          <label>Şifre</label>
-          <input type="password" id="password" required placeholder="••••••••">
-          <button type="submit" style="width:100%">Giriş Yap</button>
+          <label style="font-size:13px; font-weight:700; color:var(--muted)">KULLANICI ADI</label>
+          <input type="text" id="username" required autocomplete="off">
+          <label style="font-size:13px; font-weight:700; color:var(--muted)">ŞİFRE</label>
+          <input type="password" id="password" required>
+          <button type="submit" style="width:100%; margin-top:8px;">Giriş Yap</button>
         </form>
       </div>
     `;
@@ -94,7 +119,6 @@
   async function renderDashboard() {
     if (!token) return renderLogin();
 
-    // Randevuları Çek
     const resAppt = await fetch("/api/appointments", { headers: { "Authorization": "Bearer " + token } });
     const appointments = await resAppt.json();
 
@@ -104,27 +128,40 @@
       superData = await resSuper.json();
     }
 
+    let myBlogs = [];
+    if (user.role !== 'superadmin') {
+      const resBlogs = await fetch("/api/my-blogs", { headers: { "Authorization": "Bearer " + token } });
+      myBlogs = await resBlogs.json();
+    }
+
+    let schedule = null;
+    if (user.role !== 'superadmin') {
+      const resSch = await fetch("/api/get-schedule", { headers: { "Authorization": "Bearer " + token } });
+      schedule = await resSch.json();
+    }
+
     app.innerHTML = `
       <div class="header-bar">
         <div>
-          <h2 style="margin:0">${user.name}</h2>
-          <span style="color:var(--muted); font-size:14px">04agri.com ${user.role === 'superadmin' ? '👑 Süper Yönetici Ekranı' : '🏢 İşletme Yönetim Paneli'}</span>
+          <h2 style="margin:0; font-size:22px;">${user.name}</h2>
+          <span style="color:var(--muted); font-size:13.5px;">${user.role === 'superadmin' ? '👑 Süper Yönetici Masası' : '🏢 İşletme Portalı'}</span>
         </div>
         <button class="btn-sec" onclick="logout()">Çıkış Yap</button>
       </div>
 
       <div class="nav-tabs">
         <button class="nav-tab ${currentTab==='randevular'?'active':''}" onclick="setTab('randevular')">📅 Randevular (${appointments.length})</button>
+        ${user.role !== 'superadmin' ? `<button class="nav-tab ${currentTab==='saatler'?'active':''}" onclick="setTab('saatler')">⏰ Çalışma Saatleri & Aralıklar</button>` : ''}
         <button class="nav-tab ${currentTab==='blog'?'active':''}" onclick="setTab('blog')">✍️ Duyuru & Blog</button>
-        <button class="nav-tab ${currentTab==='sifre'?'active':''}" onclick="setTab('sifre')">🔑 Şifre Değiştir</button>
-        ${user.role === 'superadmin' ? `<button class="nav-tab ${currentTab==='isletmeler'?'active':''}" onclick="setTab('isletmeler')">🏢 23 İşletme & Şifreleri</button>` : ''}
-        ${user.role === 'superadmin' ? `<button class="nav-tab ${currentTab==='loglar'?'active':''}" onclick="setTab('loglar')">📋 Denetim Logları</button>` : ''}
+        <button class="nav-tab ${currentTab==='profil'?'active':''}" onclick="setTab('profil')">🔑 Profil & Şifre</button>
+        ${user.role === 'superadmin' ? `<button class="nav-tab ${currentTab==='isletmeler'?'active':''}" onclick="setTab('isletmeler')">🏢 23 İşletme Yönetimi</button>` : ''}
+        ${user.role === 'superadmin' ? `<button class="nav-tab ${currentTab==='loglar'?'active':''}" onclick="setTab('loglar')">📋 Canlı Denetim Logları</button>` : ''}
       </div>
 
       <div id="tabContent"></div>
     `;
 
-    renderTabContent(appointments, superData);
+    renderTabContent(appointments, superData, myBlogs, schedule);
   }
 
   function setTab(tab) {
@@ -132,127 +169,69 @@
     renderDashboard();
   }
 
-  function renderTabContent(appointments, superData) {
+  function renderTabContent(appointments, superData, myBlogs, schedule) {
     const c = document.getElementById("tabContent");
 
+    // 1. RANDEVULAR SEKMESİ
     if (currentTab === 'randevular') {
+      let filtered = appointments;
+      if (apptFilter === 'approved') filtered = appointments.filter(a => a.status === 'Onaylandı' && !a.is_deleted);
+      if (apptFilter === 'deleted') filtered = appointments.filter(a => a.is_deleted);
+
       c.innerHTML = `
-        <div class="export-btns">
-          <button onclick="exportExcel(${JSON.stringify(appointments).replace(/"/g, '&quot;')})">📊 Excel Olarak İndir</button>
-          <button onclick="exportPDF(${JSON.stringify(appointments).replace(/"/g, '&quot;')})">📄 PDF Olarak İndir</button>
+        <div class="filters-bar">
+          <button class="btn-sec ${apptFilter==='all'?'btn-green':''}" onclick="setApptFilter('all')">Tümü (${appointments.length})</button>
+          <button class="btn-sec ${apptFilter==='approved'?'btn-green':''}" onclick="setApptFilter('approved')">Onaylananlar</button>
+          <button class="btn-sec ${apptFilter==='deleted'?'btn-green':''}" onclick="setApptFilter('deleted')">Silinenler / İptaller</button>
+          
+          <div style="margin-left:auto; display:flex; gap:8px;">
+            <button class="btn-sec" onclick="exportPDF(filtered, 'Randevular_${apptFilter}')">📄 Filtreyi PDF İndir</button>
+            <button class="btn-sec" onclick="exportExcel(filtered)">📊 Excel İndir</button>
+          </div>
         </div>
 
         <div class="table-box">
           <table>
             <thead>
               <tr>
+                <th>Kod</th>
                 ${user.role === 'superadmin' ? '<th>İşletme</th>' : ''}
-                <th>Müşteri Adı</th>
-                <th>Telefon</th>
+                <th>Müşteri Bilgileri</th>
                 <th>Tarih & Saat</th>
-                <th>Not</th>
+                <th>Müşteri Notu</th>
                 <th>Durum</th>
-                <th>Silinme Bilgisi</th>
+                <th>Silinme / İptal Bilgisi</th>
                 <th>İşlem</th>
               </tr>
             </thead>
             <tbody>
-              ${appointments.length === 0 ? `<tr><td colspan="8" style="text-align:center; color:var(--muted)">Henüz randevu kaydı yok.</td></tr>` : ''}
-              ${appointments.map(a => `
+              ${filtered.length === 0 ? `<tr><td colspan="8" style="text-align:center; color:var(--muted); padding:30px;">Kayıt bulunamadı.</td></tr>` : ''}
+              ${filtered.map(a => `
                 <tr>
+                  <td><code style="font-weight:800; color:var(--blue)">${a.code || '-'}</code></td>
                   ${user.role === 'superadmin' ? `<td><strong>${a.business_name}</strong></td>` : ''}
-                  <td>${a.customer_name}</td>
-                  <td><a href="tel:${a.customer_phone}" style="color:var(--accent)">${a.customer_phone}</a></td>
-                  <td>${a.appointment_date} - ${a.appointment_time}</td>
-                  <td style="font-size:13px">${a.customer_note || '-'}</td>
-                  <td><span class="badge ${a.is_deleted ? 'badge-deleted' : 'badge-active'}">${a.is_deleted ? 'Silindi' : a.status}</span></td>
-                  <td style="font-size:12px; color:var(--muted)">${a.is_deleted ? `Silen: <strong>${a.deleted_by}</strong><br>${a.deleted_at?.split('T')[0] || ''}` : '-'}</td>
                   <td>
-                    ${!a.is_deleted ? `<button style="background:var(--pin); color:#fff; padding:6px 12px; font-size:12px" onclick="deleteAppt(${a.id})">Sil</button>` : 'Arşivde'}
+                    <strong>${a.customer_name}</strong><br>
+                    <a href="tel:${a.customer_phone}" style="color:var(--ink-soft); font-size:13px;">📞 ${a.customer_phone}</a><br>
+                    <span style="color:var(--muted); font-size:12px;">✉️ ${a.customer_email || '-'}</span>
                   </td>
-                </tr>
-              `).join('')}
-            </tbody>
-          </table>
-        </div>
-      `;
-    } else if (currentTab === 'blog') {
-      c.innerHTML = `
-        <div class="card">
-          <h3>Yeni Duyuru / Blog Yazısı Gönder</h3>
-          <p style="color:var(--muted); font-size:14px">Yazdığınız yazılar Süper Admin onayından sonra web sitesinde otomatik olarak yayına alınır.</p>
-          <input type="text" id="blogTitle" placeholder="Duyuru veya Blog Başlığı...">
-          <textarea id="blogContent" rows="4" placeholder="İçeriğinizi buraya yazın..."></textarea>
-          <button onclick="submitBlog()">Onaya Gönder</button>
-        </div>
-
-        ${user.role === 'superadmin' && superData ? `
-          <h3>Onay Bekleyen ve Yayındaki Bloglar</h3>
-          <div class="table-box">
-            <table>
-              <thead>
-                <tr>
-                  <th>İşletme</th>
-                  <th>Başlık</th>
-                  <th>İçerik</th>
-                  <th>Durum</th>
-                  <th>İşlem</th>
-                </tr>
-              </thead>
-              <tbody>
-                ${superData.blogs.map(b => `
-                  <tr>
-                    <td><strong>${b.business_name}</strong></td>
-                    <td>${b.title}</td>
-                    <td style="font-size:13px">${b.content}</td>
-                    <td><span class="badge ${b.status==='approved'?'badge-active':'badge-pending'}">${b.status==='approved'?'Yayında':'Onay Bekliyor'}</span></td>
-                    <td>
-                      ${b.status === 'pending' ? `
-                        <button style="padding:6px 10px; font-size:12px" onclick="moderateBlog(${b.id}, 'approved')">Onayla</button>
-                        <button style="background:var(--pin); color:#fff; padding:6px 10px; font-size:12px" onclick="moderateBlog(${b.id}, 'rejected')">Reddet</button>
-                      ` : 'İşlem Yapıldı'}
-                    </td>
-                  </tr>
-                `).join('')}
-              </tbody>
-            </table>
-          </div>
-        ` : ''}
-      `;
-    } else if (currentTab === 'sifre') {
-      c.innerHTML = `
-        <div class="card" style="max-width:500px">
-          <h3>Kendi Şifreni Değiştir</h3>
-          <input type="password" id="newPass" placeholder="Yeni Şifreniz...">
-          <button onclick="changePassword(null)">Şifreyi Güncelle</button>
-        </div>
-      `;
-    } else if (currentTab === 'isletmeler' && superData) {
-      c.innerHTML = `
-        <h3>23 İşletme Şifre ve Kullanıcı Yönetimi</h3>
-        <p style="color:var(--muted)">İstediğiniz işletmenin şifresini doğrudan buradan değiştirebilir ve görebilirsiniz.</p>
-        <div class="table-box">
-          <table>
-            <thead>
-              <tr>
-                <th>İşletme Adı</th>
-                <th>Kategori</th>
-                <th>Kullanıcı Adı</th>
-                <th>Mevcut Şifre</th>
-                <th>Yeni Şifre Belirle</th>
-              </tr>
-            </thead>
-            <tbody>
-              ${superData.businesses.map(b => `
-                <tr>
-                  <td><strong>${b.name}</strong></td>
-                  <td>${b.category}</td>
-                  <td><code>${b.username}</code></td>
-                  <td><code style="color:var(--accent)">${b.password_hash}</code></td>
+                  <td><strong>${a.appointment_date}</strong><br><span style="color:var(--muted)">${a.appointment_time}</span></td>
+                  <td style="font-size:13px; max-width:180px;">${a.customer_note || '-'}</td>
                   <td>
-                    <div style="display:flex; gap:6px">
-                      <input type="text" id="pass_${b.id}" placeholder="Yeni şifre" style="margin:0; padding:6px 10px; width:130px">
-                      <button style="padding:6px 12px; font-size:12px" onclick="changePassword('${b.id}')">Kaydet</button>
+                    <span class="badge ${a.is_deleted ? 'badge-deleted' : (a.status==='Onaylandı'?'badge-approved':'badge-pending')}">
+                      ${a.is_deleted ? 'Silindi' : a.status}
+                    </span>
+                  </td>
+                  <td style="font-size:12px; color:var(--muted)">
+                    ${a.is_deleted ? `<strong>${a.deleted_by || 'Kullanıcı'}</strong><br>${a.deleted_at?.replace('T',' ').substring(0,16) || ''}` : '-'}
+                  </td>
+                  <td>
+                    <div style="display:flex; gap:6px; flex-wrap:wrap;">
+                      ${!a.is_deleted ? `
+                        ${a.status !== 'Onaylandı' ? `<button class="btn-green" style="padding:6px 12px; font-size:12px;" onclick="approveAppt(${a.id})">Onayla</button>` : ''}
+                        <button class="btn-red" style="padding:6px 12px; font-size:12px;" onclick="deleteAppt(${a.id})">Sil</button>
+                      ` : ''}
+                      <button class="btn-sec" style="padding:6px 10px; font-size:12px;" onclick="singlePDF(${JSON.stringify(a).replace(/"/g, '&quot;')})">PDF</button>
                     </div>
                   </td>
                 </tr>
@@ -261,26 +240,194 @@
           </table>
         </div>
       `;
-    } else if (currentTab === 'loglar' && superData) {
+    }
+
+    // 2. ÇALIŞMA SAATLERİ SEKMESİ
+    else if (currentTab === 'saatler' && schedule) {
+      const days = ["Pazartesi", "Salı", "Çarşamba", "Perşembe", "Cuma", "Cumartesi", "Pazar"];
+      const activeDays = JSON.parse(schedule.working_days || '[]');
+
       c.innerHTML = `
-        <h3>Sistem Denetim Kayıtları (Kim Ne Yaptı?)</h3>
+        <div class="card" style="max-width:600px;">
+          <h3>⏰ Randevu Seans Süresi & Gün Ayarları</h3>
+          <p style="color:var(--muted); font-size:13.5px;">Randevuların kaçar dakikalık aralıklarla alınacağını ve çalıştığınız günleri belirleyin.</p>
+          
+          <div style="margin-bottom:20px;">
+            <label style="font-weight:700; font-size:13px;">SEANS ARALIĞI</label>
+            <select id="slotDuration" style="margin-top:6px;">
+              <option value="15" ${schedule.slot_duration==15?'selected':''}>15 Dakika</option>
+              <option value="30" ${schedule.slot_duration==30?'selected':''}>30 Dakika</option>
+              <option value="45" ${schedule.slot_duration==45?'selected':''}>45 Dakika</option>
+              <option value="60" ${schedule.slot_duration==60?'selected':''}>1 Saat</option>
+              <option value="120" ${schedule.slot_duration==120?'selected':''}>2 Saat</option>
+            </select>
+          </div>
+
+          <label style="font-weight:700; font-size:13px; display:block; margin-bottom:10px;">ÇALIŞMA GÜNLERİ</label>
+          <div style="display:grid; grid-template-columns:1fr 1fr; gap:10px; margin-bottom:20px;">
+            ${days.map(d => `
+              <label style="display:flex; align-items:center; gap:8px; background:#fafafa; padding:10px; border-radius:8px; border:1px solid var(--line); cursor:pointer;">
+                <input type="checkbox" id="day_${d}" ${activeDays.includes(d)?'checked':''} style="width:auto; margin:0;">
+                <span style="font-weight:600; font-size:14px;">${d}</span>
+              </label>
+            `).join('')}
+          </div>
+
+          <button onclick="saveSchedule()" style="width:100%;">Ayarları Kaydet</button>
+        </div>
+      `;
+    }
+
+    // 3. BLOG SEKMESİ
+    else if (currentTab === 'blog') {
+      c.innerHTML = `
+        ${user.role !== 'superadmin' ? `
+          <div class="card" style="max-width:640px;">
+            <h3>Yeni Duyuru / Blog Yazısı Gönder</h3>
+            <p style="color:var(--muted); font-size:13.5px;">Yazınız Süper Admin onayından sonra web sitesinde otomatik olarak yayına alınır.</p>
+            <input type="text" id="blogTitle" placeholder="Yazı Başlığı...">
+            <textarea id="blogContent" rows="4" placeholder="Duyuru veya blog içeriğiniz..."></textarea>
+            <button onclick="submitBlog()">Onaya Gönder ➔</button>
+          </div>
+
+          <h3>Gönderdiğiniz Blog Yazıları</h3>
+          <div class="table-box">
+            <table>
+              <thead><tr><th>Tarih</th><th>Başlık</th><th>İçerik</th><th>Durum / Ret Sebebi</th><th>İşlem</th></tr></thead>
+              <tbody>
+                ${myBlogs.length === 0 ? `<tr><td colspan="5" style="text-align:center; color:var(--muted); padding:20px;">Henüz blog yazısı göndermediniz.</td></tr>` : ''}
+                ${myBlogs.map(b => `
+                  <tr>
+                    <td style="font-size:13px; color:var(--muted)">${b.created_at?.split('T')[0]}</td>
+                    <td><strong>${b.title}</strong></td>
+                    <td style="font-size:13px">${b.content.substring(0,80)}...</td>
+                    <td>
+                      <span class="badge ${b.status==='approved'?'badge-approved':(b.status==='rejected'?'badge-deleted':'badge-pending')}">
+                        ${b.status==='approved'?'Yayında':(b.status==='rejected'?'Reddedildi':'Onay Bekliyor')}
+                      </span>
+                      ${b.rejection_reason ? `<div style="font-size:12px; color:var(--pin); margin-top:4px;">Sebep: ${b.rejection_reason}</div>` : ''}
+                    </td>
+                    <td><button class="btn-red" style="padding:6px 10px; font-size:12px;" onclick="deleteBlog(${b.id})">Sil</button></td>
+                  </tr>
+                `).join('')}
+              </tbody>
+            </table>
+          </div>
+        ` : `
+          <h3>👑 Süper Admin Blog Onay Masası</h3>
+          <div class="table-box">
+            <table>
+              <thead><tr><th>İşletme</th><th>Tarih</th><th>Başlık</th><th>İçerik</th><th>Durum</th><th>İşlem</th></tr></thead>
+              <tbody>
+                ${superData.blogs.map(b => `
+                  <tr>
+                    <td><strong>${b.business_name}</strong></td>
+                    <td style="font-size:13px; color:var(--muted)">${b.created_at?.split('T')[0]}</td>
+                    <td><strong>${b.title}</strong></td>
+                    <td style="font-size:13px">${b.content}</td>
+                    <td><span class="badge ${b.status==='approved'?'badge-approved':(b.status==='rejected'?'badge-deleted':'badge-pending')}">${b.status==='approved'?'Yayında':(b.status==='rejected'?'Reddedildi':'Onay Bekliyor')}</span></td>
+                    <td>
+                      ${b.status === 'pending' ? `
+                        <div style="display:flex; gap:6px;">
+                          <button class="btn-green" style="padding:6px 10px; font-size:12px;" onclick="moderateBlog(${b.id}, 'approved')">Onayla</button>
+                          <button class="btn-red" style="padding:6px 10px; font-size:12px;" onclick="rejectBlogPrompt(${b.id})">Reddet</button>
+                        </div>
+                      ` : `<button class="btn-red" style="padding:4px 8px; font-size:11px;" onclick="deleteBlog(${b.id})">Sil</button>`}
+                    </td>
+                  </tr>
+                `).join('')}
+              </tbody>
+            </table>
+          </div>
+        `}
+      `;
+    }
+
+    // 4. PROFİL SEKMESİ
+    else if (currentTab === 'profil') {
+      c.innerHTML = `
+        <div class="card" style="max-width:500px;">
+          <h3>Kişisel Bilgiler & Şifre</h3>
+          <label style="font-weight:700; font-size:13px; color:var(--muted)">KULLANICI ADI</label>
+          <input type="text" id="profUser" value="${user.username || ''}">
+          <label style="font-weight:700; font-size:13px; color:var(--muted)">TELEFON NUMARASI</label>
+          <input type="text" id="profPhone" value="${user.phone || ''}">
+          <label style="font-weight:700; font-size:13px; color:var(--muted)">E-POSTA ADRESİ</label>
+          <input type="email" id="profEmail" value="${user.email || ''}">
+          <label style="font-weight:700; font-size:13px; color:var(--muted)">YENİ ŞİFRE (Değiştirmek istemiyorsanız boş bırakın)</label>
+          <input type="password" id="profPass" placeholder="••••••••">
+          <button onclick="updateProfile()" style="width:100%; margin-top:10px;">Bilgileri Güncelle</button>
+        </div>
+      `;
+    }
+
+    // 5. SÜPER ADMİN: 23 İŞLETME
+    else if (currentTab === 'isletmeler' && superData) {
+      c.innerHTML = `
+        <div class="header-bar" style="margin-bottom:16px;">
+          <div>
+            <h3 style="margin:0">23 İşletme & Yönetici Hesapları</h3>
+            <p style="color:var(--muted); font-size:13.5px; margin:4px 0 0;">İşletmelerin kullanıcı adı, şifre ve iletişim bilgilerini dilediğiniz gibi güncelleyebilirsiniz.</p>
+          </div>
+          <button class="btn-sec" onclick="exportBusinesses(superData.businesses)">📄 İşletmeleri Excel/PDF İndir</button>
+        </div>
+
         <div class="table-box">
           <table>
             <thead>
               <tr>
-                <th>İşlem Yapan</th>
-                <th>Yapılan İşlem</th>
-                <th>Detay</th>
-                <th>Tarih & Saat</th>
+                <th>İşletme Adı</th>
+                <th>Kategori</th>
+                <th>Kullanıcı Adı</th>
+                <th>Mevcut Şifre</th>
+                <th>İletişim</th>
+                <th>Hızlı Güncelle</th>
               </tr>
             </thead>
             <tbody>
+              ${superData.businesses.map(b => `
+                <tr>
+                  <td><strong>${b.name}</strong></td>
+                  <td><span class="badge" style="background:#f0f0f2">${b.category}</span></td>
+                  <td><code>${b.username}</code></td>
+                  <td><code style="color:var(--blue)">${b.password_hash}</code></td>
+                  <td style="font-size:13px">${b.phone || '-'}<br><span style="color:var(--muted)">${b.email || '-'}</span></td>
+                  <td>
+                    <div style="display:flex; gap:6px;">
+                      <input type="text" id="edit_u_${b.id}" placeholder="Kullanıcı adı" value="${b.username}" style="margin:0; width:110px; padding:6px;">
+                      <input type="text" id="edit_p_${b.id}" placeholder="Şifre" value="${b.password_hash}" style="margin:0; width:110px; padding:6px;">
+                      <button class="btn-sec" style="padding:6px 12px; font-size:12px;" onclick="saveBizCreds('${b.id}')">Kaydet</button>
+                    </div>
+                  </td>
+                </tr>
+              `).join('')}
+            </tbody>
+          </table>
+        </div>
+      `;
+    }
+
+    // 6. SÜPER ADMİN: LOGLAR
+    else if (currentTab === 'loglar' && superData) {
+      c.innerHTML = `
+        <div class="header-bar" style="margin-bottom:16px;">
+          <div>
+            <h3 style="margin:0">Sistem Denetim Logları (Audit Trail)</h3>
+            <p style="color:var(--muted); font-size:13.5px; margin:4px 0 0;">Kim hangi randevuyu sildi, ne zaman onayladı, kim şifre değiştirdi anlık kayıt altındadır.</p>
+          </div>
+          <button class="btn-sec" onclick="exportLogsPDF(superData.logs)">📄 Logları PDF İndir</button>
+        </div>
+
+        <div class="table-box">
+          <table>
+            <thead><tr><th>Tarih & Saat</th><th>İşlem Yapan</th><th>İşlem Türü</th><th>Detay</th></tr></thead>
+            <tbody>
               ${superData.logs.map(l => `
                 <tr>
+                  <td style="font-size:13px; color:var(--muted)">${l.created_at?.replace('T',' ').substring(0,19)}</td>
                   <td><strong>${l.performed_by}</strong></td>
-                  <td><span class="badge badge-active">${l.action}</span></td>
-                  <td>${l.details}</td>
-                  <td style="font-size:13px; color:var(--muted)">${l.created_at}</td>
+                  <td><span class="badge badge-approved">${l.action}</span></td>
+                  <td style="font-size:13.5px">${l.details}</td>
                 </tr>
               `).join('')}
             </tbody>
@@ -290,8 +437,23 @@
     }
   }
 
+  function setApptFilter(f) {
+    apptFilter = f;
+    renderDashboard();
+  }
+
+  // API Fonksiyonları
+  async function approveAppt(id) {
+    await fetch("/api/approve-appointment", {
+      method: "POST",
+      headers: { "Content-Type": "application/json", "Authorization": "Bearer " + token },
+      body: JSON.stringify({ id })
+    });
+    renderDashboard();
+  }
+
   async function deleteAppt(id) {
-    if (!confirm("Randevuyu silmek istiyor musunuz?")) return;
+    if (!confirm("Bu randevuyu silmek istediğinize emin misiniz?")) return;
     await fetch("/api/delete-appointment", {
       method: "POST",
       headers: { "Content-Type": "application/json", "Authorization": "Bearer " + token },
@@ -300,63 +462,133 @@
     renderDashboard();
   }
 
+  async function saveSchedule() {
+    const slot_duration = parseInt(document.getElementById("slotDuration").value);
+    const days = ["Pazartesi", "Salı", "Çarşamba", "Perşembe", "Cuma", "Cumartesi", "Pazar"];
+    const working_days = days.filter(d => document.getElementById("day_" + d).checked);
+
+    await fetch("/api/save-schedule", {
+      method: "POST",
+      headers: { "Content-Type": "application/json", "Authorization": "Bearer " + token },
+      body: JSON.stringify({ working_days, slot_duration, blocked_hours: [] })
+    });
+    alert("Çalışma saatleri ve seans aralıkları kaydedildi.");
+    renderDashboard();
+  }
+
   async function submitBlog() {
     const title = document.getElementById("blogTitle").value.trim();
     const content = document.getElementById("blogContent").value.trim();
-    if (!title || !content) return alert("Lütfen alanları doldurun!");
-    const res = await fetch("/api/create-blog", {
+    if (!title || !content) return alert("Lütfen başlık ve içerik giriniz!");
+
+    await fetch("/api/create-blog", {
       method: "POST",
       headers: { "Content-Type": "application/json", "Authorization": "Bearer " + token },
       body: JSON.stringify({ title, content })
     });
-    const d = await res.json();
-    alert(d.message);
-    document.getElementById("blogTitle").value = "";
-    document.getElementById("blogContent").value = "";
+    alert("Blog yazınız Süper Admin onayına gönderildi.");
+    renderDashboard();
   }
 
-  async function moderateBlog(id, status) {
+  async function deleteBlog(id) {
+    if (!confirm("Blog yazısını silmek istediğinize emin misiniz?")) return;
+    await fetch("/api/delete-blog", {
+      method: "POST",
+      headers: { "Content-Type": "application/json", "Authorization": "Bearer " + token },
+      body: JSON.stringify({ id })
+    });
+    renderDashboard();
+  }
+
+  async function moderateBlog(id, status, reason = "") {
     await fetch("/api/moderate-blog", {
       method: "POST",
       headers: { "Content-Type": "application/json", "Authorization": "Bearer " + token },
-      body: JSON.stringify({ id, status })
+      body: JSON.stringify({ id, status, rejection_reason: reason })
     });
     renderDashboard();
   }
 
-  async function changePassword(targetId) {
-    const passInput = targetId ? document.getElementById("pass_" + targetId) : document.getElementById("newPass");
-    const newPass = passInput.value.trim();
-    if (!newPass) return alert("Lütfen yeni şifre girin!");
-    const res = await fetch("/api/change-password", {
+  function rejectBlogPrompt(id) {
+    const reason = prompt("Lütfen ret gerekçenizi yazın (İşletmeye gösterilecektir):", "İçerik kurallara uygun değil.");
+    if (reason !== null) moderateBlog(id, "rejected", reason);
+  }
+
+  async function updateProfile() {
+    const username = document.getElementById("profUser").value.trim();
+    const phone = document.getElementById("profPhone").value.trim();
+    const email = document.getElementById("profEmail").value.trim();
+    const password = document.getElementById("profPass").value.trim();
+
+    const res = await fetch("/api/update-profile", {
       method: "POST",
       headers: { "Content-Type": "application/json", "Authorization": "Bearer " + token },
-      body: JSON.stringify({ target_business_id: targetId, new_password: newPass })
+      body: JSON.stringify({ username, phone, email, password })
     });
     const d = await res.json();
-    alert(d.message);
-    passInput.value = "";
+    alert(d.message || "Güncellendi.");
     renderDashboard();
   }
 
-  function exportExcel(data) {
-    const ws = XLSX.utils.json_to_sheet(data);
-    const wb = XLSX.utils.book_new();
-    XLSX.utils.book_append_sheet(wb, ws, "Randevular");
-    XLSX.writeFile(wb, "04agri_randevu_raporu.xlsx");
+  async function saveBizCreds(id) {
+    const u = document.getElementById("edit_u_" + id).value.trim();
+    const p = document.getElementById("edit_p_" + id).value.trim();
+    await fetch("/api/superadmin-action", {
+      method: "POST",
+      headers: { "Content-Type": "application/json", "Authorization": "Bearer " + token },
+      body: JSON.stringify({ action: "change_creds", target_id: id, value: u, value2: p })
+    });
+    alert("İşletme giriş bilgileri güncellendi.");
+    renderDashboard();
   }
 
-  function exportPDF(data) {
+  // PDF & EXCEL ÇIKTILARI ($0)
+  function singlePDF(a) {
     const { jsPDF } = window.jspdf;
     const doc = new jsPDF();
-    doc.text("04agri.com - Randevu ve Islem Dokumu", 14, 15);
-    const rows = data.map(d => [d.business_name || user.name, d.customer_name, d.customer_phone, d.appointment_date + ' ' + d.appointment_time, d.is_deleted ? 'Silindi' : d.status]);
-    doc.autoTable({
-      head: [['Isletme', 'Musteri', 'Telefon', 'Tarih', 'Durum']],
-      body: rows,
-      startY: 20
-    });
-    doc.save("04agri_randevu_dokumu.pdf");
+    doc.text("04agri.com - Randevu Detay Fisi", 14, 20);
+    doc.text(`Randevu Kodu: ${a.code || '-'}`, 14, 30);
+    doc.text(`Musteri: ${a.customer_name}`, 14, 40);
+    doc.text(`Telefon: ${a.customer_phone}`, 14, 50);
+    doc.text(`E-Posta: ${a.customer_email || '-'}`, 14, 60);
+    doc.text(`Tarih & Saat: ${a.appointment_date} - ${a.appointment_time}`, 14, 70);
+    doc.text(`Durum: ${a.is_deleted ? 'Silindi' : a.status}`, 14, 80);
+    doc.text(`Not: ${a.customer_note || '-'}`, 14, 90);
+    doc.save(`Randevu_${a.code || a.id}.pdf`);
+  }
+
+  function exportPDF(list, filename = "Randevular") {
+    const { jsPDF } = window.jspdf;
+    const doc = new jsPDF();
+    doc.text("04agri.com - Randevu Dokumu", 14, 15);
+    const rows = list.map(d => [d.code || '-', d.business_name || user.name, d.customer_name, d.customer_phone, d.appointment_date + ' ' + d.appointment_time, d.is_deleted ? `Silindi (${d.deleted_by})` : d.status]);
+    doc.autoTable({ head: [['Kod', 'Isletme', 'Musteri', 'Telefon', 'Tarih', 'Durum']], body: rows, startY: 20 });
+    doc.save(`${filename}.pdf`);
+  }
+
+  function exportExcel(list) {
+    const ws = XLSX.utils.json_to_sheet(list);
+    const wb = XLSX.utils.book_new();
+    XLSX.utils.book_append_sheet(wb, ws, "Randevular");
+    XLSX.writeFile(wb, "04agri_randevular.xlsx");
+  }
+
+  function exportLogsPDF(logs) {
+    const { jsPDF } = window.jspdf;
+    const doc = new jsPDF();
+    doc.text("04agri.com - Sistem Denetim Loglari", 14, 15);
+    const rows = logs.map(l => [l.created_at?.replace('T',' ').substring(0,19), l.performed_by, l.action, l.details]);
+    doc.autoTable({ head: [['Tarih', 'Yapan', 'Islem', 'Detay']], body: rows, startY: 20 });
+    doc.save("04agri_denetim_loglari.pdf");
+  }
+
+  function exportBusinesses(biz) {
+    const { jsPDF } = window.jspdf;
+    const doc = new jsPDF();
+    doc.text("04agri.com - 23 Isletme Listesi", 14, 15);
+    const rows = biz.map(b => [b.name, b.category, b.username, b.password_hash, b.phone || '-']);
+    doc.autoTable({ head: [['Isletme', 'Kategori', 'Kullanici Adi', 'Sifre', 'Telefon']], body: rows, startY: 20 });
+    doc.save("04agri_isletmeler.pdf");
   }
 
   if (token) renderDashboard();
@@ -365,5 +597,3 @@
 
 </body>
 </html>
-
-
