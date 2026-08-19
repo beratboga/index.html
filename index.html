@@ -313,25 +313,43 @@ a{ color:inherit; text-decoration:none; cursor:pointer; }
 .subcat-card .body { justify-content:center; align-items:flex-start; height:100%; margin-top: auto; }
 .subcat-card h3 { font-size:32px; line-height:1.15; }
 
-/* KART DETAY MODALI */
-.place-modal-overlay { position:fixed; inset:0; z-index:250; background:rgba(12,16,32,0.85); backdrop-filter:blur(12px); display:grid; place-items:center; padding:20px; width:100%; height:100%; animation:fadeIn .3s ease; }
-.place-modal-content { background:var(--bg); border-radius:var(--r-lg); max-width:700px; width:100%; overflow:hidden; box-shadow:var(--shadow-3); border:1px solid var(--line); display:flex; flex-direction:column; position:relative; max-height:92vh; animation: slideUp 0.4s cubic-bezier(0.22, 0.61, 0.36, 1) forwards; }
-.pm-close { position:absolute; top:16px; right:16px; width:38px; height:38px; border-radius:50%; background:rgba(0,0,0,0.5); color:#fff; display:grid; place-items:center; z-index:10; font-weight:800; cursor:pointer; }
-.pm-img-wrap { width:100%; height:300px; position:relative; background:#111; }
-.pm-img-wrap img { width:100%; height:100%; object-fit:cover; }
-.pm-img-scrim { position:absolute; inset:0; background:linear-gradient(180deg, transparent 50%, rgba(23,21,15,0.9) 100%); }
-.pm-title-box { position:absolute; bottom:24px; left:28px; right:28px; color:#fff; }
-.pm-title-box h2 { font-size:32px; font-weight:800; text-shadow:0 2px 10px rgba(0,0,0,0.6); line-height:1.1; }
-.pm-body { padding:28px; display:flex; flex-direction:column; gap:20px; overflow-y:auto; }
-.pm-info { font-size:16px; color:var(--ink); line-height:1.6; margin:0; font-weight:500; white-space: pre-wrap; }
-.pm-meta-box { background:var(--card); border:1px solid var(--line); padding:20px; border-radius:var(--r-sm); display:flex; flex-direction:column; gap:16px; box-shadow:var(--shadow-1); }
-.pm-meta-item { display:flex; align-items:flex-start; gap:12px; font-size:15px; font-weight:600; color:var(--ink-soft); }
-.pm-meta-item strong { display:block; margin-bottom:4px; font-size:13px; color:var(--ink-faint); text-transform:uppercase; letter-spacing:.05em;}
-.pm-maps-btn { background:var(--ink); color:#fff; font-weight:800; padding:16px; border-radius:100px; display:flex; align-items:center; justify-content:center; gap:8px; font-size:16px; text-align:center; margin-top:8px; }
+/* APPLE TAM EKRAN İŞLETME DETAY SAYFASI */
+.place-fullscreen { position:fixed; inset:0; z-index:250; background:var(--bg); overflow-y:auto; display:flex; flex-direction:column; animation:fadeIn .3s ease; }
+.pf-hero { position:relative; width:100%; height:46vh; min-height:320px; max-height:480px; background:#111; overflow:hidden; }
+.pf-hero img { width:100%; height:100%; object-fit:cover; }
+.pf-hero-scrim { position:absolute; inset:0; background:linear-gradient(180deg, rgba(0,0,0,0.3) 0%, transparent 40%, rgba(12,16,32,0.92) 100%); }
+.pf-nav-bar { position:absolute; top:20px; left:20px; right:20px; z-index:10; display:flex; justify-content:space-between; align-items:center; }
+.pf-back-btn, .pf-close-btn { background:rgba(0,0,0,0.55); backdrop-filter:blur(12px); color:#fff; font-weight:800; font-size:14px; padding:10px 20px; border-radius:100px; border:1px solid rgba(255,255,255,0.2); cursor:pointer; display:inline-flex; align-items:center; gap:6px; transition:all .2s; }
+.pf-back-btn:hover, .pf-close-btn:hover { transform:scale(1.05); background:rgba(0,0,0,0.75); }
+.pf-hero-content { position:absolute; bottom:28px; left:24px; right:24px; color:#fff; z-index:5; max-width:860px; margin:0 auto; }
+.pf-hero-badge { display:inline-block; font-size:12px; font-weight:800; text-transform:uppercase; letter-spacing:0.08em; background:var(--accent); color:var(--ink); padding:4px 12px; border-radius:100px; margin-bottom:8px; }
+.pf-hero-title { font-size:clamp(28px, 4.5vw, 44px); font-weight:800; margin:0 0 4px; text-shadow:0 2px 12px rgba(0,0,0,0.5); }
+.pf-hero-sub { font-size:16.5px; opacity:0.9; font-weight:600; color:rgba(255,255,255,0.9); }
 
-/* Profil İçinde Randevu Butonu */
-.pm-book-btn { background: var(--accent); color: var(--ink); font-weight: 800; padding: 16px; border-radius: 100px; display: flex; align-items: center; justify-content: center; gap: 8px; font-size: 16px; transition: all 0.2s; text-align: center; margin-top: 4px; box-shadow: 0 8px 24px rgba(68, 189, 50, 0.2); cursor: pointer; border: none; }
-.pm-book-btn:hover { transform: translateY(-2px); filter: brightness(0.96); }
+.pf-container { max-width:860px; margin:0 auto; padding:28px 20px 90px; width:100%; display:flex; flex-direction:column; gap:22px; box-sizing:border-box; }
+
+/* APPLE HIZLI ETKİLEŞİM BUTONLARI (TELEFON, INSTAGRAM, HARİTA, RANDEVU) */
+.pf-actions-grid { display:grid; grid-template-columns:repeat(auto-fit, minmax(170px, 1fr)); gap:12px; }
+.pf-action-btn { display:flex; align-items:center; justify-content:center; gap:8px; padding:16px 18px; border-radius:18px; font-weight:800; font-size:14.5px; text-align:center; transition:all 0.25s var(--ease); box-shadow:var(--shadow-1); border:1px solid var(--line); cursor:pointer; text-decoration:none; }
+.pf-action-btn:hover { transform:translateY(-3px); box-shadow:var(--shadow-2); }
+.pf-btn-call { background:#fff; color:#0071e3; }
+.pf-btn-insta { background:linear-gradient(135deg, #833ab4, #fd1d1d, #fcb045); color:#fff; border:none; }
+.pf-btn-map { background:#fff; color:#E84142; }
+.pf-btn-book { background:var(--accent); color:var(--ink); border:none; grid-column:1/-1; font-size:16.5px; padding:18px; box-shadow:0 8px 24px rgba(68,189,50,0.25); }
+
+/* APPLE KARTLARI (HAKKINDA, HİZMETLER, İLETİŞİM) */
+.pf-card { background:var(--card); border-radius:24px; padding:26px; box-shadow:var(--shadow-1); border:1px solid var(--line); display:flex; flex-direction:column; gap:12px; }
+.pf-card-title { font-size:18px; font-weight:800; color:var(--ink); display:flex; align-items:center; gap:8px; }
+.pf-card-desc { font-size:15.5px; line-height:1.7; color:var(--ink-soft); white-space:pre-wrap; margin:0; }
+
+.pf-services-grid { display:flex; flex-wrap:wrap; gap:10px; margin-top:6px; }
+.pf-service-tag { background:var(--bg-2); color:var(--ink); padding:9px 16px; border-radius:100px; font-size:13.5px; font-weight:700; border:1px solid var(--line); display:inline-flex; align-items:center; gap:6px; }
+
+.pf-contact-list { display:flex; flex-direction:column; gap:10px; }
+.pf-contact-row { display:flex; align-items:center; justify-content:space-between; padding:14px 18px; background:var(--bg); border-radius:14px; border:1px solid var(--line); text-decoration:none; color:inherit; transition:background .2s; }
+.pf-contact-row:hover { background:var(--bg-2); }
+.pf-contact-lbl { font-size:12.5px; font-weight:700; color:var(--ink-faint); text-transform:uppercase; }
+.pf-contact-val { font-size:14.5px; font-weight:800; color:var(--ink); }
 
 /* APPLE MINIMALIST MODAL (RANDEVU & BLOG) */
 .app-modal-overlay { position:fixed; inset:0; z-index:9999; background:rgba(0,0,0,0.5); backdrop-filter:blur(16px); display:grid; place-items:center; padding:16px; animation:fadeIn .2s ease; }
@@ -517,13 +535,13 @@ a{ color:inherit; text-decoration:none; cursor:pointer; }
     },
     {
       id:"gezilecek", name:"Gezilecek Yerler", color:"#1ABC9C", tagline:"Ağrı'nın Hazineleri", blurb:"Tarihten doğaya muhteşem manzaralar.",
-      places:[
-        { name:"Balık Gölü", icon: "tent", note: "Doğa ile iç içe kamp ve gezi.", info:"Türkiye'nin en yüksek rakımlı buzul göllerinden biridir.", area:"Taşlıçay", img:"balikgolu.jpg", mapsUrl:"https://maps.google.com/?q=Balik+Golu+Taslicay+Agri" },
-        { name:"İshak Paşa Sarayı", icon: "mosque", note: "Tarihi mimari şaheseri.", info:"18. yüzyıldan kalma büyüleyici mimari şaheser.", area:"Doğubayazıt", img:"ishakpasa.jpg", mapsUrl:"https://maps.google.com/?q=Ishak+Pasa+Sarayi+Dogubayazit" },
-        { name:"Ağrı Dağı (5.137 m)", icon: "mountain", note: "Avrupa'nın en yüksek zirvesi.", info:"Türkiye'nin ve tüm Avrupa'nın en yüksek heybetli zirvesi.", area:"Doğubayazıt", img:"agridagi2.jpg", mapsUrl:"https://maps.google.com/?q=Agri+Dagi+Zirvesi" },
-        { name:"Diyadin Kaplıcaları", icon: "spa", note: "Şifalı termal sular ve dinlenme.", info:"Şifalı yüksek mineralli termal suları.", area:"Diyadin", img:"kaplica.jpg", mapsUrl:"https://maps.google.com/?q=Diyadin+Kaplicalari+Agri" },
-        { name:"Meteor Çukuru", icon: "meteor", note: "Dünyanın en büyük ikinci krateri.", info:"Dünyanın tescillenmiş en büyük ikinci göktaşı çukuru.", area:"Doğubayazıt", img:"meteor.jpg", mapsUrl:"https://maps.google.com/?q=Meteor+Cukuru+Dogubayazit" },
-        { name:"Nuh'un Gemisi (Durupınar)", icon: "ship", note: "Efsanevi inanç turizmi rotası.", info:"Nuh'un gemisinin silüetine sahip doğal oluşum.", area:"Durupınar", img:"nuh.jpg", mapsUrl:"https://maps.google.com/?q=Nuhun+Gemisi+Durupinar+Agri" }
+           places:[
+        { name:"Balık Gölü", icon: "tent", note: "Rakım: 2.250 m • Doğal Lav Seti Gölü", info:"Türkiye'nin ve dünyanın en yüksek rakımlı tatlı su göllerinden biridir (2.250 m). Eşsiz doğası, adaları ve meşhur kırmızı benekli alabalıklarıyla Ağrı'nın saklı cennetidir.", area:"Taşlıçay", img:"balikgolu.jpg", mapsUrl:"https://maps.google.com/?q=Balik+Golu+Taslicay+Agri" },
+        { name:"İshak Paşa Sarayı", icon: "mosque", note: "1784 Yapımı • Dünyanın İlk Isıtmalı Sarayı", info:"1784 yılında tamamlanan saray; Osmanlı, Selçuklu ve Barok mimarisinin büyüleyici bir sentezidir. 116 odası, camisi, divanı ve dünyada ilk kez kullanılan merkezi yerden ısıtma sistemiyle bir şaheserdir.", area:"Doğubayazıt", img:"ishakpasa.jpg", mapsUrl:"https://maps.google.com/?q=Ishak+Pasa+Sarayi+Dogubayazit" },
+        { name:"Ağrı Dağı (5.137 m)", icon: "mountain", note: "5.137 m • Türkiye ve Avrupa'nın Zirvesi", info:"5.137 metre yüksekliğiyle Türkiye'nin ve tüm Avrupa kıtasının en yüksek noktasıdır. Kutsal metinlerde Nuh'un Gemisi'nin karaya oturduğu yer olarak anılan volkanik dağ, dünya dağcılarının gözdesidir.", area:"Doğubayazıt", img:"agridagi2.jpg", mapsUrl:"https://maps.google.com/?q=Agri+Dagi+Zirvesi" },
+        { name:"Diyadin Kaplıcaları", icon: "spa", note: "Doğal Travertenler • Şifalı Termal Sular", info:"Murat Nehri kanyonu kenarında yer alan şifalı termal sular; yüksek mineralli yapısıyla cilt ve romatizma hastalıklarına iyi gelir. Doğal kireç oluşumlarıyla 'Doğu'nun Pamukkalesi' olarak bilinir.", area:"Diyadin", img:"kaplica.jpg", mapsUrl:"https://maps.google.com/?q=Diyadin+Kaplicalari+Agri" },
+        { name:"Meteor Çukuru", icon: "meteor", note: "1892 Oluşumlu • Dünyanın En Büyük 2. Çukuru", info:"1892 yılında düşen dev göktaşı sonucu oluşmuştur. 35 metre genişliği ve 60 metre derinliğiyle Alaska'dakinden sonra dünyanın tescillenmiş en büyük 2. meteor krateridir.", area:"Doğubayazıt (İran Sınırı)", img:"meteor.jpg", mapsUrl:"https://maps.google.com/?q=Meteor+Cukuru+Dogubayazit" },
+        { name:"Nuh'un Gemisi (Durupınar)", icon: "ship", note: "Tarihi İnanç Rotası • Gemi Silüeti", info:"Doğubayazıt Telçeker köyü yakınlarında bulunan ve dev bir gemi kalıbını andıran doğal jeolojik anıt; kutsal tufan sonrası Nuh'un Gemisi'nin izi olarak tüm dünyada araştırılmaktadır.", area:"Doğubayazıt (Üzengili Köyü)", img:"nuh.jpg", mapsUrl:"https://maps.google.com/?q=Nuhun+Gemisi+Durupinar+Agri" }
       ]
     }
   ];
@@ -1040,33 +1058,51 @@ function PrayerTimesWidget() {
 function PharmacyWidget() {
   const [district, setDistrict] = useState("MERKEZ");
   const now = new Date();
-  const todayStr = `${String(now.getDate()).padStart(2, '0')}.${String(now.getMonth() + 1).padStart(2, '0')}.2026`;
+  
+  // Sabah 09:00 Devir Kuralı (00:00 - 08:59 arası dünün nöbeti, 09:00'da bugünün nöbeti)
+  const shiftDate = new Date(now);
+  if (now.getHours() < 9) {
+    shiftDate.setDate(shiftDate.getDate() - 1);
+  }
+  const day = String(shiftDate.getDate()).padStart(2, '0');
+  const month = String(shiftDate.getMonth() + 1).padStart(2, '0');
+  const year = shiftDate.getFullYear();
+  const activeDateStr = `${day}.${month}.${year}`;
 
-  // Önce bugünün eczanesini, yoksa listedeki en yakın tarihi al
-  let list = window.AGRI.dutyPharmacies.filter(p => p.district === district && p.date === todayStr);
-  if (list.length === 0) list = window.AGRI.dutyPharmacies.filter(p => p.district === district);
-
-  const ph = list[0];
+  // O gün ve o ilçedeki TÜM nöbetçileri al (Merkez'de 2 tane, diğer ilçelerde 1 tane)
+  let list = window.AGRI.dutyPharmacies.filter(p => p.district === district && p.date === activeDateStr);
+  if (list.length === 0) {
+    list = window.AGRI.dutyPharmacies.filter(p => p.district === district).slice(0, 2);
+  }
 
   return (
     <div className="widget-card pharmacy-widget">
       <div className="ph-header">
-        <div className="ph-title"><span style={{color:'var(--pin)'}}>●</span> Nöbetçi Eczane</div>
+        <div className="ph-title"><span style={{color:'var(--pin)'}}>●</span> Nöbetçi Eczaneler</div>
         <select className="ph-select" value={district} onChange={e=>setDistrict(e.target.value)}>
           {["MERKEZ", "DİYADİN", "DOĞUBAYAZIT", "ELEŞKİRT", "HAMUR", "PATNOS", "TAŞLIÇAY", "TUTAK"].map(d=><option key={d} value={d}>{d}</option>)}
         </select>
       </div>
-      {ph ? (
-        <div className="ph-box">
-          <div className="ph-name-row"><span className="ph-name">{ph.name}</span><span className="ph-date-badge">{ph.date}</span></div>
-          <div className="ph-detail">{ph.address}</div>
-          {ph.landmark && <div className="ph-landmark">📍 {ph.landmark}</div>}
-          <div className="ph-footer-actions">
-            <a className="ph-phone" href={`tel:${ph.phone}`}>📞 {ph.phone}</a>
-            <a className="ph-map-link" href={ph.url} target="_blank">Harita</a>
-          </div>
-        </div>
-      ) : <div className="ph-empty">Nöbetçi bulunamadı.</div>}
+      <div style={{display:'flex', flexDirection:'column', gap:'10px'}}>
+        {list.length > 0 ? (
+          list.map((ph, idx) => (
+            <div className="ph-box" key={idx}>
+              <div className="ph-name-row">
+                <span className="ph-name">{ph.name}</span>
+                <span className="ph-date-badge">{ph.date}</span>
+              </div>
+              <div className="ph-detail">{ph.address}</div>
+              {ph.landmark && <div className="ph-landmark">📍 {ph.landmark}</div>}
+              <div className="ph-footer-actions">
+                <a className="ph-phone" href={`tel:${ph.phone}`}>📞 {ph.phone}</a>
+                <a className="ph-map-link" href={ph.url} target="_blank" rel="noopener noreferrer">Haritada Yol Tarifi ➔</a>
+              </div>
+            </div>
+          ))
+        ) : (
+          <div className="ph-empty">Bu ilçe için nöbetçi bulunamadı.</div>
+        )}
+      </div>
     </div>
   );
 }
@@ -1169,13 +1205,35 @@ function Categories({ onOpen }){
 
 function PharmacyFullView() {
   const [district, setDistrict] = useState("MERKEZ");
-  const list = window.AGRI.dutyPharmacies.filter(p => p.district === district);
+  const now = new Date();
+  
+  // Sabah 09:00 Devir Kuralı
+  const shiftDate = new Date(now);
+  if (now.getHours() < 9) {
+    shiftDate.setDate(shiftDate.getDate() - 1);
+  }
+  const day = String(shiftDate.getDate()).padStart(2, '0');
+  const month = String(shiftDate.getMonth() + 1).padStart(2, '0');
+  const year = shiftDate.getFullYear();
+  const activeDateStr = `${day}.${month}.${year}`;
+
+  // SADECE o günün nöbetçilerini filtreler (Tüm İlçeler veya Seçilen İlçe)
+  let list = window.AGRI.dutyPharmacies.filter(p => p.date === activeDateStr);
+  if (district !== "TÜM İLÇELER") {
+    list = list.filter(p => p.district === district);
+  }
+  if (list.length === 0) {
+    list = window.AGRI.dutyPharmacies.filter(p => district === "TÜM İLÇELER" || p.district === district);
+  }
+
   return (
     <div className="pharm-page">
       <div className="pharm-page-bar">
-        <div className="pharm-page-date">📅 Günlük Nöbetçi Eczaneler</div>
+        <div className="pharm-page-date">
+          📅 {activeDateStr} Nöbetçi Eczaneleri <span style={{fontSize:'13px', color:'var(--ink-soft)', fontWeight:600}}>(Sabah 09:00'a kadar nöbette)</span>
+        </div>
         <div className="pharm-page-districts">
-          {["MERKEZ", "DİYADİN", "DOĞUBAYAZIT", "ELEŞKİRT", "HAMUR", "PATNOS", "TAŞLIÇAY", "TUTAK"].map(d=>(
+          {["MERKEZ", "DİYADİN", "DOĞUBAYAZIT", "ELEŞKİRT", "HAMUR", "PATNOS", "TAŞLIÇAY", "TUTAK", "TÜM İLÇELER"].map(d=>(
             <button key={d} className={"pharm-chip"+(d===district?" active":"")} onClick={()=>setDistrict(d)}>{d}</button>
           ))}
         </div>
@@ -1183,12 +1241,15 @@ function PharmacyFullView() {
       <div className="pharm-page-grid">
         {list.map((ph, idx) => (
           <div className="pharm-card" key={idx}>
-            <div style={{display:'flex', justifyContent:'space-between'}}><span className="pharm-card-name">{ph.name}</span><span className="pharm-card-dist">{ph.district}</span></div>
-            <div style={{color:'var(--ink-soft)', fontSize:'14px'}}>{ph.address}</div>
-            {ph.landmark && <div style={{fontWeight:700, fontSize:'13px'}}>📍 {ph.landmark}</div>}
+            <div style={{display:'flex', justifyContent:'space-between', alignItems:'center'}}>
+              <span className="pharm-card-name">{ph.name}</span>
+              <span className="pharm-card-dist">{ph.district}</span>
+            </div>
+            <div style={{color:'var(--ink-soft)', fontSize:'14px', lineHeight:'1.4'}}>{ph.address}</div>
+            {ph.landmark && <div style={{fontWeight:700, fontSize:'13px', color:'var(--ink)'}}>📍 {ph.landmark}</div>}
             <div className="pharm-card-foot">
               <a href={`tel:${ph.phone}`} style={{fontWeight:800}}>📞 {ph.phone}</a>
-              <a href={ph.url} target="_blank" style={{color:'#3498DB', fontWeight:700}}>Haritada Gör</a>
+              <a href={ph.url} target="_blank" rel="noopener noreferrer" style={{color:'#3498DB', fontWeight:700}}>Haritada Yol Tarifi ➔</a>
             </div>
           </div>
         ))}
@@ -1201,32 +1262,122 @@ function PlacesOverlay({ cat, initialSubCat, initialPlace, onClose, onOpenBookin
   const [selectedSubCat, setSelectedSubCat] = useState(initialSubCat || null);
   const [selectedPlace, setSelectedPlace] = useState(initialPlace || null);
 
+  // APPLE TAM EKRAN İŞLETME DETAY EKRANI
   if (selectedPlace) {
+    const isGezilecek = cat?.id === "gezilecek" || !selectedPlace.phones;
+    const primaryPhone = selectedPlace.phones && selectedPlace.phones.length > 0 ? selectedPlace.phones[0] : null;
+    const mapLink = selectedPlace.mapsUrl || `https://maps.google.com/?q=${encodeURIComponent(selectedPlace.name + ' ' + (selectedPlace.address || 'Ağrı'))}`;
+    const instaLink = selectedPlace.instagram ? `https://instagram.com/${selectedPlace.instagram.replace('@','')}` : null;
+    const servicesList = selectedPlace.lessons || selectedPlace.services || null;
+
     return (
-      <div className="place-modal-overlay" onClick={onClose}>
-        <div className="place-modal-content" onClick={e => e.stopPropagation()}>
-          <div className="pm-close" onClick={onClose}>✕</div>
-          <div className="pm-img-wrap">
-            <img src={selectedPlace.img} alt={selectedPlace.name} style={selectedPlace.bgPos ? { objectPosition: selectedPlace.bgPos } : {}} />
-            <div className="pm-img-scrim"></div>
-            <div className="pm-title-box">
-              <h2>{selectedPlace.name}</h2>
-              {selectedPlace.subName && <span style={{display:'block', fontSize:'15px', opacity:0.85, marginTop:'4px'}}>{selectedPlace.subName}</span>}
-            </div>
-          </div>
-          <div className="pm-body">
-            <p className="pm-info">{selectedPlace.info}</p>
-            <div className="pm-meta-box">
-              {selectedPlace.area && <div className="pm-meta-item"><div><strong>Konum:</strong> {selectedPlace.area}</div></div>}
-              {selectedPlace.address && <div className="pm-meta-item"><div><strong>Adres:</strong> {selectedPlace.address}</div></div>}
-              {selectedPlace.phones && <div className="pm-meta-item"><div><strong>Telefon:</strong> {selectedPlace.phones.join(", ")}</div></div>}
-            </div>
-
-            <button className="pm-book-btn" onClick={() => { onClose(); onOpenBooking(selectedPlace); }}>
-              📅 Bu İşletmeden Online Randevu Al
+      <div className="place-fullscreen">
+        {/* ÜST GÖRSEL & BAŞLIK ALANI */}
+        <div className="pf-hero">
+          <div className="pf-nav-bar">
+            <button className="pf-back-btn" onClick={() => setSelectedPlace(null)}>
+              ‹ Geri Dön
             </button>
+            <button className="pf-close-btn" onClick={onClose}>
+              ✕ Kapat
+            </button>
+          </div>
+          <img src={selectedPlace.img} alt={selectedPlace.name} style={selectedPlace.bgPos ? { objectPosition: selectedPlace.bgPos } : {}} />
+          <div className="pf-hero-scrim"></div>
+          <div className="pf-hero-content">
+            <span className="pf-hero-badge">{selectedPlace.note || cat.name}</span>
+            <h1 className="pf-hero-title">{selectedPlace.name}</h1>
+            {selectedPlace.subName && <div className="pf-hero-sub">{selectedPlace.subName}</div>}
+          </div>
+        </div>
 
-            {selectedPlace.mapsUrl && <a className="pm-maps-btn" href={selectedPlace.mapsUrl} target="_blank">Google Haritalar'da Aç</a>}
+        {/* DETAY İÇERİK KONTEYNERI */}
+        <div className="pf-container">
+          {/* HIZLI AKSİYON BUTONLARI */}
+          <div className="pf-actions-grid">
+            {primaryPhone && (
+              <a className="pf-action-btn pf-btn-call" href={`tel:${primaryPhone.replace(/\s/g, '')}`}>
+                📞 Hemen Ara ({primaryPhone})
+              </a>
+            )}
+            {instaLink && (
+              <a className="pf-action-btn pf-btn-insta" href={instaLink} target="_blank" rel="noopener noreferrer">
+                📸 Instagram'da Gör (@{selectedPlace.instagram})
+              </a>
+            )}
+            <a className="pf-action-btn pf-btn-map" href={mapLink} target="_blank" rel="noopener noreferrer">
+              🧭 Konum & Yol Tarifi Al
+            </a>
+            {!isGezilecek && (
+              <button className="pf-action-btn pf-btn-book" onClick={() => { onClose(); onOpenBooking(selectedPlace); }}>
+                📅 Bu İşletmeden Ücretsiz Online Randevu Al ➔
+              </button>
+            )}
+          </div>
+
+          {/* HAKKINDA / TANITIM KARTI */}
+          <div className="pf-card">
+            <div className="pf-card-title">
+              {isGezilecek ? "🏛️ Tarihçe ve Özellikler" : "✨ Hakkında & Uzmanlık"}
+            </div>
+            <p className="pf-card-desc">{selectedPlace.info}</p>
+          </div>
+
+          {/* HİZMETLER VE UZMANLIK ALANLARI KARTI (Varsa gösterir) */}
+          {servicesList && servicesList.length > 0 && (
+            <div className="pf-card">
+              <div className="pf-card-title">
+                🎯 {selectedPlace.lessonsTitle || "Sunulan Hizmetler & Uzmanlıklar"}
+              </div>
+              <div className="pf-services-grid">
+                {servicesList.map((srv, idx) => (
+                  <span key={idx} className="pf-service-tag">✓ {srv}</span>
+                ))}
+              </div>
+            </div>
+          )}
+
+          {/* DETAYLI İLETİŞİM & ADRES KARTI */}
+          <div className="pf-card">
+            <div className="pf-card-title">📍 Konum ve İletişim Bilgileri</div>
+            <div className="pf-contact-list">
+              {selectedPlace.area && (
+                <div className="pf-contact-row">
+                  <span className="pf-contact-lbl">Bölge / İlçe</span>
+                  <span className="pf-contact-val">{selectedPlace.area}</span>
+                </div>
+              )}
+              {selectedPlace.address && (
+                <a className="pf-contact-row" href={mapLink} target="_blank" rel="noopener noreferrer">
+                  <span className="pf-contact-lbl">Açık Adres</span>
+                  <span className="pf-contact-val" style={{color:'#0071e3', textDecoration:'underline'}}>{selectedPlace.address} ➔</span>
+                </a>
+              )}
+              {selectedPlace.phones && selectedPlace.phones.length > 0 && (
+                <div className="pf-contact-row">
+                  <span className="pf-contact-lbl">Telefon(lar)</span>
+                  <span className="pf-contact-val">
+                    {selectedPlace.phones.map((p, i) => (
+                      <a key={i} href={`tel:${p.replace(/\s/g, '')}`} style={{color:'#0071e3', marginRight:'8px'}}>
+                        {p}{i < selectedPlace.phones.length - 1 ? ' - ' : ''}
+                      </a>
+                    ))}
+                  </span>
+                </div>
+              )}
+              {selectedPlace.email && (
+                <a className="pf-contact-row" href={`mailto:${selectedPlace.email}`}>
+                  <span className="pf-contact-lbl">E-Posta</span>
+                  <span className="pf-contact-val" style={{color:'#0071e3'}}>{selectedPlace.email}</span>
+                </a>
+              )}
+              {selectedPlace.instagram && (
+                <a className="pf-contact-row" href={instaLink} target="_blank" rel="noopener noreferrer">
+                  <span className="pf-contact-lbl">Instagram</span>
+                  <span className="pf-contact-val" style={{color:'#E1306C'}}>@{selectedPlace.instagram} ➔</span>
+                </a>
+              )}
+            </div>
           </div>
         </div>
       </div>
@@ -1261,7 +1412,7 @@ function PlacesOverlay({ cat, initialSubCat, initialPlace, onClose, onOpenBookin
                 <div className="body">
                   <h3>{p.name}</h3>
                   {p.subName && <div style={{fontSize:'13px', opacity:0.85}}>{p.subName}</div>}
-                  <div className="card-note">Detay & Randevu Al ➔</div>
+                  <div className="card-note">{cat.id === "gezilecek" ? (p.note || "Tarihçe & Yol Tarifi ➔") : "Detaylı Profil & Randevu ➔"}</div>
                 </div>
               </div>
             ))}
@@ -1523,6 +1674,21 @@ function App(){
   const [selectedBlog, setSelectedBlog] = useState(null);
   const [activeTab, setActiveTab] = useState('home');
 
+  // KULLANICI SÖZLEŞMESİ DURUMLARI
+  const [tosAccepted, setTosAccepted] = useState(() => safeStore.get("agri_tos_accepted") === "true");
+  const [tosDeclined, setTosDeclined] = useState(false);
+  const [showDocModal, setShowDocModal] = useState(false);
+
+  const handleAcceptTos = () => {
+    safeStore.set("agri_tos_accepted", "true");
+    setTosAccepted(true);
+    setTosDeclined(false);
+  };
+
+  const handleDeclineTos = () => {
+    setTosDeclined(true);
+  };
+
   const handleOpenBooking = (place = null) => {
     setSelectedPlaceForBooking(place);
     setBookingModal(true);
@@ -1538,6 +1704,104 @@ function App(){
 
   return (
     <div>
+      {/* SÖZLEŞMEYİ REDDEDEN KULLANICI İÇİN KİLİTLİ EKRAN */}
+      {tosDeclined && (
+        <div className="tos-blocked-overlay">
+          <div className="tos-blocked-card">
+            <div style={{fontSize:'48px', marginBottom:'12px'}}>⚠️</div>
+            <h2 style={{fontSize:'22px', fontWeight:800, marginBottom:'10px'}}>Erişim Kısıtlandı</h2>
+            <p style={{fontSize:'14.5px', color:'var(--ink-soft)', lineHeight:1.6, marginBottom:'24px'}}>
+              04Ağrı.com hizmetlerinden, şehir rehberinden ve randevu sisteminden yararlanabilmek için Kullanım Koşulları ve Hizmet Şartları'nı kabul etmeniz gerekmektedir.
+            </p>
+            <button className="tos-btn accept" style={{width:'100%'}} onClick={() => setTosDeclined(false)}>
+              🔄 Sözleşmeyi Tekrar İncele ve Onayla
+            </button>
+          </div>
+        </div>
+      )}
+
+      {/* YENİ GELEN KULLANICIYA APPLE MİNİMALİST SÖZLEŞME MODALI */}
+      {!tosAccepted && !tosDeclined && (
+        <div className="tos-overlay">
+          <div className="tos-modal">
+            <h2>📜 Kullanıcı ve Hizmet Şartları</h2>
+            <p>
+              04Ağrı.com, Ağrı'daki işletme, uzman ve sağlık hizmetlerine kolayca ulaşmanızı sağlayan bağımsız bir bilgilendirme ve randevu kolaylaştırma platformudur. Devam ederek kullanım şartlarımızı kabul etmiş olursunuz.
+            </p>
+            <div className="tos-disclaimer">
+              📌 Platform bir hizmet sağlayıcı değildir. Bilgiler işletmelerin kendi beyanlarıdır.
+              <button onClick={() => setShowDocModal(true)} style={{color:'#0071e3', fontWeight:800, textDecoration:'underline', marginLeft:'6px', display:'inline-block'}}>
+                Sözleşmenin Tamamını Oku (18 Madde) ➔
+              </button>
+            </div>
+            <div className="tos-actions">
+              <button className="tos-btn decline" onClick={handleDeclineTos}>Kabul Etmiyorum</button>
+              <button className="tos-btn accept" onClick={handleAcceptTos}>Kabul Ediyorum ve Giriş Yap ✓</button>
+            </div>
+          </div>
+        </div>
+      )}
+
+      {/* 18 MADDELİK DETAYLI SÖZLEŞME METNİ MODALI */}
+      {showDocModal && (
+        <div className="doc-modal-overlay" onClick={() => setShowDocModal(false)}>
+          <div className="doc-modal-card" onClick={e => e.stopPropagation()}>
+            <div className="doc-modal-head">
+              <h2>Kullanım Koşulları ve Hizmet Şartları</h2>
+              <button className="doc-modal-close" onClick={() => setShowDocModal(false)}>✕</button>
+            </div>
+            <div className="doc-modal-body">
+              <p>
+                <strong>04AĞRI.COM KULLANIM KOŞULLARI VE HİZMET ŞARTLARI</strong><br />
+                <em>Son Güncelleme: 19 Ağustos 2026</em><br /><br />
+                04Ağrı.com, Ağrı'da yaşayan vatandaşların ve Ağrı'yı ziyaret eden kişilerin şehirdeki işletme ve hizmetler hakkında daha kolay bilgi edinebilmesi amacıyla oluşturulmuş, bağımsız ve bilgilendirme amaçlı bir internet platformudur.<br />
+                Platform herhangi bir şirket, ticari kuruluş, kamu kurumu veya işletme adına faaliyet göstermemektedir.<br />
+                04Ağrı.com'un amacı Ağrı'daki işletmelerin ve hizmet sağlayıcıların vatandaşlar tarafından daha kolay bulunabilmesini sağlamak ve uygun işletmeler için randevu oluşturulmasını kolaylaştırmaktır.<br /><br />
+
+                <strong>1. Platformun Niteliği:</strong> 04Ağrı.com bağımsız bir internet platformudur. Platformda yer alan işletmeler 04Ağrı.com'un sahibi, çalışanı, ortağı veya temsilcisi değildir. Ortaklık veya işveren-çalışan ilişkisi bulunmamaktadır. Platform sadece aracı bir bilgi ve randevu kolaylaştırma hizmetidir.<br /><br />
+
+                <strong>2. İşletmeler Tarafından Sağlanan Bilgiler:</strong> 04Ağrı.com'da yer alan işletme adı, adres, telefon, e-posta, fotoğraflar, çalışma saatleri, seanslar ve fiyat gibi bilgiler ilgili işletmelerin kendi istek ve beyanları doğrultusunda yayımlanmaktadır. Doğruluğundan ilgili işletme sorumludur.<br /><br />
+
+                <strong>3. İşletmelerin Beyanı:</strong> Bilgi gönderen işletmeler verilerin doğru olduğunu, yayımlatma hakkına sahip olduğunu ve üçüncü kişilerin haklarını ihlal etmediğini kabul ve beyan eder.<br /><br />
+
+                <strong>4. İşletme Hizmetlerinden Sorumluluk:</strong> 04Ağrı.com sunulan hizmetlerin sağlayıcısı değildir. Kalite, güvenlik, yasal uygunluk, ruhsat ve randevu uyuşmazlıkları doğrudan kullanıcı ile işletme arasındadır.<br /><br />
+
+                <strong>5. İşletme Bilgilerinin Doğrulanması:</strong> Kullanıcıların fiyat, adres, çalışma saati ve randevu uygunluğunu doğrudan işletmeden teyit etmesi tavsiye edilir.<br /><br />
+
+                <strong>6. Randevu Hizmeti:</strong> Randevu talebi oluşturulması hizmetin kesin sunulacağı anlamına gelmez; işletmenin onayına bağlıdır.<br /><br />
+
+                <strong>7. Kullanıcı Bilgileri:</strong> Randevu oluşturulurken talep edilen ad-soyad, telefon, e-posta bilgileri yalnızca randevu ve iletişim amacıyla kullanılır.<br /><br />
+
+                <strong>8. Kişisel Veriler:</strong> Randevu verileri mevzuata uygun şekilde işlenir.<br /><br />
+
+                <strong>9. Randevu Bilgilerinin İletilmesi:</strong> Randevu bilgileri randevunun yürütülmesi amacıyla sadece ilgili işletmeye aktarılır.<br /><br />
+
+                <strong>10. Görsel ve İçerikler:</strong> Telif veya hak ihlali bildirilirse ilgili içerik incelenip kaldırılır.<br /><br />
+
+                <strong>11. İçeriklerin Kaldırılması:</strong> Düzeltme veya kaldırma talepleri için e-posta: <strong>biagri0404@hotmail.com</strong><br /><br />
+
+                <strong>12. Kullanıcıların Sorumluluğu:</strong> Başkası adına izinsiz sahte randevu oluşturmak ve sistemi kötüye kullanmak yasaktır.<br /><br />
+
+                <strong>13. Üçüncü Taraf Hizmetler:</strong> Harita ve dış bağlantıların güvenliği ilgili servislerin sorumluluğundadır.<br /><br />
+
+                <strong>14. Platformun Sürekliliği:</strong> Bakım ve teknik nedenlerle geçici kesintiler yaşanabilir.<br /><br />
+
+                <strong>15. Sorumluluğun Sınırlandırılması:</strong> 04Ağrı.com bağımsız bilgilendirme ve randevu kolaylaştırma platformudur; uyuşmazlıklarda taraf değildir.<br /><br />
+
+                <strong>16. Ücretsiz ve Bağımsız Platform:</strong> Platform Ağrı halkına ve ziyaretçilerine tamamen ücretsiz hizmet sunar.<br /><br />
+
+                <strong>17. Koşulların Güncellenmesi:</strong> Koşullar platformda yayımlandığı andan itibaren geçerlidir.<br /><br />
+
+                <strong>18. İletişim:</strong> Her türlü bildirim için E-posta: <strong>biagri0404@hotmail.com</strong><br /><br />
+
+                <strong>Önemli Kullanıcı Bilgilendirmesi:</strong> 04Ağrı.com bir işletme veya hizmet sağlayıcı değildir. Hizmet almadan önce teyit etmeniz tavsiye edilir.
+              </p>
+            </div>
+          </div>
+        </div>
+      )}
+
+      {/* WEB SİTESİ ANA İÇERİĞİ */}
       <Topbar onOpenBooking={handleOpenBooking} />
       <Hero onOpenCat={setOpenCat} onOpenBooking={handleOpenBooking} onSearchSelect={handleSearchSelect} />
       <ImageMarquee />
@@ -1545,7 +1809,7 @@ function App(){
       <AgendaDashboard onSelectBlog={setSelectedBlog} />
       <Categories onOpen={setOpenCat} />
 
-      <footer className="foot" id="iletisim">
+            <footer className="foot" id="iletisim">
         <div className="wrap">
           <div className="top">
             <div>
@@ -1558,13 +1822,21 @@ function App(){
                 {window.AGRI.categories.map(c => <span key={c.id} onClick={()=>setOpenCat(c)}>{c.name}</span>)}
               </div>
               <div className="col">
-                <h5>İletişim</h5>
+                <h5>Kurumsal & İletişim</h5>
+                <span onClick={() => setShowDocModal(true)} style={{cursor:'pointer', color:'var(--accent)', fontWeight:700, padding:'4px 0', display:'block'}}>
+                  📜 Kullanıcı Sözleşmesi (18 Madde)
+                </span>
                 <a href="mailto:biagri0404@hotmail.com">biagri0404@hotmail.com</a>
               </div>
             </div>
           </div>
           <div className="rule"></div>
-          <div className="bottom"><span>Copyright © 2026 04agri.com</span></div>
+          <div className="bottom" style={{display:'flex', justifyContent:'space-between', alignItems:'center', flexWrap:'wrap', gap:'10px'}}>
+            <span>Copyright © 2026 04agri.com — Tüm Hakları Saklıdır.</span>
+            <span onClick={() => setShowDocModal(true)} style={{cursor:'pointer', textDecoration:'underline', opacity:0.8}}>
+              Kullanım Koşulları ve Hizmet Şartları
+            </span>
+          </div>
         </div>
       </footer>
 
