@@ -9,7 +9,7 @@
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&display=swap" rel="stylesheet">
   
-  <!-- Ücretsiz PDF & Excel Kütüphaneleri (0 TL) -->
+  <!-- Ücretsiz PDF & Excel Kütüphaneleri -->
   <script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/2.5.1/jspdf.umd.min.js"></script>
   <script src="https://cdnjs.cloudflare.com/ajax/libs/xlsx/0.18.5/xlsx.full.min.js"></script>
 
@@ -26,52 +26,48 @@
       --radius: 18px;
     }
     * { box-sizing: border-box; margin: 0; padding: 0; }
-    body { font-family: "Plus Jakarta Sans", -apple-system, sans-serif; background: var(--bg); color: var(--text); line-height: 1.5; -webkit-font-smoothing: antialiased; }
-    .container { max-width: 1080px; margin: 0 auto; padding: 24px 20px 80px; }
+    body { font-family: "Plus Jakarta Sans", sans-serif; background: var(--bg); color: var(--text); -webkit-font-smoothing: antialiased; }
+    .container { max-width: 1100px; margin: 0 auto; padding: 24px 20px 80px; }
     
-    /* Apple Minimalist Giriş Ekranı */
     .login-wrap { min-height: 100vh; display: grid; place-items: center; padding: 20px; }
     .login-card { background: var(--card); border: 1px solid var(--line); border-radius: 24px; padding: 40px; width: 100%; max-width: 400px; box-shadow: 0 10px 40px rgba(0,0,0,0.04); text-align: center; }
     .login-logo { width: 44px; height: 44px; background: #1d1d1f; color: #fff; border-radius: 12px; display: inline-grid; place-items: center; font-weight: 800; font-size: 20px; margin-bottom: 16px; }
     
     .form-group { text-align: left; margin-bottom: 16px; }
     .form-group label { display: block; font-size: 13px; font-weight: 700; color: var(--muted); margin-bottom: 6px; }
-    .input-field { width: 100%; padding: 13px 16px; border-radius: 12px; border: 1px solid var(--line); background: #fafafa; font-size: 15px; color: var(--text); outline: none; transition: border .2s; }
+    .input-field { width: 100%; padding: 13px 16px; border-radius: 12px; border: 1px solid var(--line); background: #fafafa; font-size: 15px; color: var(--text); outline: none; }
     .input-field:focus { border-color: var(--accent); background: #fff; }
+    
+    .pass-wrap { position: relative; }
+    .pass-toggle { position: absolute; right: 14px; top: 50%; transform: translateY(-50%); cursor: pointer; font-size: 16px; opacity: 0.6; }
+    
     .btn { display: inline-flex; align-items: center; justify-content: center; gap: 8px; width: 100%; padding: 14px; border-radius: 12px; font-weight: 700; font-size: 15px; cursor: pointer; border: none; transition: all .2s; }
     .btn-primary { background: #1d1d1f; color: #fff; }
-    .btn-primary:hover { opacity: 0.9; transform: translateY(-1px); }
+    .btn-primary:hover { opacity: 0.9; }
     .btn-sm { width: auto; padding: 8px 14px; font-size: 13px; border-radius: 8px; }
     
-    /* Header */
     .header { display: flex; justify-content: space-between; align-items: center; margin-bottom: 28px; padding-bottom: 16px; border-bottom: 1px solid var(--line); }
-    .header h1 { font-size: 24px; font-weight: 800; }
-    .user-pill { font-size: 13px; font-weight: 700; background: var(--card); padding: 6px 14px; border-radius: 100px; border: 1px solid var(--line); color: var(--muted); }
-    
-    /* Tabs */
-    .tabs { display: flex; gap: 8px; margin-bottom: 24px; overflow-x: auto; padding-bottom: 4px; }
-    .tab-btn { padding: 10px 18px; border-radius: 100px; font-weight: 700; font-size: 14px; color: var(--muted); background: transparent; cursor: pointer; white-space: nowrap; transition: all .2s; }
+    .tabs { display: flex; gap: 8px; margin-bottom: 24px; overflow-x: auto; }
+    .tab-btn { padding: 10px 18px; border-radius: 100px; font-weight: 700; font-size: 14px; color: var(--muted); background: transparent; cursor: pointer; white-space: nowrap; }
     .tab-btn.active { background: #1d1d1f; color: #fff; }
     
-    /* Kartlar */
     .card { background: var(--card); border: 1px solid var(--line); border-radius: var(--radius); padding: 24px; margin-bottom: 20px; box-shadow: 0 4px 20px rgba(0,0,0,0.02); }
     .card-head { display: flex; justify-content: space-between; align-items: center; margin-bottom: 18px; flex-wrap: wrap; gap: 10px; }
-    .card-title { font-size: 18px; font-weight: 800; }
     
-    /* Tablo */
     .table-wrap { overflow-x: auto; }
     table { width: 100%; border-collapse: collapse; text-align: left; font-size: 14px; }
-    th { padding: 12px 14px; color: var(--muted); font-size: 12px; font-weight: 700; border-bottom: 1px solid var(--line); text-transform: uppercase; }
+    th { padding: 12px 14px; color: var(--muted); font-size: 12px; font-weight: 700; border-bottom: 1px solid var(--line); }
     td { padding: 16px 14px; border-bottom: 1px solid var(--line); vertical-align: top; }
     .badge { display: inline-block; padding: 4px 10px; border-radius: 100px; font-size: 12px; font-weight: 800; }
     .badge-success { background: rgba(52,199,89,0.12); color: var(--success); }
     .badge-danger { background: rgba(255,59,48,0.12); color: var(--danger); }
     .badge-warning { background: rgba(255,149,0,0.12); color: #ff9500; }
     
-    /* Saat Seçici */
-    .schedule-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(130px, 1fr)); gap: 10px; margin-top: 14px; }
-    .schedule-chip { background: #fafafa; border: 1px solid var(--line); padding: 10px; border-radius: 10px; text-align: center; cursor: pointer; font-weight: 700; font-size: 13px; }
-    .schedule-chip.active { background: #1d1d1f; color: #fff; border-color: #1d1d1f; }
+    /* Slot & Saat Kartları */
+    .slot-matrix { display: grid; grid-template-columns: repeat(auto-fill, minmax(170px, 1fr)); gap: 10px; margin-top: 14px; }
+    .slot-card { background: #fafafa; border: 1px solid var(--line); border-radius: 12px; padding: 12px; text-align: center; cursor: pointer; }
+    .slot-card.booked { background: #eef9f0; border-color: #34c759; text-align: left; }
+    .slot-card.blocked { background: #fff5f5; border-color: #ff3b30; opacity: 0.7; }
   </style>
 </head>
 <body>
@@ -84,8 +80,16 @@
   let activeTab = "appointments";
   let appointments = [];
   let blogs = [];
-  let schedule = { working_days: ["Pazartesi","Salı","Çarşamba","Perşembe","Cuma","Cumartesi"], slot_duration: 30 };
+  let schedule = {
+    working_days: ["Pazartesi","Salı","Çarşamba","Perşembe","Cuma","Cumartesi"],
+    start_time: "08:00",
+    end_time: "20:00",
+    slot_duration: 60,
+    blocked_hours: []
+  };
   let superData = null;
+  let superFilterBiz = "all";
+  let superFilterStatus = "all";
 
   function render() {
     const root = document.getElementById("app");
@@ -103,7 +107,10 @@
               </div>
               <div class="form-group">
                 <label>Şifre</label>
-                <input class="input-field" id="u_pass" type="password" required placeholder="" />
+                <div class="pass-wrap">
+                  <input class="input-field" id="u_pass" type="password" required placeholder="" />
+                  <span class="pass-toggle" onclick="togglePass('u_pass')">👁️</span>
+                </div>
               </div>
               <button type="submit" class="btn btn-primary">Giriş Yap ➔</button>
             </form>
@@ -120,14 +127,14 @@
         <div class="header">
           <div>
             <h1>${user.name}</h1>
-            <span class="user-pill">${isSuper ? '👑 Süper Admin (Tam Yetki)' : 'İşletme Hesabı'}</span>
+            <span style="font-size:13px; font-weight:700; color:var(--muted);">${isSuper ? '👑 Süper Admin (Gözlemci & Master)' : 'İşletme Yönetimi'}</span>
           </div>
-          <button class="btn btn-sm" style="background:#fff; border:1px solid var(--line);" onclick="logout()">Çıkış Yap</button>
+          <button class="btn btn-sm" style="background:#fff; border:1px solid var(--line);" onclick="logout()">Çıkış</button>
         </div>
 
         <div class="tabs">
-          <button class="tab-btn ${activeTab==='appointments'?'active':''}" onclick="setTab('appointments')">📅 Randevular (${appointments.length})</button>
-          <button class="tab-btn ${activeTab==='schedule'?'active':''}" onclick="setTab('schedule')">⏰ Çalışma Saatleri & Aralıklar</button>
+          <button class="tab-btn ${activeTab==='appointments'?'active':''}" onclick="setTab('appointments')">📅 Randevularım (${appointments.length})</button>
+          <button class="tab-btn ${activeTab==='schedule'?'active':''}" onclick="setTab('schedule')">⏰ Çalışma Saatleri & Slotlar</button>
           <button class="tab-btn ${activeTab==='blogs'?'active':''}" onclick="setTab('blogs')">✍️ Duyuru & Blog</button>
           <button class="tab-btn ${activeTab==='profile'?'active':''}" onclick="setTab('profile')">🔑 Profil & Şifre</button>
           ${isSuper ? `<button class="tab-btn ${activeTab==='super'?'active':''}" onclick="setTab('super')">🛡️ Süper Admin Master Paneli</button>` : ''}
@@ -146,11 +153,13 @@
     return `
       <div class="card">
         <div class="card-head">
-          <div class="card-title">Randevu Takip Listesi</div>
+          <div>
+            <div style="font-size:18px; font-weight:800;">Randevu Yönetim Paneli</div>
+            <p style="font-size:13px; color:var(--muted);">Gelen randevuları buradan onaylayabilir veya silebilirsiniz.</p>
+          </div>
           <div style="display:flex; gap:8px;">
-            <button class="btn btn-sm" style="background:#fff; border:1px solid var(--line);" onclick="exportExcel()">📊 Excel İndir</button>
-            <button class="btn btn-sm btn-primary" onclick="exportAppointmentsPDF('all')">📄 Tümünü PDF İndir</button>
-            <button class="btn btn-sm" style="background:rgba(255,59,48,0.1); color:var(--danger);" onclick="exportAppointmentsPDF('deleted')">Silinenleri PDF Al</button>
+            <button class="btn btn-sm" style="background:#fff; border:1px solid var(--line);" onclick="exportExcel(appointments, 'Randevular')">📊 Excel İndir</button>
+            <button class="btn btn-sm btn-primary" onclick="exportFilteredPDF(appointments, 'Tüm Randevular')">📄 PDF Raporu</button>
           </div>
         </div>
 
@@ -159,36 +168,35 @@
             <thead>
               <tr>
                 <th>Kod / Tarih</th>
-                <th>Müşteri Bilgisi</th>
+                <th>Müşteri Bilgileri</th>
                 <th>Not</th>
                 <th>Durum</th>
                 <th>İşlemler</th>
               </tr>
             </thead>
             <tbody>
-              ${appointments.length === 0 ? '<tr><td colspan="5" style="text-align:center; color:var(--muted); padding:30px;">Henüz randevu kaydı bulunmamaktadır.</td></tr>' : ''}
+              ${appointments.length === 0 ? '<tr><td colspan="5" style="text-align:center; color:var(--muted); padding:30px;">Henüz randevu bulunmamaktadır.</td></tr>' : ''}
               ${appointments.map(a => `
-                <tr style="${a.is_deleted ? 'background:#fff8f8; opacity:0.85;' : ''}">
+                <tr style="${a.is_deleted ? 'background:#fff8f8;' : ''}">
                   <td>
                     <strong>${a.code || 'AGR-0000'}</strong><br>
-                    <span style="font-size:13px; color:var(--muted);">${a.appointment_date} - ${a.appointment_time}</span>
+                    <span style="font-size:13px; color:var(--muted);">${a.appointment_date} ${a.appointment_time}</span>
                   </td>
                   <td>
                     <strong>${a.customer_name}</strong><br>
-                    <span style="font-size:13px; color:var(--muted);">📞 ${a.customer_phone} | ✉️ ${a.customer_email || 'Yok'}</span>
+                    <span style="font-size:13px; color:var(--muted);">📞 ${a.customer_phone} | ✉️ ${a.customer_email || '-'}</span>
                   </td>
                   <td style="max-width:200px; font-size:13px;">${a.customer_note || '-'}</td>
                   <td>
-                    ${a.is_deleted ? `<span class="badge badge-danger">Silindi (${a.deleted_by || 'Müşteri'})</span><div style="font-size:11px; color:var(--muted); margin-top:2px;">${a.deleted_at || ''}</div>` : (a.status==='Onaylandı'?`<span class="badge badge-success">Onaylandı</span>`:`<span class="badge badge-warning">Bekliyor</span>`)}
+                    ${a.is_deleted ? `<span class="badge badge-danger">İptal Edildi (${a.deleted_by || 'Müşteri'})</span>` : (a.status==='Onaylandı'?`<span class="badge badge-success">Onaylandı</span>`:`<span class="badge badge-warning">Onay Bekliyor</span>`)}
                   </td>
                   <td>
-                    <div style="display:flex; gap:6px;">
-                      ${!a.is_deleted ? `
+                    ${!a.is_deleted ? `
+                      <div style="display:flex; gap:6px;">
                         <button class="btn btn-sm" style="background:#e5f9e7; color:#2e7d32;" onclick="approveAppt(${a.id})">Onayla</button>
                         <button class="btn btn-sm" style="background:#ffebee; color:#c62828;" onclick="deleteAppt(${a.id})">Sil</button>
-                      ` : ''}
-                      <button class="btn btn-sm" style="background:#f0f0f0;" onclick="downloadSingleApptPDF(${JSON.stringify(a).replace(/"/g, '&quot;')})">PDF</button>
-                    </div>
+                      </div>
+                    ` : '<span style="font-size:12px; color:var(--muted);">İşlem Yok</span>'}
                   </td>
                 </tr>
               `).join('')}
@@ -199,86 +207,113 @@
     `;
   }
 
+  // 15/30/45/60 Dk ve Canlı Randevulu Saat Slotları
   function renderSchedule() {
     const days = ["Pazartesi", "Salı", "Çarşamba", "Perşembe", "Cuma", "Cumartesi", "Pazar"];
+    
+    // Saat slotlarını dinamik üret
+    let slots = [];
+    let startH = parseInt(schedule.start_time.split(":")[0]);
+    let endH = parseInt(schedule.end_time.split(":")[0]);
+    let dur = schedule.slot_duration;
+
+    for (let h = startH; h < endH; h++) {
+      for (let m = 0; m < 60; m += dur) {
+        let tStr = `${String(h).padStart(2,'0')}:${String(m).padStart(2,'0')}`;
+        slots.push(tStr);
+      }
+    }
+
     return `
       <div class="card">
-        <div class="card-title" style="margin-bottom:14px;">Çalışma Günleri & Seans Süreleri</div>
-        <p style="font-size:14px; color:var(--muted); margin-bottom:20px;">Randevu alınabilecek günleri ve seans sürelerini belirleyin.</p>
+        <div style="font-size:18px; font-weight:800; margin-bottom:14px;">Çalışma Saatleri & Slot Yönetimi</div>
         
-        <div class="form-group">
-          <label>Seans / Randevu Süresi</label>
-          <select class="input-field" style="max-width:260px;" id="slot_dur" onchange="schedule.slot_duration = parseInt(this.value)">
-            <option value="15" ${schedule.slot_duration===15?'selected':''}>15 Dakika</option>
-            <option value="30" ${schedule.slot_duration===30?'selected':''}>30 Dakika</option>
-            <option value="45" ${schedule.slot_duration===45?'selected':''}>45 Dakika</option>
-            <option value="60" ${schedule.slot_duration===60?'selected':''}>1 Saat (60 Dk)</option>
-          </select>
+        <div style="display:grid; grid-template-columns:1fr 1fr 1fr; gap:14px; margin-bottom:20px;">
+          <div class="form-group">
+            <label>Seans / Randevu Süresi</label>
+            <select class="input-field" id="s_dur" onchange="updateScheduleDuration(this.value)">
+              <option value="15" ${schedule.slot_duration===15?'selected':''}>15 Dakika</option>
+              <option value="30" ${schedule.slot_duration===30?'selected':''}>30 Dakika</option>
+              <option value="45" ${schedule.slot_duration===45?'selected':''}>45 Dakika</option>
+              <option value="60" ${schedule.slot_duration===60?'selected':''}>1 Saat (60 Dk)</option>
+            </select>
+          </div>
+          <div class="form-group">
+            <label>Başlangıç Saati</label>
+            <input class="input-field" type="time" value="${schedule.start_time}" onchange="schedule.start_time=this.value; render();" />
+          </div>
+          <div class="form-group">
+            <label>Bitiş Saati</label>
+            <input class="input-field" type="time" value="${schedule.end_time}" onchange="schedule.end_time=this.value; render();" />
+          </div>
         </div>
 
         <div class="form-group">
-          <label>Açık Olduğunuz Günler (Tıklayıp Açın/Kapatın)</label>
-          <div class="schedule-grid">
+          <label>Çalışılan Günler (Tıklayıp Açın / Kapatın)</label>
+          <div style="display:flex; gap:8px; flex-wrap:wrap;">
             ${days.map(d => {
-              const active = schedule.working_days.includes(d);
-              return `<div class="schedule-chip ${active?'active':''}" onclick="toggleDay('${d}')">${d} ${active?'✓':''}</div>`;
+              const on = schedule.working_days.includes(d);
+              return `<button class="btn btn-sm" style="background:${on?'#1d1d1f':'#e5e5ea'}; color:${on?'#fff':'#86868b'};" onclick="toggleDay('${d}')">${d} ${on?'✓':''}</button>`;
             }).join('')}
           </div>
         </div>
 
-        <button class="btn btn-primary" style="max-width:200px; margin-top:16px;" onclick="saveSchedule()">Değişiklikleri Kaydet</button>
+        <div class="form-group" style="margin-top:24px;">
+          <label>Saat Aralıkları (Tıklayarak Saati Kapatın / Açın)</label>
+          <div class="slot-matrix">
+            ${slots.map(sTime => {
+              const bookedAppt = appointments.find(a => a.appointment_time === sTime && !a.is_deleted && a.status === "Onaylandı");
+              const isBlocked = schedule.blocked_hours?.includes(sTime);
+
+              if (bookedAppt) {
+                return `
+                  <div class="slot-card booked">
+                    <div style="font-weight:800; color:#2e7d32;">📅 ${sTime} (Dolu)</div>
+                    <div style="font-size:12px; margin-top:2px;">${bookedAppt.customer_name}</div>
+                  </div>
+                `;
+              }
+              return `
+                <div class="slot-card ${isBlocked?'blocked':''}" onclick="toggleBlockHour('${sTime}')">
+                  <div style="font-weight:700;">${sTime}</div>
+                  <div style="font-size:12px; color:${isBlocked?'var(--danger)':'var(--muted)'};">${isBlocked?'Kapalı ✕':'Boş (Müsait) ✓'}</div>
+                </div>
+              `;
+            }).join('')}
+          </div>
+        </div>
+
+        <button class="btn btn-primary" style="max-width:220px; margin-top:20px;" onclick="saveSchedule()">Saat Ayarlarını Kaydet</button>
       </div>
     `;
   }
 
-  function renderBlogs() {
-    return `
-      <div class="card">
-        <div class="card-head">
-          <div class="card-title">Yeni Duyuru / Blog Yazısı</div>
-        </div>
-        <form onsubmit="handleCreateBlog(event)">
-          <div class="form-group"><label>Başlık</label><input class="input-field" id="b_title" required placeholder="Duyuru veya Blog Başlığı" /></div>
-          <div class="form-group"><label>İçerik Metni</label><textarea class="input-field" id="b_content" rows="4" required placeholder="Yazınızı buraya yazın..."></textarea></div>
-          <button type="submit" class="btn btn-primary" style="max-width:200px;">Süper Admin Onayına Gönder</button>
-        </form>
-      </div>
-
-      <div class="card">
-        <div class="card-title" style="margin-bottom:16px;">Yayınlanan / Onay Bekleyen Yazılarım</div>
-        <div class="table-wrap">
-          <table>
-            <thead><tr><th>Tarih</th><th>Başlık</th><th>Durum</th><th>İşlem</th></tr></thead>
-            <tbody>
-              ${blogs.length===0?'<tr><td colspan="4" style="text-align:center; color:var(--muted);">Henüz yazınız bulunmuyor.</td></tr>':''}
-              ${blogs.map(b => `
-                <tr>
-                  <td>${b.created_at?.split('T')[0]}</td>
-                  <td><strong>${b.title}</strong></td>
-                  <td>
-                    ${b.status==='approved'?'<span class="badge badge-success">Yayında</span>':(b.status==='rejected'?`<span class="badge badge-danger">Reddedildi (Gerekçe: ${b.rejection_reason || 'Yok'})</span>`:'<span class="badge badge-warning">Onay Bekliyor</span>')}
-                  </td>
-                  <td>
-                    <button class="btn btn-sm" style="background:#ffebee; color:#c62828;" onclick="deleteBlog(${b.id})">Sil</button>
-                  </td>
-                </tr>
-              `).join('')}
-            </tbody>
-          </table>
-        </div>
-      </div>
-    `;
-  }
-
+  // Profil & Şifre Değiştirme (Çift Doğrulama ve Göz Butonu)
   function renderProfile() {
     return `
       <div class="card" style="max-width:500px;">
-        <div class="card-title" style="margin-bottom:16px;">Profil & Şifre Güncelleme</div>
+        <div style="font-size:18px; font-weight:800; margin-bottom:16px;">Profil & Şifre Güncelleme</div>
         <form onsubmit="handleUpdateProfile(event)">
           <div class="form-group"><label>Kullanıcı Adı</label><input class="input-field" id="p_user" value="${user.username}" required /></div>
           <div class="form-group"><label>Telefon</label><input class="input-field" id="p_phone" value="${user.phone || ''}" /></div>
           <div class="form-group"><label>E-Posta</label><input class="input-field" id="p_email" value="${user.email || ''}" /></div>
-          <div class="form-group"><label>Yeni Şifre (Boş bırakırsanız değişmez)</label><input class="input-field" id="p_pass" type="password" placeholder="Yeni şifre belirleyin" /></div>
+          
+          <div class="form-group">
+            <label>Yeni Şifre</label>
+            <div class="pass-wrap">
+              <input class="input-field" id="p_pass1" type="password" placeholder="Yeni şifreniz" />
+              <span class="pass-toggle" onclick="togglePass('p_pass1')">👁️</span>
+            </div>
+          </div>
+          
+          <div class="form-group">
+            <label>Yeni Şifre (Tekrar)</label>
+            <div class="pass-wrap">
+              <input class="input-field" id="p_pass2" type="password" placeholder="Yeni şifrenizi tekrar yazın" />
+              <span class="pass-toggle" onclick="togglePass('p_pass2')">👁️</span>
+            </div>
+          </div>
+
           <button type="submit" class="btn btn-primary">Bilgileri Güncelle</button>
         </form>
       </div>
@@ -287,25 +322,51 @@
 
   function renderSuperAdmin() {
     if (!superData) return '<div class="card">Veriler yükleniyor...</div>';
+
+    let list = superData.appointments || [];
+    if (superFilterBiz !== "all") list = list.filter(a => a.business_id === superFilterBiz);
+    if (superFilterStatus !== "all") {
+      if (superFilterStatus === "deleted") list = list.filter(a => a.is_deleted === 1);
+      else if (superFilterStatus === "approved") list = list.filter(a => a.status === "Onaylandı" && !a.is_deleted);
+      else if (superFilterStatus === "pending") list = list.filter(a => a.status === "Bekliyor" && !a.is_deleted);
+    }
+
     return `
       <div class="card">
-        <div class="card-title" style="margin-bottom:16px;">📝 Blog Onay Havuzu</div>
+        <div class="card-head">
+          <div style="font-size:18px; font-weight:800;">👑 Süper Admin Master Randevu Gözlemi</div>
+          <div style="display:flex; gap:8px;">
+            <button class="btn btn-sm" style="background:#fff; border:1px solid var(--line);" onclick="exportExcel(list, 'Superadmin_Randevular')">📊 Excel İndir</button>
+            <button class="btn btn-sm btn-primary" onclick="exportFilteredPDF(list, 'Master Randevu Raporu')">📄 Filtreli PDF Al</button>
+          </div>
+        </div>
+
+        <div style="display:flex; gap:12px; margin-bottom:16px;">
+          <select class="input-field" style="max-width:240px;" onchange="superFilterBiz=this.value; render();">
+            <option value="all">Tüm İşletmeler (${superData.businesses.length})</option>
+            ${superData.businesses.map(b => `<option value="${b.id}" ${superFilterBiz===b.id?'selected':''}>${b.name}</option>`).join('')}
+          </select>
+          <select class="input-field" style="max-width:180px;" onchange="superFilterStatus=this.value; render();">
+            <option value="all">Tüm Durumlar</option>
+            <option value="approved">Sadece Onaylananlar</option>
+            <option value="pending">Sadece Bekleyenler</option>
+            <option value="deleted">Sadece İptal/Silinenler</option>
+          </select>
+        </div>
+
         <div class="table-wrap">
           <table>
-            <thead><tr><th>İşletme</th><th>Başlık</th><th>İçerik</th><th>İşlem</th></tr></thead>
+            <thead>
+              <tr><th>İşletme</th><th>Müşteri</th><th>Tarih/Saat</th><th>Durum / Kim İşlem Yaptı</th></tr>
+            </thead>
             <tbody>
-              ${superData.blogs.map(b => `
+              ${list.map(a => `
                 <tr>
-                  <td><strong>${b.business_name}</strong></td>
-                  <td>${b.title}</td>
-                  <td style="max-width:300px; font-size:13px;">${b.content}</td>
+                  <td><strong>${a.business_name || a.business_id}</strong></td>
+                  <td>${a.customer_name} (📞 ${a.customer_phone})</td>
+                  <td>${a.appointment_date} ${a.appointment_time}</td>
                   <td>
-                    ${b.status==='pending'?`
-                      <div style="display:flex; gap:6px;">
-                        <button class="btn btn-sm" style="background:#e5f9e7; color:#2e7d32;" onclick="moderateBlog(${b.id}, 'approved')">Onayla</button>
-                        <button class="btn btn-sm" style="background:#ffebee; color:#c62828;" onclick="rejectBlogPrompt(${b.id})">Reddet</button>
-                      </div>
-                    ` : `<span class="badge ${b.status==='approved'?'badge-success':'badge-danger'}">${b.status}</span>`}
+                    ${a.is_deleted ? `<span class="badge badge-danger">İptal: ${a.deleted_by || 'Müşteri'}</span>` : (a.status==='Onaylandı'?'<span class="badge badge-success">Onaylandı</span>':'<span class="badge badge-warning">Bekliyor</span>')}
                   </td>
                 </tr>
               `).join('')}
@@ -315,41 +376,19 @@
       </div>
 
       <div class="card">
-        <div class="card-title" style="margin-bottom:16px;">🏢 23 İşletme Yönetimi</div>
+        <div style="font-size:18px; font-weight:800; margin-bottom:16px;">🏢 23 İşletme Hesap Yönetimi & Şifre Değiştirme</div>
         <div class="table-wrap">
           <table>
-            <thead><tr><th>İşletme Adı</th><th>Kullanıcı Adı</th><th>Durum</th><th>İşlem</th></tr></thead>
+            <thead><tr><th>İşletme</th><th>Kullanıcı Adı</th><th>Telefon / Mail</th><th>İşlemler</th></tr></thead>
             <tbody>
               ${superData.businesses.map(bz => `
                 <tr>
                   <td><strong>${bz.name}</strong></td>
                   <td>${bz.username}</td>
-                  <td>${bz.is_frozen ? '<span class="badge badge-danger">Donduruldu</span>' : '<span class="badge badge-success">Aktif</span>'}</td>
+                  <td>${bz.phone || '-'} / ${bz.email || '-'}</td>
                   <td>
-                    <div style="display:flex; gap:6px;">
-                      <button class="btn btn-sm" style="background:#f0f0f0;" onclick="adminChangeCreds('${bz.id}')">Şifre Değiştir</button>
-                      <button class="btn btn-sm" style="background:${bz.is_frozen?'#e5f9e7':'#ffebee'}; color:${bz.is_frozen?'#2e7d32':'#c62828'};" onclick="adminToggleFreeze('${bz.id}', ${bz.is_frozen?0:1})">${bz.is_frozen?'Aktif Et':'Dondur'}</button>
-                    </div>
+                    <button class="btn btn-sm" style="background:#f0f0f0;" onclick="adminChangeCreds('${bz.id}')">Şifre Değiştir</button>
                   </td>
-                </tr>
-              `).join('')}
-            </tbody>
-          </table>
-        </div>
-      </div>
-
-      <div class="card">
-        <div class="card-title" style="margin-bottom:16px;">🛡️ Canlı Denetim Logları (Audit Trail)</div>
-        <div class="table-wrap">
-          <table>
-            <thead><tr><th>Tarih/Saat</th><th>Yapan</th><th>Eylem</th><th>Detay</th></tr></thead>
-            <tbody>
-              ${superData.logs.map(l => `
-                <tr>
-                  <td style="font-size:12px; color:var(--muted);">${l.created_at}</td>
-                  <td><strong>${l.performed_by}</strong></td>
-                  <td><span class="badge badge-warning">${l.action}</span></td>
-                  <td style="font-size:13px;">${l.details}</td>
                 </tr>
               `).join('')}
             </tbody>
@@ -359,7 +398,12 @@
     `;
   }
 
-  // Fonksiyonlar
+  // Yardımcı Fonksiyonlar
+  function togglePass(id) {
+    const el = document.getElementById(id);
+    el.type = el.type === "password" ? "text" : "password";
+  }
+
   async function handleLogin(e) {
     e.preventDefault();
     const u = document.getElementById("u_name").value.trim();
@@ -382,12 +426,6 @@
     try {
       const aRes = await fetch("/api/appointments", { headers: { Authorization: "Bearer " + token } });
       appointments = await aRes.json();
-      const bRes = await fetch("/api/my-blogs", { headers: { Authorization: "Bearer " + token } });
-      blogs = await bRes.json();
-      const sRes = await fetch("/api/get-schedule", { headers: { Authorization: "Bearer " + token } });
-      const sData = await sRes.json();
-      if (sData.working_days) schedule.working_days = JSON.parse(sData.working_days);
-      if (sData.slot_duration) schedule.slot_duration = sData.slot_duration;
       render();
     } catch(e) {}
   }
@@ -404,9 +442,21 @@
     render();
   }
 
+  function toggleBlockHour(h) {
+    if (!schedule.blocked_hours) schedule.blocked_hours = [];
+    if (schedule.blocked_hours.includes(h)) schedule.blocked_hours = schedule.blocked_hours.filter(x=>x!==h);
+    else schedule.blocked_hours.push(h);
+    render();
+  }
+
+  function updateScheduleDuration(v) {
+    schedule.slot_duration = parseInt(v);
+    render();
+  }
+
   async function saveSchedule() {
     await fetch("/api/save-schedule", { method: "POST", headers: { "Content-Type": "application/json", Authorization: "Bearer " + token }, body: JSON.stringify(schedule) });
-    alert("Çalışma saatleri güncellendi.");
+    alert("Çalışma saatleri ve slotlar kaydedildi.");
   }
 
   async function approveAppt(id) {
@@ -414,35 +464,10 @@
     initData();
   }
   async function deleteAppt(id) {
-    if (confirm("Bu randevuyu silmek istediğinize emin misiniz?")) {
+    if (confirm("Randevuyu silmek istediğinize emin misiniz?")) {
       await fetch("/api/delete-appointment", { method: "POST", headers: { "Content-Type": "application/json", Authorization: "Bearer " + token }, body: JSON.stringify({ id }) });
       initData();
     }
-  }
-
-  async function handleCreateBlog(e) {
-    e.preventDefault();
-    const title = document.getElementById("b_title").value;
-    const content = document.getElementById("b_content").value;
-    await fetch("/api/create-blog", { method: "POST", headers: { "Content-Type": "application/json", Authorization: "Bearer " + token }, body: JSON.stringify({ title, content }) });
-    alert("Yazınız onaya iletildi.");
-    initData();
-  }
-
-  async function deleteBlog(id) {
-    if (confirm("Yazıyı silmek istiyor musunuz?")) {
-      await fetch("/api/delete-blog", { method: "POST", headers: { "Content-Type": "application/json", Authorization: "Bearer " + token }, body: JSON.stringify({ id }) });
-      initData();
-    }
-  }
-
-  async function moderateBlog(id, status, reason = "") {
-    await fetch("/api/moderate-blog", { method: "POST", headers: { "Content-Type": "application/json", Authorization: "Bearer " + token }, body: JSON.stringify({ id, status, rejection_reason: reason }) });
-    loadSuper();
-  }
-  function rejectBlogPrompt(id) {
-    const r = prompt("Lütfen ret gerekçenizi yazın:");
-    if (r) moderateBlog(id, "rejected", r);
   }
 
   async function handleUpdateProfile(e) {
@@ -450,54 +475,44 @@
     const u = document.getElementById("p_user").value;
     const ph = document.getElementById("p_phone").value;
     const em = document.getElementById("p_email").value;
-    const ps = document.getElementById("p_pass").value;
-    const res = await fetch("/api/update-profile", { method: "POST", headers: { "Content-Type": "application/json", Authorization: "Bearer " + token }, body: JSON.stringify({ username: u, phone: ph, email: em, password: ps }) });
+    const p1 = document.getElementById("p_pass1").value;
+    const p2 = document.getElementById("p_pass2").value;
+
+    if (p1 && p1 !== p2) {
+      alert("Yeni şifreler birbiriyle uyuşmuyor! Lütfen kontrol edin.");
+      return;
+    }
+
+    const res = await fetch("/api/update-profile", { method: "POST", headers: { "Content-Type": "application/json", Authorization: "Bearer " + token }, body: JSON.stringify({ username: u, phone: ph, email: em, password: p1 }) });
     const data = await res.json();
     alert(data.message || "Güncellendi.");
   }
 
   function adminChangeCreds(tId) {
-    const u = prompt("Yeni Kullanıcı Adı:");
     const p = prompt("Yeni Şifre:");
-    if (u && p) {
-      fetch("/api/superadmin-action", { method: "POST", headers: { "Content-Type": "application/json", Authorization: "Bearer " + token }, body: JSON.stringify({ action: "change_creds", target_id: tId, value: u, value2: p }) }).then(()=>loadSuper());
+    if (p) {
+      fetch("/api/superadmin-action", { method: "POST", headers: { "Content-Type": "application/json", Authorization: "Bearer " + token }, body: JSON.stringify({ action: "change_creds", target_id: tId, value2: p }) }).then(()=>loadSuper());
     }
   }
-  function adminToggleFreeze(tId, val) {
-    fetch("/api/superadmin-action", { method: "POST", headers: { "Content-Type": "application/json", Authorization: "Bearer " + token }, body: JSON.stringify({ action: "toggle_freeze", target_id: tId, value: val }) }).then(()=>loadSuper());
-  }
 
-  function downloadSingleApptPDF(a) {
+  function exportFilteredPDF(list, title) {
     const { jsPDF } = window.jspdf;
     const doc = new jsPDF();
-    doc.text("04agri.com - Randevu Detay Fisi", 14, 20);
-    doc.text(`Takip Kodu: ${a.code || 'Yok'}`, 14, 30);
-    doc.text(`Musteri: ${a.customer_name}`, 14, 40);
-    doc.text(`Telefon: ${a.customer_phone}`, 14, 50);
-    doc.text(`Tarih/Saat: ${a.appointment_date} ${a.appointment_time}`, 14, 60);
-    doc.text(`Not: ${a.customer_note || '-'}`, 14, 70);
-    doc.save(`Randevu_${a.code || a.id}.pdf`);
-  }
-
-  function exportAppointmentsPDF(type) {
-    const { jsPDF } = window.jspdf;
-    const doc = new jsPDF();
-    doc.text(`04agri.com - Randevu Raporu (${type.toUpperCase()})`, 14, 20);
+    doc.text(`04agri.com - ${title}`, 14, 20);
     let y = 35;
-    const list = type==='deleted' ? appointments.filter(a=>a.is_deleted) : appointments;
     list.forEach((a, i) => {
       if (y > 270) { doc.addPage(); y = 20; }
-      doc.text(`${i+1}. [${a.code}] ${a.customer_name} (${a.customer_phone}) - ${a.appointment_date} ${a.appointment_time} - Durum: ${a.is_deleted?'Silindi':a.status}`, 14, y);
+      doc.text(`${i+1}. [${a.code || 'KODSUZ'}] ${a.customer_name} (${a.customer_phone}) - ${a.appointment_date} ${a.appointment_time} - Durum: ${a.is_deleted?'İptal':a.status}`, 14, y);
       y += 10;
     });
-    doc.save(`Randevular_${type}.pdf`);
+    doc.save(`${title}.pdf`);
   }
 
-  function exportExcel() {
-    const ws = XLSX.utils.json_to_sheet(appointments);
+  function exportExcel(list, name) {
+    const ws = XLSX.utils.json_to_sheet(list);
     const wb = XLSX.utils.book_new();
     XLSX.utils.book_append_sheet(wb, ws, "Randevular");
-    XLSX.writeFile(wb, "04agri_randevular.xlsx");
+    XLSX.writeFile(wb, `${name}.xlsx`);
   }
 
   if (token) initData();
