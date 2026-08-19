@@ -7,149 +7,503 @@
 <base href="/" />
 
 <title>04agri.com — Ağrı'nın Dijital Rehberi</title>
-<meta name="description" content="Ağrı'nın dijital rehberi: randevu alma, restoranlar, cafeler, sağlık, eğitim, nöbetçi eczaneler ve şehir haberleri." />
+<meta name="google-site-verification" content="google-site-verification: google0b24ad689a534761.html" />
+<meta name="description" content="Ağrı'nın dijital rehberi: randevu alma, restoranlar, cafeler, gezilecek yerler, nöbetçi eczane, etkinlikler ve daha fazlası." />
 
 <link rel="icon" type="image/jpeg" href="https://04agri.com/agridagi.jpg" />
 <link rel="apple-touch-icon" href="https://04agri.com/agridagi.jpg" />
+
+<meta property="og:title" content="04agri.com — Ağrı'nın Dijital Rehberi" />
+<meta property="og:description" content="Ağrı'nın dijital rehberi: restoranlar, cafeler, gezilecek yerler, nöbetçi eczaneler ve daha fazlası tek bir yerde." />
+<meta property="og:image" content="https://04agri.com/kapak-gorseli.jpg" />
+<meta property="og:url" content="https://04agri.com" />
+<meta property="og:type" content="website" />
+
+<meta name="twitter:card" content="summary_large_image" />
+<meta name="twitter:title" content="04agri.com — Ağrı'nın Dijital Rehberi" />
+<meta name="twitter:description" content="Ağrı'nın en kapsamlı dijital şehir rehberi." />
+<meta name="twitter:image" content="https://04agri.com/kapak-gorseli.jpg" />
+
+<script async src="https://www.googletagmanager.com/gtag/js?id=G-X0QLCD70X0"></script>
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js', new Date());
+  gtag('config', 'G-X0QLCD70X0');
+</script>
+
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "WebSite",
+  "name": "04agri.com — Ağrı'nın Dijital Rehberi",
+  "url": "https://04agri.com/",
+  "description": "Ağrı'nın dijital rehberi: restoranlar, cafeler, gezilecek yerler, nöbetçi eczaneler ve daha fazlası tek bir yerde.",
+  "image": "https://04agri.com/agridagi.jpg"
+}
+</script>
 
 <link rel="preconnect" href="https://fonts.googleapis.com" />
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
 <link href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:opsz,wght@12..96,400;12..96,600;12..96,700;12..96,800&family=Plus+Jakarta+Sans:wght@400;500;600;700;800&display=swap" rel="stylesheet" />
 
-<!-- PDF ve Excel Kütüphaneleri ($0 Ücretsiz) -->
+<!-- Ücretsiz PDF Oluşturucu (0 TL) -->
 <script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/2.5.1/jspdf.umd.min.js"></script>
-<script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf-autotable/3.5.31/jspdf.plugin.autotable.min.js"></script>
 
 <style>
 /* ============================================================
-   04agri.com — Ağrı Dijital Rehberi (Apple Minimalist CSS)
+   04agri.com — Ağrı Dijital Rehberi & Randevu Sistemi CSS
    ============================================================ */
 :root{
-  --bg:        #fbfbfd;
-  --bg-2:      #f5f5f7;
-  --ink:       #1d1d1f;
-  --ink-soft:  #6e6e73;
-  --ink-faint: #86868b;
-  --line:      #e5e5ea;
+  --bg:        #f6f4ef;
+  --bg-2:      #efece4;
+  --ink:       #17150f;
+  --ink-soft:  #6a655a;
+  --ink-faint: #a39d90;
+  --line:      #e3ded3;
   --card:      #ffffff;
 
-  --dark:      #0c1020;
-  --dark-2:    #131a31;
-  --dawn-1:    #1a2444;      
-  --dawn-2:    #5b6aa0;
-  --dawn-3:    #e6a071;      
-  --dawn-4:    #f3c9a0;
+  --dark:   #0c1020;
+  --dark-2: #131a31;
+  --dawn-1: #1a2444;      
+  --dawn-2: #5b6aa0;
+  --dawn-3: #e6a071;      
+  --dawn-4: #f3c9a0;
 
-  --accent:    #34c759;      
-  --pin:       #ff3b30;
-  --blue:      #0071e3;
+  --globe:  220, 232, 255;
+  --accent: #44BD32;      
+  --pin:    #E84142;
+  --blue:   #0071e3;
 
-  --maxw:      1240px;
-  --r-lg:      28px;
-  --r-md:      20px;
-  --r-sm:      12px;
-  --shadow-1:  0 4px 20px rgba(0,0,0,0.04);
-  --shadow-2:  0 12px 32px rgba(0,0,0,0.08);
-  --shadow-3:  0 24px 60px rgba(0,0,0,0.14);
+  --maxw: 1280px;
+  --r-lg: 32px;
+  --r-md: 24px;
+  --r-sm: 14px;
+  --shadow-1: 0 4px 12px rgba(20,18,12,.06), 0 1px 3px rgba(20,18,12,.04);
+  --shadow-2: 0 20px 40px rgba(20,18,12,.12), 0 8px 16px rgba(20,18,12,.08);
+  --shadow-3: 0 30px 90px rgba(8,10,24,.45);
 
-  --display: "Bricolage Grotesque", -apple-system, system-ui, sans-serif;
-  --body:    "Plus Jakarta Sans", -apple-system, system-ui, sans-serif;
+  --display: "Bricolage Grotesque", "Plus Jakarta Sans", system-ui, sans-serif;
+  --body:    "Plus Jakarta Sans", system-ui, -apple-system, sans-serif;
   --ease: cubic-bezier(.22,.61,.36,1);
+  --ease-io: cubic-bezier(.83,0,.17,1);
 }
 
 *{ box-sizing:border-box; }
 html{ scroll-behavior:smooth; }
 html, body{
-  margin:0; padding:0; width:100%; max-width:100%;
+  margin:0; padding:0;
+  width: 100%;
+  max-width: 100%;
   background:var(--bg); color:var(--ink);
-  font-family:var(--body); font-size:16px; line-height:1.5;
+  font-family:var(--body); font-size:17px; line-height:1.55;
   -webkit-font-smoothing:antialiased; text-rendering:optimizeLegibility;
   overflow-x:hidden;
 }
-h1,h2,h3,h4{ font-family:var(--display); font-weight:700; line-height:1.05; letter-spacing:-.02em; margin:0; }
+h1,h2,h3,h4{ font-family:var(--display); font-weight:700; line-height:1.02; letter-spacing:-.02em; margin:0; }
 button{ font-family:inherit; cursor:pointer; border:none; background:none; color:inherit; outline:none; }
 input, select, textarea{ font-family:inherit; font-size:15px; }
 a{ color:inherit; text-decoration:none; cursor:pointer; }
-.wrap{ max-width:var(--maxw); margin:0 auto; padding:0 24px; width:100%; }
+.wrap{ max-width:var(--maxw); margin:0 auto; padding:0 28px; width:100%; }
+::selection{ background:var(--accent); color:var(--ink); }
 
-/* TOPBAR */
-.topbar{ position:fixed; inset:0 0 auto 0; z-index:60; display:grid; grid-template-columns:auto 1fr auto; align-items:center; padding:16px 28px; transition:background .3s var(--ease), backdrop-filter .3s; pointer-events:none; width:100%; }
+/* ---------- NAZİK POLİTİKA ONAY MODALI ---------- */
+.tos-overlay { position:fixed; inset:0; z-index:9999; background:rgba(12,16,32,0.45); backdrop-filter:blur(8px); display:flex; flex-direction:column; justify-content:flex-end; align-items:center; width:100%; height:100%; }
+.tos-modal { background:#fff; color:var(--ink); padding:36px 36px 42px; border-radius:32px 32px 0 0; max-width:800px; width:100%; box-shadow:0 -10px 40px rgba(0,0,0,0.2); animation:slideUp 0.6s cubic-bezier(0.2, 0.8, 0.2, 1) forwards; display:flex; flex-direction:column; gap:16px; }
+@keyframes slideUp { from { transform:translateY(100%); opacity:0; } to { transform:translateY(0); opacity:1; } }
+.tos-modal h2 { font-size:24px; font-weight:800; color:var(--dark); display:flex; align-items:center; gap:10px; margin:0; }
+.tos-modal p { font-size:15px; color:var(--ink-soft); line-height:1.6; margin:0; text-align:justify; }
+.tos-disclaimer { font-size:13px !important; color:var(--ink-faint) !important; background:var(--bg-2); padding:12px 14px; border-radius:12px; border-left:3px solid var(--accent); }
+.tos-actions { display:flex; gap:12px; margin-top:12px; }
+.tos-btn { flex:1; padding:16px; border-radius:100px; font-weight:800; font-size:15px; text-align:center; transition:all 0.2s; cursor:pointer; }
+.tos-btn.accept { background:var(--accent); color:var(--ink); border:none; }
+.tos-btn.accept:hover { filter:brightness(0.95); transform:translateY(-2px); }
+.tos-btn.decline { background:transparent; color:var(--ink-soft); border:1px solid var(--line); }
+.tos-btn.decline:hover { background:var(--bg-2); color:var(--ink); }
+
+/* GİZLİLİK MODALI */
+.doc-modal-overlay { position:fixed; inset:0; z-index:10000; background:rgba(12,16,32,0.7); backdrop-filter:blur(10px); display:grid; place-items:center; padding:20px; }
+.doc-modal-card { background:var(--card); color:var(--ink); border-radius:24px; max-width:640px; width:100%; max-height:85vh; display:flex; flex-direction:column; box-shadow:var(--shadow-3); overflow:hidden; animation:fadeIn .35s ease; }
+.doc-modal-head { display:flex; align-items:center; justify-content:space-between; padding:24px 28px; border-bottom:1px solid var(--line); }
+.doc-modal-head h2 { font-size:22px; font-weight:800; color:var(--dark); }
+.doc-modal-close { width:38px; height:38px; border-radius:50%; background:var(--bg-2); font-weight:800; cursor:pointer; flex-shrink:0; }
+.doc-modal-body { padding:24px 28px 30px; overflow-y:auto; }
+.doc-modal-body p { font-size:15px; line-height:1.7; color:var(--ink-soft); text-align:justify; margin:0; }
+
+.tos-blocked-overlay { position:fixed; inset:0; z-index:9999; background:rgba(12,16,32,0.65); backdrop-filter:blur(12px); display:grid; place-items:center; padding:20px; }
+.tos-blocked-card { background:var(--card); color:var(--ink); padding:40px; border-radius:24px; max-width:480px; text-align:center; box-shadow:var(--shadow-3); animation: fadeIn 0.4s ease; }
+.tos-blocked-card h3 { font-size:22px; margin-bottom:16px; color:var(--dark); }
+.tos-blocked-card p { color:var(--ink-soft); font-size:15px; line-height:1.6; margin-bottom:24px; }
+@keyframes fadeIn { from { opacity:0; transform:scale(0.95); } to { opacity:1; transform:scale(1); } }
+.animate-fade { animation: fadeIn 0.4s var(--ease); }
+
+/* ---------- TOPBAR ---------- */
+.topbar{ position:fixed; inset:0 0 auto 0; z-index:60; display:grid; grid-template-columns:1fr auto 1fr; align-items:center; padding:18px 28px; transition:background .4s var(--ease), backdrop-filter .4s; pointer-events:none; width:100%; }
 .topbar > *{ pointer-events:auto; }
-.topbar.scrolled{ background:rgba(255,255,255,0.8); backdrop-filter:saturate(180%) blur(20px); box-shadow:0 1px 0 var(--line); }
-.logo{ display:flex; align-items:center; gap:8px; font-family:var(--display); font-weight:800; font-size:22px; }
-.logo .badge{ width:36px; height:36px; border-radius:10px; display:grid; place-items:center; background:var(--accent); color:#000; font-size:17px; font-weight:800; }
-.logo .txt{ display:flex; align-items:baseline; color:var(--ink); }
+.topbar.scrolled{ background:color-mix(in srgb, var(--bg), transparent 12%); backdrop-filter:saturate(140%) blur(14px); box-shadow:0 1px 0 var(--line); }
+.logo{ justify-self:start; display:flex; align-items:center; gap:8px; font-family:var(--display); font-weight:800; font-size:22px; letter-spacing:-.03em; }
+.logo .badge{ width:38px; height:38px; border-radius:11px; display:grid; place-items:center; background:var(--accent); color:var(--ink); font-size:18px; font-weight:800; box-shadow:0 6px 16px color-mix(in srgb,var(--accent),transparent 55%); }
+.logo .txt{ display:flex; align-items:baseline; color:var(--ink); transition: color .4s var(--ease); }
+.logo .dim{ color:var(--ink-faint); font-weight:600; transition: color .4s var(--ease); }
 .topbar.on-dark .logo .txt{ color:#fff; }
-.topbar-nav{ justify-self:center; display:flex; gap:24px; font-size:14.5px; font-weight:600; align-items:center; }
-.topbar-nav a{ color:var(--ink); transition:color .2s; }
-.topbar.on-dark .topbar-nav a{ color:rgba(255,255,255,0.9); }
+.topbar.on-dark .logo .dim{ color:rgba(255,255,255,.55); }
+
+.topbar-nav{ justify-self:center; display:flex; gap:24px; font-size:15px; font-weight:700; align-items:center; }
+.topbar-nav a{ position:relative; color:var(--ink); transition:color .2s; }
+.topbar.on-dark .topbar-nav a{ color:#fff; }
 .topbar-nav a:hover{ color:var(--accent); }
 
-.nav-book-btn{ background:var(--accent); color:#000 !important; font-weight:800 !important; padding:8px 18px; border-radius:100px; transition:transform .2s, opacity .2s; display:inline-flex; align-items:center; gap:6px; box-shadow:0 4px 12px rgba(52,199,89,0.25); }
-.nav-book-btn:hover{ transform:scale(1.03); opacity:0.95; }
+.nav-book-btn { background: var(--accent); color: var(--ink) !important; font-weight: 800 !important; padding: 8px 18px; border-radius: 100px; display: inline-flex; align-items: center; gap: 6px; box-shadow: 0 4px 14px rgba(68,189,50,0.25); transition: transform 0.2s, filter 0.2s; }
+.nav-book-btn:hover { transform: translateY(-1px) scale(1.02); filter: brightness(0.96); }
 
-/* HERO */
-.hero{ position:relative; height:92svh; min-height:640px; width:100%; overflow:hidden; background:linear-gradient(180deg, var(--dark) 0%, var(--dark-2) 100%); display:flex; align-items:center; justify-content:center; }
-.hero .sky{ position:absolute; inset:0; background:radial-gradient(120% 80% at 50% 120%, var(--dawn-3) 0%, transparent 55%), linear-gradient(180deg, var(--dawn-1) 0%, var(--dawn-2) 58%, var(--dawn-4) 100%); }
-.hero-content{ position:relative; z-index:10; display:flex; flex-direction:column; align-items:center; text-align:center; padding:0 20px; }
-.hero-title{ color:#fff; font-size:clamp(36px, 6vw, 72px); margin:16px 0; }
-.hero-title em{ font-style:normal; color:var(--accent); }
-.hero-sub{ color:rgba(255,255,255,0.85); font-size:clamp(15px, 1.6vw, 18px); max-width:48ch; margin-bottom:28px; }
+.topbar .loc{ justify-self:end; display:flex; align-items:center; gap:7px; font-size:14px; font-weight:600; color:var(--ink-soft); }
+.topbar.on-dark .loc{ color:rgba(255,255,255,.7); }
+.loc .dot{ width:8px;height:8px;border-radius:50%; background:var(--accent); box-shadow:0 0 0 4px color-mix(in srgb,var(--accent),transparent 70%); }
 
-.search{ display:flex; align-items:center; gap:10px; background:rgba(255,255,255,0.95); backdrop-filter:blur(20px); border-radius:100px; padding:8px 8px 8px 22px; width:min(640px, 92vw); box-shadow:var(--shadow-3); }
-.search input{ flex:1; border:none; outline:none; background:none; font-size:16px; color:var(--ink); }
-.search .go{ background:var(--ink); color:#fff; font-weight:700; font-size:14px; padding:12px 24px; border-radius:100px; transition:opacity .2s; }
-.search .go:hover{ opacity:0.85; }
+/* HERO & MOUNTAIN */
+.hero{ position:relative; height:100svh; min-height:680px; width:100%; overflow:hidden; background:linear-gradient(180deg, var(--dark) 0%, var(--dark-2) 100%); }
+.hero .sky{ position:absolute; inset:0; transition:opacity 1.4s var(--ease); }
+.hero .sky.dawn{ opacity:0; background: radial-gradient(120% 80% at 50% 120%, var(--dawn-3) 0%, transparent 55%), linear-gradient(180deg, var(--dawn-1) 0%, var(--dawn-2) 58%, var(--dawn-4) 100%); }
+.hero.is-mountain .sky.dawn{ opacity:1; }
+.hero .sun{ position:absolute; left:50%; top:62%; width:340px; height:340px; margin:-170px 0 0 -170px; border-radius:50%; opacity:0; background:radial-gradient(circle, rgba(255,228,190,.9) 0%, rgba(255,200,140,.35) 40%, transparent 70%); transition:opacity 1.6s var(--ease) .2s; filter:blur(2px); }
+.hero.is-mountain .sun{ opacity:.9; }
 
-/* GÜNDEM & BLOG BÖLÜMÜ */
-#gundem{ padding:50px 0; background:var(--bg); }
-.gundem-layout{ display:grid; grid-template-columns: 1fr 340px; gap:36px; align-items:start; }
-.news-header{ font-family:var(--display); font-size:24px; font-weight:800; margin-bottom:20px; display:flex; align-items:center; gap:10px; }
-.news-header::before{ content:""; display:block; width:10px; height:10px; border-radius:50%; background:var(--pin); }
-.news-list{ display:flex; flex-direction:column; gap:16px; }
-.news-item{ background:var(--card); border-radius:var(--r-md); padding:20px; box-shadow:var(--shadow-1); border:1px solid var(--line); transition:all .2s var(--ease); cursor:pointer; }
-.news-item:hover{ transform:translateY(-2px); box-shadow:var(--shadow-2); }
-.news-author{ font-size:12px; font-weight:800; color:var(--accent); text-transform:uppercase; letter-spacing:0.05em; margin-bottom:4px; display:flex; justify-content:space-between; }
-.news-author span.date{ color:var(--ink-faint); font-weight:500; }
-.news-item h4{ font-size:18px; color:var(--ink); margin-bottom:6px; }
-.news-item p{ font-size:14.5px; color:var(--ink-soft); line-height:1.5; margin:0; }
-.news-readmore{ color:var(--blue); font-size:13px; font-weight:700; margin-top:8px; display:inline-block; }
+.globe-stage{ position:absolute; inset:0; display:grid; place-items:center; transform-origin:50% 54%; transition:transform 1.5s var(--ease-io), opacity 1.1s var(--ease) .25s; }
+.hero.is-zoom .globe-stage{ transform:scale(8); opacity:0; }
+.globe-canvas{ display:block; }
 
-/* WIDGETLAR */
-.widget-panel{ display:flex; flex-direction:column; gap:16px; }
-.widget-card{ background:var(--card); border-radius:var(--r-md); padding:20px; box-shadow:var(--shadow-1); border:1px solid var(--line); }
-.widget-card.weather{ background:linear-gradient(135deg, #0071e3 0%, #4facfe 100%); color:#fff; border:none; }
-.widget-card.prayer{ background:var(--dark-2); color:#fff; border:none; }
+.geo-label{ position:absolute; left:50%; top:54%; transform:translate(-50%,46px) scale(.9); z-index:6; text-align:center; opacity:0; transition:opacity .6s var(--ease), transform .6s var(--ease); pointer-events:none; }
+.hero.is-locate .geo-label{ opacity:1; transform:translate(-50%,46px) scale(1); }
+.hero.is-zoom .geo-label, .hero.is-mountain .geo-label{ opacity:0; }
+.geo-label .pt{ font-family:var(--display); font-weight:700; font-size:15px; color:#fff; letter-spacing:.18em; text-transform:uppercase; }
+.geo-label .sub{ font-size:12.5px; color:rgba(255,255,255,.6); margin-top:3px; letter-spacing:.05em; }
 
-/* KARTLAR & OVERLAY */
-.grid{ max-width:var(--maxw); margin:0 auto; padding:30px 24px 80px; display:grid; grid-template-columns:repeat(auto-fill,minmax(310px,1fr)); gap:24px; }
-.card{ position:relative; height:360px; border-radius:var(--r-lg); overflow:hidden; cursor:pointer; box-shadow:var(--shadow-1); border:1px solid var(--line); display:flex; flex-direction:column; justify-content:space-between; padding:22px; color:#fff; background-size:cover; transition:transform .3s var(--ease), box-shadow .3s; }
-.card:hover{ transform:translateY(-4px); box-shadow:var(--shadow-2); }
-.card .scrim{ position:absolute; inset:0; background:linear-gradient(180deg, rgba(0,0,0,0.1) 0%, rgba(0,0,0,0.85) 100%); z-index:1; }
-.card .body{ position:relative; z-index:2; }
+.mountain{ position:absolute; inset:0; z-index: 5; opacity:0; transform:translateY(40px); pointer-events:none; transition:opacity 1.3s var(--ease) .35s, transform 1.5s var(--ease) .35s; }
+.hero.is-mountain .mountain{ opacity:1; transform:translateY(0); }
+.mountain img { width: 100%; height: 100%; object-fit: cover; object-position: bottom center; display: block; }
 
-/* APPLE MODAL DÜZENİ (Randevu & Detaylar) */
-.modal-overlay{ position:fixed; inset:0; z-index:999; background:rgba(0,0,0,0.5); backdrop-filter:blur(16px); display:grid; place-items:center; padding:16px; animation:fadeIn .2s ease; }
-.modal-box{ background:#fff; color:var(--ink); border-radius:var(--r-lg); max-width:560px; width:100%; max-height:90vh; overflow-y:auto; box-shadow:var(--shadow-3); border:1px solid var(--line); padding:32px; position:relative; animation:slideUp .3s var(--ease); }
-@keyframes fadeIn{ from{opacity:0;} to{opacity:1;} }
-@keyframes slideUp{ from{opacity:0; transform:translateY(20px);} to{opacity:1; transform:none;} }
-.modal-close{ position:absolute; top:20px; right:20px; width:36px; height:36px; border-radius:50%; background:var(--bg-2); display:grid; place-items:center; font-weight:800; cursor:pointer; }
-.form-group{ margin-bottom:16px; }
-.form-group label{ display:block; font-size:13px; font-weight:700; color:var(--ink-soft); margin-bottom:6px; }
-.form-control{ width:100%; padding:12px 16px; border-radius:var(--r-sm); border:1px solid var(--line); background:var(--bg-2); color:var(--ink); outline:none; transition:border .2s; }
-.form-control:focus{ border-color:var(--blue); background:#fff; }
-.btn-primary{ background:var(--ink); color:#fff; font-weight:800; padding:14px 24px; border-radius:100px; width:100%; font-size:15px; transition:transform .2s, opacity .2s; }
-.btn-primary:hover{ opacity:0.9; transform:scale(1.01); }
+.hero-content{ position:absolute; inset:0; z-index:10; display:flex; flex-direction:column; align-items:center; justify-content:flex-start; padding-top:14vh; text-align:center; pointer-events:none; width:100%; }
+.hero-content > *{ pointer-events:auto; }
+.hero-eyebrow{ display:inline-flex; align-items:center; gap:9px; font-size:13px; font-weight:700; letter-spacing:.16em; text-transform:uppercase; color:rgba(255,255,255,.72); white-space:nowrap; padding:8px 16px; border:1px solid rgba(255,255,255,.18); border-radius:100px; background:rgba(255,255,255,.04); backdrop-filter:blur(6px); opacity:0; transform:translateY(12px); transition:all .7s var(--ease) .1s; }
+.hero-title{ color:#fff; font-size:clamp(38px, 6.4vw, 78px); margin:20px 0 0; line-height:1.0; opacity:0; transform:translateY(18px); transition:all .8s var(--ease) .2s; white-space:nowrap; }
+.hero-title em{ font-style:normal; color:var(--accent); -webkit-text-stroke:0; background:linear-gradient(120deg,var(--accent),#2dd86f); -webkit-background-clip:text; background-clip:text; -webkit-text-fill-color:transparent; }
+.hero-sub{ color:rgba(255,255,255,.82); font-size:clamp(15px,1.6vw,19px); margin:20px auto 0; max-width:44ch; padding:0 20px; opacity:0; transform:translateY(16px); transition:all .8s var(--ease) .3s; text-wrap:pretty; }
+.hero.is-mountain .hero-eyebrow, .hero.is-mountain .hero-title, .hero.is-mountain .hero-sub{ opacity:1; transform:none; }
 
-/* MOBİL UYUM */
-@media(max-width:768px){
+.search-wrapper{ position:relative; margin-top:34px; width:min(680px, 90%); opacity:0; transform:translateY(20px) scale(.98); transition:all .8s var(--ease) .42s; }
+.hero.is-mountain .search-wrapper{ opacity:1; transform:none; }
+.search{ display:flex; align-items:center; gap:10px; background:rgba(255,255,255,.96); border-radius:100px; padding:9px 9px 9px 22px; box-shadow:var(--shadow-3); border:1px solid rgba(255,255,255,.6); position:relative; z-index:2; width:100%; }
+.search .ico{ color:var(--ink-faint); display:flex; flex-shrink:0; }
+.search input{ flex:1; border:none; outline:none; background:none; font-size:17px; color:var(--ink); padding:12px 4px; min-width:0; }
+.search input::placeholder{ color:var(--ink-faint); }
+.search .go{ flex-shrink:0; background:var(--ink); color:#fff; font-weight:700; font-size:15px; padding:13px 26px; border-radius:100px; transition:transform .2s var(--ease), background .2s; }
+.search .go:hover{ transform:translateY(-1px); background:#000; }
+
+.search-dropdown{ position:absolute; top:calc(100% + 12px); left:0; right:0; background:#fff; border-radius:var(--r-md); box-shadow:var(--shadow-3); overflow:hidden; z-index:1; display:flex; flex-direction:column; text-align:left; }
+.sugg-item{ display:flex; align-items:center; gap:12px; padding:14px 22px; border-bottom:1px solid var(--line); cursor:pointer; transition:background .2s; }
+.sugg-item:last-child{ border-bottom:none; }
+.sugg-item:hover{ background:var(--bg-2); }
+.sugg-item .s-icon{ display:grid; place-items:center; width:34px; height:34px; border-radius:8px; color:#fff; flex-shrink:0; }
+.sugg-item .s-text{ flex:1; display:flex; flex-direction:column; }
+.sugg-item .s-name{ font-weight:700; color:var(--ink); font-size:15px; }
+.sugg-item .s-cat{ font-size:12px; color:var(--ink-soft); font-weight:600; }
+
+.search-tags{ display:flex; gap:8px; flex-wrap:wrap; justify-content:center; margin-top:16px; opacity:0; transition:opacity .8s var(--ease) .6s; padding:0 16px; }
+.hero.is-mountain .search-tags{ opacity:1; }
+.search-tags button{ font-size:13px; font-weight:600; color:#fff; padding:7px 14px; border-radius:100px; border:1px solid rgba(255,255,255,.22); background:rgba(255,255,255,.06); backdrop-filter:blur(6px); transition:all .2s var(--ease); cursor:pointer; }
+.search-tags button:hover{ background:var(--accent); color:var(--ink); border-color:transparent; transform:translateY(-1px); }
+.search-tags button.highlight-btn { background: var(--accent); color: var(--ink); border-color: transparent; box-shadow: 0 4px 14px rgba(68, 189, 50, 0.2); }
+.search-tags button.highlight-btn:hover { filter: brightness(0.9); }
+
+.scroll-hint{ position:absolute; left:50%; bottom:26px; transform:translateX(-50%); z-index:11; display:flex; flex-direction:column; align-items:center; gap:7px; color:rgba(255,255,255,.7); font-size:12px; font-weight:600; letter-spacing:.14em; text-transform:uppercase; opacity:0; transition:opacity .8s var(--ease) .8s; }
+.hero.is-mountain .scroll-hint{ opacity:1; }
+.scroll-hint .mouse{ width:22px; height:34px; border:2px solid rgba(255,255,255,.45); border-radius:12px; position:relative; }
+.scroll-hint .mouse::after{ content:""; position:absolute; left:50%; top:6px; width:3px; height:7px; margin-left:-1.5px; border-radius:2px; background:#fff; animation:wheel 1.6s var(--ease) infinite; }
+@keyframes wheel{ 0%{opacity:0;transform:translateY(0)} 30%{opacity:1} 70%{opacity:1} 100%{opacity:0;transform:translateY(10px)} }
+
+/* BANNER MARQUEE */
+.banner-section{ padding:40px 0; background:var(--bg); overflow:hidden; width:100%; max-width:100%; }
+.marquee{ display:flex; width:max-content; animation:scroll 40s linear infinite; will-change:transform; }
+.marquee:hover{ animation-play-state:paused; }
+@keyframes scroll{ from{ transform:translateX(0); } to{ transform:translateX(-50%); } }
+
+.banner-item { width: 340px; height: 190px; border-radius: var(--r-md); box-shadow: var(--shadow-1); border: 1px solid rgba(255,255,255,0.4); margin-right: 20px; flex-shrink: 0; position: relative; overflow: hidden; background-size: cover; display: block; transition: transform 0.3s var(--ease), box-shadow 0.3s var(--ease); }
+.banner-item:hover { transform: translateY(-4px); box-shadow: var(--shadow-2); }
+.banner-scrim { position: absolute; inset: 0; background: linear-gradient(180deg, transparent 20%, rgba(0,0,0,0.85) 100%); }
+.banner-content { position: absolute; bottom: 16px; left: 16px; right: 16px; display: flex; flex-direction: column; z-index: 2; }
+.banner-title { color: #fff; font-family: var(--display); font-size: 17px; font-weight: 800; line-height: 1.2; margin-bottom: 4px; text-shadow: 0 2px 4px rgba(0,0,0,0.5); }
+.banner-sub { color: var(--accent); font-size: 12.5px; font-weight: 700; text-transform: uppercase; letter-spacing: 0.05em; }
+
+/* HİKAYELER */
+.stories-section{ padding:8px 0 24px; background:var(--bg); width:100%; }
+.stories-row{ display:flex; gap:20px; flex-wrap:wrap; }
+.story-bubble{ display:flex; flex-direction:column; align-items:center; gap:8px; background:none; cursor:pointer; width:84px; }
+.story-ring{ width:82px; height:82px; border-radius:50%; padding:3px; display:grid; place-items:center;
+  background:conic-gradient(from 140deg, var(--accent), var(--dawn-3), var(--dawn-2), var(--accent));
+  box-shadow:0 6px 18px color-mix(in srgb, var(--accent), transparent 70%); transition:transform .2s var(--ease); }
+.story-bubble:hover .story-ring{ transform:scale(1.05); }
+.story-thumb{ width:100%; height:100%; border-radius:50%; background-color:var(--dark-2); background-size:cover; background-repeat:no-repeat;
+  display:grid; place-items:center; color:rgba(255,255,255,.7); border:3px solid var(--bg); }
+.story-label{ font-size:13px; font-weight:700; color:var(--ink-soft); text-align:center; line-height:1.1; max-width:84px; }
+
+.story-viewer{ position:fixed; inset:0; z-index:300; background:rgba(8,10,24,.92); backdrop-filter:blur(6px); display:grid; place-items:center; padding:20px; animation:fadeIn .3s ease; }
+.story-progress{ position:absolute; top:18px; left:50%; transform:translateX(-50%); width:min(360px,80%); height:4px; border-radius:4px; background:rgba(255,255,255,.25); overflow:hidden; }
+.story-progress-fill{ display:block; height:100%; width:100%; background:#fff; border-radius:4px; transform-origin:left; animation:storyBar 6s linear forwards; }
+@keyframes storyBar{ from{ transform:scaleX(0);} to{ transform:scaleX(1);} }
+.story-close{ position:absolute; top:30px; right:24px; width:42px; height:42px; border-radius:50%; background:rgba(255,255,255,.15); color:#fff; font-size:16px; font-weight:800; cursor:pointer; }
+.story-card{ position:relative; width:min(380px,92vw); aspect-ratio:9/16; max-height:84vh; border-radius:22px; overflow:hidden; box-shadow:var(--shadow-3); }
+.story-card-img{ width:100%; height:100%; object-fit:cover; }
+.story-card-bg{ position:absolute; inset:0; background:linear-gradient(160deg, var(--dawn-1) 0%, var(--dawn-2) 45%, var(--dawn-3) 100%); }
+.story-card-overlay{ position:absolute; inset:0; display:flex; flex-direction:column; justify-content:flex-end; gap:14px; padding:30px; background:linear-gradient(180deg, transparent 45%, rgba(0,0,0,.55) 100%); }
+.story-card-badge{ align-self:flex-start; background:var(--accent); color:var(--ink); font-family:var(--display); font-weight:800; font-size:14px; padding:7px 16px; border-radius:100px; }
+.story-card-text{ color:#fff; font-family:var(--display); font-weight:700; font-size:24px; line-height:1.2; text-shadow:0 2px 10px rgba(0,0,0,.4); text-wrap:balance; }
+
+/* GÜNDEM, HİKAYELER & WIDGETLAR */
+#gundem{ padding:20px 0 40px; background:var(--bg); width:100%; max-width:100%; overflow-x:hidden; }
+.gundem-layout{ display:grid; grid-template-columns: 1fr 360px; gap:32px; align-items:start; }
+
+.widget-panel{ display:flex; flex-direction:column; gap:16px; width:100%; }
+.widget-card{ background:var(--card); border-radius:var(--r-lg); padding:24px; box-shadow:var(--shadow-1); border:1px solid var(--line); position:relative; overflow:hidden; }
+.widget-card.weather{ background:linear-gradient(135deg, #4facfe 0%, #00f2fe 100%); color:#fff; border:none; }
+.w-top{ display:flex; justify-content:space-between; align-items:flex-start; margin-bottom:12px; }
+.w-top .city{ font-family:var(--display); font-weight:700; font-size:20px; }
+.w-top .date{ font-size:13px; font-weight:600; opacity:.8; }
+.w-main{ display:flex; align-items:center; gap:16px; }
+.w-main .temp{ font-size:42px; font-family:var(--display); font-weight:800; line-height:1; }
+.w-main .desc{ font-size:14px; font-weight:600; opacity:.9; max-width:120px; line-height:1.2; }
+
+.widget-card.prayer{ background:var(--dark-2); color:#fff; border:none; padding:20px; }
+.p-top{ display:flex; flex-direction:column; margin-bottom:12px; }
+.p-top-row { display:flex; align-items:center; justify-content:space-between; font-family:var(--display); font-size:19px; font-weight:700; margin-bottom:4px; }
+.p-date{ font-size:12px; font-weight:600; color:var(--accent); font-family:var(--body); }
+.p-countdown { font-size:13px; color:rgba(255,255,255,.7); display:flex; gap:6px; align-items:center; font-weight:600; }
+.p-countdown span { background:rgba(68,189,50,.15); color:var(--accent); padding:2px 8px; border-radius:100px; font-family:var(--display); font-size:14px; font-variant-numeric:tabular-nums; border:1px solid rgba(68,189,50,.3); }
+.p-grid{ display:grid; grid-template-columns:repeat(3,1fr); gap:8px; text-align:center; }
+.p-item{ background:rgba(255,255,255,.08); border-radius:10px; padding:6px 2px; border:1px solid rgba(255,255,255,.05); }
+.p-item.active{ background:var(--accent); color:var(--ink); font-weight:800; border-color:transparent; transform:scale(1.02); box-shadow:0 4px 12px rgba(68,189,50,.2); }
+.p-item span{ display:block; font-size:10px; font-weight:700; opacity:.7; text-transform:uppercase; margin-bottom:1px; }
+.p-item strong{ display:block; font-family:var(--display); font-size:14px; }
+
+/* DİNAMİK SEÇMELİ ECZANE WIDGETI */
+.widget-card.pharmacy-widget { background: var(--card); border: 1px solid var(--line); padding: 20px; color: var(--ink); }
+.ph-header { display: flex; align-items: center; justify-content: space-between; margin-bottom: 14px; gap: 10px; }
+.ph-title { font-family: var(--display); font-size: 18px; font-weight: 800; display: flex; align-items: center; gap: 6px; }
+.ph-select { background: var(--bg-2); border: 1px solid var(--line); padding: 6px 12px; border-radius: 100px; font-size: 13px; font-weight: 700; outline: none; color: var(--ink); cursor: pointer; }
+.ph-box { background: var(--bg); border-radius: var(--r-sm); padding: 14px; border: 1px solid var(--line); display: flex; flex-direction: column; gap: 8px; }
+.ph-name-row { display: flex; justify-content: space-between; align-items: baseline; }
+.ph-name { font-family: var(--display); font-size: 16px; font-weight: 800; color: var(--pin); }
+.ph-date-badge { font-size: 11px; background: var(--ink); color: #fff; padding: 2px 8px; border-radius: 100px; font-weight: 700; }
+.ph-detail { font-size: 13.5px; color: var(--ink-soft); line-height: 1.4; font-weight: 500; }
+.ph-landmark { font-size: 12px; color: var(--ink); font-weight: 700; text-transform: uppercase; border-left: 2px solid var(--pin); padding-left: 6px; margin-top: 2px; }
+.ph-footer-actions { display: flex; justify-content: space-between; align-items: center; margin-top: 6px; padding-top: 8px; border-top: 1px dashed var(--line); }
+.ph-phone { font-size: 14px; font-weight: 800; color: var(--ink); display: flex; align-items: center; gap: 4px; }
+.ph-map-link { font-size: 12.5px; font-weight: 700; color: #3498DB; text-decoration: underline; }
+.ph-empty { font-size: 13.5px; color: var(--ink-faint); text-align: center; padding: 10px 0; font-weight: 600; }
+
+.news-wrap{ grid-column: 1 / -1; margin-top:16px; width:100%; }
+.news-header{ font-family:var(--display); font-size:26px; font-weight:700; margin-bottom:20px; display:flex; align-items:center; gap:10px; }
+.news-header::before{ content:""; display:block; width:12px; height:12px; border-radius:50%; background:var(--pin); }
+.news-list{ display:flex; flex-direction:column; gap:16px; width:100%; }
+.news-item{ display:flex; gap:20px; background:var(--card); border-radius:var(--r-md); padding:16px; box-shadow:var(--shadow-1); border:1px solid var(--line); transition:transform .2s var(--ease), box-shadow .2s; cursor:pointer; }
+.news-item:hover{ transform:translateY(-3px); box-shadow:var(--shadow-2); }
+.news-img{ width:150px; height:110px; border-radius:12px; object-fit:cover; flex-shrink:0; background:var(--bg-2); }
+.news-content{ display:flex; flex-direction:column; justify-content:center; }
+.news-content h4{ font-size:18px; margin-bottom:6px; color:var(--ink); }
+.news-content p{ font-size:14px; color:var(--ink-soft); line-height:1.4; display:-webkit-box; -webkit-line-clamp:2; -webkit-box-orient:vertical; overflow:hidden; }
+.news-meta{ margin-bottom:6px; font-size:12px; font-weight:700; color:var(--accent); letter-spacing:.05em; }
+
+/* KATEGORİLER (SABİT SEKMELİ DÜZEN) */
+#kategoriler { width:100%; max-width:100%; padding:40px 0 20px; background:var(--bg); }
+.cats-intro{ padding-bottom: 24px; }
+.cats-intro .kicker{ font-size:13px; font-weight:800; letter-spacing:.18em; text-transform:uppercase; color:var(--accent); }
+.cats-intro h2{ font-size:clamp(30px,4.6vw,56px); margin:14px 0 0; max-width:18ch; text-wrap:balance; }
+.cats-intro p{ color:var(--ink-soft); max-width:52ch; margin:16px 0 0; font-size:17px; }
+
+.cats-interactive-container { display:grid; grid-template-columns:360px 1fr; gap:40px; align-items:start; width:100%; margin-top:20px; }
+.cat-list{ display:flex; flex-direction:column; gap:4px; }
+.cat-item{ display:flex; align-items:center; gap:16px; padding:12px 16px; text-align:left; width:100%; border-radius:var(--r-sm); transition:all 0.3s var(--ease); position:relative; background:transparent; }
+.cat-item .num{ font-family:var(--display); font-weight:600; font-size:14px; width:24px; color:var(--ink-faint); font-variant-numeric:tabular-nums; }
+.cat-item .nm{ font-family:var(--display); font-weight:700; letter-spacing:-.02em; font-size:22px; color:var(--ink-soft); transition:all 0.3s var(--ease); line-height:1.05; }
+.cat-item .swatch{ width:0; height:12px; border-radius:6px; transition:width 0.3s var(--ease); flex-shrink:0; }
+.cat-item.active { background: var(--card); box-shadow: var(--shadow-1); border: 1px solid var(--line); }
+.cat-item.active .nm{ color:var(--ink); font-size:25px; }
+.cat-item.active .num{ color:var(--ink); }
+.cat-item.active .swatch{ width:24px; }
+.cat-item:hover:not(.active) { background: rgba(255,255,255,0.5); }
+.cat-item:hover .nm { color: var(--ink); }
+
+.cat-stage{ position:relative; height:420px; border-radius:var(--r-lg); overflow:hidden; box-shadow:var(--shadow-2); background:var(--bg-2); width:100%; }
+.cat-panel{ position:absolute; inset:0; display:flex; flex-direction:column; justify-content:flex-end; padding:42px; color:#fff; height:100%; }
+.cat-panel .ghost{ position:absolute; right:-10px; top:-30px; font-family:var(--display); font-weight:800; font-size:clamp(180px,24vw,260px); line-height:.8; color:rgba(255,255,255,.14); letter-spacing:-.04em; pointer-events:none; }
+.cat-panel .scrim{ position:absolute; inset:0; background:linear-gradient(180deg, transparent 30%, rgba(0,0,0,.55) 100%); }
+.cat-panel .body{ position:relative; z-index:2; }
+.cat-panel h3{ font-size:clamp(34px,4vw,50px); color:#fff; text-wrap:balance; margin-bottom:8px; }
+.cat-panel p{ margin:8px 0 0; font-size:16px; max-width:44ch; color:rgba(255,255,255,.95); text-wrap:pretty; }
+.cat-cta{ align-self:flex-start; display:inline-flex; align-items:center; gap:9px; background:#fff; color:var(--ink); font-weight:700; font-size:15px; padding:14px 24px; border-radius:100px; box-shadow:0 10px 30px rgba(0,0,0,0.15); transition:transform .2s var(--ease); margin-top:24px; }
+.cat-cta:hover{ transform:translateY(-2px); }
+
+/* MEKANLAR / KARTLAR OVERLAY */
+.ov{ position:fixed; inset:0; z-index:100; background:var(--bg); display:flex; flex-direction:column; width:100%; overflow-x:hidden; }
+.ov.animate-in { animation: ovPop 0.4s cubic-bezier(0.22, 0.61, 0.36, 1) forwards; }
+@keyframes ovPop{ from{ opacity:0; transform:scale(0.98) translateY(10px); } to{ opacity:1; transform:none; } }
+
+.ov-head{ display:flex; align-items:center; gap:16px; padding:18px 28px; border-bottom:1px solid var(--line); flex-shrink:0; background:var(--bg); z-index:3; width:100%; box-sizing:border-box; }
+.ov-back{ display:inline-flex; align-items:center; gap:8px; font-weight:700; font-size:15px; padding:10px 16px; border-radius:100px; background:var(--bg-2); transition:background .2s; }
+.ov-back:hover{ background:var(--line); }
+.ov-title{ display:flex; align-items:center; gap:12px; }
+.ov-title h2{ font-size:26px; }
+.ov-close{ margin-left:auto; width:44px; height:44px; border-radius:50%; display:grid; place-items:center; background:var(--bg-2); font-weight:800; cursor:pointer; }
+
+.ov-body{ flex:1; overflow-y:auto; overflow-x:hidden; width:100%; display:flex; flex-direction:column; }
+.grid{ max-width:var(--maxw); margin:0 auto; padding:40px 28px 80px; display:grid; grid-template-columns:repeat(auto-fill,minmax(320px,1fr)); gap:32px; width:100%; }
+
+/* --- APPLE YENİ NESİL PREMIUM KART TASARIMI --- */
+.card {
+  position: relative; 
+  height: 380px; 
+  border-radius: var(--r-lg); 
+  overflow: hidden; 
+  cursor: pointer; 
+  box-shadow: 0 12px 38px rgba(0,0,0,0.14); 
+  border: 1px solid rgba(255,255,255,0.18); 
+  transition: transform 0.45s cubic-bezier(0.22, 0.61, 0.36, 1), box-shadow 0.45s cubic-bezier(0.22, 0.61, 0.36, 1); 
+  display: flex; 
+  flex-direction: column; 
+  justify-content: space-between; 
+  padding: 24px; 
+  color: #fff; 
+  background-size: cover;
+  transform-origin: center center;
+  isolation: isolate;
+}
+.card::after {
+  content: ""; position: absolute; inset: 0; border-radius: inherit; border: 2px solid transparent; background: linear-gradient(135deg, rgba(255,255,255,0.5) 0%, rgba(255,255,255,0) 55%) border-box; -webkit-mask: linear-gradient(#fff 0 0) padding-box, linear-gradient(#fff 0 0); -webkit-mask-composite: destination-out; mask-composite: exclude; pointer-events: none; z-index: 5;
+}
+.card:hover { 
+  transform: translateY(-10px) scale(1.015); 
+  box-shadow: 0 36px 70px rgba(0,0,0,0.3); 
+}
+.card:active { transform: scale(0.97); }
+.card .scrim { 
+  position:absolute; inset:0; 
+  background:linear-gradient(180deg, rgba(0,0,0,0.05) 0%, rgba(0,0,0,0.35) 42%, rgba(0,0,0,0.92) 100%); 
+  z-index:1; pointer-events:none; 
+}
+.card-top-bar { display: flex; justify-content: space-between; align-items: flex-start; z-index: 2; position: relative; }
+.card-icon { width: 58px; height: 58px; background: rgba(255,255,255,0.18); backdrop-filter: blur(16px); border-radius: 20px; display: grid; place-items: center; box-shadow: 0 8px 22px rgba(0,0,0,0.18), inset 0 1px 0 rgba(255,255,255,0.45); border: 1px solid rgba(255,255,255,0.35); transition: transform 0.4s var(--ease), background 0.3s; }
+.card:hover .card-icon { transform: translateY(-2px) scale(1.05); background: rgba(255,255,255,0.26); }
+.card .body { position:relative; z-index:2; display:flex; flex-direction:column; }
+.card h3 { font-size:27px; color:#fff; text-wrap:balance; margin:0; font-weight:800; letter-spacing:-0.02em; line-height: 1.08; text-shadow:0 2px 12px rgba(0,0,0,0.4); }
+.card .card-area { display:inline-flex; align-items:center; gap:6px; font-size:13px; font-weight:800; margin:10px 0 0; color:var(--accent); background:rgba(255,255,255,0.15); padding:6px 12px; border-radius:10px; align-self:flex-start; backdrop-filter:blur(8px); border: 1px solid rgba(255,255,255,0.1); }
+.card p { margin:8px 0 0; font-size:14.5px; color:rgba(255,255,255,0.95); line-height:1.5; text-wrap:pretty; font-weight:500; }
+.card-note { font-size: 13px; color: rgba(255,255,255,0.78); margin-top: 18px; padding-top: 14px; border-top: 1px solid rgba(255,255,255,0.22); font-weight: 600; display: flex; align-items: center; gap: 6px; }
+
+/* ALT KATEGORİ */
+.subcat-card .body { justify-content:center; align-items:flex-start; height:100%; margin-top: auto; }
+.subcat-card h3 { font-size:32px; line-height:1.15; }
+.subcat-ghost { position:absolute; right:-26px; bottom:-22px; z-index:1; opacity:0.16; transform:rotate(-8deg); pointer-events:none; transition:transform 0.5s var(--ease), opacity 0.4s; }
+
+/* KART DETAY MODALI (POP-UP) */
+.place-modal-overlay { position:fixed; inset:0; z-index:250; background:rgba(12,16,32,0.85); backdrop-filter:blur(12px); display:grid; place-items:center; padding:20px; width:100%; height:100%; animation:fadeIn .3s ease; }
+.place-modal-content { background:var(--bg); border-radius:var(--r-lg); max-width:700px; width:100%; overflow:hidden; box-shadow:var(--shadow-3); border:1px solid var(--line); display:flex; flex-direction:column; position:relative; max-height:92vh; animation: slideUp 0.4s cubic-bezier(0.22, 0.61, 0.36, 1) forwards; }
+.pm-close { position:absolute; top:16px; right:16px; width:38px; height:38px; border-radius:50%; background:rgba(0,0,0,0.5); color:#fff; display:grid; place-items:center; z-index:10; font-weight:800; cursor:pointer; backdrop-filter:blur(4px); transition:background 0.2s; }
+.pm-close:hover { background:var(--pin); }
+.pm-img-wrap { width:100%; height:300px; position:relative; background:#111; }
+.pm-img-wrap img { width:100%; height:100%; object-fit:cover; }
+.pm-noimg { position:absolute; inset:0; display:flex; flex-direction:column; align-items:center; justify-content:center; gap:10px; color:rgba(255,255,255,.55); }
+.pm-img-scrim { position:absolute; inset:0; background:linear-gradient(180deg, transparent 50%, rgba(23,21,15,0.9) 100%); }
+.pm-title-box { position:absolute; bottom:24px; left:28px; right:28px; color:#fff; }
+.pm-title-box h2 { font-size:32px; font-weight:800; text-shadow:0 2px 10px rgba(0,0,0,0.6); line-height:1.1; }
+.pm-body { padding:28px; display:flex; flex-direction:column; gap:20px; overflow-y:auto; }
+.pm-info { font-size:16px; color:var(--ink); line-height:1.6; margin:0; font-weight:500; white-space: pre-wrap; }
+.pm-meta-box { background:var(--card); border:1px solid var(--line); padding:20px; border-radius:var(--r-sm); display:flex; flex-direction:column; gap:16px; box-shadow:var(--shadow-1); }
+.pm-meta-item { display:flex; align-items:flex-start; gap:12px; font-size:15px; font-weight:600; color:var(--ink-soft); }
+.pm-meta-item svg { color:var(--pin); flex-shrink:0; margin-top:2px; }
+.pm-meta-item strong { display:block; margin-bottom:4px; font-size:13px; color:var(--ink-faint); text-transform:uppercase; letter-spacing:.05em;}
+.pm-maps-btn { background:var(--ink); color:#fff; font-weight:800; padding:16px; border-radius:100px; display:flex; align-items:center; justify-content:center; gap:8px; font-size:16px; transition:background 0.2s, transform 0.2s; text-align:center; margin-top:8px; box-shadow:0 8px 24px rgba(0,0,0,0.15); }
+.pm-maps-btn:hover { background:#000; transform:translateY(-2px); }
+
+/* Detay Kartı Randevu Butonu */
+.pm-book-btn { background: var(--accent); color: var(--ink); font-weight: 800; padding: 16px; border-radius: 100px; display: flex; align-items: center; justify-content: center; gap: 8px; font-size: 16px; transition: all 0.2s; text-align: center; margin-top: 4px; box-shadow: 0 8px 24px rgba(68, 189, 50, 0.2); cursor: pointer; border: none; }
+.pm-book-btn:hover { transform: translateY(-2px); filter: brightness(0.96); }
+
+/* APPLE MINIMALIST RANDEVU & BLOG MODALI */
+.app-modal-overlay { position:fixed; inset:0; z-index:9999; background:rgba(0,0,0,0.5); backdrop-filter:blur(16px); display:grid; place-items:center; padding:16px; animation:fadeIn .2s ease; }
+.app-modal-card { background:#fff; color:var(--ink); border-radius:28px; max-width:540px; width:100%; max-height:90vh; overflow-y:auto; box-shadow:var(--shadow-3); border:1px solid var(--line); padding:32px; position:relative; animation:slideUp .3s var(--ease); }
+.app-modal-close { position:absolute; top:20px; right:20px; width:36px; height:36px; border-radius:50%; background:var(--bg-2); display:grid; place-items:center; font-weight:800; cursor:pointer; }
+.m-form-group { margin-bottom:14px; }
+.m-form-group label { display:block; font-size:13px; font-weight:700; color:var(--ink-soft); margin-bottom:6px; }
+.m-form-input { width:100%; padding:12px 14px; border-radius:10px; border:1px solid var(--line); background:var(--bg-2); color:var(--ink); outline:none; transition:border .2s; }
+.m-form-input:focus { border-color:var(--blue); background:#fff; }
+.m-btn-primary { background:var(--ink); color:#fff; font-weight:800; padding:14px 20px; border-radius:100px; width:100%; font-size:15px; transition:all .2s; border:none; cursor:pointer; }
+.m-btn-primary:hover { opacity:0.9; transform:scale(1.01); }
+
+/* RESPONSIVE */
+@media (max-width:920px){
+  .topbar{ grid-template-columns: auto 1fr; }
   .topbar-nav{ display:none; }
   .gundem-layout{ grid-template-columns:1fr; }
-  .modal-box{ padding:24px 20px; }
+  .cats-interactive-container { grid-template-columns:150px 1fr; gap:20px; }
+  .cat-stage{ height:380px; }
+  .cat-list{ gap:4px; }
+  .cat-item{ padding:10px 8px; gap:8px; }
+  .cat-item .num{ display:none; }
+  .cat-item .nm{ font-size:15px; }
+  .cat-item.active .nm{ font-size:17px; }
 }
+@media (max-width:680px){
+  body{ font-size:16px; }
+  .wrap{ padding: 0 16px; }
+  .topbar .loc{ display:none; }
+  .hero-content{ padding-top:13vh; }
+  .hero-title{ white-space:normal; }
+  .search{ padding:7px 7px 7px 18px; }
+  .search .go{ padding:12px 18px; }
+  .grid{ grid-template-columns:1fr; padding:20px 16px 60px; }
+  .cats-interactive-container { grid-template-columns:1fr; gap:16px; }
+  .cat-list { flex-direction: row; flex-wrap: wrap; gap:6px; }
+  .cat-item { width: auto; padding:8px 12px; background: var(--bg-2); }
+  .cat-stage { height: 300px; }
+  .cat-panel { padding: 24px; }
+  .app-modal-card { padding:24px 20px; }
+}
+/* FAVORİ BUTONU */
+.fav-btn { position: absolute; top: 16px; right: 16px; z-index: 10; width: 40px; height: 40px; border-radius: 50%; background: rgba(0, 0, 0, 0.45); backdrop-filter: blur(6px); display: grid; place-items: center; border: 1px solid rgba(255,255,255,0.2); cursor: pointer; }
+.fav-btn.is-fav svg { fill: #E84142; stroke: #E84142; }
+.pm-share-btn { background: #fff; color: var(--ink); font-weight: 800; padding: 16px; border-radius: 100px; display: flex; align-items: center; justify-content: center; gap: 8px; font-size: 16px; margin-top: 8px; border: 1px solid var(--line); cursor: pointer; width: 100%; }
+
+/* MOBİL ALT NAV */
+.bottom-nav { display: none; }
+@media (max-width: 680px) {
+  .bottom-nav {
+    display: flex; justify-content: space-around; align-items: center;
+    position: fixed; bottom: 0; left: 0; right: 0; z-index: 990;
+    background: rgba(255, 255, 255, 0.85); backdrop-filter: saturate(180%) blur(20px);
+    padding: 10px 8px calc(10px + env(safe-area-inset-bottom));
+    border-top: 1px solid rgba(0, 0, 0, 0.05); box-shadow: 0 -10px 40px rgba(0,0,0,0.04);
+  }
+  .nav-item { flex: 1; display: flex; flex-direction: column; align-items: center; gap: 5px; color: var(--ink-faint); font-weight: 600; font-size: 11px; cursor: pointer; padding: 6px 0; }
+  .nav-item.active { color: var(--ink); font-weight: 800; transform: translateY(-2px); }
+  .nav-item.active-red { color: var(--pin); font-weight: 800; transform: translateY(-2px); }
+  body { padding-bottom: 84px; }
+}
+/* SLIDER & ROZET */
+.pm-view-badge { display: inline-flex; align-items: center; gap: 8px; background: var(--bg-2); border: 1px solid var(--line); color: var(--ink-soft); font-size: 13.5px; font-weight: 700; padding: 8px 16px; border-radius: 100px; margin-bottom: 16px; }
+.pm-slider-btn { position: absolute; top: 50%; transform: translateY(-50%); width: 42px; height: 42px; border-radius: 50%; background: rgba(0,0,0,0.4); color: #fff; display: grid; place-items: center; z-index: 5; cursor: pointer; border: 1px solid rgba(255,255,255,0.2); }
+.pm-slider-btn.left { left: 16px; } .pm-slider-btn.right { right: 16px; }
+.pm-slider-dots { position: absolute; bottom: 95px; left: 0; right: 0; display: flex; justify-content: center; gap: 8px; z-index: 5; }
+.pm-slider-dot { width: 8px; height: 8px; border-radius: 50%; background: rgba(255,255,255,0.3); }
+.pm-slider-dot.active { background: #fff; transform: scale(1.3); }
 </style>
 </head>
 <body>
+
+<noscript>
+  <div style="padding: 20px; font-family: sans-serif;">
+    <h1>04agri.com — Ağrı'nın Dijital Rehberi</h1>
+    <p>Ağrı'nın dijital rehberi: restoranlar, cafeler, gezilecek yerler, nöbetçi eczane, etkinlikler ve daha fazlası.</p>
+  </div>
+</noscript>
 
 <div id="root"></div>
 
@@ -158,332 +512,1127 @@ a{ color:inherit; text-decoration:none; cursor:pointer; }
 <script src="https://cdnjs.cloudflare.com/ajax/libs/babel-standalone/7.26.4/babel.min.js"></script>
 
 <script type="text/babel">
-const { useState, useEffect } = React;
+/* ===================== DATA & MASTER REHBER LISTESİ ===================== */
+(function(){
+  "use strict";
 
-// 23 İŞLETME LİSTESİ
-const BUSINESSES = [
-  { id: 'sevval-tasdemir', name: 'Şevval Taşdemir (Dil Terapisti)', cat: 'Sağlık', catKey: 'saglik' },
-  { id: 'dilek-polat', name: 'Dilek Polat (Psikolog)', cat: 'Sağlık', catKey: 'saglik' },
-  { id: 'bilge-igan', name: 'Uzm. Dyt. Bilge İgan Yıldırım', cat: 'Diyetisyen', catKey: 'diyet' },
-  { id: 'berika-kurucay', name: 'Dyt. Berika Kuruçay', cat: 'Diyetisyen', catKey: 'diyet' },
-  { id: 'seda-nur-dursun', name: 'Dyt. Seda Nur Dursun', cat: 'Diyetisyen', catKey: 'diyet' },
-  { id: 'seher-issi', name: 'Dyt. Seher Issi', cat: 'Diyetisyen', catKey: 'diyet' },
-  { id: 'hamiyet-sahin', name: 'Dyt. Hamiyet Şahin', cat: 'Diyetisyen', catKey: 'diyet' },
-  { id: 'melike-cukadar', name: 'Melike Çukadar (Ergoterapist)', cat: 'Sağlık', catKey: 'saglik' },
-  { id: 'dr-nilay', name: 'Dr. Nilay Dinçgözoğlu', cat: 'Medikal Estetik / Doktor', catKey: 'doktor' },
-  { id: 'club-maxfit', name: 'Club Maxfit Spor Salonu', cat: 'Spor & Fitness', catKey: 'spor' },
-  { id: 'elit-dil', name: 'E.L.I.T Dil Kursu', cat: 'Eğitim', catKey: 'egitim' },
-  { id: 'bright-english', name: 'Bright English (İrem Kaya)', cat: 'Eğitim', catKey: 'egitim' },
-  { id: 'nevra-basci', name: 'Nevra Başcı (Matematik)', cat: 'Matematik', catKey: 'matematik' },
-  { id: 'emir-hoca', name: 'Emir Hoca (Matematik)', cat: 'Matematik', catKey: 'matematik' },
-  { id: 'canan-hoca', name: 'Canan Hoca (Matematik)', cat: 'Matematik', catKey: 'matematik' },
-  { id: 'muhammed-hoca', name: 'Muhammed Hoca (Müzik)', cat: 'Müzik', catKey: 'muzik' },
-  { id: 'merve-hoca', name: 'Merve Hoca (Piyano & Flüt)', cat: 'Müzik', catKey: 'muzik' },
-  { id: 'bahar-igan', name: 'Bahar İgan Bağan (Yaşam Koçu)', cat: 'Danışmanlık', catKey: 'danismanlik' },
-  { id: 'ozge-nur-celik', name: 'Özge Nur Çelik (Çocuk Gelişimi)', cat: 'Danışmanlık', catKey: 'danismanlik' },
-  { id: 'berivan-hoca', name: 'Berivan Hoca (Çocuk Gelişimi)', cat: 'Danışmanlık', catKey: 'danismanlik' },
-  { id: 'omer-hoca', name: 'Ömer Hoca (Hareket Eğitimi)', cat: 'Danışmanlık', catKey: 'danismanlik' },
-  { id: 'seastarsoft', name: 'SeaStarSoft', cat: 'Yazılım', catKey: 'yazilim' },
-  { id: 'bluversea', name: 'Bluversea', cat: 'Yazılım', catKey: 'yazilim' }
-];
+  function slugify(text) {
+    if(!text) return "";
+    const trMap = { 'ç':'c', 'Ç':'c', 'ğ':'g', 'Ğ':'g', 'ş':'s', 'Ş':'s', 'ü':'u', 'Ü':'u', 'ı':'i', 'İ':'i', 'ö':'o', 'Ö':'o' };
+    let str = text;
+    for (let key in trMap) { str = str.replace(new RegExp(key, 'g'), trMap[key]); }
+    return str.toLowerCase().replace(/[^a-z0-9\s-]/g, '').replace(/\s+/g, '-').replace(/-+/g, '-');
+  }
 
-function App() {
+  const categories = [
+    {
+      id:"restoranlar", name:"Restoranlar", color:"#E84142", tagline:"Lezzet Durakları", 
+      blurb:"Dönerden hamburgere, yöresel lezzetlerden dünya mutfağına; Ağrı'nın en sevilen lezzet duraklarını bir arada keşfet.",
+      places:[]
+    },
+    {
+      id:"cafeler", name:"Cafeler", color:"#FA8231", tagline:"Kahve ve Mola", 
+      blurb:"Üçüncü nesil kahveciler, serpme kahvaltı noktaları ve keyifli mola mekanları; şehrin kahve kültürü burada.",
+      places:[]
+    },
+    {
+      id:"pastaneler", name:"Pastaneler", color:"#FBC531", tagline:"Tatlı Molası", 
+      blurb:"Şehrin en taze pastaneleri, fırın ürünleri ve tatlı durakları; tatlı molanız için en doğru adresler.",
+      places:[]
+    },
+    {
+      id:"saglik", name:"Sağlık Hizmetleri", color:"#44BD32", tagline:"Sağlık & Danışmanlık", 
+      blurb:"Özel diş hekimi klinikleri, dil ve konuşma terapistleri, psikologlar, fizyoterapistler ve diyetisyenler bir arada.",
+      hasSubCategories: true,
+      subCategories: [
+        { id: "dis", name: "Özel Diş Hekimi Klinikleri", icon: "tooth", note: "Ağız ve diş sağlığı merkezleri", places: [] },
+        { id: "dil", name: "Dil ve Konuşma Terapistleri", icon: "speak", note: "Konuşma bozuklukları uzmanları", 
+          places: [
+            {
+              id: "sevval-tasdemir",
+              name: "Şevval Taşdemir",
+              subName: "Dil ve Konuşma Terapisti",
+              info: "Ağrı’nın Sağlık Bakanlığı onaylı ilk ve tek dil ve konuşma terapisi kliniği.",
+              area: "Ağrı Merkez",
+              img: "sevval1.jpg",
+              bgPos: "center",
+              icon: "speak",
+              note: "Sağlık Bakanlığı Onaylı Klinik",
+              address: "Leylekpınar Mahallesi 1703. Sokak Özgül Ofis Center Kat: 5 No: 29",
+              phones: ["0541 241 07 04"],
+              instagram: "dktsevvaltasdemir",
+              mapsUrl: "https://maps.google.com/?q=Leylekpınar+Mahallesi+1703.+Sokak+Özgül+Ofis+Center+Ağrı"
+            }
+          ] 
+        },
+        { id: "psikolog", name: "Psikologlar", icon: "brain", note: "Ruh sağlığı ve danışmanlık", 
+          places: [
+            {
+              id: "dilek-polat",
+              name: "Dilek Polat",
+              subName: "Psikolojik Danışman & Oyun Terapisti",
+              info: "Çocuk ve Ergenlere Yönelik Psikolojik Danışmanlık Hizmeti",
+              area: "Ağrı",
+              img: "dilekpolat1.jpg",
+              icon: "brain",
+              note: "Her çocuğun dünyasına ulaşan bir yol vardır.",
+              address: "Ağrı",
+              instagram: "psk.dan.dilekpolat",
+              email: "dilekpolat263@gmail.com",
+              lessonsTitle: "Hizmetler",
+              lessons: ["Oyun Terapisi", "Çocuk Danışmanlığı", "Ergen Danışmanlığı", "Kaygı ve Korkular", "Özgüven Geliştirme", "Sınav Kaygısı", "Dikkat ve Odaklanma", "Sosyal Beceri Geliştirme"]
+            }
+          ] 
+        },
+        { id: "fizyo", name: "Fizyoterapistler", icon: "bone", note: "Fizik tedavi uzmanları", places: [] },
+        { id: "diyetisyen", name: "Diyetisyenler", icon: "leaf", note: "Sağlıklı beslenme ve diyet uzmanları",
+          places: [
+            {
+              id: "bilge-igan",
+              name:"Uzman Diyetisyen Bilge İgan Yıldırım", 
+              info:"Uzman Hizmet Biriminde yüz yüze ve online beslenme danışmanlığı", 
+              area:"Ağrı Merkez", 
+              img:"uzm.diyetisyenbilge.jpg",
+              icon: "leaf",
+              note: "Sağlıklı yaşama ilk adımınızı atın.",
+              address:"Saray Plaza Kat 5 AĞRI",
+              phones:["0472 215 0184", "0543 120 4505"],
+              instagram: "uzm.diyetisyenbilge",
+              mapsUrl:"https://maps.google.com/?q=Saray+Plaza+Ağrı"
+            },
+            {
+              id: "berika-kurucay",
+              name: "Diyetisyen Berika Kuruçay",
+              subName: "Online Beslenme Danışmanlığı",
+              info: "Kilo kontrolü, hastalıklarda tıbbi beslenme ve yeme bozukluklarında profesyonel online beslenme danışmanlığı.",
+              area: "Ağrı/Merkez",
+              img: "berika1.jpg",
+              bgPos: "center",
+              icon: "leaf",
+              note: "Profesyonel Beslenme Danışmanlığı",
+              instagram: "diyetisyenberika",
+              email: "diyetisyenberika@gmail.com"
+            },
+            {
+              id: "seda-nur-dursun",
+              name: "Diyetisyen Seda Nur Dursun",
+              subName: "Beslenme ve Diyetetik",
+              info: "Beslenme ve Diyetetik bölümünden başarıyla mezun oldum. Güncel, kanıta dayalı bilimsel bilgileri sizlerin sağlığı için pratiğe döküyorum.",
+              area: "Ağrı Merkez",
+              img: "seda1.jpg",
+              bgPos: "center",
+              icon: "leaf",
+              note: "Sağlığınız için bilimsel rehberlik.",
+              instagram: "dytt.seda"
+            },
+            {
+              id: "seher-issi",
+              name: "Diyetisyen Seher Issi",
+              subName: "Beslenme ve Diyet Uzmanı",
+              info: "Kilo yönetimi, tıbbi beslenme tedavisi, gebelik/emzirme dönemi ve hastalıklarda beslenme alanlarında profesyonel danışmanlık.",
+              area: "Ağrı Merkez",
+              img: "seher1.jpg",
+              bgPos: "center",
+              icon: "leaf",
+              note: "Sağlıklı ve Sürdürülebilir Beslenme",
+              instagram: "dytseherissi",
+              email: "Diyetisyenseherissi@gmail.com"
+            },
+            {
+              id: "hamiyet-sahin",
+              name: "Diyetisyen Hamiyet Şahin",
+              subName: "Beslenme ve Diyet Uzmanı",
+              info: "Sağlıklı beslenme, kilo yönetimi, PCOS & İnsülin Direnci & Hormon Yönetimi.",
+              area: "Ağrı Merkez",
+              img: "hamiyet.jpg",
+              bgPos: "center",
+              icon: "leaf",
+              note: "Online & Yüz yüze diyet danışmanlığı",
+              instagram: "dyt.hmyt.shnn"
+            }
+          ]
+        },
+        { id: "ergoterapi", name: "Ergoterapistler", icon: "brain", note: "Duyu bütünleme ve ergoterapi",
+          places: [
+            {
+              id: "melike-cukadar",
+              name: "Melike Çukadar",
+              subName: "Ergoterapist",
+              info: "Pediatrik ergoterapi ve duyu bütünleme hizmeti sunulmaktadır.",
+              area: "Ağrı Merkez",
+              img: "melike1.jpg",
+              images: ["melike1.jpg", "melike2.jpg"],
+              bgPos: "center",
+              icon: "brain",
+              note: "Pediatrik Ergoterapi ve Duyu Bütünleme",
+              address: "Leylekpınar Mahallesi 1074 Sokak No: 8/2 Kat: 1 Özgül Ofis Center",
+              phones: ["0551 342 1108"],
+              instagram: "ergoterapistmelikecukadar"
+            }
+          ]
+        },
+        { id: "medikal-estetik", name: "Medikal Estetik", icon: "leaf", note: "Sağlık ve estetik uygulamaları",
+          places: [
+            {
+              id: "dr-nilay",
+              name: "Dr. Nilay Dinçgözoğlu",
+              info: "Modern estetik uygulamaları ve ileri teknoloji ile donatılmış kliniğimizde her hastaya güvenli ve kişiye özel çözümler sunulmaktadır.",
+              area: "Ağrı Merkez",
+              img: "drnilay1.jpg",
+              bgPos: "center 35%", 
+              icon: "leaf",
+              note: "Medikal Estetik Doktoru",
+              address: "Fırat Mahallesi 1010 Sokak Hacıarap Apartmanı Kat:3 No:3",
+              phones: ["0472 502 12 82", "0531 201 37 49"],
+              instagram: "drnilaydincgozoglu"
+            }
+          ]
+        }
+      ],
+      places:[] 
+    },
+    {
+      id:"nobetci", name:"Nöbetçi Eczane", color:"#E84142", tagline:"Acil Sağlık", 
+      blurb:"Ağrı genelinde tüm ilçelerin günlük nöbetçi eczane bilgisi; adres, telefon ve harita konumlarıyla.",
+      places:[]
+    },
+    {
+      id:"guzellik", name:"Güzellik & Bakım", color:"#9B59B6", tagline:"Kişisel Bakım", 
+      blurb:"Güzellik merkezleri, lazer, cilt bakımı ve estetik klinikleri; kişisel bakımınız için doğru yer.",
+      places:[]
+    },
+    {
+      id: "spor", name: "Spor & Fitness", color: "#E67E22", tagline: "Sağlıklı Yaşam", 
+      blurb: "Ağrı'daki en iyi spor salonları, fitness ve pilates merkezleri; zinde bir yaşam için seni bekliyor.",
+      places: [
+        {
+          id: "club-maxfit",
+          name: "Club Maxfit",
+          subName: "Bay/Bayan Spor Salonu",
+          info: "Ağrı Club Maxfit Bay/Bayan spor salonu. Profesyonel eğitmenler eşliğinde sağlıklı ve zinde bir yaşama adım atın.",
+          area: "Ağrı Merkez",
+          img: "clubmaxfit.jpg",
+          bgPos: "center",
+          icon: "heart",
+          note: "Gym & Physical Fitness Center",
+          address: "Abide Mahallesi 1040. Sokak Barış Apart Altı No:3",
+          phones: ["0530 345 33 04"],
+          instagram: "clubmaxfit"
+        }
+      ]
+    },
+    {
+      id:"kuafor", name:"Kuaför", color:"#FF69B4", tagline:"Saç Tasarım", 
+      blurb:"En iyi kadın ve erkek kuaför salonları ile modern saç tasarım noktaları bir arada.",
+      places:[]
+    },
+    {
+      id:"egitim", name:"Eğitim", color:"#0097E6", tagline:"Kurs & Dil Okulları", 
+      blurb:"Dershaneler, modern dil okulları, yazılım akademileri ve uzman özel ders eğitmen kadroları rehberi.",
+      hasSubCategories: true,
+      subCategories: [
+        { 
+          id: "dil-kursu", name: "Dil Kursu", icon: "lang", note: "Yabancı dil eğitim merkezleri",
+          places: [
+            {
+              id: "elit-dil",
+              name: "E.L.I.T",
+              subName: "ENGLISH LANGUAGE INSTITUTE TURKEY",
+              info: "Hayalinizdeki Dil Eğitiminize Bugün Başlayın",
+              area: "Ağrı Merkez",
+              img: "agrıelitdilkursu.jpg",
+              icon: "lang",
+              note: "Uluslararası standartlarda dil eğitimi.",
+              address: "Hürriyet Mah. 1810 SK. No:11 AĞRI",
+              phones: ["+90 533 895 8255"],
+              instagram: "agrielitdilkursu"
+            },
+            {
+              id: "bright-english",
+              name: "Bright English",
+              subName: "İrem Kaya - İngilizce Eğitmeni",
+              info: "Ağrı Merkez'de İngilizce özel ders ve eğitimleri.",
+              area: "Ağrı Merkez",
+              img: "BrightEnglish.jpg",
+              bgPos: "center",
+              icon: "lang",
+              note: "İngilizce Özel Ders",
+              instagram: "agringilizceozelders"
+            }
+          ]
+        },
+        {
+          id: "matematik", name: "Matematik", icon: "brain", note: "Matematik özel ders ve eğitimleri",
+          places: [
+            {
+              id: "nevra-basci",
+              name: "Nevra Başcı",
+              subName: "MATEMATİK EĞİTMENİ",
+              info: "Matematik derslerinde başarıya ulaşmanız için profesyonel destek. LGS ve YKS hazırlık.",
+              area: "Ağrı Merkez",
+              img: "nevrahoca1.jpg",
+              bgPos: "center",
+              icon: "brain",
+              note: "Matematiği severek öğrenin.",
+              instagram: "nevramatematik"
+            },
+            {
+              id: "emir-hoca",
+              name: "Emir Hoca",
+              subName: "MATEMATİK EĞİTMENİ",
+              info: "Her seviyeye uygun matematik eğitimi. Birebir ve online özel ders.",
+              area: "Ağrı Merkez",
+              img: "matematik1.jpg",
+              bgPos: "center",
+              icon: "brain",
+              note: "Birebir online özel ders.",
+              phones: ["0546 612 9809"],
+              instagram: "agrimatematikozelders"
+            },
+            {
+              id: "canan-hoca",
+              name: "Canan Hoca",
+              subName: "Matematik Eğitmeni",
+              info: "LGS ve YKS için tüm hazırlık süreçlerinde birebir matematik özel dersleri.",
+              area: "Ağrı Merkez",
+              img: "canan1.jpg",
+              bgPos: "center",
+              icon: "brain",
+              note: "LGS & YKS Hazırlık",
+              phones: ["0553 380 35 45"],
+              instagram: "cananhocamath"
+            }
+          ]
+        },
+        {
+          id: "muzik", name: "Müzik", icon: "music", note: "Müzik eğitmenleri ve enstrüman dersleri",
+          places: [
+            {
+              id: "muhammed-hoca",
+              name: "Muhammed Hoca",
+              subName: "MÜZİK EĞİTMENİ",
+              info: "Profesyonel müzik eğitimi ile enstrüman ve teori derslerinde Ağrı'da hizmetinizdeyim.",
+              area: "Ağrı Merkez",
+              img: "muhammedhoca1.jpg",
+              video: "muhammedhocavideo.mp4",
+              icon: "music",
+              note: "Müzik yolculuğunuza bugün başlayın.",
+              phones: ["0545 971 2132"],
+              instagram: "muhammedhoca04"
+            },
+            {
+              id: "merve-hoca",
+              name: "Merve Hoca",
+              subName: "MÜZİK EĞİTMENİ",
+              info: "Piyano ve yan flüt eğitimleri ile müziğin büyülü dünyasına adım atın.",
+              area: "Ağrı Merkez",
+              img: "mervehoca1.jpg",
+              icon: "music",
+              note: "Müzik yolculuğunuza bugün başlayın.",
+              instagram: "agripiyanoyanflutogreniyorum04"
+            }
+          ]
+        }
+      ],
+      places:[]
+    },
+    {
+      id:"etkinlik", name:"Etkinlik", color:"#3F51B5", tagline:"Kültür & Sanat", 
+      blurb:"Şehirdeki konserler, festivaller, tiyatrolar ve doğa turları; Ağrı'nın kültür-sanat takvimi.",
+      places:[]
+    },
+    {
+      id:"danismanlik", name:"Danışmanlık", color:"#8E44AD", tagline:"Kişisel Gelişim", 
+      blurb:"Yaşam koçluğu, meditasyon, farkındalık ve kişisel gelişim uzmanları ile potansiyelinizi keşfedin.",
+      hasSubCategories: true,
+      subCategories: [
+        { 
+          id: "yasam-kocu", name: "Yaşam Koçu", icon: "brain", note: "Kişisel gelişim ve farkındalık danışmanlığı", 
+          places: [
+            {
+              id: "bahar-igan",
+              name: "Bahar İgan Bağan",
+              subName: "YAŞAM KOÇU",
+              info: "Bireysel dönüşüm, duygusal denge ve yaşam kalitesini artırmaya yönelik bütüncül danışmanlık hizmetleri.",
+              area: "Ağrı Merkez",
+              img: "bahar1.jpg",
+              bgPos: "center 5%",
+              icon: "brain",
+              note: "Farkındalıklı bir yaşama adım atın.",
+              address: "Yavuz Mahallesi, Nevzat Güngör Caddesi, Saray Plaza Kat:5 No:40",
+              instagram: "farkimdalikliyasam"
+            }
+          ] 
+        },
+        {
+          id: "cocuk-gelisimi", name: "Çocuk Gelişimi Uzmanı", icon: "brain", note: "Çocuk Gelişimi ve Özel Eğitim",
+          places: [
+            {
+              id: "ozge-nur-celik",
+              name: "Özge Nur Çelik",
+              subName: "Çocuk Gelişim Uzmanı",
+              info: "Çocuk Gelişim Uzmanı ve Özel Eğitim Uzman Öğreticisi olarak Ağrı'da hizmet vermektedir.",
+              area: "Ağrı Merkez",
+              img: "ozge1.jpg",
+              bgPos: "center",
+              icon: "brain",
+              note: "Çocuk Gelişimi ve Özel Eğitim",
+              instagram: "uzm.ogrt.ozgenur"
+            },
+            {
+              id: "berivan-hoca",
+              name: "Berivan Hoca",
+              subName: "Çocuk Gelişimi Uzmanı",
+              info: "Çocuk gelişimi, özel eğitim ve aile danışmanlığı alanında çalışan eğitimci.",
+              area: "Ağrı Merkez",
+              img: "berivan1.jpg",
+              bgPos: "center",
+              icon: "brain",
+              note: "AGTE & Readkitr Uygulayıcısı",
+              instagram: "brvnogretmennn"
+            },
+            {
+              id: "omer-hoca",
+              name: "Ömer Hoca",
+              subName: "Hareket Eğitimi Uzmanı",
+              info: "Bireye özel hareket eğitimi ve gelişim programları.",
+              area: "Ağrı Merkez",
+              img: "omerhoca1.jpg",
+              bgPos: "center",
+              icon: "brain",
+              note: "Hareket Eğitimi ve Gelişim",
+              phones: ["0546 663 04 61"],
+              instagram: "omer_hoca_agri"
+            }
+          ]
+        }
+      ],
+      places:[] 
+    },
+    {
+      id:"yazilim", name:"Yazılım & Teknoloji", color:"#34495E", tagline:"Dijital Çözümler", 
+      blurb:"Ağrı'nın dijital dönüşümüne öncülük eden yazılım şirketleri ve teknoloji ajansları.",
+      places:[
+        {
+          id: "seastarsoft",
+          name: "SeaStarSoft",
+          subName: "Yazılım ve Teknoloji",
+          info: "E-ticaret ve web tasarım altyapıları kuran teknoloji platformudur.",
+          area: "Ağrı Merkez",
+          img: "seastarsoft.jpg",
+          bgPos: "center",
+          icon: "grid",
+          note: "Dijital Çözüm Ortağınız",
+          instagram: "seastarsoft"
+        },
+        {
+          id: "bluversea",
+          name: "Bluversea",
+          subName: "Yazılım ve Teknoloji",
+          info: "E-ticaret ve web tasarım çözümleri üreten teknoloji ajansı.",
+          area: "Ağrı Merkez",
+          img: "logo.jpg",
+          bgPos: "center",
+          icon: "grid",
+          note: "Dijital Çözüm Ortağınız",
+          instagram: "Bluversea"
+        }
+      ]
+    },
+    {
+      id:"gezilecek", name:"Gezilecek Yerler", color:"#1ABC9C", tagline:"Ağrı'nın Hazineleri", 
+      blurb:"Tarihten, doğaya - Muhteşem manzaralar doğrudan harita konumlarıyla.",
+      places:[
+        { name:"Balık Gölü", icon: "tent", note: "Doğa ile iç içe kamp ve gezi.", info:"Türkiye'nin en yüksek rakımlı buzul göllerinden biridir.", area:"Taşlıçay", img:"balikgolu.jpg", mapsUrl:"https://maps.google.com/?q=Balik+Golu+Taslicay+Agri" },
+        { name:"İshak Paşa Sarayı", icon: "mosque", note: "Tarihi mimari şaheseri.", info:"18. yüzyıldan kalma büyüleyici bir mimari sentez.", area:"Doğubayazıt", img:"ishakpasa.jpg", mapsUrl:"https://maps.google.com/?q=Ishak+Pasa+Sarayi+Dogubayazit" },
+        { name:"Ağrı Dağı (5.137 m)", icon: "mountain", note: "Avrupa'nın en yüksek zirvesi.", info:"Türkiye'nin ve tüm Avrupa'nın en yüksek heybetli zirvesidir.", area:"Doğubayazıt", img:"agridagi2.jpg", mapsUrl:"https://maps.google.com/?q=Agri+Dagi+Zirvesi" },
+        { name:"Diyadin Kaplıcaları", icon: "spa", note: "Şifalı termal sular ve dinlenme.", info:"Şifalı yüksek mineralli termal suları.", area:"Diyadin", img:"kaplica.jpg", mapsUrl:"https://maps.google.com/?q=Diyadin+Kaplicalari+Agri" },
+        { name:"Meteor Çukuru", icon: "meteor", note: "Dünyanın en büyük ikinci krateri.", info:"Dünyanın tescillenmiş en büyük ikinci göktaşı çukuru.", area:"Doğubayazıt", img:"meteor.jpg", mapsUrl:"https://maps.google.com/?q=Meteor+Cukuru+Dogubayazit" },
+        { name:"Nuh'un Gemisi (Durupınar)", icon: "ship", note: "Efsanevi inanç turizmi rotası.", info:"Büyük Tufan sonrası Nuh'un gemisinin silüeti.", area:"Durupınar", img:"nuh.jpg", mapsUrl:"https://maps.google.com/?q=Nuhun+Gemisi+Durupinar+Agri" }
+      ]
+    }
+  ];
+
+  categories.forEach(c => {
+    if (c.places) c.places.forEach(p => p.slug = slugify(p.name));
+    if (c.hasSubCategories) {
+      c.subCategories.forEach(sub => {
+        if (sub.places) sub.places.forEach(p => p.slug = slugify(p.name));
+      });
+    }
+  });
+
+  const dutyPharmacies = [
+    {date:"10.08.2026", district:"MERKEZ", name:"BÜŞRA DOĞAN ECZANESİ", address:"ALPASLAN MAH.ESKİ VAN CAD.NO:102", landmark:"KAPALI MEYVE-SEBZE PAZARI KARŞISI", phone:"0472 215 29 42", url:"#"},
+    {date:"10.08.2026", district:"MERKEZ", name:"NURAY ECZANESİ", address:"HÜRRİYET MAHALLLESİ CUMHURİYET CADDESİ NO:88B", landmark:"EFE (GÜVEN) TIP MERKEZİ KARŞISI", phone:"0538 864 41 33", url:"#"},
+    {date:"10.08.2026", district:"DİYADİN", name:"DERMAN ECZANESİ", address:"Atatürk Mahallesi Şehit Kaymakam Muhammed Fatih Safitürk Caddesi No:10A", landmark:"Menekşem Market Karşısı", phone:"0472 511 36 36", url:"#"},
+    {date:"10.08.2026", district:"DOĞUBAYAZIT", name:"TANCA ECZANESİ", address:"ÇİFTEPINAR MAHALLESİ BELEDİYE CADDESİ NO:25A", landmark:"1 NOLU SAĞLIK OCAĞI YANI", phone:"0541 534 57 93", url:"#"},
+    {date:"10.08.2026", district:"ELEŞKİRT", name:"MAHMUTPAŞA ECZANESİ", address:"İstiklal Mahallesi Cumhuriyet Caddesi No:101", landmark:"KİLER MARKET KARŞISI", phone:"0472 711 29 78", url:"#"},
+    {date:"10.08.2026", district:"HAMUR", name:"HAMUR ECZANESİ", address:"KÜMBET MAHALLESİ VAN CADDESİ NO:49/A", landmark:"HAMUR BELEDİYESİ ALTI", phone:"0472 616 71 72", url:"#"},
+    {date:"10.08.2026", district:"PATNOS", name:"ÖMER ECZANESİ", address:"ATATÜRK MAHALLESİ MENDERES BULVARI NO:116", landmark:"YILMAZ GİYİM KARŞISI", phone:"0472 616 88 87", url:"#"},
+    {date:"10.08.2026", district:"TAŞLIÇAY", name:"TAŞLIÇAY ECZANESİ", address:"Cumhuriyet Mahallesi Mareşal Favzi Çakmak Caddesi No:23", landmark:"", phone:"0472 551 28 91", url:"#"},
+    {date:"10.08.2026", district:"TUTAK", name:"BEGÜM ECZANESİ", address:"CAMİ MAHALLESİ KAZIM KARABEKİR CADDESİ NO:11B-11C", landmark:"KAYMAKAMLIK EVİ KARŞISI", phone:"0472 411 31 89", url:"#"}
+  ];
+
+  const weatherData = {
+    "12.06.2026": { temp: 15, low: null, desc: "Hafif yağmurlu ve açık hava" },
+    "13.06.2026": { temp: 23, low: 15, desc: "Parçalı bulutlu" }
+  };
+
+  window.AGRI = { categories, dutyPharmacies, weatherData };
+
+  window.AGRI_STATIC_BANNERS = [
+    { img:"uzm.diyetisyenbilge.jpg", title:"Uzm. Diyetisyen Bilge İgan Yıldırım", subtitle:"Aramıza Hoş Geldin", slug: slugify("Uzman Diyetisyen Bilge İgan Yıldırım") },
+    { img:"agrıelitdilkursu.jpg", title:"Ağrı E.L.I.T Dil Kursu", subtitle:"Aramıza Hoş Geldin", slug: slugify("E.L.I.T") },
+    { img:"muhammedhoca2.jpg", title:"Muhammed Hoca", subtitle:"Aramıza Hoş Geldin", slug: slugify("Muhammed Hoca") },
+    { img:"drnilay1.jpg", title:"Dr. Nilay Dinçgözoğlu", subtitle:"Aramıza Hoş Geldin", bgPos: "center center", slug: slugify("Dr. Nilay Dinçgözoğlu") },
+    { img:"bahar3.jpg", title:"Bahar İgan Bağan", subtitle:"Aramıza Hoş Geldin", bgPos: "center 35%", slug: slugify("Bahar İgan Bağan") },
+    { img:"mervehoca1.jpg", title:"Merve Hoca", subtitle:"Aramıza Hoşgeldin", slug: slugify("Merve Hoca") },
+    { img:"nevrahoca1.jpg", title:"Nevra Başcı", subtitle:"Aramıza Hoş Geldin", bgPos: "center", slug: slugify("Nevra Başcı") },
+    { img: "dilekpolat1.jpg", title: "Dilek Polat", subtitle: "Aramıza Hoş Geldin", bgPos: "center center", slug: slugify("Dilek Polat") },
+    { img: "ozge1.jpg", title: "Özge Nur Çelik", subtitle: "Aramıza Hoş Geldin", bgPos: "center", slug: slugify("Özge Nur Çelik") },
+    { img: "matematik1.jpg", title: "Emir Hoca", subtitle: "Aramıza Hoş Geldin", bgPos: "center", slug: slugify("Emir Hoca") },
+    { img: "sevval1.jpg", title: "Şevval Taşdemir", subtitle: "Aramıza Hoş Geldin", bgPos: "center", slug: slugify("Şevval Taşdemir") },
+    { img: "berivan1.jpg", title: "Berivan Hoca", subtitle: "Aramıza Hoş Geldin", bgPos: "center", slug: slugify("Berivan Hoca") },
+    { img: "berika1.jpg", title: "Berika Kuruçay", subtitle: "Aramıza Hoş Geldin", bgPos: "center", slug: slugify("Diyetisyen Berika Kuruçay") },
+    { img: "canan1.jpg", title: "Canan Hoca", subtitle: "Aramıza Hoş Geldin", bgPos: "center", slug: slugify("Canan Hoca") },
+    { img: "seda1.jpg", title: "Seda Nur Dursun", subtitle: "Aramıza Hoş Geldin", slug: slugify("Diyetisyen Seda Nur Dursun") },
+    { img: "seastarsoft.jpg", title: "SeaStarSoft", subtitle: "Dijital Çözüm Ortağınız", bgPos: "center", slug: slugify("SeaStarSoft") },
+    { img: "seher1.jpg", title: "Diyetisyen Seher Issi", subtitle: "Aramıza Hoş Geldin", bgPos: "center", slug: slugify("Diyetisyen Seher Issi") },
+    { img: "omerhoca1.jpg", title: "Ömer Hoca", subtitle: "Aramıza Hoş Geldin", bgPos: "center", slug: slugify("Ömer Hoca") },
+    { img: "melike1.jpg", title: "Melike Çukadar", subtitle: " Aramıza Hoş Geldin", bgPos: "center", slug: slugify("Melike Çukadar") },
+    { img: "logo.jpg", title: "Bluversea", subtitle: "Dijital Çözüm Ortağınız", bgPos: "center", slug: slugify("Bluversea") },
+    { img:"clubmaxfit.jpg", title:"Club Maxfit", subtitle:"Aramıza Hoş Geldin", bgPos: "center", slug: slugify("Club Maxfit") },
+    { img:"BrightEnglish.jpg", title:"Bright English", subtitle:"İrem Kaya - Aramıza Hoş Geldin", slug: slugify("Bright English") },
+    { img:"hamiyet.jpg", title:"Dyt. Hamiyet Şahin", subtitle:"Aramıza Hoş Geldin", slug: slugify("Diyetisyen Hamiyet Şahin") }
+  ];
+
+  window.AGRI_STORIES = [
+    { title: "🎁 Fırsat!", cover: "kampanya2.jpg", bgPos: "center", slideText: "Harika fırsatlarımız başladı! Detaylar burada...", slideImg: "kampanya1.jpg" }
+  ];
+
+  window.PAT = { pattern };
+})();
+
+const safeStore = (function(){
+  let mem = {};
+  function lsOk(){ try { const k="__t__"; window.localStorage.setItem(k,"1"); window.localStorage.removeItem(k); return true; } catch(e){ return false; } }
+  const hasLS = lsOk();
+  return {
+    get(key){ if (hasLS){ try { const v = window.localStorage.getItem(key); if (v != null) return v; } catch(e){} } return (key in mem) ? mem[key] : null; },
+    set(key, val){ if (hasLS){ try { window.localStorage.setItem(key, val); } catch(e){} } mem[key] = val; }
+  };
+})();
+
+const { useRef, useEffect, useState, useCallback, useMemo } = React;
+
+function Icon({ name, size = 26, stroke = "currentColor", sw = 1.7 }) {
+  const common = { width: size, height: size, viewBox: "0 0 24 24", fill: "none", stroke: stroke, strokeWidth: sw, strokeLinecap: "round", strokeLinejoin: "round" };
+  const paths = {
+    tooth: <path d="M12 5.5c-1.4-1.6-3.2-2-4.7-1.6C5.5 4.4 4.5 6 4.7 8c.2 1.7.6 2.7 1 4.5.5 2.4.7 5 1.7 6.4.5.7 1.5.7 1.9-.1.7-1.3.8-3.3 1.4-4.6.3-.6 1.3-.6 1.6 0 .6 1.3.7 3.3 1.4 4.6.4.8 1.4.8 1.9.1 1-1.4 1.2-4 1.7-6.4.4-1.8.8-2.8 1-4.5.2-2-.8-3.6-2.6-4.1-1.5-.4-3.3 0-4.7 1.6Z"/>,
+    speak: <g><path d="M3 11a8 8 0 0 1 16 0v0a8 8 0 0 1-8 8H7l-3 2v-4a8 8 0 0 1-1-6Z"/><path d="M8 10h6M8 13h4"/></g>,
+    brain: <g><path d="M9.5 3A2.5 2.5 0 0 0 7 5.5v.5a2.5 2.5 0 0 0-2 4 2.5 2.5 0 0 0 0 4 2.5 2.5 0 0 0 2 4v.5A2.5 2.5 0 0 0 12 21V3.5"/><path d="M14.5 3A2.5 2.5 0 0 1 17 5.5v.5a2.5 2.5 0 0 1 2 4 2.5 2.5 0 0 1 0 4 2.5 2.5 0 0 1-2 4v.5A2.5 2.5 0 0 1 12 21"/></g>,
+    bone: <path d="M17 10c1.5 0 3-1 3-3s-1.3-2.5-2.4-2.4C16.5 4.7 16 6 16 6l-2.5 2.5M7 14c-1.5 0-3 1-3 3s1.3 2.5 2.4 2.4C7.5 19.3 8 18 8 18l9-9 .5-.5"/>,
+    leaf: <g><path d="M11 20A7 7 0 0 1 4 13c0-5 4.5-9 16-9 0 7-3.5 13-9 13a6 6 0 0 1-2 .5"/><path d="M11 20c0-4 2-8 6-11"/></g>,
+    lang: <g><circle cx="12" cy="12" r="9"/><path d="M3 12h18M12 3c2.5 2.5 2.5 16 0 18M12 3c-2.5 2.5-2.5 16 0 18"/></g>,
+    music: <g><path d="M9 18V5l11-2v13"/><circle cx="6" cy="18" r="3"/><circle cx="17" cy="16" r="3"/></g>,
+    tent: <g><path d="M3.5 20 12 5l8.5 15M12 5v15M9 20l3-5 3 5"/></g>,
+    mosque: <g><path d="M5 21V11M19 21V11M5 11c0-3 3-3 3-6 0 3 3 3 3 6M11 11c0-3 3-3 3-6 0 3 3 3 3 6M12 3v2M3 21h18M8 21v-4a4 4 0 0 1 8 0v4"/></g>,
+    mountain: <path d="m3 20 6.5-12 3.5 6 2.5-4L21 20H3Z"/>,
+    spa: <g><path d="M12 22c4-3 7-6 7-10a7 7 0 0 0-14 0c0 4 3 7 7 10ZM9 8c1 0 3 1 3 3M15 8c-1 0-3 1-3 3"/></g>,
+    meteor: <g><circle cx="14" cy="14" r="7"/><path d="M9 9 4 4M12 7l-3-3M7 12 3 8"/></g>,
+    ship: <g><path d="M3 16 4 9h16l1 7M5 16c0 2 2 3 4 3s4-1 4-3M12 9V4h4M3 16c.5 2 2 3 3 3"/></g>,
+    pin: <g><path d="M12 21s7-6.3 7-11a7 7 0 1 0-14 0c0 4.7 7 11 7 11Z"/><circle cx="12" cy="10" r="2.5"/></g>,
+    heart: <path d="M20.84 4.61a5.5 5.5 0 0 0-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 0 0-7.78 7.78l1.06 1.06L12 21.23l7.78-7.78 1.06-1.06a5.5 5.5 0 0 0 0-7.78z"/>,
+    home: <g><path d="M3 9l9-7 9 7v11a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z"/><polyline points="9 22 9 12 15 12 15 22"/></g>,
+    grid: <g><rect x="3" y="3" width="7" height="7"/><rect x="14" y="3" width="7" height="7"/><rect x="14" y="14" width="7" height="7"/><rect x="3" y="14" width="7" height="7"/></g>,
+    cross: <g><line x1="12" y1="5" x2="12" y2="19"/><line x1="5" y1="12" x2="19" y2="12"/></g>,
+    compass: <g><circle cx="12" cy="12" r="10"/><polygon points="16.24 7.76 14.12 14.12 7.76 16.24 9.88 9.88 16.24 7.76"/></g>,
+    eye: <g><path d="M2 12c0 0 5-7 10-7s10 7 10 7-5 7-10 7-10-7-10-7Z"/><circle cx="12" cy="12" r="3"/></g>
+  };
+  return <svg {...common}>{paths[name] || paths.pin}</svg>;
+}
+
+/* 3D KÜRE VE ANİMASYONLAR */
+const AGRI_LAT = 39.72, AGRI_LON = 43.05, RAD = Math.PI / 180, norm360 = a => ((a % 360) + 360) % 360;
+function project(lat, lon, yaw, pitch){
+  const lr = (lon + yaw) * RAD, fr = lat * RAD, b = pitch * RAD;
+  return { x: Math.cos(fr) * Math.sin(lr), y: Math.sin(fr) * Math.cos(b) - Math.cos(fr) * Math.cos(lr) * Math.sin(b), z: Math.sin(fr) * Math.sin(b) + Math.cos(fr) * Math.cos(lr) * Math.cos(b) };
+}
+
+function GlobeCanvas({ phase }){
+  const ref = useRef(null);
+  const state = useRef({ yaw: -20, pitch: 8, targetYaw: null, targetPitch: 39.72, t: 0 });
+
+  useEffect(() => {
+    const canvas = ref.current; const ctx = canvas.getContext("2d");
+    let raf, w, h, R, cx, cy, dpr = Math.min(devicePixelRatio || 1, 2);
+    function size(){ w=canvas.getBoundingClientRect().width; h=canvas.getBoundingClientRect().height; canvas.width=w*dpr; canvas.height=h*dpr; ctx.setTransform(dpr,0,0,dpr,0,0); R=Math.min(w,h)*0.27; cx=w/2; cy=h*0.54; }
+    size(); window.addEventListener("resize", size);
+    const GC = `220,232,255`;
+
+    function drawArc(pts){
+      ctx.beginPath(); let started = false;
+      for (let i=0; i<pts.length; i++){
+        if (pts[i].z > 0.02){ const sx = cx + R * pts[i].x, sy = cy - R * pts[i].y; if (!started){ ctx.moveTo(sx, sy); started = true; } else ctx.lineTo(sx, sy); } else started = false;
+      }
+      ctx.stroke();
+    }
+
+    function frame(ts){
+      if (window.scrollY > 600) { raf = requestAnimationFrame(frame); return; }
+      const s = state.current; if (!s.t) s.t = ts; const dt = Math.min(48, ts - s.t); s.t = ts;
+      if (s.targetYaw == null) s.yaw -= dt * 0.024; else { s.yaw += (s.targetYaw - s.yaw) * 0.055; s.pitch += (s.targetPitch - s.pitch) * 0.06; }
+      ctx.clearRect(0,0,w,h);
+      const g = ctx.createRadialGradient(cx - R*0.3, cy - R*0.35, R*0.1, cx, cy, R*1.05); g.addColorStop(0, `rgba(${GC},0.10)`); g.addColorStop(0.7, `rgba(${GC},0.03)`); g.addColorStop(1, `rgba(${GC},0)`);
+      ctx.fillStyle = g; ctx.beginPath(); ctx.arc(cx,cy,R,0,Math.PI*2); ctx.fill();
+      ctx.lineWidth=1.1; ctx.strokeStyle=`rgba(${GC},0.28)`; ctx.beginPath(); ctx.arc(cx,cy,R,0,Math.PI*2); ctx.stroke();
+      const yaw = s.yaw, pitch = s.pitch; ctx.lineWidth=1;
+      for (let lat=-75; lat<=75; lat+=15){ ctx.strokeStyle=lat===0?`rgba(${GC},0.40)`:`rgba(${GC},0.16)`; const pts=[]; for(let lon=0; lon<=360; lon+=4) pts.push(project(lat,lon,yaw,pitch)); drawArc(pts); }
+      for (let lon=0; lon<360; lon+=15){ ctx.strokeStyle=`rgba(${GC},0.16)`; const pts=[]; for(let lat=-90; lat<=90; lat+=4) pts.push(project(lat,lon,yaw,pitch)); drawArc(pts); }
+      const m = project(AGRI_LAT, AGRI_LON, yaw, pitch);
+      if (m.z > 0){
+        const sx=cx+R*m.x, sy=cy-R*m.y, near=s.targetYaw!=null?1:0.35, pulse=(Math.sin(ts/420)+1)/2;
+        ctx.strokeStyle=`rgba(68,189,50,${0.5*near})`; ctx.lineWidth=1.5; ctx.beginPath(); ctx.arc(sx,sy,6+pulse*10*near,0,Math.PI*2); ctx.stroke();
+        ctx.fillStyle=`rgba(68,189,50,${0.85*near+0.15})`; ctx.beginPath(); ctx.arc(sx,sy,4.5,0,Math.PI*2); ctx.fill();
+      }
+      raf = requestAnimationFrame(frame);
+    }
+    raf = requestAnimationFrame(frame);
+    return () => { cancelAnimationFrame(raf); window.removeEventListener("resize", size); };
+  }, []);
+
+  useEffect(() => {
+    const s = state.current;
+    if (phase === "spin"){ s.targetYaw = null; s.targetPitch = 39.72; } else if (["locate","zoom","mountain","rest"].includes(phase)){
+      if (s.targetYaw == null){ s.targetYaw = s.yaw + norm360(-AGRI_LON - s.yaw) + 360; s.targetPitch = AGRI_LAT; }
+    }
+  }, [phase]);
+
+  return <canvas ref={ref} className="globe-canvas" style={{width:"100%", height:"100%"}} />;
+}
+
+/* TOPBAR */
+function Topbar({ onOpenBooking }){
+  const [scrolled, setScrolled] = useState(false);
+  const [isDark, setIsDark] = useState(() => safeStore.get('agri_theme') === 'dark');
+
+  useEffect(() => {
+    const onScroll = () => setScrolled(window.scrollY > 40);
+    onScroll(); window.addEventListener("scroll", onScroll, { passive: true });
+    return () => window.removeEventListener("scroll", onScroll);
+  }, []);
+
+  useEffect(() => {
+    if (isDark) { document.body.classList.add('dark-theme'); safeStore.set('agri_theme', 'dark'); }
+    else { document.body.classList.remove('dark-theme'); safeStore.set('agri_theme', 'light'); }
+  }, [isDark]);
+
+  const onDark = !scrolled;
+  const cls = ["topbar", scrolled ? "scrolled" : "", onDark ? "on-dark" : ""].join(" ").trim();
+
+  return (
+    <div className={cls}>
+      <a className="logo" href="/" onClick={(e)=>{ e.preventDefault(); window.history.pushState(null, "", "/"); window.dispatchEvent(new Event("popstate")); window.scrollTo({ top:0, behavior:"smooth" }); }}>
+        <span className="badge">04</span>
+        <span className="txt">agri<span className="dim">.com</span></span>
+      </a>
+      <nav className="topbar-nav">
+        <a href="#gundem">Gündem</a>
+        <a href="#kategoriler">Kategoriler</a>
+        <a href="#iletisim">İletişim</a>
+        <button className="nav-book-btn" onClick={() => onOpenBooking()}>
+          📅 Randevu Al
+        </button>
+      </nav>
+      
+      <div style={{ justifySelf:'end', display:'flex', alignItems:'center', gap:'14px' }}>
+        <button className="nav-book-btn" style={{padding:'6px 14px', fontSize:'13px'}} onClick={() => onOpenBooking()}>
+          Randevu 📅
+        </button>
+        <button 
+          onClick={() => setIsDark(!isDark)} 
+          title="Tema Değiştir"
+          style={{ width: '36px', height: '36px', borderRadius: '50%', background: scrolled ? 'var(--bg-2)' : 'rgba(255,255,255,0.15)', display: 'grid', placeItems: 'center', cursor: 'pointer' }}
+        >
+          <span>{isDark ? "🌙" : "☀️"}</span>
+        </button>
+      </div>
+    </div>
+  );
+}
+
+/* HERO */
+function Hero({ onSearchPlace, onOpenCat, onOpenFavorites, onOpenBooking }){
+  const [phase, setPhase] = useState("spin");
+  const timers = useRef([]);
+  const [q, setQ] = useState("");
+  const [suggs, setSuggs] = useState([]);
+
+  const run = useCallback(() => {
+    timers.current.forEach(clearTimeout); timers.current = []; setPhase("spin");
+    [[2200, "locate"], [4000, "zoom"], [4800, "mountain"], [5600, "rest"]].forEach(([ms, p]) => timers.current.push(setTimeout(() => setPhase(p), ms)));
+  }, []);
+
+  useEffect(() => { run(); return () => timers.current.forEach(clearTimeout); }, [run]);
+  const cls = ["hero", phase==="locate"?"is-locate":"", phase==="zoom"?"is-zoom":"", ["mountain","rest"].includes(phase)?"is-zoom is-mountain":""].join(" ");
+
+  const handleSearchChange = (e) => {
+    const val = e.target.value; setQ(val);
+    if(val.length > 1) {
+      let res = [];
+      const query = val.toLowerCase();
+      window.AGRI.categories.forEach(c => {
+        if(c.places) c.places.forEach(p => { if(p.name.toLowerCase().includes(query)) res.push({ ...p, catId: c.id, catName: c.name, catColor: c.color }); });
+        if(c.hasSubCategories && c.subCategories) {
+          c.subCategories.forEach(sub => { if(sub.places) sub.places.forEach(p => { if(p.name.toLowerCase().includes(query)) res.push({ ...p, catId: c.id, catName: `${c.name} - ${sub.name}`, catColor: c.color }); }); });
+        }
+      });
+      setSuggs(res.slice(0, 6));
+    } else setSuggs([]);
+  };
+
+  return (
+    <header className={cls}>
+      <div className="sky dawn"></div><div className="sun"></div>
+      <div className="globe-stage"><GlobeCanvas phase={phase} /></div>
+      <div className="geo-label"><div className="pt">AĞRI</div><div className="sub">39.72° K · 43.05° D</div></div>
+      <div className="mountain"><img src="agridagi.png" alt="Ağrı Dağı" /></div>
+
+      <div className="hero-content">
+        <span className="hero-eyebrow"><span style={{width:8,height:8,borderRadius:"50%",background:"var(--accent)",display:"inline-block"}}></span>Ağrı'nın dijital kapısı</span>
+        <h1 className="hero-title">Ağrı'yı <em>keşfet</em>.</h1>
+        <div className="search-wrapper">
+          <form className="search" onSubmit={(e)=>e.preventDefault()}>
+            <input value={q} onChange={handleSearchChange} placeholder="Mekan, doktor, diyetisyen, kurs ara..." />
+            <button type="button" className="go" onClick={() => onOpenBooking()}>Randevu Al</button>
+          </form>
+        </div>
+        <div className="search-tags">
+          <button className="highlight-btn" onClick={() => onOpenBooking()}>Online Randevu Al 📅</button>
+          <button className="highlight-btn" style={{background:'#fff', color:'#008000'}} onClick={onOpenFavorites}>Favorilerim 💚</button>
+          <button onClick={() => onOpenCat(window.AGRI.categories.find(c => c.id === 'nobetci'))}>Nöbetçi Eczane</button>
+          <button onClick={() => onOpenCat(window.AGRI.categories.find(c => c.id === 'gezilecek'))}>Gezilecek Yerler</button>
+        </div>
+      </div>
+    </header>
+  );
+}
+
+/* MARQUEE & STORIES */
+function ImageMarquee() {
+  const base = window.AGRI_STATIC_BANNERS;
+  const loop = base.concat(base); 
+  return (
+    <div className="banner-section">
+      <div className="marquee">
+        {loop.map((b, i) => (
+          <div key={i} className="banner-item" style={{ backgroundImage: `url(${b.img})`, backgroundPosition: b.bgPos || 'center' }} onClick={() => { if(b.slug) { window.history.pushState(null, "", `/mekan/${b.slug}`); window.dispatchEvent(new Event("popstate")); } }}>
+            <div className="banner-scrim"></div>
+            <div className="banner-content"><span className="banner-title">{b.title}</span><span className="banner-sub">{b.subtitle}</span></div>
+          </div>
+        ))}
+      </div>
+    </div>
+  );
+}
+
+function Stories() {
+  const stories = window.AGRI_STORIES || [];
+  const [openIdx, setOpenIdx] = useState(null);
+  if (stories.length === 0) return null;
+  const active = openIdx != null ? stories[openIdx] : null;
+
+  return (
+    <section className="stories-section">
+      <div className="wrap">
+        <div className="stories-row">
+          {stories.map((s, i) => (
+            <button key={i} className="story-bubble" onClick={() => setOpenIdx(i)}>
+              <span className="story-ring"><span className="story-thumb" style={{ backgroundImage:`url(${s.cover})` }}></span></span>
+              <span className="story-label">{s.title}</span>
+            </button>
+          ))}
+        </div>
+      </div>
+      {active && (
+        <div className="story-viewer" onClick={()=>setOpenIdx(null)}>
+          <div className="story-card">
+            <img className="story-card-img" src={active.slideImg} alt="" />
+            <div className="story-card-overlay"><div className="story-card-text">{active.slideText}</div></div>
+          </div>
+        </div>
+      )}
+    </section>
+  );
+}
+
+/* GÜNDEM & DİNAMİK BLOGLAR (Süper Admin Onaylı) */
+function AgendaDashboard({ onSelectBlog }){
   const [blogs, setBlogs] = useState([]);
-  const [selectedBlog, setSelectedBlog] = useState(null);
-  const [isBookModalOpen, setIsBookModalOpen] = useState(false);
-  const [bookTab, setBookTab] = useState('book'); // 'book' veya 'cancel'
+
+  useEffect(() => {
+    fetch("/api/public-blogs")
+      .then(res => res.json())
+      .then(data => setBlogs(data || []))
+      .catch(() => {});
+  }, []);
+
+  return (
+    <section id="gundem">
+      <div className="wrap gundem-layout">
+        <div className="g-left">
+          <div className="news-wrap" style={{marginTop: 0}}>
+            <div className="news-header">Gündem & İşletme Duyuruları</div>
+            <div className="news-list">
+              {blogs.length === 0 ? (
+                <div className="news-item">
+                  <div className="news-content">
+                    <span className="news-meta">Ağrı Şehir Portalı</span>
+                    <h4>Ağrı'nın dijital merkezi yayında 🎉</h4>
+                    <p>Ağrı genelindeki tüm yerel işletmelerden ücretsiz randevu alabilir, nöbetçi eczaneleri inceleyebilirsiniz.</p>
+                  </div>
+                </div>
+              ) : (
+                blogs.map(b => (
+                  <div key={b.id} className="news-item" onClick={() => onSelectBlog(b)}>
+                    <div className="news-content">
+                      <span className="news-meta">{b.business_name} • {b.created_at?.split('T')[0]}</span>
+                      <h4>{b.title}</h4>
+                      <p>{b.content.length > 130 ? b.content.substring(0, 130) + '...' : b.content}</p>
+                      {b.content.length > 130 && <span style={{color:'var(--accent)', fontWeight:700, fontSize:'13px', marginTop:'6px', display:'inline-block'}}>Devamını Oku ➔</span>}
+                    </div>
+                  </div>
+                ))
+              )}
+            </div>
+          </div>
+        </div>
+
+        <div className="widget-panel">
+          <div className="widget-card weather">
+            <div className="w-top"><span className="city">Ağrı Merkez</span><span className="date">Bugün</span></div>
+            <div className="w-main"><span className="temp">24°</span><span className="desc">Güneşli ve Açık</span></div>
+          </div>
+          <div className="widget-card prayer">
+            <div className="p-top"><div className="p-top-row">Namaz Vakitleri <span className="p-date">Ağrı</span></div></div>
+            <div style={{fontSize:'14px', opacity:0.85}}>Namaz vakitleri sayacı aktif.</div>
+          </div>
+        </div>
+      </div>
+    </section>
+  );
+}
+
+/* KATEGORİLER */
+function Categories({ onOpen }){
+  const cats = window.AGRI.categories; 
+  const [active, setActive] = useState(0);
+  const cat = cats[active]; 
+  const bg = window.PAT.pattern(cat.color, active);
   
-  // Randevu Formu
-  const [selectedBiz, setSelectedBiz] = useState(BUSINESSES[0].id);
+  return (
+    <section id="kategoriler">
+      <div className="wrap">
+        <div className="cats-intro">
+          <div className="kicker">Şehir Rehberi</div>
+          <h2>Ağrı'da aradığın her şey.</h2>
+          <p>Kategorileri seçerek randevu alabilir ve profilleri inceleyebilirsiniz.</p>
+        </div>
+        
+        <div className="cats-interactive-container">
+          <nav className="cat-list">
+            {cats.map((c, i) => (
+              <button key={c.id} className={"cat-item"+(i===active?" active":"")} onClick={()=>onOpen(c)} onMouseEnter={()=>setActive(i)}>
+                <span className="num">{String(i+1).padStart(2,"0")}</span>
+                <span className="swatch" style={{background:c.color}}></span>
+                <span className="nm" style={i===active?{color:c.color}:null}>{c.name}</span>
+              </button>
+            ))}
+          </nav>
+          
+          <div className="cat-stage">
+            <div className="cat-panel" key={cat.id} style={{background:bg}}>
+              <div className="ghost">{String(active+1).padStart(2,"0")}</div>
+              <div className="scrim"></div>
+              <div className="body">
+                <h3>{cat.name}</h3>
+                <p>{cat.blurb}</p>
+                <button className="cat-cta" onClick={()=>onOpen(cat)}>İncele</button>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+  );
+}
+
+/* MEKANLAR & DETAY MODALI */
+function PlacesOverlay({ cat, initialSubCat, initialPlace, onClose, favorites = [], toggleFav, onOpenBooking }){
+  const [selectedSubCat, setSelectedSubCat] = useState(initialSubCat || null);
+  const [selectedPlace, setSelectedPlace] = useState(initialPlace || null);
+
+  if (selectedPlace) {
+    return (
+      <div className="place-modal-overlay" onClick={onClose}>
+        <div className="place-modal-content" onClick={e => e.stopPropagation()}>
+          <div className="pm-close" onClick={onClose}>✕</div>
+          <div className="pm-img-wrap">
+            <img src={selectedPlace.img} alt={selectedPlace.name} style={selectedPlace.bgPos ? { objectPosition: selectedPlace.bgPos } : {}} />
+            <div className="pm-img-scrim"></div>
+            <div className="pm-title-box">
+              <h2>{selectedPlace.name}</h2>
+              {selectedPlace.subName && <span style={{display:'block', fontSize:'15px', opacity:0.85, marginTop:'4px'}}>{selectedPlace.subName}</span>}
+            </div>
+          </div>
+          <div className="pm-body">
+            <p className="pm-info">{selectedPlace.info}</p>
+            <div className="pm-meta-box">
+              {selectedPlace.area && <div className="pm-meta-item"><div><strong>Konum:</strong> {selectedPlace.area}</div></div>}
+              {selectedPlace.address && <div className="pm-meta-item"><div><strong>Adres:</strong> {selectedPlace.address}</div></div>}
+              {selectedPlace.phones && <div className="pm-meta-item"><div><strong>Telefon:</strong> {selectedPlace.phones.join(", ")}</div></div>}
+            </div>
+
+            {/* Bu İşletmeden Randevu Al Butonu */}
+            <button className="pm-book-btn" onClick={() => { onClose(); onOpenBooking(selectedPlace); }}>
+              📅 Bu İşletmeden Online Randevu Al
+            </button>
+
+            {selectedPlace.mapsUrl && <a className="pm-maps-btn" href={selectedPlace.mapsUrl} target="_blank">Google Haritalar'da Aç</a>}
+          </div>
+        </div>
+      </div>
+    );
+  }
+
+  const activePlaces = cat.hasSubCategories ? (selectedSubCat ? selectedSubCat.places : []) : cat.places;
+
+  return (
+    <div className="ov animate-in">
+      <div className="ov-head">
+        <button className="ov-back" onClick={onClose}>Geri Dön</button>
+        <div className="ov-title"><h2>{selectedSubCat ? selectedSubCat.name : cat.name}</h2></div>
+        <button className="ov-close" onClick={onClose}>✕</button>
+      </div>
+      <div className="ov-body">
+        {cat.hasSubCategories && !selectedSubCat ? (
+          <div className="grid">
+            {cat.subCategories.map((sub, i) => (
+              <div key={i} className="card subcat-card" onClick={() => setSelectedSubCat(sub)} style={{background:`linear-gradient(150deg, ${cat.color} 0%, #000 100%)`}}>
+                <div className="body"><h3>{sub.name}</h3><div className="card-note">{sub.note}</div></div>
+              </div>
+            ))}
+          </div>
+        ) : (
+          <div className="grid">
+            {activePlaces.map((p, i) => (
+              <div key={i} className="card" onClick={() => setSelectedPlace(p)} style={{ backgroundImage:`url(${p.img})` }}>
+                <div className="scrim"></div>
+                <button className={`fav-btn ${favorites.includes(p.slug)?'is-fav':''}`} onClick={(e)=>{ e.stopPropagation(); toggleFav(p.slug); }}>
+                  <Icon name="heart" size={20} stroke="#fff" />
+                </button>
+                <div className="body">
+                  <h3>{p.name}</h3>
+                  {p.subName && <div style={{fontSize:'13px', opacity:0.85}}>{p.subName}</div>}
+                  <div className="card-note">Detay & Randevu Al ➔</div>
+                </div>
+              </div>
+            ))}
+          </div>
+        )}
+      </div>
+    </div>
+  );
+}
+
+/* APPLE MINIMALIST RANDEVU ALMA & İPTAL MODALI */
+function BookingModal({ isOpen, onClose, preSelectedBiz }) {
+  const [tab, setTab] = useState('book'); // 'book' veya 'cancel'
+  const [bizId, setBizId] = useState(preSelectedBiz ? preSelectedBiz.id : 'bilge-igan');
   const [name, setName] = useState('');
   const [phone, setPhone] = useState('');
   const [email, setEmail] = useState('');
   const [date, setDate] = useState('');
   const [time, setTime] = useState('10:00');
   const [note, setNote] = useState('');
-  const [bookSuccessData, setBookSuccessData] = useState(null);
+  const [successData, setSuccessData] = useState(null);
 
-  // İptal Formu
   const [cancelCode, setCancelCode] = useState('');
   const [cancelPhone, setCancelPhone] = useState('');
 
-  // Blogları API'den Çek
-  useEffect(() => {
-    fetch('/api/public-blogs')
-      .then(res => res.json())
-      .then(data => setBlogs(data || []))
-      .catch(() => {});
-  }, []);
+  if (!isOpen) return null;
 
-  // Randevu Gönderme
-  const handleBooking = async (e) => {
+  const handleBook = async (e) => {
     e.preventDefault();
-    if (!name || !phone || !email || !date || !time) return alert("Lütfen tüm zorunlu alanları doldurun!");
+    if (!name || !phone || !email || !date || !time) return alert("Lütfen zorunlu alanları doldurun!");
 
-    const res = await fetch('/api/book-appointment', {
-      method: 'POST',
-      headers: { 'Content-Type': 'application/json' },
-      body: JSON.stringify({
-        business_id: selectedBiz,
-        customer_name: name,
-        customer_phone: phone,
-        customer_email: email,
-        appointment_date: date,
-        appointment_time: time,
-        customer_note: note
-      })
+    const res = await fetch("/api/book-appointment", {
+      method: "POST",
+      headers: { "Content-Type": "application/json" },
+      body: JSON.stringify({ business_id: bizId, customer_name: name, customer_phone: phone, customer_email: email, customer_note: note, appointment_date: date, appointment_time: time })
     });
     const data = await res.json();
     if (data.success) {
-      const bizObj = BUSINESSES.find(b => b.id === selectedBiz);
-      setBookSuccessData({
-        code: data.code,
-        bizName: bizObj.name,
-        catKey: bizObj.catKey,
-        name, phone, email, date, time
-      });
+      setSuccessData({ code: data.code, name, phone, email, date, time, bizId });
     } else {
       alert(data.error || "Randevu alınamadı.");
     }
   };
 
-  // Randevu İptal Etme
-  const handleCancelBooking = async (e) => {
+  const handleCancel = async (e) => {
     e.preventDefault();
-    if (!cancelCode || !cancelPhone) return alert("Lütfen Kod ve Telefon numaranızı girin!");
-
-    const res = await fetch('/api/cancel-by-code', {
-      method: 'POST',
-      headers: { 'Content-Type': 'application/json' },
+    const res = await fetch("/api/cancel-by-code", {
+      method: "POST",
+      headers: { "Content-Type": "application/json" },
       body: JSON.stringify({ code: cancelCode.trim(), phone: cancelPhone.trim() })
     });
     const data = await res.json();
-    alert(data.message || (data.success ? "Randevunuz iptal edildi." : "Kayıt bulunamadı."));
-    if (data.success) {
-      setIsBookModalOpen(false);
-      setCancelCode(''); setCancelPhone('');
-    }
+    alert(data.message || (data.success ? "İptal edildi." : "Kayıt bulunamadı."));
+    if (data.success) onClose();
   };
 
-  // PDF İndir
   const downloadPDF = (info) => {
     const { jsPDF } = window.jspdf;
     const doc = new jsPDF();
-    doc.setFontSize(18);
     doc.text("04agri.com - Randevu Onay Belgesi", 14, 20);
-    doc.setFontSize(12);
-    doc.text(`Randevu Kodu (PNR): ${info.code}`, 14, 30);
-    doc.text(`İşletme / Uzman: ${info.bizName}`, 14, 40);
-    doc.text(`Müşteri: ${info.name}`, 14, 50);
-    doc.text(`Tarih & Saat: ${info.date} - ${info.time}`, 14, 60);
-    doc.text(`Telefon: ${info.phone}`, 14, 70);
-    doc.text("Lütfen randevu saatinden 10 dakika önce hazır bulununuz.", 14, 85);
+    doc.text(`Randevu Takip Kodu (PNR): ${info.code}`, 14, 30);
+    doc.text(`Musteri: ${info.name}`, 14, 40);
+    doc.text(`Tarih & Saat: ${info.date} - ${info.time}`, 14, 50);
+    doc.text(`Telefon: ${info.phone}`, 14, 60);
     doc.save(`Randevu_${info.code}.pdf`);
   };
 
-  // Kategoriye Özel Mesaj
-  const getCategoryMessage = (catKey) => {
-    if (catKey === 'doktor' || catKey === 'saglik') return "Geçmiş olsun dileklerimizle, sağlıklı günler dileriz! 🩺🌿";
-    if (catKey === 'diyet') return "Sağlıklı ve formda bir yaşama harika bir adım attınız! 🥗✨";
-    if (catKey === 'muzik') return "Müzik dolu, keyifli ve verimli bir seans dileriz! 🎵🎻";
-    if (catKey === 'matematik' || catKey === 'egitim') return "Başarılarla dolu, zihin açıcı harika bir ders dileriz! 📚💡";
-    if (catKey === 'spor') return "Enerjik ve fit bir antrenman seni bekliyor! 💪🔥";
-    return "Randevunuz başarıyla onaylandı! Teşekkür ederiz. ✨";
+  return (
+    <div className="app-modal-overlay" onClick={onClose}>
+      <div className="app-modal-card" onClick={e => e.stopPropagation()}>
+        <div className="app-modal-close" onClick={onClose}>✕</div>
+
+        {!successData ? (
+          <>
+            <div style={{display:'flex', gap:'8px', background:'var(--bg-2)', padding:'4px', borderRadius:'100px', marginBottom:'20px'}}>
+              <button style={{flex:1, padding:'8px', borderRadius:'100px', fontWeight:800, background:tab==='book'?'#fff':'none'}} onClick={()=>setTab('book')}>Randevu Al</button>
+              <button style={{flex:1, padding:'8px', borderRadius:'100px', fontWeight:800, background:tab==='cancel'?'#fff':'none'}} onClick={()=>setTab('cancel')}>Randevu İptal</button>
+            </div>
+
+            {tab === 'book' ? (
+              <form onSubmit={handleBook}>
+                <div className="m-form-group">
+                  <label>İşletme / Uzman Seçimi *</label>
+                  <select className="m-form-input" value={bizId} onChange={e=>setBizId(e.target.value)}>
+                    <option value="bilge-igan">Uzm. Dyt. Bilge İgan Yıldırım</option>
+                    <option value="dr-nilay">Dr. Nilay Dinçgözoğlu (Medikal Estetik)</option>
+                    <option value="sevval-tasdemir">Şevval Taşdemir (Dil Terapisti)</option>
+                    <option value="dilek-polat">Dilek Polat (Psikolog)</option>
+                    <option value="elit-dil">E.L.I.T Dil Kursu</option>
+                    <option value="muhammed-hoca">Muhammed Hoca (Müzik)</option>
+                    <option value="nevra-basci">Nevra Başcı (Matematik)</option>
+                    <option value="emir-hoca">Emir Hoca (Matematik)</option>
+                    <option value="club-maxfit">Club Maxfit Spor Salonu</option>
+                  </select>
+                </div>
+                <div style={{display:'grid', gridTemplateColumns:'1fr 1fr', gap:'10px'}}>
+                  <div className="m-form-group"><label>Adınız Soyadınız *</label><input className="m-form-input" required placeholder="Ad Soyad" value={name} onChange={e=>setName(e.target.value)} /></div>
+                  <div className="m-form-group"><label>Telefonunuz *</label><input className="m-form-input" required placeholder="05XX XXX XX XX" value={phone} onChange={e=>setPhone(e.target.value)} /></div>
+                </div>
+                <div className="m-form-group"><label>E-Posta Adresiniz *</label><input className="m-form-input" type="email" required placeholder="mail@ornek.com" value={email} onChange={e=>setEmail(e.target.value)} /></div>
+                <div style={{display:'grid', gridTemplateColumns:'1fr 1fr', gap:'10px'}}>
+                  <div className="m-form-group"><label>Tarih *</label><input className="m-form-input" type="date" required value={date} onChange={e=>setDate(e.target.value)} /></div>
+                  <div className="m-form-group">
+                    <label>Saat *</label>
+                    <select className="m-form-input" value={time} onChange={e=>setTime(e.target.value)}>
+                      {['09:00','10:00','11:00','13:30','14:30','15:30','16:30','17:00'].map(t=><option key={t} value={t}>{t}</option>)}
+                    </select>
+                  </div>
+                </div>
+                <div className="m-form-group"><label>Notunuz (İsteğe bağlı)</label><textarea className="m-form-input" rows="2" placeholder="Özel notunuz..." value={note} onChange={e=>setNote(e.target.value)}></textarea></div>
+                <button type="submit" className="m-btn-primary">Randevuyu Onayla ➔</button>
+              </form>
+            ) : (
+              <form onSubmit={handleCancel}>
+                <p style={{fontSize:'14px', color:'var(--ink-soft)'}}>Randevunuzu iptal etmek için PNR kodunuzu giriniz.</p>
+                <div className="m-form-group"><label>Randevu Kodu (PNR) *</label><input className="m-form-input" required placeholder="ör: AGR-4921" value={cancelCode} onChange={e=>setCancelCode(e.target.value)} /></div>
+                <div className="m-form-group"><label>Telefon Numaranız *</label><input className="m-form-input" required placeholder="05XX XXX XX XX" value={cancelPhone} onChange={e=>setCancelPhone(e.target.value)} /></div>
+                <button type="submit" className="m-btn-primary" style={{background:'var(--pin)'}}>Randevuyu İptal Et</button>
+              </form>
+            )}
+          </>
+        ) : (
+          <div style={{textAlign:'center'}}>
+            <div style={{fontSize:'48px'}}>🎉</div>
+            <h2>Randevunuz Oluşturuldu!</h2>
+            <div style={{background:'var(--bg-2)', padding:'14px', borderRadius:'14px', margin:'16px 0'}}>
+              <div style={{fontSize:'12px', color:'var(--ink-faint)', fontWeight:700}}>RANDEVU TAKİP KODUNUZ</div>
+              <div style={{fontSize:'28px', fontWeight:800, color:'var(--blue)'}}>{successData.code}</div>
+            </div>
+            <p style={{color:'var(--ink-soft)', fontSize:'14.5px'}}>Sağlıklı ve verimli bir seans dileriz! ✨</p>
+            <div style={{display:'flex', gap:'10px'}}>
+              <button className="m-btn-primary" onClick={()=>downloadPDF(successData)}>📄 PDF İndir</button>
+              <button className="m-btn-primary" style={{background:'#25D366'}} onClick={()=>window.open(`https://wa.me/?text=${encodeURIComponent('Randevum onaylandı. Kod: ' + successData.code)}`, '_blank')}>💬 Paylaş</button>
+            </div>
+          </div>
+        )}
+      </div>
+    </div>
+  );
+}
+
+/* MASTER APP */
+function App(){
+  const [openCat, setOpenCat] = useState(null);
+  const [bookingModal, setBookingModal] = useState(false);
+  const [selectedPlaceForBooking, setSelectedPlaceForBooking] = useState(null);
+  const [selectedBlog, setSelectedBlog] = useState(null);
+  const [favorites, setFavorites] = useState(() => {
+    const s = safeStore.get('agri_favs'); return s ? JSON.parse(s) : [];
+  });
+
+  const toggleFav = (slug) => {
+    const next = favorites.includes(slug) ? favorites.filter(x=>x!==slug) : [...favorites, slug];
+    setFavorites(next); safeStore.set('agri_favs', JSON.stringify(next));
+  };
+
+  const handleOpenBooking = (place = null) => {
+    setSelectedPlaceForBooking(place);
+    setBookingModal(true);
   };
 
   return (
     <div>
-      {/* TOPBAR */}
-      <div className="topbar scrolled">
-        <a className="logo" href="/">
-          <span className="badge">04</span>
-          <span className="txt">agri.com</span>
-        </a>
-        <nav className="topbar-nav">
-          <a href="#gundem">Gündem</a>
-          <a href="#kategoriler">Kategoriler</a>
-          <a href="#iletisim">İletişim</a>
-          <button className="nav-book-btn" onClick={() => { setIsBookModalOpen(true); setBookSuccessData(null); }}>
-            📅 Randevu Al
-          </button>
-        </nav>
-        <div>
-          <button className="nav-book-btn" style={{padding:'6px 14px', fontSize:'13px'}} onClick={() => { setIsBookModalOpen(true); setBookSuccessData(null); }}>
-            Randevu 📅
-          </button>
+      <Topbar onOpenBooking={handleOpenBooking} />
+      <Hero onOpenCat={setOpenCat} onOpenBooking={handleOpenBooking} onOpenFavorites={()=>{}} />
+      <ImageMarquee />
+      <Stories />
+      <AgendaDashboard onSelectBlog={setSelectedBlog} />
+      <Categories onOpen={setOpenCat} />
+
+      <footer className="foot" id="iletisim">
+        <div className="wrap">
+          <h3>Ağrı Dijital Rehberi</h3>
+          <p className="lead">Ağrı'nın tanıtım ve ücretsiz online randevu platformu. © 2026 04agri.com</p>
         </div>
-      </div>
+      </footer>
 
-      {/* HERO */}
-      <header className="hero" style={{marginTop:'65px'}}>
-        <div className="sky"></div>
-        <div className="hero-content">
-          <h1 className="hero-title">Ağrı'yı <em>Keşfet</em>.</h1>
-          <p className="hero-sub">Ağrı'nın en seçkin 23 işletmesinden anında online randevu al, şehir gündemini ve nöbetçi eczaneleri takip et.</p>
-          <div className="search">
-            <input placeholder="Hangi işletme veya uzmanı arıyorsunuz?..." />
-            <button className="go" onClick={() => setIsBookModalOpen(true)}>Randevu Al</button>
-          </div>
-        </div>
-      </header>
+      {openCat && <PlacesOverlay cat={openCat} onClose={()=>setOpenCat(null)} favorites={favorites} toggleFav={toggleFav} onOpenBooking={handleOpenBooking} />}
+      
+      <BookingModal isOpen={bookingModal} onClose={()=>setBookingModal(false)} preSelectedBiz={selectedPlaceForBooking} />
 
-      {/* GÜNDEM & BLOGLAR BÖLÜMÜ */}
-      <section id="gundem">
-        <div className="wrap gundem-layout">
-          <div className="g-left">
-            <div className="news-header">Gündem & İşletme Duyuruları</div>
-            <div className="news-list">
-              {blogs.length === 0 ? (
-                <div className="news-item">
-                  <div className="news-author">04agri.com <span>Bugün</span></div>
-                  <h4>Ağrı'nın Dijital Randevu & Şehir Portalı Yayında 🎉</h4>
-                  <p>Ağrı genelindeki sağlık uzmanları, eğitim kurumları ve yerel işletmelerden anında ücretsiz randevu alabilirsiniz.</p>
-                </div>
-              ) : (
-                blogs.map(b => (
-                  <div key={b.id} className="news-item" onClick={() => setSelectedBlog(b)}>
-                    <div className="news-author">{b.business_name} <span className="date">{b.created_at?.split('T')[0] || ''}</span></div>
-                    <h4>{b.title}</h4>
-                    <p>{b.content.length > 140 ? b.content.substring(0, 140) + "..." : b.content}</p>
-                    {b.content.length > 140 && <span className="news-readmore">Devamını Oku ➔</span>}
-                  </div>
-                ))
-              )}
-            </div>
-          </div>
-
-          <div className="widget-panel">
-            <div className="widget-card weather">
-              <h3 style={{fontSize:'18px', marginBottom:'6px'}}>Ağrı Hava Durumu</h3>
-              <div style={{fontSize:'36px', fontWeight:800}}>24° Güneşli</div>
-            </div>
-            <div className="widget-card prayer">
-              <h3 style={{fontSize:'18px', marginBottom:'6px'}}>Namaz Vakitleri</h3>
-              <p style={{fontSize:'14px', opacity:0.8, margin:0}}>Ağrı için güncel vakitler aktif.</p>
-            </div>
-          </div>
-        </div>
-      </section>
-
-      {/* BLOG DETAY MODALI */}
       {selectedBlog && (
-        <div className="modal-overlay" onClick={() => setSelectedBlog(null)}>
-          <div className="modal-box" onClick={e => e.stopPropagation()}>
-            <div className="modal-close" onClick={() => setSelectedBlog(null)}>✕</div>
-            <span style={{fontSize:'12px', fontWeight:800, color:'var(--accent)', textTransform:'uppercase'}}>{selectedBlog.business_name}</span>
-            <h2 style={{margin:'10px 0 16px', fontSize:'22px'}}>{selectedBlog.title}</h2>
+        <div className="app-modal-overlay" onClick={()=>setSelectedBlog(null)}>
+          <div className="app-modal-card" onClick={e=>e.stopPropagation()}>
+            <div className="app-modal-close" onClick={()=>setSelectedBlog(null)}>✕</div>
+            <span style={{fontSize:'12px', fontWeight:800, color:'var(--accent)'}}>{selectedBlog.business_name}</span>
+            <h2 style={{margin:'8px 0 14px'}}>{selectedBlog.title}</h2>
             <p style={{fontSize:'15px', lineHeight:1.6, color:'var(--ink-soft)', whiteSpace:'pre-wrap'}}>{selectedBlog.content}</p>
-          </div>
-        </div>
-      )}
-
-      {/* APPLE MİNİMALİST RANDEVU MODALI */}
-      {isBookModalOpen && (
-        <div className="modal-overlay" onClick={() => setIsBookModalOpen(false)}>
-          <div className="modal-box" onClick={e => e.stopPropagation()}>
-            <div className="modal-close" onClick={() => setIsBookModalOpen(false)}>✕</div>
-
-            {!bookSuccessData ? (
-              <>
-                <div style={{display:'flex', gap:'8px', marginBottom:'24px', background:'var(--bg-2)', padding:'4px', borderRadius:'100px'}}>
-                  <button style={{flex:1, padding:'10px', borderRadius:'100px', fontWeight:800, fontSize:'13px', background:bookTab==='book'?'#fff':'none', color:bookTab==='book'?'#000':'var(--ink-soft)'}} onClick={() => setBookTab('book')}>
-                    📅 Yeni Randevu Al
-                  </button>
-                  <button style={{flex:1, padding:'10px', borderRadius:'100px', fontWeight:800, fontSize:'13px', background:bookTab==='cancel'?'#fff':'none', color:bookTab==='cancel'?'#000':'var(--ink-soft)'}} onClick={() => setBookTab('cancel')}>
-                    ❌ Randevu İptal Et
-                  </button>
-                </div>
-
-                {bookTab === 'book' ? (
-                  <form onSubmit={handleBooking}>
-                    <div className="form-group">
-                      <label>Randevu Alınacak İşletme / Uzman *</label>
-                      <select className="form-control" value={selectedBiz} onChange={e => setSelectedBiz(e.target.value)}>
-                        {BUSINESSES.map(b => (
-                          <option key={b.id} value={b.id}>{b.name}</option>
-                        ))}
-                      </select>
-                    </div>
-
-                    <div style={{display:'grid', gridTemplateColumns:'1fr 1fr', gap:'12px'}}>
-                      <div className="form-group">
-                        <label>Adınız Soyadınız *</label>
-                        <input className="form-control" required placeholder="Ad Soyad" value={name} onChange={e => setName(e.target.value)} />
-                      </div>
-                      <div className="form-group">
-                        <label>Telefon Numaranız *</label>
-                        <input className="form-control" required placeholder="05XX XXX XX XX" value={phone} onChange={e => setPhone(e.target.value)} />
-                      </div>
-                    </div>
-
-                    <div className="form-group">
-                      <label>E-Posta Adresiniz *</label>
-                      <input className="form-control" type="email" required placeholder="ornek@mail.com" value={email} onChange={e => setEmail(e.target.value)} />
-                    </div>
-
-                    <div style={{display:'grid', gridTemplateColumns:'1fr 1fr', gap:'12px'}}>
-                      <div className="form-group">
-                        <label>Randevu Tarihi *</label>
-                        <input className="form-control" type="date" required value={date} onChange={e => setDate(e.target.value)} />
-                      </div>
-                      <div className="form-group">
-                        <label>Saat Seçimi *</label>
-                        <select className="form-control" value={time} onChange={e => setTime(e.target.value)}>
-                          {['09:00','09:30','10:00','10:30','11:00','11:30','13:30','14:00','14:30','15:00','15:30','16:00','16:30','17:00'].map(t => (
-                            <option key={t} value={t}>{t}</option>
-                          ))}
-                        </select>
-                      </div>
-                    </div>
-
-                    <div className="form-group">
-                      <label>Kısa Notunuz (İsteğe bağlı)</label>
-                      <textarea className="form-control" rows="2" placeholder="Belirtmek istediğiniz özel bir durum varsa..." value={note} onChange={e => setNote(e.target.value)}></textarea>
-                    </div>
-
-                    <button type="submit" className="btn-primary">Randevuyu Onayla ➔</button>
-                  </form>
-                ) : (
-                  <form onSubmit={handleCancelBooking}>
-                    <p style={{fontSize:'14px', color:'var(--ink-soft)', marginBottom:'16px'}}>Daha önce aldığınız randevuyu iptal etmek için randevu kodunuzu ve kayıtlı telefonunuzu giriniz.</p>
-                    <div className="form-group">
-                      <label>Randevu Kodu (PNR) *</label>
-                      <input className="form-control" required placeholder="ör: AGR-4921" value={cancelCode} onChange={e => setCancelCode(e.target.value)} />
-                    </div>
-                    <div className="form-group">
-                      <label>Telefon Numaranız *</label>
-                      <input className="form-control" required placeholder="05XX XXX XX XX" value={cancelPhone} onChange={e => setCancelPhone(e.target.value)} />
-                    </div>
-                    <button type="submit" className="btn-primary" style={{background:'var(--pin)'}}>Randevuyu İptal Et</button>
-                  </form>
-                )}
-              </>
-            ) : (
-              <div style={{textAlign:'center'}}>
-                <div style={{fontSize:'48px', marginBottom:'10px'}}>🎉</div>
-                <h2 style={{fontSize:'22px', marginBottom:'8px'}}>Randevunuz Oluşturuldu!</h2>
-                <div style={{background:'var(--bg-2)', padding:'14px', borderRadius:'14px', margin:'16px 0', border:'1px dashed var(--line)'}}>
-                  <div style={{fontSize:'12px', color:'var(--ink-faint)', fontWeight:700}}>RANDEVU TAKİP KODUNUZ</div>
-                  <div style={{fontSize:'28px', fontWeight:800, color:'var(--blue)', letterSpacing:'2px'}}>{bookSuccessData.code}</div>
-                </div>
-                <p style={{fontSize:'15px', color:'var(--ink-soft)', lineHeight:1.5, margin:'12px 0 20px'}}>
-                  {getCategoryMessage(bookSuccessData.catKey)}
-                </p>
-
-                <div style={{display:'flex', gap:'10px'}}>
-                  <button className="btn-primary" onClick={() => downloadPDF(bookSuccessData)}>📄 PDF Olarak İndir</button>
-                  <button className="btn-primary" style={{background:'#25D366'}} onClick={() => {
-                    const txt = `04agri.com üzerinden ${bookSuccessData.bizName} için randevum alındı. Kodum: ${bookSuccessData.code} - Tarih: ${bookSuccessData.date} Saat: ${bookSuccessData.time}`;
-                    window.open(`https://wa.me/?text=${encodeURIComponent(txt)}`, '_blank');
-                  }}>💬 Paylaş</button>
-                </div>
-              </div>
-            )}
           </div>
         </div>
       )}
     </div>
   );
+}
+
+function pattern(color, variant) {
+  return `linear-gradient(135deg, ${color} 0%, color-mix(in srgb, ${color}, #000 30%) 100%)`;
 }
 
 ReactDOM.createRoot(document.getElementById("root")).render(<App />);
