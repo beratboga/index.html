@@ -30,7 +30,7 @@ async function createToken(payload) {
 export async function onRequest(context) {
   const { request, env } = context;
   const url = new URL(request.url);
-  const path = url.pathname.replace("/api/", "");
+  const pathname = url.pathname.toLowerCase();
   const method = request.method;
   const db = env.DB;
 
@@ -45,9 +45,9 @@ export async function onRequest(context) {
 
   try {
     // -----------------------------------------------------------
-    // TEK TIKLA OTOMATİK KURULUM ROTASI (Konsola Gerek Kalmaz!)
+    // 1. OTOMATİK KURULUM (Herkes Tıklayabilir)
     // -----------------------------------------------------------
-    if (path === "setup") {
+    if (pathname.includes("setup")) {
       await db.prepare(`CREATE TABLE IF NOT EXISTS businesses (id TEXT PRIMARY KEY, name TEXT NOT NULL, category TEXT NOT NULL, username TEXT UNIQUE NOT NULL, password_hash TEXT NOT NULL, role TEXT DEFAULT 'business', phone TEXT, address TEXT, created_at DATETIME DEFAULT CURRENT_TIMESTAMP)`).run();
       await db.prepare(`CREATE TABLE IF NOT EXISTS appointments (id INTEGER PRIMARY KEY AUTOINCREMENT, business_id TEXT NOT NULL, customer_name TEXT NOT NULL, customer_phone TEXT NOT NULL, customer_note TEXT, appointment_date TEXT NOT NULL, appointment_time TEXT NOT NULL, status TEXT DEFAULT 'Bekliyor', is_deleted INTEGER DEFAULT 0, deleted_by TEXT, deleted_at DATETIME, created_at DATETIME DEFAULT CURRENT_TIMESTAMP)`).run();
       await db.prepare(`CREATE TABLE IF NOT EXISTS blogs (id INTEGER PRIMARY KEY AUTOINCREMENT, business_id TEXT NOT NULL, title TEXT NOT NULL, content TEXT NOT NULL, status TEXT DEFAULT 'pending', created_at DATETIME DEFAULT CURRENT_TIMESTAMP, approved_at DATETIME)`).run();
@@ -87,8 +87,10 @@ export async function onRequest(context) {
       return new Response(JSON.stringify({ success: true, message: "TEBRİKLER! Veritabanı ve 23 İşletme Başarıyla Kuruldu." }), { headers: corsHeaders });
     }
 
-    // 1. GİRİŞ YAPMA (LOGIN)
-    if (path === "login" && method === "POST") {
+    // -----------------------------------------------------------
+    // 2. GİRİŞ YAPMA (LOGIN)
+    // -----------------------------------------------------------
+    if (pathname.includes("login") && method === "POST") {
       const { username, password } = await request.json();
       
       const user = await db.prepare(
@@ -110,8 +112,10 @@ export async function onRequest(context) {
       return new Response(JSON.stringify({ success: true, token, user: { id: user.id, name: user.name, role: user.role } }), { headers: corsHeaders });
     }
 
-    // 2. HERKESE AÇIK: RANDEVU ALMA
-    if (path === "book-appointment" && method === "POST") {
+    // -----------------------------------------------------------
+    // 3. HERKESE AÇIK: RANDEVU ALMA
+    // -----------------------------------------------------------
+    if (pathname.includes("book-appointment") && method === "POST") {
       const data = await request.json();
       const { business_id, customer_name, customer_phone, customer_note, appointment_date, appointment_time } = data;
 
@@ -122,14 +126,16 @@ export async function onRequest(context) {
       return new Response(JSON.stringify({ success: true, message: "Randevunuz oluşturuldu." }), { headers: corsHeaders });
     }
 
-    // GÜVENLİK KONTROLÜ
+    // -----------------------------------------------------------
+    // GÜVENLİK KONTROLÜ (Aşağıdakiler Token İster)
+    // -----------------------------------------------------------
     const auth = await verifyAuth(request);
     if (!auth) {
       return new Response(JSON.stringify({ error: "Yetkisiz erişim!" }), { status: 401, headers: corsHeaders });
     }
 
-    // 3. RANDEVULARI LİSTELE
-    if (path === "appointments" && method === "GET") {
+    // 4. RANDEVULARI LİSTELE
+    if (pathname.includes("appointments") && method === "GET") {
       let query = "SELECT a.*, b.name as business_name FROM appointments a JOIN businesses b ON a.business_id = b.id ";
       let params = [];
 
@@ -143,8 +149,8 @@ export async function onRequest(context) {
       return new Response(JSON.stringify(rows.results || []), { headers: corsHeaders });
     }
 
-    // 4. RANDEVU SİL
-    if (path === "delete-appointment" && method === "POST") {
+    // 5. RANDEVU SİL
+    if (pathname.includes("delete-appointment") && method === "POST") {
       const { id } = await request.json();
       const now = new Date().toISOString();
 
@@ -159,8 +165,8 @@ export async function onRequest(context) {
       return new Response(JSON.stringify({ success: true }), { headers: corsHeaders });
     }
 
-    // 5. BLOG GÖNDER
-    if (path === "create-blog" && method === "POST") {
+    // 6. BLOG GÖNDER
+    if (pathname.includes("create-blog") && method === "POST") {
       const { title, content } = await request.json();
       await db.prepare(
         "INSERT INTO blogs (business_id, title, content, status) VALUES (?, ?, ?, 'pending')"
@@ -169,8 +175,8 @@ export async function onRequest(context) {
       return new Response(JSON.stringify({ success: true, message: "Yazınız Süper Admin onayına iletildi." }), { headers: corsHeaders });
     }
 
-    // 6. BLOG ONAYLA/REDDET
-    if (path === "moderate-blog" && method === "POST") {
+    // 7. BLOG ONAYLA/REDDET
+    if (pathname.includes("moderate-blog") && method === "POST") {
       if (auth.role !== "superadmin") return new Response(JSON.stringify({ error: "Yetkisiz" }), { status: 403, headers: corsHeaders });
       const { id, status } = await request.json();
 
@@ -178,8 +184,8 @@ export async function onRequest(context) {
       return new Response(JSON.stringify({ success: true }), { headers: corsHeaders });
     }
 
-    // 7. ŞİFRE DEĞİŞTİR
-    if (path === "change-password" && method === "POST") {
+    // 8. ŞİFRE DEĞİŞTİR
+    if (pathname.includes("change-password") && method === "POST") {
       const { target_business_id, new_password } = await request.json();
       const targetId = (auth.role === "superadmin" && target_business_id) ? target_business_id : auth.id;
 
@@ -192,8 +198,8 @@ export async function onRequest(context) {
       return new Response(JSON.stringify({ success: true, message: "Şifre güncellendi." }), { headers: corsHeaders });
     }
 
-    // 8. SÜPER ADMİN VERİLERİ
-    if (path === "superadmin-data" && method === "GET") {
+    // 9. SÜPER ADMİN VERİLERİ
+    if (pathname.includes("superadmin-data") && method === "GET") {
       if (auth.role !== "superadmin") return new Response(JSON.stringify({ error: "Yetkisiz" }), { status: 403, headers: corsHeaders });
 
       const businesses = await db.prepare("SELECT id, name, category, username, password_hash, role FROM businesses").all();
