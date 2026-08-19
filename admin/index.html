@@ -1,0 +1,367 @@
+<!DOCTYPE html>
+<html lang="tr">
+<head>
+  <meta charset="UTF-8">
+  <title>04agri.com — Yönetici Paneli</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;600;700;800&display=swap" rel="stylesheet">
+  <!-- Ücretsiz Tarayıcı İçi Excel ve PDF Motorları -->
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/xlsx/0.18.5/xlsx.full.min.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/2.5.1/jspdf.umd.min.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf-autotable/3.5.31/jspdf.plugin.autotable.min.js"></script>
+  <style>
+    :root { --bg: #0c1020; --card: #131a31; --line: rgba(255,255,255,0.1); --accent: #44BD32; --pin: #E84142; --text: #fff; --muted: #a0aabf; }
+    * { box-sizing: border-box; font-family: 'Plus Jakarta Sans', sans-serif; }
+    body { margin: 0; background: var(--bg); color: var(--text); padding: 20px; font-size: 15px; }
+    .container { max-width: 1100px; margin: 0 auto; }
+    .login-box { max-width: 420px; margin: 60px auto; background: var(--card); padding: 32px; border-radius: 20px; border: 1px solid var(--line); }
+    input, textarea, select { width: 100%; padding: 12px 14px; margin: 8px 0 16px; border-radius: 10px; border: 1px solid var(--line); background: rgba(0,0,0,0.3); color: #fff; }
+    button { background: var(--accent); color: #000; font-weight: 800; padding: 12px 20px; border-radius: 10px; border: none; cursor: pointer; }
+    button:hover { opacity: 0.9; }
+    .btn-sec { background: transparent; color: #fff; border: 1px solid var(--line); }
+    .header-bar { display: flex; justify-content: space-between; align-items: center; border-bottom: 1px solid var(--line); padding-bottom: 16px; margin-bottom: 24px; flex-wrap: wrap; gap: 12px; }
+    .table-box { background: var(--card); border-radius: 16px; overflow-x: auto; border: 1px solid var(--line); margin-bottom: 24px; }
+    table { width: 100%; border-collapse: collapse; text-align: left; }
+    th, td { padding: 14px 18px; border-bottom: 1px solid var(--line); }
+    th { background: rgba(255,255,255,0.03); color: var(--muted); font-size: 13px; text-transform: uppercase; }
+    .badge { padding: 4px 8px; border-radius: 6px; font-size: 12px; font-weight: 700; display: inline-block; }
+    .badge-active { background: rgba(68,189,50,0.15); color: var(--accent); }
+    .badge-deleted { background: rgba(232,65,66,0.15); color: var(--pin); }
+    .badge-pending { background: rgba(255,193,7,0.15); color: #ffc107; }
+    .export-btns { display: flex; gap: 10px; margin-bottom: 16px; flex-wrap: wrap; }
+    .card { background: var(--card); padding: 20px; border-radius: 16px; border: 1px solid var(--line); margin-bottom: 20px; }
+    .nav-tabs { display: flex; gap: 10px; margin-bottom: 20px; border-bottom: 1px solid var(--line); padding-bottom: 10px; }
+    .nav-tab { background: none; color: var(--muted); border: none; padding: 8px 16px; font-weight: 700; cursor: pointer; border-radius: 8px; }
+    .nav-tab.active { background: var(--accent); color: #000; }
+  </style>
+</head>
+<body>
+
+<div class="container" id="app"></div>
+
+<script>
+  let token = localStorage.getItem("04agri_token");
+  let user = JSON.parse(localStorage.getItem("04agri_user") || "null");
+  let currentTab = "randevular";
+
+  const app = document.getElementById("app");
+
+  function renderLogin() {
+    app.innerHTML = `
+      <div class="login-box">
+        <h2 style="margin-top:0">04agri.com Yönetici Girişi</h2>
+        <p style="color:var(--muted); font-size:14px">İşletme veya Süper Yönetici hesabınızla giriş yapın.</p>
+        <form onsubmit="handleLogin(event)">
+          <label>Kullanıcı Adı</label>
+          <input type="text" id="username" required placeholder="ör: dytbilge">
+          <label>Şifre</label>
+          <input type="password" id="password" required placeholder="••••••••">
+          <button type="submit" style="width:100%">Giriş Yap</button>
+        </form>
+      </div>
+    `;
+  }
+
+  async function handleLogin(e) {
+    e.preventDefault();
+    const res = await fetch("/api/login", {
+      method: "POST",
+      headers: { "Content-Type": "application/json" },
+      body: JSON.stringify({
+        username: document.getElementById("username").value.trim(),
+        password: document.getElementById("password").value.trim()
+      })
+    });
+    const data = await res.json();
+    if (data.success) {
+      localStorage.setItem("04agri_token", data.token);
+      localStorage.setItem("04agri_user", JSON.stringify(data.user));
+      token = data.token;
+      user = data.user;
+      renderDashboard();
+    } else {
+      alert(data.error || "Giriş başarısız!");
+    }
+  }
+
+  function logout() {
+    localStorage.clear();
+    token = null;
+    user = null;
+    renderLogin();
+  }
+
+  async function renderDashboard() {
+    if (!token) return renderLogin();
+
+    // Randevuları Çek
+    const resAppt = await fetch("/api/appointments", { headers: { "Authorization": "Bearer " + token } });
+    const appointments = await resAppt.json();
+
+    let superData = null;
+    if (user.role === 'superadmin') {
+      const resSuper = await fetch("/api/superadmin-data", { headers: { "Authorization": "Bearer " + token } });
+      superData = await resSuper.json();
+    }
+
+    app.innerHTML = `
+      <div class="header-bar">
+        <div>
+          <h2 style="margin:0">${user.name}</h2>
+          <span style="color:var(--muted); font-size:14px">04agri.com ${user.role === 'superadmin' ? '👑 Süper Yönetici Ekranı' : '🏢 İşletme Yönetim Paneli'}</span>
+        </div>
+        <button class="btn-sec" onclick="logout()">Çıkış Yap</button>
+      </div>
+
+      <div class="nav-tabs">
+        <button class="nav-tab ${currentTab==='randevular'?'active':''}" onclick="setTab('randevular')">📅 Randevular (${appointments.length})</button>
+        <button class="nav-tab ${currentTab==='blog'?'active':''}" onclick="setTab('blog')">✍️ Duyuru & Blog</button>
+        <button class="nav-tab ${currentTab==='sifre'?'active':''}" onclick="setTab('sifre')">🔑 Şifre Değiştir</button>
+        ${user.role === 'superadmin' ? `<button class="nav-tab ${currentTab==='isletmeler'?'active':''}" onclick="setTab('isletmeler')">🏢 23 İşletme & Şifreleri</button>` : ''}
+        ${user.role === 'superadmin' ? `<button class="nav-tab ${currentTab==='loglar'?'active':''}" onclick="setTab('loglar')">📋 Denetim Logları</button>` : ''}
+      </div>
+
+      <div id="tabContent"></div>
+    `;
+
+    renderTabContent(appointments, superData);
+  }
+
+  function setTab(tab) {
+    currentTab = tab;
+    renderDashboard();
+  }
+
+  function renderTabContent(appointments, superData) {
+    const c = document.getElementById("tabContent");
+
+    if (currentTab === 'randevular') {
+      c.innerHTML = `
+        <div class="export-btns">
+          <button onclick="exportExcel(${JSON.stringify(appointments).replace(/"/g, '&quot;')})">📊 Excel Olarak İndir</button>
+          <button onclick="exportPDF(${JSON.stringify(appointments).replace(/"/g, '&quot;')})">📄 PDF Olarak İndir</button>
+        </div>
+
+        <div class="table-box">
+          <table>
+            <thead>
+              <tr>
+                ${user.role === 'superadmin' ? '<th>İşletme</th>' : ''}
+                <th>Müşteri Adı</th>
+                <th>Telefon</th>
+                <th>Tarih & Saat</th>
+                <th>Not</th>
+                <th>Durum</th>
+                <th>Silinme Bilgisi</th>
+                <th>İşlem</th>
+              </tr>
+            </thead>
+            <tbody>
+              ${appointments.length === 0 ? `<tr><td colspan="8" style="text-align:center; color:var(--muted)">Henüz randevu kaydı yok.</td></tr>` : ''}
+              ${appointments.map(a => `
+                <tr>
+                  ${user.role === 'superadmin' ? `<td><strong>${a.business_name}</strong></td>` : ''}
+                  <td>${a.customer_name}</td>
+                  <td><a href="tel:${a.customer_phone}" style="color:var(--accent)">${a.customer_phone}</a></td>
+                  <td>${a.appointment_date} - ${a.appointment_time}</td>
+                  <td style="font-size:13px">${a.customer_note || '-'}</td>
+                  <td><span class="badge ${a.is_deleted ? 'badge-deleted' : 'badge-active'}">${a.is_deleted ? 'Silindi' : a.status}</span></td>
+                  <td style="font-size:12px; color:var(--muted)">${a.is_deleted ? `Silen: <strong>${a.deleted_by}</strong><br>${a.deleted_at?.split('T')[0] || ''}` : '-'}</td>
+                  <td>
+                    ${!a.is_deleted ? `<button style="background:var(--pin); color:#fff; padding:6px 12px; font-size:12px" onclick="deleteAppt(${a.id})">Sil</button>` : 'Arşivde'}
+                  </td>
+                </tr>
+              `).join('')}
+            </tbody>
+          </table>
+        </div>
+      `;
+    } else if (currentTab === 'blog') {
+      c.innerHTML = `
+        <div class="card">
+          <h3>Yeni Duyuru / Blog Yazısı Gönder</h3>
+          <p style="color:var(--muted); font-size:14px">Yazdığınız yazılar Süper Admin onayından sonra web sitesinde otomatik olarak yayına alınır.</p>
+          <input type="text" id="blogTitle" placeholder="Duyuru veya Blog Başlığı...">
+          <textarea id="blogContent" rows="4" placeholder="İçeriğinizi buraya yazın..."></textarea>
+          <button onclick="submitBlog()">Onaya Gönder</button>
+        </div>
+
+        ${user.role === 'superadmin' && superData ? `
+          <h3>Onay Bekleyen ve Yayındaki Bloglar</h3>
+          <div class="table-box">
+            <table>
+              <thead>
+                <tr>
+                  <th>İşletme</th>
+                  <th>Başlık</th>
+                  <th>İçerik</th>
+                  <th>Durum</th>
+                  <th>İşlem</th>
+                </tr>
+              </thead>
+              <tbody>
+                ${superData.blogs.map(b => `
+                  <tr>
+                    <td><strong>${b.business_name}</strong></td>
+                    <td>${b.title}</td>
+                    <td style="font-size:13px">${b.content}</td>
+                    <td><span class="badge ${b.status==='approved'?'badge-active':'badge-pending'}">${b.status==='approved'?'Yayında':'Onay Bekliyor'}</span></td>
+                    <td>
+                      ${b.status === 'pending' ? `
+                        <button style="padding:6px 10px; font-size:12px" onclick="moderateBlog(${b.id}, 'approved')">Onayla</button>
+                        <button style="background:var(--pin); color:#fff; padding:6px 10px; font-size:12px" onclick="moderateBlog(${b.id}, 'rejected')">Reddet</button>
+                      ` : 'İşlem Yapıldı'}
+                    </td>
+                  </tr>
+                `).join('')}
+              </tbody>
+            </table>
+          </div>
+        ` : ''}
+      `;
+    } else if (currentTab === 'sifre') {
+      c.innerHTML = `
+        <div class="card" style="max-width:500px">
+          <h3>Kendi Şifreni Değiştir</h3>
+          <input type="password" id="newPass" placeholder="Yeni Şifreniz...">
+          <button onclick="changePassword(null)">Şifreyi Güncelle</button>
+        </div>
+      `;
+    } else if (currentTab === 'isletmeler' && superData) {
+      c.innerHTML = `
+        <h3>23 İşletme Şifre ve Kullanıcı Yönetimi</h3>
+        <p style="color:var(--muted)">İstediğiniz işletmenin şifresini doğrudan buradan değiştirebilir ve görebilirsiniz.</p>
+        <div class="table-box">
+          <table>
+            <thead>
+              <tr>
+                <th>İşletme Adı</th>
+                <th>Kategori</th>
+                <th>Kullanıcı Adı</th>
+                <th>Mevcut Şifre</th>
+                <th>Yeni Şifre Belirle</th>
+              </tr>
+            </thead>
+            <tbody>
+              ${superData.businesses.map(b => `
+                <tr>
+                  <td><strong>${b.name}</strong></td>
+                  <td>${b.category}</td>
+                  <td><code>${b.username}</code></td>
+                  <td><code style="color:var(--accent)">${b.password_hash}</code></td>
+                  <td>
+                    <div style="display:flex; gap:6px">
+                      <input type="text" id="pass_${b.id}" placeholder="Yeni şifre" style="margin:0; padding:6px 10px; width:130px">
+                      <button style="padding:6px 12px; font-size:12px" onclick="changePassword('${b.id}')">Kaydet</button>
+                    </div>
+                  </td>
+                </tr>
+              `).join('')}
+            </tbody>
+          </table>
+        </div>
+      `;
+    } else if (currentTab === 'loglar' && superData) {
+      c.innerHTML = `
+        <h3>Sistem Denetim Kayıtları (Kim Ne Yaptı?)</h3>
+        <div class="table-box">
+          <table>
+            <thead>
+              <tr>
+                <th>İşlem Yapan</th>
+                <th>Yapılan İşlem</th>
+                <th>Detay</th>
+                <th>Tarih & Saat</th>
+              </tr>
+            </thead>
+            <tbody>
+              ${superData.logs.map(l => `
+                <tr>
+                  <td><strong>${l.performed_by}</strong></td>
+                  <td><span class="badge badge-active">${l.action}</span></td>
+                  <td>${l.details}</td>
+                  <td style="font-size:13px; color:var(--muted)">${l.created_at}</td>
+                </tr>
+              `).join('')}
+            </tbody>
+          </table>
+        </div>
+      `;
+    }
+  }
+
+  async function deleteAppt(id) {
+    if (!confirm("Randevuyu silmek istiyor musunuz?")) return;
+    await fetch("/api/delete-appointment", {
+      method: "POST",
+      headers: { "Content-Type": "application/json", "Authorization": "Bearer " + token },
+      body: JSON.stringify({ id })
+    });
+    renderDashboard();
+  }
+
+  async function submitBlog() {
+    const title = document.getElementById("blogTitle").value.trim();
+    const content = document.getElementById("blogContent").value.trim();
+    if (!title || !content) return alert("Lütfen alanları doldurun!");
+    const res = await fetch("/api/create-blog", {
+      method: "POST",
+      headers: { "Content-Type": "application/json", "Authorization": "Bearer " + token },
+      body: JSON.stringify({ title, content })
+    });
+    const d = await res.json();
+    alert(d.message);
+    document.getElementById("blogTitle").value = "";
+    document.getElementById("blogContent").value = "";
+  }
+
+  async function moderateBlog(id, status) {
+    await fetch("/api/moderate-blog", {
+      method: "POST",
+      headers: { "Content-Type": "application/json", "Authorization": "Bearer " + token },
+      body: JSON.stringify({ id, status })
+    });
+    renderDashboard();
+  }
+
+  async function changePassword(targetId) {
+    const passInput = targetId ? document.getElementById("pass_" + targetId) : document.getElementById("newPass");
+    const newPass = passInput.value.trim();
+    if (!newPass) return alert("Lütfen yeni şifre girin!");
+    const res = await fetch("/api/change-password", {
+      method: "POST",
+      headers: { "Content-Type": "application/json", "Authorization": "Bearer " + token },
+      body: JSON.stringify({ target_business_id: targetId, new_password: newPass })
+    });
+    const d = await res.json();
+    alert(d.message);
+    passInput.value = "";
+    renderDashboard();
+  }
+
+  function exportExcel(data) {
+    const ws = XLSX.utils.json_to_sheet(data);
+    const wb = XLSX.utils.book_new();
+    XLSX.utils.book_append_sheet(wb, ws, "Randevular");
+    XLSX.writeFile(wb, "04agri_randevu_raporu.xlsx");
+  }
+
+  function exportPDF(data) {
+    const { jsPDF } = window.jspdf;
+    const doc = new jsPDF();
+    doc.text("04agri.com - Randevu ve Islem Dokumu", 14, 15);
+    const rows = data.map(d => [d.business_name || user.name, d.customer_name, d.customer_phone, d.appointment_date + ' ' + d.appointment_time, d.is_deleted ? 'Silindi' : d.status]);
+    doc.autoTable({
+      head: [['Isletme', 'Musteri', 'Telefon', 'Tarih', 'Durum']],
+      body: rows,
+      startY: 20
+    });
+    doc.save("04agri_randevu_dokumu.pdf");
+  }
+
+  if (token) renderDashboard();
+  else renderLogin();
+</script>
+
+</body>
+</html>
