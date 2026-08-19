@@ -1,5 +1,24 @@
-// CLOUDFLARE BACKEND & OTOMATİK KURULUM MOTORU
+// CLOUDFLARE BACKEND - TÜRKÇE KARAKTER & UTF-8 DESTEKLİ MOTOR
 const JWT_SECRET = "04agri-super-secret-key-2026-secure";
+
+// Güvenli Türkçe (UTF-8) Base64 Çeviriciler
+function utf8ToBase64(str) {
+  const bytes = new TextEncoder().encode(str);
+  let binary = "";
+  for (let i = 0; i < bytes.length; i++) {
+    binary += String.fromCharCode(bytes[i]);
+  }
+  return btoa(binary);
+}
+
+function base64ToUtf8(b64) {
+  const binary = atob(b64);
+  const bytes = new Uint8Array(binary.length);
+  for (let i = 0; i < binary.length; i++) {
+    bytes[i] = binary.charCodeAt(i);
+  }
+  return new TextDecoder().decode(bytes);
+}
 
 async function hashPassword(password) {
   const enc = new TextEncoder();
@@ -15,14 +34,14 @@ async function verifyAuth(request) {
     const [payloadB64, sig] = token.split(".");
     const expectedSig = await hashPassword(payloadB64 + JWT_SECRET);
     if (sig !== expectedSig) return null;
-    return JSON.parse(atob(payloadB64));
+    return JSON.parse(base64ToUtf8(payloadB64));
   } catch (e) {
     return null;
   }
 }
 
 async function createToken(payload) {
-  const payloadB64 = btoa(JSON.stringify(payload));
+  const payloadB64 = utf8ToBase64(JSON.stringify(payload));
   const sig = await hashPassword(payloadB64 + JWT_SECRET);
   return `${payloadB64}.${sig}`;
 }
@@ -44,9 +63,7 @@ export async function onRequest(context) {
   if (method === "OPTIONS") return new Response(null, { headers: corsHeaders });
 
   try {
-    // -----------------------------------------------------------
-    // 1. OTOMATİK KURULUM (Herkes Tıklayabilir)
-    // -----------------------------------------------------------
+    // 1. OTOMATİK KURULUM
     if (pathname.includes("setup")) {
       await db.prepare(`CREATE TABLE IF NOT EXISTS businesses (id TEXT PRIMARY KEY, name TEXT NOT NULL, category TEXT NOT NULL, username TEXT UNIQUE NOT NULL, password_hash TEXT NOT NULL, role TEXT DEFAULT 'business', phone TEXT, address TEXT, created_at DATETIME DEFAULT CURRENT_TIMESTAMP)`).run();
       await db.prepare(`CREATE TABLE IF NOT EXISTS appointments (id INTEGER PRIMARY KEY AUTOINCREMENT, business_id TEXT NOT NULL, customer_name TEXT NOT NULL, customer_phone TEXT NOT NULL, customer_note TEXT, appointment_date TEXT NOT NULL, appointment_time TEXT NOT NULL, status TEXT DEFAULT 'Bekliyor', is_deleted INTEGER DEFAULT 0, deleted_by TEXT, deleted_at DATETIME, created_at DATETIME DEFAULT CURRENT_TIMESTAMP)`).run();
@@ -87,9 +104,7 @@ export async function onRequest(context) {
       return new Response(JSON.stringify({ success: true, message: "TEBRİKLER! Veritabanı ve 23 İşletme Başarıyla Kuruldu." }), { headers: corsHeaders });
     }
 
-    // -----------------------------------------------------------
     // 2. GİRİŞ YAPMA (LOGIN)
-    // -----------------------------------------------------------
     if (pathname.includes("login") && method === "POST") {
       const { username, password } = await request.json();
       
@@ -112,9 +127,7 @@ export async function onRequest(context) {
       return new Response(JSON.stringify({ success: true, token, user: { id: user.id, name: user.name, role: user.role } }), { headers: corsHeaders });
     }
 
-    // -----------------------------------------------------------
     // 3. HERKESE AÇIK: RANDEVU ALMA
-    // -----------------------------------------------------------
     if (pathname.includes("book-appointment") && method === "POST") {
       const data = await request.json();
       const { business_id, customer_name, customer_phone, customer_note, appointment_date, appointment_time } = data;
@@ -126,9 +139,7 @@ export async function onRequest(context) {
       return new Response(JSON.stringify({ success: true, message: "Randevunuz oluşturuldu." }), { headers: corsHeaders });
     }
 
-    // -----------------------------------------------------------
-    // GÜVENLİK KONTROLÜ (Aşağıdakiler Token İster)
-    // -----------------------------------------------------------
+    // GÜVENLİK KONTROLÜ
     const auth = await verifyAuth(request);
     if (!auth) {
       return new Response(JSON.stringify({ error: "Yetkisiz erişim!" }), { status: 401, headers: corsHeaders });
