@@ -1650,7 +1650,7 @@ function downloadApplePDF(info, biz) {
   doc.setFontSize(7.5);
   doc.setFont("helvetica", "normal");
   doc.text("04agri.com - Agri'nin Dijital Rehberi Rehberi", 74, 194, { align: "center" });
-  doc.text("Bu belge tamamen ucretsiz olusturulmustur ($0).", 74, 199, { align: "center" });
+  doc.text("Bu belge tamamen ucretsiz olusturulmustur..", 74, 199, { align: "center" });
 
   doc.save(`04Agri_Randevu_${info.code}.pdf`);
 }
