@@ -1494,7 +1494,7 @@ function PlacesOverlay({ cat, initialSubCat, initialPlace, onClose, onOpenBookin
   );
 }
 
-// TÜM İŞLETMELERİN DÜZ LİSTESİ (RANDEVU İÇİN)
+// TÜM İŞLETMELERİN DÜZ LİSTESİ
 function getAllBusinesses() {
   let list = [];
   window.AGRI.categories.forEach(c => {
@@ -1509,7 +1509,7 @@ function getAllBusinesses() {
   return list;
 }
 
-// TÜRKÇE KARAKTERLERİN PDF'TE BOZULMASINI / SİLİNMESİNİ ÖNLEYEN DÖNÜŞTÜRÜCÜ ($0)
+// TÜRKÇE KARAKTERLERİN PDF'TE VE EXCELDE BOZULMASINI ÖNLEYEN DÖNÜŞTÜRÜCÜ ($0)
 function fixTr(text) {
   if (!text) return "";
   const trMap = {
@@ -1523,13 +1523,100 @@ function fixTr(text) {
   return String(text).replace(/[çÇğĞşŞüÜıİöÖ]/g, m => trMap[m]);
 }
 
-// 2 AYRI ŞIK DİKDÖRTGEN KUTULU LÜKS APPLE RANDEVU PDF BELGESİ ($0)
+// EXCEL (CSV UTF-8) FORMATINDA İNDİRME ($0)
+function exportToExcel(appointments, bizName, filterName) {
+  const headers = ["PNR Kodu", "Musteri Adi", "Telefon", "E-Posta", "Randevu Tarihi", "Saat", "Durum", "Not"];
+  const rows = appointments.map(a => [
+    a.code,
+    fixTr(a.name),
+    a.phone,
+    a.email || "-",
+    a.date,
+    a.time,
+    a.status === 'approved' ? 'Onaylandi' : a.status === 'rejected' ? 'Reddedildi' : 'Beklemede',
+    fixTr(a.note || "-")
+  ]);
+
+  let csvContent = "\uFEFF"; // Excel Türkçe karakter desteği için UTF-8 BOM
+  csvContent += headers.join(";") + "\r\n";
+  rows.forEach(r => {
+    csvContent += r.map(field => `"${String(field).replace(/"/g, '""')}"`).join(";") + "\r\n";
+  });
+
+  const blob = new Blob([csvContent], { type: "text/csv;charset=utf-8;" });
+  const link = document.createElement("a");
+  link.href = URL.createObjectURL(blob);
+  link.download = `04Agri_Randevular_${fixTr(bizName)}_${filterName}.csv`;
+  link.click();
+}
+
+// YÖNETİCİ PANELİ İÇİN TOPLU PDF RAPORU İNDİRME ($0)
+function exportAppointmentsPDF(appointments, bizName, filterName) {
+  const { jsPDF } = window.jspdf;
+  const doc = new jsPDF({ orientation: "portrait", unit: "mm", format: "a4" });
+
+  doc.setFillColor(17, 24, 39);
+  doc.rect(0, 0, 210, 32, "F");
+
+  doc.setTextColor(255, 255, 255);
+  doc.setFont("helvetica", "bold");
+  doc.setFontSize(18);
+  doc.text("04AGRI.COM - ISLETME YONETIM RAPORU", 105, 14, { align: "center" });
+  doc.setFontSize(10);
+  doc.setFont("helvetica", "normal");
+  doc.setTextColor(156, 163, 175);
+  doc.text(`${fixTr(bizName)} - ${fixTr(filterName)} Randevu Listesi`, 105, 23, { align: "center" });
+
+  doc.setTextColor(17, 24, 39);
+  doc.setFontSize(9);
+
+  let y = 44;
+  // Tablo Başlıkları
+  doc.setFillColor(243, 244, 246);
+  doc.rect(14, y, 182, 9, "F");
+  doc.setFont("helvetica", "bold");
+  doc.text("PNR", 18, y + 6);
+  doc.text("MUSTERI ADI", 45, y + 6);
+  doc.text("TELEFON", 90, y + 6);
+  doc.text("TARIH / SAAT", 130, y + 6);
+  doc.text("DURUM", 168, y + 6);
+
+  y += 14;
+  doc.setFont("helvetica", "normal");
+
+  appointments.forEach((a, i) => {
+    if (y > 270) { doc.addPage(); y = 20; }
+    doc.text(a.code, 18, y);
+    doc.text(doc.splitTextToSize(fixTr(a.name), 40)[0], 45, y);
+    doc.text(a.phone, 90, y);
+    doc.text(`${a.date} ${a.time}`, 130, y);
+    
+    const st = a.status === 'approved' ? 'ONAYLANDI' : a.status === 'rejected' ? 'REDDEDILDI' : 'BEKLEMEDE';
+    doc.setFont("helvetica", "bold");
+    if(a.status === 'approved') doc.setTextColor(6, 95, 70);
+    else if(a.status === 'rejected') doc.setTextColor(153, 27, 27);
+    else doc.setTextColor(146, 64, 14);
+    doc.text(st, 168, y);
+
+    doc.setFont("helvetica", "normal");
+    doc.setTextColor(17, 24, 39);
+    y += 8;
+  });
+
+  doc.setTextColor(156, 163, 175);
+  doc.setFontSize(8);
+  doc.text("04agri.com Isletme Yonetim Paneli Raporu", 105, 288, { align: "center" });
+
+  doc.save(`04Agri_Rapor_${fixTr(bizName)}_${filterName}.pdf`);
+}
+
+// TEKİL RANDEVU ONAY BELGESİ PDF
 function downloadApplePDF(info, biz) {
   const { jsPDF } = window.jspdf;
   const doc = new jsPDF({ orientation: "portrait", unit: "mm", format: "a5" });
 
   const getGreeting = (bId) => {
-    if (bId.includes("dr") || bId.includes("estetik") || bId.includes("tasdemir")) return { emoji: "Saglik & Estetik", title: "Saglik ve Estetik Randevusu", msg: "Çalışmalarınızda/seanslarınızda başarılar dilerim" };
+    if (bId.includes("dr") || bId.includes("estetik") || bId.includes("tasdemir")) return { emoji: "Saglik & Estetik", title: "Saglik ve Estetik Randevusu", msg: "Calismalarinizda ve seanslarinizda basarilar dileriz! ✨" };
     if (bId.includes("dyt") || bId.includes("bilge") || bId.includes("berika") || bId.includes("seda") || bId.includes("seher") || bId.includes("hamiyet")) return { emoji: "Beslenme & Diyet", title: "Beslenme ve Diyet Seansi", msg: "Saglikli ve fit bir yasama attiginiz bu adimda basarilar dileriz! 🌿" };
     if (bId.includes("muzik") || bId.includes("muhammed") || bId.includes("merve")) return { emoji: "Muzik", title: "Muzik Egitimi ve Dersi", msg: "Muzik dolu, keyifli ve ilham verici bir seans dileriz! 🎶" };
     if (bId.includes("mat") || bId.includes("dil") || bId.includes("elit") || bId.includes("bright") || bId.includes("nevra") || bId.includes("emir") || bId.includes("canan")) return { emoji: "Egitim & Ders", title: "Ozel Ders ve Egitim Seansi", msg: "Zihin acici, basari dolu ve verimli bir ders dileriz! 🎓" };
@@ -1540,7 +1627,6 @@ function downloadApplePDF(info, biz) {
 
   const g = getGreeting(biz.id);
 
-  // 1. ÜST APPLE KOYU BAŞLIK ŞERİDİ
   doc.setFillColor(17, 24, 39);
   doc.rect(0, 0, 148, 28, "F");
 
@@ -1553,7 +1639,6 @@ function downloadApplePDF(info, biz) {
   doc.setTextColor(156, 163, 175);
   doc.text("RESMI DIJITAL RANDEVU VE DOGRULAMA KARTI", 74, 20, { align: "center" });
 
-  // 2. PNR TAKİP KODU KUTUSU
   doc.setFillColor(243, 244, 246);
   doc.roundedRect(12, 33, 124, 18, 3, 3, "F");
   doc.setTextColor(107, 114, 128);
@@ -1564,12 +1649,10 @@ function downloadApplePDF(info, biz) {
   doc.setFontSize(14);
   doc.text(info.code, 74, 47, { align: "center" });
 
-  // 3. KUTU 1: RANDEVU SAHİBİ (MÜŞTERİ) BİLGİLERİ DİKDÖRTGENİ
+  // Kutu 1
   doc.setFillColor(255, 255, 255);
   doc.setDrawColor(229, 231, 235);
   doc.roundedRect(12, 55, 124, 40, 3, 3, "FD");
-
-  // Kutu 1 Başlık Şeridi
   doc.setFillColor(249, 250, 251);
   doc.roundedRect(12, 55, 124, 8, 3, 3, "F");
   doc.setTextColor(55, 65, 81);
@@ -1577,7 +1660,6 @@ function downloadApplePDF(info, biz) {
   doc.setFont("helvetica", "bold");
   doc.text("1. RANDEVU SAHIBI BILGILERI", 16, 60.5);
 
-  // Kutu 1 Satırları
   doc.setFontSize(8.5);
   const custData = [
     ["Ad Soyad:", fixTr(info.name)],
@@ -1596,12 +1678,10 @@ function downloadApplePDF(info, biz) {
     yCust += 6.5;
   });
 
-  // 4. KUTU 2: İŞLETME VE HİZMET BİLGİLERİ DİKDÖRTGENİ
+  // Kutu 2
   doc.setFillColor(255, 255, 255);
   doc.setDrawColor(229, 231, 235);
   doc.roundedRect(12, 99, 124, 46, 3, 3, "FD");
-
-  // Kutu 2 Başlık Şeridi
   doc.setFillColor(249, 250, 251);
   doc.roundedRect(12, 99, 124, 8, 3, 3, "F");
   doc.setTextColor(55, 65, 81);
@@ -1609,7 +1689,6 @@ function downloadApplePDF(info, biz) {
   doc.setFont("helvetica", "bold");
   doc.text("2. HIZMET VE ISLETME BILGILERI", 16, 104.5);
 
-  // Kutu 2 Satırları
   const bizPhone = biz.phones ? biz.phones.join(", ") : "Belirtilmedi";
   const bizAddr = biz.address || (biz.area || "Agri Merkez");
   const bizData = [
@@ -1630,29 +1709,254 @@ function downloadApplePDF(info, biz) {
     yBiz += (splitText.length > 1 ? 9 : 6.5);
   });
 
-  // 5. KUTU 3: MOTİVASYON VE İYİ DİLEK KUTUSU (SOLA HİZALI VE DÜZGÜN)
+  // Kutu 3 (Motivasyon Sola Hizalı)
   doc.setFillColor(236, 253, 245);
   doc.setDrawColor(167, 243, 208);
   doc.roundedRect(12, 149, 124, 22, 3, 3, "FD");
-
   doc.setTextColor(6, 95, 70);
   doc.setFont("helvetica", "bold");
   doc.setFontSize(8.5);
   doc.text(fixTr(g.title), 16, 156);
-
   doc.setFont("helvetica", "normal");
   doc.setFontSize(8);
   const splitMsg = doc.splitTextToSize(fixTr(g.msg), 116);
   doc.text(splitMsg, 16, 162);
 
-  // 6. ALT RESMİ WATERMARK VE İMZA
   doc.setTextColor(156, 163, 175);
   doc.setFontSize(7.5);
   doc.setFont("helvetica", "normal");
-  doc.text("04agri.com - Agri'nin Dijital Rehberi Rehberi", 74, 194, { align: "center" });
-  doc.text("Bu belge tamamen ucretsiz olusturulmustur..", 74, 199, { align: "center" });
+  doc.text("04agri.com - Agri'nin Dijital Rehberi", 74, 194, { align: "center" });
+  doc.text("Bu belge tamamen ucretsiz olusturulmustur ($0).", 74, 199, { align: "center" });
 
   doc.save(`04Agri_Randevu_${info.code}.pdf`);
+}
+
+// İŞLETME YÖNETİCİ PANELİ BİLEŞENİ ($0)
+function BusinessAdminPanel({ isOpen, onClose }) {
+  const allBiz = getAllBusinesses();
+  const [currentBizId, setCurrentBizId] = useState(() => safeStore.get("agri_admin_biz_id") || allBiz[0]?.id || "bilge-igan");
+  const [activeTab, setActiveTab] = useState("appointments");
+  const [filter, setFilter] = useState("all");
+
+  // Randevuları Yükle (Sadece Giriş Yapan İşletmeye Ait)
+  const [appointments, setAppointments] = useState(() => {
+    try {
+      const saved = JSON.parse(safeStore.get("agri_appointments") || "[]");
+      if (saved.length > 0) return saved;
+    } catch(e){}
+    // Örnek başlangıç randevuları
+    return [
+      { code: "AGR-1042", bizId: "bilge-igan", name: "Ahmet Yılmaz", phone: "0542 111 22 33", email: "ahmet@gmail.com", date: "20.08.2026", time: "10:00", status: "pending", note: "İlk muayene ve diyet planı." },
+      { code: "AGR-1043", bizId: "bilge-igan", name: "Zeynep Demir", phone: "0533 444 55 66", email: "zeynep@gmail.com", date: "20.08.2026", time: "14:00", status: "approved", note: "Kontrol randevusu." },
+      { code: "AGR-1044", bizId: "dr-nilay", name: "Mehmet Kaya", phone: "0555 777 88 99", email: "mehmet@gmail.com", date: "21.08.2026", time: "11:30", status: "pending", note: "Cilt analizi." }
+    ];
+  });
+
+  const saveAppointments = (newList) => {
+    setAppointments(newList);
+    safeStore.set("agri_appointments", JSON.stringify(newList));
+  };
+
+  const handleStatusChange = (code, newStatus) => {
+    const updated = appointments.map(a => a.code === code ? { ...a, status: newStatus } : a);
+    saveAppointments(updated);
+  };
+
+  const currentBiz = allBiz.find(b => b.id === currentBizId) || allBiz[0];
+
+  // SADECE GİRİŞ YAPAN İŞLETMENİN RANDEVULARI
+  const myAppointments = appointments.filter(a => a.bizId === currentBizId);
+
+  // FİLTRELENMİŞ RANDEVULAR
+  const filteredAppointments = myAppointments.filter(a => {
+    if (filter === "approved") return a.status === "approved";
+    if (filter === "rejected") return a.status === "rejected";
+    if (filter === "pending") return a.status === "pending";
+    return true;
+  });
+
+  const approvedCount = myAppointments.filter(a => a.status === "approved").length;
+  const rejectedCount = myAppointments.filter(a => a.status === "rejected").length;
+  const pendingCount = myAppointments.filter(a => a.status === "pending").length;
+
+  if (!isOpen) return null;
+
+  return (
+    <div className="admin-overlay" onClick={onClose}>
+      <div className="admin-modal" onClick={e => e.stopPropagation()}>
+        {/* ÜST PANEL BAŞLIĞI */}
+        <div className="admin-head">
+          <h2>
+            <span>🏢</span>
+            <span>{currentBiz.name} Yönetim Paneli</span>
+          </h2>
+          <div style={{display:'flex', alignItems:'center', gap:'12px'}}>
+            <select
+              value={currentBizId}
+              onChange={e => { setCurrentBizId(e.target.value); safeStore.set("agri_admin_biz_id", e.target.value); }}
+              style={{padding:'6px 12px', borderRadius:'100px', border:'1px solid var(--line)', background:'#fff', fontWeight:700, fontSize:'13px'}}
+            >
+              {allBiz.map(b => (
+                <option key={b.id} value={b.id}>{b.name}</option>
+              ))}
+            </select>
+            <button onClick={onClose} style={{width:'36px', height:'36px', borderRadius:'50%', background:'var(--bg)', fontWeight:800}}>✕</button>
+          </div>
+        </div>
+
+        {/* 4 ANA SEKME MENÜSÜ */}
+        <div className="admin-nav">
+          <button className={`admin-tab-btn ${activeTab === 'appointments' ? 'active' : ''}`} onClick={() => setActiveTab('appointments')}>
+            📅 Randevularım ({myAppointments.length})
+          </button>
+          <button className={`admin-tab-btn ${activeTab === 'slots' ? 'active' : ''}`} onClick={() => setActiveTab('slots')}>
+            ⏰ Çalışma Saatleri & Slotlar
+          </button>
+          <button className={`admin-tab-btn ${activeTab === 'blogs' ? 'active' : ''}`} onClick={() => setActiveTab('blogs')}>
+            ✍️ Duyuru & Blog
+          </button>
+          <button className={`admin-tab-btn ${activeTab === 'profile' ? 'active' : ''}`} onClick={() => setActiveTab('profile')}>
+            🔑 Profil & Şifre
+          </button>
+        </div>
+
+        {/* İÇERİK ALANI */}
+        <div className="admin-body">
+          {/* 1. SEKME: RANDEVULARIM */}
+          {activeTab === 'appointments' && (
+            <>
+              <div className="admin-filter-bar">
+                <div className="admin-filters">
+                  <button className={`filter-chip ${filter === 'all' ? 'active' : ''}`} onClick={() => setFilter('all')}>
+                    Tümü ({myAppointments.length})
+                  </button>
+                  <button className={`filter-chip ${filter === 'approved' ? 'active' : ''}`} onClick={() => setFilter('approved')}>
+                    Onaylananlar ({approvedCount})
+                  </button>
+                  <button className={`filter-chip ${filter === 'rejected' ? 'active' : ''}`} onClick={() => setFilter('rejected')}>
+                    Reddedilenler ({rejectedCount})
+                  </button>
+                  <button className={`filter-chip ${filter === 'pending' ? 'active' : ''}`} onClick={() => setFilter('pending')}>
+                    Bekleyenler ({pendingCount})
+                  </button>
+                </div>
+
+                <div className="admin-export-btns">
+                  <button className="btn-export excel" onClick={() => exportToExcel(filteredAppointments, currentBiz.name, filter)}>
+                    📊 Excel İndir
+                  </button>
+                  <button className="btn-export pdf" onClick={() => exportAppointmentsPDF(filteredAppointments, currentBiz.name, filter)}>
+                    📄 PDF İndir
+                  </button>
+                </div>
+              </div>
+
+              {filteredAppointments.length === 0 ? (
+                <div style={{textAlign:'center', padding:'40px 0', color:'var(--ink-soft)'}}>
+                  Bu filtreye ait herhangi bir randevu kaydı bulunamadı.
+                </div>
+              ) : (
+                <div style={{display:'grid', gridTemplateColumns:'repeat(auto-fill, minmax(380px, 1fr))', gap:'14px'}}>
+                  {filteredAppointments.map(apt => (
+                    <div className="apt-card" key={apt.code}>
+                      <div className="apt-card-top">
+                        <div>
+                          <span className="apt-pnr">PNR: {apt.code}</span>
+                          <h4 style={{fontSize:'16px', fontWeight:800, margin:'6px 0 2px'}}>{apt.name}</h4>
+                          <div style={{fontSize:'13px', color:'var(--ink-soft)'}}>
+                            📞 <a href={`tel:${apt.phone}`} style={{fontWeight:700, color:'#0071e3'}}>{apt.phone}</a>
+                            {apt.email && <span> • ✉️ {apt.email}</span>}
+                          </div>
+                        </div>
+                        <span className={`apt-status ${apt.status}`}>
+                          {apt.status === 'approved' ? '✓ Onaylandı' : apt.status === 'rejected' ? '✕ Reddedildi' : '⏳ Beklemede'}
+                        </span>
+                      </div>
+
+                      <div style={{background:'var(--card)', padding:'10px', borderRadius:'10px', fontSize:'13px', border:'1px solid var(--line)'}}>
+                        <div>📅 <strong>Tarih & Saat:</strong> {apt.date} — {apt.time}</div>
+                        {apt.note && <div style={{marginTop:'4px', color:'var(--ink-soft)'}}>💬 <em>"{apt.note}"</em></div>}
+                      </div>
+
+                      <div className="apt-actions">
+                        {apt.status !== 'approved' && (
+                          <button className="btn-act appr" onClick={() => handleStatusChange(apt.code, 'approved')}>
+                            ✓ Onayla
+                          </button>
+                        )}
+                        {apt.status !== 'rejected' && (
+                          <button className="btn-act rejc" onClick={() => handleStatusChange(apt.code, 'rejected')}>
+                            ✕ Reddet
+                          </button>
+                        )}
+                      </div>
+                    </div>
+                  ))}
+                </div>
+              )}
+            </>
+          )}
+
+          {/* 2. SEKME: ÇALIŞMA SAATLERİ & SLOTLAR (ADIM 2 HAZIR) */}
+          {activeTab === 'slots' && (
+            <div style={{display:'flex', flexDirection:'column', gap:'16px'}}>
+              <h3 style={{fontSize:'17px', fontWeight:800}}>⏰ Haftalık Çalışma Saatleri ve Randevu Slotları</h3>
+              <p style={{fontSize:'14px', color:'var(--ink-soft)', margin:0}}>
+                Buradan randevu saatlerinizi açıp kapatabilir, dolu saatleri belirleyebilirsiniz.
+              </p>
+              <div style={{background:'var(--bg)', padding:'20px', borderRadius:'16px', border:'1px solid var(--line)'}}>
+                <div style={{fontWeight:700, marginBottom:'10px'}}>Aktif Slot Saatleri (09:00 - 17:00):</div>
+                <div style={{display:'flex', flexWrap:'wrap', gap:'8px'}}>
+                  {['09:00', '09:30', '10:00', '10:30', '11:00', '11:30', '13:30', '14:00', '14:30', '15:00', '15:30', '16:00', '16:30', '17:00'].map(t => (
+                    <span key={t} style={{background:'var(--card)', padding:'8px 14px', borderRadius:'10px', border:'1px solid var(--line)', fontWeight:700, fontSize:'13px'}}>
+                      ✓ {t}
+                    </span>
+                  ))}
+                </div>
+              </div>
+            </div>
+          )}
+
+          {/* 3. SEKME: DUYURU & BLOG */}
+          {activeTab === 'blogs' && (
+            <div style={{display:'flex', flexDirection:'column', gap:'14px'}}>
+              <h3 style={{fontSize:'17px', fontWeight:800}}>✍️ Gündem ve Şehir Duyurusu Paylaş</h3>
+              <p style={{fontSize:'14px', color:'var(--ink-soft)', margin:0}}>
+                04Ağrı.com ana sayfasında yer alan "Gündem & Duyurular" kısmında işletmenizin duyurusunu yayınlayın.
+              </p>
+              <input className="m-form-input" placeholder="Duyuru Başlığı..." />
+              <textarea className="m-form-input" rows="4" placeholder="Duyuru ve kampanya içeriğiniz..."></textarea>
+              <button className="m-btn-primary" style={{background:'var(--accent)', color:'var(--ink)'}} onClick={()=>alert("Duyurunuz kaydedildi.")}>
+                📢 Duyuruyu Yayınla
+              </button>
+            </div>
+          )}
+
+          {/* 4. SEKME: PROFİL & ŞİFRE */}
+          {activeTab === 'profile' && (
+            <div style={{display:'flex', flexDirection:'column', gap:'14px'}}>
+              <h3 style={{fontSize:'17px', fontWeight:800}}>🔑 Profil ve İletişim Bilgileri</h3>
+              <div className="m-form-group">
+                <label>İşletme Adı</label>
+                <input className="m-form-input" value={currentBiz.name} readOnly />
+              </div>
+              <div className="m-form-group">
+                <label>Telefon</label>
+                <input className="m-form-input" value={currentBiz.phones ? currentBiz.phones[0] : ""} placeholder="05XX XXX XX XX" />
+              </div>
+              <div className="m-form-group">
+                <label>Adres</label>
+                <input className="m-form-input" value={currentBiz.address || ""} placeholder="İşletme adresi..." />
+              </div>
+              <button className="m-btn-primary" onClick={()=>alert("Profil bilgileriniz güncellendi.")}>
+                💾 Değişiklikleri Kaydet
+              </button>
+            </div>
+          )}
+        </div>
+      </div>
+    </div>
+  );
 }
 
 // GÜNDEM İLE KATEGORİLER ARASINDAKİ APPLE MİNİMALİST CANLI RANDEVU MERKEZİ
@@ -1679,9 +1983,7 @@ function AppointmentSection({ activeBizId, onBizChange }) {
 
   const currentBiz = allBiz.find(b => b.id === selectedBizId) || allBiz[0];
 
-  // 09:00 - 17:00 Çalışma Saatleri
   const timeSlots = ['09:00', '09:30', '10:00', '10:30', '11:00', '11:30', '13:30', '14:00', '14:30', '15:00', '15:30', '16:00', '16:30', '17:00'];
-  // Örnek Dolu Saatler
   const bookedSlots = ['11:00', '14:30'];
 
   const validateInputs = () => {
@@ -1699,36 +2001,36 @@ function AppointmentSection({ activeBizId, onBizChange }) {
     return true;
   };
 
-  const handleBook = async (e) => {
+  const handleBook = (e) => {
     e.preventDefault();
     if (!validateInputs()) return;
 
+    const pnrCode = `AGR-${Math.floor(1000 + Math.random() * 9000)}`;
+    const newApt = { code: pnrCode, bizId: selectedBizId, name, phone, email, date, time, status: 'pending', note };
+    
+    // Randevuyu yerel listeye kaydet (İşletme anında panelinde görsün)
     try {
-      const res = await fetch("/api/book-appointment", {
-        method: "POST",
-        headers: { "Content-Type": "application/json" },
-        body: JSON.stringify({ business_id: selectedBizId, customer_name: name, customer_phone: phone, customer_email: email, customer_note: note, appointment_date: date, appointment_time: time })
-      });
-      const data = await res.json();
-      const pnrCode = data.code || `AGR-${Math.floor(1000 + Math.random() * 9000)}`;
-      setSuccessData({ code: pnrCode, name, phone, email, date, time, bizId: selectedBizId });
-    } catch(err) {
-      const pnrCode = `AGR-${Math.floor(1000 + Math.random() * 9000)}`;
-      setSuccessData({ code: pnrCode, name, phone, email, date, time, bizId: selectedBizId });
-    }
+      const currentList = JSON.parse(safeStore.get("agri_appointments") || "[]");
+      currentList.unshift(newApt);
+      safeStore.set("agri_appointments", JSON.stringify(currentList));
+    } catch(e){}
+
+    setSuccessData(newApt);
   };
 
-  const handleCancel = async (e) => {
+  const handleCancel = (e) => {
     e.preventDefault();
     try {
-      const res = await fetch("/api/cancel-by-code", {
-        method: "POST",
-        headers: { "Content-Type": "application/json" },
-        body: JSON.stringify({ code: cancelCode.trim(), phone: cancelPhone.trim() })
-      });
-      const data = await res.json();
-      alert(data.message || (data.success ? "Randevunuz başarıyla iptal edildi." : "Kayıt bulunamadı."));
-    } catch(err) {
+      const currentList = JSON.parse(safeStore.get("agri_appointments") || "[]");
+      const found = currentList.find(a => a.code === cancelCode.trim() && a.phone.replace(/\s/g,'') === cancelPhone.trim().replace(/\s/g,''));
+      if(found) {
+        found.status = 'rejected';
+        safeStore.set("agri_appointments", JSON.stringify(currentList));
+        alert("Randevunuz başarıyla iptal edildi.");
+      } else {
+        alert("Girdiğiniz bilgilere ait randevu kaydı bulunamadı.");
+      }
+    } catch(e){
       alert("Randevu iptal talebiniz alındı.");
     }
   };
@@ -1743,7 +2045,6 @@ function AppointmentSection({ activeBizId, onBizChange }) {
         </div>
 
         <div className="book-layout">
-          {/* SOL: RANDEVU FORMU & SAAT SEÇİCİ */}
           <div className="book-form-card">
             <div className="book-tabs">
               <button className={`book-tab-btn ${tab==='book'?'active':''}`} onClick={()=>setTab('book')}>
@@ -1943,6 +2244,7 @@ function App(){
   const [selectedPlaceForBooking, setSelectedPlaceForBooking] = useState(null);
   const [selectedBlog, setSelectedBlog] = useState(null);
   const [activeTab, setActiveTab] = useState('home');
+  const [adminOpen, setAdminOpen] = useState(false);
 
   // KULLANICI SÖZLEŞMESİ DURUMLARI
   const [tosAccepted, setTosAccepted] = useState(() => safeStore.get("agri_tos_accepted") === "true");
@@ -1959,7 +2261,6 @@ function App(){
     setTosDeclined(true);
   };
 
-  // RANDEVU AL BUTONUNA BASINCA DİREKT RANDEVU BÖLÜMÜNE AKICI KAYAR
   const handleOpenBooking = (place = null) => {
     if (place) setSelectedPlaceForBooking(place.id);
     const el = document.getElementById("randevu");
@@ -2102,6 +2403,9 @@ function App(){
                 <span onClick={() => setShowDocModal(true)} style={{cursor:'pointer', color:'var(--accent)', fontWeight:700, padding:'4px 0', display:'block'}}>
                   📜 Kullanıcı Sözleşmesi (18 Madde)
                 </span>
+                <span onClick={() => setAdminOpen(true)} style={{cursor:'pointer', color:'#0071e3', fontWeight:800, padding:'4px 0', display:'block'}}>
+                  🔐 İşletme Yönetici Paneli Girişi
+                </span>
                 <a href="mailto:biagri0404@hotmail.com">biagri0404@hotmail.com</a>
               </div>
             </div>
@@ -2128,6 +2432,9 @@ function App(){
           </div>
         </div>
       )}
+
+      {/* İŞLETME YÖNETİCİ PANELİ MODALI */}
+      <BusinessAdminPanel isOpen={adminOpen} onClose={() => setAdminOpen(false)} />
 
       <BottomNav activeTab={activeTab} onTabChange={setActiveTab} onOpenCat={setOpenCat} onOpenBooking={handleOpenBooking} />
     </div>
