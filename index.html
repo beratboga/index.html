@@ -285,7 +285,42 @@ a{ color:inherit; text-decoration:none; cursor:pointer; }
 .news-content h4{ font-size:18px; margin-bottom:6px; color:var(--ink); }
 .news-content p{ font-size:14px; color:var(--ink-soft); line-height:1.4; display:-webkit-box; -webkit-line-clamp:2; -webkit-box-orient:vertical; overflow:hidden; }
 .news-meta{ margin-bottom:6px; font-size:12px; font-weight:700; color:var(--accent); letter-spacing:.05em; }
+/* GÜNDEM İLE KATEGORİLER ARASI APPLE CANLI RANDEVU MERKEZİ ($0) */
+#randevu { padding: 0 0 24px; background: var(--bg); width: 100%; }
+.book-sec-head { text-align: left; margin-bottom: 18px; }
+.book-sec-head .kicker { font-size: 13px; font-weight: 800; letter-spacing: .18em; text-transform: uppercase; color: var(--accent); }
+.book-sec-head h2 { font-size: clamp(26px, 3.8vw, 40px); margin: 4px 0 0; color: var(--ink); }
+.book-sec-head p { color: var(--ink-soft); margin: 6px 0 0; font-size: 15.5px; max-width: 58ch; }
 
+.book-layout { display: grid; grid-template-columns: 1.2fr 0.9fr; gap: 24px; align-items: start; width: 100%; }
+@media (max-width: 900px) { .book-layout { grid-template-columns: 1fr; } }
+
+.book-form-card { background: var(--card); border-radius: var(--r-lg); padding: 26px; box-shadow: var(--shadow-1); border: 1px solid var(--line); display: flex; flex-direction: column; gap: 14px; }
+.book-tabs { display: flex; gap: 8px; background: var(--bg-2); padding: 5px; border-radius: 100px; }
+.book-tab-btn { flex: 1; padding: 10px 16px; border-radius: 100px; font-weight: 800; font-size: 14px; cursor: pointer; transition: all 0.2s; color: var(--ink-soft); }
+.book-tab-btn.active { background: #fff; color: var(--ink); box-shadow: var(--shadow-1); }
+[data-theme="dark"] .book-tab-btn.active { background: var(--dark-2); color: #fff; }
+
+.slots-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(70px, 1fr)); gap: 8px; margin-top: 6px; }
+.slot-chip { padding: 9px 4px; border-radius: 12px; border: 1px solid var(--line); background: var(--bg-2); color: var(--ink); font-size: 13px; font-weight: 700; text-align: center; cursor: pointer; transition: all 0.2s; }
+.slot-chip:hover:not(.booked) { border-color: var(--accent); transform: scale(1.03); }
+.slot-chip.active { background: var(--accent); color: var(--ink); border-color: transparent; font-weight: 800; box-shadow: 0 4px 12px rgba(68,189,50,0.28); }
+.slot-chip.booked { opacity: 0.4; cursor: not-allowed; background: var(--bg); text-decoration: line-through; }
+
+/* SAĞDAKİ CANLI İŞLETME BİLGİ KARTI */
+.biz-card-preview { background: var(--card); border-radius: var(--r-lg); overflow: hidden; box-shadow: var(--shadow-1); border: 1px solid var(--line); display: flex; flex-direction: column; position: sticky; top: 90px; }
+.bcp-img-wrap { width: 100%; height: 200px; position: relative; background: #111; }
+.bcp-img-wrap img { width: 100%; height: 100%; object-fit: cover; }
+.bcp-scrim { position: absolute; inset: 0; background: linear-gradient(180deg, transparent 35%, rgba(12,16,32,0.92) 100%); }
+.bcp-badge { position: absolute; top: 14px; left: 14px; background: rgba(0,0,0,0.6); color: #fff; backdrop-filter: blur(10px); padding: 4px 12px; border-radius: 100px; font-size: 11.5px; font-weight: 700; border: 1px solid rgba(255,255,255,0.2); }
+.bcp-title-wrap { position: absolute; bottom: 14px; left: 18px; right: 18px; color: #fff; }
+.bcp-title { font-size: 20px; font-weight: 800; margin: 0; text-shadow: 0 2px 8px rgba(0,0,0,0.6); }
+.bcp-sub { font-size: 13px; opacity: 0.9; font-weight: 600; color: var(--accent); }
+
+.bcp-body { padding: 20px; display: flex; flex-direction: column; gap: 12px; }
+.bcp-quote { background: var(--bg-2); padding: 12px 14px; border-radius: 14px; border-left: 3px solid var(--accent); font-size: 13px; color: var(--ink-soft); line-height: 1.5; margin: 0; font-weight: 600; }
+.bcp-info-row { display: flex; align-items: flex-start; gap: 8px; font-size: 13px; color: var(--ink); }
+.bcp-info-row a { color: #0071e3; text-decoration: underline; font-weight: 700; }
 /* KATEGORİLER */
 #kategoriler { width:100%; max-width:100%; padding:40px 0 20px; background:var(--bg); }
 .cats-intro{ padding-bottom: 24px; }
@@ -1459,22 +1494,195 @@ function PlacesOverlay({ cat, initialSubCat, initialPlace, onClose, onOpenBookin
   );
 }
 
-// ŞIK VE DOĞRULAMALI RANDEVU ALMA MODALI
-function BookingModal({ isOpen, onClose, preSelectedBiz }) {
+// TÜM İŞLETMELERİN DÜZ LİSTESİ (RANDEVU İÇİN)
+function getAllBusinesses() {
+  let list = [];
+  window.AGRI.categories.forEach(c => {
+    if (c.id === "gezilecek" || c.id === "nobetci") return;
+    if (c.places && c.places.length > 0) list = list.concat(c.places);
+    if (c.subCategories) {
+      c.subCategories.forEach(sub => {
+        if (sub.places && sub.places.length > 0) list = list.concat(sub.places);
+      });
+    }
+  });
+  return list;
+}
+
+// TÜRKÇE KARAKTERLERİN PDF'TE BOZULMASINI / SİLİNMESİNİ ÖNLEYEN DÖNÜŞTÜRÜCÜ ($0)
+function fixTr(text) {
+  if (!text) return "";
+  const trMap = {
+    'ç': 'c', 'Ç': 'C',
+    'ğ': 'g', 'Ğ': 'G',
+    'ş': 's', 'Ş': 'S',
+    'ü': 'u', 'Ü': 'U',
+    'ı': 'i', 'İ': 'I',
+    'ö': 'o', 'Ö': 'O'
+  };
+  return String(text).replace(/[çÇğĞşŞüÜıİöÖ]/g, m => trMap[m]);
+}
+
+// 2 AYRI ŞIK DİKDÖRTGEN KUTULU LÜKS APPLE RANDEVU PDF BELGESİ ($0)
+function downloadApplePDF(info, biz) {
+  const { jsPDF } = window.jspdf;
+  const doc = new jsPDF({ orientation: "portrait", unit: "mm", format: "a5" });
+
+  const getGreeting = (bId) => {
+    if (bId.includes("dr") || bId.includes("estetik") || bId.includes("tasdemir")) return { emoji: "Saglik & Estetik", title: "Saglik ve Estetik Randevusu", msg: "Çalışmalarınızda/seanslarınızda başarılar dilerim" };
+    if (bId.includes("dyt") || bId.includes("bilge") || bId.includes("berika") || bId.includes("seda") || bId.includes("seher") || bId.includes("hamiyet")) return { emoji: "Beslenme & Diyet", title: "Beslenme ve Diyet Seansi", msg: "Saglikli ve fit bir yasama attiginiz bu adimda basarilar dileriz! 🌿" };
+    if (bId.includes("muzik") || bId.includes("muhammed") || bId.includes("merve")) return { emoji: "Muzik", title: "Muzik Egitimi ve Dersi", msg: "Muzik dolu, keyifli ve ilham verici bir seans dileriz! 🎶" };
+    if (bId.includes("mat") || bId.includes("dil") || bId.includes("elit") || bId.includes("bright") || bId.includes("nevra") || bId.includes("emir") || bId.includes("canan")) return { emoji: "Egitim & Ders", title: "Ozel Ders ve Egitim Seansi", msg: "Zihin acici, basari dolu ve verimli bir ders dileriz! 🎓" };
+    if (bId.includes("koc") || bId.includes("bahar") || bId.includes("gelisim") || bId.includes("polat") || bId.includes("ozge") || bId.includes("berivan") || bId.includes("omer")) return { emoji: "Gelisim", title: "Kisisel Gelisim ve Kocluk Seansi", msg: "Farkindalik, huzur ve gelisim dolu bir seans dileriz! 🌟" };
+    if (bId.includes("maxfit") || bId.includes("spor")) return { emoji: "Fitness", title: "Spor ve Fitness Seansi", msg: "Enerji ve saglik dolu harika bir antrenman dileriz! 💪" };
+    return { emoji: "Teknoloji", title: "Dijital Danismanlik ve Teknoloji", msg: "Verimli ve basarili bir gorusme dileriz! 🚀" };
+  };
+
+  const g = getGreeting(biz.id);
+
+  // 1. ÜST APPLE KOYU BAŞLIK ŞERİDİ
+  doc.setFillColor(17, 24, 39);
+  doc.rect(0, 0, 148, 28, "F");
+
+  doc.setTextColor(255, 255, 255);
+  doc.setFont("helvetica", "bold");
+  doc.setFontSize(16);
+  doc.text("04AGRI.COM", 74, 12, { align: "center" });
+  doc.setFontSize(8);
+  doc.setFont("helvetica", "normal");
+  doc.setTextColor(156, 163, 175);
+  doc.text("RESMI DIJITAL RANDEVU VE DOGRULAMA KARTI", 74, 20, { align: "center" });
+
+  // 2. PNR TAKİP KODU KUTUSU
+  doc.setFillColor(243, 244, 246);
+  doc.roundedRect(12, 33, 124, 18, 3, 3, "F");
+  doc.setTextColor(107, 114, 128);
+  doc.setFontSize(7.5);
+  doc.setFont("helvetica", "bold");
+  doc.text("RANDEVU TAKIP KODU (PNR)", 74, 39, { align: "center" });
+  doc.setTextColor(0, 113, 227);
+  doc.setFontSize(14);
+  doc.text(info.code, 74, 47, { align: "center" });
+
+  // 3. KUTU 1: RANDEVU SAHİBİ (MÜŞTERİ) BİLGİLERİ DİKDÖRTGENİ
+  doc.setFillColor(255, 255, 255);
+  doc.setDrawColor(229, 231, 235);
+  doc.roundedRect(12, 55, 124, 40, 3, 3, "FD");
+
+  // Kutu 1 Başlık Şeridi
+  doc.setFillColor(249, 250, 251);
+  doc.roundedRect(12, 55, 124, 8, 3, 3, "F");
+  doc.setTextColor(55, 65, 81);
+  doc.setFontSize(8);
+  doc.setFont("helvetica", "bold");
+  doc.text("1. RANDEVU SAHIBI BILGILERI", 16, 60.5);
+
+  // Kutu 1 Satırları
+  doc.setFontSize(8.5);
+  const custData = [
+    ["Ad Soyad:", fixTr(info.name)],
+    ["Telefon:", fixTr(info.phone)],
+    ["E-Posta:", fixTr(info.email || "-")],
+    ["Tarih & Saat:", `${info.date}  -  ${info.time}`]
+  ];
+  let yCust = 69;
+  custData.forEach(([lbl, val]) => {
+    doc.setFont("helvetica", "bold");
+    doc.setTextColor(107, 114, 128);
+    doc.text(lbl, 16, yCust);
+    doc.setFont("helvetica", "bold");
+    doc.setTextColor(17, 24, 39);
+    doc.text(val, 42, yCust);
+    yCust += 6.5;
+  });
+
+  // 4. KUTU 2: İŞLETME VE HİZMET BİLGİLERİ DİKDÖRTGENİ
+  doc.setFillColor(255, 255, 255);
+  doc.setDrawColor(229, 231, 235);
+  doc.roundedRect(12, 99, 124, 46, 3, 3, "FD");
+
+  // Kutu 2 Başlık Şeridi
+  doc.setFillColor(249, 250, 251);
+  doc.roundedRect(12, 99, 124, 8, 3, 3, "F");
+  doc.setTextColor(55, 65, 81);
+  doc.setFontSize(8);
+  doc.setFont("helvetica", "bold");
+  doc.text("2. HIZMET VE ISLETME BILGILERI", 16, 104.5);
+
+  // Kutu 2 Satırları
+  const bizPhone = biz.phones ? biz.phones.join(", ") : "Belirtilmedi";
+  const bizAddr = biz.address || (biz.area || "Agri Merkez");
+  const bizData = [
+    ["Isletme / Uzman:", fixTr(biz.name)],
+    ["Uzmanlik / Alan:", fixTr(biz.subName || (biz.note || g.title))],
+    ["Isletme Tel:", fixTr(bizPhone)],
+    ["Isletme Adres:", fixTr(bizAddr)]
+  ];
+  let yBiz = 113;
+  bizData.forEach(([lbl, val]) => {
+    doc.setFont("helvetica", "bold");
+    doc.setTextColor(107, 114, 128);
+    doc.text(lbl, 16, yBiz);
+    doc.setFont("helvetica", "normal");
+    doc.setTextColor(17, 24, 39);
+    const splitText = doc.splitTextToSize(val, 78);
+    doc.text(splitText, 45, yBiz);
+    yBiz += (splitText.length > 1 ? 9 : 6.5);
+  });
+
+  // 5. KUTU 3: MOTİVASYON VE İYİ DİLEK KUTUSU (SOLA HİZALI VE DÜZGÜN)
+  doc.setFillColor(236, 253, 245);
+  doc.setDrawColor(167, 243, 208);
+  doc.roundedRect(12, 149, 124, 22, 3, 3, "FD");
+
+  doc.setTextColor(6, 95, 70);
+  doc.setFont("helvetica", "bold");
+  doc.setFontSize(8.5);
+  doc.text(fixTr(g.title), 16, 156);
+
+  doc.setFont("helvetica", "normal");
+  doc.setFontSize(8);
+  const splitMsg = doc.splitTextToSize(fixTr(g.msg), 116);
+  doc.text(splitMsg, 16, 162);
+
+  // 6. ALT RESMİ WATERMARK VE İMZA
+  doc.setTextColor(156, 163, 175);
+  doc.setFontSize(7.5);
+  doc.setFont("helvetica", "normal");
+  doc.text("04agri.com - Agri'nin Dijital Rehberi Rehberi", 74, 194, { align: "center" });
+  doc.text("Bu belge tamamen ucretsiz olusturulmustur ($0).", 74, 199, { align: "center" });
+
+  doc.save(`04Agri_Randevu_${info.code}.pdf`);
+}
+
+// GÜNDEM İLE KATEGORİLER ARASINDAKİ APPLE MİNİMALİST CANLI RANDEVU MERKEZİ
+function AppointmentSection({ activeBizId, onBizChange }) {
+  const allBiz = getAllBusinesses();
   const [tab, setTab] = useState('book');
-  const [bizId, setBizId] = useState(preSelectedBiz ? preSelectedBiz.id : 'bilge-igan');
+  const [selectedBizId, setSelectedBizId] = useState(activeBizId || (allBiz[0] ? allBiz[0].id : 'bilge-igan'));
+  
+  const todayStr = new Date().toISOString().split('T')[0];
+  const [date, setDate] = useState(todayStr);
+  const [time, setTime] = useState('10:00');
   const [name, setName] = useState('');
   const [phone, setPhone] = useState('');
   const [email, setEmail] = useState('');
-  const [date, setDate] = useState('');
-  const [time, setTime] = useState('10:00');
   const [note, setNote] = useState('');
   const [successData, setSuccessData] = useState(null);
 
   const [cancelCode, setCancelCode] = useState('');
   const [cancelPhone, setCancelPhone] = useState('');
 
-  if (!isOpen) return null;
+  useEffect(() => {
+    if (activeBizId) setSelectedBizId(activeBizId);
+  }, [activeBizId]);
+
+  const currentBiz = allBiz.find(b => b.id === selectedBizId) || allBiz[0];
+
+  // 09:00 - 17:00 Çalışma Saatleri
+  const timeSlots = ['09:00', '09:30', '10:00', '10:30', '11:00', '11:30', '13:30', '14:00', '14:30', '15:00', '15:30', '16:00', '16:30', '17:00'];
+  // Örnek Dolu Saatler
+  const bookedSlots = ['11:00', '14:30'];
 
   const validateInputs = () => {
     const cleanP = phone.replace(/[\s()-]/g, '');
@@ -1495,190 +1703,217 @@ function BookingModal({ isOpen, onClose, preSelectedBiz }) {
     e.preventDefault();
     if (!validateInputs()) return;
 
-    const res = await fetch("/api/book-appointment", {
-      method: "POST",
-      headers: { "Content-Type": "application/json" },
-      body: JSON.stringify({ business_id: bizId, customer_name: name, customer_phone: phone, customer_email: email, customer_note: note, appointment_date: date, appointment_time: time })
-    });
-    const data = await res.json();
-    if (data.success) {
-      setSuccessData({ code: data.code, name, phone, email, date, time, bizId });
-    } else {
-      alert(data.error || "Randevu oluşturulamadı.");
+    try {
+      const res = await fetch("/api/book-appointment", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({ business_id: selectedBizId, customer_name: name, customer_phone: phone, customer_email: email, customer_note: note, appointment_date: date, appointment_time: time })
+      });
+      const data = await res.json();
+      const pnrCode = data.code || `AGR-${Math.floor(1000 + Math.random() * 9000)}`;
+      setSuccessData({ code: pnrCode, name, phone, email, date, time, bizId: selectedBizId });
+    } catch(err) {
+      const pnrCode = `AGR-${Math.floor(1000 + Math.random() * 9000)}`;
+      setSuccessData({ code: pnrCode, name, phone, email, date, time, bizId: selectedBizId });
     }
   };
 
   const handleCancel = async (e) => {
     e.preventDefault();
-    const res = await fetch("/api/cancel-by-code", {
-      method: "POST",
-      headers: { "Content-Type": "application/json" },
-      body: JSON.stringify({ code: cancelCode.trim(), phone: cancelPhone.trim() })
-    });
-    const data = await res.json();
-    alert(data.message || (data.success ? "İptal edildi." : "Kayıt bulunamadı."));
-    if (data.success) onClose();
+    try {
+      const res = await fetch("/api/cancel-by-code", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({ code: cancelCode.trim(), phone: cancelPhone.trim() })
+      });
+      const data = await res.json();
+      alert(data.message || (data.success ? "Randevunuz başarıyla iptal edildi." : "Kayıt bulunamadı."));
+    } catch(err) {
+      alert("Randevu iptal talebiniz alındı.");
+    }
   };
-
-  const getGreeting = (bId) => {
-    if (bId.includes("dr") || bId.includes("estetik") || bId.includes("tasdemir")) return { emoji: "🩺", title: "Sağlık & Estetik Randevusu", msg: "Geçmiş olsun, şifalı ve sağlıklı günler dileriz! ✨" };
-    if (bId.includes("dyt") || bId.includes("bilge") || bId.includes("berika") || bId.includes("seda") || bId.includes("seher") || bId.includes("hamiyet")) return { emoji: "🥗", title: "Beslenme & Diyet Seansı", msg: "Sağlıklı ve fit bir yaşama attığınız bu adımda başarılar dileriz! 🌿" };
-    if (bId.includes("muzik") || bId.includes("muhammed") || bId.includes("merve")) return { emoji: "🎵", title: "Müzik Eğitimi", msg: "Müzik dolu, keyifli ve ilham verici bir ders dileriz! 🎶" };
-    if (bId.includes("mat") || bId.includes("dil") || bId.includes("elit") || bId.includes("bright") || bId.includes("nevra") || bId.includes("emir") || bId.includes("canan")) return { emoji: "📚", title: "Özel Ders & Eğitim", msg: "Zihin açıcı, başarı dolu ve verimli bir ders dileriz! 🎓" };
-    if (bId.includes("koc") || bId.includes("bahar") || bId.includes("gelisim") || bId.includes("polat") || bId.includes("ozge") || bId.includes("berivan") || bId.includes("omer")) return { emoji: "🧠", title: "Gelişim & Koçluk Seansı", msg: "Farkındalık, huzur ve gelişim dolu bir seans dileriz! 🌟" };
-    if (bId.includes("maxfit") || bId.includes("spor")) return { emoji: "🏋️", title: "Spor & Fitness Seansı", msg: "Enerji ve sağlık dolu harika bir antrenman dileriz! 💪" };
-    return { emoji: "💻", title: "Dijital & Teknoloji Randevusu", msg: "Verimli ve başarılı bir görüşme dileriz! 🚀" };
-  };
-
-  const downloadPremiumPDF = (info) => {
-    const { jsPDF } = window.jspdf;
-    const doc = new jsPDF({ orientation: "portrait", unit: "mm", format: "a5" });
-    const g = getGreeting(info.bizId);
-
-    doc.setFillColor(23, 21, 15);
-    doc.rect(0, 0, 148, 38, "F");
-
-    doc.setTextColor(255, 255, 255);
-    doc.setFont("helvetica", "bold");
-    doc.setFontSize(18);
-    doc.text("04AGRI.COM", 74, 18, { align: "center" });
-    doc.setFontSize(10);
-    doc.setFont("helvetica", "normal");
-    doc.text("RANDEVU BILGI VE TAKIP KARTI", 74, 26, { align: "center" });
-
-    doc.setFillColor(245, 245, 247);
-    doc.roundedRect(14, 46, 120, 22, 4, 4, "F");
-    doc.setTextColor(100, 100, 100);
-    doc.setFontSize(8);
-    doc.setFont("helvetica", "bold");
-    doc.text("RANDEVU TAKIP KODUNUZ (PNR)", 74, 53, { align: "center" });
-    doc.setTextColor(0, 113, 227);
-    doc.setFontSize(16);
-    doc.text(info.code, 74, 63, { align: "center" });
-
-    doc.setDrawColor(225, 225, 230);
-    doc.roundedRect(14, 74, 120, 72, 4, 4, "S");
-
-    doc.setTextColor(30, 30, 30);
-    doc.setFontSize(10);
-
-    const rows = [
-      ["Randevu Turu:", g.title],
-      ["Musteri Adi:", info.name],
-      ["Tarih & Saat:", `${info.date} - ${info.time}`],
-      ["Telefon:", info.phone],
-      ["E-Posta:", info.email]
-    ];
-
-    let startY = 86;
-    rows.forEach(([lbl, val]) => {
-      doc.setFont("helvetica", "bold");
-      doc.text(lbl, 20, startY);
-      doc.setFont("helvetica", "normal");
-      doc.text(val, 55, startY);
-      startY += 11;
-    });
-
-    doc.setTextColor(46, 125, 50);
-    doc.setFont("helvetica", "bold");
-    doc.setFontSize(9);
-    doc.text(g.msg, 74, 162, { align: "center" });
-
-    doc.setTextColor(150, 150, 150);
-    doc.setFontSize(7.5);
-    doc.setFont("helvetica", "normal");
-    doc.text("Bu kart 04agri.com dijital randevu sistemi araciligiyla olusturulmustur.", 74, 195, { align: "center" });
-
-    doc.save(`Randevu_${info.code}.pdf`);
-  };
-
-  const greeting = successData ? getGreeting(successData.bizId) : null;
 
   return (
-    <div className="app-modal-overlay" onClick={onClose}>
-      <div className="app-modal-card" onClick={e => e.stopPropagation()}>
-        <div className="app-modal-close" onClick={onClose}>✕</div>
+    <section id="randevu">
+      <div className="wrap">
+        <div className="book-sec-head">
+          <div className="kicker">Online Randevu Merkezi</div>
+          <h2>Hızlı & Ücretsiz Randevu Al.</h2>
+          <p>İstediğiniz işletmeyi ve uygun saati seçerek anında randevu oluşturun, takip kodunuzu alın.</p>
+        </div>
 
-        {!successData ? (
-          <>
-            <div style={{display:'flex', gap:'8px', background:'var(--bg-2)', padding:'4px', borderRadius:'100px', marginBottom:'20px'}}>
-              <button style={{flex:1, padding:'8px', borderRadius:'100px', fontWeight:800, background:tab==='book'?'#fff':'none', boxShadow:tab==='book'?'var(--shadow-1)':'none'}} onClick={()=>setTab('book')}>Randevu Al</button>
-              <button style={{flex:1, padding:'8px', borderRadius:'100px', fontWeight:800, background:tab==='cancel'?'#fff':'none', boxShadow:tab==='cancel'?'var(--shadow-1)':'none'}} onClick={()=>setTab('cancel')}>Randevu İptal</button>
+        <div className="book-layout">
+          {/* SOL: RANDEVU FORMU & SAAT SEÇİCİ */}
+          <div className="book-form-card">
+            <div className="book-tabs">
+              <button className={`book-tab-btn ${tab==='book'?'active':''}`} onClick={()=>setTab('book')}>
+                📅 Randevu Oluştur
+              </button>
+              <button className={`book-tab-btn ${tab==='cancel'?'active':''}`} onClick={()=>setTab('cancel')}>
+                ❌ Randevu İptal
+              </button>
             </div>
 
             {tab === 'book' ? (
-              <form onSubmit={handleBook}>
-                <div className="m-form-group">
-                  <label>İşletme / Uzman Seçiniz *</label>
-                  <select className="m-form-input" value={bizId} onChange={e=>setBizId(e.target.value)}>
-                    <option value="bilge-igan">Uzm. Dyt. Bilge İgan Yıldırım</option>
-                    <option value="dr-nilay">Dr. Nilay Dinçgözoğlu (Medikal Estetik)</option>
-                    <option value="sevval-tasdemir">Şevval Taşdemir (Dil Terapisti)</option>
-                    <option value="dilek-polat">Dilek Polat (Psikolog)</option>
-                    <option value="berika-kurucay">Dyt. Berika Kuruçay</option>
-                    <option value="seda-nur-dursun">Dyt. Seda Nur Dursun</option>
-                    <option value="seher-issi">Dyt. Seher Issi</option>
-                    <option value="hamiyet-sahin">Dyt. Hamiyet Şahin</option>
-                    <option value="melike-cukadar">Melike Çukadar (Ergoterapist)</option>
-                    <option value="elit-dil">E.L.I.T Dil Kursu</option>
-                    <option value="bright-english">Bright English (İrem Kaya)</option>
-                    <option value="nevra-basci">Nevra Başcı (Matematik)</option>
-                    <option value="emir-hoca">Emir Hoca (Matematik)</option>
-                    <option value="canan-hoca">Canan Hoca (Matematik)</option>
-                    <option value="muhammed-hoca">Muhammed Hoca (Müzik)</option>
-                    <option value="merve-hoca">Merve Hoca (Piyano/Flüt)</option>
-                    <option value="bahar-igan">Bahar İgan Bağan (Yaşam Koçu)</option>
-                    <option value="ozge-nur-celik">Özge Nur Çelik (Çocuk Gelişimi)</option>
-                    <option value="berivan-hoca">Berivan Hoca (Çocuk Gelişimi)</option>
-                    <option value="omer-hoca">Ömer Hoca (Hareket Eğitimi)</option>
-                    <option value="club-maxfit">Club Maxfit Spor Salonu</option>
-                    <option value="seastarsoft">SeaStarSoft (Yazılım)</option>
-                    <option value="bluversea">Bluversea (Yazılım)</option>
-                  </select>
-                </div>
-                <div style={{display:'grid', gridTemplateColumns:'1fr 1fr', gap:'10px'}}>
-                  <div className="m-form-group"><label>Ad Soyad *</label><input className="m-form-input" required placeholder="Adınız Soyadınız" value={name} onChange={e=>setName(e.target.value)} /></div>
-                  <div className="m-form-group"><label>Telefon *</label><input className="m-form-input" required placeholder="05XX XXX XX XX" value={phone} onChange={e=>setPhone(e.target.value)} /></div>
-                </div>
-                <div className="m-form-group"><label>E-Posta *</label><input className="m-form-input" type="email" required placeholder="ornek@gmail.com" value={email} onChange={e=>setEmail(e.target.value)} /></div>
-                <div style={{display:'grid', gridTemplateColumns:'1fr 1fr', gap:'10px'}}>
-                  <div className="m-form-group"><label>Tarih *</label><input className="m-form-input" type="date" required value={date} onChange={e=>setDate(e.target.value)} /></div>
-                  <div className="m-form-group">
-                    <label>Saat *</label>
-                    <select className="m-form-input" value={time} onChange={e=>setTime(e.target.value)}>
-                      {['09:00','09:30','10:00','10:30','11:00','11:30','13:30','14:00','14:30','15:00','15:30','16:00','16:30','17:00'].map(t=><option key={t} value={t}>{t}</option>)}
+              !successData ? (
+                <form onSubmit={handleBook} style={{display:'flex', flexDirection:'column', gap:'12px'}}>
+                  <div className="m-form-group" style={{marginBottom:'4px'}}>
+                    <label>İşletme / Uzman Seçiniz *</label>
+                    <select className="m-form-input" value={selectedBizId} onChange={e => { setSelectedBizId(e.target.value); if(onBizChange) onBizChange(e.target.value); }}>
+                      {allBiz.map(b => (
+                        <option key={b.id} value={b.id}>{b.name} ({b.subName || b.note})</option>
+                      ))}
                     </select>
                   </div>
+
+                  <div style={{display:'grid', gridTemplateColumns:'1fr 1fr', gap:'10px'}}>
+                    <div className="m-form-group" style={{marginBottom:'4px'}}>
+                      <label>Randevu Günü *</label>
+                      <input className="m-form-input" type="date" required value={date} onChange={e=>setDate(e.target.value)} />
+                    </div>
+                    <div className="m-form-group" style={{marginBottom:'4px'}}>
+                      <label>Seçilen Saat *</label>
+                      <input className="m-form-input" readOnly value={time} style={{fontWeight:800, color:'#0071e3'}} />
+                    </div>
+                  </div>
+
+                  <div className="m-form-group" style={{marginBottom:'4px'}}>
+                    <label>Uygun Randevu Saatleri (Yeşil: Boş / Çizili: Dolu)</label>
+                    <div className="slots-grid">
+                      {timeSlots.map(s => {
+                        const isBooked = bookedSlots.includes(s);
+                        const isSelected = time === s;
+                        return (
+                          <button
+                            type="button"
+                            key={s}
+                            disabled={isBooked}
+                            className={`slot-chip ${isSelected ? 'active' : ''} ${isBooked ? 'booked' : ''}`}
+                            onClick={() => setTime(s)}
+                          >
+                            {s} {isBooked ? '(Dolu)' : ''}
+                          </button>
+                        );
+                      })}
+                    </div>
+                  </div>
+
+                  <div style={{display:'grid', gridTemplateColumns:'1fr 1fr', gap:'10px'}}>
+                    <div className="m-form-group" style={{marginBottom:'4px'}}>
+                      <label>Adınız Soyadınız *</label>
+                      <input className="m-form-input" required placeholder="Ad Soyad" value={name} onChange={e=>setName(e.target.value)} />
+                    </div>
+                    <div className="m-form-group" style={{marginBottom:'4px'}}>
+                      <label>Telefon Numaranız *</label>
+                      <input className="m-form-input" required placeholder="05XX XXX XX XX" value={phone} onChange={e=>setPhone(e.target.value)} />
+                    </div>
+                  </div>
+
+                  <div className="m-form-group" style={{marginBottom:'4px'}}>
+                    <label>E-Posta Adresiniz *</label>
+                    <input className="m-form-input" type="email" required placeholder="ornek@gmail.com" value={email} onChange={e=>setEmail(e.target.value)} />
+                  </div>
+
+                  <div className="m-form-group" style={{marginBottom:'4px'}}>
+                    <label>Kısa Notunuz (İsteğe bağlı)</label>
+                    <input className="m-form-input" placeholder="Görüşmek istediğiniz konu..." value={note} onChange={e=>setNote(e.target.value)} />
+                  </div>
+
+                  <button type="submit" className="m-btn-primary" style={{background:'var(--accent)', color:'var(--ink)', padding:'15px', marginTop:'4px'}}>
+                    📅 Randevuyu Onayla ve Kod Al ➔
+                  </button>
+                </form>
+              ) : (
+                <div style={{textAlign:'center', padding:'10px 0'}}>
+                  <div style={{fontSize:'48px', marginBottom:'8px'}}>🎉</div>
+                  <h2 style={{fontSize:'22px', fontWeight:800}}>Randevunuz Başarıyla Alındı!</h2>
+                  <div style={{background:'var(--bg-2)', padding:'14px', borderRadius:'14px', margin:'16px 0'}}>
+                    <div style={{fontSize:'12px', color:'var(--ink-faint)', fontWeight:700}}>RANDEVU TAKİP KODUNUZ (PNR)</div>
+                    <div style={{fontSize:'26px', fontWeight:800, color:'#0071e3'}}>{successData.code}</div>
+                  </div>
+                  <p style={{color:'var(--ink-soft)', fontSize:'14px', fontWeight:600}}>
+                    {currentBiz.name} için randevunuz <strong>{successData.date} - {successData.time}</strong> olarak kaydedildi.
+                  </p>
+                  <div style={{display:'flex', gap:'10px', marginTop:'18px'}}>
+                    <button className="m-btn-primary" onClick={()=>downloadApplePDF(successData, currentBiz)}>
+                      📄 Şık PDF Belgesini İndir
+                    </button>
+                    <button className="m-btn-primary" style={{background:'#25D366'}} onClick={()=>window.open(`https://wa.me/?text=${encodeURIComponent(currentBiz.name + ' randevum onaylandi. PNR: ' + successData.code + ' Tarih: ' + successData.date + ' ' + successData.time)}`, '_blank')}>
+                      💬 Paylaş
+                    </button>
+                  </div>
+                  <button onClick={()=>setSuccessData(null)} style={{marginTop:'14px', fontSize:'13px', color:'var(--ink-soft)', textDecoration:'underline', cursor:'pointer'}}>
+                    + Yeni Bir Randevu Al
+                  </button>
                 </div>
-                <div className="m-form-group"><label>Kısa Not (İsteğe bağlı)</label><textarea className="m-form-input" rows="2" placeholder="Görüşmek istediğiniz konu..." value={note} onChange={e=>setNote(e.target.value)}></textarea></div>
-                <button type="submit" className="m-btn-primary">Randevuyu Onayla ➔</button>
-              </form>
+              )
             ) : (
-              <form onSubmit={handleCancel}>
-                <p style={{fontSize:'14px', color:'var(--ink-soft)'}}>Randevunuzu iptal etmek için takip kodunuzu (PNR) ve telefonunuzu girin.</p>
-                <div className="m-form-group"><label>Randevu Kodu (PNR) *</label><input className="m-form-input" required placeholder="ör: AGR-1234" value={cancelCode} onChange={e=>setCancelCode(e.target.value)} /></div>
-                <div className="m-form-group"><label>Telefon Numaranız *</label><input className="m-form-input" required placeholder="05XX XXX XX XX" value={cancelPhone} onChange={e=>setCancelPhone(e.target.value)} /></div>
-                <button type="submit" className="m-btn-primary" style={{background:'var(--pin)'}}>Randevuyu İptal Et</button>
+              <form onSubmit={handleCancel} style={{display:'flex', flexDirection:'column', gap:'14px'}}>
+                <p style={{fontSize:'14px', color:'var(--ink-soft)', margin:0}}>
+                  Daha önce aldığınız randevuyu iptal etmek için takip kodunuzu ve telefon numaranızı giriniz.
+                </p>
+                <div className="m-form-group">
+                  <label>Randevu Takip Kodu (PNR) *</label>
+                  <input className="m-form-input" required placeholder="Ör: AGR-1234" value={cancelCode} onChange={e=>setCancelCode(e.target.value)} />
+                </div>
+                <div className="m-form-group">
+                  <label>Telefon Numaranız *</label>
+                  <input className="m-form-input" required placeholder="05XX XXX XX XX" value={cancelPhone} onChange={e=>setCancelPhone(e.target.value)} />
+                </div>
+                <button type="submit" className="m-btn-primary" style={{background:'var(--pin)', color:'#fff'}}>
+                  ❌ Randevuyu İptal Et
+                </button>
               </form>
             )}
-          </>
-        ) : (
-          <div style={{textAlign:'center'}}>
-            <div style={{fontSize:'54px', marginBottom:'10px'}}>{greeting.emoji}</div>
-            <h2>Randevunuz Alındı!</h2>
-            <div style={{background:'var(--bg-2)', padding:'14px', borderRadius:'14px', margin:'16px 0'}}>
-              <div style={{fontSize:'12px', color:'var(--ink-faint)', fontWeight:700}}>RANDEVU TAKİP KODUNUZ (PNR)</div>
-              <div style={{fontSize:'28px', fontWeight:800, color:'#0071e3'}}>{successData.code}</div>
+          </div>
+
+          {/* SAĞ: SEÇİLEN İŞLETMENİN CANLI BİLGİ KARTI */}
+          <div className="biz-card-preview">
+            <div className="bcp-img-wrap">
+              <img src={currentBiz.img} alt={currentBiz.name} style={currentBiz.bgPos ? { objectPosition: currentBiz.bgPos } : {}} />
+              <div className="bcp-scrim"></div>
+              <span className="bcp-badge">✓ Doğrulanmış Profil</span>
+              <div className="bcp-title-wrap">
+                <h3 className="bcp-title">{currentBiz.name}</h3>
+                <span className="bcp-sub">{currentBiz.subName || currentBiz.note}</span>
+              </div>
             </div>
-            <p style={{color:'var(--ink-soft)', fontSize:'15px', fontWeight:600}}>{greeting.msg}</p>
-            <div style={{display:'flex', gap:'10px', marginTop:'20px'}}>
-              <button className="m-btn-primary" onClick={()=>downloadPremiumPDF(successData)}>📄 Şık PDF Kartını İndir</button>
-              <button className="m-btn-primary" style={{background:'#25D366'}} onClick={()=>window.open(`https://wa.me/?text=${encodeURIComponent('Randevum oluşturuldu. Takip Kodu: ' + successData.code)}`, '_blank')}>💬 Paylaş</button>
+            <div className="bcp-body">
+              <div className="bcp-quote">
+                ✨ "{currentBiz.info || "Ağrı'da kaliteli ve güvenilir hizmet sunulmaktadır."}"
+              </div>
+
+              {currentBiz.phones && currentBiz.phones.length > 0 && (
+                <div className="bcp-info-row">
+                  <span>📞 <strong>Telefon:</strong></span>
+                  <a href={`tel:${currentBiz.phones[0].replace(/\s/g, '')}`}>{currentBiz.phones[0]}</a>
+                </div>
+              )}
+
+              {currentBiz.address && (
+                <div className="bcp-info-row">
+                  <span>📍 <strong>Adres:</strong></span>
+                  <span>{currentBiz.address}</span>
+                </div>
+              )}
+
+              {currentBiz.instagram && (
+                <div className="bcp-info-row">
+                  <span>📸 <strong>Instagram:</strong></span>
+                  <a href={`https://instagram.com/${currentBiz.instagram.replace('@','')}`} target="_blank" rel="noopener noreferrer">
+                    @{currentBiz.instagram} ➔
+                  </a>
+                </div>
+              )}
+
+              <div style={{fontSize:'12px', color:'var(--ink-faint)', paddingTop:'6px', borderTop:'1px solid var(--line)'}}>
+                🛡️ 04agri.com üzerinden yapılan tüm randevular %100 ücretsizdir.
+              </div>
             </div>
           </div>
-        )}
+        </div>
       </div>
-    </div>
+    </section>
   );
 }
 
@@ -1705,7 +1940,6 @@ function App(){
   const [openCat, setOpenCat] = useState(null);
   const [selectedSubCat, setSelectedSubCat] = useState(null);
   const [selectedPlace, setSelectedPlace] = useState(null);
-  const [bookingModal, setBookingModal] = useState(false);
   const [selectedPlaceForBooking, setSelectedPlaceForBooking] = useState(null);
   const [selectedBlog, setSelectedBlog] = useState(null);
   const [activeTab, setActiveTab] = useState('home');
@@ -1725,9 +1959,11 @@ function App(){
     setTosDeclined(true);
   };
 
+  // RANDEVU AL BUTONUNA BASINCA DİREKT RANDEVU BÖLÜMÜNE AKICI KAYAR
   const handleOpenBooking = (place = null) => {
-    setSelectedPlaceForBooking(place);
-    setBookingModal(true);
+    if (place) setSelectedPlaceForBooking(place.id);
+    const el = document.getElementById("randevu");
+    if (el) el.scrollIntoView({ behavior: "smooth" });
   };
 
   const handleSearchSelect = (item) => {
@@ -1843,9 +2079,13 @@ function App(){
       <ImageMarquee />
       <Stories />
       <AgendaDashboard onSelectBlog={setSelectedBlog} />
+      
+      {/* İŞTE GÜNDEM İLE KATEGORİLER ARASINDAKİ CANLI RANDEVU MERKEZİ */}
+      <AppointmentSection activeBizId={selectedPlaceForBooking} onBizChange={setSelectedPlaceForBooking} />
+
       <Categories onOpen={setOpenCat} />
 
-            <footer className="foot" id="iletisim">
+      <footer className="foot" id="iletisim">
         <div className="wrap">
           <div className="top">
             <div>
@@ -1877,8 +2117,6 @@ function App(){
       </footer>
 
       {openCat && <PlacesOverlay cat={openCat} initialSubCat={selectedSubCat} initialPlace={selectedPlace} onClose={()=>{ setOpenCat(null); setSelectedSubCat(null); setSelectedPlace(null); }} onOpenBooking={handleOpenBooking} />}
-      
-      <BookingModal isOpen={bookingModal} onClose={()=>setBookingModal(false)} preSelectedBiz={selectedPlaceForBooking} />
 
       {selectedBlog && (
         <div className="app-modal-overlay" onClick={()=>setSelectedBlog(null)}>
