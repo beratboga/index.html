@@ -3,137 +3,346 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>İşletme Paneli - 04agri.com</title>
+  <title>Gelişmiş İşletme Paneli - 04agri.com</title>
   
+  <!-- Supabase ve PDF Kütüphaneleri -->
   <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/html2pdf.js/0.10.1/html2pdf.bundle.min.js"></script>
+  
   <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;600;800&display=swap" rel="stylesheet" />
   
   <style>
-    body { font-family: "Plus Jakarta Sans", sans-serif; background: #f6f4ef; display: flex; justify-content: center; align-items: center; min-height: 100vh; margin: 0; color: #17150f; }
-    .card { background: white; padding: 40px 30px; border-radius: 24px; box-shadow: 0 20px 40px rgba(20,18,12,.12); text-align: center; width: 100%; max-width: 400px; }
-    h2 { margin-top: 0; font-weight: 800; color: #0c1020; }
-    input { width: 90%; padding: 14px; margin: 10px 0; border: 1px solid #e3ded3; border-radius: 12px; font-family: inherit; font-size: 15px; outline: none; box-sizing: border-box; }
-    input:focus { border-color: #44BD32; }
-    button { background: #17150f; color: #fff; border: none; padding: 16px; width: 100%; border-radius: 100px; cursor: pointer; font-weight: 800; font-size: 15px; transition: transform 0.2s; margin-top: 10px; }
-    button:hover { transform: translateY(-2px); }
-    button.logout { background: #f6f4ef; color: #E84142; margin-top: 20px; }
+    :root { --bg: #f6f4ef; --card: #ffffff; --ink: #17150f; --ink-soft: #6a655a; --accent: #44BD32; --red: #E84142; --line: #e3ded3; }
+    body { font-family: "Plus Jakarta Sans", sans-serif; background: var(--bg); margin: 0; color: var(--ink); display: flex; height: 100vh; overflow: hidden; }
     
-    /* Randevu Kartları İçin Tasarım */
-    .randevu-karti { border: 1px solid #e3ded3; padding: 16px; border-radius: 16px; margin-bottom: 12px; text-align: left; background: #faf9f6; }
-    .r-isim { font-weight: 800; font-size: 16px; color: #0c1020; margin-bottom: 4px; }
-    .r-tarih { font-size: 14px; color: #6a655a; font-weight: 600; margin-bottom: 8px; }
-    .r-durum { font-size: 12px; font-weight: 800; padding: 4px 10px; border-radius: 100px; display: inline-block; }
-    .durum-bekliyor { background: #FBC531; color: #17150f; }
-    .durum-onaylandi { background: #44BD32; color: #fff; }
+    /* GİRİŞ EKRANI */
+    #login-view { width: 100%; height: 100vh; display: flex; justify-content: center; align-items: center; position: absolute; z-index: 100; background: var(--bg); }
+    .login-card { background: var(--card); padding: 40px 30px; border-radius: 24px; box-shadow: 0 20px 40px rgba(0,0,0,0.1); text-align: center; width: 100%; max-width: 320px; }
+    .login-card input { width: 90%; padding: 14px; margin: 10px 0; border: 1px solid var(--line); border-radius: 12px; font-family: inherit; font-size: 15px; outline: none; }
+    .btn-main { background: var(--ink); color: #fff; border: none; padding: 14px; width: 100%; border-radius: 100px; cursor: pointer; font-weight: 800; font-size: 15px; transition: transform 0.2s; margin-top: 10px; }
+    .btn-main:hover { transform: translateY(-2px); }
+
+    /* ANA UYGULAMA DÜZENİ */
+    #app-view { display: none; width: 100%; height: 100%; }
+    
+    /* SOL MENÜ (SIDEBAR) */
+    .sidebar { width: 260px; background: var(--card); border-right: 1px solid var(--line); padding: 30px 20px; display: flex; flex-direction: column; gap: 10px; }
+    .sidebar h2 { font-weight: 800; color: var(--ink); margin-bottom: 30px; font-size: 22px; text-align: center; }
+    .nav-btn { background: none; border: none; text-align: left; padding: 14px 20px; font-size: 15px; font-weight: 600; color: var(--ink-soft); border-radius: 12px; cursor: pointer; transition: 0.2s; }
+    .nav-btn:hover { background: var(--bg); color: var(--ink); }
+    .nav-btn.active { background: var(--ink); color: #fff; }
+    .nav-btn.admin-only { background: rgba(232, 65, 66, 0.1); color: var(--red); display: none; }
+    .nav-btn.admin-only.active { background: var(--red); color: #fff; }
+    .logout-btn { margin-top: auto; color: var(--red); font-weight: 800; }
+
+    /* İÇERİK ALANI */
+    .content { flex: 1; padding: 40px; overflow-y: auto; background: var(--bg); }
+    .tab-content { display: none; max-width: 900px; margin: 0 auto; }
+    
+    /* ARAÇ ÇUBUĞU VE KARTLAR */
+    .toolbar { display: flex; justify-content: space-between; align-items: center; margin-bottom: 20px; background: var(--card); padding: 15px 25px; border-radius: 16px; box-shadow: 0 4px 12px rgba(0,0,0,0.03); }
+    .toolbar select { padding: 10px; border-radius: 8px; border: 1px solid var(--line); font-family: inherit; font-weight: 600; outline: none; }
+    .btn-pdf { background: var(--ink); color: #fff; padding: 10px 20px; border-radius: 8px; cursor: pointer; border: none; font-weight: 700; }
+    
+    .data-card { background: var(--card); padding: 20px; border-radius: 16px; margin-bottom: 16px; border: 1px solid var(--line); box-shadow: 0 4px 12px rgba(0,0,0,0.03); display: flex; justify-content: space-between; align-items: center; }
+    .data-info h4 { margin: 0 0 6px 0; font-size: 17px; }
+    .data-info p { margin: 0; color: var(--ink-soft); font-size: 14px; line-height: 1.5; }
+    .badge { padding: 6px 12px; border-radius: 100px; font-size: 12px; font-weight: 800; }
+    .bg-bekliyor { background: #FBC531; color: #17150f; }
+    .bg-onaylandi { background: var(--accent); color: #fff; }
+    .bg-reddedildi { background: var(--red); color: #fff; }
+    .action-btns button { padding: 8px 16px; border-radius: 8px; border: none; font-weight: 700; cursor: pointer; margin-left: 6px; }
+    .btn-onay { background: rgba(68, 189, 50, 0.1); color: var(--accent); }
+    .btn-red { background: rgba(232, 65, 66, 0.1); color: var(--red); }
+
+    /* ŞİFRE ALANI */
+    .input-group { display: flex; align-items: center; background: #fff; border: 1px solid var(--line); border-radius: 12px; padding: 0 14px; margin-top: 10px; }
+    .input-group input { border: none; width: 100%; outline: none; margin: 0; padding: 14px 0; }
+    .eye-icon { cursor: pointer; font-size: 18px; user-select: none; }
+
+    /* PDF Çıktısı İçin Görünmez Footer */
+    #pdf-footer { display: none; text-align: center; margin-top: 40px; font-weight: 800; color: var(--ink-soft); }
   </style>
 </head>
 <body>
 
-  <!-- GİRİŞ EKRANI -->
-  <div class="card" id="login-section">
-    <h2>İşletme Girişi</h2>
-    <p style="font-size: 14px; color: #6a655a; margin-bottom: 20px;">04agri.com paneline hoş geldiniz.</p>
-    <input type="email" id="email" placeholder="E-posta adresiniz" />
-    <input type="password" id="password" placeholder="Şifreniz" />
-    <button onclick="girisYap()">Giriş Yap</button>
-    <p id="mesaj" style="color: #E84142; font-size: 13px; font-weight: 600; margin-top: 15px;"></p>
+  <!-- 1. GİRİŞ EKRANI -->
+  <div id="login-view">
+    <div class="login-card">
+      <h2>04agri Paneli</h2>
+      <p style="font-size: 14px; color: var(--ink-soft); margin-bottom: 20px;">İşletme veya Yönetici girişi yapın</p>
+      <input type="email" id="email" placeholder="E-posta adresiniz" />
+      <div class="input-group">
+        <input type="password" id="password" placeholder="Şifreniz" />
+      </div>
+      <button class="btn-main" onclick="girisYap()">Giriş Yap</button>
+      <p id="mesaj" style="color: var(--red); font-size: 13px; font-weight: 600; margin-top: 15px;"></p>
+    </div>
   </div>
 
-  <!-- BAŞARILI GİRİŞ EKRANI (DASHBOARD) -->
-  <div class="card" id="dashboard-section" style="display: none; max-width: 500px;">
-    <h2>Randevularım</h2>
+  <!-- 2. ANA UYGULAMA (Giriş yaptıktan sonra açılır) -->
+  <div id="app-view">
     
-    <!-- Randevuların listeleneceği alan -->
-    <div id="randevu-listesi" style="margin-top: 20px; max-height: 400px; overflow-y: auto;">
-      <p style="color: #6a655a; font-size: 14px;">Randevular yükleniyor...</p>
+    <!-- SOL MENÜ -->
+    <div class="sidebar">
+      <h2 id="isletme-isim-etiketi">Yükleniyor...</h2>
+      <button class="nav-btn active" id="nav-randevular" onclick="sekmeDegistir('randevular')">📅 Randevularım</button>
+      <button class="nav-btn" id="nav-saatler" onclick="sekmeDegistir('saatler')">⏰ Çalışma Saatleri</button>
+      <button class="nav-btn" id="nav-blog" onclick="sekmeDegistir('blog')">✍️ Blog & Gündem</button>
+      <button class="nav-btn" id="nav-profil" onclick="sekmeDegistir('profil')">⚙️ Profil Ayarları</button>
+      
+      <!-- Sadece Admin Görecek -->
+      <button class="nav-btn admin-only" id="nav-admin" onclick="sekmeDegistir('admin')">👑 Süper Yönetici</button>
+
+      <button class="nav-btn logout-btn" onclick="cikisYap()">Çıkış Yap</button>
     </div>
 
-    <button class="logout" onclick="cikisYap()">Sistemden Çıkış Yap</button>
+    <!-- İÇERİK ALANI -->
+    <div class="content">
+
+      <!-- RANDEVULAR SEKMSİ -->
+      <div id="tab-randevular" class="tab-content" style="display: block;">
+        <div class="toolbar">
+          <div>
+            <span style="font-weight: 800; font-size: 20px;">Randevu Yönetimi</span>
+            <select id="randevu-filtre" onchange="randevulariGetir()" style="margin-left: 15px;">
+              <option value="hepsi">Tüm Randevular</option>
+              <option value="bekliyor">Onay Bekleyenler</option>
+              <option value="onaylandi">Onaylananlar</option>
+              <option value="reddedildi">İptal Edilenler</option>
+            </select>
+          </div>
+          <button class="btn-pdf" onclick="pdfIndir('randevu-liste-alani', 'Randevularim')">📄 PDF İndir</button>
+        </div>
+
+        <div id="randevu-liste-alani">
+          <!-- Randevular buraya JavaScript ile çizilecek -->
+          <div id="pdf-footer">04agri.com Dijital Şehir Rehberi</div>
+        </div>
+      </div>
+
+      <!-- SAATLER SEKMSİ (Sonraki Adımda Doldurulacak) -->
+      <div id="tab-saatler" class="tab-content">
+        <h2>Çalışma Saatleri</h2>
+        <p>Bu modül bir sonraki adımda eklenecektir. (İşletme çalışma günlerini, başlangıç-bitiş saatlerini, seans aralıklarını ve boş/dolu günleri buradan yönetecek).</p>
+      </div>
+
+      <!-- BLOG SEKMSİ (Sonraki Adımda Doldurulacak) -->
+      <div id="tab-blog" class="tab-content">
+        <h2>Blog & Gündem Yönetimi</h2>
+        <p>Bu modül bir sonraki adımda eklenecektir. (İşletme buradan yazı gönderecek, admin onayına düşecek).</p>
+      </div>
+
+      <!-- PROFİL SEKMSİ -->
+      <div id="tab-profil" class="tab-content">
+        <h2 style="margin-bottom: 20px;">Profil & Güvenlik Ayarları</h2>
+        <div class="data-card" style="flex-direction: column; align-items: flex-start;">
+          <h4 style="margin-bottom: 15px;">Şifre Değiştir</h4>
+          <div class="input-group" style="width: 100%; max-width: 400px; margin:0 0 15px 0;">
+            <input type="password" id="yeni-sifre" placeholder="Yeni şifrenizi girin" />
+            <span class="eye-icon" onclick="sifreGosterGizle()">👁️</span>
+          </div>
+          <button class="btn-main" style="max-width: 400px; margin:0;" onclick="sifreGuncelle()">Şifreyi Kaydet</button>
+        </div>
+      </div>
+
+      <!-- ADMİN SEKMSİ (Sadece Patron) -->
+      <div id="tab-admin" class="tab-content">
+        <h2>Süper Yönetici Paneli</h2>
+        <p>Sistemdeki tüm kayıtlı işletmeler, tüm bekleyen/onaylanan blog yazıları ve sistemin genel raporu burada yer alacaktır. (Sonraki adımda eklenecek).</p>
+      </div>
+
+    </div>
   </div>
 
   <script>
-    // 1. SUPABASE BAĞLANTISI
+    // 1. SUPABASE BAĞLANTISI (Şifrelerin burada)
     const supabaseUrl = 'https://hsrifvlkiazkzlmebdgb.supabase.co';
     const supabaseKey = 'sb_publishable_fJ4Z7Hp80QOGUVh9pDrMXA_ZIuTi7rn';
     const client = window.supabase.createClient(supabaseUrl, supabaseKey);
 
-    // Sayfa açıldığında zaten giriş yapılmış mı kontrol et
+    let aktifIsletme = null;
+
+    // SAYFA YÜKLENDİĞİNDE OTURUM KONTROLÜ YAP
     window.onload = async function() {
       const { data: { session } } = await client.auth.getSession();
       if (session) {
-        ekraniGoster('dashboard-section');
-        randevulariGetir();
+        kullaniciyiHazirla(session.user.id);
       }
     };
 
-    // 2. GİRİŞ YAPMA FONKSİYONU
+    // GİRİŞ İŞLEMİ
     async function girisYap() {
       const email = document.getElementById('email').value;
       const password = document.getElementById('password').value;
       const mesaj = document.getElementById('mesaj');
 
       mesaj.innerText = "Bağlanıyor...";
-
       const { data, error } = await client.auth.signInWithPassword({ email, password });
 
       if (error) {
         mesaj.innerText = "Hata: E-posta veya şifre yanlış!";
       } else {
         mesaj.innerText = "";
-        ekraniGoster('dashboard-section');
-        randevulariGetir(); // Giriş yapınca randevuları çek!
+        kullaniciyiHazirla(data.user.id);
       }
     }
 
-    // 3. RANDEVULARI VERİTABANINDAN ÇEKME FONKSİYONU
-    async function randevulariGetir() {
-      const liste = document.getElementById('randevu-listesi');
+    // KULLANICI ROLÜNÜ VE BİLGİLERİNİ ÇEK
+    async function kullaniciyiHazirla(uid) {
+      // isletmeler tablosundan bu UID'ye ait kaydı bul
+      const { data, error } = await client.from('isletmeler').select('*').eq('kullanici_id', uid).single();
       
-      // Supabase'den randevular tablosunu iste (RLS sadece sana ait olanları verecek)
-      const { data, error } = await client
-        .from('randevular')
-        .select('*')
-        .order('tarih', { ascending: true }); // Tarihe göre sırala
+      if (error || !data) {
+        alert("Sisteme giriş yaptınız ama işletme profiliniz bulunamadı. Lütfen yöneticiye başvurun.");
+        return;
+      }
+
+      aktifIsletme = data;
+      document.getElementById('isletme-isim-etiketi').innerText = data.isletme_adi;
+
+      // Eğer yetkisi 'admin' ise özel sekmeyi göster
+      if (data.rol === 'admin') {
+        document.getElementById('nav-admin').style.display = 'block';
+      }
+
+      document.getElementById('login-view').style.display = 'none';
+      document.getElementById('app-view').style.display = 'flex';
+      
+      randevulariGetir(); // İlk ekran randevular olduğu için yükle
+    }
+
+    // ÇIKIŞ YAP
+    async function cikisYap() {
+      await client.auth.signOut();
+      document.getElementById('email').value = "";
+      document.getElementById('password').value = "";
+      document.getElementById('login-view').style.display = 'flex';
+      document.getElementById('app-view').style.display = 'none';
+      aktifIsletme = null;
+    }
+
+    // SEKME (MENÜ) DEĞİŞTİRME MOTORU
+    function sekmeDegistir(sekmeAdi) {
+      // Tüm içerikleri gizle
+      document.querySelectorAll('.tab-content').forEach(el => el.style.display = 'none');
+      // Tıklananı göster
+      document.getElementById('tab-' + sekmeAdi).style.display = 'block';
+      
+      // Menüdeki aktif rengi değiştir
+      document.querySelectorAll('.nav-btn').forEach(el => el.classList.remove('active'));
+      document.getElementById('nav-' + sekmeAdi).classList.add('active');
+
+      // Tıklanan sekmeye göre verileri yükle
+      if (sekmeAdi === 'randevular') randevulariGetir();
+    }
+
+    // RANDEVULARI GETİR VE EKRANA ÇİZ
+    async function randevulariGetir() {
+      if (!aktifIsletme) return;
+      
+      const filtre = document.getElementById('randevu-filtre').value;
+      const liste = document.getElementById('randevu-liste-alani');
+      liste.innerHTML = '<p>Yükleniyor...</p>';
+
+      // Supabase'den Randevuları çek
+      let sorgu = client.from('randevular').select('*').eq('isletme_id', aktifIsletme.id).order('tarih', { ascending: true });
+      if (filtre !== 'hepsi') {
+        sorgu = sorgu.eq('durum', filtre);
+      }
+
+      const { data, error } = await sorgu;
 
       if (error) {
-        liste.innerHTML = '<p style="color:red;">Randevular çekilirken bir hata oluştu.</p>';
+        liste.innerHTML = '<p style="color:red;">Hata oluştu.</p>';
         return;
       }
 
-      // Eğer hiç randevu yoksa
       if (data.length === 0) {
-        liste.innerHTML = '<p style="color: #6a655a; font-size: 15px;">Şu an bekleyen randevunuz bulunmamaktadır.</p>';
+        liste.innerHTML = '<p>Bu kritere uygun randevu bulunamadı.</p><div id="pdf-footer">04agri.com</div>';
         return;
       }
 
-      // Randevular varsa, ekrana HTML olarak çiz
-      liste.innerHTML = '';
-      data.forEach(randevu => {
-        let durumClass = randevu.durum === 'bekliyor' ? 'durum-bekliyor' : 'durum-onaylandi';
-        let durumYazi = randevu.durum === 'bekliyor' ? 'Onay Bekliyor' : 'Onaylandı';
+      // Verileri HTML Kartlarına Dönüştür
+      let html = '';
+      data.forEach(r => {
+        let rozetSinif = r.durum === 'bekliyor' ? 'bg-bekliyor' : (r.durum === 'onaylandi' ? 'bg-onaylandi' : 'bg-reddedildi');
+        let rozetYazi = r.durum.toUpperCase();
 
-        liste.innerHTML += `
-          <div class="randevu-karti">
-            <div class="r-isim">👤 ${randevu.musteri_adi}</div>
-            <div class="r-tarih">📅 ${randevu.tarih} - ⏰ Saat: ${randevu.saat}</div>
-            <div class="r-tarih">📞 ${randevu.musteri_telefon || 'Belirtilmedi'}</div>
-            <div class="r-durum ${durumClass}">${durumYazi}</div>
+        html += `
+          <div class="data-card">
+            <div class="data-info">
+              <h4>${r.musteri_adi} <span class="badge ${rozetSinif}" style="margin-left:8px;">${rozetYazi}</span></h4>
+              <p>📅 ${r.tarih} &nbsp;|&nbsp; ⏰ Saat: ${r.saat}</p>
+              <p>📞 Tel: ${r.musteri_telefon} &nbsp;|&nbsp; ✉️ E-posta: ${r.musteri_email}</p>
+              <p style="font-size: 11px; margin-top:4px;">İptal Kodu: ${r.randevu_kodu}</p>
+            </div>
+            
+            <div class="action-btns" data-html2canvas-ignore="true">
+              ${r.durum === 'bekliyor' ? `
+                <button class="btn-onay" onclick="randevuDurumGuncelle('${r.id}', 'onaylandi')">✓ Onayla</button>
+                <button class="btn-red" onclick="randevuDurumGuncelle('${r.id}', 'reddedildi')">✕ Reddet</button>
+              ` : ''}
+              ${r.durum === 'onaylandi' ? `
+                <button class="btn-red" onclick="randevuDurumGuncelle('${r.id}', 'reddedildi')">✕ İptal Et</button>
+              ` : ''}
+            </div>
           </div>
         `;
       });
+      
+      html += `<div id="pdf-footer">04agri.com Dijital Şehir Rehberi</div>`;
+      liste.innerHTML = html;
     }
 
-    // 4. ÇIKIŞ YAPMA FONKSİYONU
-    async function cikisYap() {
-      await client.auth.signOut();
-      ekraniGoster('login-section');
+    // RANDEVU ONAYLAMA VEYA REDDETME
+    async function randevuDurumGuncelle(id, yeniDurum) {
+      if (!confirm("Randevu durumunu değiştirmek istediğinize emin misiniz?")) return;
+      
+      const { error } = await client.from('randevular').update({ durum: yeniDurum }).eq('id', id);
+      if (error) alert("Bir hata oluştu!");
+      else randevulariGetir(); // Listeyi yenile
     }
 
-    // Ekran değiştirme yardımcısı
-    function ekraniGoster(ekranId) {
-      document.getElementById('login-section').style.display = 'none';
-      document.getElementById('dashboard-section').style.display = 'none';
-      document.getElementById(ekranId).style.display = 'block';
+    // PROFİL ŞİFRE GÖSTER/GİZLE
+    function sifreGosterGizle() {
+      const input = document.getElementById('yeni-sifre');
+      if (input.type === "password") input.type = "text";
+      else input.type = "password";
+    }
+
+    // ŞİFRE GÜNCELLEME
+    async function sifreGuncelle() {
+      const yeniSifre = document.getElementById('yeni-sifre').value;
+      if (yeniSifre.length < 6) {
+        alert("Şifre en az 6 karakter olmalıdır!");
+        return;
+      }
+      
+      const { data, error } = await client.auth.updateUser({ password: yeniSifre });
+      if (error) alert("Şifre güncellenirken hata oluştu: " + error.message);
+      else {
+        alert("Şifreniz başarıyla değiştirildi!");
+        document.getElementById('yeni-sifre').value = "";
+      }
+    }
+
+    // ŞIK PDF İNDİRME MOTORU
+    function pdfIndir(elementId, dosyaAdi) {
+      const element = document.getElementById(elementId);
+      document.getElementById('pdf-footer').style.display = 'block'; // Markayı PDF'te göster
+      
+      const opt = {
+        margin:       10,
+        filename:     `${dosyaAdi}_04agri.pdf`,
+        image:        { type: 'jpeg', quality: 0.98 },
+        html2canvas:  { scale: 2, ignoreElements: (el) => el.hasAttribute('data-html2canvas-ignore') },
+        jsPDF:        { unit: 'mm', format: 'a4', orientation: 'portrait' }
+      };
+
+      html2pdf().set(opt).from(element).save().then(() => {
+        document.getElementById('pdf-footer').style.display = 'none'; // Ekranda tekrar gizle
+      });
     }
   </script>
 </body>
