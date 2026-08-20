@@ -321,6 +321,38 @@ a{ color:inherit; text-decoration:none; cursor:pointer; }
 .bcp-quote { background: var(--bg-2); padding: 12px 14px; border-radius: 14px; border-left: 3px solid var(--accent); font-size: 13px; color: var(--ink-soft); line-height: 1.5; margin: 0; font-weight: 600; }
 .bcp-info-row { display: flex; align-items: flex-start; gap: 8px; font-size: 13px; color: var(--ink); }
 .bcp-info-row a { color: #0071e3; text-decoration: underline; font-weight: 700; }
+/* İŞLETME YÖNETİCİ PANELİ APPLE STİLLERİ ($0) */
+.admin-overlay { position:fixed; inset:0; z-index:99999; background:rgba(12,16,32,0.7); backdrop-filter:blur(16px); display:grid; place-items:center; padding:16px; animation:fadeIn .25s ease; }
+.admin-modal { background:var(--card); color:var(--ink); border-radius:28px; max-width:960px; width:100%; max-height:90vh; display:flex; flex-direction:column; box-shadow:var(--shadow-3); border:1px solid var(--line); overflow:hidden; }
+.admin-head { display:flex; justify-content:space-between; align-items:center; padding:20px 28px; border-bottom:1px solid var(--line); background:var(--bg-2); }
+.admin-head h2 { font-size:20px; font-weight:800; display:flex; align-items:center; gap:10px; margin:0; }
+.admin-nav { display:flex; gap:8px; padding:12px 28px; background:var(--bg); border-bottom:1px solid var(--line); overflow-x:auto; }
+.admin-tab-btn { padding:10px 18px; border-radius:100px; font-weight:800; font-size:13.5px; cursor:pointer; color:var(--ink-soft); background:var(--bg-2); border:1px solid var(--line); white-space:nowrap; transition:all .2s; }
+.admin-tab-btn.active { background:var(--ink); color:#fff; border-color:transparent; }
+.admin-body { padding:24px 28px; overflow-y:auto; flex:1; display:flex; flex-direction:column; gap:18px; }
+
+/* FİLTRE VE İNDİRME ÇUBUĞU */
+.admin-filter-bar { display:flex; justify-content:space-between; align-items:center; flex-wrap:wrap; gap:12px; }
+.admin-filters { display:flex; gap:6px; flex-wrap:wrap; }
+.filter-chip { padding:7px 14px; border-radius:100px; font-size:12.5px; font-weight:700; background:var(--bg-2); border:1px solid var(--line); cursor:pointer; }
+.filter-chip.active { background:var(--accent); color:var(--ink); font-weight:800; border-color:transparent; }
+.admin-export-btns { display:flex; gap:8px; }
+.btn-export { padding:8px 14px; border-radius:100px; font-size:12.5px; font-weight:800; border:1px solid var(--line); cursor:pointer; display:inline-flex; align-items:center; gap:6px; background:#fff; color:var(--ink); }
+.btn-export.excel { color:#107c41; }
+.btn-export.pdf { color:#e84142; }
+
+/* RANDEVU LİSTESİ KARTLARI */
+.apt-card { background:var(--bg); border-radius:16px; padding:18px; border:1px solid var(--line); display:flex; flex-direction:column; gap:12px; }
+.apt-card-top { display:flex; justify-content:space-between; align-items:flex-start; }
+.apt-pnr { font-size:12px; font-weight:800; color:#0071e3; background:rgba(0,113,227,0.1); padding:4px 10px; border-radius:100px; }
+.apt-status { font-size:12px; font-weight:800; padding:4px 12px; border-radius:100px; }
+.apt-status.approved { background:#d1fae5; color:#065f46; }
+.apt-status.rejected { background:#fee2e2; color:#991b1b; }
+.apt-status.pending { background:#fef3c7; color:#92400e; }
+.apt-actions { display:flex; gap:8px; margin-top:8px; }
+.btn-act { flex:1; padding:9px; border-radius:10px; font-weight:800; font-size:13px; cursor:pointer; text-align:center; }
+.btn-act.appr { background:var(--accent); color:var(--ink); }
+.btn-act.rejc { background:#fee2e2; color:#991b1b; border:1px solid #fca5a5; }
 /* KATEGORİLER */
 #kategoriler { width:100%; max-width:100%; padding:40px 0 20px; background:var(--bg); }
 .cats-intro{ padding-bottom: 24px; }
@@ -1509,7 +1541,7 @@ function getAllBusinesses() {
   return list;
 }
 
-// TÜRKÇE KARAKTERLERİN PDF'TE VE EXCELDE BOZULMASINI ÖNLEYEN DÖNÜŞTÜRÜCÜ ($0)
+// TÜRKÇE KARAKTER DÖNÜŞTÜRÜCÜ ($0)
 function fixTr(text) {
   if (!text) return "";
   const trMap = {
@@ -1523,7 +1555,7 @@ function fixTr(text) {
   return String(text).replace(/[çÇğĞşŞüÜıİöÖ]/g, m => trMap[m]);
 }
 
-// EXCEL (CSV UTF-8) FORMATINDA İNDİRME ($0)
+// EXCEL (CSV UTF-8) İNDİRME ($0)
 function exportToExcel(appointments, bizName, filterName) {
   const headers = ["PNR Kodu", "Musteri Adi", "Telefon", "E-Posta", "Randevu Tarihi", "Saat", "Durum", "Not"];
   const rows = appointments.map(a => [
@@ -1571,7 +1603,6 @@ function exportAppointmentsPDF(appointments, bizName, filterName) {
   doc.setFontSize(9);
 
   let y = 44;
-  // Tablo Başlıkları
   doc.setFillColor(243, 244, 246);
   doc.rect(14, y, 182, 9, "F");
   doc.setFont("helvetica", "bold");
@@ -1584,7 +1615,7 @@ function exportAppointmentsPDF(appointments, bizName, filterName) {
   y += 14;
   doc.setFont("helvetica", "normal");
 
-  appointments.forEach((a, i) => {
+  appointments.forEach((a) => {
     if (y > 270) { doc.addPage(); y = 20; }
     doc.text(a.code, 18, y);
     doc.text(doc.splitTextToSize(fixTr(a.name), 40)[0], 45, y);
@@ -1610,7 +1641,7 @@ function exportAppointmentsPDF(appointments, bizName, filterName) {
   doc.save(`04Agri_Rapor_${fixTr(bizName)}_${filterName}.pdf`);
 }
 
-// TEKİL RANDEVU ONAY BELGESİ PDF
+// TEKİL MÜŞTERİ RANDEVU BELGESİ PDF ($0)
 function downloadApplePDF(info, biz) {
   const { jsPDF } = window.jspdf;
   const doc = new jsPDF({ orientation: "portrait", unit: "mm", format: "a5" });
@@ -1709,7 +1740,7 @@ function downloadApplePDF(info, biz) {
     yBiz += (splitText.length > 1 ? 9 : 6.5);
   });
 
-  // Kutu 3 (Motivasyon Sola Hizalı)
+  // Kutu 3
   doc.setFillColor(236, 253, 245);
   doc.setDrawColor(167, 243, 208);
   doc.roundedRect(12, 149, 124, 22, 3, 3, "FD");
@@ -1731,53 +1762,19 @@ function downloadApplePDF(info, biz) {
   doc.save(`04Agri_Randevu_${info.code}.pdf`);
 }
 
-// İŞLETME YÖNETİCİ PANELİ BİLEŞENİ (CANLI HAFIZA YENİLEMELİ - $0)
-function BusinessAdminPanel({ isOpen, onClose }) {
+// 4 SEKMELİ İŞLETME YÖNETİCİ PANELİ ($0)
+function BusinessAdminPanel({ isOpen, onClose, appointments, onStatusChange }) {
   const allBiz = getAllBusinesses();
   const [currentBizId, setCurrentBizId] = useState(() => safeStore.get("agri_admin_biz_id") || allBiz[0]?.id || "bilge-igan");
   const [activeTab, setActiveTab] = useState("appointments");
   const [filter, setFilter] = useState("all");
-  const [appointments, setAppointments] = useState([]);
-
-  // PANEL HER AÇILDIĞINDA EN GÜNCEL RANDEVULARI HAFIZADAN YENİLER
-  const loadAppointments = () => {
-    try {
-      const saved = JSON.parse(safeStore.get("agri_appointments") || "[]");
-      setAppointments(saved);
-    } catch(e) {
-      setAppointments([]);
-    }
-  };
-
-  useEffect(() => {
-    if (isOpen) {
-      loadAppointments();
-    }
-  }, [isOpen, currentBizId]);
-
-  // CANLI SİNYAL: Yeni randevu alındığı anda paneli anında günceller
-  useEffect(() => {
-    const handleNewBooking = () => loadAppointments();
-    window.addEventListener("agri_new_booking", handleNewBooking);
-    return () => window.removeEventListener("agri_new_booking", handleNewBooking);
-  }, []);
-
-  const saveAppointments = (newList) => {
-    setAppointments(newList);
-    safeStore.set("agri_appointments", JSON.stringify(newList));
-  };
-
-  const handleStatusChange = (code, newStatus) => {
-    const updated = appointments.map(a => a.code === code ? { ...a, status: newStatus } : a);
-    saveAppointments(updated);
-  };
 
   const currentBiz = allBiz.find(b => b.id === currentBizId) || allBiz[0];
 
-  // SADECE SEÇİLEN İŞLETMEYE AİT RANDEVULARI FİLTRELER (BAŞKASINI GÖREMEZ)
-  const myAppointments = appointments.filter(a => a.bizId === currentBizId);
+  // SADECE GİRİŞ YAPAN İŞLETMENİN RANDEVULARI (BAŞKASINI GÖREMEZ)
+  const myAppointments = (appointments || []).filter(a => a.bizId === currentBizId);
 
-  // DURUMA GÖRE FİLTRELEME
+  // DURUM FİLTRESİ
   const filteredAppointments = myAppointments.filter(a => {
     if (filter === "approved") return a.status === "approved";
     if (filter === "rejected") return a.status === "rejected";
@@ -1892,12 +1889,12 @@ function BusinessAdminPanel({ isOpen, onClose }) {
 
                       <div className="apt-actions">
                         {apt.status !== 'approved' && (
-                          <button className="btn-act appr" onClick={() => handleStatusChange(apt.code, 'approved')}>
+                          <button className="btn-act appr" onClick={() => onStatusChange(apt.code, 'approved')}>
                             ✓ Randevuyu Onayla
                           </button>
                         )}
                         {apt.status !== 'rejected' && (
-                          <button className="btn-act rejc" onClick={() => handleStatusChange(apt.code, 'rejected')}>
+                          <button className="btn-act rejc" onClick={() => onStatusChange(apt.code, 'rejected')}>
                             ✕ Randevuyu Reddet
                           </button>
                         )}
@@ -1971,8 +1968,8 @@ function BusinessAdminPanel({ isOpen, onClose }) {
   );
 }
 
-// GÜNDEM İLE KATEGORİLER ARASINDAKİ APPLE MİNİMALİST CANLI RANDEVU MERKEZİ
-function AppointmentSection({ activeBizId, onBizChange }) {
+// GÜNDEM İLE KATEGORİLER ARASINDAKİ CANLI RANDEVU FORMU
+function AppointmentSection({ activeBizId, onBizChange, onBookAppointment }) {
   const allBiz = getAllBusinesses();
   const [tab, setTab] = useState('book');
   const [selectedBizId, setSelectedBizId] = useState(activeBizId || (allBiz[0] ? allBiz[0].id : 'bilge-igan'));
@@ -2030,15 +2027,10 @@ function AppointmentSection({ activeBizId, onBizChange }) {
       note: note.trim()
     };
     
-    // Randevuyu anında yerel hafızaya kaydet
-    try {
-      const currentList = JSON.parse(safeStore.get("agri_appointments") || "[]");
-      currentList.unshift(newApt);
-      safeStore.set("agri_appointments", JSON.stringify(currentList));
-      
-      // Yönetici paneline canlı anlık yenileme sinyali gönder
-      window.dispatchEvent(new Event("agri_new_booking"));
-    } catch(e){}
+    // Doğrudan ana yönetim veritabanına kaydet
+    if (onBookAppointment) {
+      onBookAppointment(newApt);
+    }
 
     setSuccessData(newApt);
   };
@@ -2051,7 +2043,6 @@ function AppointmentSection({ activeBizId, onBizChange }) {
       if(found) {
         found.status = 'rejected';
         safeStore.set("agri_appointments", JSON.stringify(currentList));
-        window.dispatchEvent(new Event("agri_new_booking"));
         alert("Randevunuz başarıyla iptal edildi.");
       } else {
         alert("Girdiğiniz bilgilere ait randevu kaydı bulunamadı.");
@@ -2272,6 +2263,36 @@ function App(){
   const [activeTab, setActiveTab] = useState('home');
   const [adminOpen, setAdminOpen] = useState(false);
 
+  // CANLI VE GÜVENLİ RANDEVU VERİTABANI STATE'İ ($0)
+  const [appointments, setAppointments] = useState(() => {
+    try {
+      const saved = JSON.parse(safeStore.get("agri_appointments") || "[]");
+      if (saved && saved.length > 0) return saved;
+    } catch(e){}
+    return [
+      { code: "AGR-1042", bizId: "bilge-igan", name: "Ahmet Yılmaz", phone: "0542 111 22 33", email: "ahmet@gmail.com", date: "20.08.2026", time: "10:00", status: "pending", note: "İlk muayene ve diyet planı." },
+      { code: "AGR-1043", bizId: "bilge-igan", name: "Zeynep Demir", phone: "0533 444 55 66", email: "zeynep@gmail.com", date: "20.08.2026", time: "14:00", status: "approved", note: "Kontrol randevusu." }
+    ];
+  });
+
+  // Yeni Randevu Alındığında Anında Ekle
+  const handleNewBooking = (newApt) => {
+    setAppointments(prev => {
+      const updated = [newApt, ...prev];
+      safeStore.set("agri_appointments", JSON.stringify(updated));
+      return updated;
+    });
+  };
+
+  // Onaylama veya Reddetme Yapıldığında Durumu Güncelle
+  const handleStatusChange = (code, newStatus) => {
+    setAppointments(prev => {
+      const updated = prev.map(a => a.code === code ? { ...a, status: newStatus } : a);
+      safeStore.set("agri_appointments", JSON.stringify(updated));
+      return updated;
+    });
+  };
+
   // KULLANICI SÖZLEŞMESİ DURUMLARI
   const [tosAccepted, setTosAccepted] = useState(() => safeStore.get("agri_tos_accepted") === "true");
   const [tosDeclined, setTosDeclined] = useState(false);
@@ -2303,7 +2324,6 @@ function App(){
 
   return (
     <div>
-      {/* SÖZLEŞMEYİ REDDEDEN KULLANICI İÇİN KİLİTLİ EKRAN */}
       {tosDeclined && (
         <div className="tos-blocked-overlay">
           <div className="tos-blocked-card">
@@ -2319,7 +2339,6 @@ function App(){
         </div>
       )}
 
-      {/* YENİ GELEN KULLANICIYA APPLE MİNİMALİST SÖZLEŞME MODALI */}
       {!tosAccepted && !tosDeclined && (
         <div className="tos-overlay">
           <div className="tos-modal">
@@ -2341,7 +2360,6 @@ function App(){
         </div>
       )}
 
-      {/* 18 MADDELİK DETAYLI SÖZLEŞME METNİ MODALI */}
       {showDocModal && (
         <div className="doc-modal-overlay" onClick={() => setShowDocModal(false)}>
           <div className="doc-modal-card" onClick={e => e.stopPropagation()}>
@@ -2408,7 +2426,11 @@ function App(){
       <AgendaDashboard onSelectBlog={setSelectedBlog} />
       
       {/* GÜNDEM İLE KATEGORİLER ARASINDAKİ CANLI RANDEVU MERKEZİ */}
-      <AppointmentSection activeBizId={selectedPlaceForBooking} onBizChange={setSelectedPlaceForBooking} />
+      <AppointmentSection
+        activeBizId={selectedPlaceForBooking}
+        onBizChange={setSelectedPlaceForBooking}
+        onBookAppointment={handleNewBooking}
+      />
 
       <Categories onOpen={setOpenCat} />
 
@@ -2460,7 +2482,12 @@ function App(){
       )}
 
       {/* İŞLETME YÖNETİCİ PANELİ MODALI */}
-      <BusinessAdminPanel isOpen={adminOpen} onClose={() => setAdminOpen(false)} />
+      <BusinessAdminPanel
+        isOpen={adminOpen}
+        onClose={() => setAdminOpen(false)}
+        appointments={appointments}
+        onStatusChange={handleStatusChange}
+      />
 
       <BottomNav activeTab={activeTab} onTabChange={setActiveTab} onOpenCat={setOpenCat} onOpenBooking={handleOpenBooking} />
     </div>
