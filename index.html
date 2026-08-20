@@ -1,3114 +1,349 @@
 <!DOCTYPE html>
 <html lang="tr">
 <head>
-<meta charset="UTF-8" />
-<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no" />
-
-<base href="/" />
-
-<title>04agri.com — Ağrı'nın Dijital Rehberi</title>
-<meta name="google-site-verification" content="google-site-verification: google0b24ad689a534761.html" />
-<meta name="description" content="Ağrı'nın dijital rehberi: restoranlar, cafes, gezilecek yerler, nöbetçi eczane, etkinlikler ve daha fazlası." />
-
-<link rel="icon" type="image/jpeg" href="https://04agri.com/agridagi.jpg" />
-<link rel="apple-touch-icon" href="https://04agri.com/agridagi.jpg" />
-
-<meta property="og:title" content="04agri.com — Ağrı'nın Dijital Rehberi" />
-<meta property="og:description" content="Ağrı'nın dijital rehberi: restoranlar, cafeler, gezilecek yerler, nöbetçi eczaneler ve daha fazlası tek bir yerde." />
-<meta property="og:image" content="https://04agri.com/kapak-gorseli.jpg" />
-<meta property="og:url" content="https://04agri.com" />
-<meta property="og:type" content="website" />
-
-<meta name="twitter:card" content="summary_large_image" />
-<meta name="twitter:title" content="04agri.com — Ağrı'nın Dijital Rehberi" />
-<meta name="twitter:description" content="Ağrı'nın en kapsamlı dijital şehir rehberi." />
-<meta name="twitter:image" content="https://04agri.com/kapak-gorseli.jpg" />
-
-<script async src="https://www.googletagmanager.com/gtag/js?id=G-X0QLCD70X0"></script>
-<script>
-  window.dataLayer = window.dataLayer || [];
-  function gtag(){dataLayer.push(arguments);}
-  gtag('js', new Date());
-
-  gtag('config', 'G-X0QLCD70X0');
-</script>
-
-<script type="application/ld+json">
-{
-  "@context": "https://schema.org",
-  "@type": "WebSite",
-  "name": "04agri.com — Ağrı'nın Dijital Rehberi",
-  "url": "https://04agri.com/",
-  "description": "Ağrı'nın dijital rehberi: restoranlar, cafeler, gezilecek yerler, nöbetçi eczaneler ve daha fazlası tek bir yerde.",
-  "image": "https://04agri.com/agridagi.jpg"
-}
-</script>
-
-<link rel="preconnect" href="https://fonts.googleapis.com" />
-<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
-<link href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:opsz,wght@12..96,400;12..96,600;12..96,700;12..96,800&family=Plus+Jakarta+Sans:wght@400;500;600;700;800&display=swap" rel="stylesheet" />
-<style>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Gelişmiş İşletme Paneli - 04agri.com</title>
   
-/* ============================================================
-   04agri.com — Ağrı Dijital Rehberi
-   ============================================================ */
-:root{
-  --bg:        #f6f4ef;
-  --bg-2:      #efece4;
-  --ink:       #17150f;
-  --ink-soft:  #6a655a;
-  --ink-faint: #a39d90;
-  --line:      #e3ded3;
-  --card:      #ffffff;
-
-  --dark:   #0c1020;
-  --dark-2: #131a31;
-  --dawn-1: #1a2444;      
-  --dawn-2: #5b6aa0;
-  --dawn-3: #e6a071;      
-  --dawn-4: #f3c9a0;
-
-  --globe:  220, 232, 255;
-  --accent: #44BD32;      
-  --pin:    #E84142;
-
-  --maxw: 1280px;
-  --r-lg: 32px;
-  --r-md: 24px;
-  --r-sm: 14px;
-  --shadow-1: 0 4px 12px rgba(20,18,12,.06), 0 1px 3px rgba(20,18,12,.04);
-  --shadow-2: 0 20px 40px rgba(20,18,12,.12), 0 8px 16px rgba(20,18,12,.08);
-  --shadow-3: 0 30px 90px rgba(8,10,24,.45);
-
-  --display: "Bricolage Grotesque", "Plus Jakarta Sans", system-ui, sans-serif;
-  --body:    "Plus Jakarta Sans", system-ui, -apple-system, sans-serif;
-  --ease: cubic-bezier(.22,.61,.36,1);
-  --ease-io: cubic-bezier(.83,0,.17,1);
-}
-
-*{ box-sizing:border-box; }
-html{ scroll-behavior:smooth; }
-html, body{
-  margin:0; padding:0;
-  width: 100%;
-  max-width: 100%;
-  background:var(--bg); color:var(--ink);
-  font-family:var(--body); font-size:17px; line-height:1.55;
-  -webkit-font-smoothing:antialiased; text-rendering:optimizeLegibility;
-  overflow-x:hidden;
-}
-h1,h2,h3,h4{ font-family:var(--display); font-weight:700; line-height:1.02; letter-spacing:-.02em; margin:0; }
-button{ font-family:inherit; cursor:pointer; border:none; background:none; color:inherit; outline:none; }
-input, select{ font-family:inherit; }
-a{ color:inherit; text-decoration:none; cursor:pointer; }
-.wrap{ max-width:var(--maxw); margin:0 auto; padding:0 28px; width:100%; }
-::selection{ background:var(--accent); color:var(--ink); }
-
-/* ---------- NAZİK POLİTİKA ONAY MODALI ---------- */
-.tos-overlay { position:fixed; inset:0; z-index:9999; background:rgba(12,16,32,0.45); backdrop-filter:blur(8px); display:flex; flex-direction:column; justify-content:flex-end; align-items:center; width:100%; height:100%; }
-.tos-modal { background:#fff; color:var(--ink); padding:36px 36px 42px; border-radius:32px 32px 0 0; max-width:800px; width:100%; box-shadow:0 -10px 40px rgba(0,0,0,0.2); animation:slideUp 0.6s cubic-bezier(0.2, 0.8, 0.2, 1) forwards; display:flex; flex-direction:column; gap:16px; }
-@keyframes slideUp { from { transform:translateY(100%); opacity:0; } to { transform:translateY(0); opacity:1; } }
-.tos-modal h2 { font-size:24px; font-weight:800; color:var(--dark); display:flex; align-items:center; gap:10px; margin:0; }
-.tos-modal p { font-size:15px; color:var(--ink-soft); line-height:1.6; margin:0; text-align:justify; }
-.tos-disclaimer { font-size:13px !important; color:var(--ink-faint) !important; background:var(--bg-2); padding:12px 14px; border-radius:12px; border-left:3px solid var(--accent); }
-.tos-actions { display:flex; gap:12px; margin-top:12px; }
-.tos-btn { flex:1; padding:16px; border-radius:100px; font-weight:800; font-size:15px; text-align:center; transition:all 0.2s; cursor:pointer; }
-.tos-btn.accept { background:var(--accent); color:var(--ink); border:none; }
-.tos-btn.accept:hover { filter:brightness(0.95); transform:translateY(-2px); }
-.tos-btn.decline { background:transparent; color:var(--ink-soft); border:1px solid var(--line); }
-.tos-btn.decline:hover { background:var(--bg-2); color:var(--ink); }
-
-/* GİZLİLİK MODALI */
-.doc-modal-overlay { position:fixed; inset:0; z-index:10000; background:rgba(12,16,32,0.7); backdrop-filter:blur(10px); display:grid; place-items:center; padding:20px; }
-.doc-modal-card { background:var(--card); color:var(--ink); border-radius:24px; max-width:640px; width:100%; max-height:85vh; display:flex; flex-direction:column; box-shadow:var(--shadow-3); overflow:hidden; animation:fadeIn .35s ease; }
-.doc-modal-head { display:flex; align-items:center; justify-content:space-between; padding:24px 28px; border-bottom:1px solid var(--line); }
-.doc-modal-head h2 { font-size:22px; font-weight:800; color:var(--dark); }
-.doc-modal-close { width:38px; height:38px; border-radius:50%; background:var(--bg-2); font-weight:800; cursor:pointer; flex-shrink:0; }
-.doc-modal-body { padding:24px 28px 30px; overflow-y:auto; }
-.doc-modal-body p { font-size:15px; line-height:1.7; color:var(--ink-soft); text-align:justify; margin:0; }
-
-.tos-blocked-overlay { position:fixed; inset:0; z-index:9999; background:rgba(12,16,32,0.65); backdrop-filter:blur(12px); display:grid; place-items:center; padding:20px; }
-.tos-blocked-card { background:var(--card); color:var(--ink); padding:40px; border-radius:24px; max-width:480px; text-align:center; box-shadow:var(--shadow-3); animation: fadeIn 0.4s ease; }
-.tos-blocked-card h3 { font-size:22px; margin-bottom:16px; color:var(--dark); }
-.tos-blocked-card p { color:var(--ink-soft); font-size:15px; line-height:1.6; margin-bottom:24px; }
-@keyframes fadeIn { from { opacity:0; transform:scale(0.95); } to { opacity:1; transform:scale(1); } }
-.animate-fade { animation: fadeIn 0.4s var(--ease); }
-
-/* ---------- top bar ---------- */
-.topbar{ position:fixed; inset:0 0 auto 0; z-index:60; display:grid; grid-template-columns:1fr auto 1fr; align-items:center; padding:18px 28px; transition:background .4s var(--ease), backdrop-filter .4s; pointer-events:none; width:100%; }
-.topbar > *{ pointer-events:auto; }
-.topbar.scrolled{ background:color-mix(in srgb, var(--bg), transparent 12%); backdrop-filter:saturate(140%) blur(14px); box-shadow:0 1px 0 var(--line); }
-.logo{ justify-self:start; display:flex; align-items:center; gap:8px; font-family:var(--display); font-weight:800; font-size:22px; letter-spacing:-.03em; }
-.logo .badge{ width:38px; height:38px; border-radius:11px; display:grid; place-items:center; background:var(--accent); color:var(--ink); font-size:18px; font-weight:800; box-shadow:0 6px 16px color-mix(in srgb,var(--accent),transparent 55%); }
-.logo .txt{ display:flex; align-items:baseline; color:var(--ink); transition: color .4s var(--ease); }
-.logo .dim{ color:var(--ink-faint); font-weight:600; transition: color .4s var(--ease); }
-.topbar.on-dark .logo .txt{ color:#fff; }
-.topbar.on-dark .logo .dim{ color:rgba(255,255,255,.55); }
-
-.topbar-nav{ justify-self:center; display:flex; gap:28px; font-size:15px; font-weight:700; }
-.topbar-nav a{ position:relative; color:var(--ink); transition:color .2s; }
-.topbar.on-dark .topbar-nav a{ color:#fff; }
-.topbar-nav a:hover{ color:var(--accent); }
-
-.topbar .loc{ justify-self:end; display:flex; align-items:center; gap:7px; font-size:14px; font-weight:600; color:var(--ink-soft); }
-.topbar.on-dark .loc{ color:rgba(255,255,255,.7); }
-.loc .dot{ width:8px;height:8px;border-radius:50%; background:var(--accent); box-shadow:0 0 0 4px color-mix(in srgb,var(--accent),transparent 70%); }
-
-/* HERO & MOUNTAIN */
-.hero{ position:relative; height:100svh; min-height:680px; width:100%; overflow:hidden; background:linear-gradient(180deg, var(--dark) 0%, var(--dark-2) 100%); }
-.hero .sky{ position:absolute; inset:0; transition:opacity 1.4s var(--ease); }
-.hero .sky.dawn{ opacity:0; background: radial-gradient(120% 80% at 50% 120%, var(--dawn-3) 0%, transparent 55%), linear-gradient(180deg, var(--dawn-1) 0%, var(--dawn-2) 58%, var(--dawn-4) 100%); }
-.hero.is-mountain .sky.dawn{ opacity:1; }
-.hero .sun{ position:absolute; left:50%; top:62%; width:340px; height:340px; margin:-170px 0 0 -170px; border-radius:50%; opacity:0; background:radial-gradient(circle, rgba(255,228,190,.9) 0%, rgba(255,200,140,.35) 40%, transparent 70%); transition:opacity 1.6s var(--ease) .2s; filter:blur(2px); }
-.hero.is-mountain .sun{ opacity:.9; }
-
-.globe-stage{ position:absolute; inset:0; display:grid; place-items:center; transform-origin:50% 54%; transition:transform 1.5s var(--ease-io), opacity 1.1s var(--ease) .25s; }
-.hero.is-zoom .globe-stage{ transform:scale(8); opacity:0; }
-.globe-canvas{ display:block; }
-
-.geo-label{ position:absolute; left:50%; top:54%; transform:translate(-50%,46px) scale(.9); z-index:6; text-align:center; opacity:0; transition:opacity .6s var(--ease), transform .6s var(--ease); pointer-events:none; }
-.hero.is-locate .geo-label{ opacity:1; transform:translate(-50%,46px) scale(1); }
-.hero.is-zoom .geo-label, .hero.is-mountain .geo-label{ opacity:0; }
-.geo-label .pt{ font-family:var(--display); font-weight:700; font-size:15px; color:#fff; letter-spacing:.18em; text-transform:uppercase; }
-.geo-label .sub{ font-size:12.5px; color:rgba(255,255,255,.6); margin-top:3px; letter-spacing:.05em; }
-
-.mountain{ position:absolute; inset:0; z-index: 5; opacity:0; transform:translateY(40px); pointer-events:none; transition:opacity 1.3s var(--ease) .35s, transform 1.5s var(--ease) .35s; }
-.hero.is-mountain .mountain{ opacity:1; transform:translateY(0); }
-.mountain img { width: 100%; height: 100%; object-fit: cover; object-position: bottom center; display: block; }
-
-.hero-content{ position:absolute; inset:0; z-index:10; display:flex; flex-direction:column; align-items:center; justify-content:flex-start; padding-top:14vh; text-align:center; pointer-events:none; width:100%; }
-.hero-content > *{ pointer-events:auto; }
-.hero-eyebrow{ display:inline-flex; align-items:center; gap:9px; font-size:13px; font-weight:700; letter-spacing:.16em; text-transform:uppercase; color:rgba(255,255,255,.72); white-space:nowrap; padding:8px 16px; border:1px solid rgba(255,255,255,.18); border-radius:100px; background:rgba(255,255,255,.04); backdrop-filter:blur(6px); opacity:0; transform:translateY(12px); transition:all .7s var(--ease) .1s; }
-.hero-title{ color:#fff; font-size:clamp(38px, 6.4vw, 78px); margin:20px 0 0; line-height:1.0; opacity:0; transform:translateY(18px); transition:all .8s var(--ease) .2s; white-space:nowrap; }
-.hero-title em{ font-style:normal; color:var(--accent); -webkit-text-stroke:0; background:linear-gradient(120deg,var(--accent),#2dd86f); -webkit-background-clip:text; background-clip:text; -webkit-text-fill-color:transparent; }
-.hero-sub{ color:rgba(255,255,255,.82); font-size:clamp(15px,1.6vw,19px); margin:20px auto 0; max-width:44ch; padding:0 20px; opacity:0; transform:translateY(16px); transition:all .8s var(--ease) .3s; text-wrap:pretty; }
-.hero.is-mountain .hero-eyebrow, .hero.is-mountain .hero-title, .hero.is-mountain .hero-sub{ opacity:1; transform:none; }
-
-.search-wrapper{ position:relative; margin-top:34px; width:min(680px, 90%); opacity:0; transform:translateY(20px) scale(.98); transition:all .8s var(--ease) .42s; }
-.hero.is-mountain .search-wrapper{ opacity:1; transform:none; }
-.search{ display:flex; align-items:center; gap:10px; background:rgba(255,255,255,.96); border-radius:100px; padding:9px 9px 9px 22px; box-shadow:var(--shadow-3); border:1px solid rgba(255,255,255,.6); position:relative; z-index:2; width:100%; }
-.search .ico{ color:var(--ink-faint); display:flex; flex-shrink:0; }
-.search input{ flex:1; border:none; outline:none; background:none; font-size:17px; color:var(--ink); padding:12px 4px; min-width:0; }
-.search input::placeholder{ color:var(--ink-faint); }
-.search .go{ flex-shrink:0; background:var(--ink); color:#fff; font-weight:700; font-size:15px; padding:13px 26px; border-radius:100px; transition:transform .2s var(--ease), background .2s; }
-.search .go:hover{ transform:translateY(-1px); background:#000; }
-
-.search-dropdown{ position:absolute; top:calc(100% + 12px); left:0; right:0; background:#fff; border-radius:var(--r-md); box-shadow:var(--shadow-3); overflow:hidden; z-index:1; display:flex; flex-direction:column; text-align:left; }
-.sugg-item{ display:flex; align-items:center; gap:12px; padding:14px 22px; border-bottom:1px solid var(--line); cursor:pointer; transition:background .2s; }
-.sugg-item:last-child{ border-bottom:none; }
-.sugg-item:hover{ background:var(--bg-2); }
-.sugg-item .s-icon{ display:grid; place-items:center; width:34px; height:34px; border-radius:8px; color:#fff; flex-shrink:0; }
-.sugg-item .s-text{ flex:1; display:flex; flex-direction:column; }
-.sugg-item .s-name{ font-weight:700; color:var(--ink); font-size:15px; }
-.sugg-item .s-cat{ font-size:12px; color:var(--ink-soft); font-weight:600; }
-
-.search-tags{ display:flex; gap:8px; flex-wrap:wrap; justify-content:center; margin-top:16px; opacity:0; transition:opacity .8s var(--ease) .6s; padding:0 16px; }
-.hero.is-mountain .search-tags{ opacity:1; }
-.search-tags button{ font-size:13px; font-weight:600; color:#fff; padding:7px 14px; border-radius:100px; border:1px solid rgba(255,255,255,.22); background:rgba(255,255,255,.06); backdrop-filter:blur(6px); transition:all .2s var(--ease); cursor:pointer; }
-.search-tags button:hover{ background:var(--accent); color:var(--ink); border-color:transparent; transform:translateY(-1px); }
-.search-tags button.highlight-btn { background: var(--accent); color: var(--ink); border-color: transparent; box-shadow: 0 4px 14px rgba(68, 189, 50, 0.2); }
-.search-tags button.highlight-btn:hover { filter: brightness(0.9); }
-
-.scroll-hint{ position:absolute; left:50%; bottom:26px; transform:translateX(-50%); z-index:11; display:flex; flex-direction:column; align-items:center; gap:7px; color:rgba(255,255,255,.7); font-size:12px; font-weight:600; letter-spacing:.14em; text-transform:uppercase; opacity:0; transition:opacity .8s var(--ease) .8s; }
-.hero.is-mountain .scroll-hint{ opacity:1; }
-.scroll-hint .mouse{ width:22px; height:34px; border:2px solid rgba(255,255,255,.45); border-radius:12px; position:relative; }
-.scroll-hint .mouse::after{ content:""; position:absolute; left:50%; top:6px; width:3px; height:7px; margin-left:-1.5px; border-radius:2px; background:#fff; animation:wheel 1.6s var(--ease) infinite; }
-@keyframes wheel{ 0%{opacity:0;transform:translateY(0)} 30%{opacity:1} 70%{opacity:1} 100%{opacity:0;transform:translateY(10px)} }
-
-/* BANNER MARQUEE (YENİLENDİ) */
-.banner-section{ padding:40px 0; background:var(--bg); overflow:hidden; width:100%; max-width:100%; }
-.marquee{ display:flex; width:max-content; animation:scroll 40s linear infinite; will-change:transform; }
-.marquee:hover{ animation-play-state:paused; }
-@keyframes scroll{ from{ transform:translateX(0); } to{ transform:translateX(-50%); } }
-
-.banner-item { width: 340px; height: 190px; border-radius: var(--r-md); box-shadow: var(--shadow-1); border: 1px solid rgba(255,255,255,0.4); margin-right: 20px; flex-shrink: 0; position: relative; overflow: hidden; background-size: cover; display: block; transition: transform 0.3s var(--ease), box-shadow 0.3s var(--ease); }
-.banner-item:hover { transform: translateY(-4px); box-shadow: var(--shadow-2); }
-.banner-scrim { position: absolute; inset: 0; background: linear-gradient(180deg, transparent 20%, rgba(0,0,0,0.85) 100%); }
-.banner-content { position: absolute; bottom: 16px; left: 16px; right: 16px; display: flex; flex-direction: column; z-index: 2; }
-.banner-title { color: #fff; font-family: var(--display); font-size: 17px; font-weight: 800; line-height: 1.2; margin-bottom: 4px; text-shadow: 0 2px 4px rgba(0,0,0,0.5); }
-.banner-sub { color: var(--accent); font-size: 12.5px; font-weight: 700; text-transform: uppercase; letter-spacing: 0.05em; }
-
-/* HİKAYELER */
-.stories-section{ padding:8px 0 24px; background:var(--bg); width:100%; }
-.stories-row{ display:flex; gap:20px; flex-wrap:wrap; }
-.story-bubble{ display:flex; flex-direction:column; align-items:center; gap:8px; background:none; cursor:pointer; width:84px; }
-.story-ring{ width:82px; height:82px; border-radius:50%; padding:3px; display:grid; place-items:center;
-  background:conic-gradient(from 140deg, var(--accent), var(--dawn-3), var(--dawn-2), var(--accent));
-  box-shadow:0 6px 18px color-mix(in srgb, var(--accent), transparent 70%); transition:transform .2s var(--ease); }
-.story-bubble:hover .story-ring{ transform:scale(1.05); }
-.story-thumb{ width:100%; height:100%; border-radius:50%; background-color:var(--dark-2); background-size:cover; background-repeat:no-repeat;
-  display:grid; place-items:center; color:rgba(255,255,255,.7); border:3px solid var(--bg); }
-.story-label{ font-size:13px; font-weight:700; color:var(--ink-soft); text-align:center; line-height:1.1; max-width:84px; }
-
-/* Hikaye tam ekran görüntüleyici */
-.story-viewer{ position:fixed; inset:0; z-index:300; background:rgba(8,10,24,.92); backdrop-filter:blur(6px); display:grid; place-items:center; padding:20px; animation:fadeIn .3s ease; }
-.story-progress{ position:absolute; top:18px; left:50%; transform:translateX(-50%); width:min(360px,80%); height:4px; border-radius:4px; background:rgba(255,255,255,.25); overflow:hidden; }
-.story-progress-fill{ display:block; height:100%; width:100%; background:#fff; border-radius:4px; transform-origin:left; animation:storyBar 6s linear forwards; }
-@keyframes storyBar{ from{ transform:scaleX(0);} to{ transform:scaleX(1);} }
-.story-close{ position:absolute; top:30px; right:24px; width:42px; height:42px; border-radius:50%; background:rgba(255,255,255,.15); color:#fff; font-size:16px; font-weight:800; cursor:pointer; }
-.story-card{ position:relative; width:min(380px,92vw); aspect-ratio:9/16; max-height:84vh; border-radius:22px; overflow:hidden; box-shadow:var(--shadow-3); }
-.story-card-img{ width:100%; height:100%; object-fit:cover; }
-.story-card-bg{ position:absolute; inset:0; background:linear-gradient(160deg, var(--dawn-1) 0%, var(--dawn-2) 45%, var(--dawn-3) 100%); }
-.story-card-overlay{ position:absolute; inset:0; display:flex; flex-direction:column; justify-content:flex-end; gap:14px; padding:30px; background:linear-gradient(180deg, transparent 45%, rgba(0,0,0,.55) 100%); }
-.story-card-badge{ align-self:flex-start; background:var(--accent); color:var(--ink); font-family:var(--display); font-weight:800; font-size:14px; padding:7px 16px; border-radius:100px; }
-.story-card-text{ color:#fff; font-family:var(--display); font-weight:700; font-size:24px; line-height:1.2; text-shadow:0 2px 10px rgba(0,0,0,.4); text-wrap:balance; }
-
-/* GÜNDEM, HİKAYELER & WIDGETLAR */
-#gundem{ padding:20px 0 40px; background:var(--bg); width:100%; max-width:100%; overflow-x:hidden; }
-.gundem-layout{ display:grid; grid-template-columns: 1fr 360px; gap:32px; align-items:start; }
-
-.widget-panel{ display:flex; flex-direction:column; gap:16px; width:100%; }
-.widget-card{ background:var(--card); border-radius:var(--r-lg); padding:24px; box-shadow:var(--shadow-1); border:1px solid var(--line); position:relative; overflow:hidden; }
-.widget-card.weather{ background:linear-gradient(135deg, #4facfe 0%, #00f2fe 100%); color:#fff; border:none; }
-.w-top{ display:flex; justify-content:space-between; align-items:flex-start; margin-bottom:12px; }
-.w-top .city{ font-family:var(--display); font-weight:700; font-size:20px; }
-.w-top .date{ font-size:13px; font-weight:600; opacity:.8; }
-.w-main{ display:flex; align-items:center; gap:16px; }
-.w-main .temp{ font-size:42px; font-family:var(--display); font-weight:800; line-height:1; }
-.w-main .desc{ font-size:14px; font-weight:600; opacity:.9; max-width:120px; line-height:1.2; }
-
-.widget-card.prayer{ background:var(--dark-2); color:#fff; border:none; padding:20px; }
-.p-top{ display:flex; flex-direction:column; margin-bottom:12px; }
-.p-top-row { display:flex; align-items:center; justify-content:space-between; font-family:var(--display); font-size:19px; font-weight:700; margin-bottom:4px; }
-.p-date{ font-size:12px; font-weight:600; color:var(--accent); font-family:var(--body); }
-.p-countdown { font-size:13px; color:rgba(255,255,255,.7); display:flex; gap:6px; align-items:center; font-weight:600; }
-.p-countdown span { background:rgba(68,189,50,.15); color:var(--accent); padding:2px 8px; border-radius:100px; font-family:var(--display); font-size:14px; font-variant-numeric:tabular-nums; border:1px solid rgba(68,189,50,.3); }
-.p-grid{ display:grid; grid-template-columns:repeat(3,1fr); gap:8px; text-align:center; }
-.p-item{ background:rgba(255,255,255,.08); border-radius:10px; padding:6px 2px; border:1px solid rgba(255,255,255,.05); }
-.p-item.active{ background:var(--accent); color:var(--ink); font-weight:800; border-color:transparent; transform:scale(1.02); box-shadow:0 4px 12px rgba(68,189,50,.2); }
-.p-item span{ display:block; font-size:10px; font-weight:700; opacity:.7; text-transform:uppercase; margin-bottom:1px; }
-.p-item strong{ display:block; font-family:var(--display); font-size:14px; }
-
-/* DİNAMİK SEÇMELİ ECZANE WIDGETI */
-.widget-card.pharmacy-widget { background: var(--card); border: 1px solid var(--line); padding: 20px; color: var(--ink); }
-.ph-header { display: flex; align-items: center; justify-content: space-between; margin-bottom: 14px; gap: 10px; }
-.ph-title { font-family: var(--display); font-size: 18px; font-weight: 800; display: flex; align-items: center; gap: 6px; }
-.ph-select { background: var(--bg-2); border: 1px solid var(--line); padding: 6px 12px; border-radius: 100px; font-size: 13px; font-weight: 700; outline: none; color: var(--ink); cursor: pointer; }
-.ph-box { background: var(--bg); border-radius: var(--r-sm); padding: 14px; border: 1px solid var(--line); display: flex; flex-direction: column; gap: 8px; }
-.ph-name-row { display: flex; justify-content: space-between; align-items: baseline; }
-.ph-name { font-family: var(--display); font-size: 16px; font-weight: 800; color: var(--pin); }
-.ph-date-badge { font-size: 11px; background: var(--ink); color: #fff; padding: 2px 8px; border-radius: 100px; font-weight: 700; }
-.ph-detail { font-size: 13.5px; color: var(--ink-soft); line-height: 1.4; font-weight: 500; }
-.ph-landmark { font-size: 12px; color: var(--ink); font-weight: 700; text-transform: uppercase; border-left: 2px solid var(--pin); padding-left: 6px; margin-top: 2px; }
-.ph-footer-actions { display: flex; justify-content: space-between; align-items: center; margin-top: 6px; padding-top: 8px; border-top: 1px dashed var(--line); }
-.ph-phone { font-size: 14px; font-weight: 800; color: var(--ink); display: flex; align-items: center; gap: 4px; }
-.ph-map-link { font-size: 12.5px; font-weight: 700; color: #3498DB; text-decoration: underline; }
-.ph-empty { font-size: 13.5px; color: var(--ink-faint); text-align: center; padding: 10px 0; font-weight: 600; }
-
-.news-wrap{ grid-column: 1 / -1; margin-top:16px; width:100%; }
-.news-header{ font-family:var(--display); font-size:26px; font-weight:700; margin-bottom:20px; display:flex; align-items:center; gap:10px; }
-.news-header::before{ content:""; display:block; width:12px; height:12px; border-radius:50%; background:var(--pin); }
-.news-list{ display:flex; flex-direction:column; gap:16px; width:100%; }
-.news-item{ display:flex; gap:20px; background:var(--card); border-radius:var(--r-md); padding:16px; box-shadow:var(--shadow-1); border:1px solid var(--line); transition:transform .2s var(--ease), box-shadow .2s; cursor:pointer; }
-.news-item:hover{ transform:translateY(-3px); box-shadow:var(--shadow-2); }
-.news-img{ width:150px; height:110px; border-radius:12px; object-fit:cover; flex-shrink:0; background:var(--bg-2); }
-.news-img-placeholder{ background:linear-gradient(135deg, var(--dawn-1) 0%, var(--dawn-3) 100%); }
-.news-content{ display:flex; flex-direction:column; justify-content:center; }
-.news-content h4{ font-size:18px; margin-bottom:6px; color:var(--ink); }
-.news-content p{ font-size:14px; color:var(--ink-soft); line-height:1.4; display:-webkit-box; -webkit-line-clamp:2; -webkit-box-orient:vertical; overflow:hidden; }
-.news-meta{ margin-bottom:6px; font-size:12px; font-weight:700; color:var(--accent); letter-spacing:.05em; }
-
-/* KATEGORİLER (SABİT SEKMELİ DÜZEN - ASLA BOŞLUK BIRAKMAZ) */
-#kategoriler { width:100%; max-width:100%; padding:40px 0 20px; background:var(--bg); }
-.cats-intro{ padding-bottom: 24px; }
-.cats-intro .kicker{ font-size:13px; font-weight:800; letter-spacing:.18em; text-transform:uppercase; color:var(--accent); }
-.cats-intro h2{ font-size:clamp(30px,4.6vw,56px); margin:14px 0 0; max-width:18ch; text-wrap:balance; }
-.cats-intro p{ color:var(--ink-soft); max-width:52ch; margin:16px 0 0; font-size:17px; }
-
-.cats-interactive-container { display:grid; grid-template-columns:360px 1fr; gap:40px; align-items:start; width:100%; margin-top:20px; }
-.cat-list{ display:flex; flex-direction:column; gap:4px; }
-.cat-item{ display:flex; align-items:center; gap:16px; padding:12px 16px; text-align:left; width:100%; border-radius:var(--r-sm); transition:all 0.3s var(--ease); position:relative; background:transparent; }
-.cat-item .num{ font-family:var(--display); font-weight:600; font-size:14px; width:24px; color:var(--ink-faint); font-variant-numeric:tabular-nums; }
-.cat-item .nm{ font-family:var(--display); font-weight:700; letter-spacing:-.02em; font-size:22px; color:var(--ink-soft); transition:all 0.3s var(--ease); line-height:1.05; }
-.cat-item .swatch{ width:0; height:12px; border-radius:6px; transition:width 0.3s var(--ease); flex-shrink:0; }
-.cat-item.active { background: var(--card); box-shadow: var(--shadow-1); border: 1px solid var(--line); }
-.cat-item.active .nm{ color:var(--ink); font-size:25px; }
-.cat-item.active .num{ color:var(--ink); }
-.cat-item.active .swatch{ width:24px; }
-.cat-item:hover:not(.active) { background: rgba(255,255,255,0.5); }
-.cat-item:hover .nm { color: var(--ink); }
-
-.cat-stage{ position:relative; height:420px; border-radius:var(--r-lg); overflow:hidden; box-shadow:var(--shadow-2); background:var(--bg-2); width:100%; }
-.cat-panel{ position:absolute; inset:0; display:flex; flex-direction:column; justify-content:flex-end; padding:42px; color:#fff; height:100%; }
-.cat-panel .ghost{ position:absolute; right:-10px; top:-30px; font-family:var(--display); font-weight:800; font-size:clamp(180px,24vw,260px); line-height:.8; color:rgba(255,255,255,.14); letter-spacing:-.04em; pointer-events:none; }
-.cat-panel .scrim{ position:absolute; inset:0; background:linear-gradient(180deg, transparent 30%, rgba(0,0,0,.55) 100%); }
-.cat-panel .body{ position:relative; z-index:2; }
-.cat-panel h3{ font-size:clamp(34px,4vw,50px); color:#fff; text-wrap:balance; margin-bottom:8px; }
-.cat-panel p{ margin:8px 0 0; font-size:16px; max-width:44ch; color:rgba(255,255,255,.95); text-wrap:pretty; }
-.cat-cta{ align-self:flex-start; display:inline-flex; align-items:center; gap:9px; background:#fff; color:var(--ink); font-weight:700; font-size:15px; padding:14px 24px; border-radius:100px; box-shadow:0 10px 30px rgba(0,0,0,0.15); transition:transform .2s var(--ease); margin-top:24px; }
-.cat-cta:hover{ transform:translateY(-2px); }
-
-/* MEKANLAR / KARTLAR OVERLAY */
-.ov{ position:fixed; inset:0; z-index:100; background:var(--bg); display:flex; flex-direction:column; width:100%; overflow-x:hidden; }
-.ov.animate-in { animation: ovPop 0.4s cubic-bezier(0.22, 0.61, 0.36, 1) forwards; }
-@keyframes ovPop{ from{ opacity:0; transform:scale(0.98) translateY(10px); } to{ opacity:1; transform:none; } }
-
-.ov-head{ display:flex; align-items:center; gap:16px; padding:18px 28px; border-bottom:1px solid var(--line); flex-shrink:0; background:var(--bg); z-index:3; width:100%; box-sizing:border-box; }
-.ov-back{ display:inline-flex; align-items:center; gap:8px; font-weight:700; font-size:15px; padding:10px 16px; border-radius:100px; background:var(--bg-2); transition:background .2s; }
-.ov-back:hover{ background:var(--line); }
-.ov-title{ display:flex; align-items:center; gap:12px; }
-.ov-title .dot{ width:14px; height:14px; border-radius:5px; }
-.ov-title h2{ font-size:26px; }
-.ov-close{ margin-left:auto; width:44px; height:44px; border-radius:50%; display:grid; place-items:center; background:var(--bg-2); font-weight:800; cursor:pointer; }
-
-.ov-body{ flex:1; overflow-y:auto; overflow-x:hidden; width:100%; display:flex; flex-direction:column; }
-.grid{ max-width:var(--maxw); margin:0 auto; padding:40px 28px 80px; display:grid; grid-template-columns:repeat(auto-fill,minmax(320px,1fr)); gap:32px; width:100%; }
-
-/* --- APPLE YENİ NESİL PREMIUM KART TASARIMI --- */
-.card {
-  position: relative; 
-  height: 380px; 
-  border-radius: var(--r-lg); 
-  overflow: hidden; 
-  cursor: pointer; 
-  box-shadow: 0 12px 38px rgba(0,0,0,0.14); 
-  border: 1px solid rgba(255,255,255,0.18); 
-  transition: transform 0.45s cubic-bezier(0.22, 0.61, 0.36, 1), box-shadow 0.45s cubic-bezier(0.22, 0.61, 0.36, 1); 
-  display: flex; 
-  flex-direction: column; 
-  justify-content: space-between; 
-  padding: 24px; 
-  color: #fff; 
-  background-size: cover;
-  transform-origin: center center;
-  isolation: isolate;
-}
-.card::after {
-  content: ""; position: absolute; inset: 0; border-radius: inherit; border: 2px solid transparent; background: linear-gradient(135deg, rgba(255,255,255,0.5) 0%, rgba(255,255,255,0) 55%) border-box; -webkit-mask: linear-gradient(#fff 0 0) padding-box, linear-gradient(#fff 0 0); -webkit-mask-composite: destination-out; mask-composite: exclude; pointer-events: none; z-index: 5;
-}
-.card:hover { 
-  transform: translateY(-10px) scale(1.015); 
-  box-shadow: 0 36px 70px rgba(0,0,0,0.3); 
-}
-.card:active {
-  transform: scale(0.97);
-}
-.card .scrim { 
-  position:absolute; inset:0; 
-  background:linear-gradient(180deg, rgba(0,0,0,0.05) 0%, rgba(0,0,0,0.35) 42%, rgba(0,0,0,0.92) 100%); 
-  z-index:1; pointer-events:none; 
-}
-.card-top-bar {
-  display: flex; justify-content: space-between; align-items: flex-start; z-index: 2; position: relative;
-}
-.card-icon {
-  width: 58px; height: 58px; background: rgba(255,255,255,0.18); backdrop-filter: blur(16px); border-radius: 20px; display: grid; place-items: center; box-shadow: 0 8px 22px rgba(0,0,0,0.18), inset 0 1px 0 rgba(255,255,255,0.45); border: 1px solid rgba(255,255,255,0.35); transition: transform 0.4s var(--ease), background 0.3s; 
-}
-.card:hover .card-icon { transform: translateY(-2px) scale(1.05); background: rgba(255,255,255,0.26); }
-.card .body { position:relative; z-index:2; display:flex; flex-direction:column; }
-.card h3 { font-size:27px; color:#fff; text-wrap:balance; margin:0; font-weight:800; letter-spacing:-0.02em; line-height: 1.08; text-shadow:0 2px 12px rgba(0,0,0,0.4); }
-.card .card-area { display:inline-flex; align-items:center; gap:6px; font-size:13px; font-weight:800; margin:10px 0 0; color:var(--accent); background:rgba(255,255,255,0.15); padding:6px 12px; border-radius:10px; align-self:flex-start; backdrop-filter:blur(8px); border: 1px solid rgba(255,255,255,0.1); }
-.card p { margin:8px 0 0; font-size:14.5px; color:rgba(255,255,255,0.95); line-height:1.5; text-wrap:pretty; font-weight:500; }
-.card-note { font-size: 13px; color: rgba(255,255,255,0.78); margin-top: 18px; padding-top: 14px; border-top: 1px solid rgba(255,255,255,0.22); font-weight: 600; display: flex; align-items: center; gap: 6px; }
-
-/* ALT KATEGORİ ÖZEL TASARIMI (SUBCAT) */
-.subcat-card .body { justify-content:center; align-items:flex-start; height:100%; margin-top: auto; }
-.subcat-card h3 { font-size:32px; line-height:1.15; }
-.subcat-ghost { position:absolute; right:-26px; bottom:-22px; z-index:1; opacity:0.16; transform:rotate(-8deg); pointer-events:none; transition:transform 0.5s var(--ease), opacity 0.4s; }
-.subcat-card:hover .subcat-ghost { transform:rotate(-4deg) scale(1.08); opacity:0.22; }
-
-/* KART DETAY MODALI (POP-UP) */
-@keyframes modalPopUp {
-  0% { opacity: 0; transform: scale(0.95) translateY(15px); }
-  100% { opacity: 1; transform: scale(1) translateY(0); }
-}
-.place-modal-overlay { position:fixed; inset:0; z-index:250; background:rgba(12,16,32,0.85); backdrop-filter:blur(12px); display:grid; place-items:center; padding:20px; width:100%; height:100%; animation:fadeIn .3s ease; }
-.place-modal-content { background:var(--bg); border-radius:var(--r-lg); max-width:700px; width:100%; overflow:hidden; box-shadow:var(--shadow-3); border:1px solid var(--line); display:flex; flex-direction:column; position:relative; max-height:92vh; animation: modalPopUp 0.4s cubic-bezier(0.22, 0.61, 0.36, 1) forwards; }
-.pm-close { position:absolute; top:16px; right:16px; width:38px; height:38px; border-radius:50%; background:rgba(0,0,0,0.5); color:#fff; display:grid; place-items:center; z-index:10; font-weight:800; cursor:pointer; backdrop-filter:blur(4px); transition:background 0.2s; }
-.pm-close:hover { background:var(--pin); }
-.pm-img-wrap { width:100%; height:300px; position:relative; background:#111; }
-.pm-img-wrap img { width:100%; height:100%; object-fit:cover; }
-.pm-noimg { position:absolute; inset:0; display:flex; flex-direction:column; align-items:center; justify-content:center; gap:10px; color:rgba(255,255,255,.55); }
-.pm-noimg span { font-size:13px; font-weight:600; letter-spacing:.04em; }
-.card-noimg { position:absolute; inset:0; display:grid; place-items:center; color:rgba(255,255,255,.35); z-index:0; }
-.pm-img-scrim { position:absolute; inset:0; background:linear-gradient(180deg, transparent 50%, rgba(23,21,15,0.9) 100%); }
-.pm-title-box { position:absolute; bottom:24px; left:28px; right:28px; color:#fff; }
-.pm-title-box h2 { font-size:32px; font-weight:800; text-shadow:0 2px 10px rgba(0,0,0,0.6); line-height:1.1; }
-.pm-body { padding:28px; display:flex; flex-direction:column; gap:20px; overflow-y:auto; }
-.pm-info { font-size:16px; color:var(--ink); line-height:1.6; margin:0; font-weight:500; white-space: pre-wrap; }
-.pm-meta-box { background:var(--card); border:1px solid var(--line); padding:20px; border-radius:var(--r-sm); display:flex; flex-direction:column; gap:16px; box-shadow:var(--shadow-1); }
-.pm-meta-item { display:flex; align-items:flex-start; gap:12px; font-size:15px; font-weight:600; color:var(--ink-soft); }
-.pm-meta-item svg { color:var(--pin); flex-shrink:0; margin-top:2px; }
-.pm-meta-item strong { display:block; margin-bottom:4px; font-size:13px; color:var(--ink-faint); text-transform:uppercase; letter-spacing:.05em;}
-.pm-maps-btn { background:var(--ink); color:#fff; font-weight:800; padding:16px; border-radius:100px; display:flex; align-items:center; justify-content:center; gap:8px; font-size:16px; transition:background 0.2s, transform 0.2s; text-align:center; margin-top:8px; box-shadow:0 8px 24px rgba(0,0,0,0.15); }
-.pm-maps-btn:hover { background:#000; transform:translateY(-2px); }
-
-/* Detay görselini tıklanabilir yap (tam ekran açılır) */
-.pm-img-wrap.clickable { cursor: zoom-in; }
-.pm-zoom-hint { position:absolute; top:14px; left:14px; z-index:6; background:rgba(0,0,0,0.5); color:#fff; font-size:12px; font-weight:700; padding:7px 12px; border-radius:100px; display:flex; align-items:center; gap:6px; backdrop-filter:blur(6px); pointer-events:none; letter-spacing:.02em; }
-
-/* DERS LİSTESİ (chip) */
-.pm-lessons { display:flex; flex-wrap:wrap; gap:9px; }
-.pm-lesson-chip { background:linear-gradient(135deg, var(--accent) 0%, color-mix(in srgb, var(--accent), #000 18%) 100%); color:#fff; font-size:13.5px; font-weight:800; padding:9px 15px; border-radius:100px; box-shadow:0 4px 12px rgba(0,0,0,0.12); letter-spacing:.01em; border:1px solid rgba(255,255,255,0.25); }
-
-/* TAM EKRAN GÖRSEL / VİDEO İZLEYİCİ (LIGHTBOX) */
-@keyframes fsIn { from { opacity:0; } to { opacity:1; } }
-.fs-overlay { position:fixed; inset:0; z-index:400; background:rgba(8,8,12,0.96); backdrop-filter:blur(10px); display:flex; flex-direction:column; animation:fsIn .25s ease; }
-.fs-stage { flex:1; display:flex; align-items:center; justify-content:center; min-height:0; padding:16px; position:relative; }
-.fs-stage img, .fs-stage video { max-width:100%; max-height:100%; width:auto; height:auto; object-fit:contain; border-radius:12px; box-shadow:0 20px 60px rgba(0,0,0,0.5); background:#000; }
-.fs-close { position:absolute; top:18px; right:18px; width:46px; height:46px; border-radius:50%; background:rgba(255,255,255,0.14); color:#fff; display:grid; place-items:center; z-index:10; font-weight:800; cursor:pointer; backdrop-filter:blur(8px); border:1px solid rgba(255,255,255,0.2); transition:background .2s; font-size:20px; }
-.fs-close:hover { background:rgba(255,255,255,0.28); }
-.fs-caption { flex-shrink:0; background:linear-gradient(0deg, rgba(0,0,0,0.6) 0%, transparent 100%); padding:22px 20px 26px; color:#fff; }
-.fs-caption-inner { max-width:640px; margin:0 auto; display:flex; flex-direction:column; gap:12px; }
-.fs-caption h3 { font-size:23px; font-weight:800; letter-spacing:-0.01em; line-height:1.1; }
-.fs-caption h3 span { display:block; font-size:13.5px; font-weight:700; opacity:0.8; margin-top:3px; letter-spacing:.03em; }
-.fs-meta-row { display:flex; flex-wrap:wrap; gap:10px 22px; }
-.fs-meta { display:flex; align-items:center; gap:9px; font-size:15px; font-weight:700; color:rgba(255,255,255,0.92); }
-.fs-meta svg { flex-shrink:0; opacity:0.9; }
-.fs-meta a { color:#fff; text-decoration:none; }
-.fs-meta a:hover { text-decoration:underline; }
-
-/* VİDEO oynatıcı kontrolleri */
-.fs-vid-controls { display:flex; align-items:center; justify-content:center; gap:14px; flex-shrink:0; padding:14px 16px calc(14px + env(safe-area-inset-bottom)); background:rgba(0,0,0,0.4); }
-.fs-vid-btn { width:54px; height:54px; border-radius:50%; background:rgba(255,255,255,0.16); color:#fff; display:grid; place-items:center; cursor:pointer; border:1px solid rgba(255,255,255,0.22); transition:background .2s, transform .15s; backdrop-filter:blur(6px); }
-.fs-vid-btn:hover { background:rgba(255,255,255,0.3); }
-.fs-vid-btn:active { transform:scale(0.92); }
-.fs-vid-btn.primary { width:66px; height:66px; background:var(--accent); border-color:rgba(255,255,255,0.4); }
-.fs-bigplay { position:absolute; top:50%; left:50%; transform:translate(-50%,-50%); width:84px; height:84px; border-radius:50%; background:rgba(0,0,0,0.55); display:grid; place-items:center; cursor:pointer; backdrop-filter:blur(6px); border:1.5px solid rgba(255,255,255,0.35); box-shadow:0 10px 30px rgba(0,0,0,0.4); animation:fsIn .2s ease; }
-.fs-bigplay:active { transform:translate(-50%,-50%) scale(0.92); }
-.fs-bigplay svg { margin-left:5px; }
-
-/* Müzik kartı: kaydırılabilir olduğunu belirten ipucu */
-.card.has-video { touch-action: pan-y; }
-.card-video-badge { position:absolute; top:18px; right:18px; z-index:3; background:rgba(0,0,0,0.55); color:#fff; font-size:11.5px; font-weight:800; padding:7px 12px; border-radius:100px; display:flex; align-items:center; gap:6px; backdrop-filter:blur(6px); border:1px solid rgba(255,255,255,0.2); letter-spacing:.02em; }
-
-/* ÇOK YAKINDA SADECE TEK SATIR UYARI MODELİ */
-.coming-soon-container { max-width:500px; margin:auto; text-align:center; padding:80px 24px; }
-.coming-soon-container h4 { font-size:20px; color:var(--ink-soft); font-weight:700; margin:0; letter-spacing:-0.01em; }
-
-/* NÖBETÇİ ECZANE TAM SAYFA GÖRÜNÜMÜ */
-.pharm-page { max-width:var(--maxw); margin:0 auto; padding:28px 28px 80px; width:100%; }
-.pharm-page-bar { display:flex; flex-direction:column; gap:16px; margin-bottom:26px; }
-.pharm-page-date { display:inline-flex; align-items:center; gap:8px; font-family:var(--display); font-weight:700; font-size:18px; color:var(--ink); }
-.pharm-page-date svg { color:var(--pin); }
-.pharm-page-districts { display:flex; flex-wrap:wrap; gap:8px; }
-.pharm-chip { font-size:14px; font-weight:700; padding:9px 18px; border-radius:100px; background:var(--bg-2); border:1px solid var(--line); color:var(--ink-soft); transition:all .2s var(--ease); cursor:pointer; }
-.pharm-chip:hover { background:var(--card); color:var(--ink); }
-.pharm-chip.active { background:var(--ink); color:#fff; border-color:transparent; }
-.pharm-page-grid { display:grid; grid-template-columns:repeat(auto-fill,minmax(330px,1fr)); gap:20px; }
-.pharm-card { background:var(--card); border:1px solid var(--line); border-radius:var(--r-md); padding:22px; box-shadow:var(--shadow-1); display:flex; flex-direction:column; gap:10px; transition:transform .2s var(--ease), box-shadow .2s; }
-.pharm-card:hover { transform:translateY(-3px); box-shadow:var(--shadow-2); }
-.pharm-card-top { display:flex; justify-content:space-between; align-items:baseline; gap:10px; }
-.pharm-card-name { font-family:var(--display); font-size:19px; font-weight:800; color:var(--pin); line-height:1.1; }
-.pharm-card-dist { font-size:11px; font-weight:800; background:var(--ink); color:#fff; padding:3px 10px; border-radius:100px; white-space:nowrap; letter-spacing:.03em; }
-.pharm-card-addr { font-size:14px; color:var(--ink-soft); line-height:1.45; font-weight:500; }
-.pharm-card-landmark { font-size:13px; color:var(--ink); font-weight:700; border-left:3px solid var(--pin); padding-left:8px; }
-.pharm-card-foot { display:flex; justify-content:space-between; align-items:center; margin-top:4px; padding-top:12px; border-top:1px dashed var(--line); }
-.pharm-card-phone { font-size:15px; font-weight:800; color:var(--ink); }
-.pharm-card-map { font-size:13px; font-weight:700; color:#3498DB; text-decoration:underline; }
-.pharm-empty { grid-column:1 / -1; text-align:center; padding:60px 20px; color:var(--ink-soft); font-size:16px; font-weight:600; }
-
-/* FOOTER & SÖZLEŞME METNİ */
-.foot{ background:var(--dark); color:#fff; padding:60px 0 30px; margin-top:40px; width:100%; max-width:100%; overflow:hidden; }
-.foot .top{ display:flex; flex-wrap:wrap; gap:40px; justify-content:space-between; align-items:flex-start; }
-.foot h3{ font-size:clamp(28px,4vw,48px); max-width:16ch; color:#fff; text-wrap:balance; }
-.foot .lead { color:rgba(255,255,255,.6); font-size:14px; margin-top:12px; max-width:52ch; text-align:justify; line-height:1.5; }
-.foot .cols{ display:flex; gap:64px; flex-wrap:wrap; }
-.foot .col h5{ font-size:13px; letter-spacing:.14em; text-transform:uppercase; color:rgba(255,255,255,.5); margin:0 0 14px; font-weight:700; }
-.foot .col a, .foot .col span{ display:block; color:rgba(255,255,255,.82); font-size:15px; padding:5px 0; transition:color .2s; cursor:pointer; }
-.foot .col a:hover{ color:var(--accent); }
-.foot .rule{ height:1px; background:rgba(255,255,255,.1); margin:40px 0 20px; width:100%; }
-.foot .bottom{ display:flex; flex-wrap:wrap; gap:12px; justify-content:space-between; font-size:13.5px; color:rgba(255,255,255,.45); width:100%; }
-
-/* ---------- RESPONSIVE ---------- */
-@media (max-width:920px){
-  .topbar{ grid-template-columns: auto 1fr; }
-  .topbar-nav{ display:none; }
-  .gundem-layout{ grid-template-columns:1fr; }
-  .cats-interactive-container { grid-template-columns:150px 1fr; gap:20px; }
-  .cat-stage{ height:380px; }
-  .cat-list{ gap:4px; }
-  .cat-item{ padding:10px 8px; gap:8px; }
-  .cat-item .num{ display:none; }
-  .cat-item .nm{ font-size:15px; }
-  .cat-item.active .nm{ font-size:17px; }
-  .tos-modal { padding: 30px 24px; border-radius:24px 24px 0 0; }
-}
-@media (max-width:680px){
-  body{ font-size:16px; }
-  .wrap{ padding: 0 16px; }
-  .topbar .loc{ display:none; }
-  .hero-content{ padding-top:13vh; }
-  .hero-title{ white-space:normal; }
-  .search{ padding:7px 7px 7px 18px; }
-  .search .go{ padding:12px 18px; }
-  .grid{ grid-template-columns:1fr; padding:20px 16px 60px; }
-  .cats-interactive-container { grid-template-columns:1fr; gap:16px; }
-  .cat-list { flex-direction: row; flex-wrap: wrap; gap:6px; }
-  .cat-item { width: auto; padding:8px 12px; background: var(--bg-2); }
-  .cat-item.active { background: var(--card); }
-  .cat-stage { height: 300px; }
-  .cat-panel { padding: 24px; }
-  .tos-actions { flex-direction: column; }
-  .tos-modal { padding: 24px 20px; }
-  .pharm-page { padding:20px 16px 60px; }
-  .pharm-page-grid { grid-template-columns:1fr; }
-  .fs-stage { padding:10px; }
-  .fs-caption { padding:18px 16px 22px; }
-  .fs-caption h3 { font-size:20px; }
-  .fs-meta { font-size:14px; }
-  .fs-vid-btn { width:48px; height:48px; }
-  .fs-vid-btn.primary { width:58px; height:58px; }
-  .pm-img-wrap { height:240px; }
-}
-/* FAVORİ KALP BUTONU */
-.fav-btn { position: absolute; top: 16px; right: 16px; z-index: 10; width: 40px; height: 40px; border-radius: 50%; background: rgba(0, 0, 0, 0.45); backdrop-filter: blur(6px); display: grid; place-items: center; border: 1px solid rgba(255,255,255,0.2); transition: all 0.2s var(--ease); cursor: pointer; }
-.fav-btn:hover { background: rgba(0, 0, 0, 0.65); transform: scale(1.05); }
-.fav-btn:active { transform: scale(0.9); }
-.fav-btn.is-fav svg { fill: #E84142; stroke: #E84142; animation: heartPop 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275); }
-@keyframes heartPop { 0% { transform: scale(1); } 50% { transform: scale(1.3); } 100% { transform: scale(1); } }
-/* --- FAVORİ VE PAYLAŞ BUTONU TASARIMLARI --- */
-.pm-share-btn { background: #fff; color: var(--ink); font-weight: 800; padding: 16px; border-radius: 100px; display: flex; align-items: center; justify-content: center; gap: 8px; font-size: 16px; transition: all 0.2s; text-align: center; margin-top: 12px; box-shadow: 0 8px 24px rgba(0,0,0,0.08); border: 1px solid var(--line); cursor: pointer; width: 100%; }
-.pm-share-btn:hover { transform: translateY(-2px); box-shadow: 0 12px 28px rgba(0,0,0,0.12); }
-/* --- KARANLIK MOD RENKLERİ VE GEÇİŞ ANİMASYONU --- */
-body.dark-theme {
-  --bg: #0c1020;
-  --bg-2: #131a31;
-  --card: #1a2444;
-  --line: rgba(255,255,255,0.1);
-  --ink: #ffffff;
-  --ink-soft: #a0aabf;
-  --ink-faint: #5b6aa0;
-}
-
-body {
-  transition: background-color 0.5s var(--ease), color 0.5s var(--ease);
-}
-
-.widget-card, .pharm-card, .news-item, .cat-item, .pm-meta-box, .tos-modal, .doc-modal-card, .search-dropdown, .sugg-item {
-  transition: background-color 0.5s var(--ease), color 0.5s var(--ease), border-color 0.5s var(--ease), transform 0.2s ease, box-shadow 0.2s ease;
-}
-/* YENİ NESİL PREMIUM MOBİL ALT NAVİGASYON BAR (REDDIT TARZI) */
-.bottom-nav { display: none; }
-@media (max-width: 680px) {
-  .bottom-nav {
-    display: flex; justify-content: space-around; align-items: center;
-    position: fixed; bottom: 0; left: 0; right: 0; z-index: 990;
-    background: rgba(255, 255, 255, 0.85); 
-    backdrop-filter: saturate(180%) blur(20px); -webkit-backdrop-filter: saturate(180%) blur(20px);
-    padding: 10px 8px calc(10px + env(safe-area-inset-bottom));
-    border-top: 1px solid rgba(0, 0, 0, 0.05); box-shadow: 0 -10px 40px rgba(0,0,0,0.04);
-  }
-  .nav-item {
-    position: relative; flex: 1; display: flex; flex-direction: column; align-items: center; gap: 5px;
-    color: var(--ink-faint); font-weight: 600; font-size: 11px; cursor: pointer; transition: all 0.3s var(--ease);
-    padding: 6px 0; border-radius: 14px;
-  }
-  .nav-item.active { color: var(--ink); font-weight: 800; transform: translateY(-2px); }
-  .nav-item.active-red { color: var(--pin); font-weight: 800; transform: translateY(-2px); }
+  <!-- Supabase ve PDF Kütüphaneleri -->
+  <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/html2pdf.js/0.10.1/html2pdf.bundle.min.js"></script>
   
-  /* Aktif sekmeye arkada şık bir hap (pill) efekti */
-  .nav-item.active::before, .nav-item.active-red::before {
-    content: ""; position: absolute; top: -2px; left: 50%; transform: translateX(-50%);
-    width: 48px; height: 32px; border-radius: 16px;
-    background: rgba(0,0,0,0.05); z-index: -1; animation: pillPop 0.3s var(--ease);
-  }
-  .nav-item.active-red::before { background: rgba(255, 75, 75, 0.12); }
-}
-@keyframes pillPop { 0% { transform: translateX(-50%) scale(0.5); opacity: 0; } 100% { transform: translateX(-50%) scale(1); opacity: 1; } }
-@media (max-width: 680px) { body { padding-bottom: 84px; } }
+  <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;600;800&display=swap" rel="stylesheet" />
+  
+  <style>
+    :root { --bg: #f6f4ef; --card: #ffffff; --ink: #17150f; --ink-soft: #6a655a; --accent: #44BD32; --red: #E84142; --line: #e3ded3; }
+    body { font-family: "Plus Jakarta Sans", sans-serif; background: var(--bg); margin: 0; color: var(--ink); display: flex; height: 100vh; overflow: hidden; }
+    
+    /* GİRİŞ EKRANI */
+    #login-view { width: 100%; height: 100vh; display: flex; justify-content: center; align-items: center; position: absolute; z-index: 100; background: var(--bg); }
+    .login-card { background: var(--card); padding: 40px 30px; border-radius: 24px; box-shadow: 0 20px 40px rgba(0,0,0,0.1); text-align: center; width: 100%; max-width: 320px; }
+    .login-card input { width: 90%; padding: 14px; margin: 10px 0; border: 1px solid var(--line); border-radius: 12px; font-family: inherit; font-size: 15px; outline: none; }
+    .btn-main { background: var(--ink); color: #fff; border: none; padding: 14px; width: 100%; border-radius: 100px; cursor: pointer; font-weight: 800; font-size: 15px; transition: transform 0.2s; margin-top: 10px; }
+    .btn-main:hover { transform: translateY(-2px); }
 
-/* Karanlık Mod İçin Reddit Navigasyon Uyumu */
-body.dark-theme .bottom-nav { background: rgba(12, 16, 32, 0.85); border-top: 1px solid rgba(255,255,255,0.05); }
-body.dark-theme .nav-item { color: rgba(255,255,255,0.4); }
-body.dark-theme .nav-item.active { color: #fff; }
-body.dark-theme .nav-item.active-red { color: var(--pin); }
-body.dark-theme .nav-item.active::before { background: rgba(255,255,255,0.1); }
-/* --- GÖRÜNTÜLENME SAYISI ROZETİ --- */
-.pm-view-badge {
-  display: inline-flex; align-items: center; gap: 8px;
-  background: var(--bg-2); border: 1px solid var(--line);
-  color: var(--ink-soft); font-size: 13.5px; font-weight: 700;
-  padding: 8px 16px; border-radius: 100px; margin-bottom: 16px;
-  align-self: flex-start; opacity: 0; transform: translateY(15px);
-  animation: viewPop 0.5s ease forwards; animation-delay: 0.15s;
-}
-.pm-view-badge svg { color: var(--accent); }
-.pm-view-badge strong { color: var(--ink); font-size: 15px; font-weight: 800; }
-@keyframes viewPop { to { opacity: 1; transform: translateY(0); } }
-/* --- ÇOKLU GÖRSEL SLIDER (KAYDIRMA) TASARIMI --- */
-.pm-slider-btn { position: absolute; top: 50%; transform: translateY(-50%); width: 42px; height: 42px; border-radius: 50%; background: rgba(0,0,0,0.4); color: #fff; display: grid; place-items: center; z-index: 5; cursor: pointer; border: 1px solid rgba(255,255,255,0.2); backdrop-filter: blur(6px); transition: all 0.2s var(--ease); }
-.pm-slider-btn:hover { background: rgba(0,0,0,0.75); transform: translateY(-50%) scale(1.05); }
-.pm-slider-btn:active { transform: translateY(-50%) scale(0.95); }
-.pm-slider-btn.left { left: 16px; }
-.pm-slider-btn.right { right: 16px; }
-.pm-slider-dots { position: absolute; bottom: 95px; left: 0; right: 0; display: flex; justify-content: center; gap: 8px; z-index: 5; pointer-events: none; }
-.pm-slider-dot { width: 8px; height: 8px; border-radius: 50%; background: rgba(255,255,255,0.3); transition: background 0.3s, transform 0.3s; box-shadow: 0 2px 4px rgba(0,0,0,0.2); }
-.pm-slider-dot.active { background: #fff; transform: scale(1.3); }
-</style>
+    /* ANA UYGULAMA DÜZENİ */
+    #app-view { display: none; width: 100%; height: 100%; }
+    
+    /* SOL MENÜ (SIDEBAR) */
+    .sidebar { width: 260px; background: var(--card); border-right: 1px solid var(--line); padding: 30px 20px; display: flex; flex-direction: column; gap: 10px; }
+    .sidebar h2 { font-weight: 800; color: var(--ink); margin-bottom: 30px; font-size: 22px; text-align: center; }
+    .nav-btn { background: none; border: none; text-align: left; padding: 14px 20px; font-size: 15px; font-weight: 600; color: var(--ink-soft); border-radius: 12px; cursor: pointer; transition: 0.2s; }
+    .nav-btn:hover { background: var(--bg); color: var(--ink); }
+    .nav-btn.active { background: var(--ink); color: #fff; }
+    .nav-btn.admin-only { background: rgba(232, 65, 66, 0.1); color: var(--red); display: none; }
+    .nav-btn.admin-only.active { background: var(--red); color: #fff; }
+    .logout-btn { margin-top: auto; color: var(--red); font-weight: 800; }
+
+    /* İÇERİK ALANI */
+    .content { flex: 1; padding: 40px; overflow-y: auto; background: var(--bg); }
+    .tab-content { display: none; max-width: 900px; margin: 0 auto; }
+    
+    /* ARAÇ ÇUBUĞU VE KARTLAR */
+    .toolbar { display: flex; justify-content: space-between; align-items: center; margin-bottom: 20px; background: var(--card); padding: 15px 25px; border-radius: 16px; box-shadow: 0 4px 12px rgba(0,0,0,0.03); }
+    .toolbar select { padding: 10px; border-radius: 8px; border: 1px solid var(--line); font-family: inherit; font-weight: 600; outline: none; }
+    .btn-pdf { background: var(--ink); color: #fff; padding: 10px 20px; border-radius: 8px; cursor: pointer; border: none; font-weight: 700; }
+    
+    .data-card { background: var(--card); padding: 20px; border-radius: 16px; margin-bottom: 16px; border: 1px solid var(--line); box-shadow: 0 4px 12px rgba(0,0,0,0.03); display: flex; justify-content: space-between; align-items: center; }
+    .data-info h4 { margin: 0 0 6px 0; font-size: 17px; }
+    .data-info p { margin: 0; color: var(--ink-soft); font-size: 14px; line-height: 1.5; }
+    .badge { padding: 6px 12px; border-radius: 100px; font-size: 12px; font-weight: 800; }
+    .bg-bekliyor { background: #FBC531; color: #17150f; }
+    .bg-onaylandi { background: var(--accent); color: #fff; }
+    .bg-reddedildi { background: var(--red); color: #fff; }
+    .action-btns button { padding: 8px 16px; border-radius: 8px; border: none; font-weight: 700; cursor: pointer; margin-left: 6px; }
+    .btn-onay { background: rgba(68, 189, 50, 0.1); color: var(--accent); }
+    .btn-red { background: rgba(232, 65, 66, 0.1); color: var(--red); }
+
+    /* ŞİFRE ALANI */
+    .input-group { display: flex; align-items: center; background: #fff; border: 1px solid var(--line); border-radius: 12px; padding: 0 14px; margin-top: 10px; }
+    .input-group input { border: none; width: 100%; outline: none; margin: 0; padding: 14px 0; }
+    .eye-icon { cursor: pointer; font-size: 18px; user-select: none; }
+
+    /* PDF Çıktısı İçin Görünmez Footer */
+    #pdf-footer { display: none; text-align: center; margin-top: 40px; font-weight: 800; color: var(--ink-soft); }
+  </style>
 </head>
 <body>
 
-<noscript>
-  <div style="padding: 20px; font-family: sans-serif;">
-    <h1>04agri.com — Ağrı'nın Dijital Rehberi</h1>
-    <p>Ağrı'nın dijital rehberi: restoranlar, cafeler, gezilecek yerler, nöbetçi eczane, etkinlikler ve daha fazlası.</p>
-    <h2>Öne Çıkanlar ve Uzmanlar</h2>
-    <ul>
-      <li>Sağlık Hizmetleri: Uzman Diyetisyen Bilge İgan Yıldırım, Dr. Nilay Dinçgözoğlu (Medikal Estetik)</li>
-      <li>Eğitim: E.L.I.T Dil Kursu, Muhammed Hoca (Müzik), Merve Hoca (Piyano ve Yan Flüt), Nevra Başçı (Matematik), Emir Hoca (Matematik)</li>
-      <li>Gezilecek Yerler: Balık Gölü, İshak Paşa Sarayı, Ağrı Dağı, Diyadin Kaplıcaları, Meteor Çukuru, Nuh'un Gemisi</li>
-      <li>Ağrı Merkez, Doğubayazıt, Diyadin, Eleşkirt, Patnos Nöbetçi Eczaneleri</li>
-      <li>Spor & Fitness: Club Maxfit (Ağrı Bay/Bayan Spor Salonu)</li>
-    </ul>
+  <!-- 1. GİRİŞ EKRANI -->
+  <div id="login-view">
+    <div class="login-card">
+      <h2>04agri Paneli</h2>
+      <p style="font-size: 14px; color: var(--ink-soft); margin-bottom: 20px;">İşletme veya Yönetici girişi yapın</p>
+      <input type="email" id="email" placeholder="E-posta adresiniz" />
+      <div class="input-group">
+        <input type="password" id="password" placeholder="Şifreniz" />
+      </div>
+      <button class="btn-main" onclick="girisYap()">Giriş Yap</button>
+      <p id="mesaj" style="color: var(--red); font-size: 13px; font-weight: 600; margin-top: 15px;"></p>
+    </div>
   </div>
-</noscript>
 
-<div id="root"></div>
-
-<script src="https://cdnjs.cloudflare.com/ajax/libs/react/18.3.1/umd/react.production.min.js" crossorigin="anonymous"></script>
-<script src="https://cdnjs.cloudflare.com/ajax/libs/react-dom/18.3.1/umd/react-dom.production.min.js" crossorigin="anonymous"></script>
-<script src="https://cdnjs.cloudflare.com/ajax/libs/babel-standalone/7.26.4/babel.min.js" crossorigin="anonymous"></script>
-
-<script type="text/babel">
-/* ===================== DATA & MASTER REHBER LISTESİ ===================== */
-(function(){
-  "use strict";
-
-  // Slugify Fonksiyonu (URL dostu metin oluşturucu)
-  function slugify(text) {
-    if(!text) return "";
-    const trMap = { 'ç':'c', 'Ç':'c', 'ğ':'g', 'Ğ':'g', 'ş':'s', 'Ş':'s', 'ü':'u', 'Ü':'u', 'ı':'i', 'İ':'i', 'ö':'o', 'Ö':'o' };
-    let str = text;
-    for (let key in trMap) { str = str.replace(new RegExp(key, 'g'), trMap[key]); }
-    return str.toLowerCase().replace(/[^a-z0-9\s-]/g, '').replace(/\s+/g, '-').replace(/-+/g, '-');
-  }
-
-  const categories = [
-    {
-      id:"restoranlar", name:"Restoranlar", color:"#E84142", tagline:"Lezzet Durakları", 
-      blurb:"Dönerden hamburgere, yöresel lezzetlerden dünya mutfağına; Ağrı'nın en sevilen lezzet duraklarını bir arada keşfet.",
-      places:[]
-    },
-    {
-      id:"cafeler", name:"Cafeler", color:"#FA8231", tagline:"Kahve ve Mola", 
-      blurb:"Üçüncü nesil kahveciler, serpme kahvaltı noktaları ve keyifli mola mekanları; şehrin kahve kültürü burada.",
-      places:[]
-    },
-    {
-      id:"pastaneler", name:"Pastaneler", color:"#FBC531", tagline:"Tatlı Molası", 
-      blurb:"Şehrin en taze pastaneleri, fırın ürünleri ve tatlı durakları; tatlı molanız için en doğru adresler.",
-      places:[]
-    },
-    {
-      id:"saglik", name:"Sağlık Hizmetleri", color:"#44BD32", tagline:"Sağlık & Danışmanlık", 
-      blurb:"Özel diş hekimi klinikleri, dil ve konuşma terapistleri, psikologlar, fizyoterapistler ve diyetisyenler bir arada.",
-      hasSubCategories: true,
-      subCategories: [
-        { id: "dis", name: "Özel Diş Hekimi Klinikleri", icon: "tooth", note: "Ağız ve diş sağlığı merkezleri", places: [] },
-       { id: "dil", name: "Dil ve Konuşma Terapistleri", icon: "speak", note: "Konuşma bozuklukları uzmanları", 
-          places: [
-          {
-              name: "Şevval Taşdemir",
-              subName: "Dil ve Konuşma Terapisti",
-              info: "Ağrı’nın Sağlık Bakanlığı onaylı ilk ve tek dil ve konuşma terapisi kliniği.",
-              area: "Ağrı Merkez",
-              img: "sevval1.jpg",
-              bgPos: "center",
-              icon: "speak",
-              note: "Sağlık Bakanlığı Onaylı Klinik",
-              address: "Leylekpınar Mahallesi 1703. Sokak Özgül Ofis Center Kat: 5 No: 29",
-              phones: ["0541 241 07 04"],
-              instagram: "dktsevvaltasdemir",
-              mapsUrl: "https://maps.google.com/?q=Leylekpınar+Mahallesi+1703.+Sokak+Özgül+Ofis+Center+Ağrı"
-            }
-          ] 
-        },
-        { id: "psikolog", name: "Psikologlar", icon: "brain", note: "Ruh sağlığı ve danışmanlık", 
-  places: [
-    {
-      name: "Dilek Polat",
-      subName: "Psikolojik Danışman & Oyun Terapisti",
-      info: "Çocuk ve Ergenlere Yönelik Psikolojik Danışmanlık Hizmeti",
-      area: "Ağrı",
-      img: "dilekpolat1.jpg",
-      icon: "brain",
-      note: "Her çocuğun dünyasına ulaşan bir yol vardır.",
-      address: "Ağrı",
-      instagram: "psk.dan.dilekpolat",
-      email: "dilekpolat263@gmail.com",
-      lessonsTitle: "Hizmetler",
-      lessons: [
-        "Oyun Terapisi",
-        "Çocuk Danışmanlığı",
-        "Ergen Danışmanlığı",
-        "Kaygı ve Korkular",
-        "Özgüven Geliştirme",
-        "Sınav Kaygısı",
-        "Dikkat ve Odaklanma Çalışmaları",
-        "Sosyal Beceri Geliştirme",
-        "Duygu Düzenleme Becerileri"
-      ],
-      mapsUrl: ""
-    }
-  ] 
-},
-        { id: "fizyo", name: "Fizyoterapistler", icon: "bone", note: "Fizik tedavi uzmanları", places: [] },
-        { id: "diyetisyen", name: "Diyetisyenler", icon: "leaf", note: "Sağlıklı beslenme ve diyet uzmanları",
-          places: [
-            {
-              name:"Uzman Diyetisyen Bilge İgan Yıldırım", 
-              info:"Uzman Hizmet Biriminde yüz yüze ve online beslenme danışmanlığı", 
-              area:"Ağrı Merkez", 
-              img:"uzm.diyetisyenbilge.jpg",
-              icon: "leaf",
-              note: "Sağlıklı yaşama ilk adımınızı atın.",
-              address:"Saray Plaza Kat 5 AĞRI",
-              phones:["0472 215 0184", "0543 120 4505"],
-              instagram: "uzm.diyetisyenbilge",
-              mapsUrl:"https://maps.google.com/?q=Saray+Plaza+Ağrı"
-            },
-            {
-              name: "Diyetisyen Berika Kuruçay",
-              subName: "Online Beslenme Danışmanlığı",
-              info: "Kilo kontrolü, hastalıklarda tıbbi beslenme ve yeme bozukluklarında profesyonel online beslenme danışmanlığı.",
-              area: "Ağrı/Merkez",
-              img: "berika1.jpg",
-              bgPos: "center",
-              icon: "leaf",
-              note: "Profesyonel Beslenme Danışmanlığı",
-              instagram: "diyetisyenberika",
-              email: "diyetisyenberika@gmail.com",
-              lessonsTitle: "Hizmet Alanları",
-              lessons: [
-                "Kilo alma ve kilo verme",
-                "İnsülin direnci ve PKOS’ta beslenme",
-                "Gebelik ve emziklilik döneminde beslenme",
-                "Böbrek, karaciğer, mide ve bağırsak hastalıklarında tıbbi beslenme tedavisi",
-                "Yeme bozukluklarında beslenme danışmanlığı"
-              ]
-            },
-            {
-              name: "Diyetisyen Seda Nur Dursun",
-              subName: "Beslenme ve Diyetetik",
-              info: "“Beslenme ve Diyetetik bölümünden başarıyla mezun oldum. Lisans eğitimim ve klinik stajlarım süresince edindiğim güncel, kanıta dayalı bilimsel bilgileri sizlerin sağlığı için pratiğe döküyorum.”",
-              area: "Ağrı Merkez",
-              img: "seda1.jpg",
-              bgPos: "center",
-              icon: "leaf",
-              note: "Sağlığınız için bilimsel rehberlik.",
-              instagram: "dytt.seda"
-            },
-            {
-              name: "Diyetisyen Seher Issi",
-              subName: "Beslenme ve Diyet Uzmanı",
-              info: "Kilo yönetimi, tıbbi beslenme tedavisi, gebelik/emzirme dönemi ve hastalıklarda beslenme alanlarında yüz yüze ve online profesyonel danışmanlık hizmeti.",
-              area: "Ağrı Merkez",
-              img: "seher1.jpg",
-              bgPos: "center",
-              icon: "leaf",
-              note: "Sağlıklı ve Sürdürülebilir Beslenme",
-              instagram: "dytseherissi",
-              email: "Diyetisyenseherissi@gmail.com",
-              lessonsTitle: "Uzmanlık Alanlarım",
-              lessons: [
-                "Kilo Verme ve Kilo Alma",
-                "Obezite ve Kilo Yönetimi",
-                "Tıbbi Beslenme Tedavisi",
-                "Diyabet Beslenmesi",
-                "İnsülin Direnci",
-                "Kalp ve Damar Hastalıkları",
-                "Polikistik Over Sendromu",
-                "Tiroit Hastalıkları",
-                "Sindirim Sistemi Hastalıkları",
-                "Karaciğer ve Böbrek Hastalıkları",
-                "Yeme Bozuklukları",
-                "Gebelik ve Emzirme",
-                "Çocuk ve Ergen Beslenmesi",
-                "Sürdürülebilir Beslenme",
-                "Online Danışmanlık"
-              ]
-            },
-            {
-              name: "Diyetisyen Hamiyet Şahin",
-              subName: "Beslenme ve Diyet Uzmanı",
-              info: "✨ Sağlıklı beslenme\n✨ Kilo yönetimi\n✨ PMOS & İnsülin Direnci & Hormon Yönetimi\n\n📍 Ağrı Merkez | Online & Yüz yüze danışmanlık hizmeti.",
-              area: "Ağrı Merkez",
-              img: "hamiyet.jpg",
-              bgPos: "center",
-              icon: "leaf",
-              note: "Online & Yüz yüze diyet danışmanlığı",
-              instagram: "dyt.hmyt.shnn"
-            },
-          ]
-        },
-        { id: "ergoterapi", name: "Ergoterapistler", icon: "brain", note: "Duyu bütünleme ve ergoterapi",
-          places: [
-            {
-              name: "Melike Çukadar",
-              subName: "Ergoterapist",
-              info: "Özel Sağlık Meslek Hizmet Birimi\n\nÇocukların bağımsızlıklarını kazanmaları ve potansiyellerini en üst seviyeye çıkarmaları için profesyonel pediatrik ergoterapi ve duyu bütünleme hizmeti sunulmaktadır.",
-              area: "Ağrı Merkez",
-              img: "melike1.jpg",
-              images: ["melike1.jpg", "melike2.jpg"],
-              bgPos: "center",
-              icon: "brain",
-              note: "Pediatrik Ergoterapi ve Duyu Bütünleme",
-              address: "Leylekpınar Mahallesi 1074 Sokak No: 8/2 Kat: 1 Özgül Ofis Center Ağrı/Merkez",
-              phones: ["0551 342 1108"],
-              instagram: "ergoterapistmelikecukadar",
-              lessonsTitle: "Uzmanlık Alanları",
-              lessons: [
-                "Pediatrik Ergoterapi", "Duyu Bütünleme Terapisi", "Beslenme Terapisi", "Çocuk Yogası",
-                "Oyun Becerileri", "Sosyal Duygusal Beceriler", "İnce ve Kaba Motor Beceriler",
-                "Oral Motor Beceriler", "Riskli Bebek Takibi", "Davranış Problemleri",
-                "Günlük Yaşam Becerileri", "Uyaran Eksikliği", "Otizm", "Down Sendromu (Genetik Bozukluklar)",
-                "Dikkat Eksikliği ve Hiperaktivite (DEHB)", "Gelişimsel Gerilikler", "Konuşma Bozuklukları",
-                "Yeme Bozuklukları"
-              ],
-              mapsUrl: "https://maps.google.com/?q=Leylekpınar+Mahallesi+1074+Sokak+Özgül+Ofis+Center+Ağrı"
-            }
-          ]
-        },
-        { id: "medikal-estetik", name: "Medikal Estetik", icon: "leaf", note: "Sağlık ve estetik uygulamaları",
-          places: [
-            {
-              name: "Dr. Nilay Dinçgözoğlu",
-              info: "Dr. Nilay Estetik Kliniği, modern estetik uygulamaları ve ileri teknoloji ile donatılmış alanında uzman ekibiyle, her hastasına güvenli ve kişiye özel çözümler sunmaktadır. Kliniğimiz, hijyen ve hasta memnuniyetini ön planda tutarak, doğal ve estetik sonuçlar elde etmeyi amaçlar. Amacımız, estetik müdahaleleri bir sanat ve bilim olarak birleştirip, herkesin kendini daha iyi hissetmesini sağlamaktır.",
-              area: "Ağrı Merkez",
-              img: "drnilay1.jpg",
-              bgPos: "center 35%", 
-              icon: "leaf",
-              note: "Medikal Estetik Doktoru",
-              address: "Fırat Mahallesi 1010 Sokak Hacıarap Apartmanı Kat:3 No:3 Ağrı/Merkez",
-              phones: ["0472 502 12 82", "0531 201 37 49"],
-              instagram: "drnilaydincgozoglu",
-              email: "drnilaydincgozoglu@gmail.com",
-              lessonsTitle: "Uygulanan İşlemler",
-              lessons: [
-                "PRP (Platelet Rich Plasma) İşlemi",
-                "Botoks İşlemi",
-                "Kök Hücre İşlemi",
-                "Mezoterapi İşlemi",
-                "Sıvı Yüz Germe",
-                "Gençlik Aşısı",
-                "Dolgu Uygulaması",
-                "Ben Alma İşlemi"
-              ],
-              mapsUrl: "https://maps.google.com/?q=Fırat+Mahallesi+1010+Sokak+Hacıarap+Apartmanı+Ağrı+Merkez"
-            }
-          ]
-        }
-      ],
-      places:[] 
-    },
-    {
-      id:"nobetci", name:"Nöbetçi Eczane", color:"#E84142", tagline:"Acil Sağlık", 
-      blurb:"Ağrı genelinde tüm ilçelerin günlük nöbetçi eczane bilgisi; adres, telefon ve harita konumlarıyla.",
-      places:[]
-    },
-    {
-      id:"guzellik", name:"Güzellik & Bakım", color:"#9B59B6", tagline:"Kişisel Bakım", 
-      blurb:"Güzellik merkezleri, lazer, cilt bakımı ve estetik klinikleri; kişisel bakımınız için doğru yer.",
-      places:[]
-    },
-    {
-      id: "spor", 
-      name: "Spor & Fitness", 
-      color: "#E67E22", 
-      tagline: "Sağlıklı Yaşam", 
-      blurb: "Ağrı'daki en iyi spor salonları, fitness ve pilates merkezleri; zinde bir yaşam için seni bekliyor.",
-      places: [
-        {
-          name: "Club Maxfit",
-          subName: "Bay/Bayan Spor Salonu",
-          info: "Ağrı Club Maxfit Bay/Bayan spor salonu. Profesyonel eğitmenler eşliğinde sağlıklı ve zinde bir yaşama adım atın.",
-          area: "Ağrı Merkez",
-          img: "clubmaxfit.jpg",
-          bgPos: "center",
-          icon: "heart",
-          note: "Gym & Physical Fitness Center",
-          address: "Abide Mahallesi 1040. Sokak Barış Apart Altı No:3",
-          phones: ["0530 345 33 04"],
-          instagram: "clubmaxfit",
-          lessonsTitle: "Hizmetlerimiz",
-          lessons: ["Bodybuilding", "Fitness", "Zumba", "Pilates", "Step Aerobik"]
-        }
-      ]
-    },
-    {
-      id:"kuafor", name:"Kuaför", color:"#FF69B4", tagline:"Saç Tasarım", 
-      blurb:"En iyi kadın ve erkek kuaför salonları ile modern saç tasarım noktaları bir arada.",
-      places:[]
-    },
-    {
-      id:"egitim", name:"Eğitim", color:"#0097E6", tagline:"Kurs & Dil Okulları", 
-      blurb:"Dershaneler, modern dil okulları, yazılım akademileri ve uzman özel ders eğitmen kadroları rehberi.",
-      hasSubCategories: true,
-      subCategories: [
-        { 
-          id: "dil-kursu", 
-          name: "Dil Kursu", 
-          icon: "lang",
-          note: "Yabancı dil eğitim merkezleri",
-          places: [
-            {
-              name: "E.L.I.T",
-              subName: "ENGLISH LANGUAGE INSTITUTE TURKEY",
-              info: "Hayalinizdeki Dil Eğitiminize Bugün Başlayın",
-              area: "Ağrı Merkez",
-              img: "agrıelitdilkursu.jpg",
-              icon: "lang",
-              note: "Uluslararası standartlarda dil eğitimi.",
-              address: "Hürriyet Mah. 1810 SK. No:11 AĞRI",
-              phones: ["+90 533 895 8255"],
-              instagram: "agrielitdilkursu",
-              email: "info@elitlearning.com",
-              mapsUrl: "https://maps.google.com/?q=Hürriyet+Mah.+1810+SK.+No:11+Ağrı"
-            },
-            {
-              name: "Bright English",
-              subName: "İrem Kaya - İngilizce Eğitmeni",
-              info: "Ağrı Merkez'de İngilizce özel ders ve eğitimleri ile dil öğrenim yolculuğunuzda yanınızdayım.",
-              area: "Ağrı Merkez",
-              img: "BrightEnglish.jpg",
-              bgPos: "center",
-              icon: "lang",
-              note: "İngilizce Özel Ders",
-              instagram: "agringilizceozelders",
-              lessons: ["İngilizce"]
-            },
-          ]
-        },
-        {
-          id: "matematik",
-          name: "Matematik",
-          icon: "brain",
-          note: "Matematik özel ders ve eğitimleri",
-          places: [
-            {
-              name: "Nevra Başcı",
-              subName: "MATEMATİK EĞİTMENİ",
-              info: "Matematik derslerinde başarıya ulaşmanız için profesyonel destek. Matematiği korkulan bir ders olmaktan çıkarıp severek öğrenin.",
-              area: "Ağrı Merkez",
-              img: "nevrahoca1.jpg",
-              bgPos: "center",
-              icon: "brain",
-              note: "Matematiği severek öğrenin.",
-              address: "Ağrı Merkez",
-              instagram: "nevramatematik",
-              lessons: ["Matematik", "LGS Hazırlık", "YKS Hazırlık"]
-            },
-           {
-              name: "Emir Hoca",
-              subName: "MATEMATİK EĞİTMENİ",
-              info: "Her seviyeye uygun matematik eğitimi. Birebir ve online özel ders seçenekleriyle matematiği kolayca öğrenin.",
-              area: "Ağrı Merkez",
-              img: "matematik1.jpg",
-              bgPos: "center",
-              icon: "brain",
-              note: "Birebir online özel ders.",
-              address: "Ağrı Merkez",
-              phones: ["0546 612 9809"],
-              instagram: "agrimatematikozelders",
-              website: "http://emirhocam.gt.tc",
-              lessons: ["İlkokul Matematik", "Ortaokul Matematik", "Lise Matematik", "Online Ders"]
-            },
-            {
-              name: "Canan Hoca",
-              subName: "Matematik Eğitmeni",
-              info: "LGS ve YKS için tüm hazırlık süreçlerinde birebir matematik özel dersleri ile başarıya giden yolda yanınızdayım.",
-              area: "Ağrı Merkez",
-              img: "canan1.jpg",
-              bgPos: "center",
-              icon: "brain",
-              note: "LGS & YKS Hazırlık",
-              phones: ["0553 380 35 45"],
-              instagram: "cananhocamath",
-              lessonsTitle: "Verilen Dersler",
-              lessons: [
-                "LGS Matematik",
-                "YKS Matematik"
-              ]
-            }
-          ]
-        },
-        {
-          id: "muzik",
-          name: "Müzik",
-          icon: "music",
-          note: "Müzik eğitmenleri ve enstrüman dersleri",
-          places: [
-            {
-              name: "Muhammed Hoca",
-              subName: "MÜZİK EĞİTMENİ",
-              info: "Profesyonel müzik eğitimi ile enstrüman ve teori derslerinde Ağrı'da hizmetinizdeyim. Her yaş ve seviyeye uygun, birebir ve grup dersleriyle müzik yolculuğunuza güçlü bir başlangıç yapın.",
-              area: "Ağrı Merkez",
-              img: "muhammedhoca1.jpg",
-              video: "muhammedhocavideo.mp4",
-              icon: "music",
-              note: "Müzik yolculuğunuza bugün başlayın.",
-              address: "Ağrı Merkez",
-              phones: ["0545 971 2132"],
-              instagram: "muhammedhoca04",
-              lessons: ["Bağlama", "Gitar", "Keman", "Yan Flüt", "Elektro Gitar", "Piyano", "Kalimba", "Ukulele", "Ritim"],
-              mapsUrl: "https://maps.google.com/?q=Ağrı+Merkez"
-            },
-            {
-              name: "Merve Hoca",
-              subName: "MÜZİK EĞİTMENİ",
-              info: "Piyano ve yan flüt eğitimleri ile müziğin büyülü dünyasına adım atın. Her yaş ve seviyeye uygun dersler.",
-              area: "Ağrı Merkez",
-              img: "mervehoca1.jpg",
-              icon: "music",
-              note: "Müzik yolculuğunuza bugün başlayın.",
-              address: "Ağrı Merkez",
-              instagram: "agripiyanoyanflutogreniyorum04",
-              lessons: ["Piyano", "Yan Flüt"]
-            }
-          ]
-        }
-      ],
-      places:[]
-    },
-    {
-      id:"etkinlik", name:"Etkinlik", color:"#3F51B5", tagline:"Kültür & Sanat", 
-      blurb:"Şehirdeki konserler, festivaller, tiyatrolar ve doğa turları; Ağrı'nın kültür-sanat takvimi.",
-      places:[]
-    },
-    {
-      id:"danismanlik", name:"Danışmanlık", color:"#8E44AD", tagline:"Kişisel Gelişim", 
-      blurb:"Yaşam koçluğu, meditasyon, farkındalık ve kişisel gelişim uzmanları ile potansiyelinizi keşfedin.",
-      hasSubCategories: true,
-      subCategories: [
-        { 
-          id: "yasam-kocu", 
-          name: "Yaşam Koçu", 
-          icon: "brain", 
-          note: "Kişisel gelişim ve farkındalık danışmanlığı", 
-          places: [
-            {
-              name: "Bahar İgan Bağan",
-              subName: "YAŞAM KOÇU",
-              info: "Hizmet Tanımı\n\nBireysel dönüşüm, duygusal denge ve yaşam kalitesini artırmaya yönelik bütüncül danışmanlık hizmetleri sunulmaktadır.\n\nHizmet Kapsamı:\n\n• Yaşam Koçluğu\nKişinin hedeflerini netleştirmesi, karar alma süreçlerini güçlendirmesi ve yaşamında yön belirlemesine destek sağlayan koçluk çalışmaları.\n\n• Enerji Çalışmaları (Kozmik Enerji, Bioenerji, Spiritüel Enerji)\nEnerji alanının dengelenmesi, blokajların çözülmesi ve yaşam akışının desteklenmesine yönelik uygulamalar.\n\n• EFT (Duygusal Özgürleşme Tekniği)\nStres, kaygı ve duygusal yüklerin azaltılmasına yardımcı olan duygusal regülasyon çalışmaları.\n\n• Meditasyon Uygulamaları\nZihinsel sakinlik, farkındalık ve içsel dengeyi destekleyen rehberli uygulamalar.\n\nÇalışma Prensibi:\n\nHer danışan için ihtiyaçlara özel seans planlaması yapılır. Süreç tamamen bireysel hedefler doğrultusunda ilerler.\n\nÖnemli Bilgilendirme:\n\nSunulan hizmetler tıbbi bir tedavi, teşhis veya psikolojik terapi niteliği taşımaz. Dini bir içerik veya dini yönlendirme taşımaz",
-              area: "Ağrı Merkez",
-              img: "bahar1.jpg",
-              bgPos: "center 5%",
-              icon: "brain",
-              note: "Farkındalıklı bir yaşama adım atın.",
-              address: "Yavuz Mahallesi, Nevzat Güngör Caddesi, Saray Plaza Kat:5 No:40",
-              instagram: "farkimdalikliyasam",
-              mapsUrl: "https://maps.google.com/?q=Ağrı+Saray+Plaza"
-            }
-          ] 
-        },
-        {
-          id: "cocuk-gelisimi",
-          name: "Çocuk Gelişimi Uzmanı",
-          icon: "brain",
-          note: "Çocuk Gelişimi ve Özel Eğitim",
-          places: [
-            {
-              name: "Özge Nur Çelik",
-              subName: "Çocuk Gelişim Uzmanı",
-              info: "Çocuk Gelişim Uzmanı ve Özel Eğitim Uzman Öğreticisi olarak Ağrı'da hizmet vermektedir.",
-              area: "Ağrı Merkez",
-              img: "ozge1.jpg",
-              bgPos: "center",
-              icon: "brain",
-              note: "Çocuk Gelişimi ve Özel Eğitim",
-              address: "Ağrı Merkez",
-              instagram: "uzm.ogrt.ozgenur",
-              lessons: ["Çocuk Gelişimi", "Özel Eğitim"]
-            },
-        
-            {
-              name: "Berivan Hoca",
-              subName: "Çocuk Gelişimi Uzmanı",
-              info: "Çocuk gelişimi, özel eğitim ve aile danışmanlığı alanında çalışan; AGTE uygulamalarıyla çocukların gelişimini destekleyen eğitimci. Readkitr uygulayıcısı.",
-              area: "Ağrı Merkez",
-              img: "berivan1.jpg",
-              bgPos: "center",
-              icon: "brain",
-              note: "AGTE & Readkitr Uygulayıcısı",
-              address: "Ağrı Merkez",
-              instagram: "brvnogretmennn"
-            },
-            {
-              name: "Ömer Hoca",
-              subName: "Hareket Eğitimi Uzmanı",
-              info: "Bireye özel hareket eğitimi ve gelişim programları.",
-              area: "Ağrı Merkez",
-              img: "omerhoca1.jpg",
-              bgPos: "center",
-              icon: "brain",
-              note: "Hareket Eğitimi ve Gelişim",
-              address: "Özel Ümit Aras Özel Eğitim Uygulama Okulu 1. Kademe",
-              phones: ["0546 663 04 61"],
-              instagram: "omer_hoca_agri",
-              lessonsTitle: "Uzmanlık Alanları",
-              lessons: ["Otizm", "DEHB", "Zihinsel Yetersizlik", "Tipik Gelişim"],
-              mapsUrl: "https://maps.google.com/?q=Fırat,+Yaşar+Kemal+Cad+No+75/1,+04100+Ağrı+Merkez/Ağrı"
-            }
-          ]
-          
-        }
-      ],
-      places:[] 
-    },
-    {
-      id:"yazilim", name:"Yazılım & Teknoloji", color:"#34495E", tagline:"Dijital Çözümler", 
-      blurb:"Ağrı'nın dijital dönüşümüne öncülük eden yazılım şirketleri ve teknoloji ajansları.",
-      places:[
-        {
-          name: "SeaStarSoft",
-          subName: "Yazılım ve Teknoloji",
-          info: "SeaStarSoft, e-ticaret ve web tasarım altyapıları kuran, işletmelere özel mağaza kurucu (website builder) çözümleri üreten yenilikçi bir teknoloji platformudur. Markanızı dijital dünyaya taşıyoruz.",
-          area: "Ağrı Merkez",
-          img: "seastarsoft.jpg",
-          bgPos: "center",
-          icon: "grid",
-          note: "Dijital Çözüm Ortağınız",
-          instagram: "seastarsoft"
-        },
-        {
-          name: "Bluversea",
-          subName: "Yazılım ve Teknoloji",
-          info: "Bluversea, e-ticaret ve web tasarım altyapıları kuran, işletmelere özel mağaza kurucu (website builder) çözümleri üreten yenilikçi bir teknoloji platformudur. Markanızı dijital dünyaya taşıyoruz.",
-          area: "Ağrı Merkez",
-          img: "logo.jpg",
-          bgPos: "center",
-          icon: "grid",
-          note: "Dijital Çözüm Ortağınız",
-          instagram: "Bluversea"
-        },
-      ],
+  <!-- 2. ANA UYGULAMA (Giriş yaptıktan sonra açılır) -->
+  <div id="app-view">
+    
+    <!-- SOL MENÜ -->
+    <div class="sidebar">
+      <h2 id="isletme-isim-etiketi">Yükleniyor...</h2>
+      <button class="nav-btn active" id="nav-randevular" onclick="sekmeDegistir('randevular')">📅 Randevularım</button>
+      <button class="nav-btn" id="nav-saatler" onclick="sekmeDegistir('saatler')">⏰ Çalışma Saatleri</button>
+      <button class="nav-btn" id="nav-blog" onclick="sekmeDegistir('blog')">✍️ Blog & Gündem</button>
+      <button class="nav-btn" id="nav-profil" onclick="sekmeDegistir('profil')">⚙️ Profil Ayarları</button>
       
-    },
-    {
-      
-      id:"gezilecek", name:"Gezilecek Yerler", color:"#1ABC9C", tagline:"Ağrı'nın Hazineleri", 
-      blurb:"Tarihten, doğaya - Muhteşem manzaralar doğrudan harita konumlarıyla.",
-      places:[
-        {
-          name:"Balık Gölü", 
-          icon: "tent", note: "Doğa ile iç içe kamp ve gezi.",
-          info:"Türkiye'nin en yüksek rakımlı doğa harikası buzul göllerinden biridir. Taşlıçay ilçesi sınırlarında yer alan bu saklı cennet, berrak suları, doğal kırmızı benekli alabalığı ve etrafındaki muhteşem sıradağ manzarasıyla kampçılar, doğa yürüyüşçüleri ve fotoğrafçılar için kusursuz bir kaçış noktası sunar.", 
-          area:"Taşlıçay", 
-          img:"balikgolu.jpg",
-          address:"Balık Gölü Doğal Koruma Alanı, Taşlıçay / Ağrı",
-          mapsUrl:"https://maps.google.com/?q=Balik+Golu+Taslicay+Agri"
-        },
-        {
-          name:"İshak Paşa Sarayı", 
-          icon: "mosque", note: "Tarihi mimari şaheseri.",
-          info:"18. yüzyıldan kalma büyüleyici bir Osmanlı, Selçuklu ve Pat mimarisi sentezidir. Doğubayazıt ovasına hâkim yüksek sarp kayalıklar üzerine inşa edilmiş bu heybetli anıt eser, muazzam taş işlemeli kapıları, camisi, divan avlusu ve haremiyle adeta bir masal diyarından günümüze kalmış bir şaheserdir.", 
-          area:"Doğubayazıt", 
-          img:"ishakpasa.jpg",
-          address:"İshakpaşa Mahallesi, Saray Yolu No:1, Doğubayazıt / Ağrı",
-          mapsUrl:"https://maps.google.com/?q=Ishak+Pasa+Sarayi+Dogubayazit"
-        },
-        {
-          name:"Ağrı Dağı (5.137 m)", 
-          icon: "mountain", note: "Avrupa'nın en yüksek zirvesi.",
-          info:"Türkiye'nin ve tüm Avrupa'nın en yüksek heybetli zirvesidir. Yıl boyunca erimeyen kalıcı buzulları, efsanevi Nuh'un Tufanı hikayeleri ve heybetli volkanik yapısıyla her yıl dünyanın dört bir yanından binlerce profesyonel dağcıyı, trekking grubunu ve coğrafya meraklısını Ağrı'ya çekmektedir.", 
-          area:"Doğubayazıt", 
-          img:"agridagi2.jpg",
-          address:"Ağrı Dağı Millî Parkı, Doğubayazıt / Ağrı",
-          mapsUrl:"https://maps.google.com/?q=Agri+Dagi+Zirvesi"
-        },
-        {
-          name:"Diyadin Kaplıcaları", 
-          icon: "spa", note: "Şifalı termal sular ve dinlenme.",
-          info:"Şifalı yüksek mineralli termal suları, jeotermal kaynakları ve hemen yanı başından gürleyen derin kanyon oluşumuyla Ağrı'nın en önemli sağlık, dinlenme ve şifa merkezidir. Bölgedeki tesisler cilt hastalıkları, romatizma ve eklem rahatsızlıklarına iyi gelen sularıyla bilinir.", 
-          area:"Diyadin", 
-          img:"kaplica.jpg",
-          address:"Kaplıcalar Bölgesi, Diyadin / Ağrı",
-          mapsUrl:"https://maps.google.com/?q=Diyadin+Kaplicalari+Agri"
-        },
-        {
-          name:"Meteor Çukuru", 
-          icon: "meteor", note: "Dünyanın en büyük ikinci krateri.",
-          info:"Alaska'dakinden sonra dünyanın tescillenmiş en büyük ikinci göktaşı çukurudur. Gürbulak sınır kapısına oldukça yakın bir konumda yer alan, derinliği ve dairesel genişliğiyle görenleri hayrete düşüren, sıra dışı ve gizemli bir doğal coğrafi anıttır.", 
-          area:"Doğubayazıt", 
-          img:"meteor.jpg",
-          address:"Karlıca Köyü Yolu, Sınır Hattı, Doğubayazıt / Ağrı",
-          mapsUrl:"https://maps.google.com/?q=Meteor+Cukuru+Dogubayazit"
-        },
-        {
-          name:"Nuh'un Gemisi (Durupınar)", 
-          icon: "ship", note: "Efsanevi inanç turizmi rotası.",
-          info:"Büyük Tufan sonrası Nuh'un efsanevi gemisinin karaya oturduğu yer olarak kabul edilen, doğal silüetiyle devasa bir tekne şekline sahip yeryüzü oluşumudur. Her yıl inanç turizmi ve uluslararası araştırmacılar tarafından yoğun şekilde ziyaret edilir.", 
-          area:"Durupınar", 
-          img:"nuh.jpg",
-          address:"Üzengili Köyü Dağlık Alanı, Durupınar, Doğubayazıt / Ağrı",
-          mapsUrl:"https://maps.google.com/?q=Nuhun+Gemisi+Durupinar+Agri"
-        }
-      ]
-    },
-  ];
+      <!-- Sadece Admin Görecek -->
+      <button class="nav-btn admin-only" id="nav-admin" onclick="sekmeDegistir('admin')">👑 Süper Yönetici</button>
 
-  // Kategorilerdeki her mekana otomatik slug (url) ekliyoruz.
-  categories.forEach(c => {
-    if (c.places) c.places.forEach(p => p.slug = slugify(p.name));
-    if (c.hasSubCategories) {
-      c.subCategories.forEach(sub => {
-        if (sub.places) sub.places.forEach(p => p.slug = slugify(p.name));
-      });
-    }
-  });
+      <button class="nav-btn logout-btn" onclick="cikisYap()">Çıkış Yap</button>
+    </div>
 
-const dutyPharmacies = [
-    // --- 10.08.2026 ---
-    {date:"10.08.2026", district:"MERKEZ", name:"BÜŞRA DOĞAN ECZANESİ", address:"ALPASLAN MAH.ESKİ VAN CAD.NO:102", landmark:"KAPALI MEYVE-SEBZE PAZARI KARŞISI", phone:"0472 215 29 42", url:"#"},
-    {date:"10.08.2026", district:"MERKEZ", name:"NURAY ECZANESİ", address:"HÜRRİYET MAHALLLESİ CUMHURİYET CADDESİ NO:88B", landmark:"EFE (GÜVEN) TIP MERKEZİ KARŞISI", phone:"0538 864 41 33", url:"#"},
-    {date:"10.08.2026", district:"DİYADİN", name:"DERMAN ECZANESİ", address:"Atatürk Mahallesi Şehit Kaymakam Muhammed Fatih Safitürk Caddesi No:10A", landmark:"Menekşem Market Karşısı", phone:"0472 511 36 36", url:"#"},
-    {date:"10.08.2026", district:"DOĞUBAYAZIT", name:"TANCA ECZANESİ", address:"ÇİFTEPINAR MAHALLESİ BELEDİYE CADDESİ NO:25A", landmark:"1 NOLU SAĞLIK OCAĞI YANI", phone:"0541 534 57 93", url:"#"},
-    {date:"10.08.2026", district:"ELEŞKİRT", name:"MAHMUTPAŞA ECZANESİ", address:"İstiklal Mahallesi Cumhuriyet Caddesi No:101", landmark:"KİLER MARKET KARŞISI", phone:"0472 711 29 78", url:"#"},
-    {date:"10.08.2026", district:"HAMUR", name:"HAMUR ECZANESİ", address:"KÜMBET MAHALLESİ VAN CADDESİ NO:49/A", landmark:"HAMUR BELEDİYESİ ALTI", phone:"0472 616 71 72", url:"#"},
-    {date:"10.08.2026", district:"PATNOS", name:"ÖMER ECZANESİ", address:"ATATÜRK MAHALLESİ MENDERES BULVARI NO:116", landmark:"YILMAZ GİYİM KARŞISI", phone:"0472 616 88 87", url:"#"},
-    {date:"10.08.2026", district:"TAŞLIÇAY", name:"TAŞLIÇAY ECZANESİ", address:"Cumhuriyet Mahallesi Mareşal Favzi Çakmak Caddesi No:23", landmark:"", phone:"0472 551 28 91", url:"#"},
-    {date:"10.08.2026", district:"TUTAK", name:"BEGÜM ECZANESİ", address:"CAMİ MAHALLESİ KAZIM KARABEKİR CADDESİ NO:11B-11C", landmark:"KAYMAKAMLIK EVİ KARŞISI", phone:"0472 411 31 89", url:"#"},
+    <!-- İÇERİK ALANI -->
+    <div class="content">
 
-    // --- 11.08.2026 ---
-    {date:"11.08.2026", district:"DİYADİN", name:"DİLAN ECZANESİ", address:"ISA AGA MAHALLESİ INÖNÜ CADDESİ NO:36", landmark:"BELEDİYE YANI", phone:"0472 511 28 28", url:"#"},
-    {date:"11.08.2026", district:"DOĞUBAYAZIT", name:"MONA ECZANESİ", address:"Uluyol Mahallesi Ağrı Caddesi No:91A", landmark:"ŞENLEN GİYİM KARŞISI", phone:"0541 737 63 04", url:"#"},
-    {date:"11.08.2026", district:"ELEŞKİRT", name:"ŞİFA ECZANESİ", address:"MÜFTÜ SELİM MAHALLESİ CUMHURİYET CADDESİ NO:13", landmark:"SAĞLIK OCAĞI KARŞISI", phone:"0472 711 21 41", url:"#"},
-    {date:"11.08.2026", district:"HAMUR", name:"AHMET ECZANESİ", address:"Kümbet Mahallesi Van Caddesi No:49C", landmark:"HAMUR BELEDİYESİ ALTI", phone:"0544 564 57 48", url:"#"},
-    {date:"11.08.2026", district:"MERKEZ", name:"TUĞBA ECZANESİ", address:"Fırat Mahallesi 1018/1 Sokak No:14C Ağrı", landmark:"AĞRI EĞİTİM VE ARAŞTIRMA HASTANESİ ACİL ÇIKIŞ KAPISI ÇAPRAZI", phone:"0507 252 68 74", url:"#"},
-    {date:"11.08.2026", district:"MERKEZ", name:"YONCA ECZANESİ", address:"LEYLEK PINAR MAHALLESİ VALI KONAGI CADDESİ NO:41", landmark:"BELEDİYE İŞ MERKEZİ ÇAPRAZI", phone:"0472 216 58 16", url:"#"},
-    {date:"11.08.2026", district:"PATNOS", name:"ÖZLEM ECZANESİ", address:"YENİ MAHALLESİ GARİP CADDESİ NO:39", landmark:"ÖZEL HASTANE KARŞISI", phone:"0472 616 14 02", url:"#"},
-    {date:"11.08.2026", district:"TAŞLIÇAY", name:"BEYZA ECZANESİ", address:"15 TEMMUZ ŞEHİTLER MAHALLESİ MAREŞAL FEVZİ ÇAKMAK CADDESİ NO:1/1", landmark:"PTT KARGO YANI", phone:"0472 551 30 00", url:"#"},
-    {date:"11.08.2026", district:"TUTAK", name:"TUTAK ECZANESİ", address:"MURAT MAHALLESİ CUMHURİYET CADDESİ NO:51/A", landmark:"", phone:"0472 411 26 98", url:"#"},
-
-    // --- 12.08.2026 ---
-    {date:"12.08.2026", district:"DİYADİN", name:"DİYADİN ECZANESİ", address:"İSA AĞA MAHALLESİ INÖNÜ CADDESİ NO:98", landmark:"PTT KARŞISI", phone:"0472 511 24 65", url:"#"},
-    {date:"12.08.2026", district:"DOĞUBAYAZIT", name:"ZEYNEP ECZANESİ", address:"SANAYİ MAHALLESİ ÇEVRE YOLU BULVARI NO:766/D", landmark:"DEVLET HASTANESİ KARŞISI", phone:"0472 312 82 22", url:"#"},
-    {date:"12.08.2026", district:"ELEŞKİRT", name:"ELEŞKİRT ECZANESİ", address:"İSTİKLAL MAHALLESİ CUMHURİYET CADDESİ NO:109", landmark:"BELEDİYE BİNASİ KARŞISI", phone:"0472 711 29 16", url:"#"},
-    {date:"12.08.2026", district:"HAMUR", name:"HAMUR ECZANESİ", address:"KÜMBET MAHALLESİ VAN CADDESİ NO:49/A", landmark:"HAMUR BELEDİYESİ ALTI", phone:"0472 616 71 72", url:"#"},
-    {date:"12.08.2026", district:"MERKEZ", name:"YAŞAM ECZANESİ", address:"HURRİYET MAHALLESİ VALI KONAGI CADDESİ NO:50", landmark:"ÖZGÜL MARKET ÇAPRAZI", phone:"0472 215 42 72", url:"#"},
-    {date:"12.08.2026", district:"MERKEZ", name:"DURU ECZANESİ", address:"FIRAT MAHALLESİ 1018/3 SOKAK NO:6/F.", landmark:"Ağrı Eğitim ve Araştırma Hastanesi Karşısı", phone:"0472 215 06 61", url:"#"},
-    {date:"12.08.2026", district:"PATNOS", name:"SARI ECZANESİ", address:"ATATÜRK MAHALLESİ ALPASLAN CADDESİ KAPI NO: 69", landmark:"FATİH ET LOKANTASI ÇAPRAZI", phone:"0551 481 44 68", url:"#"},
-    {date:"12.08.2026", district:"TAŞLIÇAY", name:"ÇARE ECZANESİ", address:"HÜRRİYET MAHALLESİ M.FEVZİ ÇAKMAK CADDESİ DIŞ KAPI NO:94A", landmark:"MERVE KIRTASİYE YANI", phone:"0546 491 53 22", url:"#"},
-    {date:"12.08.2026", district:"TUTAK", name:"OZAN ECZANESİ", address:"Cami Mahallesi Cumhuriyet Caddesi No:39B", landmark:"Merkez Camii Yanı", phone:"0472 411 28 97", url:"#"},
-
-    // --- 13.08.2026 ---
-    {date:"13.08.2026", district:"DİYADİN", name:"ŞİFA ECZANESİ", address:"MURAT MAHALLESİ KAYMAKAM ÖZGÜR AZER KURAK CADDESİ NO:63A", landmark:"MURAT CAMİİ YANI", phone:"0505 597 63 42", url:"#"},
-    {date:"13.08.2026", district:"DOĞUBAYAZIT", name:"TEKIN ECZANESİ", address:"ÇIFTEPINAR MAHALLESİ RIFKI BAŞKAYA CADDESİ NO:17/34", landmark:"DOĞUBAYAZIT AVM ALTI", phone:"0472 502 05 60", url:"#"},
-    {date:"13.08.2026", district:"ELEŞKİRT", name:"EMEK ECZANESİ", address:"MÜFTÜ SELİM MAHALLESİ CUMHURİYET CADDESİ NO:112/B", landmark:"SAĞLIK OCAĞI KARŞISI", phone:"0472 711 47 47", url:"#"},
-    {date:"13.08.2026", district:"HAMUR", name:"AHMET ECZANESİ", address:"Kümbet Mahallesi Van Caddesi No:49C", landmark:"HAMUR BELEDİYESİ ALTI", phone:"0544 564 57 48", url:"#"},
-    {date:"13.08.2026", district:"MERKEZ", name:"KRAL ECZANESİ", address:"MURAT MAHALLESİ ESKİ VAN CADDESİ NO:135A", landmark:"ÇEVİK KUVVET YANI", phone:"0472 215 44 65", url:"#"},
-    {date:"13.08.2026", district:"MERKEZ", name:"GÜVEN ECZANESİ", address:"ABİDE MAHALLESİ 1042 SOKAK NO:1", landmark:"ÖZEL LENA HASTANESİ KARŞISI", phone:"0472 215 01 91", url:"#"},
-    {date:"13.08.2026", district:"PATNOS", name:"YALÇIN ECZANESİ", address:"CAMİ MAHALLESİ RECEP TAYYİP ERDOĞAN BULVARI KAPI NO:1/A", landmark:"VANGÖLÜ YAZIHANE KARŞISI", phone:"0472 616 60 60", url:"#"},
-    {date:"13.08.2026", district:"TAŞLIÇAY", name:"ELİF ECZANESİ", address:"HÜRRİYET MAHALLESİ MAREŞAL FEVZİ ÇAKMAK CADDESİ NO:100", landmark:"A101 KARŞISI", phone:"0472 551 29 00", url:"#"},
-    {date:"13.08.2026", district:"TUTAK", name:"BERFİN ECZANESİ", address:"Murat Mahallesi Dr Cihan ÖKTEM Caddesi No:5A ve 5B", landmark:"GAZİ İLKOKULUNUN KARŞISI", phone:"0552 636 00 04", url:"#"},
-
-    // --- 14.08.2026 ---
-    {date:"14.08.2026", district:"DİYADİN", name:"CEREN ECZANESİ", address:"Murat Mahallesi Şehit Kaymakam Muhammed Fatih Safitürk Caddesi No:13H", landmark:"KÜLTÜR KİTAP KIRTASİYE KARŞISI", phone:"0530 115 54 04", url:"#"},
-    {date:"14.08.2026", district:"DOĞUBAYAZIT", name:"DÜNYA ECZANESİ", address:"Ahmedi Hani Mahallesi 1352 Sokak No:5C", landmark:"Meteoroloji Sağlık Ocağı Karşısı", phone:"0472 312 60 70", url:"#"},
-    {date:"14.08.2026", district:"ELEŞKİRT", name:"ESRA ECZANESİ", address:"İstiklal Mahallesi Cumhuriyet Caddesi No:83", landmark:"ZİRAAT BANKASI KARŞISI", phone:"0545 591 44 24", url:"#"},
-    {date:"14.08.2026", district:"HAMUR", name:"HAMUR ECZANESİ", address:"KÜMBET MAHALLESİ VAN CADDESİ NO:49/A", landmark:"HAMUR BELEDİYESİ ALTI", phone:"0472 616 71 72", url:"#"},
-    {date:"14.08.2026", district:"MERKEZ", name:"DUMAN ECZANESİ", address:"SITKIYE MAHAHLLESİ YAŞAR KEMAL CADDESİ NO:27", landmark:"ADALET SARAYI KARŞISI", phone:"0472 216 11 13", url:"#"},
-    {date:"14.08.2026", district:"MERKEZ", name:"RUKİYE ECZANESİ", address:"BAHÇELİ EVLER MAHALLESİ CUMHURİYET CADDESİ NO 125A", landmark:"ESKİ KÜTÜPHANE YANI", phone:"0472 216 06 06", url:"#"},
-    {date:"14.08.2026", district:"PATNOS", name:"YUSUF ECZANESİ", address:"ATATÜRK MAHALLESİ MALAZGİRT CADDESİ CADDE KAPI NO:6A", landmark:"LAL ET LOKANTASI YANI", phone:"0472 616 89 35", url:"#"},
-    {date:"14.08.2026", district:"TAŞLIÇAY", name:"FERHAT ECZANESİ", address:"HÜRRİYET MAHALLESİ M.FEVZİ ÇAKMAK CADDESİ NO:48/A", landmark:"ÖĞRETMEN EVİ ALTI", phone:"0539 430 14 11", url:"#"},
-    {date:"14.08.2026", district:"TUTAK", name:"BEGÜM ECZANESİ", address:"CAMİ MAHALLESİ KAZIM KARABEKİR CADDESİ NO:11B-11C", landmark:"KAYMAKAMLIK EVİ KARŞISI", phone:"0472 411 31 89", url:"#"},
-
-    // --- 15.08.2026 ---
-    {date:"15.08.2026", district:"DİYADİN", name:"DERMAN ECZANESİ", address:"Atatürk Mahallesi Şehit Kaymakam Muhammed Fatih Safitürk Caddesi No:10A", landmark:"Menekşem Market Karşısı", phone:"0472 511 36 36", url:"#"},
-    {date:"15.08.2026", district:"DOĞUBAYAZIT", name:"SULTAN ECZANESİ", address:"ULUYOL MAHALLESİ AĞRI CADDESİ NO:69/B", landmark:"ŞÖHRET PASTANESİ KARŞISI", phone:"0472 312 08 87", url:"#"},
-    {date:"15.08.2026", district:"ELEŞKİRT", name:"MAHMUTPAŞA ECZANESİ", address:"İstiklal Mahallesi Cumhuriyet Caddesi No:101", landmark:"KİLER MARKET KARŞISI", phone:"0472 711 29 78", url:"#"},
-    {date:"15.08.2026", district:"HAMUR", name:"AHMET ECZANESİ", address:"Kümbet Mahallesi Van Caddesi No:49C", landmark:"HAMUR BELEDİYESİ ALTI", phone:"0544 564 57 48", url:"#"},
-    {date:"15.08.2026", district:"MERKEZ", name:"ŞÜKRAN ECZANESİ", address:"HÜRRİYET MAHALLESİ 1810 SOKAK NO:25/D AĞRI/MERKEZ", landmark:"YENİ DİŞ HASTANESİ KARŞISI", phone:"0472 215 38 68", url:"#"},
-    {date:"15.08.2026", district:"MERKEZ", name:"TURAN ECZANESİ", address:"YAVUZ MAHALLESİ KAĞIZMAN CADDESİ NO:8/B", landmark:"SULTAN SOFRASI KARŞISI", phone:"0472 215 75 75", url:"#"},
-    {date:"15.08.2026", district:"PATNOS", name:"EMEK ECZANESİ", address:"SARISU MAHALLESİ BİTLİS YOLU NO:29", landmark:"HASTANE YANI", phone:"0472 616 14 11", url:"#"},
-    {date:"15.08.2026", district:"TAŞLIÇAY", name:"TAŞLIÇAY ECZANESİ", address:"Cumhuriyet Mahallesi Mareşal Favzi Çakmak Caddesi No:23", landmark:"", phone:"0472 551 28 91", url:"#"},
-    {date:"15.08.2026", district:"TUTAK", name:"TUTAK ECZANESİ", address:"MURAT MAHALLESİ CUMHURİYET CADDESİ NO:51/A", landmark:"", phone:"0472 411 26 98", url:"#"},
-  ];
- /* 15 GÜNLÜK HAVA DURUMU (Ağrı Merkez) */
-  const weatherData = {
-    "12.06.2026": { temp: 15, low: null, desc: "Hafif yağmurlu ve açık hava" },
-    "13.06.2026": { temp: 23, low: 15, desc: "Parçalı bulutlu" },
-    "14.06.2026": { temp: 21, low: 10, desc: "Yer yer yoğun yağmurlu" },
-    "15.06.2026": { temp: 21, low: 11, desc: "Hafif yağmurlu ve açık hava" },
-    "16.06.2026": { temp: 22, low: 14, desc: "Parçalı bulutlu" },
-    "17.06.2026": { temp: 24, low: 16, desc: "Güneşli" },
-    "18.06.2026": { temp: 26, low: 16, desc: "Bulutlu ve yağmur ihtimali" },
-    "19.06.2026": { temp: 27, low: 16, desc: "Hafif yağmurlu ve açık hava" },
-    "20.06.2026": { temp: 27, low: 16, desc: "Güneşli" },
-    "21.06.2026": { temp: 29, low: 17, desc: "Parçalı bulutlu" },
-    "22.06.2026": { temp: 30, low: 17, desc: "Güneşli" },
-    "23.06.2026": { temp: 28, low: 19, desc: "Güneşli" },
-    "24.06.2026": { temp: 28, low: 20, desc: "Güneşli" },
-    "25.06.2026": { temp: 29, low: 20, desc: "Güneşli" },
-    "26.06.2026": { temp: 29, low: 15, desc: "Güneşli" },
-    "27.06.2026": { temp: 25, low: 9,  desc: "Çok bulutlu" },
-    "28.06.2026": { temp: 25, low: 12, desc: "Çoğunlukla güneşli" },
-    "29.06.2026": { temp: 20, low: 8,  desc: "Bölgenin bazı kesimlerinde gök gürültülü sağanak yağış" },
-    "30.06.2026": { temp: 21, low: 10, desc: "Bölgenin bazı kesimlerinde gök gürültülü sağanak yağış" }
-  };
-
-  window.AGRI = { categories, dutyPharmacies, weatherData };
-
-  // BANNERLAR
- window.AGRI_STATIC_BANNERS = [
-    { img:"uzm.diyetisyenbilge.jpg", title:"Uzm. Diyetisyen Bilge İgan Yıldırım", subtitle:"Aramıza Hoş Geldin", slug: slugify("Uzman Diyetisyen Bilge İgan Yıldırım") },
-    { img:"agrıelitdilkursu.jpg", title:"Ağrı E.L.I.T Dil Kursu", subtitle:"Aramıza Hoş Geldin", slug: slugify("E.L.I.T") },
-    { img:"muhammedhoca2.jpg", title:"Muhammed Hoca", subtitle:"Aramıza Hoş Geldin", slug: slugify("Muhammed Hoca") },
-    { img:"drnilay1.jpg", title:"Dr. Nilay Dinçgözoğlu", subtitle:"Aramıza Hoş Geldin", bgPos: "center center", slug: slugify("Dr. Nilay Dinçgözoğlu") },
-    { img:"bahar3.jpg", title:"Bahar İgan Bağan", subtitle:"Aramıza Hoş Geldin", bgPos: "center 35%", slug: slugify("Bahar İgan Bağan") },
-    { img:"mervehoca1.jpg", title:"Merve Hoca", subtitle:"Aramıza Hoşgeldin", slug: slugify("Merve Hoca") },
-    { img:"nevrahoca1.jpg", title:"Nevra Başcı", subtitle:"Aramıza Hoş Geldin", bgPos: "center", slug: slugify("Nevra Başcı") },
-    { img: "dilekpolat1.jpg", title: "Dilek Polat", subtitle: "Aramıza Hoş Geldin", bgPos: "center center", slug: slugify("Dilek Polat") },
-    { img: "ozge1.jpg", title: "Özge Nur Çelik", subtitle: "Aramıza Hoş Geldin", bgPos: "center", slug: slugify("Özge Nur Çelik") },
-    { img: "matematik1.jpg", title: "Emir Hoca", subtitle: "Aramıza Hoş Geldin", bgPos: "center", slug: slugify("Emir Hoca") },
-    { img: "sevval1.jpg", title: "Şevval Taşdemir", subtitle: "Aramıza Hoş Geldin", bgPos: "center", slug: slugify("Şevval Taşdemir") },
-    { img: "berivan1.jpg", title: "Berivan Hoca", subtitle: "Aramıza Hoş Geldin", bgPos: "center", slug: slugify("Berivan Hoca") },
-    { img: "berika1.jpg", title: "Berika Kuruçay", subtitle: "Aramıza Hoş Geldin", bgPos: "center", slug: slugify("Diyetisyen Berika Kuruçay") },
-    { img: "canan1.jpg", title: "Canan Hoca", subtitle: "Aramıza Hoş Geldin", bgPos: "center", slug: slugify("Canan Hoca") },
-    { img: "seda1.jpg", title: "Seda Nur Dursun", subtitle: "Aramıza Hoş Geldin", slug: slugify("Diyetisyen Seda Nur Dursun") },
-    { img: "seastarsoft.jpg", title: "SeaStarSoft", subtitle: "Dijital Çözüm Ortağınız", bgPos: "center", slug: slugify("SeaStarSoft") },
-    { img: "seher1.jpg", title: "Diyetisyen Seher Issi", subtitle: "Aramıza Hoş Geldin", bgPos: "center", slug: slugify("Diyetisyen Seher Issi") },
-    { img: "omerhoca1.jpg", title: "Ömer Hoca", subtitle: "Aramıza Hoş Geldin", bgPos: "center", slug: slugify("Ömer Hoca") },
-    { img: "melike1.jpg", title: "Melike Çukadar", subtitle: " Aramıza Hoş Geldin", bgPos: "center", slug: slugify("Melike Çukadar") },
-    { img: "logo.jpg", title: "Bluversea", subtitle: "Dijital Çözüm Ortağınız", bgPos: "center", slug: slugify("Bluversea") },
-    { img:"clubmaxfit.jpg", title:"Club Maxfit", subtitle:"Aramıza Hoş Geldin", bgPos: "center", slug: slugify("Club Maxfit") },
-    { img:"BrightEnglish.jpg", title:"Bright English", subtitle:"İrem Kaya - Aramıza Hoş Geldin", slug: slugify("Bright English") },
-  { img:"hamiyet.jpg", title:"Dyt. Hamiyet Şahin", subtitle:"Aramıza Hoş Geldin", slug: slugify("Diyetisyen Hamiyet Şahin") },
-  ];
-
-  // HİKAYELER
-  window.AGRI_STORIES = [
-    {
-      title: "🎁 Fırsat!",
-      cover: "kampanya2.jpg", 
-      bgPos: "center",
-      slideText: "Harika fırsatlarımız başladı! Detaylar burada...",
-      slideImg: "kampanya1.jpg" 
-    }
-  ];
-
-  window.PAT = { pattern };
-})();
-
-/* Güvenli kalıcı yerel veri saklama */
-const safeStore = (function(){
-  let mem = {};
-
-  function lsOk(){
-    try { const k="__t__"; window.localStorage.setItem(k,"1"); window.localStorage.removeItem(k); return true; }
-    catch(e){ return false; }
-  }
-  const hasLS = lsOk();
-
-  function setCookie(key, val){
-    try {
-      const exp = new Date(Date.now() + 365*24*60*60*1000).toUTCString();
-      document.cookie = encodeURIComponent(key) + "=" + encodeURIComponent(val) + "; expires=" + exp + "; path=/; SameSite=Lax";
-      return true;
-    } catch(e){ return false; }
-  }
-  function getCookie(key){
-    try {
-      const name = encodeURIComponent(key) + "=";
-      const parts = document.cookie.split(";");
-      for (let c of parts){
-        c = c.trim();
-        if (c.indexOf(name) === 0) return decodeURIComponent(c.substring(name.length));
-      }
-      return null;
-    } catch(e){ return null; }
-  }
-
-  return {
-    get(key){
-      if (hasLS){
-        try { const v = window.localStorage.getItem(key); if (v != null) return v; } catch(e){}
-      }
-      const ck = getCookie(key);
-      if (ck != null) return ck;
-      return (key in mem) ? mem[key] : null;
-    },
-    set(key, val){
-      let stored = false;
-      if (hasLS){
-        try { window.localStorage.setItem(key, val); stored = true; } catch(e){}
-      }
-      if (setCookie(key, val)) stored = true;
-      mem[key] = val;
-      return stored;
-    }
-  };
-})();
-
-const { useRef, useEffect, useState, useCallback, useMemo } = React;
-
-/* ===================== KALİTELİ SVG İKON KÜTÜPHANESİ ===================== */
-function Icon({ name, size = 26, stroke = "currentColor", sw = 1.7 }) {
-  const common = {
-    width: size, height: size, viewBox: "0 0 24 24",
-    fill: "none", stroke: stroke, strokeWidth: sw,
-    strokeLinecap: "round", strokeLinejoin: "round"
-  };
-  const paths = {
-    tooth: <path d="M12 5.5c-1.4-1.6-3.2-2-4.7-1.6C5.5 4.4 4.5 6 4.7 8c.2 1.7.6 2.7 1 4.5.5 2.4.7 5 1.7 6.4.5.7 1.5.7 1.9-.1.7-1.3.8-3.3 1.4-4.6.3-.6 1.3-.6 1.6 0 .6 1.3.7 3.3 1.4 4.6.4.8 1.4.8 1.9.1 1-1.4 1.2-4 1.7-6.4.4-1.8.8-2.8 1-4.5.2-2-.8-3.6-2.6-4.1-1.5-.4-3.3 0-4.7 1.6Z"/>,
-    speak: <g><path d="M3 11a8 8 0 0 1 16 0v0a8 8 0 0 1-8 8H7l-3 2v-4a8 8 0 0 1-1-6Z"/><path d="M8 10h6M8 13h4"/></g>,
-    brain: <g><path d="M9.5 3A2.5 2.5 0 0 0 7 5.5v.5a2.5 2.5 0 0 0-2 4 2.5 2.5 0 0 0 0 4 2.5 2.5 0 0 0 2 4v.5A2.5 2.5 0 0 0 12 21V3.5"/><path d="M14.5 3A2.5 2.5 0 0 1 17 5.5v.5a2.5 2.5 0 0 1 2 4 2.5 2.5 0 0 1 0 4 2.5 2.5 0 0 1-2 4v.5A2.5 2.5 0 0 1 12 21"/></g>,
-    bone: <path d="M17 10c1.5 0 3-1 3-3s-1.3-2.5-2.4-2.4C16.5 4.7 16 6 16 6l-2.5 2.5M7 14c-1.5 0-3 1-3 3s1.3 2.5 2.4 2.4C7.5 19.3 8 18 8 18l9-9 .5-.5"/>,
-    leaf: <g><path d="M11 20A7 7 0 0 1 4 13c0-5 4.5-9 16-9 0 7-3.5 13-9 13a6 6 0 0 1-2 .5"/><path d="M11 20c0-4 2-8 6-11"/></g>,
-    lang: <g><circle cx="12" cy="12" r="9"/><path d="M3 12h18M12 3c2.5 2.5 2.5 16 0 18M12 3c-2.5 2.5-2.5 16 0 18"/></g>,
-    music: <g><path d="M9 18V5l11-2v13"/><circle cx="6" cy="18" r="3"/><circle cx="17" cy="16" r="3"/></g>,
-    tent: <g><path d="M3.5 20 12 5l8.5 15M12 5v15M9 20l3-5 3 5"/></g>,
-    mosque: <g><path d="M5 21V11M19 21V11M5 11c0-3 3-3 3-6 0 3 3 3 3 6M11 11c0-3 3-3 3-6 0 3 3 3 3 6M12 3v2M3 21h18M8 21v-4a4 4 0 0 1 8 0v4"/></g>,
-    mountain: <path d="m3 20 6.5-12 3.5 6 2.5-4L21 20H3Z"/>,
-    spa: <g><path d="M12 22c4-3 7-6 7-10a7 7 0 0 0-14 0c0 4 3 7 7 10ZM9 8c1 0 3 1 3 3M15 8c-1 0-3 1-3 3"/></g>,
-    meteor: <g><circle cx="14" cy="14" r="7"/><path d="M9 9 4 4M12 7l-3-3M7 12 3 8"/></g>,
-    ship: <g><path d="M3 16 4 9h16l1 7M5 16c0 2 2 3 4 3s4-1 4-3M12 9V4h4M3 16c.5 2 2 3 3 3"/></g>,
-    pin: <g><path d="M12 21s7-6.3 7-11a7 7 0 1 0-14 0c0 4.7 7 11 7 11Z"/><circle cx="12" cy="10" r="2.5"/></g>,
-    heart: <path d="M20.84 4.61a5.5 5.5 0 0 0-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 0 0-7.78 7.78l1.06 1.06L12 21.23l7.78-7.78 1.06-1.06a5.5 5.5 0 0 0 0-7.78z"/>,
-    share: <g><circle cx="18" cy="5" r="3"/><circle cx="6" cy="12" r="3"/><circle cx="18" cy="19" r="3"/><line x1="8.59" y1="13.51" x2="15.42" y2="17.49"/><line x1="15.41" y1="6.51" x2="8.59" y2="10.49"/></g>,
-    home: <g><path d="M3 9l9-7 9 7v11a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z"/><polyline points="9 22 9 12 15 12 15 22"/></g>,
-    grid: <g><rect x="3" y="3" width="7" height="7"/><rect x="14" y="3" width="7" height="7"/><rect x="14" y="14" width="7" height="7"/><rect x="3" y="14" width="7" height="7"/></g>,
-    cross: <g><line x1="12" y1="5" x2="12" y2="19"/><line x1="5" y1="12" x2="19" y2="12"/></g>,
-   compass: <g><circle cx="12" cy="12" r="10"/><polygon points="16.24 7.76 14.12 14.12 7.76 16.24 9.88 9.88 16.24 7.76"/></g>,
-    eye: <g><path d="M2 12c0 0 5-7 10-7s10 7 10 7-5 7-10 7-10-7-10-7Z"/><circle cx="12" cy="12" r="3"/></g>
-  };
-  return <svg {...common}>{paths[name] || paths.pin}</svg>;
-}
-
-/* ===================== TAM EKRAN GÖRSEL İZLEYİCİ ===================== */
-function FullscreenImage({ place, onClose }) {
-  useEffect(() => {
-    const onKey = (e) => { if (e.key === "Escape") onClose(); };
-    document.addEventListener("keydown", onKey);
-    const prev = document.body.style.overflow;
-    document.body.style.overflow = "hidden";
-    return () => { document.removeEventListener("keydown", onKey); document.body.style.overflow = prev; };
-  }, []);
-
-  const phone = place.phones && place.phones.length ? place.phones[0] : null;
-
-  return (
-    <div className="fs-overlay" onClick={(e) => { if (e.target.classList.contains("fs-overlay")) onClose(); }}>
-      <div className="fs-close" onClick={onClose}>✕</div>
-      <div className="fs-stage">
-        <img src={place.img} alt={place.name} style={place.bgPos ? { objectPosition: place.bgPos } : {}} />
-      </div>
-      <div className="fs-caption">
-        <div className="fs-caption-inner">
-          <h3>{place.name}{place.subName && <span>{place.subName}</span>}</h3>
-          <div className="fs-meta-row">
-            {place.address && (
-              <div className="fs-meta">
-                <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.2"><path d="M20 10c0 6-8 12-8 12s-8-6-8-12a8 8 0 0 1 16 0Z"/><circle cx="12" cy="10" r="2.5"/></svg>
-                <span>{place.address}</span>
-              </div>
-            )}
-            {phone && (
-              <div className="fs-meta">
-                <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.2"><path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07 19.5 19.5 0 0 1-6-6 19.79 19.79 0 0 1-3.07-8.67A2 2 0 0 1 4.11 2h3a2 2 0 0 1 2 1.72 12.84 12.84 0 0 0 .7 2.81 2 2 0 0 1-.45 2.11L8.09 9.91a16 16 0 0 0 6 6l1.27-1.27a2 2 0 0 1 2.11-.45 12.84 12.84 0 0 0 2.81.7A2 2 0 0 1 22 16.92z"/></svg>
-                <a href={`tel:${phone.replace(/\s/g,'')}`} onClick={() => window.gtag && window.gtag('event', 'telefon_arandi', { mekan_adi: place.name })}>{phone}</a>
-              </div>
-            )}
+      <!-- RANDEVULAR SEKMSİ -->
+      <div id="tab-randevular" class="tab-content" style="display: block;">
+        <div class="toolbar">
+          <div>
+            <span style="font-weight: 800; font-size: 20px;">Randevu Yönetimi</span>
+            <select id="randevu-filtre" onchange="randevulariGetir()" style="margin-left: 15px;">
+              <option value="hepsi">Tüm Randevular</option>
+              <option value="bekliyor">Onay Bekleyenler</option>
+              <option value="onaylandi">Onaylananlar</option>
+              <option value="reddedildi">İptal Edilenler</option>
+            </select>
           </div>
+          <button class="btn-pdf" onclick="pdfIndir('randevu-liste-alani', 'Randevularim')">📄 PDF İndir</button>
+        </div>
+
+        <div id="randevu-liste-alani">
+          <!-- Randevular buraya JavaScript ile çizilecek -->
+          <div id="pdf-footer">04agri.com Dijital Şehir Rehberi</div>
         </div>
       </div>
+
+      <!-- SAATLER SEKMSİ (Sonraki Adımda Doldurulacak) -->
+      <div id="tab-saatler" class="tab-content">
+        <h2>Çalışma Saatleri</h2>
+        <p>Bu modül bir sonraki adımda eklenecektir. (İşletme çalışma günlerini, başlangıç-bitiş saatlerini, seans aralıklarını ve boş/dolu günleri buradan yönetecek).</p>
+      </div>
+
+      <!-- BLOG SEKMSİ (Sonraki Adımda Doldurulacak) -->
+      <div id="tab-blog" class="tab-content">
+        <h2>Blog & Gündem Yönetimi</h2>
+        <p>Bu modül bir sonraki adımda eklenecektir. (İşletme buradan yazı gönderecek, admin onayına düşecek).</p>
+      </div>
+
+      <!-- PROFİL SEKMSİ -->
+      <div id="tab-profil" class="tab-content">
+        <h2 style="margin-bottom: 20px;">Profil & Güvenlik Ayarları</h2>
+        <div class="data-card" style="flex-direction: column; align-items: flex-start;">
+          <h4 style="margin-bottom: 15px;">Şifre Değiştir</h4>
+          <div class="input-group" style="width: 100%; max-width: 400px; margin:0 0 15px 0;">
+            <input type="password" id="yeni-sifre" placeholder="Yeni şifrenizi girin" />
+            <span class="eye-icon" onclick="sifreGosterGizle()">👁️</span>
+          </div>
+          <button class="btn-main" style="max-width: 400px; margin:0;" onclick="sifreGuncelle()">Şifreyi Kaydet</button>
+        </div>
+      </div>
+
+      <!-- ADMİN SEKMSİ (Sadece Patron) -->
+      <div id="tab-admin" class="tab-content">
+        <h2>Süper Yönetici Paneli</h2>
+        <p>Sistemdeki tüm kayıtlı işletmeler, tüm bekleyen/onaylanan blog yazıları ve sistemin genel raporu burada yer alacaktır. (Sonraki adımda eklenecek).</p>
+      </div>
+
     </div>
-  );
-}
+  </div>
 
-/* ===================== TAM EKRAN VİDEO OYNATICI ===================== */
-function FullscreenVideo({ src, title, onClose }) {
-  const vidRef = useRef(null);
-  const [playing, setPlaying] = useState(true);
-  const [muted, setMuted] = useState(false);
+  <script>
+    // 1. SUPABASE BAĞLANTISI (Şifrelerin burada)
+    const supabaseUrl = 'https://hsrifvlkiazkzlmebdgb.supabase.co';
+    const supabaseKey = 'sb_publishable_fJ4Z7Hp80QOGUVh9pDrMXA_ZIuTi7rn';
+    const client = window.supabase.createClient(supabaseUrl, supabaseKey);
 
-  useEffect(() => {
-    const onKey = (e) => { if (e.key === "Escape") onClose(); };
-    document.addEventListener("keydown", onKey);
-    const prev = document.body.style.overflow;
-    document.body.style.overflow = "hidden";
-    const v = vidRef.current;
-    if (v) { v.play().then(() => setPlaying(true)).catch(() => setPlaying(false)); }
+    let aktifIsletme = null;
 
-    const onVisible = () => {
-      const vid = vidRef.current;
-      if (!vid) return;
-      if (document.visibilityState === "visible") {
-        vid.play().then(() => setPlaying(true)).catch(() => setPlaying(false));
+    // SAYFA YÜKLENDİĞİNDE OTURUM KONTROLÜ YAP
+    window.onload = async function() {
+      const { data: { session } } = await client.auth.getSession();
+      if (session) {
+        kullaniciyiHazirla(session.user.id);
       }
     };
-    document.addEventListener("visibilitychange", onVisible);
-    window.addEventListener("focus", onVisible);
-    window.addEventListener("pageshow", onVisible);
 
-    return () => {
-      document.removeEventListener("keydown", onKey);
-      document.removeEventListener("visibilitychange", onVisible);
-      window.removeEventListener("focus", onVisible);
-      window.removeEventListener("pageshow", onVisible);
-      document.body.style.overflow = prev;
-    };
-  }, []);
+    // GİRİŞ İŞLEMİ
+    async function girisYap() {
+      const email = document.getElementById('email').value;
+      const password = document.getElementById('password').value;
+      const mesaj = document.getElementById('mesaj');
 
-  const togglePlay = () => {
-    const v = vidRef.current; if (!v) return;
-    if (v.paused) { v.play().then(() => setPlaying(true)).catch(() => {}); }
-    else { v.pause(); setPlaying(false); }
-  };
-  const toggleMute = () => {
-    const v = vidRef.current; if (!v) return;
-    v.muted = !v.muted; setMuted(v.muted);
-  };
+      mesaj.innerText = "Bağlanıyor...";
+      const { data, error } = await client.auth.signInWithPassword({ email, password });
 
-  return (
-    <div className="fs-overlay">
-      <div className="fs-close" onClick={onClose}>✕</div>
-      <div className="fs-stage">
-        <video
-          ref={vidRef}
-          src={src}
-          playsInline
-          autoPlay
-          loop
-          onClick={togglePlay}
-          onPlay={() => setPlaying(true)}
-          onPause={() => setPlaying(false)}
-        />
-        {!playing && (
-          <div className="fs-bigplay" onClick={togglePlay}>
-            <svg width="42" height="42" viewBox="0 0 24 24" fill="#fff"><path d="M7 5.5v13a1 1 0 0 0 1.5.87l11-6.5a1 1 0 0 0 0-1.74l-11-6.5A1 1 0 0 0 7 5.5Z"/></svg>
-          </div>
-        )}
-      </div>
-      <div className="fs-vid-controls">
-        <div className="fs-vid-btn primary" onClick={togglePlay} title={playing ? "Durdur" : "Oynat"}>
-          {playing ? (
-            <svg width="26" height="26" viewBox="0 0 24 24" fill="#fff"><rect x="6" y="5" width="4" height="14" rx="1.2"/><rect x="14" y="5" width="4" height="14" rx="1.2"/></svg>
-          ) : (
-            <svg width="26" height="26" viewBox="0 0 24 24" fill="#fff"><path d="M7 5.5v13a1 1 0 0 0 1.5.87l11-6.5a1 1 0 0 0 0-1.74l-11-6.5A1 1 0 0 0 7 5.5Z"/></svg>
-          )}
-        </div>
-        <div className="fs-vid-btn" onClick={toggleMute} title={muted ? "Sesi aç" : "Sesi kapat"}>
-          {muted ? (
-            <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="#fff" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"><path d="M11 5 6 9H2v6h4l5 4V5Z"/><line x1="22" y1="9" x2="16" y2="15"/><line x1="16" y1="9" x2="22" y2="15"/></svg>
-          ) : (
-            <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="#fff" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"><path d="M11 5 6 9H2v6h4l5 4V5Z"/><path d="M15.5 8.5a5 5 0 0 1 0 7M18.5 5.5a9 9 0 0 1 0 13"/></svg>
-          )}
-        </div>
-      </div>
-    </div>
-  );
-}
-
-const AGRI_LAT = 39.72, AGRI_LON = 43.05;
-const RAD = Math.PI / 180;
-const norm360 = a => ((a % 360) + 360) % 360;
-
-function project(lat, lon, yaw, pitch){
-  const lr = (lon + yaw) * RAD, fr = lat * RAD, b = pitch * RAD;
-  const x = Math.cos(fr) * Math.sin(lr), y = Math.sin(fr), z = Math.cos(fr) * Math.cos(lr);
-  return { x, y: y * Math.cos(b) - z * Math.sin(b), z: y * Math.sin(b) + z * Math.cos(b) };
-}
-
-function GlobeCanvas({ phase }){
-  const ref = useRef(null);
-  const state = useRef({ yaw: -20, pitch: 8, targetYaw: null, targetPitch: 39.72, t: 0 });
-
-  useEffect(() => {
-    const canvas = ref.current; const ctx = canvas.getContext("2d");
-    let raf, w, h, R, cx, cy, dpr = Math.min(devicePixelRatio || 1, 2);
-    function size(){ w=canvas.getBoundingClientRect().width; h=canvas.getBoundingClientRect().height; canvas.width=w*dpr; canvas.height=h*dpr; ctx.setTransform(dpr,0,0,dpr,0,0); R=Math.min(w,h)*0.27; cx=w/2; cy=h*0.54; }
-    size(); window.addEventListener("resize", size);
-    const GC = `220,232,255`;
-
-    function drawArc(pts){
-      ctx.beginPath(); let started = false;
-      for (let i=0; i<pts.length; i++){
-        if (pts[i].z > 0.02){ const sx = cx + R * pts[i].x, sy = cy - R * pts[i].y; if (!started){ ctx.moveTo(sx, sy); started = true; } else ctx.lineTo(sx, sy); } else started = false;
+      if (error) {
+        mesaj.innerText = "Hata: E-posta veya şifre yanlış!";
+      } else {
+        mesaj.innerText = "";
+        kullaniciyiHazirla(data.user.id);
       }
-      ctx.stroke();
     }
 
-    function frame(ts){
-      // --- KASMA ENGELLEYİCİ (PERFORMANS) BAŞLANGICI ---
-      // Kullanıcı sayfayı aşağı kaydırdığında (600px) görünmeyen animasyonu durdur
-      if (window.scrollY > 600) {
-        raf = requestAnimationFrame(frame);
+    // KULLANICI ROLÜNÜ VE BİLGİLERİNİ ÇEK
+    async function kullaniciyiHazirla(uid) {
+      // isletmeler tablosundan bu UID'ye ait kaydı bul
+      const { data, error } = await client.from('isletmeler').select('*').eq('kullanici_id', uid).single();
+      
+      if (error || !data) {
+        alert("Sisteme giriş yaptınız ama işletme profiliniz bulunamadı. Lütfen yöneticiye başvurun.");
         return;
       }
-      // --- KASMA ENGELLEYİCİ BİTİŞİ ---
-      const s = state.current; if (!s.t) s.t = ts; const dt = Math.min(48, ts - s.t); s.t = ts;
-      if (s.targetYaw == null) s.yaw -= dt * 0.024; else { s.yaw += (s.targetYaw - s.yaw) * 0.055; s.pitch += (s.targetPitch - s.pitch) * 0.06; }
-      ctx.clearRect(0,0,w,h);
-      const g = ctx.createRadialGradient(cx - R*0.3, cy - R*0.35, R*0.1, cx, cy, R*1.05); g.addColorStop(0, `rgba(${GC},0.10)`); g.addColorStop(0.7, `rgba(${GC},0.03)`); g.addColorStop(1, `rgba(${GC},0)`);
-      ctx.fillStyle = g; ctx.beginPath(); ctx.arc(cx,cy,R,0,Math.PI*2); ctx.fill();
-      ctx.lineWidth=1.1; ctx.strokeStyle=`rgba(${GC},0.28)`; ctx.beginPath(); ctx.arc(cx,cy,R,0,Math.PI*2); ctx.stroke();
-      const yaw = s.yaw, pitch = s.pitch; ctx.lineWidth=1;
-      for (let lat=-75; lat<=75; lat+=15){ ctx.strokeStyle=lat===0?`rgba(${GC},0.40)`:`rgba(${GC},0.16)`; const pts=[]; for(let lon=0; lon<=360; lon+=4) pts.push(project(lat,lon,yaw,pitch)); drawArc(pts); }
-      for (let lon=0; lon<360; lon+=15){ ctx.strokeStyle=`rgba(${GC},0.16)`; const pts=[]; for(let lat=-90; lat<=90; lat+=4) pts.push(project(lat,lon,yaw,pitch)); drawArc(pts); }
-      const m = project(AGRI_LAT, AGRI_LON, yaw, pitch);
-      if (m.z > 0){
-        const sx=cx+R*m.x, sy=cy-R*m.y, near=s.targetYaw!=null?1:0.35, pulse=(Math.sin(ts/420)+1)/2;
-        ctx.strokeStyle=`rgba(68,189,50,${0.5*near})`; ctx.lineWidth=1.5; ctx.beginPath(); ctx.arc(sx,sy,6+pulse*10*near,0,Math.PI*2); ctx.stroke();
-        ctx.fillStyle=`rgba(68,189,50,${0.85*near+0.15})`; ctx.beginPath(); ctx.arc(sx,sy,4.5,0,Math.PI*2); ctx.fill();
+
+      aktifIsletme = data;
+      document.getElementById('isletme-isim-etiketi').innerText = data.isletme_adi;
+
+      // Eğer yetkisi 'admin' ise özel sekmeyi göster
+      if (data.rol === 'admin') {
+        document.getElementById('nav-admin').style.display = 'block';
       }
-      raf = requestAnimationFrame(frame);
-    }
-    raf = requestAnimationFrame(frame);
-    return () => { cancelAnimationFrame(raf); window.removeEventListener("resize", size); };
-  }, []);
 
-  useEffect(() => {
-    const s = state.current;
-    if (phase === "spin"){ s.targetYaw = null; s.targetPitch = 39.72; } else if (["locate","zoom","mountain","rest"].includes(phase)){
-      if (s.targetYaw == null){ s.targetYaw = s.yaw + norm360(-AGRI_LON - s.yaw) + 360; s.targetPitch = AGRI_LAT; }
-    }
-  }, [phase]);
-
-  return <canvas ref={ref} className="globe-canvas" style={{width:"100%", height:"100%"}} />;
-}
-
-/* ===================== TOPBAR ===================== */
-function Topbar(){
-  const [scrolled, setScrolled] = useState(false);
-  
-  // Karanlık mod hafızası ve kontrolü
-  const [isDark, setIsDark] = useState(() => {
-    const saved = safeStore.get('agri_theme');
-    return saved === 'dark'; 
-  });
-
-  // Sayfa kaydırma efekti
-  useEffect(() => {
-    const onScroll = () => setScrolled(window.scrollY > 40);
-    onScroll();
-    window.addEventListener("scroll", onScroll, { passive: true });
-    return () => window.removeEventListener("scroll", onScroll);
-  }, []);
-
-  // Tema değiştiğinde siteye rengi uygula ve hafızaya kaydet
-  useEffect(() => {
-    if (isDark) {
-      document.body.classList.add('dark-theme');
-      safeStore.set('agri_theme', 'dark');
-    } else {
-      document.body.classList.remove('dark-theme');
-      safeStore.set('agri_theme', 'light');
-    }
-  }, [isDark]);
-
-  const onDark = !scrolled;
-  const cls = ["topbar", scrolled ? "scrolled" : "", onDark ? "on-dark" : ""].join(" ").trim();
-
-  return (
-    <div className={cls}>
-      <a className="logo" href="/" onClick={(e)=>{ e.preventDefault(); window.history.pushState(null, "", "/"); window.dispatchEvent(new Event("popstate")); window.scrollTo({ top:0, behavior:"smooth" }); }}>
-        <span className="badge">04</span>
-        <span className="txt">agri<span className="dim">.com</span></span>
-      </a>
-      <nav className="topbar-nav">
-        <a href="#gundem" onClick={(e)=>{ e.preventDefault(); document.getElementById("gundem").scrollIntoView({ behavior:"smooth" }); }}>Gündem</a>
-        <a href="#kategoriler" onClick={(e)=>{ e.preventDefault(); document.getElementById("kategoriler").scrollIntoView({ behavior:"smooth" }); }}>Kategoriler</a>
-        <a href="#iletisim" onClick={(e)=>{ e.preventDefault(); document.getElementById("iletisim").scrollIntoView({ behavior:"smooth" }); }}>İletişim</a>
-      </nav>
+      document.getElementById('login-view').style.display = 'none';
+      document.getElementById('app-view').style.display = 'flex';
       
-      <div style={{ justifySelf:'end', display:'flex', alignItems:'center', gap:'18px' }}>
-        <div className="loc"><span className="dot"></span>Ağrı, Türkiye</div>
-        
-        {/* Karanlık/Aydınlık Mod Butonu */}
-        <button 
-          onClick={() => setIsDark(!isDark)} 
-          title={isDark ? "Aydınlık Moda Geç" : "Karanlık Moda Geç"}
-          style={{
-            width: '38px', height: '38px', borderRadius: '50%', 
-            background: scrolled ? 'var(--bg-2)' : 'rgba(255,255,255,0.1)', 
-            border: scrolled ? '1px solid var(--line)' : '1px solid rgba(255,255,255,0.3)', 
-            display: 'grid', placeItems: 'center', cursor: 'pointer', 
-            transition: 'all 0.4s var(--ease)', backdropFilter: 'blur(6px)',
-            color: scrolled ? 'var(--ink)' : '#fff'
-          }}
-        >
-          <span style={{ 
-            fontSize: '18px', 
-            transition: 'transform 0.6s cubic-bezier(0.68, -0.55, 0.265, 1.55)', 
-            transform: isDark ? 'rotate(360deg)' : 'rotate(0deg)' 
-          }}>
-            {isDark ? "🌙" : "☀️"}
-          </span>
-        </button>
-      </div>
-    </div>
-  );
-}
+      randevulariGetir(); // İlk ekran randevular olduğu için yükle
+    }
 
-/* ===================== AKILLI ARAMA YARDIMCI FONKSİYONU ===================== */
-// Arama yaparken Türkçe karakterleri ve büyük/küçük harf sorunlarını çözer
-const normalizeSearchText = (text) => {
-  if (!text) return "";
-  return text.toLocaleLowerCase('tr-TR')
-    .replace(/ğ/g, 'g').replace(/ü/g, 'u').replace(/ş/g, 's')
-    .replace(/ı/g, 'i').replace(/ö/g, 'o').replace(/ç/g, 'c');
-};
+    // ÇIKIŞ YAP
+    async function cikisYap() {
+      await client.auth.signOut();
+      document.getElementById('email').value = "";
+      document.getElementById('password').value = "";
+      document.getElementById('login-view').style.display = 'flex';
+      document.getElementById('app-view').style.display = 'none';
+      aktifIsletme = null;
+    }
 
-/* ===================== HERO (GÜNCELLENMİŞ ARAMA ÇUBUĞU) ===================== */
-function Hero({ onSearchPlace, onOpenCat, onOpenFavorites }){
-  const [phase, setPhase] = useState("spin");
-  const timers = useRef([]);
-  const [q, setQ] = useState("");
-  const [suggs, setSuggs] = useState([]);
+    // SEKME (MENÜ) DEĞİŞTİRME MOTORU
+    function sekmeDegistir(sekmeAdi) {
+      // Tüm içerikleri gizle
+      document.querySelectorAll('.tab-content').forEach(el => el.style.display = 'none');
+      // Tıklananı göster
+      document.getElementById('tab-' + sekmeAdi).style.display = 'block';
+      
+      // Menüdeki aktif rengi değiştir
+      document.querySelectorAll('.nav-btn').forEach(el => el.classList.remove('active'));
+      document.getElementById('nav-' + sekmeAdi).classList.add('active');
 
-  const run = useCallback(() => {
-    timers.current.forEach(clearTimeout); timers.current = []; setPhase("spin");
-    [[2200, "locate"], [4000, "zoom"], [4800, "mountain"], [5600, "rest"]].forEach(([ms, p]) => timers.current.push(setTimeout(() => setPhase(p), ms)));
-  }, []);
+      // Tıklanan sekmeye göre verileri yükle
+      if (sekmeAdi === 'randevular') randevulariGetir();
+    }
 
-  useEffect(() => { run(); return () => timers.current.forEach(clearTimeout); }, [run]);
+    // RANDEVULARI GETİR VE EKRANA ÇİZ
+    async function randevulariGetir() {
+      if (!aktifIsletme) return;
+      
+      const filtre = document.getElementById('randevu-filtre').value;
+      const liste = document.getElementById('randevu-liste-alani');
+      liste.innerHTML = '<p>Yükleniyor...</p>';
 
-  const cls = ["hero", phase==="locate"?"is-locate":"", phase==="zoom"?"is-zoom":"", ["mountain","rest"].includes(phase)?"is-zoom is-mountain":""].join(" ");
+      // Supabase'den Randevuları çek
+      let sorgu = client.from('randevular').select('*').eq('isletme_id', aktifIsletme.id).order('tarih', { ascending: true });
+      if (filtre !== 'hepsi') {
+        sorgu = sorgu.eq('durum', filtre);
+      }
 
-  const handleSearchChange = (e) => {
-    const val = e.target.value; 
-    setQ(val);
+      const { data, error } = await sorgu;
 
-    if(val.length > 1) {
-      let res = [];
-      const query = normalizeSearchText(val); // Kullanıcının yazdığını temizle
+      if (error) {
+        liste.innerHTML = '<p style="color:red;">Hata oluştu.</p>';
+        return;
+      }
 
-      // Tüm kategorileri ve alt kategorileri tara
-      window.AGRI.categories.forEach(c => {
-        
-        // 1. Ana kategorilerdeki mekanları tara
-        if(c.places) {
-          c.places.forEach(p => {
-            // İsim, alt isim, açıklama ve dersleri birleştirip tek bir metin yapıyoruz
-            const targetText = normalizeSearchText(p.name + " " + (p.info || "") + " " + (p.subName || "") + " " + (p.lessons ? p.lessons.join(" ") : ""));
+      if (data.length === 0) {
+        liste.innerHTML = '<p>Bu kritere uygun randevu bulunamadı.</p><div id="pdf-footer">04agri.com</div>';
+        return;
+      }
+
+      // Verileri HTML Kartlarına Dönüştür
+      let html = '';
+      data.forEach(r => {
+        let rozetSinif = r.durum === 'bekliyor' ? 'bg-bekliyor' : (r.durum === 'onaylandi' ? 'bg-onaylandi' : 'bg-reddedildi');
+        let rozetYazi = r.durum.toUpperCase();
+
+        html += `
+          <div class="data-card">
+            <div class="data-info">
+              <h4>${r.musteri_adi} <span class="badge ${rozetSinif}" style="margin-left:8px;">${rozetYazi}</span></h4>
+              <p>📅 ${r.tarih} &nbsp;|&nbsp; ⏰ Saat: ${r.saat}</p>
+              <p>📞 Tel: ${r.musteri_telefon} &nbsp;|&nbsp; ✉️ E-posta: ${r.musteri_email}</p>
+              <p style="font-size: 11px; margin-top:4px;">İptal Kodu: ${r.randevu_kodu}</p>
+            </div>
             
-            if(targetText.includes(query)) {
-              if (!res.some(existing => existing.slug === p.slug)) {
-                res.push({ ...p, catId: c.id, catName: c.name, catColor: c.color });
-              }
-            }
-          });
-        }
-
-        // 2. Alt kategorilerdeki mekanları tara (Sağlık, Eğitim vb.)
-        if(c.hasSubCategories && c.subCategories) {
-          c.subCategories.forEach(sub => {
-            if(sub.places) {
-              sub.places.forEach(p => {
-                const targetText = normalizeSearchText(p.name + " " + (p.info || "") + " " + (p.subName || "") + " " + (p.lessons ? p.lessons.join(" ") : ""));
-                
-                if(targetText.includes(query)) {
-                  if (!res.some(existing => existing.slug === p.slug)) {
-                    res.push({ ...p, catId: c.id, catName: `${c.name} - ${sub.name}`, catColor: c.color });
-                  }
-                }
-              });
-            }
-          });
-        }
+            <div class="action-btns" data-html2canvas-ignore="true">
+              ${r.durum === 'bekliyor' ? `
+                <button class="btn-onay" onclick="randevuDurumGuncelle('${r.id}', 'onaylandi')">✓ Onayla</button>
+                <button class="btn-red" onclick="randevuDurumGuncelle('${r.id}', 'reddedildi')">✕ Reddet</button>
+              ` : ''}
+              ${r.durum === 'onaylandi' ? `
+                <button class="btn-red" onclick="randevuDurumGuncelle('${r.id}', 'reddedildi')">✕ İptal Et</button>
+              ` : ''}
+            </div>
+          </div>
+        `;
       });
-      // En fazla 6 sonuç göster
-      setSuggs(res.slice(0, 6));
-    } else {
-      setSuggs([]);
+      
+      html += `<div id="pdf-footer">04agri.com Dijital Şehir Rehberi</div>`;
+      liste.innerHTML = html;
     }
-  };
 
-  const handleSelect = (place) => { setQ(""); setSuggs([]); onSearchPlace(place); }
+    // RANDEVU ONAYLAMA VEYA REDDETME
+    async function randevuDurumGuncelle(id, yeniDurum) {
+      if (!confirm("Randevu durumunu değiştirmek istediğinize emin misiniz?")) return;
+      
+      const { error } = await client.from('randevular').update({ durum: yeniDurum }).eq('id', id);
+      if (error) alert("Bir hata oluştu!");
+      else randevulariGetir(); // Listeyi yenile
+    }
 
-  return (
-    <header className={cls} data-screen-label="Hero">
-      <div className="sky dawn"></div><div className="sun"></div>
-      <div className="globe-stage"><GlobeCanvas phase={phase} /></div>
-      <div className="geo-label"><div className="pt">AĞRI</div><div className="sub">39.72° K · 43.05° D</div></div>
-      <div className="mountain"><img src="agridagi.png" alt="Ağrı Dağı" /></div>
+    // PROFİL ŞİFRE GÖSTER/GİZLE
+    function sifreGosterGizle() {
+      const input = document.getElementById('yeni-sifre');
+      if (input.type === "password") input.type = "text";
+      else input.type = "password";
+    }
 
-      <div className="hero-content">
-        <span className="hero-eyebrow"><span style={{width:8,height:8,borderRadius:"50%",background:"var(--accent)",display:"inline-block"}}></span>Ağrı'nın dijital kapısı</span>
-        <h1 className="hero-title">Ağrı'yı <em>keşfet</em>.</h1>
-        <div className="search-wrapper">
-          <form className="search" onSubmit={(e)=>e.preventDefault()}>
-            <span className="ico"><svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2"><circle cx="11" cy="11" r="7"/><path d="m20 20-3.2-3.2"/></svg></span>
-            <input value={q} onChange={handleSearchChange} placeholder="Mekan, doktor, restoran, kurs arayın..." aria-label="Ara" onBlur={()=>setTimeout(()=>setSuggs([]), 200)} />
-            <button type="button" className="go" onClick={() => document.getElementById("kategoriler").scrollIntoView({ behavior:"smooth" })}>Kategoriler</button>
-          </form>
-          {suggs.length > 0 && (
-            <div className="search-dropdown">
-              {suggs.map((s, idx) => (
-                <div key={idx} className="sugg-item" onMouseDown={()=>handleSelect(s)}>
-                  <div className="s-icon" style={{background: s.catColor}}><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2"><path d="M12 21s7-6.3 7-11a7 7 0 1 0-14 0c0 4.7 7 11 7 11Z"/></svg></div>
-                  <div className="s-text"><span className="s-name">{s.name}</span><span className="s-cat">{s.catName}</span></div>
-                </div>
-              ))}
-            </div>
-          )}
-        </div>
-        <div className="search-tags">
-           <button className="highlight-btn" onClick={() => document.getElementById("kategoriler").scrollIntoView({ behavior:"smooth" })}>Tüm Kategoriler</button>
-          <button className="highlight-btn" style={{background:'#fff', color:'#008000'}} onClick={onOpenFavorites}>Favorilerim 💚</button>
-          <button onClick={() => onOpenCat(window.AGRI.categories.find(c => c.id === 'nobetci'))}>Nöbetçi Eczane</button>
-          <button onClick={() => onOpenCat(window.AGRI.categories.find(c => c.id === 'gezilecek'))}>Gezilecek Yerler</button>
-          <button onClick={() => onOpenCat(window.AGRI.categories.find(c => c.id === 'egitim'))}>Eğitim</button>
-        </div>
-      </div>
-    </header>
-  );
-}
-
-function fmtDate(dateObj){
-  const d = dateObj.getDate().toString().padStart(2, '0');
-  const m = (dateObj.getMonth() + 1).toString().padStart(2, '0');
-  const y = dateObj.getFullYear();
-  return `${d}.${m}.${y}`;
-}
-
-const PHARMACY_SHIFT_HOUR = 9;
-
-function getActiveDutyDateText(){
-  const now = new Date();
-  const base = new Date(now.getFullYear(), now.getMonth(), now.getDate());
-  if (now.getHours() < PHARMACY_SHIFT_HOUR) {
-    base.setDate(base.getDate() - 1);
-  }
-  return fmtDate(base);
-}
-
-function resolveDutyDate(){
-  const active = getActiveDutyDateText();
-  const all = window.AGRI.dutyPharmacies;
-  if (all.some(p => p.date === active)) return active;
-  const dates = [...new Set(all.map(p => p.date))];
-  /* Hata düzeltmesi: Eğer o gün listede yoksa, listedeki İLK tarihi göster (en sonuncuyu değil) */
-  return dates.length ? dates[0] : active; 
-}
-
-function resolveWeatherDate(){
-  const now = new Date();
-  const today = fmtDate(new Date(now.getFullYear(), now.getMonth(), now.getDate()));
-  const wd = window.AGRI.weatherData || {};
-  if (wd[today]) return today;
-  const keys = Object.keys(wd);
-  return keys.length ? keys[0] : today;
-}
-
-/* ===================== BANNER (IMAGE MARQUEE) ===================== */
-function ImageMarquee() {
-  const base = window.AGRI_STATIC_BANNERS;
-  const loop = base.concat(base).concat(base).concat(base); 
-  return (
-    <div className="banner-section">
-      <div className="marquee">
-        {loop.map((b, i) => (
-          <div 
-            key={i} 
-            className="banner-item" 
-            style={{ 
-              backgroundImage: `url(${b.img})`, 
-              backgroundPosition: b.bgPos || 'center 20%', 
-              cursor: b.slug ? 'pointer' : 'default' 
-            }} 
-            onClick={() => { 
-              if(b.slug) { 
-                window.history.pushState(null, "", `/mekan/${b.slug}`); 
-                window.dispatchEvent(new Event("popstate")); 
-              } 
-            }}
-          >
-            <div className="banner-scrim"></div>
-            <div className="banner-content">
-              <span className="banner-title">{b.title}</span>
-              <span className="banner-sub">{b.subtitle}</span>
-            </div>
-          </div>
-        ))}
-      </div>
-    </div>
-  );
-}
-
-function Stories() {
-  const stories = window.AGRI_STORIES || [];
-  const [openIdx, setOpenIdx] = useState(null);
-
-  if (stories.length === 0) return null;
-  const active = openIdx != null ? stories[openIdx] : null;
-
-  return (
-    <section className="stories-section">
-      <div className="wrap">
-        <div className="stories-row">
-          {stories.map((s, i) => {
-            const hasCover = s.cover && s.cover.trim() !== "";
-            return (
-              <button key={i} className="story-bubble" onClick={() => setOpenIdx(i)}>
-                <span className="story-ring">
-                  <span className="story-thumb" style={hasCover ? { backgroundImage:`url(${s.cover})`, backgroundPosition: s.bgPos || 'center' } : null}>
-                    {!hasCover && (
-                      <svg width="26" height="26" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.8"><path d="M12 2v4M12 18v4M2 12h4M18 12h4"/><circle cx="12" cy="12" r="4"/></svg>
-                    )}
-                  </span>
-                </span>
-                <span className="story-label">{s.title}</span>
-              </button>
-            );
-          })}
-        </div>
-      </div>
-
-      {active && (
-        <div className="story-viewer" onClick={(e)=>{ if(e.target.className==='story-viewer') setOpenIdx(null); }}>
-          <div className="story-progress"><span className="story-progress-fill"></span></div>
-          <button className="story-close" onClick={()=>setOpenIdx(null)}>✕</button>
-          <div className="story-card">
-            {active.slideImg && active.slideImg.trim() !== "" ? (
-              <img className="story-card-img" src={active.slideImg} alt={active.title} style={active.bgPos ? { objectPosition: active.bgPos } : {}} />
-            ) : (
-              <div className="story-card-bg"></div>
-            )}
-            <div className="story-card-overlay">
-              <div className="story-card-badge">{active.title}</div>
-              <div className="story-card-text">{active.slideText}</div>
-              {active.slug && (
-                 <button className="cat-cta" style={{marginTop:'12px', padding:'10px 20px'}} onClick={() => { setOpenIdx(null); window.history.pushState(null, "", `/mekan/${active.slug}`); window.dispatchEvent(new Event("popstate")); }}>
-                   Profili İncele ➔
-                 </button>
-              )}
-            </div>
-          </div>
-        </div>
-      )}
-    </section>
-  );
-}
-
-function PharmacyWidget() {
-  const [district, setDistrict] = useState("MERKEZ");
-  const [currentDateText, setCurrentDateText] = useState(() => resolveDutyDate());
-
-  useEffect(() => {
-    const update = () => setCurrentDateText(resolveDutyDate());
-    update();
-    const interval = setInterval(update, 60000); 
-    return () => clearInterval(interval);
-  }, []);
-
-  const activePharmacies = window.AGRI.dutyPharmacies.filter(
-    p => p.date === currentDateText && p.district.toUpperCase() === district.toUpperCase()
-  );
-
-  const districtsList = ["MERKEZ", "DİYADİN", "DOĞUBAYAZIT", "ELEŞKİRT", "HAMUR", "PATNOS", "TAŞLIÇAY", "TUTAK"];
-
-  return (
-    <div className="widget-card pharmacy-widget" data-nosnippet="true">
-      <div className="ph-header">
-        <div className="ph-title">
-          <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="#E84142" strokeWidth="2.5"><path d="M12 2v20M2 12h20"/></svg>
-          Nöbetçi Eczaneler
-        </div>
-        <select className="ph-select" value={district} onChange={(e) => setDistrict(e.target.value)}>
-          {districtsList.map((d, i) => <option key={i} value={d}>{d}</option>)}
-        </select>
-      </div>
-
-      <div className="ph-list-container">
-        {activePharmacies.length > 0 ? (
-          activePharmacies.map((ph, idx) => (
-            <div className="ph-box" key={idx} style={{marginBottom: idx < activePharmacies.length - 1 ? '10px' : '0'}}>
-              <div className="ph-name-row">
-                <span className="ph-name">{ph.name}</span>
-                <span className="ph-date-badge">{ph.date}</span>
-              </div>
-              <div className="ph-detail">{ph.address}</div>
-              {ph.landmark && <div className="ph-landmark">📍 {ph.landmark}</div>}
-              <div className="ph-footer-actions">
-                <span className="ph-phone">📞 {ph.phone}</span>
-                <a className="ph-map-link" href={ph.url} target="_blank" rel="noopener noreferrer">Haritada Göster</a>
-              </div>
-            </div>
-          ))
-        ) : (
-          <div className="ph-empty">Bu tarihte bu ilçe için nöbetçi listesi bulunamadı.</div>
-        )}
-      </div>
-    </div>
-  );
-}
-
-function WeatherWidget() {
-  const [dateText, setDateText] = useState(() => resolveWeatherDate());
-
-  useEffect(() => {
-    const update = () => setDateText(resolveWeatherDate());
-    update();
-    const interval = setInterval(update, 60000);
-    return () => clearInterval(interval);
-  }, []);
-
-  const wd = (window.AGRI.weatherData || {})[dateText] || { temp: "--", low: null, desc: "Veri yok" };
-
-  const months = ["Oca","Şub","Mar","Nis","May","Haz","Tem","Ağu","Eyl","Eki","Kas","Ara"];
-  const parts = dateText.split(".");
-  const shortDate = parts.length === 3 ? `${parseInt(parts[0],10)} ${months[parseInt(parts[1],10)-1]} ${parts[2]}` : dateText;
-
-  return (
-    <div className="widget-card weather" data-nosnippet="true" style={{background: 'linear-gradient(135deg, #4facfe 0%, #00f2fe 100%)'}}>
-      <div className="w-top"><span className="city">Ağrı Merkez</span><span className="date">{shortDate}</span></div>
-      <div className="w-main">
-        <span className="temp">{wd.temp}{wd.temp !== "--" ? "°" : ""}</span>
-        <span className="desc">
-          {wd.desc}
-          {wd.low != null && <span style={{display:'block', opacity:0.85, fontSize:'12px', marginTop:'4px'}}>En düşük {wd.low}°</span>}
-        </span>
-      </div>
-    </div>
-  );
-}
-
-const AGRI_PRAYER = { lat: 39.7191, lng: 43.0503, tz: 3, fajrAngle: 18, ishaAngle: 17 };
-
-const PRAYER_ORDER = [
-  { key:"imsak",   label:"İmsak" },
-  { key:"gunes",   label:"Güneş" },
-  { key:"ogle",    label:"Öğle" },
-  { key:"ikindi",  label:"İkindi" },
-  { key:"aksam",   label:"Akşam" },
-  { key:"yatsi",   label:"Yatsı" }
-];
-
-function pad2(n){ return n.toString().padStart(2, "0"); }
-
-const _dtr = d => d * Math.PI / 180;
-const _rtd = r => r * 180 / Math.PI;
-const _sin = d => Math.sin(_dtr(d));
-const _cos = d => Math.cos(_dtr(d));
-const _tan = d => Math.tan(_dtr(d));
-const _arcsin = x => _rtd(Math.asin(x));
-const _arccos = x => _rtd(Math.acos(x));
-const _arccot = x => _rtd(Math.atan(1 / x));
-const _fixAngle = a => { a = a - 360 * Math.floor(a / 360); return a < 0 ? a + 360 : a; };
-const _fixHour  = a => { a = a - 24 * Math.floor(a / 24); return a < 0 ? a + 24 : a; };
-
-function _julian(y, m, d){
-  if (m <= 2){ y -= 1; m += 12; }
-  const A = Math.floor(y / 100);
-  const B = 2 - A + Math.floor(A / 4);
-  return Math.floor(365.25 * (y + 4716)) + Math.floor(30.6001 * (m + 1)) + d + B - 1524.5;
-}
-
-function _sunPosition(jd){
-  const D = jd - 2451545.0;
-  const g = _fixAngle(357.529 + 0.98560028 * D);
-  const q = _fixAngle(280.459 + 0.98564736 * D);
-  const L = _fixAngle(q + 1.915 * _sin(g) + 0.020 * _sin(2 * g));
-  const e = 23.439 - 0.00000036 * D;
-  const decl = _arcsin(_sin(e) * _sin(L));
-  let RA = _rtd(Math.atan2(_cos(e) * _sin(L), _cos(L))) / 15;
-  RA = _fixHour(RA);
-  const eqt = q / 15 - RA;
-  return [decl, eqt];
-}
-
-function _timeForAngle(angle, lat, decl){
-  const cosH = (-_sin(angle) - _sin(lat) * _sin(decl)) / (_cos(lat) * _cos(decl));
-  if (cosH > 1 || cosH < -1) return NaN;
-  return _arccos(cosH) / 15;
-}
-
-function _asrTime(lat, decl){
-  const angle = -_arccot(1 + _tan(Math.abs(lat - decl)));
-  return _timeForAngle(angle, lat, decl);
-}
-
-function computeAgriPrayerTimes(dateObj){
-  const y = dateObj.getFullYear(), m = dateObj.getMonth() + 1, d = dateObj.getDate();
-  const { lat, lng, tz, fajrAngle, ishaAngle } = AGRI_PRAYER;
-  const jd = _julian(y, m, d) - lng / (15 * 24);
-  const [decl, eqt] = _sunPosition(jd + 0.5);
-
-  const dhuhr = _fixHour(12 - eqt) + (tz - lng / 15);
-  const noon = dhuhr;
-
-  const tImsak  = _timeForAngle(fajrAngle, lat, decl);
-  const tGunes  = _timeForAngle(0.833, lat, decl);     
-  const tIkindi = _asrTime(lat, decl);
-  const tAksam  = _timeForAngle(0.833, lat, decl);     
-  const tYatsi  = _timeForAngle(ishaAngle, lat, decl);
-
-  const times = {
-    imsak:  noon - tImsak,
-    gunes:  noon - tGunes,
-    ogle:   noon,
-    ikindi: noon + tIkindi,
-    aksam:  noon + tAksam,
-    yatsi:  noon + tYatsi
-  };
-
-  const TEMKIN = { imsak: 5, gunes: -5, ogle: 6, ikindi: 3, aksam: 2, yatsi: -7 };
-  for (const k in times) { if (!isNaN(times[k])) times[k] += TEMKIN[k] / 60; }
-
-  const fmt = (t) => {
-    if (isNaN(t)) return "--:--";
-    t = _fixHour(t + 0.5 / 60); 
-    const hh = Math.floor(t);
-    const mm = Math.floor((t - hh) * 60);
-    return pad2(hh) + ":" + pad2(mm);
-  };
-
-  const out = {};
-  for (const k in times) out[k] = fmt(times[k]);
-  return out;
-}
-
-function toMinutesFloat(hhmm){
-  if (!hhmm || hhmm.indexOf(":") < 0) return 0;
-  const [h, m] = hhmm.split(":").map(n => parseInt(n, 10));
-  return h * 60 + m;
-}
-
-function PrayerTimesWidget(){
-  const [now, setNow] = useState(() => new Date());
-
-  useEffect(() => {
-    const id = setInterval(() => setNow(new Date()), 1000);
-    return () => clearInterval(id);
-  }, []);
-
-  const dayKey = now.getFullYear() + "-" + now.getMonth() + "-" + now.getDate();
-  const times = useMemo(() => computeAgriPrayerTimes(now), [dayKey]);
-
-  const nowMinutes = now.getHours() * 60 + now.getMinutes() + now.getSeconds() / 60;
-  const list = PRAYER_ORDER.map(p => ({ ...p, time: times[p.key], min: toMinutesFloat(times[p.key]) }));
-
-  let nextIdx = list.findIndex(p => p.min > nowMinutes);
-  let isTomorrow = false;
-  if (nextIdx === -1) { nextIdx = 0; isTomorrow = true; }
-
-  let activeIdx = nextIdx - 1;
-  if (activeIdx < 0) activeIdx = list.length - 1;
-
-  const next = list[nextIdx];
-  const nowSec = now.getHours() * 3600 + now.getMinutes() * 60 + now.getSeconds();
-  let secRemain = next.min * 60 - nowSec;
-  if (isTomorrow) secRemain = (next.min + 24 * 60) * 60 - nowSec;
-  if (secRemain < 0) secRemain += 24 * 3600;
-
-  const hh = Math.floor(secRemain / 3600);
-  const mm = Math.floor((secRemain % 3600) / 60);
-  const ss = Math.floor(secRemain % 60);
-  const countdown = `${pad2(hh)}:${pad2(mm)}:${pad2(ss)}`;
-
-  return (
-    <div className="widget-card prayer" data-nosnippet="true">
-      <div className="p-top">
-        <div className="p-top-row">Namaz Vakitleri <span className="p-date">Ağrı</span></div>
-        <div className="p-countdown">{next.label} vaktine <span>{countdown}</span></div>
-      </div>
-      <div className="p-grid">
-        {list.map((p, i) => (
-          <div key={p.key} className={"p-item" + (i === activeIdx ? " active" : "")}>
-            <span>{p.label}</span><strong>{p.time}</strong>
-          </div>
-        ))}
-      </div>
-    </div>
-  );
-}
-
-
-function AgendaDashboard(){
-  return (
-    <section id="gundem">
-      <div className="wrap gundem-layout">
-        <div className="g-left">
-          <div className="news-wrap" style={{marginTop: 0}} data-nosnippet="true">
-            <div className="news-header">Gündem Haberleri</div>
-            <div className="news-list">
-              
-              <div className="news-item">
-                <img className="news-img" src="agridagi2.jpg" alt="Ağrı Dijital Merkezi" style={{ objectFit: 'cover' }} />
-                <div className="news-content">
-                  <span className="news-meta">GÜNCEL</span>
-                  <h4>Ağrı'nın dijital merkezi yayında 🎉</h4>
-                  <p>Ağrı genelindeki tüm yerel bilgilendirmeler, esnaf rehberi ve gezi rotaları tek bir çatı altında, ücretsiz olarak yayına alıyoruz.</p>
-                </div>
-              </div>
-
-            </div>
-          </div>
-        </div>
-
-        <div className="widget-panel">
-          <WeatherWidget />
-          <PrayerTimesWidget />
-          <PharmacyWidget />
-        </div>
-      </div>
-    </section>
-  );
-}
-
-function Categories({ onOpen }){
-  const cats = window.AGRI.categories; 
-  const [active, setActive] = useState(0);
-  const cat = cats[active]; 
-  const bg = window.PAT.pattern(cat.color, active);
-  
-  return (
-    <section id="kategoriler">
-      <div className="wrap">
-        <div className="cats-intro">
-          <div className="kicker">Şehir Rehberi</div>
-          <h2>Ağrı'da aradığın her şey.</h2>
-          <p>Kategorileri seçerek içerikleri inceleyebilirsiniz.</p>
-        </div>
-        
-        <div className="cats-interactive-container">
-          <nav className="cat-list">
-            {cats.map((c, i) => (
-              <button key={c.id} className={"cat-item"+(i===active?" active":"")} onClick={()=>onOpen(c)} onMouseEnter={()=>setActive(i)}>
-                <span className="num">{String(i+1).padStart(2,"0")}</span>
-                <span className="swatch" style={{background:c.color}}></span>
-                <span className="nm" style={i===active?{color:c.color}:null}>{c.name}</span>
-              </button>
-            ))}
-          </nav>
-          
-          <div className="cat-stage">
-            <div className="cat-panel" key={cat.id} style={{background:bg}}>
-              <div className="ghost">{String(active+1).padStart(2,"0")}</div>
-              <div className="scrim"></div>
-              <div className="body">
-                <h3>{cat.name}</h3>
-                <p>{cat.blurb}</p>
-                <button className="cat-cta" onClick={()=>onOpen(cat)}>İncele</button>
-              </div>
-            </div>
-          </div>
-        </div>
-      </div>
-    </section>
-  );
-}
-
-function PharmacyFullView() {
-  const districtsList = ["MERKEZ", "TAŞLIÇAY", "DİYADİN", "DOĞUBAYAZIT", "ELEŞKİRT", "HAMUR", "PATNOS", "TUTAK"];
-  const [district, setDistrict] = useState("MERKEZ");
-  const [currentDateText, setCurrentDateText] = useState(() => resolveDutyDate());
-
-  useEffect(() => {
-    const update = () => setCurrentDateText(resolveDutyDate());
-    update();
-    const t = setInterval(update, 60000);
-    return () => clearInterval(t);
-  }, []);
-
-  const list = window.AGRI.dutyPharmacies.filter(
-    p => p.date === currentDateText && p.district.toUpperCase() === district.toUpperCase()
-  );
-
-  return (
-    <div className="pharm-page animate-fade" data-nosnippet="true">
-      <div className="pharm-page-bar">
-        <div className="pharm-page-date">
-          <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2"><rect x="3" y="4" width="18" height="18" rx="2"/><path d="M16 2v4M8 2v4M3 10h18"/></svg>
-          {currentDateText} tarihli nöbetçi eczaneler
-        </div>
-        <div className="pharm-page-districts">
-          {districtsList.map((d, i) => (
-            <button key={i} className={"pharm-chip"+(d===district?" active":"")} onClick={()=>setDistrict(d)}>{d}</button>
-          ))}
-        </div>
-      </div>
-
-      <div className="pharm-page-grid">
-        {list.length > 0 ? (
-          list.map((ph, idx) => (
-            <div className="pharm-card" key={idx}>
-              <div className="pharm-card-top">
-                <span className="pharm-card-name">{ph.name}</span>
-                <span className="pharm-card-dist">{ph.district}</span>
-              </div>
-              <div className="pharm-card-addr">{ph.address}</div>
-              {ph.landmark && <div className="pharm-card-landmark">📍 {ph.landmark}</div>}
-              <div className="pharm-card-foot">
-                <a className="pharm-card-phone" href={`tel:${ph.phone.replace(/\s/g,'')}`}>📞 {ph.phone}</a>
-                <a className="pharm-card-map" href={ph.url} target="_blank" rel="noopener noreferrer">Haritada Göster</a>
-              </div>
-            </div>
-          ))
-        ) : (
-          <div className="pharm-empty">Bu tarihte <strong>{district}</strong> ilçesi için nöbetçi eczane listesi bulunamadı.</div>
-        )}
-      </div>
-    </div>
-  );
-}
-
-// ROUTER GÜNCELLEMESİ: initialSubCat ve initialPlace propertyleri eklendi
-function PlacesOverlay({ cat, initialSubCat, initialPlace, onClose, favorites = [], toggleFav }){
-  const [selectedSubCat, setSelectedSubCat] = useState(initialSubCat || null);
-  const [selectedPlace, setSelectedPlace] = useState(initialPlace || null);
-  const [isClosing, setIsClosing] = useState(false);
-  const [fsImage, setFsImage] = useState(null);
-  const [fsVideo, setFsVideo] = useState(null);
-  const touchStartX = useRef(null);
-  // --- SLIDER (Çoklu Görsel) HAFIZASI ---
-  const [imgIdx, setImgIdx] = useState(0);
-  
-  // Profil değiştiğinde slider'ı hep 1. görsele (0. index) sıfırla
-  useEffect(() => { setImgIdx(0); }, [selectedPlace]);
-  const [viewCount, setViewCount] = useStateA(0);
-
-  useEffectA(() => {
-    if (selectedPlace) {
-   let baseNumber = 0;
-      for (let i = 0; i < selectedPlace.slug.length; i++) {
-        baseNumber += selectedPlace.slug.charCodeAt(i);
+    // ŞİFRE GÜNCELLEME
+    async function sifreGuncelle() {
+      const yeniSifre = document.getElementById('yeni-sifre').value;
+      if (yeniSifre.length < 6) {
+        alert("Şifre en az 6 karakter olmalıdır!");
+        return;
       }
       
-      // 1. Sabit Başlangıç Sayısı (20 ile 80 arası)
-      let staticBase = (baseNumber * 13) % 60 + 20;
-      
-      // 2. Mekana özel günlük büyüme hızı (Günde 1 veya iki günde 1 izlenme)
-      let dailyGrowth = (baseNumber % 2 === 0) ? 1 : 0.5;
-      
-      // 3. Zaman hesabı (Sitenin açılışından bugüne geçen gün sayısı)
-      let launchDate = new Date("2026-06-01").getTime(); // Sitenin başlangıç tarihi
-      let daysPassed = Math.max(0, (Date.now() - launchDate) / (1000 * 60 * 60 * 24));
-      
-      // 4. Zamanla otomatik eklenen izlenme (Geçen Gün x Günlük Büyüme)
-      let timeBonus = Math.floor(daysPassed * dailyGrowth);
-      
-      // Toplam Ana Sayı
-      baseNumber = staticBase + timeBonus;
-
-      const storageKey = `view_count_${selectedPlace.slug}`;
-      let localClicks = parseInt(safeStore.get(storageKey) || "0", 10);
-      
-      localClicks += 1;
-      safeStore.set(storageKey, localClicks.toString());
-
-      setViewCount(baseNumber + localClicks);
+      const { data, error } = await client.auth.updateUser({ password: yeniSifre });
+      if (error) alert("Şifre güncellenirken hata oluştu: " + error.message);
+      else {
+        alert("Şifreniz başarıyla değiştirildi!");
+        document.getElementById('yeni-sifre').value = "";
+      }
     }
-  }, [selectedPlace]);
-  const isNobetci = cat.id === "nobetci";
-  const hasSubCats = cat.hasSubCategories;
-  // --- NAVİGASYON VE KAYDIRMA ÇÖZÜCÜ BAŞLANGICI ---
-      useEffect(() => {
-        // Alt navigasyondan geçişte eski profili zorla temizle
-        setSelectedSubCat(initialSubCat || null);
-        setSelectedPlace(initialPlace || null);
 
-        // Kategori veya profil açıldığında sayfayı anında EN TEPEYE al
-        setTimeout(() => {
-          const bodyEl = document.querySelector('.ov-body');
-          if (bodyEl) bodyEl.scrollTo({ top: 0, behavior: 'instant' });
-          const pmBody = document.querySelector('.pm-body');
-          if (pmBody) pmBody.scrollTo({ top: 0, behavior: 'instant' });
-          window.scrollTo({ top: 0, behavior: 'instant' });
-        }, 10);
-      }, [cat, initialSubCat, initialPlace]);
-      // --- NAVİGASYON VE KAYDIRMA ÇÖZÜCÜ BİTİŞİ ---
-
-  // Dinamik SEO Title ve Description Mantığı
-  useEffect(() => {
-    let title = "04agri.com — Ağrı'nın Dijital Rehberi";
-    let desc = "Ağrı'nın dijital rehberi: restoranlar, cafeler, gezilecek yerler, nöbetçi eczaneler ve daha fazlası tek bir yerde.";
-    
-    if (selectedPlace) {
-      title = `${selectedPlace.name} - ${cat.name} | 04agri.com`;
-      if(selectedPlace.info) desc = selectedPlace.info.substring(0, 150) + '...';
-    } else if (cat) {
-      title = `${cat.name} | 04agri.com`;
-      desc = cat.blurb || desc;
-    }
-    
-    document.title = title;
-    let metaDesc = document.querySelector('meta[name="description"]');
-    if (metaDesc) metaDesc.setAttribute("content", desc);
-
-  }, [selectedPlace, cat]);
-
-  const handleBack = () => {
-    if (selectedPlace) {
-      setSelectedPlace(null);
-      window.history.pushState(null, "", `/${cat.id}`);
-    } else if (selectedSubCat) {
-      setSelectedSubCat(null);
-    } else {
-      setIsClosing(true);
-      setTimeout(onClose, 250); 
-    }
-  };
-
-  const handleClose = () => {
-    setIsClosing(true);
-    setTimeout(onClose, 250);
-  };
-
-  if (selectedPlace) {
-    const hasImg = selectedPlace.img && selectedPlace.img.trim() !== "";
-    const hasVideo = selectedPlace.video && selectedPlace.video.trim() !== "";
-   const openMedia = () => {
-      if (hasVideo) setFsVideo(selectedPlace.video);
-      else if (hasImg) setFsImage({ ...selectedPlace, img: selectedPlace.images ? selectedPlace.images[imgIdx] : selectedPlace.img });
-    };
-    const handleShare = async () => {
-      const shareUrl = `https://04agri.com/mekan/${selectedPlace.slug}`;
-      const shareData = {
-        title: selectedPlace.name,
-        text: `${selectedPlace.name} detaylarını Ağrı Dijital Rehberi'nde incele!`,
-        url: shareUrl
+    // ŞIK PDF İNDİRME MOTORU
+    function pdfIndir(elementId, dosyaAdi) {
+      const element = document.getElementById(elementId);
+      document.getElementById('pdf-footer').style.display = 'block'; // Markayı PDF'te göster
+      
+      const opt = {
+        margin:       10,
+        filename:     `${dosyaAdi}_04agri.pdf`,
+        image:        { type: 'jpeg', quality: 0.98 },
+        html2canvas:  { scale: 2, ignoreElements: (el) => el.hasAttribute('data-html2canvas-ignore') },
+        jsPDF:        { unit: 'mm', format: 'a4', orientation: 'portrait' }
       };
-      if (navigator.share) {
-        try {
-          await navigator.share(shareData);
-        } catch (err) {
-          console.log("Paylaşım iptal edildi");
-        }
-      } else {
-        navigator.clipboard.writeText(shareUrl);
-        alert("Link kopyalandı! İstediğiniz yere yapıştırıp gönderebilirsiniz:\n" + shareUrl);
-      }
-    };
-    return ( 
-      <div className="place-modal-overlay" onClick={(e) => { if(e.target.className==='place-modal-overlay') handleBack(); }}>
-        <div className="place-modal-content">
-          <div className="pm-close" onClick={handleBack}>X</div>
-          <div
-            className={"pm-img-wrap" + ((hasImg || hasVideo) ? " clickable" : "")}
-            onClick={(hasImg || hasVideo) ? openMedia : undefined}
-            onTouchStart={hasVideo ? (e) => { touchStartX.current = e.touches[0].clientX; } : undefined}
-            onTouchEnd={hasVideo ? (e) => {
-              if (touchStartX.current == null) return;
-              const dx = e.changedTouches[0].clientX - touchStartX.current;
-              touchStartX.current = null;
-              if (Math.abs(dx) > 45) setFsVideo(selectedPlace.video);
-            } : undefined}
-            style={ !hasImg ? { background:`linear-gradient(150deg, ${cat.color} 0%, color-mix(in srgb, ${cat.color}, #000 45%) 100%)` } : null }
-          >
-            { hasImg ? (
-              <>
-                <img 
-                  src={selectedPlace.images ? selectedPlace.images[imgIdx] : selectedPlace.img} 
-                  alt={selectedPlace.name} 
-                  style={selectedPlace.bgPos ? { objectPosition: selectedPlace.bgPos } : {}} 
-                />
-                
-                {/* Eğer profilde birden fazla görsel varsa okları ve noktaları göster */}
-                {selectedPlace.images && selectedPlace.images.length > 1 && (
-                  <>
-                    <div className="pm-slider-btn left" onClick={(e) => { e.stopPropagation(); setImgIdx(prev => prev > 0 ? prev - 1 : selectedPlace.images.length - 1); }}>
-                      <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round"><polyline points="15 18 9 12 15 6"></polyline></svg>
-                    </div>
-                    <div className="pm-slider-btn right" onClick={(e) => { e.stopPropagation(); setImgIdx(prev => prev < selectedPlace.images.length - 1 ? prev + 1 : 0); }}>
-                      <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round"><polyline points="9 18 15 12 9 6"></polyline></svg>
-                    </div>
-                    <div className="pm-slider-dots">
-                      {selectedPlace.images.map((_, i) => (
-                        <div key={i} className={`pm-slider-dot ${i === imgIdx ? 'active' : ''}`}></div>
-                      ))}
-                    </div>
-                  </>
-                )}
-              </>
-            ) : (
-              <div className="pm-noimg">
-                <div style={{marginBottom:'10px', opacity:0.9}}><Icon name={selectedPlace.icon || 'pin'} size={48} stroke="#fff" sw={1.5} /></div>
-                <span>Görsel yakında eklenecek</span>
-              </div>
-            )}
-            {(hasImg || hasVideo) && (
-              <div className="pm-zoom-hint">
-                {hasVideo ? (
-                  <>
-                    <svg width="14" height="14" viewBox="0 0 24 24" fill="#fff"><path d="M7 5.5v13a1 1 0 0 0 1.5.87l11-6.5a1 1 0 0 0 0-1.74l-11-6.5A1 1 0 0 0 7 5.5Z"/></svg>
-                    Videoyu Oynat
-                  </>
-                ) : (
-                  <>
-                    <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="#fff" strokeWidth="2.2" strokeLinecap="round" strokeLinejoin="round"><path d="M15 3h6v6M9 21H3v-6M21 3l-7 7M3 21l7-7"/></svg>
-                    Tam Ekran
-                  </>
-                )}
-              </div>
-            )}
-            <div className="pm-img-scrim"></div>
-            <div className="pm-title-box">
-              <h2>{selectedPlace.name}</h2>
-              {selectedPlace.subName && <span style={{display:'block', fontSize:'15px', opacity:0.85, fontWeight:600, marginTop:'4px', letterSpacing:'0.02em'}}>{selectedPlace.subName}</span>}
-            </div>
-          </div>
-          <div className="pm-body">
-            <div className="pm-view-badge">
-              <Icon name="eye" size={18} strokeWidth={2.5} />
-              <span><strong>{viewCount.toLocaleString('tr-TR')}</strong> kişi inceledi</span>
-            </div>
-            <p className="pm-info">{selectedPlace.info}</p>
 
-            {selectedPlace.lessons && selectedPlace.lessons.length > 0 && (
-              <div style={{display:'flex', flexDirection:'column', gap:'12px'}}>
-                <strong style={{fontSize:'13px', color:'var(--ink-faint)', textTransform:'uppercase', letterSpacing:'.05em', fontWeight:800}}>{selectedPlace.lessonsTitle || "Verilen Dersler"}</strong>
-                <div className="pm-lessons">
-                  {selectedPlace.lessons.map((ls, li) => (
-                    <span key={li} className="pm-lesson-chip">{ls}</span>
-                  ))}
-                </div>
-              </div> 
-            )}
-
-            <div className="pm-meta-box">
-              
-              {selectedPlace.area && (
-                <div className="pm-meta-item">
-                  <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5"><path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z"/><circle cx="12" cy="10" r="3"/></svg>
-                  <div><strong>Konum / İlçe:</strong> {selectedPlace.area}</div>
-                </div>
-              )}
-
-              {selectedPlace.address && (
-                <div className="pm-meta-item">
-                  <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5"><path d="M20 10c0 6-8 12-8 12s-8-6-8-12a8 8 0 0 1 16 0Z"/></svg>
-                  <div><strong>Adres Tarifi:</strong> {selectedPlace.address}</div>
-                </div>
-              )}
-
-              {/* Telefon ve WhatsApp Bölümü HERKES İÇİN */}
-              {selectedPlace.phones && selectedPlace.phones.length > 0 && (
-                <div className="pm-meta-item">
-                  <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5"><path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07 19.5 19.5 0 0 1-6-6 19.79 19.79 0 0 1-3.07-8.67A2 2 0 0 1 4.11 2h3a2 2 0 0 1 2 1.72 12.84 12.84 0 0 0 .7 2.81 2 2 0 0 1-.45 2.11L8.09 9.91a16 16 0 0 0 6 6l1.27-1.27a2 2 0 0 1 2.11-.45 12.84 12.84 0 0 0 2.81.7A2 2 0 0 1 22 16.92z"/></svg>
-                  <div style={{display:'flex', flexDirection:'column', gap:'8px', width: '100%'}}>
-                    <strong>İletişim & Randevu:</strong>
-                    {selectedPlace.phones.map((pNum, pIdx) => {
-                      const cleanPhone = pNum.replace(/\s/g,'').replace(/^0/, '90');
-                      const waText = "Merhabalar, 04agri.com web sayfası üzerinden profilinizi gördüm ve size ulaşıyorum.";
-                      const waUrl = `https://wa.me/${cleanPhone}?text=${encodeURIComponent(waText)}`;
-                      return (
-                        <div key={pIdx} style={{display:'flex', gap:'8px', alignItems:'center', flexWrap:'wrap'}}>
-                          <a href={`tel:${pNum.replace(/\s/g,'')}`} style={{color:'var(--ink)', textDecoration:'none', fontWeight:'700', fontSize:'14px', background:'var(--bg-2)', padding:'6px 14px', borderRadius:'100px'}} onClick={() => window.gtag && window.gtag('event', 'telefon_arandi', { mekan_adi: selectedPlace.name })}>📞 Ara ({pNum})</a>
-                          <a href={waUrl} target="_blank" rel="noopener noreferrer" style={{color:'#25D366', textDecoration:'none', fontWeight:'800', fontSize:'14px', background:'rgba(37, 211, 102, 0.12)', padding:'6px 14px', borderRadius:'100px'}} onClick={() => window.gtag && window.gtag('event', 'whatsapp_tiklandi', { mekan_adi: selectedPlace.name })}>💬 WhatsApp'tan Yaz</a>
-                        </div>
-                      )
-                    })}
-                  </div>
-                </div>
-              )}
-
-              {/* Instagram ve DM Bölümü HERKES İÇİN */}
-              {selectedPlace.instagram && (
-                <div className="pm-meta-item">
-                  <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5"><rect x="2" y="2" width="20" height="20" rx="5" ry="5"/><path d="M16 11.37A4 4 0 1 1 12.63 8 4 4 0 0 1 16 11.37z"/><line x1="17.5" y1="6.5" x2="17.51" y2="6.5"/></svg>
-                  <div style={{display:'flex', flexDirection:'column', gap:'6px', width: '100%'}}>
-                    <strong>Instagram:</strong> 
-                    <div style={{display:'flex', gap:'8px', alignItems:'center', flexWrap:'wrap'}}>
-                      <a href={`https://instagram.com/${selectedPlace.instagram}`} target="_blank" rel="noopener noreferrer" style={{color:'var(--ink)', fontWeight:'700', textDecoration:'none', background:'var(--bg-2)', padding:'6px 14px', borderRadius:'100px', fontSize:'14px'}} onClick={() => window.gtag && window.gtag('event', 'instagram_profile_tiklandi', { mekan_adi: selectedPlace.name })}>📸 @{selectedPlace.instagram}</a>
-                      <a href={`https://ig.me/m/${selectedPlace.instagram}`} target="_blank" rel="noopener noreferrer" style={{color:'#E1306C', fontWeight:'800', textDecoration:'none', background:'rgba(225, 48, 108, 0.08)', padding:'6px 14px', borderRadius:'100px', fontSize:'14px'}} onClick={() => window.gtag && window.gtag('event', 'instagram_dm_tiklandi', { mekan_adi: selectedPlace.name })}>✉️ DM Gönder</a>
-                    </div>
-                  </div>
-                </div>
-              )}
-
-              {/* Web Sitesi Bölümü */}
-              {selectedPlace.website && (
-                <div className="pm-meta-item">
-                  <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5"><circle cx="12" cy="12" r="10"/><line x1="2" y1="12" x2="22" y2="12"/><path d="M12 2a15.3 15.3 0 0 1 4 10 15.3 15.3 0 0 1-4 10 15.3 15.3 0 0 1-4-10 15.3 15.3 0 0 1 4-10z"/></svg>
-                  <div>
-                    <strong>Web Sitesi:</strong> <a href={selectedPlace.website} target="_blank" rel="noopener noreferrer" style={{color:'var(--ink)', fontWeight:'700', textDecoration:'underline'}}>{selectedPlace.website.replace(/^https?:\/\//, '')}</a>
-                  </div>
-                </div>
-              )}
-
-              {selectedPlace.email && (
-                <div className="pm-meta-item">
-                  <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5"><path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"/><polyline points="22,6 12,13 2,6"/></svg>
-                  <div><strong>E-Posta:</strong> <a href={`mailto:${selectedPlace.email}`} style={{color:'var(--ink)', fontWeight:'700'}}>{selectedPlace.email}</a></div>
-                </div>
-              )}
-            </div>
-
-            {selectedPlace.mapsUrl && (
-              <a className="pm-maps-btn" href={selectedPlace.mapsUrl} target="_blank" rel="noopener noreferrer" onClick={() => window.gtag && window.gtag('event', 'harita_tiklandi', { mekan_adi: selectedPlace.name })}>
-                Google Haritalar'da Aç (Navigasyon)
-              </a>
-            )}
-            <button className="pm-share-btn" onClick={handleShare}>
-              <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round">
-                <circle cx="18" cy="5" r="3"></circle>
-                <circle cx="6" cy="12" r="3"></circle>
-                <circle cx="18" cy="19" r="3"></circle>
-                <line x1="8.59" y1="13.51" x2="15.42" y2="17.49"></line>
-                <line x1="15.41" y1="6.51" x2="8.59" y2="10.49"></line>
-              </svg>
-              Bu Mekanı Paylaş
-            </button>
-          </div>
-        </div>
-        {fsImage && <FullscreenImage place={fsImage} onClose={() => setFsImage(null)} />}
-        {fsVideo && <FullscreenVideo src={fsVideo} title={selectedPlace.name} onClose={() => setFsVideo(null)} />}
-      </div>
-    );
-  }
-
-  let content;
-  if (isNobetci) {
-    content = <PharmacyFullView />;
-  } else if (hasSubCats && !selectedSubCat) {
-    content = (
-      <div className="grid animate-fade">
-        {cat.subCategories.map((sub, i) => (
-          <div key={i} className="card subcat-card" onClick={() => setSelectedSubCat(sub)} style={{background:`linear-gradient(150deg, ${cat.color} 0%, color-mix(in srgb, ${cat.color}, #000 45%) 100%)`}}>
-            <div className="scrim"></div>
-            <div className="subcat-ghost"><Icon name={sub.icon || 'pin'} size={150} stroke="#fff" sw={1} /></div>
-
-            <div className="card-top-bar">
-              <div className="card-icon"><Icon name={sub.icon || 'pin'} size={28} stroke="#fff" sw={1.7} /></div>
-            </div>
-
-            <div className="body">
-              <h3>{sub.name}</h3>
-              <div className="card-note">{sub.note || 'Tıklayıp içerikleri inceleyin'}</div>
-            </div>
-          </div>
-        ))}
-      </div>
-    );
-  } else {
-    const activePlaces = hasSubCats ? (selectedSubCat ? selectedSubCat.places : []) : cat.places;
-    
-    if (activePlaces && activePlaces.length > 0) {
-      content = (
-        <div className="grid animate-fade">
-          {activePlaces.map((p, i) => {
-            const hasImg = p.img && p.img.trim() !== "";
-            const hasVideo = p.video && p.video.trim() !== "";
-            const cardStyle = hasImg
-              ? { backgroundImage:`url(${p.img})`, backgroundPosition: p.bgPos || 'center 22%' }
-              : { background:`linear-gradient(150deg, ${cat.color} 0%, color-mix(in srgb, ${cat.color}, #000 45%) 100%)` };
-
-            const handleCardClick = () => { 
-              setSelectedPlace(p); 
-              // Mikro-Site Router Mantığı: Karta tıklayınca linki güncelle
-              window.history.pushState(null, "", `/mekan/${p.slug}`);
-            };
-            const onTouchStart = hasVideo ? (e) => { touchStartX.current = e.touches[0].clientX; } : undefined;
-            const onTouchEnd = hasVideo ? (e) => {
-              if (touchStartX.current == null) return;
-              const dx = e.changedTouches[0].clientX - touchStartX.current;
-              touchStartX.current = null;
-              if (Math.abs(dx) > 45) setFsVideo(p.video);
-            } : undefined;
-
-            return (
-              <div
-                key={i}
-                className={"card" + (hasVideo ? " has-video" : "")}
-                onClick={handleCardClick}
-                onTouchStart={onTouchStart}
-                onTouchEnd={onTouchEnd}
-                style={cardStyle}
-              >
-                <div className="scrim"></div>
-<button 
-                  className={`fav-btn ${favorites.includes(p.slug) ? "is-fav" : ""}`} 
-                  onClick={(e) => { 
-                    e.stopPropagation(); 
-                    toggleFav(p.slug); 
-                    if(window.gtag) window.gtag('event', 'favoriye_eklendi', { mekan_adi: p.name });
-                  }}
-                >
-                  <Icon name="heart" size={20} stroke="#fff" sw={2} />
-                </button>
-                {hasVideo && (
-                  <div className="card-video-badge">
-                    <svg width="13" height="13" viewBox="0 0 24 24" fill="#fff"><path d="M7 5.5v13a1 1 0 0 0 1.5.87l11-6.5a1 1 0 0 0 0-1.74l-11-6.5A1 1 0 0 0 7 5.5Z"/></svg>
-                    Video
-                  </div>
-                )}
-
-                <div className="card-top-bar">
-                  <div className="card-icon"><Icon name={p.icon || 'pin'} size={28} stroke="#fff" sw={1.7} /></div>
-                </div>
-
-                <div className="body">
-                  <h3>{p.name}</h3>
-                  {p.subName && <div style={{fontSize:'13px', color:'rgba(255,255,255,0.85)', fontWeight:'700', marginTop:'4px'}}>{p.subName}</div>}
-                  {p.area && <div className="card-area">📍 {p.area}</div>}
-                  <div className="card-note">{hasVideo ? ' Müzik Hocası' : (p.note || 'Detayları görmek için tıklayın')}</div>
-                </div>
-              </div>
-            );
-          })}
-          
-          {cat.id === "gezilecek" && (
-            <div style={{ gridColumn: '1 / -1', textAlign: 'center', padding: '20px 10px', marginTop: '10px', color: 'var(--ink-soft)', fontSize: '14px' }}>
-              💡 <strong>Önemli Not:</strong> Bu bölümdeki görseller yapay zeka (AI) tarafından tasarlanmıştır. Detaylarda ufak hatalar barındırabilir ve mekanların birebir gerçek halini yansıtmayabilir.
-            </div>
-          )}
-
-        </div>
-      );
-    } else {
-      content = (
-        <div className="coming-soon-container animate-fade">
-          <h4>Çok yakında burada listelenecektir.</h4>
-        </div>
-      );
+      html2pdf().set(opt).from(element).save().then(() => {
+        document.getElementById('pdf-footer').style.display = 'none'; // Ekranda tekrar gizle
+      });
     }
-  }
-
-  return (
-    <div className={`ov ${isClosing ? 'animate-out' : 'animate-in'}`} style={isClosing ? {opacity:0, transition:'opacity 0.2s'} : {}}>
-      <div className="ov-head">
-        <button className="ov-back" onClick={handleBack}>Geri Dön</button>
-        <div className="ov-title"><h2>{selectedSubCat ? selectedSubCat.name : cat.name}</h2></div>
-        <button className="ov-close" onClick={handleClose}>X</button>
-      </div>
-      <div className="ov-body">
-        {content}
-      </div>
-    </div>
-  );
-}
-
-function BottomNav({ activeTab, onTabChange, onOpenCat, onOpenFavorites }) {
-  const tabs = [
-    { id: 'home', label: 'Ana Sayfa', icon: 'home' },
-    { id: 'cats', label: 'Keşfet', icon: 'grid' },
-    { id: 'nobetci', label: 'Eczane', icon: 'cross', colorClass: 'active-red' },
-    { id: 'gezilecek', label: 'Gezi', icon: 'compass' },
-    { id: 'favs', label: 'Favoriler', icon: 'heart', colorClass: 'active-red' }
-  ];
-
-  const handlePress = (tab) => {
-    onTabChange(tab.id);
-    if (tab.id === 'home') {
-      window.scrollTo({ top: 0, behavior: 'smooth' });
-      onOpenCat(null, 'home');
-    } else if (tab.id === 'cats') {
-      document.getElementById("kategoriler").scrollIntoView({ behavior:"smooth" });
-      onOpenCat(null, 'cats');
-    } else if (tab.id === 'nobetci') {
-      onOpenCat(window.AGRI.categories.find(c => c.id === 'nobetci'));
-    } else if (tab.id === 'gezilecek') {
-      onOpenCat(window.AGRI.categories.find(c => c.id === 'gezilecek'));
-    } else if (tab.id === 'favs') {
-      onOpenFavorites();
-    }
-  };
-
-  return (
-    <nav className="bottom-nav" data-nosnippet="true">
-      {tabs.map(tab => {
-        const isActive = activeTab === tab.id;
-        const activeClass = tab.colorClass || 'active';
-        return (
-          <button key={tab.id} className={`nav-item ${isActive ? activeClass : ''}`} onClick={() => handlePress(tab)}>
-            <span className="nav-indicator"></span>
-            <Icon name={tab.icon} size={24} stroke={isActive ? "currentColor" : "var(--ink-faint)"} sw={isActive ? 2.2 : 1.8} />
-            <span>{tab.label}</span>
-          </button>
-        )
-      })}
-    </nav>
-  );
-}
-
-/* ===================== MASTER APP ===================== */
-const { useEffect: useEffectA, useState: useStateA } = React;
-
-function App(){
-  const [activeTab, setActiveTab] = useStateA('home');
-  const [openCat, setOpenCat] = useStateA(null);
-  const [directSub, setDirectSub] = useStateA(null);
-  const [directPlace, setDirectPlace] = useStateA(null);
-  const [docView, setDocView] = useStateA(null); 
-  // FAVORİLER HAFIZASI (Yerel Depolama)
-  const [favorites, setFavorites] = useStateA(() => {
-    const saved = safeStore.get('agri_favs');
-    return saved ? JSON.parse(saved) : [];
-  });
-
-  const toggleFav = (slug) => {
-    let newFavs;
-    if (favorites.includes(slug)) {
-      newFavs = favorites.filter(id => id !== slug); // Favoriden çıkar
-    } else {
-      newFavs = [...favorites, slug]; // Favoriye ekle
-    }
-    setFavorites(newFavs);
-    safeStore.set('agri_favs', JSON.stringify(newFavs));
-  };
-
-  const handleOpenFavorites = () => {
-    let allPlaces = [];
-    window.AGRI.categories.forEach(c => {
-      if(c.places) allPlaces = [...allPlaces, ...c.places];
-      if(c.hasSubCategories) {
-        c.subCategories.forEach(sub => { if(sub.places) allPlaces = [...allPlaces, ...sub.places]; });
-      }
-    });
-    const favPlaces = allPlaces.filter(p => favorites.includes(p.slug));
-    
-    const favCategory = {
-      id: "favorilerim",
-      name: "Favorilerim 💚",
-      color: "#E84142",
-      blurb: "Kendi cihazınıza kaydettiğiniz favori mekanlarınız.",
-      places: favPlaces
-    };
-    setOpenCat(favCategory); setDirectSub(null); setDirectPlace(null);
-    document.getElementById("kategoriler").scrollIntoView({ behavior:"smooth" });
-    setActiveTab('favs');
-  };
-  
-  const [tosStatus, setTosStatus] = useStateA(() => {
-    return safeStore.get('agri_onay') || 'ask'; 
-  });
-
-  useEffectA(() => {
-    const handleLocationRouting = () => {
-      const pathParts = window.location.pathname.replace(/^\/|\/$/g, "").split("/");
-      
-      // Mikro site yönlendirmesi (Örn: /mekan/bahar-igan-bagan)
-      if (pathParts[0] === "mekan" && pathParts[1]) {
-        const slug = pathParts[1];
-        let fCat = null, fSub = null, fPlace = null;
-        
-        window.AGRI.categories.forEach(c => {
-          if (c.places) {
-            const p = c.places.find(x => x.slug === slug);
-            if (p) { fCat = c; fPlace = p; }
-          }
-          if (c.hasSubCategories) {
-            c.subCategories.forEach(sub => {
-              if (sub.places) {
-                const p = sub.places.find(x => x.slug === slug);
-                if (p) { fCat = c; fSub = sub; fPlace = p; }
-              }
-            });
-          }
-        });
-        
-        if (fCat && fPlace) {
-          setOpenCat(fCat); setDirectSub(fSub); setDirectPlace(fPlace);
-          setActiveTab(fCat.id === 'nobetci' ? 'nobetci' : (fCat.id === 'gezilecek' ? 'gezilecek' : 'cats'));
-        } else {
-          setOpenCat(null); setDirectSub(null); setDirectPlace(null);
-          setActiveTab('home');
-        }
-      } 
-      // Normal Kategori Yönlendirmesi (Örn: /gezilecek)
-      else if (pathParts[0]) {
-        const matchingCat = window.AGRI.categories.find(c => c.id === pathParts[0]);
-        if (matchingCat) {
-          setOpenCat(matchingCat); setDirectSub(null); setDirectPlace(null);
-          setActiveTab(matchingCat.id === 'nobetci' ? 'nobetci' : (matchingCat.id === 'gezilecek' ? 'gezilecek' : 'cats'));
-        } else {
-          setOpenCat(null); setDirectSub(null); setDirectPlace(null);
-          setActiveTab('home');
-        }
-      } else {
-        setOpenCat(null); setDirectSub(null); setDirectPlace(null);
-        setActiveTab('home');
-        document.title = "04agri.com — Ağrı'nın Dijital Rehberi";
-      }
-    };
-
-    handleLocationRouting(); 
-    window.addEventListener("popstate", handleLocationRouting);
-    return () => window.removeEventListener("popstate", handleLocationRouting);
-  }, []);
-
-  const handleUpdateCategoryView = (cat, intendedTab = null) => {
-    if (cat) {
-      window.history.pushState(null, "", `/${cat.id}`);
-      setOpenCat(cat); setDirectSub(null); setDirectPlace(null);
-      setActiveTab(cat.id === 'nobetci' ? 'nobetci' : (cat.id === 'gezilecek' ? 'gezilecek' : 'cats'));
-    } else {
-      window.history.pushState(null, "", "/"); 
-      setOpenCat(null); setDirectSub(null); setDirectPlace(null);
-      if (intendedTab) {
-        setActiveTab(intendedTab);
-      }
-    }
-  };
-
-  const handleSearchSelect = (place) => {
-    const cat = window.AGRI.categories.find(c => c.id === place.catId);
-    if(cat) {
-      window.history.pushState(null, "", `/mekan/${place.slug}`);
-      setOpenCat(cat); setDirectSub(null); setDirectPlace(place);
-    }
-  };
-
-  const handleAcceptTos = () => {
-    safeStore.set('agri_onay', 'true');
-    setTosStatus('true');
-  };
-
-  const handleDeclineTos = () => {
-    setTosStatus('blocked');
-  };
-
-  useEffectA(() => {
-    if (tosStatus !== 'true') {
-      document.body.style.overflow = 'hidden';
-    } else {
-      document.body.style.overflow = 'auto';
-    }
-  }, [tosStatus]);
-
-  // --- EKRAN KAYDIRMA (SWIPE) İLE SEKME DEĞİŞTİRME MOTORU ---
-  const touchStartX = useRef(null);
-  const touchStartY = useRef(null);
-  const touchEndX = useRef(null);
-
-  const handleTabSwitch = (tabId) => {
-    setActiveTab(tabId);
-    if (tabId === 'home') {
-      window.scrollTo({ top: 0, behavior: 'smooth' });
-      handleUpdateCategoryView(null, 'home');
-    } else if (tabId === 'cats') {
-      document.getElementById("kategoriler").scrollIntoView({ behavior:"smooth" });
-      handleUpdateCategoryView(null, 'cats');
-    } else if (tabId === 'nobetci') {
-      handleUpdateCategoryView(window.AGRI.categories.find(c => c.id === 'nobetci'));
-    } else if (tabId === 'gezilecek') {
-      handleUpdateCategoryView(window.AGRI.categories.find(c => c.id === 'gezilecek'));
-    } else if (tabId === 'favs') {
-      handleOpenFavorites();
-    }
-  };
-
-  const onTouchStartGlobal = (e) => {
-    touchStartX.current = e.targetTouches[0].clientX;
-    touchStartY.current = e.targetTouches[0].clientY;
-    touchEndX.current = null;
-  };
-
-  const onTouchMoveGlobal = (e) => { touchEndX.current = e.targetTouches[0].clientX; };
-
-  const onTouchEndGlobal = (e) => {
-    if (!touchStartX.current || !touchEndX.current) return;
-    
-    // Hikayeler veya kayan görseller (marquee) üzerinde kaydırma yapılıyorsa sekmeyi değiştirme
-    if (e.target.closest('.stories-row') || e.target.closest('.marquee') || e.target.closest('.search-tags')) return;
-
-    const distanceX = touchStartX.current - touchEndX.current;
-    
-    // Kaydırmanın bilerek yapıldığından emin ol (en az 90 piksel kaydırılmış olmalı)
-    if (Math.abs(distanceX) > 90) {
-      if (openCat && !['nobetci', 'gezilecek', 'favs'].includes(activeTab)) return; // Detay kartındayken sekme değiştirme
-      if (docView || tosStatus !== 'true') return; // Sözleşme ekranındayken sekme değiştirme
-      
-      const tabsOrder = ['home', 'cats', 'nobetci', 'gezilecek', 'favs'];
-      const currentIndex = tabsOrder.indexOf(activeTab);
-      
-      if (distanceX > 0 && currentIndex < tabsOrder.length - 1) {
-        handleTabSwitch(tabsOrder[currentIndex + 1]); // Sola Kaydırdı -> Sonraki Sekme
-      } else if (distanceX < 0 && currentIndex > 0) {
-        handleTabSwitch(tabsOrder[currentIndex - 1]); // Sağa Kaydırdı -> Önceki Sekme
-      }
-    }
-  };
-
-  const privacyText = "Değerli Ziyaretçimiz, bu web sayfası Ağrı'ya hizmet eden; hiçbir verinizi işlemeyen, saklamayan veya üçüncü taraflarla paylaşmayan, hiçbir konum bilgisi veya kişisel bilgi talep etmeyen bir tanıtım platformudur. Sizden ad, soyad, telefon, e-posta veya konum gibi hiçbir kişisel veri istenmez ve toplanmaz. Amacımız yalnızca Ağrı'yı; restoranları, cafeleri, pastaneleri, sağlık hizmetlerini, nöbetçi eczaneleri, güzellik ve bakım merkezlerini, kuaförleri, eğitim kurumlarını, etkinlikleri ve gezilecek yerleri tek bir çatı altında, ücretsiz biçimde hem Ağrı halkına hem de değerli misafirlerimize tanıtmaktır. Tarayıcınızda yalnızca bu onay kutusunu bir daha göstermemek için küçük bir teknik kayıt (yerel depolama) tutulabilir; bu kayıt hiçbir şekilde tarafımıza iletilmez. Herhangi bir soru veya talebiniz için biagri0404@hotmail.com adresinden bize ulaşabilirsiniz.";
-  const termsText = "Bu platformu kullanarak aşağıdaki şartları kabul etmiş olursunuz. Platformda yer alan tüm bilgiler (mekan, adres, telefon, nöbetçi eczane, vakitler vb.) tamamen bilgilendirme amaçlıdır ve resmî nitelik taşımaz. Bilgiler zamanla değişebileceğinden, olası hatalı, eksik veya güncel olmayan içeriklerden tarafımız sorumlu tutulamaz; önemli durumlarda ilgili kurumdan teyit almanız önerilir. Platformdaki içerikler izinsiz olarak ticari amaçla kopyalanamaz veya çoğaltılamaz. Bağlantı verilen üçüncü taraf hizmetlerin (ör. harita uygulamaları) içeriğinden ve gizlilik uygulamalarından o hizmet sağlayıcılar sorumludur. Bir bilgiyi düzeltmek, eklemek veya kaldırmak isterseniz biagri0404@hotmail.com adresi üzerinden bizimle iletişime geçebilirsiniz. Şartlar gerektiğinde güncellenebilir.\n\nSorumluluk Reddi (Disclaimer): Verilen bilgiler bilgilendirme amaçlıdır, resmî nitelik taşımaz ve güncel olmayabilir.";
-
-  const docData = {
-    privacy: { title: "Gizlilik Politikası", body: privacyText },
-    terms:   { title: "Kullanım Şartları",   body: termsText }
-  };
-
-  return (
-    <div id="top" 
-      style={{ pointerEvents: tosStatus !== 'true' ? 'none' : 'auto', overflowX: 'hidden' }}
-      onTouchStart={onTouchStartGlobal}
-      onTouchMove={onTouchMoveGlobal}
-      onTouchEnd={onTouchEndGlobal}
-    >
-      
-      <Topbar />
-      <Hero onOpenCat={handleUpdateCategoryView} onSearchPlace={handleSearchSelect} onOpenFavorites={handleOpenFavorites} />
-      <ImageMarquee /> 
-      <Stories />
-      <AgendaDashboard />
-      <Categories onOpen={handleUpdateCategoryView} />
-      
-      <footer className="foot" id="iletisim">
-        <div className="wrap">
-          <div className="top">
-            <div>
-              <h3>Ağrı Dijital Rehberi</h3>
-              <p className="lead">Ağrı'ya hizmet eden; hiçbir verinizi işlemeyen, saklamayan ve hiçbir konum bilgisi talep etmeyen ücretsiz bir tanıtım platformudur. Amacımız yalnızca şehrimizi en güzel şekilde tanıtmaktır. Sorumluluk Reddi (Disclaimer): Verilen bilgiler bilgilendirme amaçlıdır, resmî nitelik taşımaz ve güncel olmayabilir.</p>
-            </div>
-            <div className="cols">
-              <div className="col">
-                <h5>Kategoriler</h5>
-                {window.AGRI.categories.map(c => (
-                  <span key={c.id} onClick={()=>handleUpdateCategoryView(window.AGRI.categories.find(x=>x.id===c.id))}>{c.name}</span>
-                ))}
-              </div>
-              <div className="col">
-                <h5>Yasal</h5>
-                <span onClick={()=>setDocView('privacy')}>Gizlilik Politikası</span>
-                <span onClick={()=>setDocView('terms')}>Kullanım Şartları</span>
-              </div>
-              <div className="col">
-                <h5>İletişim</h5>
-                <a href="mailto:biagri0404@hotmail.com">biagri0404@hotmail.com</a>
-              </div>
-            </div>
-          </div>
-          <div className="rule"></div>
-          <div className="bottom">
-            <span>Copyright © 2026 04agri.com — Tüm hakları saklıdır. Başarılar dileriz.</span>
-          </div>
-        </div>
-      </footer>
-
-      {openCat && <PlacesOverlay cat={openCat} initialSubCat={directSub} initialPlace={directPlace} onClose={() => handleUpdateCategoryView(null)} favorites={favorites} toggleFav={toggleFav} />}
-
-      {docView && (
-        <div className="doc-modal-overlay" style={{ pointerEvents:'auto' }} onClick={(e)=>{ if(e.target.className==='doc-modal-overlay') setDocView(null); }}>
-          <div className="doc-modal-card">
-            <div className="doc-modal-head">
-              <h2>{docData[docView].title}</h2>
-              <button className="doc-modal-close" onClick={()=>setDocView(null)}>X</button>
-            </div>
-            <div className="doc-modal-body">
-              <p>{docData[docView].body}</p>
-            </div>
-          </div>
-        </div>
-      )}
-
-      {tosStatus === 'ask' && (
-        <div className="tos-overlay" style={{ pointerEvents: 'auto' }}>
-          <div className="tos-modal">
-            <h2>Hoş Geldiniz 🌿</h2>
-            <p>Ağrı'nın dijital rehberine hoş geldiniz. Bu platform sizden hiçbir kişisel veri veya konum bilgisi talep etmez. Devam etmeden önce lütfen <strong onClick={()=>setDocView('privacy')} style={{cursor:'pointer', textDecoration:'underline'}}>Gizlilik Politikası</strong> ve <strong onClick={()=>setDocView('terms')} style={{cursor:'pointer', textDecoration:'underline'}}>Kullanım Şartları</strong> metinlerini onaylayın.</p>
-            <p className="tos-disclaimer"><strong>Sorumluluk Reddi (Disclaimer):</strong> Verilen bilgiler bilgilendirme amaçlıdır, resmî nitelik taşımaz ve güncel olmayabilir.</p>
-            <div className="tos-actions">
-              <button className="tos-btn decline" onClick={handleDeclineTos}>Şimdilik Onaylamıyorum</button>
-              <button className="tos-btn accept" onClick={handleAcceptTos}>Okudum, Onaylıyorum</button>
-            </div>
-          </div>
-        </div>
-      )}
-
-      {tosStatus === 'blocked' && (
-        <div className="tos-blocked-overlay" style={{ pointerEvents: 'auto' }}>
-          <div className="tos-blocked-card">
-            <h3>Görüşünüze Saygı Duyuyoruz</h3>
-            <p>Sayfamızı inceleyebilmek ve kullanabilmek için Gizlilik Politikası ve Kullanım Şartları'nı onaylamanız gerekmektedir. Fikrinizi değiştirdiğinizde aramıza tekrar katılabilirsiniz.</p>
-            <button className="tos-btn accept" style={{ width: '100%', padding: '16px' }} onClick={() => setTosStatus('ask')}>Şartları Tekrar İncele</button>
-          </div>
-        </div>
-      )}
-
-      <BottomNav activeTab={activeTab} onTabChange={setActiveTab} onOpenCat={handleUpdateCategoryView} onOpenFavorites={handleOpenFavorites} />
-    </div>
-  );
-}
-
-function pattern(color, variant) {
-  return `linear-gradient(135deg, ${color} 0%, color-mix(in srgb, ${color}, #000 30%) 100%)`;
-}
-
-ReactDOM.createRoot(document.getElementById("root")).render(<App />);
-</script>
+  </script>
 </body>
 </html>
