@@ -1731,26 +1731,36 @@ function downloadApplePDF(info, biz) {
   doc.save(`04Agri_Randevu_${info.code}.pdf`);
 }
 
-// İŞLETME YÖNETİCİ PANELİ BİLEŞENİ ($0)
+// İŞLETME YÖNETİCİ PANELİ BİLEŞENİ (CANLI HAFIZA YENİLEMELİ - $0)
 function BusinessAdminPanel({ isOpen, onClose }) {
   const allBiz = getAllBusinesses();
   const [currentBizId, setCurrentBizId] = useState(() => safeStore.get("agri_admin_biz_id") || allBiz[0]?.id || "bilge-igan");
   const [activeTab, setActiveTab] = useState("appointments");
   const [filter, setFilter] = useState("all");
+  const [appointments, setAppointments] = useState([]);
 
-  // Randevuları Yükle (Sadece Giriş Yapan İşletmeye Ait)
-  const [appointments, setAppointments] = useState(() => {
+  // PANEL HER AÇILDIĞINDA EN GÜNCEL RANDEVULARI HAFIZADAN YENİLER
+  const loadAppointments = () => {
     try {
       const saved = JSON.parse(safeStore.get("agri_appointments") || "[]");
-      if (saved.length > 0) return saved;
-    } catch(e){}
-    // Örnek başlangıç randevuları
-    return [
-      { code: "AGR-1042", bizId: "bilge-igan", name: "Ahmet Yılmaz", phone: "0542 111 22 33", email: "ahmet@gmail.com", date: "20.08.2026", time: "10:00", status: "pending", note: "İlk muayene ve diyet planı." },
-      { code: "AGR-1043", bizId: "bilge-igan", name: "Zeynep Demir", phone: "0533 444 55 66", email: "zeynep@gmail.com", date: "20.08.2026", time: "14:00", status: "approved", note: "Kontrol randevusu." },
-      { code: "AGR-1044", bizId: "dr-nilay", name: "Mehmet Kaya", phone: "0555 777 88 99", email: "mehmet@gmail.com", date: "21.08.2026", time: "11:30", status: "pending", note: "Cilt analizi." }
-    ];
-  });
+      setAppointments(saved);
+    } catch(e) {
+      setAppointments([]);
+    }
+  };
+
+  useEffect(() => {
+    if (isOpen) {
+      loadAppointments();
+    }
+  }, [isOpen, currentBizId]);
+
+  // CANLI SİNYAL: Yeni randevu alındığı anda paneli anında günceller
+  useEffect(() => {
+    const handleNewBooking = () => loadAppointments();
+    window.addEventListener("agri_new_booking", handleNewBooking);
+    return () => window.removeEventListener("agri_new_booking", handleNewBooking);
+  }, []);
 
   const saveAppointments = (newList) => {
     setAppointments(newList);
@@ -1764,10 +1774,10 @@ function BusinessAdminPanel({ isOpen, onClose }) {
 
   const currentBiz = allBiz.find(b => b.id === currentBizId) || allBiz[0];
 
-  // SADECE GİRİŞ YAPAN İŞLETMENİN RANDEVULARI
+  // SADECE SEÇİLEN İŞLETMEYE AİT RANDEVULARI FİLTRELER (BAŞKASINI GÖREMEZ)
   const myAppointments = appointments.filter(a => a.bizId === currentBizId);
 
-  // FİLTRELENMİŞ RANDEVULAR
+  // DURUMA GÖRE FİLTRELEME
   const filteredAppointments = myAppointments.filter(a => {
     if (filter === "approved") return a.status === "approved";
     if (filter === "rejected") return a.status === "rejected";
@@ -1794,13 +1804,13 @@ function BusinessAdminPanel({ isOpen, onClose }) {
             <select
               value={currentBizId}
               onChange={e => { setCurrentBizId(e.target.value); safeStore.set("agri_admin_biz_id", e.target.value); }}
-              style={{padding:'6px 12px', borderRadius:'100px', border:'1px solid var(--line)', background:'#fff', fontWeight:700, fontSize:'13px'}}
+              style={{padding:'7px 14px', borderRadius:'100px', border:'1px solid var(--line)', background:'#fff', fontWeight:800, fontSize:'13px', color:'var(--ink)'}}
             >
               {allBiz.map(b => (
                 <option key={b.id} value={b.id}>{b.name}</option>
               ))}
             </select>
-            <button onClick={onClose} style={{width:'36px', height:'36px', borderRadius:'50%', background:'var(--bg)', fontWeight:800}}>✕</button>
+            <button onClick={onClose} style={{width:'36px', height:'36px', borderRadius:'50%', background:'var(--bg)', fontWeight:800, cursor:'pointer'}}>✕</button>
           </div>
         </div>
 
@@ -1852,17 +1862,19 @@ function BusinessAdminPanel({ isOpen, onClose }) {
               </div>
 
               {filteredAppointments.length === 0 ? (
-                <div style={{textAlign:'center', padding:'40px 0', color:'var(--ink-soft)'}}>
-                  Bu filtreye ait herhangi bir randevu kaydı bulunamadı.
+                <div style={{textAlign:'center', padding:'48px 0', color:'var(--ink-soft)', background:'var(--bg)', borderRadius:'16px', border:'1px dashed var(--line)'}}>
+                  <div style={{fontSize:'32px', marginBottom:'8px'}}>📭</div>
+                  <div style={{fontWeight:700, fontSize:'15px'}}>Bu filtreye ait herhangi bir randevu kaydı bulunamadı.</div>
+                  <div style={{fontSize:'13px', color:'var(--ink-faint)', marginTop:'4px'}}>Yeni bir randevu alındığında anında burada görünecektir.</div>
                 </div>
               ) : (
-                <div style={{display:'grid', gridTemplateColumns:'repeat(auto-fill, minmax(380px, 1fr))', gap:'14px'}}>
+                <div style={{display:'grid', gridTemplateColumns:'repeat(auto-fill, minmax(360px, 1fr))', gap:'14px'}}>
                   {filteredAppointments.map(apt => (
                     <div className="apt-card" key={apt.code}>
                       <div className="apt-card-top">
                         <div>
                           <span className="apt-pnr">PNR: {apt.code}</span>
-                          <h4 style={{fontSize:'16px', fontWeight:800, margin:'6px 0 2px'}}>{apt.name}</h4>
+                          <h4 style={{fontSize:'16.5px', fontWeight:800, margin:'6px 0 2px'}}>{apt.name}</h4>
                           <div style={{fontSize:'13px', color:'var(--ink-soft)'}}>
                             📞 <a href={`tel:${apt.phone}`} style={{fontWeight:700, color:'#0071e3'}}>{apt.phone}</a>
                             {apt.email && <span> • ✉️ {apt.email}</span>}
@@ -1873,20 +1885,20 @@ function BusinessAdminPanel({ isOpen, onClose }) {
                         </span>
                       </div>
 
-                      <div style={{background:'var(--card)', padding:'10px', borderRadius:'10px', fontSize:'13px', border:'1px solid var(--line)'}}>
-                        <div>📅 <strong>Tarih & Saat:</strong> {apt.date} — {apt.time}</div>
+                      <div style={{background:'var(--card)', padding:'10px 14px', borderRadius:'10px', fontSize:'13px', border:'1px solid var(--line)'}}>
+                        <div>📅 <strong>Randevu Zamanı:</strong> {apt.date} — {apt.time}</div>
                         {apt.note && <div style={{marginTop:'4px', color:'var(--ink-soft)'}}>💬 <em>"{apt.note}"</em></div>}
                       </div>
 
                       <div className="apt-actions">
                         {apt.status !== 'approved' && (
                           <button className="btn-act appr" onClick={() => handleStatusChange(apt.code, 'approved')}>
-                            ✓ Onayla
+                            ✓ Randevuyu Onayla
                           </button>
                         )}
                         {apt.status !== 'rejected' && (
                           <button className="btn-act rejc" onClick={() => handleStatusChange(apt.code, 'rejected')}>
-                            ✕ Reddet
+                            ✕ Randevuyu Reddet
                           </button>
                         )}
                       </div>
@@ -1897,7 +1909,7 @@ function BusinessAdminPanel({ isOpen, onClose }) {
             </>
           )}
 
-          {/* 2. SEKME: ÇALIŞMA SAATLERİ & SLOTLAR (ADIM 2 HAZIR) */}
+          {/* 2. SEKME: ÇALIŞMA SAATLERİ & SLOTLAR */}
           {activeTab === 'slots' && (
             <div style={{display:'flex', flexDirection:'column', gap:'16px'}}>
               <h3 style={{fontSize:'17px', fontWeight:800}}>⏰ Haftalık Çalışma Saatleri ve Randevu Slotları</h3>
@@ -1905,7 +1917,7 @@ function BusinessAdminPanel({ isOpen, onClose }) {
                 Buradan randevu saatlerinizi açıp kapatabilir, dolu saatleri belirleyebilirsiniz.
               </p>
               <div style={{background:'var(--bg)', padding:'20px', borderRadius:'16px', border:'1px solid var(--line)'}}>
-                <div style={{fontWeight:700, marginBottom:'10px'}}>Aktif Slot Saatleri (09:00 - 17:00):</div>
+                <div style={{fontWeight:700, marginBottom:'10px'}}>Aktif Randevu Saatleri (09:00 - 17:00):</div>
                 <div style={{display:'flex', flexWrap:'wrap', gap:'8px'}}>
                   {['09:00', '09:30', '10:00', '10:30', '11:00', '11:30', '13:30', '14:00', '14:30', '15:00', '15:30', '16:00', '16:30', '17:00'].map(t => (
                     <span key={t} style={{background:'var(--card)', padding:'8px 14px', borderRadius:'10px', border:'1px solid var(--line)', fontWeight:700, fontSize:'13px'}}>
@@ -2006,13 +2018,26 @@ function AppointmentSection({ activeBizId, onBizChange }) {
     if (!validateInputs()) return;
 
     const pnrCode = `AGR-${Math.floor(1000 + Math.random() * 9000)}`;
-    const newApt = { code: pnrCode, bizId: selectedBizId, name, phone, email, date, time, status: 'pending', note };
+    const newApt = {
+      code: pnrCode,
+      bizId: selectedBizId,
+      name: name.trim(),
+      phone: phone.trim(),
+      email: email.trim(),
+      date,
+      time,
+      status: 'pending',
+      note: note.trim()
+    };
     
-    // Randevuyu yerel listeye kaydet (İşletme anında panelinde görsün)
+    // Randevuyu anında yerel hafızaya kaydet
     try {
       const currentList = JSON.parse(safeStore.get("agri_appointments") || "[]");
       currentList.unshift(newApt);
       safeStore.set("agri_appointments", JSON.stringify(currentList));
+      
+      // Yönetici paneline canlı anlık yenileme sinyali gönder
+      window.dispatchEvent(new Event("agri_new_booking"));
     } catch(e){}
 
     setSuccessData(newApt);
@@ -2026,6 +2051,7 @@ function AppointmentSection({ activeBizId, onBizChange }) {
       if(found) {
         found.status = 'rejected';
         safeStore.set("agri_appointments", JSON.stringify(currentList));
+        window.dispatchEvent(new Event("agri_new_booking"));
         alert("Randevunuz başarıyla iptal edildi.");
       } else {
         alert("Girdiğiniz bilgilere ait randevu kaydı bulunamadı.");
@@ -2381,7 +2407,7 @@ function App(){
       <Stories />
       <AgendaDashboard onSelectBlog={setSelectedBlog} />
       
-      {/* İŞTE GÜNDEM İLE KATEGORİLER ARASINDAKİ CANLI RANDEVU MERKEZİ */}
+      {/* GÜNDEM İLE KATEGORİLER ARASINDAKİ CANLI RANDEVU MERKEZİ */}
       <AppointmentSection activeBizId={selectedPlaceForBooking} onBizChange={setSelectedPlaceForBooking} />
 
       <Categories onOpen={setOpenCat} />
