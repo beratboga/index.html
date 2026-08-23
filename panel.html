@@ -1,1 +1,459 @@
+<!DOCTYPE html>
+<html lang="tr">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<title>04agri.com — Yönetim Paneli</title>
+<style>
+  :root{
+    --bg:#f6f4ef; --card:#fff; --ink:#17150f; --ink-soft:#6a655a;
+    --line:#e3ded3; --accent:#44BD32; --pin:#E84142;
+  }
+  * { box-sizing: border-box; }
+  body {
+    margin: 0;
+    font-family: system-ui, -apple-system, sans-serif;
+    background: var(--bg);
+    color: var(--ink);
+    min-height: 100vh;
+  }
 
+  .login-wrap {
+    display: flex; align-items: center; justify-content: center;
+    min-height: 100vh; padding: 20px;
+  }
+  .login-box {
+    background: var(--card);
+    padding: 40px;
+    border-radius: 20px;
+    box-shadow: 0 10px 40px rgba(0,0,0,0.08);
+    width: 100%; max-width: 380px;
+  }
+  .login-box h1 { font-size: 22px; margin: 0 0 24px; }
+  .login-box input {
+    width: 100%; padding: 12px 14px; margin-bottom: 12px;
+    border: 1px solid var(--line); border-radius: 10px; font-size: 15px;
+  }
+  .login-box button {
+    width: 100%; padding: 13px; background: var(--ink); color: #fff;
+    border: none; border-radius: 10px; font-size: 15px; font-weight: 700; cursor: pointer;
+  }
+  .msg { margin-top: 14px; font-size: 14px; color: #444; text-align: center; }
+  .err { color: var(--pin); }
+
+  .panel-header {
+    display: flex; align-items: center; justify-content: space-between;
+    padding: 16px 24px; background: var(--card); border-bottom: 1px solid var(--line);
+    position: sticky; top: 0; z-index: 10;
+  }
+  .panel-header .brand { font-weight: 800; font-size: 18px; }
+  .panel-header .who { font-size: 13px; color: var(--ink-soft); }
+  .logout-btn {
+    background: var(--bg); border: 1px solid var(--line); padding: 8px 16px;
+    border-radius: 100px; font-weight: 700; font-size: 13px; cursor: pointer;
+  }
+
+  .tabs { display: flex; gap: 8px; padding: 16px 24px 0; flex-wrap: wrap; }
+  .tab-btn {
+    padding: 10px 18px; border-radius: 100px; border: 1px solid var(--line);
+    background: var(--card); font-weight: 700; font-size: 14px; cursor: pointer;
+    color: var(--ink-soft);
+  }
+  .tab-btn.active { background: var(--ink); color: #fff; border-color: transparent; }
+
+  .tab-content { padding: 24px; max-width: 1100px; margin: 0 auto; }
+  .placeholder-card {
+    background: var(--card); border: 1px solid var(--line); border-radius: 16px;
+    padding: 40px; text-align: center; color: var(--ink-soft); font-size: 15px;
+  }
+
+  .hidden { display: none; }
+
+  .form-card {
+    background: var(--card); border: 1px solid var(--line); border-radius: 16px;
+    padding: 24px; margin-bottom: 24px;
+  }
+  .form-card h3 { margin: 0 0 16px; font-size: 17px; }
+  .form-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(220px, 1fr)); gap: 12px; }
+  .form-grid label {
+    display: flex; flex-direction: column; gap: 6px; font-size: 13px; font-weight: 700; color: var(--ink-soft);
+  }
+  .form-grid input, .form-grid select {
+    padding: 10px 12px; border: 1px solid var(--line); border-radius: 10px; font-size: 14px; font-family: inherit;
+  }
+  .form-submit-row { margin-top: 16px; display: flex; align-items: center; gap: 12px; }
+  .btn-primary {
+    background: var(--accent); color: #17150f; border: none; padding: 12px 24px;
+    border-radius: 100px; font-weight: 800; font-size: 14px; cursor: pointer;
+  }
+  .btn-primary:disabled { opacity: .6; cursor: not-allowed; }
+  .form-status { font-size: 13px; font-weight: 600; }
+  .form-status.err { color: var(--pin); }
+  .form-status.ok { color: var(--accent); }
+
+  .biz-list { display: flex; flex-direction: column; gap: 10px; }
+  .biz-item {
+    background: var(--card); border: 1px solid var(--line); border-radius: 14px;
+    padding: 16px 18px; display: flex; align-items: center; justify-content: space-between;
+    gap: 12px; flex-wrap: wrap;
+  }
+  .biz-info { display: flex; flex-direction: column; gap: 3px; }
+  .biz-name { font-weight: 800; font-size: 15px; }
+  .biz-meta { font-size: 13px; color: var(--ink-soft); }
+  .biz-badge {
+    font-size: 11px; font-weight: 800; padding: 3px 10px; border-radius: 100px;
+    text-transform: uppercase; letter-spacing: .03em;
+  }
+  .biz-badge.active { background: rgba(68,189,50,.15); color: #2f8a1f; }
+  .biz-badge.suspended { background: rgba(232,65,66,.12); color: var(--pin); }
+  .biz-actions { display: flex; gap: 8px; align-items: center; }
+  .btn-sm {
+    padding: 8px 14px; border-radius: 100px; border: 1px solid var(--line);
+    background: var(--bg); font-weight: 700; font-size: 12.5px; cursor: pointer;
+  }
+  .empty-note { color: var(--ink-soft); font-size: 14px; padding: 20px 0; text-align: center; }
+</style>
+</head>
+<body>
+
+<div id="loginScreen" class="login-wrap">
+  <div class="login-box">
+    <h1>04agri.com Yönetim Paneli</h1>
+    <input type="email" id="email" placeholder="E-posta" />
+    <input type="password" id="password" placeholder="Şifre" />
+    <button onclick="girisYap()">Giriş Yap</button>
+    <div class="msg" id="msg"></div>
+  </div>
+</div>
+
+<div id="panelScreen" class="hidden">
+  <div class="panel-header">
+    <div>
+      <div class="brand">04agri.com Panel</div>
+      <div class="who" id="whoText"></div>
+    </div>
+    <button class="logout-btn" onclick="cikisYap()">Çıkış Yap</button>
+  </div>
+
+  <div id="businessTabs" class="tabs hidden">
+    <button class="tab-btn active" data-tab="appointments">Randevularım</button>
+    <button class="tab-btn" data-tab="hours">Çalışma Saatleri</button>
+    <button class="tab-btn" data-tab="blog">Blog</button>
+    <button class="tab-btn" data-tab="profile">Profil Ayarları</button>
+  </div>
+
+  <div id="adminTabs" class="tabs hidden">
+    <button class="tab-btn active" data-tab="businesses">İşletmeler</button>
+    <button class="tab-btn" data-tab="allAppointments">Tüm Randevular</button>
+    <button class="tab-btn" data-tab="allBlog">Blog Onayları</button>
+    <button class="tab-btn" data-tab="adminProfile">Profilim</button>
+  </div>
+
+  <div class="tab-content">
+    <div id="tabContentBox">Yükleniyor...</div>
+  </div>
+</div>
+
+<script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2/dist/umd/supabase.min.js"></script>
+<script>
+  const SUPABASE_URL = 'https://ckxqfasgddhgbpnxaaja.supabase.co';
+  const SUPABASE_KEY = 'sb_publishable_gEX1rPpXyfxdY0WPhK0KNw_vZSQAj7Z';
+
+  const supabaseClient = supabase.createClient(SUPABASE_URL, SUPABASE_KEY);
+
+  let currentRole = null;
+  let categoriesCache = [];
+
+  /* ============ GİRİŞ / ÇIKIŞ ============ */
+
+  async function girisYap() {
+    const email = document.getElementById('email').value;
+    const password = document.getElementById('password').value;
+    const msg = document.getElementById('msg');
+    msg.textContent = 'Giriş yapılıyor...';
+    msg.className = 'msg';
+
+    const { data, error } = await supabaseClient.auth.signInWithPassword({ email, password });
+
+    if (error) {
+      msg.textContent = 'Hata: ' + error.message;
+      msg.className = 'msg err';
+      return;
+    }
+
+    await girisSonrasiYukle();
+  }
+
+  async function girisSonrasiYukle() {
+    const { data: { user } } = await supabaseClient.auth.getUser();
+    if (!user) return;
+
+    const { data: profile, error: profileError } = await supabaseClient
+      .from('profiles')
+      .select('role')
+      .eq('id', user.id)
+      .single();
+
+    if (profileError || !profile) {
+      document.getElementById('msg').textContent = 'Rol bilgisi bulunamadı.';
+      document.getElementById('msg').className = 'msg err';
+      return;
+    }
+
+    currentRole = profile.role;
+
+    document.getElementById('loginScreen').classList.add('hidden');
+    document.getElementById('panelScreen').classList.remove('hidden');
+    document.getElementById('whoText').textContent = user.email + ' — ' + (currentRole === 'admin' ? 'Yönetici' : 'İşletme');
+
+    if (currentRole === 'admin') {
+      document.getElementById('adminTabs').classList.remove('hidden');
+      setupTabs('adminTabs');
+      renderTab('businesses');
+    } else {
+      document.getElementById('businessTabs').classList.remove('hidden');
+      setupTabs('businessTabs');
+      renderTab('appointments');
+    }
+  }
+
+  function setupTabs(containerId) {
+    const container = document.getElementById(containerId);
+    const buttons = container.querySelectorAll('.tab-btn');
+    buttons.forEach(btn => {
+      btn.onclick = () => {
+        buttons.forEach(b => b.classList.remove('active'));
+        btn.classList.add('active');
+        renderTab(btn.dataset.tab);
+      };
+    });
+  }
+
+  async function cikisYap() {
+    await supabaseClient.auth.signOut();
+    document.getElementById('panelScreen').classList.add('hidden');
+    document.getElementById('loginScreen').classList.remove('hidden');
+    document.getElementById('email').value = '';
+    document.getElementById('password').value = '';
+    document.getElementById('msg').textContent = '';
+  }
+
+  (async function checkSession() {
+    const { data: { session } } = await supabaseClient.auth.getSession();
+    if (session) {
+      await girisSonrasiYukle();
+    }
+  })();
+
+  /* ============ SEKME YÖNLENDİRME ============ */
+
+  async function renderTab(tabName) {
+    const box = document.getElementById('tabContentBox');
+
+    if (tabName === 'businesses') {
+      await renderBusinessesTab();
+      return;
+    }
+
+    const names = {
+      appointments: 'Randevularım',
+      hours: 'Çalışma Saatleri',
+      blog: 'Blog',
+      profile: 'Profil Ayarları',
+      allAppointments: 'Tüm Randevular',
+      allBlog: 'Blog Onayları',
+      adminProfile: 'Profilim'
+    };
+    box.innerHTML = '<div class="placeholder-card">' + (names[tabName] || tabName) + ' — bu bölüm bir sonraki adımda eklenecek.</div>';
+  }
+
+  /* ============ SLUG ÜRETME ============ */
+
+  function slugify(text) {
+    if (!text) return '';
+    const trMap = { 'ç':'c','Ç':'c','ğ':'g','Ğ':'g','ş':'s','Ş':'s','ü':'u','Ü':'u','ı':'i','İ':'i','ö':'o','Ö':'o' };
+    let str = text;
+    for (let key in trMap) { str = str.replace(new RegExp(key, 'g'), trMap[key]); }
+    return str.toLowerCase().replace(/[^a-z0-9\s-]/g, '').replace(/\s+/g, '-').replace(/-+/g, '-');
+  }
+
+  /* ============ ADMIN: İŞLETMELER SEKMESİ ============ */
+
+  async function loadCategoriesIfNeeded() {
+    if (categoriesCache.length > 0) return categoriesCache;
+    const { data, error } = await supabaseClient.from('categories').select('id, name').order('sort_order');
+    if (!error && data) categoriesCache = data;
+    return categoriesCache;
+  }
+
+  async function renderBusinessesTab() {
+    const box = document.getElementById('tabContentBox');
+    await loadCategoriesIfNeeded();
+
+    const optionsHtml = categoriesCache.map(c => '<option value="' + c.id + '">' + c.name + '</option>').join('');
+
+    box.innerHTML =
+      '<div class="form-card">' +
+        '<h3>Yeni İşletme Ekle</h3>' +
+        '<div class="form-grid">' +
+          '<label>İşletme Adı<input type="text" id="biz_name" placeholder="Örn: Club Maxfit" /></label>' +
+          '<label>Alt Başlık (opsiyonel)<input type="text" id="biz_subname" placeholder="Örn: Bay/Bayan Spor Salonu" /></label>' +
+          '<label>Kategori<select id="biz_category">' + optionsHtml + '</select></label>' +
+          '<label>Giriş E-postası<input type="email" id="biz_email" placeholder="isletme@ornek.com" /></label>' +
+          '<label>Giriş Şifresi<input type="text" id="biz_password" placeholder="En az 6 karakter" /></label>' +
+          '<label>Telefon (opsiyonel)<input type="text" id="biz_phone" placeholder="0555 555 55 55" /></label>' +
+          '<label>Adres (opsiyonel)<input type="text" id="biz_address" placeholder="Adres" /></label>' +
+          '<label>Bölge / İlçe (opsiyonel)<input type="text" id="biz_area" placeholder="Örn: Ağrı Merkez" /></label>' +
+        '</div>' +
+        '<div class="form-submit-row">' +
+          '<button class="btn-primary" id="addBizBtn" onclick="addBusiness()">İşletme Ekle</button>' +
+          '<span class="form-status" id="bizFormStatus"></span>' +
+        '</div>' +
+      '</div>' +
+      '<div id="bizListWrap"><div class="empty-note">Yükleniyor...</div></div>';
+
+    await refreshBusinessList();
+  }
+
+  async function refreshBusinessList() {
+    const wrap = document.getElementById('bizListWrap');
+    const { data, error } = await supabaseClient
+      .from('businesses')
+      .select('*, categories(name)')
+      .order('created_at', { ascending: false });
+
+    if (error) {
+      wrap.innerHTML = '<div class="empty-note">Liste yüklenemedi: ' + error.message + '</div>';
+      return;
+    }
+
+    if (!data || data.length === 0) {
+      wrap.innerHTML = '<div class="empty-note">Henüz eklenmiş işletme yok.</div>';
+      return;
+    }
+
+    wrap.innerHTML = '<div class="biz-list">' + data.map(function(b) {
+      return '<div class="biz-item">' +
+        '<div class="biz-info">' +
+          '<div class="biz-name">' + b.name + (b.sub_name ? ' — ' + b.sub_name : '') + '</div>' +
+          '<div class="biz-meta">' + (b.categories ? b.categories.name : '—') + ' · ' + (b.email || '—') + ' · ' + (b.phone || 'telefon yok') + '</div>' +
+        '</div>' +
+        '<div class="biz-actions">' +
+          '<span class="biz-badge ' + b.status + '">' + (b.status === 'active' ? 'Aktif' : 'Askıda') + '</span>' +
+          '<button class="btn-sm" onclick="toggleBusinessStatus(\'' + b.id + '\', \'' + (b.status === 'active' ? 'suspended' : 'active') + '\')">' +
+            (b.status === 'active' ? 'Askıya Al' : 'Aktif Et') +
+          '</button>' +
+        '</div>' +
+      '</div>';
+    }).join('') + '</div>';
+  }
+
+  async function toggleBusinessStatus(id, newStatus) {
+    const { error } = await supabaseClient.from('businesses').update({ status: newStatus }).eq('id', id);
+    if (error) {
+      alert('Güncellenemedi: ' + error.message);
+      return;
+    }
+    await refreshBusinessList();
+  }
+
+  async function addBusiness() {
+    const name = document.getElementById('biz_name').value.trim();
+    const subName = document.getElementById('biz_subname').value.trim();
+    const categoryId = document.getElementById('biz_category').value;
+    const email = document.getElementById('biz_email').value.trim();
+    const password = document.getElementById('biz_password').value;
+    const phone = document.getElementById('biz_phone').value.trim();
+    const address = document.getElementById('biz_address').value.trim();
+    const area = document.getElementById('biz_area').value.trim();
+    const statusEl = document.getElementById('bizFormStatus');
+    const btn = document.getElementById('addBizBtn');
+
+    if (!name || !email || !password || !categoryId) {
+      statusEl.textContent = 'İşletme adı, kategori, e-posta ve şifre zorunludur.';
+      statusEl.className = 'form-status err';
+      return;
+    }
+    if (password.length < 6) {
+      statusEl.textContent = 'Şifre en az 6 karakter olmalı.';
+      statusEl.className = 'form-status err';
+      return;
+    }
+
+    btn.disabled = true;
+    statusEl.textContent = 'Ekleniyor...';
+    statusEl.className = 'form-status';
+
+    const tempClient = supabase.createClient(SUPABASE_URL, SUPABASE_KEY, {
+      auth: { persistSession: false, autoRefreshToken: false }
+    });
+
+    const { data: signUpData, error: signUpError } = await tempClient.auth.signUp({ email, password });
+
+    if (signUpError) {
+      statusEl.textContent = 'Hesap oluşturulamadı: ' + signUpError.message;
+      statusEl.className = 'form-status err';
+      btn.disabled = false;
+      return;
+    }
+
+    const newUserId = signUpData.user ? signUpData.user.id : null;
+    if (!newUserId) {
+      statusEl.textContent = 'Beklenmeyen hata: kullanıcı oluşmadı.';
+      statusEl.className = 'form-status err';
+      btn.disabled = false;
+      return;
+    }
+
+    const { error: profileInsertError } = await supabaseClient
+      .from('profiles')
+      .insert({ id: newUserId, role: 'business' });
+
+    if (profileInsertError) {
+      statusEl.textContent = 'Profil kaydı oluşturulamadı: ' + profileInsertError.message;
+      statusEl.className = 'form-status err';
+      btn.disabled = false;
+      return;
+    }
+
+    const baseSlug = slugify(name);
+    const { error: bizInsertError } = await supabaseClient
+      .from('businesses')
+      .insert({
+        id: newUserId,
+        category_id: categoryId,
+        name: name,
+        sub_name: subName || null,
+        slug: baseSlug + '-' + newUserId.slice(0, 6),
+        phone: phone || null,
+        email: email,
+        address: address || null,
+        area: area || null,
+        status: 'active'
+      });
+
+    if (bizInsertError) {
+      statusEl.textContent = 'İşletme kaydı oluşturulamadı: ' + bizInsertError.message;
+      statusEl.className = 'form-status err';
+      btn.disabled = false;
+      return;
+    }
+
+    statusEl.textContent = 'Eklendi! Giriş bilgileri — E-posta: ' + email + ' / Şifre: ' + password;
+    statusEl.className = 'form-status ok';
+    btn.disabled = false;
+
+    document.getElementById('biz_name').value = '';
+    document.getElementById('biz_subname').value = '';
+    document.getElementById('biz_email').value = '';
+    document.getElementById('biz_password').value = '';
+    document.getElementById('biz_phone').value = '';
+    document.getElementById('biz_address').value = '';
+    document.getElementById('biz_area').value = '';
+
+    await refreshBusinessList();
+  }
+</script>
+
+</body>
+</html>
