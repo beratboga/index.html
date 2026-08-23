@@ -23,7 +23,7 @@
 <meta name="twitter:title" content="04agri.com — Ağrı'nın Dijital Rehberi" />
 <meta name="twitter:description" content="Ağrı'nın en kapsamlı dijital şehir rehberi." />
 <meta name="twitter:image" content="https://04agri.com/kapak-gorseli.jpg" />
-
+<script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2/dist/umd/supabase.min.js"></script>
 <script async src="https://www.googletagmanager.com/gtag/js?id=G-X0QLCD70X0"></script>
 <script>
   window.dataLayer = window.dataLayer || [];
@@ -661,6 +661,15 @@ body.dark-theme .nav-item.active::before { background: rgba(255,255,255,0.1); }
 <script src="https://cdnjs.cloudflare.com/ajax/libs/babel-standalone/7.26.4/babel.min.js" crossorigin="anonymous"></script>
 
 <script type="text/babel">
+  const supabaseClient = supabase.createClient(
+  'https://ckxqfasgddhgbpnxaaja.supabase.co',
+  'sb_publishable_gEX1rPpXyfxdY0WPhK0KNw_vZSQAj7Z'
+);
+
+// GEÇİCİ TEST - kategori verisini çekip konsola yazdırır
+supabaseClient.from('categories').select('*').then(({ data, error }) => {
+  console.log('SUPABASE TEST:', data, error);
+});
 /* ===================== DATA & MASTER REHBER LISTESİ ===================== */
 (function(){
   "use strict";
