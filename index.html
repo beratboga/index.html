@@ -635,6 +635,36 @@ body.dark-theme .nav-item.active::before { background: rgba(255,255,255,0.1); }
 .pm-slider-dots { position: absolute; bottom: 95px; left: 0; right: 0; display: flex; justify-content: center; gap: 8px; z-index: 5; pointer-events: none; }
 .pm-slider-dot { width: 8px; height: 8px; border-radius: 50%; background: rgba(255,255,255,0.3); transition: background 0.3s, transform 0.3s; box-shadow: 0 2px 4px rgba(0,0,0,0.2); }
 .pm-slider-dot.active { background: #fff; transform: scale(1.3); }
+/* --- YENİ NESİL APPLE TARZI RANDEVU & BLOG TASARIMI --- */
+.apple-appt-widget {
+  background: var(--card); border: 1px solid var(--line);
+  border-radius: var(--r-md); padding: 24px; margin-bottom: 20px;
+  box-shadow: var(--shadow-1);
+}
+.apple-appt-widget h4 { font-family: var(--display); font-size: 19px; margin-bottom: 8px; color: var(--dark); }
+.apple-appt-widget p { font-size: 14px; color: var(--ink-soft); margin-bottom: 16px; }
+.apple-date-input {
+  width: 100%; padding: 14px; border-radius: 12px; border: 1px solid var(--line);
+  font-family: inherit; font-size: 15px; font-weight: 600; color: var(--ink);
+  background: var(--bg-2); margin-bottom: 16px; outline: none;
+}
+.apple-slots-grid { display: flex; gap: 10px; flex-wrap: wrap; margin-bottom: 16px; }
+.apple-slot-btn {
+  background: var(--bg); border: 1px solid var(--line); padding: 10px 16px;
+  border-radius: 100px; font-size: 14px; font-weight: 700; color: var(--ink-soft);
+  cursor: pointer; transition: all 0.2s;
+}
+.apple-slot-btn:hover { background: var(--line); color: var(--ink); }
+.apple-slot-btn.active { background: var(--accent); color: var(--ink); border-color: var(--accent); box-shadow: 0 4px 12px rgba(68,189,50,.25); }
+.apple-form-group { display: flex; flex-direction: column; gap: 10px; margin-bottom: 16px; animation: fadeIn 0.3s ease; }
+.apple-input { padding: 12px 16px; border-radius: 12px; border: 1px solid var(--line); font-family: inherit; font-size: 14px; }
+.apple-submit-btn {
+  width: 100%; background: var(--ink); color: #fff; padding: 16px; border-radius: 100px;
+  font-weight: 800; font-size: 15px; border: none; cursor: pointer; transition: background 0.2s, transform 0.1s;
+}
+.apple-submit-btn:active { transform: scale(0.98); }
+.news-item.dynamic-blog { border-left: 4px solid var(--accent); }
+
 </style>
 </head>
 <body>
@@ -2238,6 +2268,22 @@ function PrayerTimesWidget(){
 
 
 function AgendaDashboard(){
+  const [blogs, setBlogs] = useStateA([]);
+
+  // Supabase'den işletmelerin yayınladığı blogları isimleriyle beraber çekiyoruz
+  useEffectA(() => {
+    async function fetchBlogs() {
+      const { data } = await supabaseClient
+        .from('blog_posts')
+        .select('*, businesses(name, slug, category)')
+        .eq('is_published', true)
+        .order('created_at', { ascending: false })
+        .limit(5); // Son 5 yazıyı getir
+      if (data) setBlogs(data);
+    }
+    fetchBlogs();
+  }, []);
+
   return (
     <section id="gundem">
       <div className="wrap gundem-layout">
@@ -2246,6 +2292,21 @@ function AgendaDashboard(){
             <div className="news-header">Gündem Haberleri</div>
             <div className="news-list">
               
+              {/* Varsa panelden yazılan dinamik blogları göster */}
+              {blogs.map((b, idx) => (
+                <div key={idx} className="news-item dynamic-blog" onClick={() => { window.history.pushState(null, "", `/mekan/${b.businesses.slug}`); window.dispatchEvent(new Event("popstate")); }}>
+                  <div className="news-img" style={{display:'grid', placeItems:'center', background:'var(--bg-2)'}}>
+                    <Icon name="grid" size={32} stroke="var(--accent)" />
+                  </div>
+                  <div className="news-content">
+                    <span className="news-meta">{b.businesses.name}</span>
+                    <h4>{b.title}</h4>
+                    <p>{b.content}</p>
+                  </div>
+                </div>
+              ))}
+
+              {/* Sabit (Kalıcı) Haberimiz */}
               <div className="news-item">
                 <img className="news-img" src="agridagi2.jpg" alt="Ağrı Dijital Merkezi" style={{ objectFit: 'cover' }} />
                 <div className="news-content">
@@ -2362,6 +2423,208 @@ function PharmacyFullView() {
           <div className="pharm-empty">Bu tarihte <strong>{district}</strong> ilçesi için nöbetçi eczane listesi bulunamadı.</div>
         )}
       </div>
+    </div>
+  );
+}
+/* ===================== APPLE TARZI RANDEVU WIDGET'I ===================== */
+function AppointmentWidget({ place }) {
+  const [businessId, setBusinessId] = useStateA(null);
+  const [slots, setSlots] = useStateA([]);
+  const [selectedDate, setSelectedDate] = useStateA("");
+  const [availableHours, setAvailableHours] = useStateA([]);
+  const [selectedHour, setSelectedHour] = useStateA(null);
+  const [form, setForm] = useStateA({ name: "", phone: "", note: "" });
+  const [status, setStatus] = useStateA(""); // "success", "error", "loading"
+
+  // 1. İşletmenin panelde eklediği saatleri veritabanından çek
+  useEffectA(() => {
+    async function fetchBusinessData() {
+      const { data } = await supabaseClient.from('businesses').select('id').eq('slug', place.slug).single();
+      if (data) {
+        setBusinessId(data.id);
+        const { data: slotData } = await supabaseClient.from('availability_slots').select('*').eq('business_id', data.id);
+        if (slotData) setSlots(slotData);
+      }
+    }
+    fetchBusinessData();
+  }, [place.slug]);
+
+  // Eğer işletme panelden saat girmemişse, kutuyu hiç gösterme (temiz kalsın)
+  if (!businessId || slots.length === 0) return null;
+
+  // 2. Kullanıcı tarih seçtiğinde, o günün haftanın hangi günü olduğunu bulup saatleri filtrele
+  const handleDateChange = (e) => {
+    const d = e.target.value;
+    setSelectedDate(d);
+    setSelectedHour(null);
+    setStatus("");
+    const dayIndex = new Date(d).getDay(); // 0=Pazar, 1=Pazartesi...
+    const daySlots = slots.filter(s => s.weekday === dayIndex);
+    setAvailableHours(daySlots);
+  };
+
+  // 3. Randevuyu Supabase'e gönder
+  const submitAppointment = async () => {
+    if (!form.name || !form.phone || !selectedDate || !selectedHour) return alert("Lütfen tarih, saat, isim ve telefon giriniz.");
+    setStatus("loading");
+    const { error } = await supabaseClient.from('appointments').insert([{
+      business_id: businessId,
+      customer_name: form.name,
+      customer_phone: form.phone,
+      requested_date: selectedDate,
+      requested_time: selectedHour.start_time,
+      note: form.note
+    }]);
+
+    if (error) { setStatus("error"); alert("Bir hata oluştu: " + error.message); } 
+    else { setStatus("success"); }
+  };
+
+  if (status === "success") {
+    return (
+      <div className="apple-appt-widget" style={{textAlign:'center'}}>
+        <svg width="48" height="48" viewBox="0 0 24 24" fill="none" stroke="var(--accent)" strokeWidth="2" style={{marginBottom:'10px'}}><path d="M22 11.08V12a10 10 0 1 1-5.93-9.14"/><polyline points="22 4 12 14.01 9 11.01"/></svg>
+        <h4>Randevu Talebiniz İletildi!</h4>
+        <p>İşletme en kısa sürede sizinle iletişime geçecektir. Teşekkürler.</p>
+      </div>
+    );
+  }
+
+  // Bugünden önceki günleri seçemesin diye
+  const today = new Date().toISOString().split('T')[0];
+
+  return (
+    <div className="apple-appt-widget">
+      <h4>📅 Randevu Al</h4>
+      <p>Lütfen randevu talebi için uygun bir tarih seçin.</p>
+      
+      <input type="date" className="apple-date-input" min={today} value={selectedDate} onChange={handleDateChange} />
+      
+      {selectedDate && availableHours.length === 0 && (
+        <p style={{color:'var(--pin)', fontWeight:600, fontSize:'13px'}}>Bu tarihte uygun randevu saati bulunmuyor. Başka bir gün deneyin.</p>
+      )}
+
+      {availableHours.length > 0 && (
+        <div className="apple-slots-grid">
+          {availableHours.map((h, i) => (
+            <button key={i} className={`apple-slot-btn ${selectedHour === h ? 'active' : ''}`} onClick={() => setSelectedHour(h)}>
+              {h.start_time.slice(0,5)}
+            </button>
+          ))}
+        </div>
+      )}
+
+      {selectedHour && (
+        <div className="apple-form-group">
+          <input className="apple-input" placeholder="Adınız Soyadınız" value={form.name} onChange={e => setForm({...form, name: e.target.value})} />
+          <input className="apple-input" placeholder="Telefon Numaranız" value={form.phone} onChange={e => setForm({...form, phone: e.target.value})} />
+          <input className="apple-input" placeholder="Notunuz (Opsiyonel)" value={form.note} onChange={e => setForm({...form, note: e.target.value})} />
+          <button className="apple-submit-btn" onClick={submitAppointment}>
+            {status === "loading" ? "Gönderiliyor..." : "Randevu Talebini Gönder"}
+          </button>
+        </div>
+      )}
+    </div>
+  );
+}
+/* ===================== APPLE TARZI RANDEVU WIDGET'I ===================== */
+function AppointmentWidget({ place }) {
+  const [businessId, setBusinessId] = useStateA(null);
+  const [slots, setSlots] = useStateA([]);
+  const [selectedDate, setSelectedDate] = useStateA("");
+  const [availableHours, setAvailableHours] = useStateA([]);
+  const [selectedHour, setSelectedHour] = useStateA(null);
+  const [form, setForm] = useStateA({ name: "", phone: "", note: "" });
+  const [status, setStatus] = useStateA(""); // "success", "error", "loading"
+
+  // 1. İşletmenin panelde eklediği saatleri veritabanından çek
+  useEffectA(() => {
+    async function fetchBusinessData() {
+      const { data } = await supabaseClient.from('businesses').select('id').eq('slug', place.slug).single();
+      if (data) {
+        setBusinessId(data.id);
+        const { data: slotData } = await supabaseClient.from('availability_slots').select('*').eq('business_id', data.id);
+        if (slotData) setSlots(slotData);
+      }
+    }
+    fetchBusinessData();
+  }, [place.slug]);
+
+  // Eğer işletme panelden saat girmemişse, kutuyu hiç gösterme (temiz kalsın)
+  if (!businessId || slots.length === 0) return null;
+
+  // 2. Kullanıcı tarih seçtiğinde, o günün haftanın hangi günü olduğunu bulup saatleri filtrele
+  const handleDateChange = (e) => {
+    const d = e.target.value;
+    setSelectedDate(d);
+    setSelectedHour(null);
+    setStatus("");
+    const dayIndex = new Date(d).getDay(); // 0=Pazar, 1=Pazartesi...
+    const daySlots = slots.filter(s => s.weekday === dayIndex);
+    setAvailableHours(daySlots);
+  };
+
+  // 3. Randevuyu Supabase'e gönder
+  const submitAppointment = async () => {
+    if (!form.name || !form.phone || !selectedDate || !selectedHour) return alert("Lütfen tarih, saat, isim ve telefon giriniz.");
+    setStatus("loading");
+    const { error } = await supabaseClient.from('appointments').insert([{
+      business_id: businessId,
+      customer_name: form.name,
+      customer_phone: form.phone,
+      requested_date: selectedDate,
+      requested_time: selectedHour.start_time,
+      note: form.note
+    }]);
+
+    if (error) { setStatus("error"); alert("Bir hata oluştu: " + error.message); } 
+    else { setStatus("success"); }
+  };
+
+  if (status === "success") {
+    return (
+      <div className="apple-appt-widget" style={{textAlign:'center'}}>
+        <svg width="48" height="48" viewBox="0 0 24 24" fill="none" stroke="var(--accent)" strokeWidth="2" style={{marginBottom:'10px'}}><path d="M22 11.08V12a10 10 0 1 1-5.93-9.14"/><polyline points="22 4 12 14.01 9 11.01"/></svg>
+        <h4>Randevu Talebiniz İletildi!</h4>
+        <p>İşletme en kısa sürede sizinle iletişime geçecektir. Teşekkürler.</p>
+      </div>
+    );
+  }
+
+  // Bugünden önceki günleri seçemesin diye
+  const today = new Date().toISOString().split('T')[0];
+
+  return (
+    <div className="apple-appt-widget">
+      <h4>📅 Randevu Al</h4>
+      <p>Lütfen randevu talebi için uygun bir tarih seçin.</p>
+      
+      <input type="date" className="apple-date-input" min={today} value={selectedDate} onChange={handleDateChange} />
+      
+      {selectedDate && availableHours.length === 0 && (
+        <p style={{color:'var(--pin)', fontWeight:600, fontSize:'13px'}}>Bu tarihte uygun randevu saati bulunmuyor. Başka bir gün deneyin.</p>
+      )}
+
+      {availableHours.length > 0 && (
+        <div className="apple-slots-grid">
+          {availableHours.map((h, i) => (
+            <button key={i} className={`apple-slot-btn ${selectedHour === h ? 'active' : ''}`} onClick={() => setSelectedHour(h)}>
+              {h.start_time.slice(0,5)}
+            </button>
+          ))}
+        </div>
+      )}
+
+      {selectedHour && (
+        <div className="apple-form-group">
+          <input className="apple-input" placeholder="Adınız Soyadınız" value={form.name} onChange={e => setForm({...form, name: e.target.value})} />
+          <input className="apple-input" placeholder="Telefon Numaranız" value={form.phone} onChange={e => setForm({...form, phone: e.target.value})} />
+          <input className="apple-input" placeholder="Notunuz (Opsiyonel)" value={form.note} onChange={e => setForm({...form, note: e.target.value})} />
+          <button className="apple-submit-btn" onClick={submitAppointment}>
+            {status === "loading" ? "Gönderiliyor..." : "Randevu Talebini Gönder"}
+          </button>
+        </div>
+      )}
     </div>
   );
 }
@@ -2567,6 +2830,7 @@ function PlacesOverlay({ cat, initialSubCat, initialPlace, onClose, favorites = 
               <span><strong>{viewCount.toLocaleString('tr-TR')}</strong> kişi inceledi</span>
             </div>
             <p className="pm-info">{selectedPlace.info}</p>
+  <AppointmentWidget place={selectedPlace} />
 
             {selectedPlace.lessons && selectedPlace.lessons.length > 0 && (
               <div style={{display:'flex', flexDirection:'column', gap:'12px'}}>
