@@ -144,7 +144,7 @@
     <input type="email" id="email" placeholder="E-posta Adresi">
     <input type="password" id="password" placeholder="Şifre">
     <button onclick="login()">Giriş Yap</button>
-    <p id="login-error" style="color: var(--danger); margin-top: 15px; display: none;"></p>
+    <p id="login-error" style="color: var(--danger); margin-top: 15px; display: none; font-size: 14px;"></p>
   </div>
 </div>
 
@@ -169,7 +169,7 @@
     <div id="appointments-list">Yükleniyor...</div>
   </div>
 
-  <!-- ÇALIŞMA SAATLERİ BÖLÜMÜ (ŞIK SLOTLAR İÇİN) -->
+  <!-- ÇALIŞMA SAATLERİ BÖLÜMÜ -->
   <div id="saatler" class="panel-section">
     <h3>Müsait Saatlerinizi Belirleyin</h3>
     <p style="color: var(--text-muted); font-size: 14px;">Ziyaretçiler sadece burada eklediğiniz gün ve saat dilimlerinde sizden randevu talep edebilir.</p>
@@ -212,7 +212,8 @@
   // Supabase Bağlantı Ayarları
   const SUPABASE_URL = 'https://ckxqfasgddhgbpnxaaja.supabase.co';
   const SUPABASE_KEY = 'sb_publishable_gEX1rPpXyfxdY0WPhK0KNw_vZSQAj7Z';
-  const supabase = supabase.createClient(SUPABASE_URL, SUPABASE_KEY);
+  // Çakışmayı önlemek için supabaseClient adını kullanıyoruz
+  const supabaseClient = supabase.createClient(SUPABASE_URL, SUPABASE_KEY);
   
   let currentBusinessId = null;
   let isSuperAdmin = false;
@@ -228,7 +229,7 @@
   // 2. OTURUM KONTROLÜ
   async function checkSession() {
     try {
-      const { data: { session }, error } = await supabase.auth.getSession();
+      const { data: { session }, error } = await supabaseClient.auth.getSession();
       if (session) {
         document.getElementById('login-screen').style.display = 'none';
         document.getElementById('dashboard-screen').style.display = 'block';
@@ -239,7 +240,7 @@
     }
   }
   
-  // 3. GİRİŞ YAP BUTONU (YENİLENDİ - HATALARI EKRANA YAZAR)
+  // 3. GİRİŞ YAP BUTONU
   async function login() {
     const email = document.getElementById('email').value;
     const password = document.getElementById('password').value;
@@ -257,11 +258,11 @@
     errorEl.style.display = 'block';
     
     try {
-      const { data, error } = await supabase.auth.signInWithPassword({ email, password });
+      const { data, error } = await supabaseClient.auth.signInWithPassword({ email, password });
       
       if (error) {
         errorEl.style.color = "var(--danger)";
-        errorEl.innerText = "Hata: " + error.message; // Supabase'den gelen hatayı Türkçe/İngilizce ekrana basar
+        errorEl.innerText = "Hata: " + error.message; 
       } else {
         errorEl.style.color = "var(--success)";
         errorEl.innerText = "Giriş başarılı! İçeri alınıyorsunuz...";
@@ -274,24 +275,24 @@
   }
 
   async function logout() {
-    await supabase.auth.signOut();
+    await supabaseClient.auth.signOut();
     location.reload();
   }
 
-  // 4. İŞLETME VEYA SÜPER YÖNETİCİ VERİLERİNİ ÇEKME (YENİLENDİ)
+  // 4. İŞLETME VEYA SÜPER YÖNETİCİ VERİLERİNİ ÇEKME
   async function loadBusinessData(userId) {
-    // Önce giriş yapan kişi SÜPER YÖNETİCİ mi diye bakıyoruz
-    const { data: adminData } = await supabase.from('super_admins').select('*').eq('auth_user_id', userId).single();
+    // SÜPER YÖNETİCİ KONTROLÜ
+    const { data: adminData } = await supabaseClient.from('super_admins').select('*').eq('auth_user_id', userId).single();
     
     if (adminData) {
       isSuperAdmin = true;
-      document.getElementById('business-name').innerText = "Süper Yönetici (Berat Boğa)";
-      document.getElementById('randevular').innerHTML = `<h3>Süper Yönetici Paneli</h3><p>Hoş geldin Berat! Şu an başarılı şekilde giriş yaptın. Tüm işletmeleri düzenleyebileceğin Süper Yönetici sayfası için altyapın hazır.</p>`;
+      document.getElementById('business-name').innerText = "Süper Yönetici (Berat)";
+      document.getElementById('randevular').innerHTML = `<h3>Süper Yönetici Paneli</h3><p>Hoş geldin Berat! Başarıyla giriş yaptın. (Tüm işletmeleri görme ekranı eklenecek).</p>`;
       return;
     }
 
-    // Süper yönetici değilse, normal işletmedir. Bilgilerini çek:
-    const { data, error } = await supabase.from('businesses').select('*').eq('auth_user_id', userId).single();
+    // İŞLETME KONTROLÜ
+    const { data, error } = await supabaseClient.from('businesses').select('*').eq('auth_user_id', userId).single();
     
     if (data) {
       currentBusinessId = data.id;
@@ -319,7 +320,7 @@
     const address = document.getElementById('prof-address').value;
     const info = document.getElementById('prof-info').value;
 
-    const { error } = await supabase.from('businesses').update({
+    const { error } = await supabaseClient.from('businesses').update({
       name, sub_name, phone, address, info
     }).eq('id', currentBusinessId);
 
@@ -329,7 +330,7 @@
   // ÇALIŞMA SAATLERİ (SLOTLAR)
   async function fetchSlots() {
     const days = ["Pazar", "Pazartesi", "Salı", "Çarşamba", "Perşembe", "Cuma", "Cumartesi"];
-    const { data } = await supabase.from('availability_slots').select('*').eq('business_id', currentBusinessId);
+    const { data } = await supabaseClient.from('availability_slots').select('*').eq('business_id', currentBusinessId);
     let html = '';
     if(data) {
       data.forEach(s => {
@@ -351,20 +352,20 @@
     const start_time = document.getElementById('slot-start').value;
     const end_time = document.getElementById('slot-end').value;
 
-    await supabase.from('availability_slots').insert([{
+    await supabaseClient.from('availability_slots').insert([{
       business_id: currentBusinessId, weekday: parseInt(weekday), start_time, end_time
     }]);
     fetchSlots();
   }
   
   async function deleteSlot(id) {
-    await supabase.from('availability_slots').delete().eq('id', id);
+    await supabaseClient.from('availability_slots').delete().eq('id', id);
     fetchSlots();
   }
 
   // RANDEVULAR
   async function fetchAppointments() {
-    const { data } = await supabase.from('appointments').select('*').eq('business_id', currentBusinessId).order('created_at', { ascending: false });
+    const { data } = await supabaseClient.from('appointments').select('*').eq('business_id', currentBusinessId).order('created_at', { ascending: false });
     let html = '';
     if(data) {
       data.forEach(a => {
@@ -388,17 +389,17 @@
   }
 
   async function updateAppt(id, status) {
-    await supabase.from('appointments').update({ status }).eq('id', id);
+    await supabaseClient.from('appointments').update({ status }).eq('id', id);
     fetchAppointments();
   }
   async function deleteAppt(id) {
-    await supabase.from('appointments').delete().eq('id', id);
+    await supabaseClient.from('appointments').delete().eq('id', id);
     fetchAppointments();
   }
 
   // BLOG YAZILARI
   async function fetchBlogs() {
-    const { data } = await supabase.from('blog_posts').select('*').eq('business_id', currentBusinessId).order('created_at', { ascending: false });
+    const { data } = await supabaseClient.from('blog_posts').select('*').eq('business_id', currentBusinessId).order('created_at', { ascending: false });
     let html = '';
     if (data) {
       data.forEach(b => {
@@ -420,7 +421,7 @@
     const content = document.getElementById('blog-content').value;
     if(!title || !content) return alert("Başlık ve içerik boş olamaz.");
 
-    await supabase.from('blog_posts').insert([{ business_id: currentBusinessId, title, content }]);
+    await supabaseClient.from('blog_posts').insert([{ business_id: currentBusinessId, title, content }]);
     document.getElementById('blog-title').value = '';
     document.getElementById('blog-content').value = '';
     alert("Yazınız paylaşıldı! Ana sayfadaki gündem haberlerine eklendi.");
@@ -428,7 +429,7 @@
   }
 
   async function deleteBlog(id) {
-    await supabase.from('blog_posts').delete().eq('id', id);
+    await supabaseClient.from('blog_posts').delete().eq('id', id);
     fetchBlogs();
   }
 
