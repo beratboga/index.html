@@ -662,10 +662,9 @@ body.dark-theme .nav-item.active::before { background: rgba(255,255,255,0.1); }
 
 <script type="text/babel">
   const supabaseClient = supabase.createClient(
-  'https://dnaefflgijqlusbkbroa.supabase.co/rest/v1/',
+  'https://dnaefflgijqlusbkbroa.supabase.co',
   'sb_publishable_-9xSEIubyCUMSpNaDWk1Gg_-eAaaZHW'
 );
-
 // GEÇİCİ TEST - kategori verisini çekip konsola yazdırır
 supabaseClient.from('categories').select('*').then(({ data, error }) => {
   console.log('SUPABASE TEST:', data, error);
