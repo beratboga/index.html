@@ -2267,11 +2267,12 @@ function PrayerTimesWidget(){
 }
 
 
+/* ===================== GÜNDEM HABERLERİ (BLOGLAR) ===================== */
 function AgendaDashboard(){
-  const [blogs, setBlogs] = useStateA([]);
+  const [blogs, setBlogs] = useState([]);
 
-  // Supabase'den işletmelerin yayınladığı blogları isimleriyle beraber çekiyoruz
-  useEffectA(() => {
+  // Supabase'den işletmelerin yayınladığı blogları çekiyoruz
+  useEffect(() => {
     async function fetchBlogs() {
       const { data } = await supabaseClient
         .from('blog_posts')
@@ -2292,7 +2293,7 @@ function AgendaDashboard(){
             <div className="news-header">Gündem Haberleri</div>
             <div className="news-list">
               
-              {/* Varsa panelden yazılan dinamik blogları göster */}
+              {/* Panelden yazılan dinamik blogları göster */}
               {blogs.map((b, idx) => (
                 <div key={idx} className="news-item dynamic-blog" onClick={() => { window.history.pushState(null, "", `/mekan/${b.businesses.slug}`); window.dispatchEvent(new Event("popstate")); }}>
                   <div className="news-img" style={{display:'grid', placeItems:'center', background:'var(--bg-2)'}}>
@@ -2330,6 +2331,7 @@ function AgendaDashboard(){
   );
 }
 
+/* ===================== KATEGORİLER ===================== */
 function Categories({ onOpen }){
   const cats = window.AGRI.categories; 
   const [active, setActive] = useState(0);
@@ -2373,6 +2375,7 @@ function Categories({ onOpen }){
   );
 }
 
+/* ===================== NÖBETÇİ ECZANE LİSTESİ ===================== */
 function PharmacyFullView() {
   const districtsList = ["MERKEZ", "TAŞLIÇAY", "DİYADİN", "DOĞUBAYAZIT", "ELEŞKİRT", "HAMUR", "PATNOS", "TUTAK"];
   const [district, setDistrict] = useState("MERKEZ");
@@ -2426,18 +2429,19 @@ function PharmacyFullView() {
     </div>
   );
 }
+
 /* ===================== APPLE TARZI RANDEVU WIDGET'I ===================== */
 function AppointmentWidget({ place }) {
-  const [businessId, setBusinessId] = useStateA(null);
-  const [slots, setSlots] = useStateA([]);
-  const [selectedDate, setSelectedDate] = useStateA("");
-  const [availableHours, setAvailableHours] = useStateA([]);
-  const [selectedHour, setSelectedHour] = useStateA(null);
-  const [form, setForm] = useStateA({ name: "", phone: "", note: "" });
-  const [status, setStatus] = useStateA(""); // "success", "error", "loading"
+  const [businessId, setBusinessId] = useState(null);
+  const [slots, setSlots] = useState([]);
+  const [selectedDate, setSelectedDate] = useState("");
+  const [availableHours, setAvailableHours] = useState([]);
+  const [selectedHour, setSelectedHour] = useState(null);
+  const [form, setForm] = useState({ name: "", phone: "", note: "" });
+  const [status, setStatus] = useState(""); // "success", "error", "loading"
 
   // 1. İşletmenin panelde eklediği saatleri veritabanından çek
-  useEffectA(() => {
+  useEffect(() => {
     async function fetchBusinessData() {
       const { data } = await supabaseClient.from('businesses').select('id').eq('slug', place.slug).single();
       if (data) {
@@ -2527,107 +2531,7 @@ function AppointmentWidget({ place }) {
     </div>
   );
 }
-/* ===================== APPLE TARZI RANDEVU WIDGET'I ===================== */
-function AppointmentWidget({ place }) {
-  const [businessId, setBusinessId] = useStateA(null);
-  const [slots, setSlots] = useStateA([]);
-  const [selectedDate, setSelectedDate] = useStateA("");
-  const [availableHours, setAvailableHours] = useStateA([]);
-  const [selectedHour, setSelectedHour] = useStateA(null);
-  const [form, setForm] = useStateA({ name: "", phone: "", note: "" });
-  const [status, setStatus] = useStateA(""); // "success", "error", "loading"
 
-  // 1. İşletmenin panelde eklediği saatleri veritabanından çek
-  useEffectA(() => {
-    async function fetchBusinessData() {
-      const { data } = await supabaseClient.from('businesses').select('id').eq('slug', place.slug).single();
-      if (data) {
-        setBusinessId(data.id);
-        const { data: slotData } = await supabaseClient.from('availability_slots').select('*').eq('business_id', data.id);
-        if (slotData) setSlots(slotData);
-      }
-    }
-    fetchBusinessData();
-  }, [place.slug]);
-
-  // Eğer işletme panelden saat girmemişse, kutuyu hiç gösterme (temiz kalsın)
-  if (!businessId || slots.length === 0) return null;
-
-  // 2. Kullanıcı tarih seçtiğinde, o günün haftanın hangi günü olduğunu bulup saatleri filtrele
-  const handleDateChange = (e) => {
-    const d = e.target.value;
-    setSelectedDate(d);
-    setSelectedHour(null);
-    setStatus("");
-    const dayIndex = new Date(d).getDay(); // 0=Pazar, 1=Pazartesi...
-    const daySlots = slots.filter(s => s.weekday === dayIndex);
-    setAvailableHours(daySlots);
-  };
-
-  // 3. Randevuyu Supabase'e gönder
-  const submitAppointment = async () => {
-    if (!form.name || !form.phone || !selectedDate || !selectedHour) return alert("Lütfen tarih, saat, isim ve telefon giriniz.");
-    setStatus("loading");
-    const { error } = await supabaseClient.from('appointments').insert([{
-      business_id: businessId,
-      customer_name: form.name,
-      customer_phone: form.phone,
-      requested_date: selectedDate,
-      requested_time: selectedHour.start_time,
-      note: form.note
-    }]);
-
-    if (error) { setStatus("error"); alert("Bir hata oluştu: " + error.message); } 
-    else { setStatus("success"); }
-  };
-
-  if (status === "success") {
-    return (
-      <div className="apple-appt-widget" style={{textAlign:'center'}}>
-        <svg width="48" height="48" viewBox="0 0 24 24" fill="none" stroke="var(--accent)" strokeWidth="2" style={{marginBottom:'10px'}}><path d="M22 11.08V12a10 10 0 1 1-5.93-9.14"/><polyline points="22 4 12 14.01 9 11.01"/></svg>
-        <h4>Randevu Talebiniz İletildi!</h4>
-        <p>İşletme en kısa sürede sizinle iletişime geçecektir. Teşekkürler.</p>
-      </div>
-    );
-  }
-
-  // Bugünden önceki günleri seçemesin diye
-  const today = new Date().toISOString().split('T')[0];
-
-  return (
-    <div className="apple-appt-widget">
-      <h4>📅 Randevu Al</h4>
-      <p>Lütfen randevu talebi için uygun bir tarih seçin.</p>
-      
-      <input type="date" className="apple-date-input" min={today} value={selectedDate} onChange={handleDateChange} />
-      
-      {selectedDate && availableHours.length === 0 && (
-        <p style={{color:'var(--pin)', fontWeight:600, fontSize:'13px'}}>Bu tarihte uygun randevu saati bulunmuyor. Başka bir gün deneyin.</p>
-      )}
-
-      {availableHours.length > 0 && (
-        <div className="apple-slots-grid">
-          {availableHours.map((h, i) => (
-            <button key={i} className={`apple-slot-btn ${selectedHour === h ? 'active' : ''}`} onClick={() => setSelectedHour(h)}>
-              {h.start_time.slice(0,5)}
-            </button>
-          ))}
-        </div>
-      )}
-
-      {selectedHour && (
-        <div className="apple-form-group">
-          <input className="apple-input" placeholder="Adınız Soyadınız" value={form.name} onChange={e => setForm({...form, name: e.target.value})} />
-          <input className="apple-input" placeholder="Telefon Numaranız" value={form.phone} onChange={e => setForm({...form, phone: e.target.value})} />
-          <input className="apple-input" placeholder="Notunuz (Opsiyonel)" value={form.note} onChange={e => setForm({...form, note: e.target.value})} />
-          <button className="apple-submit-btn" onClick={submitAppointment}>
-            {status === "loading" ? "Gönderiliyor..." : "Randevu Talebini Gönder"}
-          </button>
-        </div>
-      )}
-    </div>
-  );
-}
 
 // ROUTER GÜNCELLEMESİ: initialSubCat ve initialPlace propertyleri eklendi
 function PlacesOverlay({ cat, initialSubCat, initialPlace, onClose, favorites = [], toggleFav }){
