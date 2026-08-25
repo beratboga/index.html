@@ -209,14 +209,15 @@
 </div>
 
 <script>
-  // Supabase Bağlantı Ayarları (Ana sayfandaki kodlarla aynı)
+  // Supabase Bağlantı Ayarları
   const SUPABASE_URL = 'https://ckxqfasgddhgbpnxaaja.supabase.co';
   const SUPABASE_KEY = 'sb_publishable_gEX1rPpXyfxdY0WPhK0KNw_vZSQAj7Z';
   const supabase = supabase.createClient(SUPABASE_URL, SUPABASE_KEY);
   
   let currentBusinessId = null;
+  let isSuperAdmin = false;
 
-  // 1. SEKME DEĞİŞTİRME MANTIĞI
+  // 1. SEKME DEĞİŞTİRME
   function switchTab(tabId) {
     document.querySelectorAll('.panel-section').forEach(s => s.classList.remove('active'));
     document.querySelectorAll('.tab-btn').forEach(b => b.classList.remove('active'));
@@ -224,28 +225,51 @@
     event.target.classList.add('active');
   }
 
-  // 2. OTURUM KONTROLÜ VE GİRİŞ
+  // 2. OTURUM KONTROLÜ
   async function checkSession() {
-    const { data: { session } } = await supabase.auth.getSession();
-    if (session) {
-      document.getElementById('login-screen').style.display = 'none';
-      document.getElementById('dashboard-screen').style.display = 'block';
-      loadBusinessData(session.user.id);
+    try {
+      const { data: { session }, error } = await supabase.auth.getSession();
+      if (session) {
+        document.getElementById('login-screen').style.display = 'none';
+        document.getElementById('dashboard-screen').style.display = 'block';
+        loadBusinessData(session.user.id);
+      }
+    } catch (e) {
+      console.log("Oturum kontrol hatası:", e);
     }
   }
   
+  // 3. GİRİŞ YAP BUTONU (YENİLENDİ - HATALARI EKRANA YAZAR)
   async function login() {
     const email = document.getElementById('email').value;
     const password = document.getElementById('password').value;
     const errorEl = document.getElementById('login-error');
     
-    const { data, error } = await supabase.auth.signInWithPassword({ email, password });
-    if (error) {
-      errorEl.innerText = "Hatalı e-posta veya şifre girdiniz.";
+    if(!email || !password) {
+      errorEl.innerText = "Lütfen e-posta ve şifrenizi boş bırakmayın.";
+      errorEl.style.color = "var(--danger)";
       errorEl.style.display = 'block';
-    } else {
-      errorEl.style.display = 'none';
-      checkSession();
+      return;
+    }
+
+    errorEl.innerText = "Bağlanıyor, lütfen bekleyin...";
+    errorEl.style.color = "var(--accent)";
+    errorEl.style.display = 'block';
+    
+    try {
+      const { data, error } = await supabase.auth.signInWithPassword({ email, password });
+      
+      if (error) {
+        errorEl.style.color = "var(--danger)";
+        errorEl.innerText = "Hata: " + error.message; // Supabase'den gelen hatayı Türkçe/İngilizce ekrana basar
+      } else {
+        errorEl.style.color = "var(--success)";
+        errorEl.innerText = "Giriş başarılı! İçeri alınıyorsunuz...";
+        checkSession();
+      }
+    } catch (err) {
+      errorEl.style.color = "var(--danger)";
+      errorEl.innerText = "Sistem Hatası: " + err.message;
     }
   }
 
@@ -254,28 +278,40 @@
     location.reload();
   }
 
-  // 3. İŞLETME VERİLERİNİ ÇEKME
+  // 4. İŞLETME VEYA SÜPER YÖNETİCİ VERİLERİNİ ÇEKME (YENİLENDİ)
   async function loadBusinessData(userId) {
+    // Önce giriş yapan kişi SÜPER YÖNETİCİ mi diye bakıyoruz
+    const { data: adminData } = await supabase.from('super_admins').select('*').eq('auth_user_id', userId).single();
+    
+    if (adminData) {
+      isSuperAdmin = true;
+      document.getElementById('business-name').innerText = "Süper Yönetici (Berat Boğa)";
+      document.getElementById('randevular').innerHTML = `<h3>Süper Yönetici Paneli</h3><p>Hoş geldin Berat! Şu an başarılı şekilde giriş yaptın. Tüm işletmeleri düzenleyebileceğin Süper Yönetici sayfası için altyapın hazır.</p>`;
+      return;
+    }
+
+    // Süper yönetici değilse, normal işletmedir. Bilgilerini çek:
     const { data, error } = await supabase.from('businesses').select('*').eq('auth_user_id', userId).single();
+    
     if (data) {
       currentBusinessId = data.id;
       document.getElementById('business-name').innerText = data.name;
       
-      // Profil formunu doldur
       document.getElementById('prof-name').value = data.name || '';
       document.getElementById('prof-subname').value = data.sub_name || '';
       document.getElementById('prof-phone').value = data.phone || '';
       document.getElementById('prof-address').value = data.address || '';
       document.getElementById('prof-info').value = data.info || '';
 
-      // Diğer sekmelerin verilerini getir
       fetchAppointments();
       fetchSlots();
       fetchBlogs();
+    } else {
+      alert("Bu hesaba bağlı bir işletme profili bulunamadı! Lütfen veritabanı UID eşleştirmesini kontrol edin.");
     }
   }
 
-  // 4. BİLGİLERİ GÜNCELLEME
+  // BİLGİLERİ GÜNCELLEME
   async function updateProfile() {
     const name = document.getElementById('prof-name').value;
     const sub_name = document.getElementById('prof-subname').value;
@@ -290,7 +326,7 @@
     if (!error) alert("Bilgileriniz başarıyla güncellendi!");
   }
 
-  // 5. ÇALIŞMA SAATLERİ (SLOTLAR)
+  // ÇALIŞMA SAATLERİ (SLOTLAR)
   async function fetchSlots() {
     const days = ["Pazar", "Pazartesi", "Salı", "Çarşamba", "Perşembe", "Cuma", "Cumartesi"];
     const { data } = await supabase.from('availability_slots').select('*').eq('business_id', currentBusinessId);
@@ -326,7 +362,7 @@
     fetchSlots();
   }
 
-  // 6. RANDEVULAR
+  // RANDEVULAR
   async function fetchAppointments() {
     const { data } = await supabase.from('appointments').select('*').eq('business_id', currentBusinessId).order('created_at', { ascending: false });
     let html = '';
@@ -360,7 +396,7 @@
     fetchAppointments();
   }
 
-  // 7. BLOG YAZILARI
+  // BLOG YAZILARI
   async function fetchBlogs() {
     const { data } = await supabase.from('blog_posts').select('*').eq('business_id', currentBusinessId).order('created_at', { ascending: false });
     let html = '';
