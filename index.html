@@ -23,7 +23,7 @@
 <meta name="twitter:title" content="04agri.com — Ağrı'nın Dijital Rehberi" />
 <meta name="twitter:description" content="Ağrı'nın en kapsamlı dijital şehir rehberi." />
 <meta name="twitter:image" content="https://04agri.com/kapak-gorseli.jpg" />
-<script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2/dist/umd/supabase.min.js"></script>
+
 <script async src="https://www.googletagmanager.com/gtag/js?id=G-X0QLCD70X0"></script>
 <script>
   window.dataLayer = window.dataLayer || [];
@@ -635,36 +635,6 @@ body.dark-theme .nav-item.active::before { background: rgba(255,255,255,0.1); }
 .pm-slider-dots { position: absolute; bottom: 95px; left: 0; right: 0; display: flex; justify-content: center; gap: 8px; z-index: 5; pointer-events: none; }
 .pm-slider-dot { width: 8px; height: 8px; border-radius: 50%; background: rgba(255,255,255,0.3); transition: background 0.3s, transform 0.3s; box-shadow: 0 2px 4px rgba(0,0,0,0.2); }
 .pm-slider-dot.active { background: #fff; transform: scale(1.3); }
-/* --- YENİ NESİL APPLE TARZI RANDEVU & BLOG TASARIMI --- */
-.apple-appt-widget {
-  background: var(--card); border: 1px solid var(--line);
-  border-radius: var(--r-md); padding: 24px; margin-bottom: 20px;
-  box-shadow: var(--shadow-1);
-}
-.apple-appt-widget h4 { font-family: var(--display); font-size: 19px; margin-bottom: 8px; color: var(--dark); }
-.apple-appt-widget p { font-size: 14px; color: var(--ink-soft); margin-bottom: 16px; }
-.apple-date-input {
-  width: 100%; padding: 14px; border-radius: 12px; border: 1px solid var(--line);
-  font-family: inherit; font-size: 15px; font-weight: 600; color: var(--ink);
-  background: var(--bg-2); margin-bottom: 16px; outline: none;
-}
-.apple-slots-grid { display: flex; gap: 10px; flex-wrap: wrap; margin-bottom: 16px; }
-.apple-slot-btn {
-  background: var(--bg); border: 1px solid var(--line); padding: 10px 16px;
-  border-radius: 100px; font-size: 14px; font-weight: 700; color: var(--ink-soft);
-  cursor: pointer; transition: all 0.2s;
-}
-.apple-slot-btn:hover { background: var(--line); color: var(--ink); }
-.apple-slot-btn.active { background: var(--accent); color: var(--ink); border-color: var(--accent); box-shadow: 0 4px 12px rgba(68,189,50,.25); }
-.apple-form-group { display: flex; flex-direction: column; gap: 10px; margin-bottom: 16px; animation: fadeIn 0.3s ease; }
-.apple-input { padding: 12px 16px; border-radius: 12px; border: 1px solid var(--line); font-family: inherit; font-size: 14px; }
-.apple-submit-btn {
-  width: 100%; background: var(--ink); color: #fff; padding: 16px; border-radius: 100px;
-  font-weight: 800; font-size: 15px; border: none; cursor: pointer; transition: background 0.2s, transform 0.1s;
-}
-.apple-submit-btn:active { transform: scale(0.98); }
-.news-item.dynamic-blog { border-left: 4px solid var(--accent); }
-
 </style>
 </head>
 <body>
@@ -689,16 +659,13 @@ body.dark-theme .nav-item.active::before { background: rgba(255,255,255,0.1); }
 <script src="https://cdnjs.cloudflare.com/ajax/libs/react/18.3.1/umd/react.production.min.js" crossorigin="anonymous"></script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/react-dom/18.3.1/umd/react-dom.production.min.js" crossorigin="anonymous"></script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/babel-standalone/7.26.4/babel.min.js" crossorigin="anonymous"></script>
-
+<script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2/dist/umd/supabase.min.js"></script>
 <script type="text/babel">
   const supabaseClient = supabase.createClient(
-  'https://dnaefflgijqlusbkbroa.supabase.co',
-  'sb_publishable_-9xSEIubyCUMSpNaDWk1Gg_-eAaaZHW'
+  'https://ckxqfasgddhgbpnxaaja.supabase.co',
+  'sb_publishable_gEX1rPpXyfxdY0WPhK0KNw_vZSQAj7Z'
 );
-// GEÇİCİ TEST - kategori verisini çekip konsola yazdırır
-supabaseClient.from('categories').select('*').then(({ data, error }) => {
-  console.log('SUPABASE TEST:', data, error);
-});
+ 
 /* ===================== DATA & MASTER REHBER LISTESİ ===================== */
 (function(){
   "use strict";
@@ -1352,28 +1319,6 @@ const dutyPharmacies = [
     {date:"15.08.2026", district:"PATNOS", name:"EMEK ECZANESİ", address:"SARISU MAHALLESİ BİTLİS YOLU NO:29", landmark:"HASTANE YANI", phone:"0472 616 14 11", url:"#"},
     {date:"15.08.2026", district:"TAŞLIÇAY", name:"TAŞLIÇAY ECZANESİ", address:"Cumhuriyet Mahallesi Mareşal Favzi Çakmak Caddesi No:23", landmark:"", phone:"0472 551 28 91", url:"#"},
     {date:"15.08.2026", district:"TUTAK", name:"TUTAK ECZANESİ", address:"MURAT MAHALLESİ CUMHURİYET CADDESİ NO:51/A", landmark:"", phone:"0472 411 26 98", url:"#"},
-        // --- 21.08.2026 ---
-    {date:"21.08.2026", district:"MERKEZ", name:"TURAN ECZANESİ", address:"YAVUZ MAHALLESİ KAĞIZMAN CADDESİ NO:8/B", landmark:"SULTAN SOFRASI KARŞISI", phone:"0472 215 75 75", url:"#"},
-    {date:"21.08.2026", district:"MERKEZ", name:"DERMAN ECZANESİ", address:"GAZİ MAHALLESİ SAĞLIK CADDESİ NO:46/B", landmark:"2 NOLU SAĞLIK OCAĞI KARŞISI", phone:"0545 190 85 04", url:"#"},
-    {date:"21.08.2026", district:"DİYADİN", name:"DİLAN ECZANESİ", address:"ISA AGA MAHALLESİ INÖNÜ CADDESİ NO:36", landmark:"BELEDİYE YANI", phone:"0472 511 28 28", url:"#"},
-    {date:"21.08.2026", district:"DOĞUBAYAZIT", name:"ZEYNEP ECZANESİ", address:"SANAYİ MAHALLESİ ÇEVRE YOLU BULVARI NO:766/D", landmark:"DEVLET HASTANESİ KARŞISI", phone:"0472 312 82 22", url:"#"},
-    {date:"21.08.2026", district:"ELEŞKİRT", name:"ŞİFA ECZANESİ", address:"MÜFTÜ SELİM MAHALLESİ CUMHURİYET CADDESİ NO:13", landmark:"SAĞLIK OCAĞI KARŞISI", phone:"0472 711 21 41", url:"#"},
-    {date:"21.08.2026", district:"HAMUR", name:"AHMET ECZANESİ", address:"Kümbet Mahallesi Van Caddesi No:49C", landmark:"HAMUR BELEDİYESİ ALTI", phone:"0544 564 57 48", url:"#"},
-    {date:"21.08.2026", district:"PATNOS", name:"BEYZADE ECZANESİ", address:"ATATÜRK MAHALLESİ SAİDİ NURSİ CADDESİ NO:3", landmark:"DİŞ HASTANESİ KARŞISI", phone:"0472 616 72 73", url:"#"},
-    {date:"21.08.2026", district:"TAŞLIÇAY", name:"BEYZA ECZANESİ", address:"15 TEMMUZ ŞEHİTLER MAHALLESİ MAREŞAL FEVZİ ÇAKMAK CADDESİ NO:1/1", landmark:"PTT KARGO YANI", phone:"0472 551 30 00", url:"#"},
-    {date:"21.08.2026", district:"TUTAK", name:"BERFİN ECZANESİ", address:"Murat Mahallesi Dr Cihan ÖKTEM Caddesi No:5A ve 5B", landmark:"GAZİ İLKOKULUNUN KARŞISI", phone:"0552 636 00 04", url:"#"},
-    
-    // --- 22.08.2026 ---
-    {date:"22.08.2026", district:"DİYADİN", name:"DİYADİN ECZANESİ", address:"İSA AĞA MAHALLESİ INÖNÜ CADDESİ NO:98", landmark:"PTT KARŞISI", phone:"0472 511 24 65", url:"#"},
-    {date:"22.08.2026", district:"DOĞUBAYAZIT", name:"TANCA ECZANESİ", address:"ÇİFTEPINAR MAHALLESİ BELEDİYE CADDESİ NO:25A", landmark:"1 NOLU SAĞLIK OCAĞI YANI", phone:"0541 534 57 93", url:"#"},
-    {date:"22.08.2026", district:"ELEŞKİRT", name:"ELEŞKİRT ECZANESİ", address:"İSTİKLAL MAHALLESİ CUMHURİYET CADDESİ NO:109", landmark:"BELEDİYE BİNASİ KARŞISI", phone:"0472 711 29 16", url:"#"},
-    {date:"22.08.2026", district:"HAMUR", name:"HAMUR ECZANESİ", address:"KÜMBET MAHALLESİ VAN CADDESİ NO:49/A", landmark:"HAMUR BELEDİYESİ ALTI", phone:"0472 616 71 72", url:"#"},
-    {date:"22.08.2026", district:"MERKEZ", name:"HARUN ECZANESİ", address:"YAVUZ MAHALLESİ 403 SOKAK NO:13/A", landmark:"TERZİLER CADDESİ AŞAĞISI", phone:"0472 215 25 83", url:"#"},
-    {date:"22.08.2026", district:"MERKEZ", name:"NADİR ECZANESİ", address:"FIRAT MAHALLESİ 1018/3 SOKAK NO:8/A", landmark:"AĞRI EĞİTİM VE ARAŞTIRMA HASTANESİ KARŞISI", phone:"0542 188 55 04", url:"#"},
-    {date:"22.08.2026", district:"PATNOS", name:"IŞIK ECZANESİ", address:"INÖNÜ MAHALLESİ MALAZGIRT CADDESİ NO:13", landmark:"LAL LOKANTASI KARŞISI", phone:"0472 616 24 01", url:"#"},
-    {date:"22.08.2026", district:"TAŞLIÇAY", name:"ÇARE ECZANESİ", address:"HÜRRİYET MAHALLESİ M.FEVZİ ÇAKMAK CADDESİ DIŞ KAPI NO:94A", landmark:"MERVE KIRTASİYE YANI", phone:"0546 491 53 22", url:"#"},
-    {date:"22.08.2026", district:"TUTAK", name:"BEGÜM ECZANESİ", address:"CAMİ MAHALLESİ KAZIM KARABEKİR CADDESİ NO:11B-11C", landmark:"KAYMAKAMLIK EVİ KARŞISI", phone:"0472 411 31 89", url:"#"}
-
   ];
  /* 15 GÜNLÜK HAVA DURUMU (Ağrı Merkez) */
   const weatherData = {
@@ -1569,6 +1514,217 @@ function FullscreenImage({ place, onClose }) {
 
 /* ===================== TAM EKRAN VİDEO OYNATICI ===================== */
 function FullscreenVideo({ src, title, onClose }) {
+  const WEEKDAYS_TR = ["Pazar","Pazartesi","Salı","Çarşamba","Perşembe","Cuma","Cumartesi"];
+ 
+function BookingWidget({ businessSlug, placeName }) {
+  const [step, setStep] = useState('form');
+  const [days, setDays] = useState([]);
+  const [selectedDate, setSelectedDate] = useState('');
+  const [availableTimes, setAvailableTimes] = useState([]);
+  const [selectedTime, setSelectedTime] = useState('');
+  const [name, setName] = useState('');
+  const [phone, setPhone] = useState('');
+  const [note, setNote] = useState('');
+  const [loading, setLoading] = useState(false);
+  const [bookingCode, setBookingCode] = useState('');
+  const [errorMsg, setErrorMsg] = useState('');
+  const [bizId, setBizId] = useState(null);
+ 
+  useEffect(() => {
+    let cancelled = false;
+    (async () => {
+      const { data } = await supabaseClient.from('businesses').select('id').eq('slug', businessSlug).single();
+      if (!cancelled && data) {
+        setBizId(data.id);
+        const { data: slots } = await supabaseClient.from('availability_slots').select('*').eq('business_id', data.id).eq('is_working', true);
+        setDays(slots || []);
+      }
+    })();
+    return () => { cancelled = true; };
+  }, [businessSlug]);
+ 
+  useEffect(() => {
+    if (!selectedDate || !bizId) return;
+    (async () => {
+      const d = new Date(selectedDate + 'T00:00:00');
+      const weekday = d.getDay();
+      const dayInfo = days.find(x => x.weekday === weekday);
+      if (!dayInfo) { setAvailableTimes([]); return; }
+ 
+      const { data: blocked } = await supabaseClient.from('blocked_slots').select('blocked_time').eq('business_id', bizId).eq('blocked_date', selectedDate);
+      const blockedSet = new Set((blocked || []).map(b => b.blocked_time.slice(0,5)));
+ 
+      const { data: taken } = await supabaseClient.from('appointments').select('requested_time').eq('business_id', bizId).eq('requested_date', selectedDate).in('status', ['pending','approved']);
+      const takenSet = new Set((taken || []).map(t => t.requested_time.slice(0,5)));
+ 
+      const [sh, sm] = dayInfo.start_time.split(':').map(Number);
+      const [eh, em] = dayInfo.end_time.split(':').map(Number);
+      const step = dayInfo.slot_length_minutes || 30;
+      let cur = sh * 60 + sm;
+      const end = eh * 60 + em;
+      const times = [];
+      while (cur < end) {
+        const hh = String(Math.floor(cur/60)).padStart(2,'0');
+        const mm = String(cur%60).padStart(2,'0');
+        const t = `${hh}:${mm}`;
+        if (!blockedSet.has(t) && !takenSet.has(t)) times.push(t);
+        cur += step;
+      }
+      setAvailableTimes(times);
+      setSelectedTime('');
+    })();
+  }, [selectedDate, bizId, days]);
+ 
+  const submitBooking = async () => {
+    if (!name.trim() || !phone.trim() || !selectedDate || !selectedTime) {
+      setErrorMsg('Lütfen ad, telefon, tarih ve saat seçin.'); return;
+    }
+    setLoading(true); setErrorMsg('');
+    const { data, error } = await supabaseClient.from('appointments').insert([{
+      business_id: bizId,
+      customer_name: name.trim(),
+      customer_phone: phone.trim(),
+      customer_note: note.trim() || null,
+      requested_date: selectedDate,
+      requested_time: selectedTime,
+      status: 'pending'
+    }]).select().single();
+    setLoading(false);
+    if (error) { setErrorMsg('Bir hata oluştu, lütfen tekrar deneyin.'); return; }
+    setBookingCode(data.booking_code);
+    setStep('success');
+  };
+ 
+  if (!bizId) return null;
+ 
+  if (step === 'success') {
+    return (
+      <div style={{background:'#f0fdf4', border:'1px solid #bbf7d0', borderRadius:'16px', padding:'20px', textAlign:'center'}}>
+        <div style={{fontSize:'32px', marginBottom:'8px'}}>✅</div>
+        <h3 style={{fontSize:'18px', marginBottom:'6px'}}>Randevu talebiniz alındı!</h3>
+        <p style={{fontSize:'14px', color:'var(--ink-soft)', marginBottom:'12px'}}>{placeName} sizinle onay için iletişime geçecek.</p>
+        <div style={{background:'#fff', border:'1px dashed #16a34a', borderRadius:'12px', padding:'12px', fontWeight:800, fontSize:'20px', letterSpacing:'2px', color:'#16a34a'}}>{bookingCode}</div>
+        <p style={{fontSize:'12px', color:'var(--ink-faint)', marginTop:'8px'}}>Bu kodu saklayın, randevunuzla ilgili görüşmelerde kullanabilirsiniz.</p>
+      </div>
+    );
+  }
+ 
+  return (
+    <div style={{background:'var(--card)', border:'1px solid var(--line)', borderRadius:'16px', padding:'20px', display:'flex', flexDirection:'column', gap:'12px'}}>
+      <strong style={{fontSize:'15px'}}>📅 Randevu Al</strong>
+      <input type="text" placeholder="Adınız Soyadınız" value={name} onChange={e=>setName(e.target.value)}
+        style={{padding:'12px', borderRadius:'10px', border:'1px solid var(--line)', fontSize:'14px'}} />
+      <input type="tel" placeholder="Telefon Numaranız" value={phone} onChange={e=>setPhone(e.target.value)}
+        style={{padding:'12px', borderRadius:'10px', border:'1px solid var(--line)', fontSize:'14px'}} />
+      <input type="date" value={selectedDate} min={new Date().toISOString().split('T')[0]}
+        onChange={e=>setSelectedDate(e.target.value)}
+        style={{padding:'12px', borderRadius:'10px', border:'1px solid var(--line)', fontSize:'14px'}} />
+ 
+      {selectedDate && (
+        availableTimes.length > 0 ? (
+          <div style={{display:'flex', flexWrap:'wrap', gap:'8px'}}>
+            {availableTimes.map(t => (
+              <button key={t} onClick={()=>setSelectedTime(t)}
+                style={{padding:'8px 14px', borderRadius:'100px', border:'1px solid ' + (selectedTime===t?'var(--accent)':'var(--line)'),
+                  background: selectedTime===t ? 'var(--accent)' : 'transparent', color: selectedTime===t ? '#fff':'var(--ink)', fontWeight:700, fontSize:'13px', cursor:'pointer'}}>
+                {t}
+              </button>
+            ))}
+          </div>
+        ) : <p style={{fontSize:'13px', color:'var(--ink-faint)'}}>Bu tarihte müsait saat yok, başka bir gün seçin.</p>
+      )}
+ 
+      <textarea placeholder="Not (opsiyonel)" value={note} onChange={e=>setNote(e.target.value)} rows={2}
+        style={{padding:'12px', borderRadius:'10px', border:'1px solid var(--line)', fontSize:'14px', fontFamily:'inherit'}} />
+ 
+      {errorMsg && <p style={{color:'#dc2626', fontSize:'13px'}}>{errorMsg}</p>}
+ 
+      <button onClick={submitBooking} disabled={loading}
+        style={{padding:'14px', borderRadius:'100px', background:'var(--ink)', color:'#fff', fontWeight:800, fontSize:'15px'}}>
+        {loading ? 'Gönderiliyor...' : 'Randevu Talebi Gönder'}
+      </button>
+    </div>
+  );
+}
+ 
+ 
+------------------------------------------------------------
+PARÇA 4 — Randevu kutusunu mekan detay sayfasına yerleştir
+------------------------------------------------------------
+index.html içinde şu satırı bul (PlacesOverlay fonksiyonunun içinde,
+pm-body kısmında geçiyor):
+ 
+    <p className="pm-info">{selectedPlace.info}</p>
+ 
+Bu satırın HEMEN ALTINA, tek satır olarak şunu ekle:
+ 
+    <BookingWidget businessSlug={selectedPlace.slug} placeName={selectedPlace.name} />
+ 
+ 
+------------------------------------------------------------
+PARÇA 5 — Gündem Haberleri'ni onaylı bloglarla doldur
+------------------------------------------------------------
+index.html içinde "function AgendaDashboard(){" ile başlayıp
+kapanış süslü parantezine kadar giden TÜM fonksiyonu bul,
+SİL ve yerine şunun TAMAMINI yapıştır:
+ 
+function AgendaDashboard(){
+  const [blogs, setBlogs] = useState([]);
+ 
+  useEffect(() => {
+    (async () => {
+      const { data } = await supabaseClient
+        .from('blog_posts')
+        .select('*, businesses(name, image_url)')
+        .eq('status', 'approved')
+        .order('created_at', { ascending: false })
+        .limit(10);
+      setBlogs(data || []);
+    })();
+  }, []);
+ 
+  return (
+    <section id="gundem">
+      <div className="wrap gundem-layout">
+        <div className="g-left">
+          <div className="news-wrap" style={{marginTop: 0}} data-nosnippet="true">
+            <div className="news-header">Gündem Haberleri</div>
+            <div className="news-list">
+ 
+              <div className="news-item">
+                <img className="news-img" src="agridagi2.jpg" alt="Ağrı Dijital Merkezi" style={{ objectFit: 'cover' }} />
+                <div className="news-content">
+                  <span className="news-meta">GÜNCEL</span>
+                  <h4>Ağrı'nın dijital merkezi yayında 🎉</h4>
+                  <p>Ağrı genelindeki tüm yerel bilgilendirmeler, esnaf rehberi ve gezi rotaları tek bir çatı altında, ücretsiz olarak yayına alıyoruz.</p>
+                </div>
+              </div>
+ 
+              {blogs.map(b => (
+                <div className="news-item" key={b.id}>
+                  <div className="news-img news-img-placeholder"></div>
+                  <div className="news-content">
+                    <span className="news-meta">{b.businesses?.name || 'İşletme'}</span>
+                    <h4>{b.title}</h4>
+                    <p>{b.content}</p>
+                  </div>
+                </div>
+              ))}
+ 
+            </div>
+          </div>
+        </div>
+ 
+        <div className="widget-panel">
+          <WeatherWidget />
+          <PrayerTimesWidget />
+          <PharmacyWidget />
+        </div>
+      </div>
+    </section>
+  );
+}
+ 
   const vidRef = useRef(null);
   const [playing, setPlaying] = useState(true);
   const [muted, setMuted] = useState(false);
@@ -2267,24 +2423,7 @@ function PrayerTimesWidget(){
 }
 
 
-/* ===================== GÜNDEM HABERLERİ (BLOGLAR) ===================== */
 function AgendaDashboard(){
-  const [blogs, setBlogs] = useState([]);
-
-  // Supabase'den işletmelerin yayınladığı blogları çekiyoruz
-  useEffect(() => {
-    async function fetchBlogs() {
-      const { data } = await supabaseClient
-        .from('blog_posts')
-        .select('*, businesses(name, slug, category)')
-        .eq('is_published', true)
-        .order('created_at', { ascending: false })
-        .limit(5); // Son 5 yazıyı getir
-      if (data) setBlogs(data);
-    }
-    fetchBlogs();
-  }, []);
-
   return (
     <section id="gundem">
       <div className="wrap gundem-layout">
@@ -2293,21 +2432,6 @@ function AgendaDashboard(){
             <div className="news-header">Gündem Haberleri</div>
             <div className="news-list">
               
-              {/* Panelden yazılan dinamik blogları göster */}
-              {blogs.map((b, idx) => (
-                <div key={idx} className="news-item dynamic-blog" onClick={() => { window.history.pushState(null, "", `/mekan/${b.businesses.slug}`); window.dispatchEvent(new Event("popstate")); }}>
-                  <div className="news-img" style={{display:'grid', placeItems:'center', background:'var(--bg-2)'}}>
-                    <Icon name="grid" size={32} stroke="var(--accent)" />
-                  </div>
-                  <div className="news-content">
-                    <span className="news-meta">{b.businesses.name}</span>
-                    <h4>{b.title}</h4>
-                    <p>{b.content}</p>
-                  </div>
-                </div>
-              ))}
-
-              {/* Sabit (Kalıcı) Haberimiz */}
               <div className="news-item">
                 <img className="news-img" src="agridagi2.jpg" alt="Ağrı Dijital Merkezi" style={{ objectFit: 'cover' }} />
                 <div className="news-content">
@@ -2331,7 +2455,6 @@ function AgendaDashboard(){
   );
 }
 
-/* ===================== KATEGORİLER ===================== */
 function Categories({ onOpen }){
   const cats = window.AGRI.categories; 
   const [active, setActive] = useState(0);
@@ -2375,7 +2498,6 @@ function Categories({ onOpen }){
   );
 }
 
-/* ===================== NÖBETÇİ ECZANE LİSTESİ ===================== */
 function PharmacyFullView() {
   const districtsList = ["MERKEZ", "TAŞLIÇAY", "DİYADİN", "DOĞUBAYAZIT", "ELEŞKİRT", "HAMUR", "PATNOS", "TUTAK"];
   const [district, setDistrict] = useState("MERKEZ");
@@ -2429,109 +2551,6 @@ function PharmacyFullView() {
     </div>
   );
 }
-
-/* ===================== APPLE TARZI RANDEVU WIDGET'I ===================== */
-function AppointmentWidget({ place }) {
-  const [businessId, setBusinessId] = useState(null);
-  const [slots, setSlots] = useState([]);
-  const [selectedDate, setSelectedDate] = useState("");
-  const [availableHours, setAvailableHours] = useState([]);
-  const [selectedHour, setSelectedHour] = useState(null);
-  const [form, setForm] = useState({ name: "", phone: "", note: "" });
-  const [status, setStatus] = useState(""); // "success", "error", "loading"
-
-  // 1. İşletmenin panelde eklediği saatleri veritabanından çek
-  useEffect(() => {
-    async function fetchBusinessData() {
-      const { data } = await supabaseClient.from('businesses').select('id').eq('slug', place.slug).single();
-      if (data) {
-        setBusinessId(data.id);
-        const { data: slotData } = await supabaseClient.from('availability_slots').select('*').eq('business_id', data.id);
-        if (slotData) setSlots(slotData);
-      }
-    }
-    fetchBusinessData();
-  }, [place.slug]);
-
-  // Eğer işletme panelden saat girmemişse, kutuyu hiç gösterme (temiz kalsın)
-  if (!businessId || slots.length === 0) return null;
-
-  // 2. Kullanıcı tarih seçtiğinde, o günün haftanın hangi günü olduğunu bulup saatleri filtrele
-  const handleDateChange = (e) => {
-    const d = e.target.value;
-    setSelectedDate(d);
-    setSelectedHour(null);
-    setStatus("");
-    const dayIndex = new Date(d).getDay(); // 0=Pazar, 1=Pazartesi...
-    const daySlots = slots.filter(s => s.weekday === dayIndex);
-    setAvailableHours(daySlots);
-  };
-
-  // 3. Randevuyu Supabase'e gönder
-  const submitAppointment = async () => {
-    if (!form.name || !form.phone || !selectedDate || !selectedHour) return alert("Lütfen tarih, saat, isim ve telefon giriniz.");
-    setStatus("loading");
-    const { error } = await supabaseClient.from('appointments').insert([{
-      business_id: businessId,
-      customer_name: form.name,
-      customer_phone: form.phone,
-      requested_date: selectedDate,
-      requested_time: selectedHour.start_time,
-      note: form.note
-    }]);
-
-    if (error) { setStatus("error"); alert("Bir hata oluştu: " + error.message); } 
-    else { setStatus("success"); }
-  };
-
-  if (status === "success") {
-    return (
-      <div className="apple-appt-widget" style={{textAlign:'center'}}>
-        <svg width="48" height="48" viewBox="0 0 24 24" fill="none" stroke="var(--accent)" strokeWidth="2" style={{marginBottom:'10px'}}><path d="M22 11.08V12a10 10 0 1 1-5.93-9.14"/><polyline points="22 4 12 14.01 9 11.01"/></svg>
-        <h4>Randevu Talebiniz İletildi!</h4>
-        <p>İşletme en kısa sürede sizinle iletişime geçecektir. Teşekkürler.</p>
-      </div>
-    );
-  }
-
-  // Bugünden önceki günleri seçemesin diye
-  const today = new Date().toISOString().split('T')[0];
-
-  return (
-    <div className="apple-appt-widget">
-      <h4>📅 Randevu Al</h4>
-      <p>Lütfen randevu talebi için uygun bir tarih seçin.</p>
-      
-      <input type="date" className="apple-date-input" min={today} value={selectedDate} onChange={handleDateChange} />
-      
-      {selectedDate && availableHours.length === 0 && (
-        <p style={{color:'var(--pin)', fontWeight:600, fontSize:'13px'}}>Bu tarihte uygun randevu saati bulunmuyor. Başka bir gün deneyin.</p>
-      )}
-
-      {availableHours.length > 0 && (
-        <div className="apple-slots-grid">
-          {availableHours.map((h, i) => (
-            <button key={i} className={`apple-slot-btn ${selectedHour === h ? 'active' : ''}`} onClick={() => setSelectedHour(h)}>
-              {h.start_time.slice(0,5)}
-            </button>
-          ))}
-        </div>
-      )}
-
-      {selectedHour && (
-        <div className="apple-form-group">
-          <input className="apple-input" placeholder="Adınız Soyadınız" value={form.name} onChange={e => setForm({...form, name: e.target.value})} />
-          <input className="apple-input" placeholder="Telefon Numaranız" value={form.phone} onChange={e => setForm({...form, phone: e.target.value})} />
-          <input className="apple-input" placeholder="Notunuz (Opsiyonel)" value={form.note} onChange={e => setForm({...form, note: e.target.value})} />
-          <button className="apple-submit-btn" onClick={submitAppointment}>
-            {status === "loading" ? "Gönderiliyor..." : "Randevu Talebini Gönder"}
-          </button>
-        </div>
-      )}
-    </div>
-  );
-}
-
 
 // ROUTER GÜNCELLEMESİ: initialSubCat ve initialPlace propertyleri eklendi
 function PlacesOverlay({ cat, initialSubCat, initialPlace, onClose, favorites = [], toggleFav }){
@@ -2734,7 +2753,6 @@ function PlacesOverlay({ cat, initialSubCat, initialPlace, onClose, favorites = 
               <span><strong>{viewCount.toLocaleString('tr-TR')}</strong> kişi inceledi</span>
             </div>
             <p className="pm-info">{selectedPlace.info}</p>
-  <AppointmentWidget place={selectedPlace} />
 
             {selectedPlace.lessons && selectedPlace.lessons.length > 0 && (
               <div style={{display:'flex', flexDirection:'column', gap:'12px'}}>
