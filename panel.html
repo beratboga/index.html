@@ -3,439 +3,377 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>04agri.com | İşletme Yönetim Paneli</title>
-
-<!-- Supabase Bağlantısı -->
+<title>04agri.com | İşletme Paneli</title>
 <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2/dist/umd/supabase.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/xlsx@0.18.5/dist/xlsx.full.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/jspdf@2.5.1/dist/jspdf.umd.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/jspdf-autotable@3.8.1/dist/jspdf.plugin.autotable.min.js"></script>
 <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&display=swap" rel="stylesheet">
-
 <style>
-  /* Apple Minimalist Tasarım Sistemi */
-  :root {
-    --bg-color: #f5f5f7;
-    --card-bg: #ffffff;
-    --text-main: #1d1d1f;
-    --text-muted: #86868b;
-    --accent: #0071e3;
-    --accent-hover: #0077ED;
-    --danger: #ff3b30;
-    --success: #34c759;
-    --border: #d2d2d7;
-    --radius: 18px;
-    --shadow: 0 4px 24px rgba(0,0,0,0.06);
-  }
-  
-  body {
-    font-family: 'Plus Jakarta Sans', -apple-system, BlinkMacSystemFont, sans-serif;
-    background-color: var(--bg-color);
-    color: var(--text-main);
-    margin: 0;
-    padding: 0;
-    -webkit-font-smoothing: antialiased;
-  }
-
-  /* GİRİŞ EKRANI */
-  #login-screen {
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    height: 100vh;
-    padding: 20px;
-  }
-  
-  .login-card {
-    background: var(--card-bg);
-    padding: 40px;
-    border-radius: var(--radius);
-    box-shadow: var(--shadow);
-    width: 100%;
-    max-width: 400px;
-    text-align: center;
-  }
-
-  .login-card h2 { margin-top: 0; font-weight: 700; font-size: 24px; }
-  .login-card p { color: var(--text-muted); font-size: 14px; margin-bottom: 24px; }
-
-  input, textarea, select {
-    width: 100%;
-    padding: 14px;
-    margin-bottom: 16px;
-    border: 1px solid var(--border);
-    border-radius: 12px;
-    font-size: 15px;
-    font-family: inherit;
-    box-sizing: border-box;
-    transition: border 0.3s;
-  }
-  input:focus, textarea:focus { outline: none; border-color: var(--accent); }
-  
-  button {
-    width: 100%;
-    padding: 14px;
-    background: var(--accent);
-    color: white;
-    border: none;
-    border-radius: 12px;
-    font-size: 16px;
-    font-weight: 600;
-    cursor: pointer;
-    transition: background 0.2s, transform 0.1s;
-  }
-  button:hover { background: var(--accent-hover); }
-  button:active { transform: scale(0.98); }
-  button.danger { background: var(--danger); }
-  button.outline { background: transparent; color: var(--text-main); border: 1px solid var(--border); }
-  
-  /* PANEL EKRANI */
-  #dashboard-screen { display: none; max-width: 1000px; margin: 0 auto; padding: 40px 20px; }
-  
-  .top-bar {
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-    margin-bottom: 40px;
-  }
-  
-  .top-bar h1 { font-size: 28px; margin: 0; letter-spacing: -0.5px; }
-  .logout-btn { width: auto; padding: 10px 20px; font-size: 14px; background: var(--text-muted); }
-
-  .menu-tabs {
-    display: flex; gap: 10px; margin-bottom: 30px; overflow-x: auto;
-  }
-  
-  .tab-btn {
-    flex: 1; min-width: 120px; background: white; color: var(--text-muted);
-    border: 1px solid var(--border);
-  }
-  .tab-btn.active { background: var(--text-main); color: white; border-color: var(--text-main); }
-
-  .panel-section {
-    background: var(--card-bg); padding: 30px;
-    border-radius: var(--radius); box-shadow: var(--shadow);
-    display: none;
-    animation: fadeIn 0.4s ease;
-  }
-  .panel-section.active { display: block; }
-  
-  @keyframes fadeIn { from { opacity: 0; transform: translateY(10px); } to { opacity: 1; transform: none; } }
-
-  /* KARTLAR VE LİSTELER */
-  .item-card {
-    border: 1px solid var(--border); padding: 16px;
-    border-radius: 12px; margin-bottom: 12px;
-    display: flex; justify-content: space-between; align-items: center;
-  }
-  .item-info strong { display: block; font-size: 16px; margin-bottom: 4px; }
-  .item-info span { font-size: 14px; color: var(--text-muted); }
-  .status-badge { padding: 4px 10px; border-radius: 20px; font-size: 12px; font-weight: 700; }
-  .status-pending { background: #fff3cd; color: #856404; }
-  .status-approved { background: #d4edda; color: #155724; }
-  
-  .action-btns button { width: auto; padding: 8px 14px; font-size: 13px; margin-left: 8px; }
+  :root{--bg:#f5f5f7;--card:#fff;--ink:#1d1d1f;--muted:#86868b;--accent:#0071e3;--danger:#ff3b30;--ok:#34c759;--warn:#ff9500;--border:#d2d2d7;--r:16px;--shadow:0 4px 24px rgba(0,0,0,.06)}
+  *{box-sizing:border-box}
+  body{font-family:'Plus Jakarta Sans',sans-serif;background:var(--bg);color:var(--ink);margin:0}
+  input,textarea,select{width:100%;padding:12px;margin-bottom:12px;border:1px solid var(--border);border-radius:10px;font-size:14px;font-family:inherit}
+  button{padding:12px 18px;background:var(--accent);color:#fff;border:none;border-radius:10px;font-weight:700;cursor:pointer;font-size:14px}
+  button.sm{padding:8px 12px;font-size:13px}
+  button.danger{background:var(--danger)}
+  button.ok{background:var(--ok)}
+  button.outline{background:transparent;color:var(--ink);border:1px solid var(--border)}
+  #login{display:flex;justify-content:center;align-items:center;min-height:100vh;padding:20px}
+  .login-card{background:var(--card);padding:36px;border-radius:var(--r);box-shadow:var(--shadow);width:100%;max-width:380px}
+  #app{display:none;max-width:1100px;margin:0 auto;padding:28px 16px 80px}
+  .topbar{display:flex;justify-content:space-between;align-items:center;margin-bottom:24px}
+  .topbar h1{font-size:22px;margin:0}
+  .tabs{display:flex;gap:8px;overflow-x:auto;margin-bottom:20px;padding-bottom:4px}
+  .tabs button{background:var(--card);color:var(--muted);border:1px solid var(--border);white-space:nowrap}
+  .tabs button.active{background:var(--ink);color:#fff;border-color:var(--ink)}
+  .panel{display:none;background:var(--card);padding:24px;border-radius:var(--r);box-shadow:var(--shadow)}
+  .panel.active{display:block}
+  .row{display:flex;justify-content:space-between;align-items:center;border:1px solid var(--border);border-radius:12px;padding:14px;margin-bottom:10px;gap:10px;flex-wrap:wrap}
+  .row .info strong{display:block;font-size:15px}
+  .row .info span{font-size:13px;color:var(--muted)}
+  .badge{padding:3px 10px;border-radius:20px;font-size:11px;font-weight:800}
+  .b-pending{background:#fff3cd;color:#856404}
+  .b-approved{background:#d4edda;color:#155724}
+  .b-rejected{background:#f8d7da;color:#721c24}
+  .toolbar{display:flex;gap:10px;flex-wrap:wrap;margin-bottom:16px}
+  .day-grid{display:grid;grid-template-columns:120px 1fr 1fr 1fr auto;gap:10px;align-items:center;margin-bottom:10px}
+  .day-grid label{font-weight:700;font-size:14px}
+  .switch{position:relative;width:44px;height:24px}
+  .switch input{opacity:0;width:0;height:0}
+  .slider2{position:absolute;inset:0;background:#ccc;border-radius:24px;cursor:pointer;transition:.2s}
+  .slider2:before{content:"";position:absolute;height:18px;width:18px;left:3px;top:3px;background:#fff;border-radius:50%;transition:.2s}
+  input:checked+.slider2{background:var(--ok)}
+  input:checked+.slider2:before{transform:translateX(20px)}
+  .filters{display:flex;gap:8px;flex-wrap:wrap;margin-bottom:16px}
+  .filters select,.filters input{width:auto;margin:0}
 </style>
 </head>
 <body>
 
-<!-- GİRİŞ EKRANI -->
-<div id="login-screen">
+<div id="login">
   <div class="login-card">
-    <h2>Yönetim Paneli</h2>
-    <p>İşletme hesabınızla giriş yapın.</p>
-    <input type="email" id="email" placeholder="E-posta Adresi">
+    <h2>İşletme Paneli</h2>
+    <p style="color:var(--muted);font-size:14px">Size verilen e-posta ve şifre ile giriş yapın.</p>
+    <input type="email" id="email" placeholder="E-posta">
     <input type="password" id="password" placeholder="Şifre">
-    <button onclick="login()">Giriş Yap</button>
-    <p id="login-error" style="color: var(--danger); margin-top: 15px; display: none; font-size: 14px;"></p>
+    <button onclick="login()" style="width:100%">Giriş Yap</button>
+    <p id="loginMsg" style="font-size:13px;margin-top:10px"></p>
   </div>
 </div>
 
-<!-- KONTROL PANELİ -->
-<div id="dashboard-screen">
-  <div class="top-bar">
-    <h1>Merhaba, <span id="business-name">İşletme</span></h1>
-    <button class="logout-btn" onclick="logout()">Çıkış Yap</button>
+<div id="app">
+  <div class="topbar">
+    <h1>Merhaba, <span id="bizName"></span></h1>
+    <button class="outline sm" onclick="logout()">Çıkış</button>
   </div>
 
-  <div class="menu-tabs">
-    <button class="tab-btn active" onclick="switchTab('randevular')">Randevular</button>
-    <button class="tab-btn" onclick="switchTab('saatler')">Çalışma Saatleri</button>
-    <button class="tab-btn" onclick="switchTab('blog')">Blog Yaz</button>
-    <button class="tab-btn" onclick="switchTab('profil')">Profilim</button>
+  <div class="tabs">
+    <button class="active" onclick="tab('randevular')">Randevular</button>
+    <button onclick="tab('saatler')">Çalışma Saatleri</button>
+    <button onclick="tab('blog')">Blog</button>
+    <button onclick="tab('profil')">Profil & Şifre</button>
+    <button onclick="tab('gecmis')">İşlem Geçmişi</button>
   </div>
 
-  <!-- RANDEVULAR BÖLÜMÜ -->
-  <div id="randevular" class="panel-section active">
-    <h3>Gelen Randevu Talepleri</h3>
-    <p style="color: var(--text-muted); font-size: 14px;">Müşterilerin web sitesinden aldığı randevuları buradan onaylayabilir veya reddedebilirsiniz.</p>
-    <div id="appointments-list">Yükleniyor...</div>
-  </div>
-
-  <!-- ÇALIŞMA SAATLERİ BÖLÜMÜ -->
-  <div id="saatler" class="panel-section">
-    <h3>Müsait Saatlerinizi Belirleyin</h3>
-    <p style="color: var(--text-muted); font-size: 14px;">Ziyaretçiler sadece burada eklediğiniz gün ve saat dilimlerinde sizden randevu talep edebilir.</p>
-    <div style="display: flex; gap: 10px;">
-      <select id="slot-day">
-        <option value="1">Pazartesi</option><option value="2">Salı</option><option value="3">Çarşamba</option>
-        <option value="4">Perşembe</option><option value="5">Cuma</option><option value="6">Cumartesi</option><option value="0">Pazar</option>
+  <!-- RANDEVULAR -->
+  <div id="p-randevular" class="panel active">
+    <div class="toolbar">
+      <select id="apptStatusFilter" onchange="loadAppointments()">
+        <option value="">Tüm Durumlar</option>
+        <option value="pending">Bekleyen</option>
+        <option value="approved">Onaylanan</option>
+        <option value="rejected">Reddedilen</option>
       </select>
-      <input type="time" id="slot-start" value="09:00">
-      <input type="time" id="slot-end" value="17:00">
+      <button class="outline sm" onclick="exportApptsExcel()">📊 Excel İndir</button>
+      <button class="outline sm" onclick="exportApptsPdf()">📄 PDF İndir</button>
     </div>
-    <button onclick="addSlot()" style="margin-bottom: 20px;">+ Yeni Saat Aralığı Ekle</button>
-    <div id="slots-list"></div>
+    <div id="apptList">Yükleniyor...</div>
   </div>
 
-  <!-- BLOG YAZMA BÖLÜMÜ -->
-  <div id="blog" class="panel-section">
-    <h3>Gündem Haberleri İçin Blog Yayınla</h3>
-    <p style="color: var(--text-muted); font-size: 14px;">Buradan yazdığınız yazılar ana sayfadaki "Gündem Haberleri" kısmında isminizle yayınlanır.</p>
-    <input type="text" id="blog-title" placeholder="Yazının Başlığı">
-    <textarea id="blog-content" rows="6" placeholder="Ne hakkında yazmak istersiniz?"></textarea>
-    <button onclick="addBlogPost()">Yayınla</button>
-    <h4 style="margin-top: 30px;">Geçmiş Yazılarım</h4>
-    <div id="blogs-list"></div>
+  <!-- ÇALIŞMA SAATLERİ -->
+  <div id="p-saatler" class="panel">
+    <h3>Haftalık Çalışma Günleri</h3>
+    <p style="color:var(--muted);font-size:13px">Kapalı günlerde ziyaretçiler randevu talep edemez.</p>
+    <div id="weekGrid"></div>
+    <button onclick="saveWeek()">Kaydet</button>
+
+    <h3 style="margin-top:32px">Belirli Saati Dolu/Boş Yap</h3>
+    <p style="color:var(--muted);font-size:13px">Örn: 25.08.2026 14:00'ü kapatmak için aşağıya girin.</p>
+    <div style="display:flex;gap:10px;flex-wrap:wrap">
+      <input type="date" id="blockDate" style="width:auto">
+      <input type="time" id="blockTime" style="width:auto">
+      <input type="text" id="blockReason" placeholder="Sebep (opsiyonel)" style="width:200px">
+      <button onclick="addBlockedSlot()">Kapat</button>
+    </div>
+    <div id="blockedList" style="margin-top:14px"></div>
   </div>
 
-  <!-- PROFİL GÜNCELLEME BÖLÜMÜ -->
-  <div id="profil" class="panel-section">
+  <!-- BLOG -->
+  <div id="p-blog" class="panel">
+    <h3>Kısa Bir Yazı Paylaş</h3>
+    <p style="color:var(--muted);font-size:13px">Yazınız önce süper yöneticinin onayına gider, onaylanınca ana sayfada "Gündem Haberleri"nde yayınlanır.</p>
+    <input type="text" id="blogTitle" placeholder="Başlık" maxlength="80">
+    <textarea id="blogContent" rows="4" placeholder="Kısa bir yazı yazın (en fazla 400 karakter)" maxlength="400"></textarea>
+    <button onclick="submitBlog()">Onaya Gönder</button>
+    <h4 style="margin-top:24px">Yazılarım</h4>
+    <div id="blogList"></div>
+  </div>
+
+  <!-- PROFİL -->
+  <div id="p-profil" class="panel">
     <h3>İşletme Bilgileri</h3>
-    <input type="text" id="prof-name" placeholder="İşletme / Uzman Adı">
-    <input type="text" id="prof-subname" placeholder="Ünvan (Örn: Medikal Estetik)">
-    <input type="text" id="prof-phone" placeholder="Telefon Numarası">
-    <input type="text" id="prof-address" placeholder="Açık Adres">
-    <textarea id="prof-info" rows="4" placeholder="Hakkımızda Yazısı"></textarea>
+    <input type="text" id="prof-name" placeholder="Ad / İşletme Adı">
+    <input type="text" id="prof-subname" placeholder="Ünvan">
+    <input type="text" id="prof-area" placeholder="Bölge (örn: Ağrı Merkez)">
+    <input type="text" id="prof-address" placeholder="Adres">
+    <input type="text" id="prof-phone" placeholder="Telefon">
+    <input type="text" id="prof-whatsapp" placeholder="WhatsApp (5xx xxx xx xx)">
+    <input type="text" id="prof-instagram" placeholder="Instagram kullanıcı adı">
+    <input type="text" id="prof-website" placeholder="Web sitesi (varsa)">
+    <textarea id="prof-info" rows="4" placeholder="Hakkında yazısı"></textarea>
     <button onclick="updateProfile()">Bilgileri Kaydet</button>
+
+    <h3 style="margin-top:32px">Şifremi Değiştir</h3>
+    <input type="password" id="newPass" placeholder="Yeni şifre (en az 6 karakter)">
+    <button onclick="changeMyPassword()">Şifreyi Güncelle</button>
+    <p id="passMsg" style="font-size:13px"></p>
+  </div>
+
+  <!-- GEÇMİŞ / AUDIT LOG -->
+  <div id="p-gecmis" class="panel">
+    <h3>İşlem Geçmişi</h3>
+    <p style="color:var(--muted);font-size:13px">Silinen randevular dahil, hesabınızda yapılan tüm işlemler burada kalıcı olarak tutulur.</p>
+    <div id="auditList">Yükleniyor...</div>
   </div>
 </div>
 
-<script>//
-  // Supabase Bağlantı Ayarları
-  const SUPABASE_URL = 'https://dnaefflgijqlusbkbroa.supabase.co';
-  const SUPABASE_KEY = 'sb_publishable_-9xSEIubyCUMSpNaDWk1Gg_-eAaaZHW';
-  // Çakışmayı önlemek için supabaseClient adını kullanıyoruz
-  const supabaseClient = supabase.createClient(SUPABASE_URL, SUPABASE_KEY);
-  
-  let currentBusinessId = null;
-  let isSuperAdmin = false;
+<script>
+  const SUPABASE_URL = 'https://ckxqfasgddhgbpnxaaja.supabase.co';
+  const SUPABASE_KEY = 'sb_publishable_gEX1rPpXyfxdY0WPhK0KNw_vZSQAj7Z'; // publishable key - tarayıcıda kalması güvenlidir
+  const sb = supabase.createClient(SUPABASE_URL, SUPABASE_KEY);
 
-  // 1. SEKME DEĞİŞTİRME
-  function switchTab(tabId) {
-    document.querySelectorAll('.panel-section').forEach(s => s.classList.remove('active'));
-    document.querySelectorAll('.tab-btn').forEach(b => b.classList.remove('active'));
-    document.getElementById(tabId).classList.add('active');
+  let myBiz = null;
+  const WEEKDAYS = ["Pazar","Pazartesi","Salı","Çarşamba","Perşembe","Cuma","Cumartesi"];
+
+  async function checkSession(){
+    const { data: { session } } = await sb.auth.getSession();
+    if (session) await loadMyBusiness(session.user.id);
+  }
+
+  async function login(){
+    const email = document.getElementById('email').value.trim();
+    const password = document.getElementById('password').value;
+    const msg = document.getElementById('loginMsg');
+    msg.style.color = 'var(--muted)'; msg.innerText = 'Bağlanıyor...';
+    const { data, error } = await sb.auth.signInWithPassword({ email, password });
+    if (error){ msg.style.color = 'var(--danger)'; msg.innerText = 'Hata: ' + error.message; return; }
+    await loadMyBusiness(data.user.id);
+  }
+
+  async function logout(){ await sb.auth.signOut(); location.reload(); }
+
+  async function loadMyBusiness(userId){
+    const { data, error } = await sb.from('businesses').select('*').eq('auth_user_id', userId).single();
+    if (error || !data){
+      document.getElementById('loginMsg').innerText = 'Bu hesaba bağlı işletme bulunamadı. Süper yöneticinizle iletişime geçin.';
+      return;
+    }
+    myBiz = data;
+    document.getElementById('login').style.display='none';
+    document.getElementById('app').style.display='block';
+    document.getElementById('bizName').innerText = data.name;
+    fillProfileForm();
+    loadAppointments();
+    loadWeek();
+    loadBlockedSlots();
+    loadMyBlogs();
+    loadAudit();
+  }
+
+  function tab(name){
+    document.querySelectorAll('.panel').forEach(p=>p.classList.remove('active'));
+    document.querySelectorAll('.tabs button').forEach(b=>b.classList.remove('active'));
+    document.getElementById('p-'+name).classList.add('active');
     event.target.classList.add('active');
   }
 
-  // 2. OTURUM KONTROLÜ
-  async function checkSession() {
-    try {
-      const { data: { session }, error } = await supabaseClient.auth.getSession();
-      if (session) {
-        document.getElementById('login-screen').style.display = 'none';
-        document.getElementById('dashboard-screen').style.display = 'block';
-        loadBusinessData(session.user.id);
-      }
-    } catch (e) {
-      console.log("Oturum kontrol hatası:", e);
-    }
-  }
-  
-  // 3. GİRİŞ YAP BUTONU
-  async function login() {
-    const email = document.getElementById('email').value;
-    const password = document.getElementById('password').value;
-    const errorEl = document.getElementById('login-error');
-    
-    if(!email || !password) {
-      errorEl.innerText = "Lütfen e-posta ve şifrenizi boş bırakmayın.";
-      errorEl.style.color = "var(--danger)";
-      errorEl.style.display = 'block';
-      return;
-    }
-
-    errorEl.innerText = "Bağlanıyor, lütfen bekleyin...";
-    errorEl.style.color = "var(--accent)";
-    errorEl.style.display = 'block';
-    
-    try {
-      const { data, error } = await supabaseClient.auth.signInWithPassword({ email, password });
-      
-      if (error) {
-        errorEl.style.color = "var(--danger)";
-        errorEl.innerText = "Hata: " + error.message; 
-      } else {
-        errorEl.style.color = "var(--success)";
-        errorEl.innerText = "Giriş başarılı! İçeri alınıyorsunuz...";
-        checkSession();
-      }
-    } catch (err) {
-      errorEl.style.color = "var(--danger)";
-      errorEl.innerText = "Sistem Hatası: " + err.message;
-    }
-  }
-
-  async function logout() {
-    await supabaseClient.auth.signOut();
-    location.reload();
-  }
-
-  // 4. İŞLETME VEYA SÜPER YÖNETİCİ VERİLERİNİ ÇEKME
-  async function loadBusinessData(userId) {
-    // SÜPER YÖNETİCİ KONTROLÜ
-    const { data: adminData } = await supabaseClient.from('super_admins').select('*').eq('auth_user_id', userId).single();
-    
-    if (adminData) {
-      isSuperAdmin = true;
-      document.getElementById('business-name').innerText = "Süper Yönetici (Berat)";
-      document.getElementById('randevular').innerHTML = `<h3>Süper Yönetici Paneli</h3><p>Hoş geldin Berat! Başarıyla giriş yaptın. (Tüm işletmeleri görme ekranı eklenecek).</p>`;
-      return;
-    }
-
-    // İŞLETME KONTROLÜ
-    const { data, error } = await supabaseClient.from('businesses').select('*').eq('auth_user_id', userId).single();
-    
-    if (data) {
-      currentBusinessId = data.id;
-      document.getElementById('business-name').innerText = data.name;
-      
-      document.getElementById('prof-name').value = data.name || '';
-      document.getElementById('prof-subname').value = data.sub_name || '';
-      document.getElementById('prof-phone').value = data.phone || '';
-      document.getElementById('prof-address').value = data.address || '';
-      document.getElementById('prof-info').value = data.info || '';
-
-      fetchAppointments();
-      fetchSlots();
-      fetchBlogs();
-    } else {
-      alert("Bu hesaba bağlı bir işletme profili bulunamadı! Lütfen veritabanı UID eşleştirmesini kontrol edin.");
-    }
-  }
-
-  // BİLGİLERİ GÜNCELLEME
-  async function updateProfile() {
-    const name = document.getElementById('prof-name').value;
-    const sub_name = document.getElementById('prof-subname').value;
-    const phone = document.getElementById('prof-phone').value;
-    const address = document.getElementById('prof-address').value;
-    const info = document.getElementById('prof-info').value;
-
-    const { error } = await supabaseClient.from('businesses').update({
-      name, sub_name, phone, address, info
-    }).eq('id', currentBusinessId);
-
-    if (!error) alert("Bilgileriniz başarıyla güncellendi!");
-  }
-
-  // ÇALIŞMA SAATLERİ (SLOTLAR)
-  async function fetchSlots() {
-    const days = ["Pazar", "Pazartesi", "Salı", "Çarşamba", "Perşembe", "Cuma", "Cumartesi"];
-    const { data } = await supabaseClient.from('availability_slots').select('*').eq('business_id', currentBusinessId);
-    let html = '';
-    if(data) {
-      data.forEach(s => {
-        html += `
-        <div class="item-card">
-          <div class="item-info">
-            <strong>${days[s.weekday]}</strong>
-            <span>${s.start_time.slice(0,5)} - ${s.end_time.slice(0,5)} arası</span>
-          </div>
-          <div class="action-btns"><button class="danger" onclick="deleteSlot('${s.id}')">Sil</button></div>
-        </div>`;
-      });
-    }
-    document.getElementById('slots-list').innerHTML = html || '<p>Henüz bir saat aralığı eklemediniz.</p>';
-  }
-
-  async function addSlot() {
-    const weekday = document.getElementById('slot-day').value;
-    const start_time = document.getElementById('slot-start').value;
-    const end_time = document.getElementById('slot-end').value;
-
-    await supabaseClient.from('availability_slots').insert([{
-      business_id: currentBusinessId, weekday: parseInt(weekday), start_time, end_time
+  async function logAction(action, target_type, target_id, details){
+    await sb.from('audit_log').insert([{
+      business_id: myBiz.id, business_name: myBiz.name,
+      actor_user_id: (await sb.auth.getUser()).data.user.id,
+      actor_type: 'business', action, target_type, target_id, details
     }]);
-    fetchSlots();
-  }
-  
-  async function deleteSlot(id) {
-    await supabaseClient.from('availability_slots').delete().eq('id', id);
-    fetchSlots();
   }
 
-  // RANDEVULAR
-  async function fetchAppointments() {
-    const { data } = await supabaseClient.from('appointments').select('*').eq('business_id', currentBusinessId).order('created_at', { ascending: false });
-    let html = '';
-    if(data) {
-      data.forEach(a => {
-        const badgeClass = a.status === 'approved' ? 'status-approved' : 'status-pending';
-        const badgeText = a.status === 'approved' ? 'Onaylandı' : 'Bekliyor';
-        html += `
-        <div class="item-card">
-          <div class="item-info">
-            <strong>${a.customer_name} - ${a.customer_phone}</strong>
-            <span>Talep: ${a.requested_date} saat ${a.requested_time.slice(0,5)}</span>
-            <div style="margin-top:6px"><span class="status-badge ${badgeClass}">${badgeText}</span></div>
-          </div>
-          <div class="action-btns">
-            ${a.status === 'pending' ? `<button style="background:var(--success)" onclick="updateAppt('${a.id}', 'approved')">Onayla</button>` : ''}
-            <button class="danger" onclick="deleteAppt('${a.id}')">Reddet/Sil</button>
-          </div>
-        </div>`;
-      });
-    }
-    document.getElementById('appointments-list').innerHTML = html || '<p>Bekleyen randevunuz yok.</p>';
+  // ---------- RANDEVULAR ----------
+  async function loadAppointments(){
+    let q = sb.from('appointments').select('*').eq('business_id', myBiz.id).order('requested_date',{ascending:false});
+    const st = document.getElementById('apptStatusFilter').value;
+    if (st) q = q.eq('status', st);
+    const { data } = await q;
+    const box = document.getElementById('apptList');
+    if (!data || !data.length){ box.innerHTML = '<p style="color:var(--muted)">Randevu yok.</p>'; return; }
+    box.innerHTML = data.map(a => `
+      <div class="row">
+        <div class="info">
+          <strong>${a.customer_name} · ${a.customer_phone} <span style="color:var(--accent);font-weight:800">${a.booking_code||''}</span></strong>
+          <span>${a.requested_date} — ${a.requested_time.slice(0,5)} ${a.customer_note ? '· '+a.customer_note : ''}</span>
+          <div style="margin-top:4px"><span class="badge b-${a.status}">${a.status==='pending'?'Bekliyor':a.status==='approved'?'Onaylandı':'Reddedildi'}</span></div>
+        </div>
+        <div style="display:flex;gap:6px;flex-wrap:wrap">
+          ${a.status==='pending' ? `<button class="sm ok" onclick="setApptStatus('${a.id}','approved')">Onayla</button>
+          <button class="sm outline" onclick="setApptStatus('${a.id}','rejected')">Reddet</button>` : ''}
+          <button class="sm danger" onclick="deleteAppt('${a.id}')">Sil</button>
+        </div>
+      </div>`).join('');
+  }
+  async function setApptStatus(id, status){
+    const { data:old } = await sb.from('appointments').select('*').eq('id',id).single();
+    await sb.from('appointments').update({ status, updated_at: new Date().toISOString() }).eq('id', id);
+    await logAction('appointment_'+status, 'appointment', id, old);
+    loadAppointments();
+  }
+  async function deleteAppt(id){
+    if(!confirm('Bu randevuyu silmek istediğinize emin misiniz? İşlem geçmişinde kaydı kalacak.')) return;
+    const { data:old } = await sb.from('appointments').select('*').eq('id',id).single();
+    await sb.from('appointments').delete().eq('id', id);
+    await logAction('appointment_deleted', 'appointment', id, old);
+    loadAppointments();
+  }
+  async function exportApptsExcel(){
+    const { data } = await sb.from('appointments').select('*').eq('business_id', myBiz.id);
+    const rows = (data||[]).map(a=>({Kod:a.booking_code,Ad:a.customer_name,Telefon:a.customer_phone,Tarih:a.requested_date,Saat:a.requested_time,Durum:a.status,Not:a.customer_note||''}));
+    const ws = XLSX.utils.json_to_sheet(rows);
+    const wb = XLSX.utils.book_new();
+    XLSX.utils.book_append_sheet(wb, ws, "Randevular");
+    XLSX.writeFile(wb, `randevular_${myBiz.slug}.xlsx`);
+  }
+  async function exportApptsPdf(){
+    const { data } = await sb.from('appointments').select('*').eq('business_id', myBiz.id);
+    const doc = new jspdf.jsPDF();
+    doc.text(myBiz.name + " - Randevular", 14, 14);
+    doc.autoTable({ startY:20, head:[['Kod','Ad','Telefon','Tarih','Saat','Durum']],
+      body:(data||[]).map(a=>[a.booking_code,a.customer_name,a.customer_phone,a.requested_date,a.requested_time,a.status]) });
+    doc.save(`randevular_${myBiz.slug}.pdf`);
   }
 
-  async function updateAppt(id, status) {
-    await supabaseClient.from('appointments').update({ status }).eq('id', id);
-    fetchAppointments();
+  // ---------- ÇALIŞMA SAATLERİ ----------
+  async function loadWeek(){
+    const { data } = await sb.from('availability_slots').select('*').eq('business_id', myBiz.id);
+    const grid = document.getElementById('weekGrid');
+    grid.innerHTML = WEEKDAYS.map((name, i) => {
+      const existing = (data||[]).find(d=>d.weekday===i) || { start_time:'09:00', end_time:'17:00', is_working:true };
+      return `
+      <div class="day-grid" data-day="${i}">
+        <label>${name}</label>
+        <input type="time" class="startT" value="${existing.start_time.slice(0,5)}">
+        <input type="time" class="endT" value="${existing.end_time.slice(0,5)}">
+        <span></span>
+        <label class="switch"><input type="checkbox" class="workT" ${existing.is_working?'checked':''}><span class="slider2"></span></label>
+      </div>`;
+    }).join('');
   }
-  async function deleteAppt(id) {
-    await supabaseClient.from('appointments').delete().eq('id', id);
-    fetchAppointments();
-  }
-
-  // BLOG YAZILARI
-  async function fetchBlogs() {
-    const { data } = await supabaseClient.from('blog_posts').select('*').eq('business_id', currentBusinessId).order('created_at', { ascending: false });
-    let html = '';
-    if (data) {
-      data.forEach(b => {
-        html += `
-        <div class="item-card">
-          <div class="item-info">
-            <strong>${b.title}</strong>
-            <span>${new Date(b.created_at).toLocaleDateString('tr-TR')} tarihinde yazıldı.</span>
-          </div>
-          <div class="action-btns"><button class="danger" onclick="deleteBlog('${b.id}')">Sil</button></div>
-        </div>`;
-      });
-    }
-    document.getElementById('blogs-list').innerHTML = html || '<p>Henüz blog yazınız yok.</p>';
-  }
-
-  async function addBlogPost() {
-    const title = document.getElementById('blog-title').value;
-    const content = document.getElementById('blog-content').value;
-    if(!title || !content) return alert("Başlık ve içerik boş olamaz.");
-
-    await supabaseClient.from('blog_posts').insert([{ business_id: currentBusinessId, title, content }]);
-    document.getElementById('blog-title').value = '';
-    document.getElementById('blog-content').value = '';
-    alert("Yazınız paylaşıldı! Ana sayfadaki gündem haberlerine eklendi.");
-    fetchBlogs();
+  async function saveWeek(){
+    const rows = [...document.querySelectorAll('.day-grid')].map(el => ({
+      business_id: myBiz.id,
+      weekday: parseInt(el.dataset.day),
+      start_time: el.querySelector('.startT').value,
+      end_time: el.querySelector('.endT').value,
+      is_working: el.querySelector('.workT').checked
+    }));
+    await sb.from('availability_slots').delete().eq('business_id', myBiz.id);
+    await sb.from('availability_slots').insert(rows);
+    await logAction('availability_updated','availability_slots', null, rows);
+    alert('Çalışma saatleri kaydedildi.');
   }
 
-  async function deleteBlog(id) {
-    await supabaseClient.from('blog_posts').delete().eq('id', id);
-    fetchBlogs();
+  // ---------- TEKİL SAAT BLOKLAMA ----------
+  async function loadBlockedSlots(){
+    const { data } = await sb.from('blocked_slots').select('*').eq('business_id', myBiz.id).order('blocked_date');
+    document.getElementById('blockedList').innerHTML = (data||[]).map(b=>`
+      <div class="row"><div class="info"><strong>${b.blocked_date} ${b.blocked_time.slice(0,5)}</strong><span>${b.reason||''}</span></div>
+      <button class="sm outline" onclick="unblockSlot('${b.id}')">Tekrar Aç</button></div>`).join('') || '<p style="color:var(--muted)">Kapatılmış saat yok.</p>';
+  }
+  async function addBlockedSlot(){
+    const blocked_date = document.getElementById('blockDate').value;
+    const blocked_time = document.getElementById('blockTime').value;
+    const reason = document.getElementById('blockReason').value;
+    if(!blocked_date || !blocked_time) return alert('Tarih ve saat girin.');
+    await sb.from('blocked_slots').insert([{ business_id: myBiz.id, blocked_date, blocked_time, reason }]);
+    await logAction('slot_blocked','blocked_slots', null, {blocked_date, blocked_time});
+    loadBlockedSlots();
+  }
+  async function unblockSlot(id){
+    await sb.from('blocked_slots').delete().eq('id', id);
+    await logAction('slot_unblocked','blocked_slots', id, null);
+    loadBlockedSlots();
   }
 
-  // Sayfa açıldığında oturumu kontrol et
+  // ---------- BLOG ----------
+  async function submitBlog(){
+    const title = document.getElementById('blogTitle').value.trim();
+    const content = document.getElementById('blogContent').value.trim();
+    if(!title || !content) return alert('Başlık ve içerik boş olamaz.');
+    await sb.from('blog_posts').insert([{ business_id: myBiz.id, title, content, status:'pending' }]);
+    document.getElementById('blogTitle').value=''; document.getElementById('blogContent').value='';
+    alert('Yazınız onaya gönderildi. Süper yönetici onayladıktan sonra yayınlanacak.');
+    loadMyBlogs();
+  }
+  async function loadMyBlogs(){
+    const { data } = await sb.from('blog_posts').select('*').eq('business_id', myBiz.id).order('created_at',{ascending:false});
+    document.getElementById('blogList').innerHTML = (data||[]).map(b=>`
+      <div class="row"><div class="info"><strong>${b.title}</strong><span>${new Date(b.created_at).toLocaleDateString('tr-TR')}</span></div>
+      <span class="badge b-${b.status}">${b.status==='pending'?'Onay Bekliyor':b.status==='approved'?'Yayında':'Reddedildi'}</span></div>`).join('') || '<p style="color:var(--muted)">Henüz yazınız yok.</p>';
+  }
+
+  // ---------- PROFİL ----------
+  function fillProfileForm(){
+    document.getElementById('prof-name').value = myBiz.name||'';
+    document.getElementById('prof-subname').value = myBiz.sub_name||'';
+    document.getElementById('prof-area').value = myBiz.area||'';
+    document.getElementById('prof-address').value = myBiz.address||'';
+    document.getElementById('prof-phone').value = myBiz.phone||'';
+    document.getElementById('prof-whatsapp').value = myBiz.whatsapp||'';
+    document.getElementById('prof-instagram').value = myBiz.instagram||'';
+    document.getElementById('prof-website').value = myBiz.website||'';
+    document.getElementById('prof-info').value = myBiz.info||'';
+  }
+  async function updateProfile(){
+    const payload = {
+      name: document.getElementById('prof-name').value,
+      sub_name: document.getElementById('prof-subname').value,
+      area: document.getElementById('prof-area').value,
+      address: document.getElementById('prof-address').value,
+      phone: document.getElementById('prof-phone').value,
+      whatsapp: document.getElementById('prof-whatsapp').value,
+      instagram: document.getElementById('prof-instagram').value,
+      website: document.getElementById('prof-website').value,
+      info: document.getElementById('prof-info').value,
+    };
+    await sb.from('businesses').update(payload).eq('id', myBiz.id);
+    await logAction('profile_updated','business', myBiz.id, payload);
+    alert('Bilgileriniz güncellendi.');
+  }
+  async function changeMyPassword(){
+    const p = document.getElementById('newPass').value;
+    const msg = document.getElementById('passMsg');
+    if(p.length < 6){ msg.style.color='var(--danger)'; msg.innerText='Şifre en az 6 karakter olmalı.'; return; }
+    const { error } = await sb.auth.updateUser({ password: p });
+    if(error){ msg.style.color='var(--danger)'; msg.innerText='Hata: '+error.message; return; }
+    msg.style.color='var(--ok)'; msg.innerText='Şifreniz güncellendi.';
+    document.getElementById('newPass').value='';
+  }
+
+  // ---------- GEÇMİŞ ----------
+  async function loadAudit(){
+    const { data } = await sb.from('audit_log').select('*').eq('business_id', myBiz.id).order('created_at',{ascending:false}).limit(100);
+    document.getElementById('auditList').innerHTML = (data||[]).map(l=>`
+      <div class="row"><div class="info"><strong>${l.action}</strong>
+      <span>${new Date(l.created_at).toLocaleString('tr-TR')}</span></div></div>`).join('') || '<p style="color:var(--muted)">Kayıt yok.</p>';
+  }
+
   checkSession();
 </script>
-
 </body>
 </html>
