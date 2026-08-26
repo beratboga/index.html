@@ -1,0 +1,254 @@
+<!DOCTYPE html>
+<html lang="tr">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>04agri.com | Süper Yönetici</title>
+<script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2/dist/umd/supabase.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/xlsx@0.18.5/dist/xlsx.full.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/jspdf@2.5.1/dist/jspdf.umd.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/jspdf-autotable@3.8.1/dist/jspdf.plugin.autotable.min.js"></script>
+<link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+<style>
+  :root{--bg:#f5f5f7;--card:#fff;--ink:#1d1d1f;--muted:#86868b;--accent:#0071e3;--danger:#ff3b30;--ok:#34c759;--border:#d2d2d7;--r:16px;--shadow:0 4px 24px rgba(0,0,0,.06)}
+  *{box-sizing:border-box}
+  body{font-family:'Plus Jakarta Sans',sans-serif;background:var(--bg);color:var(--ink);margin:0}
+  input,select,textarea{width:100%;padding:10px;margin-bottom:10px;border:1px solid var(--border);border-radius:10px;font-size:14px;font-family:inherit}
+  button{padding:10px 16px;background:var(--accent);color:#fff;border:none;border-radius:10px;font-weight:700;cursor:pointer;font-size:13px}
+  button.sm{padding:7px 12px}
+  button.danger{background:var(--danger)} button.ok{background:var(--ok)} button.outline{background:transparent;color:var(--ink);border:1px solid var(--border)}
+  #login{display:flex;justify-content:center;align-items:center;min-height:100vh}
+  .login-card{background:var(--card);padding:36px;border-radius:var(--r);box-shadow:var(--shadow);width:100%;max-width:380px}
+  #app{display:none;max-width:1200px;margin:0 auto;padding:28px 16px 80px}
+  .tabs{display:flex;gap:8px;overflow-x:auto;margin-bottom:20px}
+  .tabs button{background:var(--card);color:var(--muted);border:1px solid var(--border)}
+  .tabs button.active{background:var(--ink);color:#fff;border-color:var(--ink)}
+  .panel{display:none;background:var(--card);padding:24px;border-radius:var(--r);box-shadow:var(--shadow)}
+  .panel.active{display:block}
+  .row{display:flex;justify-content:space-between;align-items:center;border:1px solid var(--border);border-radius:12px;padding:14px;margin-bottom:10px;gap:10px;flex-wrap:wrap}
+  .row .info strong{display:block} .row .info span{font-size:13px;color:var(--muted)}
+  .badge{padding:3px 10px;border-radius:20px;font-size:11px;font-weight:800}
+  .b-pending{background:#fff3cd;color:#856404} .b-approved{background:#d4edda;color:#155724} .b-rejected{background:#f8d7da;color:#721c24}
+  .toolbar{display:flex;gap:8px;flex-wrap:wrap;margin-bottom:16px}
+  .toolbar select{width:auto}
+  .modal-bg{display:none;position:fixed;inset:0;background:rgba(0,0,0,.5);z-index:99;justify-content:center;align-items:center}
+  .modal-bg.show{display:flex}
+  .modal{background:#fff;padding:24px;border-radius:16px;width:100%;max-width:380px}
+</style>
+</head>
+<body>
+
+<div id="login">
+  <div class="login-card">
+    <h2>Süper Yönetici</h2>
+    <input type="email" id="email" placeholder="E-posta">
+    <input type="password" id="password" placeholder="Şifre">
+    <button onclick="login()" style="width:100%">Giriş Yap</button>
+    <p id="loginMsg" style="font-size:13px"></p>
+  </div>
+</div>
+
+<div id="app">
+  <div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:20px">
+    <h1 style="font-size:22px">Süper Yönetici Paneli</h1>
+    <button class="outline sm" onclick="sb.auth.signOut().then(()=>location.reload())">Çıkış</button>
+  </div>
+
+  <div class="tabs">
+    <button class="active" onclick="tab('isletmeler')">İşletmeler</button>
+    <button onclick="tab('randevular')">Tüm Randevular</button>
+    <button onclick="tab('bloglar')">Blog Onayları</button>
+    <button onclick="tab('gecmis')">Tüm İşlem Geçmişi</button>
+  </div>
+
+  <div id="p-isletmeler" class="panel active">
+    <div class="toolbar">
+      <button class="outline sm" onclick="openNewBizModal()">+ Yeni İşletme Ekle</button>
+    </div>
+    <div id="bizList">Yükleniyor...</div>
+  </div>
+
+  <div id="p-randevular" class="panel">
+    <div class="toolbar">
+      <select id="bizFilter" onchange="loadAllAppointments()"><option value="">Tüm İşletmeler</option></select>
+      <button class="outline sm" onclick="exportAllExcel()">📊 Excel</button>
+      <button class="outline sm" onclick="exportAllPdf()">📄 PDF</button>
+    </div>
+    <div id="allApptList">Yükleniyor...</div>
+  </div>
+
+  <div id="p-bloglar" class="panel">
+    <div id="blogModList">Yükleniyor...</div>
+  </div>
+
+  <div id="p-gecmis" class="panel">
+    <div id="allAuditList">Yükleniyor...</div>
+  </div>
+</div>
+
+<!-- Şifre/kullanıcı adı değiştirme modalı -->
+<div class="modal-bg" id="credModal">
+  <div class="modal">
+    <h3>Giriş Bilgilerini Değiştir</h3>
+    <p style="font-size:13px;color:var(--muted)" id="credBizName"></p>
+    <input type="email" id="credEmail" placeholder="Yeni e-posta (opsiyonel)">
+    <input type="password" id="credPass" placeholder="Yeni şifre (opsiyonel, en az 6 karakter)">
+    <button onclick="applyCredChange()" style="width:100%">Kaydet</button>
+    <button class="outline" style="width:100%;margin-top:8px" onclick="closeCredModal()">İptal</button>
+    <p id="credMsg" style="font-size:13px"></p>
+  </div>
+</div>
+
+<script>
+  const SUPABASE_URL = 'https://ckxqfasgddhgbpnxaaja.supabase.co';
+  const SUPABASE_KEY = 'sb_publishable_gEX1rPpXyfxdY0WPhK0KNw_vZSQAj7Z';
+  const sb = supabase.createClient(SUPABASE_URL, SUPABASE_KEY);
+  // Edge Function'ı deploy ettikten sonra buraya kendi proje referansını yaz:
+  const ADMIN_FN_URL = SUPABASE_URL + '/functions/v1/admin-actions';
+
+  let allBiz = [];
+  let credTargetUserId = null;
+
+  async function checkSession(){
+    const { data: { session } } = await sb.auth.getSession();
+    if (session){
+      const { data } = await sb.from('super_admins').select('*').eq('auth_user_id', session.user.id).single();
+      if (data){ boot(); } else { document.getElementById('loginMsg').innerText = 'Bu hesap süper yönetici değil.'; }
+    }
+  }
+  async function login(){
+    const email = document.getElementById('email').value.trim();
+    const password = document.getElementById('password').value;
+    const { error } = await sb.auth.signInWithPassword({ email, password });
+    if (error){ document.getElementById('loginMsg').innerText = 'Hata: '+error.message; return; }
+    checkSession();
+  }
+  function boot(){
+    document.getElementById('login').style.display='none';
+    document.getElementById('app').style.display='block';
+    loadBusinesses(); loadAllAppointments(); loadBlogModeration(); loadAllAudit();
+  }
+  function tab(name){
+    document.querySelectorAll('.panel').forEach(p=>p.classList.remove('active'));
+    document.querySelectorAll('.tabs button').forEach(b=>b.classList.remove('active'));
+    document.getElementById('p-'+name).classList.add('active');
+    event.target.classList.add('active');
+  }
+  async function logAudit(business_id, business_name, action, target_type, target_id, details){
+    const { data:{user} } = await sb.auth.getUser();
+    await sb.from('audit_log').insert([{business_id,business_name,actor_user_id:user.id,actor_type:'super_admin',action,target_type,target_id,details}]);
+  }
+
+  // ---------- İŞLETMELER ----------
+  async function loadBusinesses(){
+    const { data } = await sb.from('businesses').select('*').order('name');
+    allBiz = data || [];
+    document.getElementById('bizFilter').innerHTML = '<option value="">Tüm İşletmeler</option>' +
+      allBiz.map(b=>`<option value="${b.id}">${b.name}</option>`).join('');
+    document.getElementById('bizList').innerHTML = allBiz.map(b=>`
+      <div class="row">
+        <div class="info"><strong>${b.name}</strong><span>${b.sub_name||''} · ${b.category||''} · ${b.phone||'telefon yok'}</span></div>
+        <div style="display:flex;gap:6px;flex-wrap:wrap">
+          <button class="sm outline" onclick="openCredModal('${b.auth_user_id}','${b.name.replace(/'/g,"\\'")}')">🔑 Giriş Bilgisi Değiştir</button>
+          <button class="sm danger" onclick="deactivateBiz('${b.id}','${b.name.replace(/'/g,"\\'")}')">Devre Dışı Bırak</button>
+        </div>
+      </div>`).join('');
+  }
+  async function deactivateBiz(id, name){
+    if(!confirm(name + ' devre dışı bırakılsın mı?')) return;
+    await sb.from('businesses').update({is_active:false}).eq('id', id);
+    await logAudit(id, name, 'business_deactivated', 'business', id, null);
+    loadBusinesses();
+  }
+  function openNewBizModal(){
+    alert('Yeni işletme eklemek için önce Authentication > Users kısmından bir hesap oluşturup UID kopyalayın, sonra businesses tablosuna SQL Editor veya Table Editor üzerinden ekleyin. İsterseniz bunu da panele taşıyabiliriz.');
+  }
+
+  // ---------- ŞİFRE / E-POSTA DEĞİŞTİRME (Edge Function ile) ----------
+  function openCredModal(userId, name){
+    credTargetUserId = userId;
+    document.getElementById('credBizName').innerText = name;
+    document.getElementById('credEmail').value='';
+    document.getElementById('credPass').value='';
+    document.getElementById('credMsg').innerText='';
+    document.getElementById('credModal').classList.add('show');
+  }
+  function closeCredModal(){ document.getElementById('credModal').classList.remove('show'); }
+  async function applyCredChange(){
+    const email = document.getElementById('credEmail').value.trim();
+    const password = document.getElementById('credPass').value;
+    const msg = document.getElementById('credMsg');
+    if(!email && !password){ msg.innerText='En az bir alan doldurun.'; return; }
+    const { data:{session} } = await sb.auth.getSession();
+    try{
+      const res = await fetch(ADMIN_FN_URL, {
+        method:'POST',
+        headers:{ 'Content-Type':'application/json', 'Authorization':'Bearer '+session.access_token },
+        body: JSON.stringify({ action:'update_credentials', target_user_id: credTargetUserId, email: email||undefined, password: password||undefined })
+      });
+      const j = await res.json();
+      if(!res.ok) throw new Error(j.error||'Bilinmeyen hata');
+      msg.style.color='var(--ok)'; msg.innerText='Güncellendi!';
+      await logAudit(null, document.getElementById('credBizName').innerText, 'credentials_changed_by_admin', 'business', credTargetUserId, {email_changed: !!email, password_changed: !!password});
+      setTimeout(closeCredModal, 1200);
+    }catch(e){ msg.style.color='var(--danger)'; msg.innerText='Hata: '+e.message; }
+  }
+
+  // ---------- TÜM RANDEVULAR ----------
+  async function loadAllAppointments(){
+    const bizId = document.getElementById('bizFilter').value;
+    let q = sb.from('appointments').select('*, businesses(name)').order('requested_date',{ascending:false});
+    if (bizId) q = q.eq('business_id', bizId);
+    const { data } = await q;
+    document.getElementById('allApptList').innerHTML = (data||[]).map(a=>`
+      <div class="row">
+        <div class="info"><strong>${a.businesses?.name||'—'} · ${a.customer_name} · ${a.customer_phone} · <span style="color:var(--accent)">${a.booking_code||''}</span></strong>
+        <span>${a.requested_date} ${a.requested_time?.slice(0,5)} <span class="badge b-${a.status}">${a.status}</span></span></div>
+      </div>`).join('') || '<p style="color:var(--muted)">Randevu yok.</p>';
+  }
+  async function exportAllExcel(){
+    const { data } = await sb.from('appointments').select('*, businesses(name)');
+    const rows = (data||[]).map(a=>({Isletme:a.businesses?.name,Ad:a.customer_name,Telefon:a.customer_phone,Tarih:a.requested_date,Saat:a.requested_time,Durum:a.status}));
+    const ws = XLSX.utils.json_to_sheet(rows); const wb = XLSX.utils.book_new();
+    XLSX.utils.book_append_sheet(wb, ws, "Tüm Randevular"); XLSX.writeFile(wb, "tum_randevular.xlsx");
+  }
+  async function exportAllPdf(){
+    const { data } = await sb.from('appointments').select('*, businesses(name)');
+    const doc = new jspdf.jsPDF();
+    doc.text("Tüm Randevular", 14, 14);
+    doc.autoTable({ startY:20, head:[['İşletme','Ad','Telefon','Tarih','Saat','Durum']],
+      body:(data||[]).map(a=>[a.businesses?.name,a.customer_name,a.customer_phone,a.requested_date,a.requested_time,a.status]) });
+    doc.save("tum_randevular.pdf");
+  }
+
+  // ---------- BLOG ONAYLARI ----------
+  async function loadBlogModeration(){
+    const { data } = await sb.from('blog_posts').select('*, businesses(name)').eq('status','pending').order('created_at');
+    document.getElementById('blogModList').innerHTML = (data||[]).map(b=>`
+      <div class="row" style="align-items:flex-start">
+        <div class="info"><strong>${b.title}</strong><span>${b.businesses?.name} · ${new Date(b.created_at).toLocaleString('tr-TR')}</span>
+          <p style="margin:8px 0 0;font-size:14px">${b.content}</p></div>
+        <div style="display:flex;gap:6px">
+          <button class="sm ok" onclick="reviewBlog('${b.id}','approved')">Onayla</button>
+          <button class="sm danger" onclick="reviewBlog('${b.id}','rejected')">Reddet</button>
+        </div>
+      </div>`).join('') || '<p style="color:var(--muted)">Onay bekleyen yazı yok.</p>';
+  }
+  async function reviewBlog(id, status){
+    await sb.from('blog_posts').update({status, reviewed_at: new Date().toISOString()}).eq('id', id);
+    await logAudit(null, null, 'blog_'+status, 'blog_post', id, null);
+    loadBlogModeration();
+  }
+
+  // ---------- TÜM GEÇMİŞ ----------
+  async function loadAllAudit(){
+    const { data } = await sb.from('audit_log').select('*').order('created_at',{ascending:false}).limit(200);
+    document.getElementById('allAuditList').innerHTML = (data||[]).map(l=>`
+      <div class="row"><div class="info"><strong>${l.business_name||'Sistem'} — ${l.action}</strong>
+      <span>${l.actor_type} · ${new Date(l.created_at).toLocaleString('tr-TR')}</span></div></div>`).join('') || '<p style="color:var(--muted)">Kayıt yok.</p>';
+  }
+
+  checkSession();
+</script>
+</body>
+</html>
